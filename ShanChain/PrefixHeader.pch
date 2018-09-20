@@ -1,0 +1,43 @@
+//
+//  PrefixHeader.pch
+//  ShanChain
+//
+//  Created by krew on 2017/5/15.
+//  Copyright © 2017年 krew. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+
+#import "SCHeaderFile.h"
+
+#import "SCConstants.h"
+
+#import "DefMacro .h"
+
+#import "EnvironmentConfiguration.h"
+
+#define BLOCK_EXEC(block, ...) if (block) { block(__VA_ARGS__); };
+
+#endif
+
+
+// Log
+#ifdef DEBUG
+    #define SCLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+//    #define SCLog(fmt, ...) NSLog((@"%s: %s: %s [Line %d] " fmt), __FILE__, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+    #define SCLog(...)
+#endif
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */

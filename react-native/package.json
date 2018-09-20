@@ -1,0 +1,40 @@
+{
+  "name": "ArkSpot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "react-devtools": "react-devtools",
+    "test": "jest",
+    "flow": "flow",
+    "reverse": "adb reverse tcp:8081 tcp:8081",
+    "bundle-android": "node node_modules/react-native/local-cli/cli.js bundle --platform android --dev false --entry-file index.android.js  --bundle-output ../arkspot/src/main/assets/index.android.bundle  --assets-dest ../arkspot/src/main/res/",
+    "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.ios.js  --platform ios --dev false --bundle-output ../ShanChain/RNBundle/index.ios.jsbundle --assets-dest ../ShanChain/RNBundle"
+  },
+  "dependencies": {
+    "native-base": "^2.3.5",
+    "react": "16.0.0",
+    "react-dom": "^16.0.0-alpha",
+    "react-native": "^0.50.0",
+    "react-native-code-push": "^5.2.0-beta",
+    "react-native-elements": "^0.17.0",
+    "react-native-gifted-listview": "0.0.15",
+    "react-native-image-zoom-viewer": "^2.0.16",
+    "react-navigation": "^1.0.0-beta.21",
+    "react-redux": "5.0.6",
+    "react-virtualized": "^9.13.0",
+    "redux": "3.7.2",
+    "redux-actions": "2.2.1"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react-native": "2.1.0",
+    "flow-bin": "^0.59.0",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

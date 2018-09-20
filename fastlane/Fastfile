@@ -1,0 +1,29 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new release build to the App Store"
+  lane :release do
+    build_app(workspace: "ShanChain.xcworkspace", scheme: "ShanChain")
+    upload_to_app_store
+  end
+
+  lane :beta do
+      build_app(export_method: "ad-hoc")
+      pgyer(api_key: "82f584c10019b8efdb484003bda9b543", user_key: "d1d68f0fe41cdf8ed7ad7236c65c152c", update_description: "update by fastlane")
+  end
+end
