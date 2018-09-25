@@ -16,8 +16,7 @@
 //static NSString * const SC_BASE_URL = @"http://47.91.178.114:8080";
 //static NSString * const SC_BASE_URL = @"http://192.168.1.113:8080";
 #define SC_BASE_URL  Base_url
-#define SC_BASE_PORT_8082  @"http://95.169.24.11:8082"
-#define SC_BASE_PORT_8083  @"http://95.169.24.11:8083"
+
 
 @interface SCNetwork : NSObject
 

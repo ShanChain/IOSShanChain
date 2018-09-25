@@ -165,7 +165,7 @@
 }
 
 
-- (void)setupShareConfig {
+- (void)setupShareConfig{
     [ShareSDK registerActivePlatforms:@[
                                         @(SSDKPlatformTypeSinaWeibo),
                                         @(SSDKPlatformTypeWechat),

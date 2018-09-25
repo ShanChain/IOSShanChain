@@ -59,6 +59,7 @@ static SCAliyunPlayerUploader *instance = nil;
             info.cateId = contentDict[@"cateId"];
             info.desc = desc;
             WeakSelf.videoInfo = info;
+          
             [WeakSelf.client uploadWithVideoPath:videoPath imagePath:imagePath svideoInfo:info accessKeyId:accesseKeyId accessKeySecret:accessKeySecret accessToken:securityToken];
         }
     } failure:^(NSError *error) {

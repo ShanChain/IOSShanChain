@@ -5,7 +5,15 @@ def pods
     pod 'MBProgressHUD', '~> 1.1.0'
     pod 'Hyphenate'
     pod 'AliyunOSSiOS'
-    
+   
+
+    pod 'mob_sharesdk'
+    pod 'mob_sharesdk/ShareSDKUI'
+    pod 'mob_sharesdk/ShareSDKPlatforms/QQ'
+    pod 'mob_sharesdk/ShareSDKPlatforms/SinaWeibo'
+    pod 'mob_sharesdk/ShareSDKPlatforms/WeChat'  
+
+ 
     #react-native
     pod ‘React’, :path => './react-native/node_modules/react-native', :subspecs => [
     'Core',             #核心库

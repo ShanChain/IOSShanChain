@@ -108,10 +108,10 @@ static SCAliyunUploadMananger *instance = nil;
     [putTask continueWithBlock:^id(OSSTask *task) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!task.error) {
-                SCLog(@"阿里云上传成功!");
+                SCLog(@"阿里云!");
                 cb(url);
             } else {
-                SCLog(@"阿里云上传失败!%@", task.error.description);
+                SCLog(@"阿里云!%@", task.error.description);
                 cb(nil);
             }
         });

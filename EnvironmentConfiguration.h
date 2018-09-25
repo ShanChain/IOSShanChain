@@ -13,19 +13,29 @@
 #define Prtocol @"http://"
 
 
-#define PN_ENVIRONMENT 0  // 2 测试环境   0 生产环境
+#define PN_ENVIRONMENT 1  // 0 测试环境   1 生产环境
 
 
 #if PN_ENVIRONMENT == 0
 
 #define HostName @"95.169.24.11"
 #define PORT @"8081"
+#define Base_url [NSString stringWithFormat:@"%@%@:%@",Prtocol,HostName,PORT]
+
+
+#define SC_BASE_PORT_8082  @"http://95.169.24.11:8082"
+#define SC_BASE_PORT_8083  @"http://95.169.24.11:8083"
+
 /******************************************/
 
 #elif PN_ENVIRONMENT == 1
 
-#define HostName @"95.169.24.11"
-#define PORT @"8081"
+#define HostName @"47.100.20.170"
+#define Base_url [NSString stringWithFormat:@"%@%@",Prtocol,HostName]
+
+#define SC_BASE_PORT_8082  Base_url
+#define SC_BASE_PORT_8083  Base_url
+
 /******************************************/
 
 #elif PN_ENVIRONMENT == 2
@@ -33,10 +43,17 @@
 #define HostName @"95.169.24.11"
 #define PORT @"8081"
 
+
+#elif PN_ENVIRONMENT == 3
+
+#define HostName @"api.qianqianshijie.com"
+#define PORT @""
+
+
 #else
 
 #endif
 
-#define Base_url [NSString stringWithFormat:@"%@%@:%@",Prtocol,HostName,PORT]
+
 
 #endif /* EnvironmentConfiguration_h */

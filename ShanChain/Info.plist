@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>千千世界</string>
+	<string>马甲</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -48,6 +48,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wxf3ca04328ebf58f1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>QQ登录</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>41F56EC2</string>
 			</array>
 		</dict>
 	</array>
@@ -96,7 +106,8 @@
 	<key>MOBAppSecret</key>
 	<string></string>
 	<key>MOBAppkey</key>
-	<string>1f261774d84d0</string>
+	<string>
+27f91364d122f</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

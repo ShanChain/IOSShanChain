@@ -9,6 +9,9 @@
 #import "SCCommonShareDashboardView.h"
 #import <ShareSDK/ShareSDK.h>
 
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
+
 @interface SCCommonShareDashboardView()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -70,7 +73,7 @@
     }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelAction)];
-    [self addGestureRecognizer:tap];
+//    [self addGestureRecognizer:tap];
     self.userInteractionEnabled = YES;
     
     self.backgroundColor = RGB_Hex(0xCACAC9, 0.5);
@@ -130,11 +133,63 @@
     return cell;
 }
 
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:NO];
     
     NSDictionary *content = self.contentArray[indexPath.row];
     
+    NSArray* imageArray = @[[UIImage imageNamed:@"topc3"]];
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    [shareParams SSDKSetupShareParamsByText:@"分享内容"
+                                         images:imageArray
+                                            url:[NSURL URLWithString:@"http://mob.com"]
+                                          title:@"分享标题"
+                                       type:SSDKContentTypeAuto];
+    
+    
+    NSNumber  *  formTypeNumber = @[@(SSDKPlatformTypeWechat),@(SSDKPlatformSubTypeWechatTimeline),@(SSDKPlatformSubTypeQQFriend),@(SSDKPlatformSubTypeQZone),@(SSDKPlatformTypeSinaWeibo)][indexPath.row];
+    [ShareSDK share:formTypeNumber.integerValue
+         parameters:shareParams
+     onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+         
+         switch (state) {
+             case SSDKResponseStateSuccess:
+             {
+                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                           message:nil
+                                           delegate:nil
+                                           cancelButtonTitle:@"确定"
+                                           otherButtonTitles:nil];
+                 [alertView show];
+                 break;
+             }
+             case SSDKResponseStateFail:
+             {
+                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                     message:[NSString stringWithFormat:@"%@", error]
+                                           delegate:nil
+                                                           cancelButtonTitle:@"确定"
+                                           otherButtonTitles:nil];
+                 [alertView show];
+                 break;
+             }
+             case SSDKResponseStateCancel:
+             {
+                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享已取消"
+                                           message:nil
+                                           delegate:nil
+                                                           cancelButtonTitle:@"确定"
+                                           otherButtonTitles:nil];
+                 [alertView show];
+                 break;
+             }
+             default:
+                 break;
+         }
+     }];
+    
+    [self cancelAction];
     // share action
 }
 
