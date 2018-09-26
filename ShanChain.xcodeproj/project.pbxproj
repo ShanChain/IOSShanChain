@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222C30FD215A21D3009871C7 /* ShareSaveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C30FC215A21D3009871C7 /* ShareSaveModel.m */; };
+		222C3100215A27FE009871C7 /* HHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C30FF215A27FE009871C7 /* HHBaseModel.m */; };
+		222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C3102215A38E0009871C7 /* UIImage+MingleChang.m */; };
+		2242C0002159C34E00707024 /* UIView+NoDataImgShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFF92159C34D00707024 /* UIView+NoDataImgShow.m */; };
+		2242C0012159C34E00707024 /* UIViewController+NoDataTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFFA2159C34D00707024 /* UIViewController+NoDataTip.m */; };
+		2242C0022159C34E00707024 /* YYHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFFD2159C34D00707024 /* YYHud.m */; };
+		2242C0032159C34E00707024 /* YYHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2242BFFE2159C34D00707024 /* YYHud.xib */; };
+		2242C0042159C34E00707024 /* YYHud.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2242BFFF2159C34D00707024 /* YYHud.xcassets */; };
+		2242C0072159C3AB00707024 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242C0062159C3AB00707024 /* UIColor+Extention.m */; };
 		22EBC11321533BAE00C11359 /* MCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EBC11121533BA800C11359 /* MCDate.m */; };
 		33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33055FE91F0503AC005740E0 /* StoreKit.framework */; };
 		332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5D91F4ED69F00888313 /* NSMutableAttributedString+TY.m */; };
@@ -494,6 +503,22 @@
 
 /* Begin PBXFileReference section */
 		1873FA0D212E882900C1088E /* DefMacro .h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DefMacro .h"; sourceTree = "<group>"; };
+		222C30FB215A21D3009871C7 /* ShareSaveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareSaveModel.h; sourceTree = "<group>"; };
+		222C30FC215A21D3009871C7 /* ShareSaveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareSaveModel.m; sourceTree = "<group>"; };
+		222C30FE215A27FE009871C7 /* HHBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHBaseModel.h; sourceTree = "<group>"; };
+		222C30FF215A27FE009871C7 /* HHBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHBaseModel.m; sourceTree = "<group>"; };
+		222C3101215A38DF009871C7 /* UIImage+MingleChang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MingleChang.h"; sourceTree = "<group>"; };
+		222C3102215A38E0009871C7 /* UIImage+MingleChang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MingleChang.m"; sourceTree = "<group>"; };
+		2242BFF72159C34D00707024 /* UIView+NoDataImgShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NoDataImgShow.h"; sourceTree = "<group>"; };
+		2242BFF82159C34D00707024 /* UIViewController+NoDataTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NoDataTip.h"; sourceTree = "<group>"; };
+		2242BFF92159C34D00707024 /* UIView+NoDataImgShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NoDataImgShow.m"; sourceTree = "<group>"; };
+		2242BFFA2159C34D00707024 /* UIViewController+NoDataTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NoDataTip.m"; sourceTree = "<group>"; };
+		2242BFFC2159C34D00707024 /* YYHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHud.h; sourceTree = "<group>"; };
+		2242BFFD2159C34D00707024 /* YYHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHud.m; sourceTree = "<group>"; };
+		2242BFFE2159C34D00707024 /* YYHud.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YYHud.xib; sourceTree = "<group>"; };
+		2242BFFF2159C34D00707024 /* YYHud.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YYHud.xcassets; sourceTree = "<group>"; };
+		2242C0052159C3AA00707024 /* UIColor+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extention.h"; sourceTree = "<group>"; };
+		2242C0062159C3AB00707024 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
 		22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentConfiguration.h; sourceTree = "<group>"; };
 		22EBC11121533BA800C11359 /* MCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDate.m; sourceTree = "<group>"; };
 		22EBC11221533BA900C11359 /* MCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDate.h; sourceTree = "<group>"; };
@@ -1440,6 +1465,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2242BFF52159C34D00707024 /* PublicService */ = {
+			isa = PBXGroup;
+			children = (
+				2242BFF62159C34D00707024 /* noDataTip */,
+				2242BFFB2159C34D00707024 /* YYHud */,
+			);
+			path = PublicService;
+			sourceTree = "<group>";
+		};
+		2242BFF62159C34D00707024 /* noDataTip */ = {
+			isa = PBXGroup;
+			children = (
+				2242BFF72159C34D00707024 /* UIView+NoDataImgShow.h */,
+				2242BFF92159C34D00707024 /* UIView+NoDataImgShow.m */,
+				2242BFF82159C34D00707024 /* UIViewController+NoDataTip.h */,
+				2242BFFA2159C34D00707024 /* UIViewController+NoDataTip.m */,
+			);
+			path = noDataTip;
+			sourceTree = "<group>";
+		};
+		2242BFFB2159C34D00707024 /* YYHud */ = {
+			isa = PBXGroup;
+			children = (
+				2242BFFC2159C34D00707024 /* YYHud.h */,
+				2242BFFD2159C34D00707024 /* YYHud.m */,
+				2242BFFE2159C34D00707024 /* YYHud.xib */,
+				2242BFFF2159C34D00707024 /* YYHud.xcassets */,
+			);
+			path = YYHud;
+			sourceTree = "<group>";
+		};
 		33055FE81F0503AC005740E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1512,6 +1568,8 @@
 		332AB6261F4ED8C900888313 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				222C3101215A38DF009871C7 /* UIImage+MingleChang.h */,
+				222C3102215A38E0009871C7 /* UIImage+MingleChang.m */,
 				33A847C41F9493A0005EA99A /* THDatePickerView.h */,
 				33A847C51F9493A0005EA99A /* THDatePickerView.m */,
 				332AB6271F4ED8C900888313 /* APIClient.h */,
@@ -1663,6 +1721,7 @@
 		33B7CCEB1EC5865700FB6378 /* ShanChain */ = {
 			isa = PBXGroup;
 			children = (
+				2242BFF52159C34D00707024 /* PublicService */,
 				48AC035E1F95AAE70040B54F /* RNBundle */,
 				332AB6261F4ED8C900888313 /* Tools */,
 				996047D21ED7C17F007634EE /* MainApplication */,
@@ -2090,6 +2149,8 @@
 				4852A0471FCE9F0300CDD7BE /* SYMarkModel.m */,
 				897B8DF81FD5279B00404E93 /* SYWordStyle.h */,
 				897B8DF91FD5279B00404E93 /* SYWordStyle.m */,
+				222C30FB215A21D3009871C7 /* ShareSaveModel.h */,
+				222C30FC215A21D3009871C7 /* ShareSaveModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2345,6 +2406,8 @@
 				4852A1621FCE9F7200CDD7BE /* SCNetworkError.h */,
 				4852A1631FCE9F7200CDD7BE /* SCNetworkError.m */,
 				4852A1641FCE9F7200CDD7BE /* UrlConstants.h */,
+				222C30FE215A27FE009871C7 /* HHBaseModel.h */,
+				222C30FF215A27FE009871C7 /* HHBaseModel.m */,
 			);
 			path = newwork;
 			sourceTree = "<group>";
@@ -3174,6 +3237,8 @@
 		996048EF1ED7C21E007634EE /* Catagory */ = {
 			isa = PBXGroup;
 			children = (
+				2242C0052159C3AA00707024 /* UIColor+Extention.h */,
+				2242C0062159C3AB00707024 /* UIColor+Extention.m */,
 				22EBC11221533BA900C11359 /* MCDate.h */,
 				22EBC11121533BA800C11359 /* MCDate.m */,
 				332AB5D71F4ED69F00888313 /* TYAttributedLabel */,
@@ -3214,6 +3279,7 @@
 				F218BB8F3EE9CC52199697FC /* [CP] Embed Pods Frameworks */,
 				5DF0761D1DCD8E47FBD751DC /* [CP] Copy Pods Resources */,
 				892B39F31FE8EC5700292A75 /* Embed Frameworks */,
+				222C3104215A48D7009871C7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3324,10 +3390,12 @@
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
 				4852A0D11FCE9F0300CDD7BE /* SCMessageCell.xib in Resources */,
 				4852A0E41FCE9F0300CDD7BE /* SYScreenInsideCell.xib in Resources */,
+				2242C0042159C34E00707024 /* YYHud.xcassets in Resources */,
 				892B39D91FE8B0B400292A75 /* SYmarkCollectionViewCell.xib in Resources */,
 				4852A0D51FCE9F0300CDD7BE /* SCPersonalCollectionCell.xib in Resources */,
 				485E66251F42862900B158BF /* EaseUIResource.bundle in Resources */,
 				33F7257F1F0B3570006382F6 /* README.txt in Resources */,
+				2242C0032159C34E00707024 /* YYHud.xib in Resources */,
 				4852A0E11FCE9F0300CDD7BE /* SYScreenCell.xib in Resources */,
 				33F725721F0B3570006382F6 /* ShareSDKConfigFile.bundle in Resources */,
 				485E65AF1F42862900B158BF /* EaseUI.podspec in Resources */,
@@ -3373,6 +3441,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		222C3104215A48D7009871C7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Without further ado, here’s the script. Add a Run Script step to your build steps, put it after your step to embed frameworks, set it to use /bin/sh and enter the following script:\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
+		};
 		5DF0761D1DCD8E47FBD751DC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3466,6 +3547,7 @@
 				33C1A17A1F4C50FB003E22CA /* MASCompositeConstraint.m in Sources */,
 				8916D1241FDA66E80058DD0B /* SYAddTimeReportController.m in Sources */,
 				48718D761F42277400010AA0 /* MJPhotoView.m in Sources */,
+				222C30FD215A21D3009871C7 /* ShareSaveModel.m in Sources */,
 				485E65D71F42862900B158BF /* MWTapDetectingView.m in Sources */,
 				890A020A1FE2208D0069186F /* SYMessageNormalCell.m in Sources */,
 				48718D2D1F42277400010AA0 /* AFSecurityPolicy.m in Sources */,
@@ -3478,6 +3560,7 @@
 				485E65B71F42862900B158BF /* amrFileCodec.mm in Sources */,
 				48718D981F42277400010AA0 /* SDWebImagePrefetcher.m in Sources */,
 				4852A12F1FCE9F0300CDD7BE /* SYmarkCollectionViewCell.m in Sources */,
+				222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */,
 				48718D8E1F42277400010AA0 /* MKAnnotationView+WebCache.m in Sources */,
 				33C1A1831F4C50FB003E22CA /* ViewController+MASAdditions.m in Sources */,
 				332D3E451F500331001ADDB3 /* NSObject+MJCoding.m in Sources */,
@@ -3511,6 +3594,7 @@
 				485E65F01F42862900B158BF /* PSTCollectionViewItemKey.m in Sources */,
 				332D3E431F500331001ADDB3 /* MJPropertyType.m in Sources */,
 				4852A1391FCE9F0300CDD7BE /* SYWaterFlowLayout.m in Sources */,
+				2242C0072159C3AB00707024 /* UIColor+Extention.m in Sources */,
 				4852A0B81FCE9F0300CDD7BE /* SYBigDramaController.m in Sources */,
 				89500F581FEB395200732CEB /* SCStoryPublishDashboardView.m in Sources */,
 				33C1A17B1F4C50FB003E22CA /* MASConstraint.m in Sources */,
@@ -3572,6 +3656,7 @@
 				332F483E1F25CA45002C4D12 /* NSDate+Formatter.m in Sources */,
 				485E66131F42862900B158BF /* EaseMessageTimeCell.m in Sources */,
 				4852A1131FCE9F0300CDD7BE /* SYComment.m in Sources */,
+				2242C0012159C34E00707024 /* UIViewController+NoDataTip.m in Sources */,
 				4852A16E1FCE9F7200CDD7BE /* FMDatabasePool.m in Sources */,
 				485E66181F42862900B158BF /* EaseBubbleView+Text.m in Sources */,
 				89E031511FCECBA70089240B /* GWLPhotoGroupTableViewController.m in Sources */,
@@ -3678,6 +3763,7 @@
 				4852A1071FCE9F0300CDD7BE /* SYStorySelectFriendController.m in Sources */,
 				4852A16F1FCE9F7200CDD7BE /* FMDatabaseQueue.m in Sources */,
 				4852A0E21FCE9F0300CDD7BE /* SYScreenDetailHeadView.m in Sources */,
+				2242C0022159C34E00707024 /* YYHud.m in Sources */,
 				485E66141F42862900B158BF /* EaseBubbleView+File.m in Sources */,
 				485E65E71F42862900B158BF /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				4852A13B1FCE9F0400CDD7BE /* SCBaseVC.m in Sources */,
@@ -3704,6 +3790,7 @@
 				4852A0C11FCE9F0300CDD7BE /* SYNoticeController.m in Sources */,
 				4852A1491FCE9F0400CDD7BE /* SCNavigatorModule.m in Sources */,
 				485E65EC1F42862900B158BF /* PSTCollectionViewCell.m in Sources */,
+				2242C0002159C34E00707024 /* UIView+NoDataImgShow.m in Sources */,
 				4852A14B1FCE9F0400CDD7BE /* SCPhotoLibrary.m in Sources */,
 				4852A0DB1FCE9F0300CDD7BE /* SYMeetSomeHeadView.m in Sources */,
 				8997A5DD1FE505BA0024B3AB /* SYGuiderScrollview.m in Sources */,
@@ -3737,6 +3824,7 @@
 				89500F551FEA5B2000732CEB /* SCStoryRecordController.m in Sources */,
 				48718D931F42277400010AA0 /* SDWebImageCompat.m in Sources */,
 				48718D731F42277400010AA0 /* MJPhotoLoadingView.m in Sources */,
+				222C3100215A27FE009871C7 /* HHBaseModel.m in Sources */,
 				48718D961F42277400010AA0 /* SDWebImageDownloaderOperation.m in Sources */,
 				332F483D1F25CA45002C4D12 /* CalendarViewController.m in Sources */,
 				4852A1461FCE9F0400CDD7BE /* SCAlertModule.m in Sources */,
@@ -3963,8 +4051,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
 				ENABLE_BITCODE = NO;
@@ -4008,8 +4096,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51e6a056-0305-4959-a19f-458cbe3c66dc";
-				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
+				PROVISIONING_PROFILE = "10875f27-8b2c-4824-8254-9d9dca6e57b9";
+				PROVISIONING_PROFILE_SPECIFIER = "马甲_APPStore";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -4021,8 +4109,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
 				ENABLE_BITCODE = NO;
@@ -4066,8 +4154,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51e6a056-0305-4959-a19f-458cbe3c66dc";
-				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
+				PROVISIONING_PROFILE = "10875f27-8b2c-4824-8254-9d9dca6e57b9";
+				PROVISIONING_PROFILE_SPECIFIER = "马甲_APPStore";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

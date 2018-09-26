@@ -10,6 +10,7 @@
 #import "UIColor+Extention.h"
 #import <objc/runtime.h>
 #import "UIImage+GIF.h"
+#import "YYHud.h"
 
 #define TipBgColor [UIColor colorWithWhite:1 alpha:1]
 #define TipLabelDefault @"很抱歉，暂时没有数据，请稍候再试!"
@@ -54,7 +55,6 @@
     }else{
         _tipImage.center = CGPointMake(_tipLabel.center.x, _tipLabel.center.y-_tipLabelInterval-size.height/2-_tipImage.frame.size.height/2);
     }
-    
     
     CGSize buttonSize = [_tipButton sizeThatFits:CGSizeMake(self.frame.size.width, CGFLOAT_MAX)];
     

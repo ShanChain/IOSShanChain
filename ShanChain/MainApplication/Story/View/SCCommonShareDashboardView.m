@@ -12,13 +12,20 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 
+#import "ShareSaveModel.h"
+
 @interface SCCommonShareDashboardView()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 
 @property (strong, nonatomic) NSArray *contentArray;
 
+@property (nonatomic,copy)    NSString   *storyId;
+
+@property (nonatomic,strong)  ShareSaveModel   *shareModel;
+
 @end
+
 
 @implementation SCCommonShareDashboardView
 
@@ -62,12 +69,11 @@
     self = [super init];
     if (self) {
 
-        
     }
     return self;
 }
 
-- (void)presentView {
+- (void)presentViewWithStoryId:(NSString*)storyId{
     for (UIView *sub in self.subviews) {
         [sub removeFromSuperview];
     }
@@ -75,7 +81,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelAction)];
 //    [self addGestureRecognizer:tap];
     self.userInteractionEnabled = YES;
-    
+    self.storyId = storyId;
     self.backgroundColor = RGB_Hex(0xCACAC9, 0.5);
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
@@ -134,20 +140,15 @@
 }
 
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-    
+- (void)_share:(ShareSaveModel*)model didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *content = self.contentArray[indexPath.row];
-    
-    NSArray* imageArray = @[[UIImage imageNamed:@"topc3"]];
+    NSArray* imageArray = @[model.background];
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-    [shareParams SSDKSetupShareParamsByText:@"分享内容"
-                                         images:imageArray
-                                            url:[NSURL URLWithString:@"http://mob.com"]
-                                          title:@"分享标题"
+    [shareParams SSDKSetupShareParamsByText:model.intro
+                                     images:@[model.background]
+                                        url:model.url
+                                      title:model.title
                                        type:SSDKContentTypeAuto];
-    
-    
     NSNumber  *  formTypeNumber = @[@(SSDKPlatformTypeWechat),@(SSDKPlatformSubTypeWechatTimeline),@(SSDKPlatformSubTypeQQFriend),@(SSDKPlatformSubTypeQZone),@(SSDKPlatformTypeSinaWeibo)][indexPath.row];
     [ShareSDK share:formTypeNumber.integerValue
          parameters:shareParams
@@ -157,10 +158,10 @@
              case SSDKResponseStateSuccess:
              {
                  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                           message:nil
-                                           delegate:nil
-                                           cancelButtonTitle:@"确定"
-                                           otherButtonTitles:nil];
+                                                                     message:nil
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"确定"
+                                                           otherButtonTitles:nil];
                  [alertView show];
                  break;
              }
@@ -168,19 +169,19 @@
              {
                  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
                                                                      message:[NSString stringWithFormat:@"%@", error]
-                                           delegate:nil
+                                                                    delegate:nil
                                                            cancelButtonTitle:@"确定"
-                                           otherButtonTitles:nil];
+                                                           otherButtonTitles:nil];
                  [alertView show];
                  break;
              }
              case SSDKResponseStateCancel:
              {
                  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享已取消"
-                                           message:nil
-                                           delegate:nil
+                                                                     message:nil
+                                                                    delegate:nil
                                                            cancelButtonTitle:@"确定"
-                                           otherButtonTitles:nil];
+                                                           otherButtonTitles:nil];
                  [alertView show];
                  break;
              }
@@ -188,8 +189,27 @@
                  break;
          }
      }];
+   
     
     [self cancelAction];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    weakify(self);
+    [[SCNetwork shareInstance]postWithUrl:SHARE_SAVE parameters:@{@"characterId":[SCCacheTool shareInstance].getCurrentCharacterId,@"id":self.storyId,@"type":@"story"} success:^(id responseObject) {
+        if (responseObject[@"data"] && [responseObject[@"data"] isKindOfClass:[NSDictionary class]]) {
+            weak_self.shareModel = [ShareSaveModel mj_objectWithKeyValues:responseObject[@"data"]];
+            [weak_self _share:weak_self.shareModel didSelectItemAtIndexPath:indexPath];
+        }
+        
+    } failure:^(NSError *error) {
+        [YYHud showError:@"分享失败"];
+        [weak_self cancelAction];
+    }];
+    
+    
+    
     // share action
 }
 

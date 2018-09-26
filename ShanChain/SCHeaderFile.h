@@ -67,4 +67,8 @@
 #import "MCDate.h"
 #import "MJExtension.h"
 
+#import "UIViewController+NoDataTip.h"
+#import "YYHud.h"
+#import "UIImage+MingleChang.h"
+
 #endif /* SCHeaderFile_h */

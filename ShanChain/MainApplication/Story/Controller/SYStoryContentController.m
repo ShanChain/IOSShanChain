@@ -244,6 +244,7 @@
         
         NSMutableDictionary *dic = [data[0] mutableCopy];
         NSString *characterString = dic[@"characterId"];
+        self.storyId = dic[@"storyId"]; //获取故事ID
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         [params setObject:[JsonTool stringFromArray:@[characterString]] forKey:@"dataArray"];
       
@@ -389,20 +390,19 @@
 }
 
 - (void)addActionTarget:(UIAlertController *)alertController titles:(NSString *)titles {
-    WS(WeakSelf);
     for (NSString *title in titles) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             if ([title isEqualToString:@"举报"]) {
-                SCDynamicModel *model = WeakSelf.dynamicStatusFrame.dynamicModel;
+                SCDynamicModel *model = self.dynamicStatusFrame.dynamicModel;
                 SCReportController *reportVC = [[SCReportController alloc] init];
                 reportVC.detailId = model.detailId;
-                [WeakSelf.navigationController pushViewController:reportVC animated:YES];
+                [self.navigationController pushViewController:reportVC animated:YES];
             }
             
             if ([title isEqualToString:@"分享"]) {
             //    [self share_];
                 SCCommonShareDashboardView *shareDashboardView = [[SCCommonShareDashboardView alloc] init];
-                [shareDashboardView presentView];
+                [shareDashboardView presentViewWithStoryId:self.storyId];
             }
         }];
         [action setValue:RGB(0, 118, 255) forKey:@"_titleTextColor"];
@@ -410,49 +410,6 @@
     }
 }
 
-- (void)share_{
-    //1、创建分享参数
-    NSArray* imageArray = @[[UIImage imageNamed:@"topc3"]];
-//    （注意：图片必须要在Xcode左边目录里面，名称必须要传正确，如果要分享网络图片，可以这样传iamge参数 images:@[@"http://mob.com/Assets/images/logo.png?v=20150320"]）
-    if (imageArray) {
-        
-        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"分享内容"
-                                         images:imageArray
-                                            url:[NSURL URLWithString:@"http://mob.com"]
-                                          title:@"分享标题"
-                                           type:SSDKContentTypeAuto];
-  
-                       
-                    //大家请注意：4.1.2版本开始因为UI重构了下，所以这个弹出分享菜单的接口有点改变，如果集成的是4.1.2以及以后版本，如下调用：
-                       [ShareSDK showShareActionSheet:nil customItems:nil shareParams:shareParams sheetConfiguration:nil onStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                           switch (state) {
-                               case SSDKResponseStateSuccess:
-                               {
-                                   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                                       message:nil
-                                                                                      delegate:nil
-                                                                             cancelButtonTitle:@"确定"
-                                                                             otherButtonTitles:nil];
-                                   [alertView show];
-                                   break;
-                               }
-                               case SSDKResponseStateFail:
-                               {
-                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                                   message:[NSString stringWithFormat:@"%@",error]
-                                                                                  delegate:nil
-                                                                         cancelButtonTitle:@"OK"
-                                                                         otherButtonTitles:nil, nil];
-                                   [alert show];
-                                   break;
-                               }
-                               default:
-                                   break;
-                           }
-                       }];
-    }
-}
 
 
 // 取消按钮

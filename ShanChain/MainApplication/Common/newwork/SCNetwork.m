@@ -16,6 +16,7 @@
 #import "UrlConstants.h"
 #import "SCCacheTool.h"
 
+#import "HHBaseModel.h"
 
 #define ACCEPT_TYPE_NORMAL @[@"application/json",@"application/xml",@"text/json",@"text/javascript",@"text/html",@"text/plain",@"application/x-www-form-urlencodem"]
 #define ACCEPT_TYPE_IMAGE @[@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json"]
@@ -96,14 +97,16 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         if ([responseObject[@"code"] isEqualToString:SC_COMMON_SUC_CODE]) {
             success(responseObject);
         } else {
+            NSString *msg = responseObject[@"message"];
+            if (!msg) {
+                msg = @"操作失败";
+            }
 //            SCLog(@"Request error%@", responseObject);
             if([responseObject[@"code"] isEqualToString:SC_REQUEST_TOKEN_EXPIRE]){
                 [[SCAppManager shareInstance] logout];
-            } else {
-                NSString *msg = responseObject[@"message"];
-                if (!msg) {
-                    msg = @"操作失败";
-                }
+            } else if ([responseObject[@"code"] isEqualToString:SC_SHARE_NOOPEN]){
+                [SYProgressHUD showError:msg];
+            }else {
                 if (failure) {
                     failure([SCNetworkError errorWithCode:(NSInteger)responseObject[@"code"] msg:msg]);
                 } else {

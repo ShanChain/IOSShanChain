@@ -10,6 +10,6 @@
 
 @interface SCCommonShareDashboardView : UIView
 
-- (void)presentView;
+- (void)presentViewWithStoryId:(NSString*)storyId;
 
 @end

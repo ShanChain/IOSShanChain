@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
+
 @interface UIView (NoDataImgShow)
 - (NoDataTip *)noDataImgShow:(UIView *)superView  AndTheimage:(UIImage *)image;
 

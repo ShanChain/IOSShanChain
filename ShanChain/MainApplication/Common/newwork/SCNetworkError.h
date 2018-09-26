@@ -16,6 +16,7 @@ static NSString * const SC_LOGIN_ERR_CODE = @"999996";
 static NSString * const SC_USER_REPEAT_ERR_CODE = @"999997";
 static NSString * const SC_COMMON_ERR_CODE = @"999999";
 static NSString * const SC_ACCOUNT_HAS_BINDED = @"999989";
+static NSString * const SC_SHARE_NOOPEN = @"999987";
 
 
 typedef enum : NSInteger {

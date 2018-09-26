@@ -7,6 +7,7 @@
 //
 
 #import "SCStoryPublishDashboardView.h"
+#import "YYHud.h"
 
 @implementation SCStoryPublishDashboardView
 
@@ -85,6 +86,7 @@
 }
 
 - (void)selectStory:(UITapGestureRecognizer *)tap {
+    
     [self removeFromSuperview];
     if ([self.delegate respondsToSelector:@selector(storyPublishDashboardSelectStory)]) {
         [self.delegate storyPublishDashboardSelectStory];
@@ -92,10 +94,13 @@
 }
 
 - (void)selectPlay:(UITapGestureRecognizer *)tap {
-    [self removeFromSuperview];
-    if ([self.delegate respondsToSelector:@selector(storyPublishDashboardSelectPlay)]) {
-        [self.delegate storyPublishDashboardSelectPlay];
-    }
+#pragma mark --这版本视频先不上
+    [YYHud showError:@"暂时未开放"];
+
+//    [self removeFromSuperview];
+//    if ([self.delegate respondsToSelector:@selector(storyPublishDashboardSelectPlay)]) {
+//        [self.delegate storyPublishDashboardSelectPlay];
+//    }
 }
 
 - (void)closeTap:(UITapGestureRecognizer *)tap {

@@ -229,6 +229,9 @@
 //提交videoID和imageURL到服务器
 #define PLAY_ADD_URL            @"/v1/play/add"
 
+// 分享
+#define SHARE_SAVE         @"/v1/share/save"
+
 
 #pragma mark -IM接口
 

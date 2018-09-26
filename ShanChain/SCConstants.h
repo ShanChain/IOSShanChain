@@ -17,6 +17,8 @@
 #define KSCMargin 15.0
 
 #define KSYBetweenMargin 8.0f
+// 视图背景色
+#define Theme_ViewBackgroundColor  [UIColor colorWithString:@"F2F2F2"]
 
 //AppDelegate
 #define App_Delegate ((AppDelegate*)[[UIApplication sharedApplication]delegate])
