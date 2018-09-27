@@ -70,5 +70,7 @@
 #import "UIViewController+NoDataTip.h"
 #import "YYHud.h"
 #import "UIImage+MingleChang.h"
+#import "UIImageView+sd.h"
+#import "UIViewController+HRAlertViewController.h"
 
 #endif /* SCHeaderFile_h */

@@ -72,7 +72,7 @@
         [self.view addSubview:_contentView];
         [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(50);
+            make.height.mas_equalTo(IPHONE_TOOL_HEIGHT);
         }];
         UIImageView *contentImgView = [[UIImageView alloc]init];
         contentImgView.image = [UIImage imageNamed:@"abs_home_btn_comment_default"];

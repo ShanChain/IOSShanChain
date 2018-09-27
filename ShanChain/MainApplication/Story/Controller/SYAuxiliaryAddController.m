@@ -573,16 +573,16 @@ static int const TagDetailField = 100004;
 #pragma mark -UITextViewDelegate代理方法
 -(void)textViewDidChange:(UITextView *)textView{
     //    textview 改变字体的行间距
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 5;// 字体的行间距
-    NSDictionary *attributes = @{
-                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                 
-                                 NSParagraphStyleAttributeName:paragraphStyle
-                                 };
-    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
-    
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    paragraphStyle.lineSpacing = 5;// 字体的行间距
+//    NSDictionary *attributes = @{
+//                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+//
+//                                 NSParagraphStyleAttributeName:paragraphStyle
+//                                 };
+//    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
     self.detailPlaceholdLabel.hidden = self.detailTextView.text.length;
+   
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

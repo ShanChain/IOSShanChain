@@ -204,7 +204,10 @@ static NSString * const SYStoryRoleCollectionCellID = @"SYStoryRoleCollectionCel
 -(UIButton *)btn{
     if (!_btn) {
         _btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btn.frame = CGRectMake(KSCMargin, 560.0/667*SCREEN_HEIGHT, SCREEN_WIDTH - 2 * KSCMargin, 40.0/667*SCREEN_HEIGHT);
+//        _btn.frame = CGRectMake(KSCMargin, 560.0/667*SCREEN_HEIGHT, SCREEN_WIDTH - 2 * KSCMargin, 40.0/667*SCREEN_HEIGHT);
+//        _btn.y = SCREEN_HEIGHT - _btn.height - IPHONE_STATUSBAR_HEIGHT
+ 
+        
         [_btn setTitle:@"我们穿越吧" forState:UIControlStateNormal];
         _btn.layer.masksToBounds = YES;
         _btn.layer.cornerRadius = 8.0;
@@ -262,6 +265,12 @@ static NSString * const SYStoryRoleCollectionCellID = @"SYStoryRoleCollectionCel
     [self.view addSubview:self.selectLab];
     
     [self.view addSubview:self.btn];
+    [_btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(@(-IPHONE_STATUSBAR_HEIGHT));
+        make.left.equalTo(@KSCMargin);
+        make.right.equalTo(@-KSCMargin);
+        make.height.equalTo(@(40.0/667*SCREEN_HEIGHT));
+    }];
 }
 
 #pragma mark -构造方法

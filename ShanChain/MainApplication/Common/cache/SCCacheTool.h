@@ -10,6 +10,8 @@
 
 @interface SCCacheTool : NSObject
 
+
+
 +(SCCacheTool *)shareInstance;
 
 /**

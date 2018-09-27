@@ -85,6 +85,7 @@
     [super layoutUI];
     
     self.title = @"人物名牌";
+    [self addNavigationRightWithImageName:@"abs_home_btn_more_default" withTarget:self withAction:@selector(moreAction:)];
     [self initFromRnData];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -228,6 +229,7 @@
     [headerView addSubview:_headBackground];
     
     _headIconView = [[UIImageView alloc] init];
+    [_headIconView preventImageViewExtrudeDeformation];
     [_headIconView makeLayerWithRadius:35 withBorderColor:[UIColor whiteColor] withBorderWidth:2];
     [_headBackground addSubview:_headIconView];
     [_headIconView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -389,5 +391,49 @@
         WeakSelf.isFollow = follow;
     } failure:nil];
 }
+
+
+//- (void)moreAction:(UIButton *)button {
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+//                                                                   message:nil
+//                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+//    NSArray *titles = @[@"举报", @"分享"];
+//    [self addActionTarget:alert titles:titles];
+//    [self addCancelActionTarget:alert title:@"取消"];
+//    [self presentViewController:alert animated:YES completion:nil];
+//}
+//
+//- (void)addActionTarget:(UIAlertController *)alertController titles:(NSString *)titles {
+//    for (NSString *title in titles) {
+//        UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//            if ([title isEqualToString:@"举报"]) {
+//                SCDynamicModel *model = self.dynamicStatusFrame.dynamicModel;
+//                SCReportController *reportVC = [[SCReportController alloc] init];
+//                reportVC.detailId = model.detailId;
+//                [self.navigationController pushViewController:reportVC animated:YES];
+//            }
+//
+//            if ([title isEqualToString:@"分享"]) {
+//                //    [self share_];
+//                SCCommonShareDashboardView *shareDashboardView = [[SCCommonShareDashboardView alloc] init];
+//                [shareDashboardView presentViewWithStoryId:self.storyId];
+//            }
+//        }];
+//        [action setValue:RGB(0, 118, 255) forKey:@"_titleTextColor"];
+//        [alertController addAction:action];
+//    }
+//}
+
+
+
+// 取消按钮
+- (void)addCancelActionTarget:(UIAlertController *)alertController title:(NSString *)title{
+    UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    [action setValue:RGB(0, 118,255) forKey:@"_titleTextColor"];
+    [alertController addAction:action];
+}
+
 
 @end

@@ -65,6 +65,7 @@ static NSString * const KSYChatListCellID = @"SYChatListCell";
 {
     [super viewWillAppear:animated];
     [self refresh];
+    
 }
 
 - (void)removeEmptyConversationsFromDB{
@@ -206,6 +207,7 @@ static NSString * const KSYChatListCellID = @"SYChatListCell";
     return _networkStateView;
 }
 
+#pragma mark -- 点击cell回调
 - (void)conversationListViewController:(EaseConversationListViewController *)conversationListViewController
             didSelectConversationModel:(id<IConversationModel>)conversationModel{
     if (conversationModel) {

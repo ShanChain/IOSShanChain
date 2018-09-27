@@ -18,6 +18,9 @@
 #import "SYFriendHomePageController.h"
 #import "SYStatusTextview.h"
 
+#define AKDKTIP  @"马甲致力于打造一个健康向上、积极的想象力社交分享平台，我们允许本网站用户发布内容，包括但不限于发布文章、图片、视频，以及通过网站评论系统发送给其他注册用户的评论，文章，链接，私人消息。马甲有权自行决定在不通知您的情况下，监控，审查，编辑，移动，删除和/或删除您随时以任何理由来往马甲用户帐户在网站上发布的任何或所有内容，或通过直接消息或任何其他方式传输的任何内容。在不限制前述规定的前提下，马甲有权自行决定删除\n您同意不：\n1 选择威胁，辱骂，冒犯，骚扰，嘲笑，诽谤，粗俗，淫秽，诽谤，仇恨，种族，民族或其他或令人反感的别名。\n2 发布或传输您知道或应该知道的任何内容是虚假的，欺骗性的或误导性的，或歪曲或欺骗他人您发布的任何评论的来源，准确性，完整性或完整性。\n3 发布或传播任何对他人非法，有害或有害的内容，包含软件病毒或其他有害的计算机代码，文件或程序，威胁，辱骂，冒犯，骚扰，嘲弄，诽谤，粗俗，淫秽，诽谤，仇恨，种族，民族或其他侵权或令人反感的。\n4 发布或传播任何侵犯或侵犯隐私或侵犯或侵犯他人权利的内容，包括但不限于版权和其他知识产权。\n5 通过使用您的别名或任何评论，冒充任何人或实体，虚假或欺骗性地陈述、推断或以其他方式谎称您与任何个人或实体的关系或联系。\n6 发布或传输任何内容，无论是发布行为还是评论本身，您无权根据任何法院，法规或任何法院的命令，或因雇用，合同，信托或其他方式而做法律义务或关系。\n7 发布或传播任何广告，宣传材料，所谓的“连锁信”，“金字塔”或其他计划或邀请参加这些或任何其他形式的招揽或促销。\n8 未经授权，发布或传输任何非公开或其他受限制的机密或专有信息。\n9 违反任何法院的任何地方，州，国家或国际法律，法规或命令，包括任何交易规则。您认为可能违反本网站使用条款的任何内容或评论。\n若用户违反以下马甲内容原则之一，马甲将保留自行决定删除的权利：\n没有煽动仇恨。将删除基于种族或民族血统，宗教，残疾，性别，年龄，退伍军人身份或性取向/性别认同而促进对群体的仇恨的材料。\n没有色情或恋童癖\n对任何人或一群人没有直接或隐蔽的威胁。\n没有版权侵权\n不发布其他人的私人和机密信息，例如信用卡号，社会保险号，驾驶员和其他许可证号码。  "
+
+
 @interface SYStoryController ()<UIScrollViewDelegate, SCStoryPublishDashboardDelegate>
 
 @property (strong, nonatomic) UIView        *mainTitleScrollView;
@@ -101,10 +104,28 @@
 }
 
 - (void)publishArticle:(UIButton *)button {
+    
+    BOOL   isRespectProtocol = [[NSUserDefaults standardUserDefaults]objectForKey:@"isRespectProtocol"];
+    if (!isRespectProtocol) {
+        weakify(self);
+        [self hrShowAlertWithTitle:@"您需要遵守以下用户协议\n" message:AKDKTIP buttonsTitles:@[@"不同意",@"同意"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+            if (indexOfAction == 1) {
+                [weak_self hh_presentPublishDashboardView];
+                [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"isRespectProtocol"];
+                [[NSUserDefaults standardUserDefaults]synchronize];
+            }
+        }];
+    }else{
+        [self hh_presentPublishDashboardView];
+    }
+ }
+
+- (void)hh_presentPublishDashboardView{
     SCStoryPublishDashboardView *dashboardView = [[SCStoryPublishDashboardView alloc] init];
     dashboardView.delegate = self;
     [dashboardView presentView];
- }
+}
+
 
 - (void)storyPublishDashboardSelectStory {
     SYStoryPublishController *vc = [[SYStoryPublishController alloc] init];

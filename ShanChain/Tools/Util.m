@@ -17,7 +17,10 @@
     
 }
 
-NS_INLINE void tipWithMessage(NSString *message){ dispatch_async(dispatch_get_main_queue(), ^{ UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil]; [alerView show]; [alerView performSelector:@selector(dismissWithClickedButtonIndex:animated:) withObject:@[@0, @1] afterDelay:0.9]; });    
+NS_INLINE void tipWithMessage(NSString *message){
+    dispatch_async(dispatch_get_main_queue(), ^{
+     UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil]; [alerView show]; [alerView performSelector:@selector(dismissWithClickedButtonIndex:animated:) withObject:@[@0, @1] afterDelay:0.9];
+    });
 }
 
 + (UIWindow *)topWindow

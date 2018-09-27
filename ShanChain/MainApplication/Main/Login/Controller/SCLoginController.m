@@ -222,7 +222,7 @@
 //    self.rnDemoBtn.frame=CGRectMake(KSCMargin, CGRectGetMaxY(self.registerBtn.frame) + KSCMargin, SCREEN_WIDTH-30, 40);
     
 
-    self.socialView.frame=CGRectMake(45,SCREEN_HEIGHT-70.0/667*SCREEN_HEIGHT - kNavStatusBarHeight, SCREEN_WIDTH - 45 * 2 , 50);
+    self.socialView.frame=CGRectMake(45,SCREEN_HEIGHT-70.0/667*SCREEN_HEIGHT - IPHONE_NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH - 45 * 2 , 50);
     self.socialBtn.frame = CGRectMake((SCREEN_WIDTH-75)/2,CGRectGetMinY(self.socialView.frame) - 45, 75,20);
     self.weiBtn.frame=CGRectMake(0, 0, 50, 50);
     self.weibBtn.frame=CGRectMake((SCREEN_WIDTH- 50)/2-45, 0, 50, 50);

@@ -165,9 +165,8 @@
     // 5.头像
     self.iconView.frame = dynamicStatusFrame.dynamicDetailFrame.icon;
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:dynamicModel.characterImg] placeholderImage:[UIImage imageNamed:@"abs_addanewrole_def_photo_default"]];
-    
+    [self.iconView preventImageViewExtrudeDeformation];
     self.moreBtn.frame = dynamicStatusFrame.dynamicDetailFrame.more;
-    
     self.photosView.hidden = YES;
     
     switch (dynamicModel.type) {
@@ -194,7 +193,7 @@
         }
     }
     
-    self.moreBtn.hidden     = !dynamicModel.showMore;
+    self.moreBtn.hidden     = dynamicModel.type == 3?YES:NO;
     self.floorLabel.hidden  = !dynamicModel.showFloor;
 }
 

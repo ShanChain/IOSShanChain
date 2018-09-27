@@ -178,7 +178,7 @@ static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity
     [self.navigationController pushViewController:selectVC animated:YES];
 }
 
-- (void)insertMentionRole:(NSString *)name withHXID:(NSString *)hxID {
+- (void)insertMentionRole:(NSString *)name withHXID:(NSString *)hxID{
     NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:name attributes:self.chatToolbar.inputTextView.typingAttributes];
     NSRange range = self.chatToolbar.inputTextView.selectedRange;
     [attri addAttribute:SYWordStylePointedName value:[NSNumber numberWithUnsignedInteger:name.length] range:NSMakeRange(0, name.length)];
@@ -213,7 +213,7 @@ static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity
         screenCell.content = body.text;
         return screenCell;
     }
-    if (ext[HX_EXT_MSG_ATTR] == @0 || ext[HX_EXT_MSG_ATTR] == @1 ) {
+    if (ext[HX_EXT_MSG_ATTR] == @0 || ext[HX_EXT_MSG_ATTR] == @1) {
         SYMessageNormalCell *cell = nil;
         if (messageModel.isSender) {
             cell = (SYMessageNormalCell *)[tableView dequeueReusableCellWithIdentifier:@"SYMessageNormalCellSender"];
@@ -224,7 +224,7 @@ static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity
             cell = [[SYMessageNormalCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:(messageModel.isSender ? @"SYMessageNormalCellSender" : @"SYMessageNormalCellReceive") withModel:messageModel];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.indexPath = self;
+        cell.indexPath = indexPath;
         cell.delegate = self;
         [cell setModel:messageModel];
         return cell;
