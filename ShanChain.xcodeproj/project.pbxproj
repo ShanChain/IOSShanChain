@@ -2087,10 +2087,10 @@
 		48529FFC1FCE9F0300CDD7BE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				48529FFE1FCE9F0300CDD7BE /* SCReportController.m */,
 				48529FFD1FCE9F0300CDD7BE /* SCReportController.h */,
 				8916D1231FDA66E70058DD0B /* SYAddTimeReportController.h */,
 				8916D1221FDA66E70058DD0B /* SYAddTimeReportController.m */,
-				48529FFE1FCE9F0300CDD7BE /* SCReportController.m */,
 				48529FFF1FCE9F0300CDD7BE /* SCSearchController.h */,
 				4852A0001FCE9F0300CDD7BE /* SCSearchController.m */,
 				4852A0011FCE9F0300CDD7BE /* SYAddRoleReportController.h */,

@@ -146,18 +146,33 @@
     [params setObject:(self.currentIndex == 5 ? self.textView.text : self.titles[self.currentIndex]) forKey:@"reason"];
     
     [params setObject:[SCCacheTool.shareInstance getCurrentCharacterId] forKey:@"characterId"];
-    if (![self.detailId isNotBlank]) {
-        [SYProgressHUD showError:@"动态信息有误"];
-        return;
+    
+    NSMutableString *targetId = nil;
+    if (self.isReportPersonal) {
+        targetId = self.userId;
+        [params setObject:@"USER" forKey:@"reportType"];
+        [params setObject:[SCCacheTool shareInstance].getCurrentCharacterId forKey:@"characterId"];
+    }else{
+        if (![self.detailId isNotBlank]) {
+            [SYProgressHUD showError:@"动态信息有误"];
+            return;
+        }
+        targetId  = [NSMutableString stringWithString:[self.detailId copy]];
+        NSString *startCharacter = [targetId substringWithRange:NSMakeRange(0, 1)];
+        [params setObject:([startCharacter isEqualToString:@"s"] ? @"STORY" : @"TOPIC") forKey:@"reportType"];
+        [targetId deleteCharactersInRange:NSMakeRange(0, 1)];
     }
     
-    NSMutableString *targetId = [NSMutableString stringWithString:[self.detailId copy]];
-    NSString *startCharacter = [targetId substringWithRange:NSMakeRange(0, 1)];
-    [params setObject:([startCharacter isEqualToString:@"s"] ? @"STORY" : @"TOPIC") forKey:@"reportType"];
-    [targetId deleteCharactersInRange:NSMakeRange(0, 1)];
     [params setObject:targetId forKey:@"targetId"];
-    [[SCNetwork shareInstance] postWithUrl:STORYREPORT parameters:params success:^(id responseObject) {
+    [[SCNetwork shareInstance] postWithUrl:self.isReportPersonal ? REPORT_USER_URL:STORYREPORT parameters:params success:^(id responseObject) {
         SYReportSuccessController *successVC = [[SYReportSuccessController alloc]init];
+        weakify(self);
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//        });
+        successVC.successBlock = ^{
+              [weak_self.navigationController popToRootViewControllerAnimated:YES];
+        };
         [self.navigationController presentViewController:successVC animated:YES completion:nil];
     } failure:^(NSError *error) {
         SCLog(@"%@",error);

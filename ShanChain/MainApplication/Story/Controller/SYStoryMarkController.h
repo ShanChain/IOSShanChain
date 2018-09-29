@@ -10,4 +10,6 @@
 
 @interface SYStoryMarkController : SCBaseViewController
 
+@property    (nonatomic,copy)     NSString   *navTitle;
+
 @end

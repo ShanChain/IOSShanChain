@@ -41,15 +41,17 @@
 -(NSArray <UIViewController *> *)userChildViewControllers{
     if (!_userChildViewControllers) {
         SYStoryConcernController *focusVC=[[SYStoryConcernController alloc]init];
-        [focusVC.view setFrame:CGRectMake(0, 0, self.bodyScrollView.width, self.bodyScrollView.height)];
+//        [focusVC.view setFrame:CGRectMake(0, 0, self.bodyScrollView.width, self.bodyScrollView.height)];
+        [focusVC.view setFrame:CGRectMake(self.bodyScrollView.width, 0, self.bodyScrollView.width, self.bodyScrollView.height)];
         
         SYStoryRecommendController *recomendVC=[[SYStoryRecommendController alloc]init];
         [recomendVC.view setFrame:CGRectMake(self.bodyScrollView.width * 2, 0, self.bodyScrollView.width, self.bodyScrollView.height)];
         
         SYStoryRealTimeController *realTimeVC=[[SYStoryRealTimeController alloc]init];
-        [realTimeVC.view setFrame:CGRectMake(self.bodyScrollView.width, 0, self.bodyScrollView.width, self.bodyScrollView.height)];
+      //  [realTimeVC.view setFrame:CGRectMake(self.bodyScrollView.width, 0, self.bodyScrollView.width, self.bodyScrollView.height)];
+        [realTimeVC.view setFrame:CGRectMake(0, 0, self.bodyScrollView.width, self.bodyScrollView.height)];
         
-        _userChildViewControllers = @[focusVC,realTimeVC,recomendVC];
+        _userChildViewControllers = @[realTimeVC,focusVC,recomendVC];
     }
     return _userChildViewControllers;
 }
@@ -104,7 +106,6 @@
 }
 
 - (void)publishArticle:(UIButton *)button {
-    
     BOOL   isRespectProtocol = [[NSUserDefaults standardUserDefaults]objectForKey:@"isRespectProtocol"];
     if (!isRespectProtocol) {
         weakify(self);
@@ -143,7 +144,7 @@
     if (!_mainTitleScrollView) {
         _mainTitleScrollView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
         _mainTitleScrollView.backgroundColor = RGBA(254, 255, 255, 1.0);
-        NSArray *dataArray = @[@"关注",@"实时",@"推荐"];
+        NSArray *dataArray = @[@"实时",@"关注",@"推荐"];
         CGFloat width = SCREEN_WIDTH/dataArray.count;
         for (int i = 0; i < dataArray.count; i++) {
             NSString * title = dataArray[i];
@@ -270,7 +271,6 @@
         [lastBtn setTitleColor:RGB(83, 83, 83) forState:UIControlStateNormal];
         UIButton *currentBtn = [self.view viewWithTag:(2222 + index)];
         [currentBtn setTitleColor:RGB(59, 186, 200) forState:UIControlStateNormal];
-        
         [self removeChildViewControllerWithIndex:self.currentIndex];
         self.currentIndex = index;
     }

@@ -94,7 +94,9 @@
 }
 
 - (void)sureBtnClick{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        BLOCK_EXEC(self.successBlock);
+    }];
 }
 
 @end

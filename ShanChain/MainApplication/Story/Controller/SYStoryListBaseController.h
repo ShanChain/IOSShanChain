@@ -34,6 +34,8 @@
 
 @property (strong, nonatomic) id<SYStoryListDelegate> delegate;
 
+@property (nonatomic,assign)   BOOL     isRow;
+
 // 刷新数据的处理接口
 - (void)requestData:(BOOL)isReload;
 

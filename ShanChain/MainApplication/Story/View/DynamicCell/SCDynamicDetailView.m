@@ -30,6 +30,8 @@
 // 配图
 @property (weak, nonatomic) DSStatusPhotosView *photosView;
 
+@property (nonatomic,strong)  SCDynamicModel    *dynamicModel;
+
 @end
 
 @implementation SCDynamicDetailView
@@ -107,6 +109,7 @@
 - (void)setDynamicStatusFrame:(SCDynamicStatusFrame *)dynamicStatusFrame {
 
     self.frame = dynamicStatusFrame.frame;
+    self.dynamicModel = dynamicStatusFrame.dynamicModel;
     
     //取出数据
     SCDynamicModel *dynamicModel = dynamicStatusFrame.dynamicModel;
@@ -194,12 +197,16 @@
     }
     
     self.moreBtn.hidden     = dynamicModel.type == 3?YES:NO;
+    if (dynamicModel.isDetailsPage) {
+         // 详情页隐藏更多按钮
+        self.moreBtn.hidden = YES;
+    }
     self.floorLabel.hidden  = !dynamicModel.showFloor;
 }
 
-- (void)moreBtnOnClick {
-    //利用通知发送更多按钮被点击：挣对于多层次需要传递数据
-    [[NSNotificationCenter defaultCenter] postNotificationName:SYStoryDidReportNotication object:nil];
+- (void)moreBtnOnClick{
+    NSNotification *notification =[NSNotification notificationWithName:SYStoryDidReportNotication object:nil userInfo:@{@"detailId":self.dynamicModel.detailId}];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 @end

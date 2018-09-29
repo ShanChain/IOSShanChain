@@ -43,6 +43,8 @@ static NSString * const SYStoryRoleCollectionCellID = @"SYStoryRoleCollectionCel
 
 @property(nonatomic,strong)NSMutableDictionary    *characterInfo;
 
+@property(nonatomic,assign)    NSInteger    page; //角色分页数
+
 @end
 
 @implementation SYStoryRoleController
@@ -245,7 +247,8 @@ static NSString * const SYStoryRoleCollectionCellID = @"SYStoryRoleCollectionCel
 #pragma mark -系统方法
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    
+    [_itemShowArray removeAllObjects];
+    self.page = 0;
     [self requestSpaceCharacterList];
 }
 
@@ -265,8 +268,9 @@ static NSString * const SYStoryRoleCollectionCellID = @"SYStoryRoleCollectionCel
     [self.view addSubview:self.selectLab];
     
     [self.view addSubview:self.btn];
+    NSInteger   bottomInt = IS_IPHONE_X ? 44:10;
     [_btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@(-IPHONE_STATUSBAR_HEIGHT));
+        make.bottom.equalTo(@(-bottomInt));
         make.left.equalTo(@KSCMargin);
         make.right.equalTo(@-KSCMargin);
         make.height.equalTo(@(40.0/667*SCREEN_HEIGHT));
@@ -286,10 +290,8 @@ static NSString * const SYStoryRoleCollectionCellID = @"SYStoryRoleCollectionCel
 - (void)requestSpaceCharacterList{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@(self.spaceId) forKey:@"spaceId"];
-    
+    [params setObject:@(self.page)    forKey:@"page"];
     [[SCNetwork shareInstance]postWithUrl:STORYCHARACTERMODELQUERYSPACEID parameters:params success:^(id responseObject) {
-        [self.itemShowArray removeAllObjects];
-        
         NSDictionary *data = responseObject[@"data"];
         NSMutableArray *content = data[@"content"];
         
@@ -297,6 +299,10 @@ static NSString * const SYStoryRoleCollectionCellID = @"SYStoryRoleCollectionCel
             SYCharacterModel *characterModel=[[SYCharacterModel alloc]init];
             [characterModel setValuesForKeysWithDictionary:dic];
             [_itemShowArray addObject:characterModel];
+        }
+        if (_itemShowArray.count >= (self.page + 1)*10) {
+            self.page += 1;
+            [self requestSpaceCharacterList];
         }
         [self.scrolCollectionView reloadData];
     } failure:^(NSError *error) {
@@ -306,6 +312,10 @@ static NSString * const SYStoryRoleCollectionCellID = @"SYStoryRoleCollectionCel
 }
 
 - (void)readyBtnClick {
+    if ([self.selectLab.text isEqualToString:@""] || [self.selectLab.text isEqualToString:@"添加角色"]) {
+        [SYProgressHUD showError:@"选一个你喜欢的角色吧~"];
+        return;
+    }
     SYCharacterModel *m = self.itemShowArray[self.curIndexPath.item];
     [[SCAppManager shareInstance] switchRoleWithSpaceId:@(self.spaceId) modelId:@(m.modelId)];
 }

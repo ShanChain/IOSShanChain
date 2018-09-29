@@ -211,7 +211,7 @@ static NSString * const SYStoryMarkFavoriteHeaderID = @"SYStoryMarkFavoriteHeade
     
     NSString *spaceName = [[SCCacheTool shareInstance] getCurrentSpaceName];
     spaceName = spaceName.length <= 10 ? spaceName : [[spaceName substringToIndex:9] stringByAppendingString:@"..."];
-    if (!spaceName || ![spaceName isNotBlank]) {
+    if (spaceName || ![spaceName isNotBlank]) {
         _titleButton = [UIButton buttonWithType: UIButtonTypeCustom];
         _titleButton.frame = CGRectMake(100, 10.0/667*SCREEN_HEIGHT, SCREEN_WIDTH - 200, 25.0/667*SCREEN_HEIGHT);
         [_titleButton setTitle:spaceName forState:UIControlStateNormal];
@@ -237,7 +237,7 @@ static NSString * const SYStoryMarkFavoriteHeaderID = @"SYStoryMarkFavoriteHeade
 }
 
 -(void)titleBtnClick:(UIButton *)btn {
-    [self.navigationController popViewControllerAnimated:false];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 #pragma mark ----------- request data -----------
 - (void)requestSpaceFavoriteList {

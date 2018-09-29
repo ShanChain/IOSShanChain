@@ -20,6 +20,8 @@
 
 @property (assign, nonatomic) BOOL showChain;
 
+@property (assign, nonatomic) BOOL isDetailsPage; //是否是详情页
+
 // 动态ID
 @property (copy, nonnull) NSString *detailId;
 // 动态的类型

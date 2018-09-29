@@ -15,6 +15,8 @@
 #import "SYFriendHomePageController.h"
 #import "SYStoryTransmitController.h"
 #import "SYStatusTextview.h"
+#import "SCReportController.h"
+#import "SCCommonShareDashboardView.h"
 
 @interface SYStoryListBaseController()<UITableViewDelegate, UITableViewDataSource, SCDynamicCellDelegate, UIActionSheetDelegate>{
 }
@@ -79,6 +81,12 @@
     [self.view addSubview:self.tableView];
     
     [self requestData:YES];
+}
+
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(actionMore:) name:SYStoryDidReportNotication object:nil];;
 }
 
 #pragma mark ------ lifeCycle -----------
@@ -229,7 +237,8 @@
         return [self.delegate storyListTableView:tableView cellForRowAtIndexPath:indexPath];
     } else {
         SCDynamicCell *cell = [tableView dequeueReusableCellWithIdentifier:[SCDynamicCell cellDequeueReusableIdentifier] forIndexPath:indexPath];
-        SCDynamicStatusFrame *statusFrame = self.dynamicFrames[indexPath.section];
+        NSInteger i = self.isRow ? indexPath.row:indexPath.section;
+        SCDynamicStatusFrame *statusFrame = self.dynamicFrames[i];
         cell.indexPath = indexPath;
         cell.delegate = self;
         cell.dynamicStatusFrame = statusFrame;
@@ -387,5 +396,49 @@
         [self _enterStoryDetailWithModel:modelArray[index]];
     }
 }
+
+// 点击更多
+
+- (void)actionMore:(NSNotification*)notification{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    NSArray *titles = @[@"举报"];
+    [self addActionTarget:alert titles:titles detailId:notification.userInfo[@"detailId"]];
+    [self addCancelActionTarget:alert title:@"取消"];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)addActionTarget:(UIAlertController *)alertController titles:(NSString *)titles detailId:(NSString*)detailId{
+    for (NSString *title in titles) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if ([title isEqualToString:@"举报"]) {
+                SCReportController *reportVC = [[SCReportController alloc] init];
+                reportVC.detailId = detailId;
+                [self.navigationController pushViewController:reportVC animated:YES];
+            }
+            
+            if ([title isEqualToString:@"分享"]) {
+                //    [self share_];
+                SCCommonShareDashboardView *shareDashboardView = [[SCCommonShareDashboardView alloc] init];
+                [shareDashboardView presentViewWithStoryId:detailId];
+            }
+        }];
+        [action setValue:RGB(0, 118, 255) forKey:@"_titleTextColor"];
+        [alertController addAction:action];
+    }
+}
+
+
+
+// 取消按钮
+- (void)addCancelActionTarget:(UIAlertController *)alertController title:(NSString *)title{
+    UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    [action setValue:RGB(0, 118,255) forKey:@"_titleTextColor"];
+    [alertController addAction:action];
+}
+
 
 @end

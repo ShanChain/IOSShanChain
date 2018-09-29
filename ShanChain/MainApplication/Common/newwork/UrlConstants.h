@@ -208,6 +208,7 @@
 //切换角色
 #define STORYCHARACTERCHANGE @"/v1/character/change"
 
+// 获取用户信息
 #define STORYCHARACTQUERYBYID @"/v1/character/query"
 
 //获取话题，小说，故事列表
@@ -230,7 +231,10 @@
 #define PLAY_ADD_URL            @"/v1/play/add"
 
 // 分享
-#define SHARE_SAVE         @"/v1/share/save"
+#define SHARE_SAVE              @"/v1/share/save"
+
+// 举报用户
+#define REPORT_USER_URL         @"/v1/user/report/create"
 
 
 #pragma mark -IM接口

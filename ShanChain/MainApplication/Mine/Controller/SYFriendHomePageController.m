@@ -11,6 +11,7 @@
 #import "SCDynamicStatusFrame.h"
 #import "SYCharacterModel.h"
 #import "SYMessageController.h"
+#import "SCReportController.h"
 
 @interface SYFriendHomePageController ()<SYStoryListDelegate>{
 }
@@ -81,11 +82,19 @@
     }
 }
 
+
+- (void)addNavigation{
+    if (self.characterModel.userId.integerValue != [SCCacheTool shareInstance].getCurrentUser.integerValue) {
+        [self addNavigationRightWithImageName:@"abs_home_btn_more_default" withTarget:self withAction:@selector(moreAction:)];
+    }
+}
+
 - (void)layoutUI {
     [super layoutUI];
     
     self.title = @"人物名牌";
-    [self addNavigationRightWithImageName:@"abs_home_btn_more_default" withTarget:self withAction:@selector(moreAction:)];
+    // 当前ID不等于用户ID时才能举报
+
     [self initFromRnData];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,6 +108,7 @@
     }];
      
     self.delegate = self;
+    self.isRow = YES;
     self.tableView.backgroundColor = [UIColor clearColor];
 
     [self requestCharacterDetail];
@@ -118,6 +128,7 @@
         
         SYCharacterModel *model = [SYCharacterModel objectWithKeyValues:contentDic];
         WeakSelf.characterModel = model;
+        [self addNavigation];
         [WeakSelf.tableView.mj_header beginRefreshing];
     } failure:^(NSError *error) {
         [WeakSelf.tableView mj_endRefreshing];
@@ -393,36 +404,31 @@
 }
 
 
-//- (void)moreAction:(UIButton *)button {
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-//                                                                   message:nil
-//                                                            preferredStyle:UIAlertControllerStyleActionSheet];
-//    NSArray *titles = @[@"举报", @"分享"];
-//    [self addActionTarget:alert titles:titles];
-//    [self addCancelActionTarget:alert title:@"取消"];
-//    [self presentViewController:alert animated:YES completion:nil];
-//}
-//
-//- (void)addActionTarget:(UIAlertController *)alertController titles:(NSString *)titles {
-//    for (NSString *title in titles) {
-//        UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            if ([title isEqualToString:@"举报"]) {
-//                SCDynamicModel *model = self.dynamicStatusFrame.dynamicModel;
-//                SCReportController *reportVC = [[SCReportController alloc] init];
-//                reportVC.detailId = model.detailId;
-//                [self.navigationController pushViewController:reportVC animated:YES];
-//            }
-//
-//            if ([title isEqualToString:@"分享"]) {
-//                //    [self share_];
-//                SCCommonShareDashboardView *shareDashboardView = [[SCCommonShareDashboardView alloc] init];
-//                [shareDashboardView presentViewWithStoryId:self.storyId];
-//            }
-//        }];
-//        [action setValue:RGB(0, 118, 255) forKey:@"_titleTextColor"];
-//        [alertController addAction:action];
-//    }
-//}
+- (void)moreAction:(UIButton *)button {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    NSArray *titles = @[@"举报"];
+    [self addActionTarget:alert titles:titles];
+    [self addCancelActionTarget:alert title:@"取消"];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)addActionTarget:(UIAlertController *)alertController titles:(NSString *)titles {
+    for (NSString *title in titles) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if ([title isEqualToString:@"举报"]) {
+                SCReportController *reportVC = [[SCReportController alloc] init];
+                reportVC.userId = self.characterModel.userId;
+                reportVC.isReportPersonal = YES;
+                [self.navigationController pushViewController:reportVC animated:YES];
+            }
+
+        }];
+        [action setValue:RGB(0, 118, 255) forKey:@"_titleTextColor"];
+        [alertController addAction:action];
+    }
+}
 
 
 

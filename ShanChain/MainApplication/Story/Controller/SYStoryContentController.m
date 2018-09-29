@@ -153,7 +153,6 @@
     
     if (self.type == 1) {
         self.title = @"动态";
-        [self addNavigationRightWithImageName:@"abs_home_btn_more_default" withTarget:self withAction:@selector(moreAction:)];
     } else {
         self.title = @"故事长文";
         [self addNavigationRightWithName:@"阅读" withTarget:self withAction:@selector(readNovelAction:)];
@@ -247,7 +246,12 @@
         self.storyId = dic[@"storyId"]; //获取故事ID
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         [params setObject:[JsonTool stringFromArray:@[characterString]] forKey:@"dataArray"];
-      
+        NSString  *userId = dic[@"userId"]; //获取当前用户ID
+        // 满足当前条件添加更多按钮
+        if (userId.integerValue != [SCCacheTool shareInstance].getCurrentUser.integerValue && self.type == 1) {
+            [self addNavigationRightWithImageName:@"abs_home_btn_more_default" withTarget:self withAction:@selector(moreAction:)];
+        }
+        
         [[SCNetwork shareInstance] postWithUrl:STORYCAHRACTERQUERYBRIEF parameters:params success:^(id responseObject) {
             NSMutableArray *data2 = responseObject[@"data"];
             NSMutableDictionary *contDic = data2[0];
@@ -263,6 +267,7 @@
             }
             SCDynamicStatusFrame *statusFrame = [[SCDynamicStatusFrame alloc] init];
             statusFrame.dynamicModel = model;
+            statusFrame.dynamicModel.isDetailsPage = YES;
             WeakSelf.dynamicStatusFrame = statusFrame;
             
             NSMutableDictionary *params1 = [NSMutableDictionary dictionary];
@@ -537,13 +542,13 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     //    textview 改变字体的行间距
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 5;// 字体的行间距
-    NSDictionary *attributes = @{
-                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                 NSParagraphStyleAttributeName:paragraphStyle
-                                 };
-    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    paragraphStyle.lineSpacing = 5;// 字体的行间距
+//    NSDictionary *attributes = @{
+//                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+//                                 NSParagraphStyleAttributeName:paragraphStyle
+//                                 };
+//    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
     
     self.placeHolderLabel.hidden = self.textView.text.length != 0;
 }

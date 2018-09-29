@@ -449,12 +449,12 @@ static int const TagDetailField = 100004;
 //        return;
 //    }
     
-    if (![self.detailTextView.text isNotBlank]) {
+    if (NULLString(self.detailTextView.text)) {
         [SYProgressHUD showError:@"来点简要的描述吧"];
         return;
     }
 
-    if (![self.titleField.text isNotBlank]) {
+    if (NULLString(self.titleField.text)) {
         [SYProgressHUD showError:@"标题不能为空哦"];
         return;
     }

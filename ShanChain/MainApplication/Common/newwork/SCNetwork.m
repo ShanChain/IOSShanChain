@@ -107,19 +107,17 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             } else if ([responseObject[@"code"] isEqualToString:SC_SHARE_NOOPEN]){
                 [SYProgressHUD showError:msg];
             }else {
+                [YYHud showError:msg];
                 if (failure) {
                     failure([SCNetworkError errorWithCode:(NSInteger)responseObject[@"code"] msg:msg]);
-                } else {
-                    [SYProgressHUD showError:msg];
                 }
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         SCLog(@"Error%@",error);
+        [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
         if (failure) {
             failure(error);
-        } else {
-            [SYProgressHUD showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
         }
     }];
 }
