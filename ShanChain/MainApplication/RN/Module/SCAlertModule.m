@@ -75,7 +75,7 @@ RCT_EXPORT_METHOD(showInputDialog
 }
 
  RCT_EXPORT_METHOD(showMessage:(NSString *)msg){
-     [SYProgressHUD showError:msg];
+     [YYHud showError:msg];
  }
 
 

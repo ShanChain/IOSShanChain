@@ -4,6 +4,7 @@
  * @flow
  */
 'use strict';
+
 console.disableYellowBox = true;
 
 var React = require('react-native');
