@@ -244,6 +244,7 @@
         NSMutableDictionary *dic = [data[0] mutableCopy];
         NSString *characterString = dic[@"characterId"];
         self.storyId = dic[@"storyId"]; //获取故事ID
+        self.characterId = dic[@"characterId"];
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         [params setObject:[JsonTool stringFromArray:@[characterString]] forKey:@"dataArray"];
         NSString  *userId = dic[@"userId"]; //获取当前用户ID
@@ -505,6 +506,49 @@
         return cell;
     }
 }
+
+//先要设Cell可编辑
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section > 0 && self.dataArr.count > 0) {
+        SYComment *comment = self.dataArr[indexPath.row];
+        return comment.characterId.integerValue == [SCCacheTool shareInstance].getCurrentCharacterId.integerValue || self.characterId.integerValue == [SCCacheTool shareInstance].getCurrentCharacterId.integerValue;
+    }
+    return NO;
+}
+
+//定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+//修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
+//设置进入编辑状态时，Cell不会缩进
+- (BOOL)tableView: (UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+//点击删除
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self hrShowAlertWithTitle:nil message:@"确定要删除该条评论么？" buttonsTitles:@[@"取消",@"确定"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+        if (indexOfAction == 1) {
+            [HHTool showChrysanthemum];
+            SYComment *comment = self.dataArr[indexPath.row];
+            [[SCNetwork shareInstance]postWithUrl:COMMENT_DELETE_URL parameters:@{@"commentId":comment.commentId,@"userId":[SCCacheTool shareInstance].getCurrentUser,@"checkId":comment.characterId,@"spaceId":@(comment.storyId)} success:^(id responseObject) {
+                [HHTool dismiss];
+                [HHTool showResponseObject:responseObject];
+                [self requestStoryDetailComplete:nil];
+            } failure:^(NSError *error) {
+                [HHTool dismiss];
+            }];
+        }
+    }];
+}
+
+
 
 #pragma mark -UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

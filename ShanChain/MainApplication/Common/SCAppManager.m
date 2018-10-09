@@ -15,11 +15,11 @@
 #import "SCCacheTool.h"
 #import "SCLoginController.h"
 #import "SCBaseNavigationController.h"
-
+#import <React/RCTBundleURLProvider.h>
 //#import "JsonTool.h"
 //开发时改成自己的IP
-//#define RN_RES_PATH @"http://192.168.1.104:8081/index.ios.bundle?platform=ios&dev=true"
-#define RN_RES_PATH [NSString stringWithFormat:@"%@/index.ios.bundle?platform=ios&dev=true",Base_url]
+#define RN_RES_PATH @"http://192.168.1.103:8081/index.ios.bundle?platform=ios&dev=true"
+//#define RN_RES_PATH [NSString stringWithFormat:@"%@/index.ios.bundle?platform=ios&dev=true",Base_url]
 #define RN_DEBUG @"false"
 
 
@@ -40,11 +40,11 @@ static SCAppManager *instance = nil;
     @synchronized(self) {
         if (instance == nil) {
             instance = [[SCAppManager alloc] init];
-            if([RN_DEBUG isEqualToString:@"true"]){
+            if([RN_DEBUG isEqualToString:@"false"]){
                 instance.jsCodeLocation = [NSURL URLWithString:RN_RES_PATH];
             }else{
-                instance.jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"RNBundle/index.ios" withExtension:@"jsbundle"];
-               // instance.jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=false"];
+                instance.jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"RNBundle/_index.ios" withExtension:@"jsbundle"];
+//                instance.jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=false"];
             }
         }
     }

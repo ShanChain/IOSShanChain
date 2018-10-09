@@ -151,7 +151,7 @@ static NSString * const KSCPersonalCollectionCellID = @"SCPersonalCollectionCell
 
 - ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SCPersonalCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:KSCPersonalCollectionCellID forIndexPath:indexPath];
-    NSString *headImg = self.dataArray[indexPath.row][@"headImg"];
+    NSString *headImg = self.dataArray[indexPath.row][@"head_img"];
     [cell.iconImgView sd_setImageWithURL:[NSURL URLWithString:headImg]];
     return cell;
 }

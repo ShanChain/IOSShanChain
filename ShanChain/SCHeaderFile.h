@@ -72,5 +72,6 @@
 #import "UIImage+MingleChang.h"
 #import "UIImageView+sd.h"
 #import "UIViewController+HRAlertViewController.h"
+#import "HHTool.h"
 
 #endif /* SCHeaderFile_h */

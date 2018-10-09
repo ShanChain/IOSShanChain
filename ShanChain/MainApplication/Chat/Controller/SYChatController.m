@@ -65,7 +65,6 @@ static NSString * const KSYChatListCellID = @"SYChatListCell";
 {
     [super viewWillAppear:animated];
     [self refresh];
-    
 }
 
 - (void)removeEmptyConversationsFromDB{
@@ -105,6 +104,8 @@ static NSString * const KSYChatListCellID = @"SYChatListCell";
             [array addObject:model.conversation.conversationId];
         }
     }
+    
+    
     
     [self requestHXAccountInfo:array];
     [self requestHXGroupInfo:groupArray];
@@ -375,6 +376,11 @@ static NSString * const KSYChatListCellID = @"SYChatListCell";
 //让tableView可编辑
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
+}
+
+//设置进入编辑状态时，Cell不会缩进
+- (BOOL)tableView: (UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {

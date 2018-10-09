@@ -36,6 +36,8 @@
 @property (copy, nonatomic) NSString *characterImg;
 //世界ID
 @property (copy, nonatomic) NSString *spaceId;
+// 事件ID
+@property (copy, nonatomic) NSString *rootId;
 //Feed 创建时间
 @property (copy, nonatomic) NSString *createTime;
 

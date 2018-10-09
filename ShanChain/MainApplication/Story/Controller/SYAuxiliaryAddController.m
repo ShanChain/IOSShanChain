@@ -15,6 +15,7 @@
 #import "SYAddRoleReportController.h"
 #import "SYStoryPublishController.h"
 #import "SYStoryMarkController.h"
+#import "SYStoryRoleController.h"
 
 static NSString * const SYMarkCollection1CellID = @"SYMarkCollection1Cell";
 
@@ -520,8 +521,16 @@ static int const TagDetailField = 100004;
             [params setObject:[NSNumber numberWithLong:self.spaceId] forKey:@"spaceId"];
             [params setObject:[SCCacheTool.shareInstance getCurrentUser] forKey:@"userId"];
             [[SCNetwork shareInstance]postWithUrl:STORYCHARATERCREATE parameters:params success:^(id responseObject) {
-                SYAddRoleReportController *addVC = [[SYAddRoleReportController alloc]init];
-                [WeakSelf.navigationController pushViewController:addVC animated:YES];
+                [HHTool showSucess:@"角色创建成功~"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    for (UIViewController  *vc in self.navigationController.viewControllers) {
+                        if ([vc isKindOfClass:[SYStoryRoleController class]]) {
+                            [self.navigationController popToViewController:vc animated:YES];
+                        }
+                    }
+                });
+//                SYAddRoleReportController *addVC = [[SYAddRoleReportController alloc]init];
+//                [WeakSelf.navigationController pushViewController:addVC animated:YES];
             } failure:^(NSError *error) {
                 
             }];

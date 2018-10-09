@@ -66,6 +66,8 @@ typedef NS_ENUM(NSUInteger, YYHudMaskType) {
 - (YYHud *)showSucess:(NSString *)msg;
 - (YYHud *)showError:(NSString *)msg;
 
++ (YYHud *)sharedInstance;
+
 /**
  *  显示hud
  *

@@ -236,6 +236,8 @@
 // 举报用户
 #define REPORT_USER_URL         @"/v1/user/report/create"
 
+// 删除评论
+#define COMMENT_DELETE_URL      @"/v1/storyComment/delete"
 
 #pragma mark -IM接口
 
@@ -284,7 +286,7 @@
 #define HXGROUPCREATE @"/hx/group/create"
 
 //退群
-#define HXGROUPMEMBERREMOVE @"/hx/group/rmMembers"
+#define HXGROUPMEMBERREMOVE @"/hx/group/rmMember"
 
 //根据characterId查找环信联系人
 #define HXUSERLIST @"/hx/user/list"

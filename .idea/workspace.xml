@@ -2,12 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b5eeb73-8bb1-4ed7-98da-14f41e868722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ShanChain/Tools/HHTool.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShanChain/Tools/HHTool.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DefMacro .h" beforeDir="false" afterPath="$PROJECT_DIR$/DefMacro .h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShanChain.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/RN/Module/SCAlertModule.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/RN/Module/SCAlertModule.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-native/common/utils/SCPropUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-native/common/utils/SCPropUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-native/home/mine/pages/SecurityScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-native/home/mine/pages/SecurityScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-native/index.ios.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-native/index.ios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/Application/AppDelegate.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/Application/AppDelegate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/Controller/SYChatController.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/Controller/SYChatController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/Controller/SYChatController.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/Controller/SYChatController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/Controller/SYScreenDetailController.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/Controller/SYScreenDetailController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/View/SYCommonRoleView.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/View/SYCommonRoleView.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/View/SYScreenDetailHeadView.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/View/SYScreenDetailHeadView.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Common/SCAppManager.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Common/SCAppManager.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Common/newwork/UrlConstants.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Common/newwork/UrlConstants.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYAuxiliaryAddController.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYAuxiliaryAddController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYStoryContentController.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYStoryContentController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYStoryListBaseController.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYStoryListBaseController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYStoryPublishController.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYStoryPublishController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Model/DynamicCell/SCDynamicModel.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Model/DynamicCell/SCDynamicModel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/View/DynamicCell/SCDynamicDetailView.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/View/DynamicCell/SCDynamicDetailView.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/PublicService/YYHud/YYHud.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/PublicService/YYHud/YYHud.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/SCHeaderFile.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/SCHeaderFile.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,22 +43,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="18" />
+          <entry key="js" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="18" />
+          <entry key="JavaScript" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="289" />
+          <entry key="js" value="299" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="289" />
+          <entry key="JavaScript" value="299" />
         </counts>
       </usages-collector>
     </session>
@@ -62,8 +77,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/react-native/home/square/SquarePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="789">
-              <caret line="149" column="9" lean-forward="true" selection-start-line="149" selection-start-column="9" selection-end-line="149" selection-end-column="9" />
+            <state relative-caret-position="-2263">
+              <caret line="163" column="21" lean-forward="true" selection-start-line="163" selection-start-column="21" selection-end-line="163" selection-end-column="21" />
               <folding>
                 <element signature="e#86#125#0" expanded="true" />
               </folding>
@@ -77,6 +92,9 @@
     <findStrings>
       <find>SecurityScreen</find>
       <find>Running application</find>
+      <find>PullView</find>
+      <find>isContentScroll</find>
+      <find>noticePress</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -1242,12 +1260,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1538275108158</updated>
-      <workItem from="1538275110550" duration="8577000" />
+      <workItem from="1538275110550" duration="16106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8577000" />
+    <option name="totallyTimeSpent" value="16106000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1316,11 +1334,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react-native/home/square/components/SpaceBriefItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2790" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/react-native/node_modules/react-native/Libraries/react-native/react-native-implementation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
@@ -1369,10 +1382,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/react-native/home/square/components/SpaceBriefItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/react-native/home/square/SquarePage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="789">
-          <caret line="149" column="9" lean-forward="true" selection-start-line="149" selection-start-column="9" selection-end-line="149" selection-end-column="9" />
+        <state relative-caret-position="-2263">
+          <caret line="163" column="21" lean-forward="true" selection-start-line="163" selection-start-column="21" selection-end-line="163" selection-end-column="21" />
           <folding>
             <element signature="e#86#125#0" expanded="true" />
           </folding>

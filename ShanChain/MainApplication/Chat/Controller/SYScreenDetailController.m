@@ -16,6 +16,7 @@
 
 #import "SYMessageController.h"
 #import "SYScreenInsideController.h"
+#import "SYChatController.h"
 
 static NSString * const KSCMessageSettingCellID = @"SCMessageSettingCell";
 static NSString * const KSYScreenCellID = @"SYScreenCell";
@@ -59,26 +60,41 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
     return _tableView;
 }
 
-#pragma mark -系统方法
-#pragma mark -系统方法
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    
-    self.memberArray = [NSMutableArray array];
-    self.semaphoreMember = dispatch_semaphore_create(1);
-    self.semaphoreGroup = dispatch_semaphore_create(1);
-    
-    [self requestGroupInfo];
-    
-    [self requestGroupMemberList];
-}
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)HH_requestData{
+    self.memberArray = [NSMutableArray array];
+    dispatch_group_t   group = dispatch_group_create();
+    dispatch_queue_t   queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_enter(group);
+    dispatch_async(queue, ^{
+        [self requestGroupInfoCallBlock:^{
+            dispatch_group_leave(group);
+        }];
+        
+    });
+    
+    dispatch_group_enter(group);
+    dispatch_async(queue, ^{
+        [self requestGroupMemberListCallBlock:^{
+            dispatch_group_leave(group);
+        }];
+        
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [self requestMembersInfo];
+    });
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self HH_requestData];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(arrowMoreAction) name:SYScreenInsideDidArrowClickBtnActionNotication object:nil];
     self.title = @"场景详情";
@@ -94,21 +110,36 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
     self.tableView.tableHeaderView = headView;
     self.headView = headView;
     
+//    UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+//                                                                                       action:@selector(createScreenViewAction)];
+//    [headView addGestureRecognizer:singleTapGesture];
+    
+    
+    UIButton  *quitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [quitBtn setTitle:@"离开" forState:0];
+    [quitBtn setBackgroundImage:[UIImage imageNamed:@"abs_login_btn_rectangle_default"] forState:0];
+    [quitBtn addTarget:self action:@selector(quitAction) forControlEvents:UIControlEventTouchUpInside];
+    [quitBtn setTitleColor:[UIColor whiteColor] forState:0];
+    [self.view addSubview:quitBtn];
+    [quitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.right.equalTo(@-15);
+        make.left.equalTo(@15);
+        make.height.equalTo(@50);
+    }];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self requestMembersInfo];
 }
 
 #pragma mark - 构造方法
-- (void)requestGroupInfo {
+- (void)requestGroupInfoCallBlock:(dispatch_block_t)callBlock{
     if (!self.groupId) {
         SCLog(@"group info request error for emprty groupId");
         return;
     }
-  //  dispatch_semaphore_wait(self.semaphoreGroup, DISPATCH_TIME_FOREVER);
+    //  dispatch_semaphore_wait(self.semaphoreGroup, DISPATCH_TIME_FOREVER);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.groupId forKey:@"groupId"];
     WS(WeakSelf);
@@ -124,18 +155,20 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
         } else {
             [SYProgressHUD showError:@"获取群信息错误"];
         }
-       // dispatch_semaphore_signal(WeakSelf.semaphoreGroup);
+        BLOCK_EXEC(callBlock);
+        // dispatch_semaphore_signal(WeakSelf.semaphoreGroup);
     } failure:^(NSError *error) {
+        BLOCK_EXEC(callBlock);
         SCLog(@"%@",error);
     }];
 }
 
-- (void)requestGroupMemberList {
+- (void)requestGroupMemberListCallBlock:(dispatch_block_t)callBlock{
     if (!self.groupId) {
         SCLog(@"group member info request error for emprty groupId");
         return;
     }
-   // dispatch_semaphore_wait(self.semaphoreMember, DISPATCH_TIME_FOREVER);
+    // dispatch_semaphore_wait(self.semaphoreMember, DISPATCH_TIME_FOREVER);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.groupId forKey:@"groupId"];
     WS(WeakSelf);
@@ -146,18 +179,20 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
                 [WeakSelf.memberArray addObject:dict[@"hxUserName"]];
             }
             
-         //   dispatch_semaphore_signal(self.semaphoreMember);
+            //   dispatch_semaphore_signal(self.semaphoreMember);
         } else {
             [SYProgressHUD showError:@"获取群成员信息错误"];
         }
+        BLOCK_EXEC(callBlock);
     } failure:^(NSError *error) {
+        BLOCK_EXEC(callBlock);
         SCLog(@"%@",error);
     }];
 }
 
 - (void)requestMembersInfo {
-//    dispatch_semaphore_wait(self.semaphoreGroup, DISPATCH_TIME_FOREVER);
-//    dispatch_semaphore_wait(self.semaphoreMember, DISPATCH_TIME_FOREVER));
+    //    dispatch_semaphore_wait(self.semaphoreGroup, DISPATCH_TIME_FOREVER);
+    //    dispatch_semaphore_wait(self.semaphoreMember, DISPATCH_TIME_FOREVER));
     if (!self.memberArray.count) {
         SCLog(@"group member detail info request error for emprty arrayHX");
         return;
@@ -172,8 +207,8 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
         } else {
             [SYProgressHUD showError:@"获取群成员信息错误"];
         }
-//        dispatch_semaphore_signal(WeakSelf.semaphoreMember);
-//        dispatch_semaphore_signal(WeakSelf.semaphoreGroup);
+        //        dispatch_semaphore_signal(WeakSelf.semaphoreMember);
+        //        dispatch_semaphore_signal(WeakSelf.semaphoreGroup);
     } failure:^(NSError *error) {
         SCLog(@"%@",error);
     }];
@@ -255,10 +290,24 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
+        
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        [params setObject:@"" forKey:@"jArray"];
-        [params setObject:@"" forKey:@"groupId"];
+        // 获取当前用户环信ID
+        NSString *owerHXID = [SCCacheTool.shareInstance getCacheValueInfoWithUserID:[SCCacheTool.shareInstance getCurrentUser] andKey:CACHE_HX_USER_NAME];
+        [params setObject:owerHXID forKey:@"username"];
+        [params setObject:self.groupId forKey:@"groupId"];
+        [HHTool showChrysanthemum];
         [[SCNetwork shareInstance] postWithUrl:HXGROUPMEMBERREMOVE parameters:params success:^(id responseObject) {
+            [HHTool dismiss];
+            [HHTool showResponseObject:responseObject];
+            SYChatController  *chatVC = nil;
+            for (UIViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[SYChatController class]]) {
+                    chatVC = (SYChatController*)vc;
+                    [self.navigationController popToViewController:chatVC animated:YES];
+                    [chatVC tableViewDidTriggerHeaderRefresh];
+                }
+            }
             
         } failure:nil];
     }
@@ -272,13 +321,13 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
 
 - (void)createScreenViewAction{
 #pragma Todo 权限暂时不做
-//    SYEditScreenController *editVC = [[SYEditScreenController alloc]init];
-//    [self.navigationController pushViewController:editVC animated:YES];
+        SYEditScreenController *editVC = [[SYEditScreenController alloc]init];
+        [self.navigationController pushViewController:editVC animated:YES];
 }
 
 - (void)arrowMoreAction{
-//    SYScreenInsideController *insideVC = [[SYScreenInsideController alloc]init];
-//    [self.navigationController pushViewController:insideVC animated:YES];
+    //    SYScreenInsideController *insideVC = [[SYScreenInsideController alloc]init];
+    //    [self.navigationController pushViewController:insideVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

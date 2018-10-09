@@ -18,6 +18,9 @@
 #import "SCReportController.h"
 #import "SCCommonShareDashboardView.h"
 
+#define REPORT @"举报"
+#define DELETE @"删除"
+
 @interface SYStoryListBaseController()<UITableViewDelegate, UITableViewDataSource, SCDynamicCellDelegate, UIActionSheetDelegate>{
 }
 
@@ -403,16 +406,22 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    NSArray *titles = @[@"举报"];
-    [self addActionTarget:alert titles:titles detailId:notification.userInfo[@"detailId"]];
+    NSArray  *titles;
+    NSString  *characterId = notification.userInfo[@"characterId"];
+    if (characterId.integerValue == [SCCacheTool shareInstance].getCurrentCharacterId.integerValue) {
+        titles = @[REPORT,DELETE];
+    }else{
+        titles = @[REPORT];
+    }
+    [self addActionTarget:alert titles:titles detailId:notification.userInfo[@"detailId"] rootId:notification.userInfo[@"rootId"]];
     [self addCancelActionTarget:alert title:@"取消"];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)addActionTarget:(UIAlertController *)alertController titles:(NSString *)titles detailId:(NSString*)detailId{
+- (void)addActionTarget:(UIAlertController *)alertController titles:(NSString *)titles detailId:(NSString*)detailId rootId:(NSString*)rootId{
     for (NSString *title in titles) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            if ([title isEqualToString:@"举报"]) {
+            if ([title isEqualToString:REPORT]) {
                 SCReportController *reportVC = [[SCReportController alloc] init];
                 reportVC.detailId = detailId;
                 [self.navigationController pushViewController:reportVC animated:YES];
@@ -422,6 +431,14 @@
                 //    [self share_];
                 SCCommonShareDashboardView *shareDashboardView = [[SCCommonShareDashboardView alloc] init];
                 [shareDashboardView presentViewWithStoryId:detailId];
+            }
+            if ([title isEqualToString:DELETE]) {
+                //调用删除接口
+                weakify(self);
+                [[SCNetwork shareInstance]postWithUrl:DELETE_STORY parameters:@{@"storyId":rootId} success:^(id responseObject) {
+                    [HHTool showResponseObject:responseObject];
+                    [weak_self requestData:YES];
+                } failure:nil];
             }
         }];
         [action setValue:RGB(0, 118, 255) forKey:@"_titleTextColor"];

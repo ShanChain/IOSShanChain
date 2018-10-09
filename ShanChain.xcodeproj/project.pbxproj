@@ -18,6 +18,8 @@
 		2242C0032159C34E00707024 /* YYHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2242BFFE2159C34D00707024 /* YYHud.xib */; };
 		2242C0042159C34E00707024 /* YYHud.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2242BFFF2159C34D00707024 /* YYHud.xcassets */; };
 		2242C0072159C3AB00707024 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242C0062159C3AB00707024 /* UIColor+Extention.m */; };
+		2281A218216B2CB0009E95EE /* HHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A217216B2CB0009E95EE /* HHTool.m */; };
+		2281A21A216B6351009E95EE /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 2281A219216B6350009E95EE /* index.ios.js */; };
 		22EBC11321533BAE00C11359 /* MCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EBC11121533BA800C11359 /* MCDate.m */; };
 		33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33055FE91F0503AC005740E0 /* StoreKit.framework */; };
 		332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5D91F4ED69F00888313 /* NSMutableAttributedString+TY.m */; };
@@ -525,6 +527,9 @@
 		2242BFFF2159C34D00707024 /* YYHud.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YYHud.xcassets; sourceTree = "<group>"; };
 		2242C0052159C3AA00707024 /* UIColor+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extention.h"; sourceTree = "<group>"; };
 		2242C0062159C3AB00707024 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
+		2281A216216B2CB0009E95EE /* HHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHTool.h; sourceTree = "<group>"; };
+		2281A217216B2CB0009E95EE /* HHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHTool.m; sourceTree = "<group>"; };
+		2281A219216B6350009E95EE /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = "react-native/index.ios.js"; sourceTree = SOURCE_ROOT; };
 		22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentConfiguration.h; sourceTree = "<group>"; };
 		22EBC11121533BA800C11359 /* MCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDate.m; sourceTree = "<group>"; };
 		22EBC11221533BA900C11359 /* MCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDate.h; sourceTree = "<group>"; };
@@ -1619,6 +1624,8 @@
 				8951B58A1FE10C5100961544 /* UIViewController+SYBase.m */,
 				89C3380A1FF0802700BDF87A /* UITableViewCell+Identity.h */,
 				89C3380B1FF0802700BDF87A /* UITableViewCell+Identity.m */,
+				2281A216216B2CB0009E95EE /* HHTool.h */,
+				2281A217216B2CB0009E95EE /* HHTool.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1727,6 +1734,7 @@
 		33B7CCEB1EC5865700FB6378 /* ShanChain */ = {
 			isa = PBXGroup;
 			children = (
+				2281A219216B6350009E95EE /* index.ios.js */,
 				2242BFF52159C34D00707024 /* PublicService */,
 				48AC035E1F95AAE70040B54F /* RNBundle */,
 				332AB6261F4ED8C900888313 /* Tools */,
@@ -3396,6 +3404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B7CCFC1EC5865700FB6378 /* LaunchScreen.storyboard in Resources */,
+				2281A21A216B6351009E95EE /* index.ios.js in Resources */,
 				4852A0D31FCE9F0300CDD7BE /* SCMessageSettingCell.xib in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
 				4852A0D11FCE9F0300CDD7BE /* SCMessageCell.xib in Resources */,
@@ -3889,6 +3898,7 @@
 				485E65E11F42862900B158BF /* MKAnnotationView+EMWebCache.m in Sources */,
 				485E65F21F42862900B158BF /* PSTCollectionViewUpdateItem.m in Sources */,
 				4852A0C31FCE9F0300CDD7BE /* SYPasserByController.m in Sources */,
+				2281A218216B2CB0009E95EE /* HHTool.m in Sources */,
 				8952A02F1FDB7A6500312243 /* SYProgressHUD.m in Sources */,
 				892B3A0A1FE91EFD00292A75 /* SCStoryPublishVideoController.m in Sources */,
 				4852A1001FCE9F0300CDD7BE /* SYStoryController.m in Sources */,

@@ -205,7 +205,7 @@
 }
 
 - (void)moreBtnOnClick{
-    NSNotification *notification =[NSNotification notificationWithName:SYStoryDidReportNotication object:nil userInfo:@{@"detailId":self.dynamicModel.detailId}];
+    NSNotification *notification =[NSNotification notificationWithName:SYStoryDidReportNotication object:nil userInfo:@{@"detailId":self.dynamicModel.detailId,@"characterId":self.dynamicModel.characterId,@"rootId":self.dynamicModel.rootId}];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 

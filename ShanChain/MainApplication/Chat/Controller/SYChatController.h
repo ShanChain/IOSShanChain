@@ -11,5 +11,6 @@
 @interface SYChatController : EaseConversationListViewController
 
 + (void)removeAllConversationFromLocalDB;
+- (void)tableViewDidTriggerHeaderRefresh;
 
 @end

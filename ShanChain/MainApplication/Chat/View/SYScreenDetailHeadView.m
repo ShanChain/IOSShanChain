@@ -52,7 +52,7 @@
 - (UIImageView *)imgView{
     if (!_imgView) {
         _imgView = [[UIImageView alloc]initWithFrame:CGRectMake(KSCMargin, KSCMargin, 55, 55)];
-        _imgView.image = [UIImage imageNamed:@"run4.jpg"];
+        _imgView.image = [UIImage imageNamed:@"abs_addanewrole_def_photo_default"];
         _imgView.layer.masksToBounds = YES;
         _imgView.layer.cornerRadius = 8.0f;
     }

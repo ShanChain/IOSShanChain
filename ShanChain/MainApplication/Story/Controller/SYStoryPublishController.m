@@ -18,6 +18,8 @@
 #import "SCAliyunUploadMananger.h"
 #import "SYWordStyle.h"
 #import "SYStoryNovelReadController.h"
+#import "SYStoryListBaseController.h"
+#import "SYStoryController.h"
 
 static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
 
@@ -318,7 +320,14 @@ static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
     [[SCNetwork shareInstance] postWithUrl:STORYADD parameters:self.params success:^(id responseObject) {
         [SYProgressHUD hideHUD];
         [NSNotificationCenter.defaultCenter postNotificationName:NotificationNameStoryPublishSuccess object:nil];
-        [WeakSelf.navigationController popViewControllerAnimated:YES];
+        SYStoryListBaseController *storyListVC = nil;
+        for (UIViewController   *vc in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[SYStoryController class]]) {
+                storyListVC = (SYStoryListBaseController*)vc.childViewControllers.lastObject;
+                [storyListVC requestData:YES];
+                [WeakSelf.navigationController popViewControllerAnimated:YES];
+            }
+        }
     } failure:^(NSError *error) {
         [SYProgressHUD showError:error.description];
         SCLog(@"%@",error);
