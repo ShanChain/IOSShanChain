@@ -73,5 +73,8 @@
 #import "UIImageView+sd.h"
 #import "UIViewController+HRAlertViewController.h"
 #import "HHTool.h"
+#import "NSObject+Runtime.h"
+#import "UITableView+Registered.h"
+#import "NSObject+AutoProperty.h"
 
 #endif /* SCHeaderFile_h */

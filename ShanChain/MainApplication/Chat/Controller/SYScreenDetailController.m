@@ -17,6 +17,7 @@
 #import "SYMessageController.h"
 #import "SYScreenInsideController.h"
 #import "SYChatController.h"
+#import "SYContactsController.h"
 
 static NSString * const KSCMessageSettingCellID = @"SCMessageSettingCell";
 static NSString * const KSYScreenCellID = @"SYScreenCell";
@@ -121,8 +122,13 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
     [quitBtn addTarget:self action:@selector(quitAction) forControlEvents:UIControlEventTouchUpInside];
     [quitBtn setTitleColor:[UIColor whiteColor] forState:0];
     [self.view addSubview:quitBtn];
+    NSInteger  bottom = 15;
+    if (IS_IPHONE_X) {
+        bottom = 47;
+    }
     [quitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.equalTo(@-15);
+        make.right.equalTo(@-15);
+        make.bottom.equalTo(@(-bottom));
         make.left.equalTo(@15);
         make.height.equalTo(@50);
     }];
@@ -306,6 +312,8 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
                     chatVC = (SYChatController*)vc;
                     [self.navigationController popToViewController:chatVC animated:YES];
                     [chatVC tableViewDidTriggerHeaderRefresh];
+                }else if ([vc isKindOfClass:[SYContactsController class]]){
+                    [self.navigationController popToViewController:vc animated:YES];
                 }
             }
             

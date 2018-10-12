@@ -18,4 +18,6 @@
 + (YYHud *)showChrysanthemum;
 + (id)getControllerResponsder:(UIView*)view;
 + (void)openAppStore;
+//获取设备当前网络IP地址
++(NSString *)getDeviceIPIpAddresses;
 @end

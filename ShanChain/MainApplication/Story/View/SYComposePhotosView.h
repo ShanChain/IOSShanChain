@@ -10,6 +10,7 @@
 
 @interface SYComposePhotosView : UIView
 
+
 - (void)addImage:(UIImage *)image;
 
 -(NSArray *)images;

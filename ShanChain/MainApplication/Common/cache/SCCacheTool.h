@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SavePublishContentModel.h"
 
 @interface SCCacheTool : NSObject
 
@@ -78,4 +79,8 @@
 - (void)cacheCharacterInfo:(NSDictionary *)characterInfo withUserId:(NSString *)userId;
 
 - (NSMutableDictionary *)getCharacterInfo;
+
+
+@property   (nonatomic,strong)  SavePublishContentModel  *editContentModel;
+
 @end

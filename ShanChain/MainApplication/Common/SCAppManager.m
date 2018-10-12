@@ -19,8 +19,28 @@
 //#import "JsonTool.h"
 //开发时改成自己的IP
 #define RN_RES_PATH @"http://192.168.1.103:8081/index.ios.bundle?platform=ios&dev=true"
-//#define RN_RES_PATH [NSString stringWithFormat:@"%@/index.ios.bundle?platform=ios&dev=true",Base_url]
+#define RN_RES_PATH @"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"
+
+
+#if DEBUG
+
 #define RN_DEBUG @"false"
+
+#if TARGET_OS_SIMULATOR
+#warning "DEBUG SIMULATOR"
+
+#define RN_RES_PATH @"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"
+
+#else
+#warning "DEBUG DEVICE"
+
+#define RN_RES_PATH  [NSString stringWithFormat:@"http://%@:8081/index.ios.bundle?platform=ios&dev=true",IP_ADDRESS]
+#endif
+#else
+//release
+#define RN_DEBUG @"true"
+
+#endif
 
 
 
@@ -43,7 +63,7 @@ static SCAppManager *instance = nil;
             if([RN_DEBUG isEqualToString:@"false"]){
                 instance.jsCodeLocation = [NSURL URLWithString:RN_RES_PATH];
             }else{
-                instance.jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"RNBundle/_index.ios" withExtension:@"jsbundle"];
+                instance.jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"RNBundle/index.ios" withExtension:@"jsbundle"];
 //                instance.jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=false"];
             }
         }

@@ -20,6 +20,8 @@
 #import "SYStoryNovelReadController.h"
 #import "SYStoryListBaseController.h"
 #import "SYStoryController.h"
+#import "SavePublishContentModel.h"
+#import "UIViewController+BackButtonHandler.h"
 
 static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
 
@@ -67,10 +69,28 @@ static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
         _wordEditView.frame = CGRectMake(0, 15, SCREEN_WIDTH, SCREEN_HEIGHT - kNavStatusBarHeight - 44);
         _wordEditView.hidden = YES;
         _wordEditView.maxWordNum = 10000;
+        [_wordEditView setPlaceholder:@"请输入内容..."];
         [self.view addSubview:_wordEditView];
     }
     
     return _wordEditView;
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    SavePublishContentModel  *model = [SCCacheTool shareInstance].editContentModel;
+    if (model) {
+        self.textView.text = model.dyContent;
+        [model.dyImages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.imageDisplayView addImage:obj];
+        }];
+        self.wordEditView.titleTextField.text = model.fictionTitle;
+        self.wordEditView.text = model.fictionContent;
+        if (model.fictionContent) {
+            [_wordEditView setPlaceholder:@""];
+        }
+    }
 }
 
 - (SYTextView *)textView {
@@ -125,8 +145,33 @@ static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
     [self.textView becomeFirstResponder];
 }
 
+- (void)saveEditContent{
+    if (NULLString(self.textView.text) && NULLString(self.wordEditView.titleTextField.text) &&
+        NULLString(self.wordEditView.text) &&
+        self.imageDisplayView.images.count == 0) {
+        [SCCacheTool shareInstance].editContentModel = nil;
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self hrShowAlertWithTitle:@"离开" message:@"当前动态未发布，是否保存草稿以便下次继续编辑？" buttonsTitles:@[@"取消",@"保存"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+            if (indexOfAction == 1) {
+                SavePublishContentModel  *model = [[SavePublishContentModel alloc]init];
+                model.dyContent = self.textView.text ?:@"";
+                model.dyImages =  self.imageDisplayView.images.count > 0 ? self.imageDisplayView.images:@[];
+                model.fictionTitle = self.wordEditView.titleTextField.text ?: @"";;
+                model.fictionContent = self.wordEditView.text ?: @"";
+                [SCCacheTool shareInstance].editContentModel = model;
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [SCCacheTool shareInstance].editContentModel = nil;
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self hh_rewriteBackActionFunc:@selector(saveEditContent)];
     //监听键盘
     // 键盘的frame(位置)即将改变, 就会发出UIKeyboardWillChangeFrameNotification
     // 键盘即将弹出, 就会发出UIKeyboardWillShowNotification
@@ -435,5 +480,6 @@ static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
 - (void)composeTrendControllerWithText:(NSString *)string withTopicId:(long)topicId {
     [self.textView insertTopic:string withTopicId:[NSString stringWithFormat:@"%ld", topicId]];
 }
+
 
 @end

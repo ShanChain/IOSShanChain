@@ -8,6 +8,7 @@
 
 #import "SYWordEditView.h"
 #import "SYWordStyle.h"
+#import "UITextView+Placeholder.h"
 
 @interface SYWordEditView() <UITextViewDelegate, UITextFieldDelegate>
 
@@ -73,6 +74,7 @@ NSString * const SYImageAttachmentName = @"SYImageAttachmentName";
 }
 
 - (void)setup {
+    
     _titleTextField = [[UITextField alloc] init];
     _titleTextField.font = [UIFont boldSystemFontOfSize:16];
     _titleTextField.placeholder = @"标题";
@@ -117,6 +119,7 @@ NSString * const SYImageAttachmentName = @"SYImageAttachmentName";
 }
 
 - (void)setPlaceholder:(NSString *)text {
+    
     self.placeholderLabel.text = text;
 }
 
@@ -141,6 +144,7 @@ NSString * const SYImageAttachmentName = @"SYImageAttachmentName";
 #pragma mark ----------------------------- textView delegate ------------------------
 - (void)textViewDidChange:(UITextView *)textView {
     self.placeholderLabel.hidden = self.text.length > 0;
+    self.placeholderLabel.text = self.text.length == 0 ? @"请输入内容...":@"";
 }
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {
