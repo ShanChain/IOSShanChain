@@ -1,11 +1,13 @@
-platform :ios,'10.0'
+platform :ios,'8.0'
 def pods
     pod 'UMengAnalytics-NO-IDFA'
     pod 'RedpacketAliAuthLib','~> 1.1.4'
     pod 'MBProgressHUD', '~> 1.1.0'
     pod 'Hyphenate'
     pod 'AliyunOSSiOS'
-   
+    pod 'YYModel'
+    pod 'BaiduMapKit', '~> 4.0.0'
+     
 
     pod 'mob_sharesdk'
     pod 'mob_sharesdk/ShareSDKUI'

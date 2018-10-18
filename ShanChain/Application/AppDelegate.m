@@ -25,6 +25,7 @@
 #import "SCAppManager.h"
 #import "SYGuiderScrollview.h"
 #import "VersionUtils.h"
+#import "BMKTestLocationViewController.h"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate, UIAlertViewDelegate,UIApplicationDelegate>
 
@@ -37,12 +38,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    [self setupHXConfig];
+    [self setupHXConfigWithApplication:application];
+    
+    [self setBMKManager];
     
     [self setupMapConfig];
     
     [self setupUMPushNoticationWithLaunchOptions:launchOptions];
-
+   
     UIViewController *rootVc = nil;
     rootVc = [[SCTabbarController alloc]init];
     if ([[SCAppManager shareInstance] isLogin]) {
@@ -51,6 +54,10 @@
         SCLoginController *loginVC=[[SCLoginController alloc]init];
         rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
     }
+//
+    // 测试代码
+//    BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+//    rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:locationVC];
 
     self.window.rootViewController = rootVc;
     
@@ -64,6 +71,19 @@
     return YES;
 }
 
+
+- (void)setBMKManager{
+    
+    _mapManager = [[BMKMapManager alloc]init];
+   [BMKMapManager setCoordinateTypeUsedInBaiduMapSDK:BMK_COORDTYPE_COMMON];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:BMKAPPKEY  generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
+}
+
+// 提交deviceToken给SDK
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *string = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
                          stringByReplacingOccurrencesOfString: @">" withString: @""]
@@ -71,7 +91,13 @@
     if(string){
         [[SCCacheTool shareInstance] setCacheValue:string withUserID:@"0" andKey:CACHE_DEVICE_TOKEN];
     }
+    [[EMClient sharedClient] bindDeviceToken:deviceToken];
     SCLog(@"DeviceToken: %@", string);
+}
+
+// 注册deviceToken失败
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"error -- %@",error);
 }
 
 - (void)checkGuideView {
@@ -119,17 +145,37 @@
 }
 
 #pragma mark --------------------------- init handler ---------------------------
-- (void)setupHXConfig {
+- (void)setupHXConfigWithApplication:(UIApplication *)application{
 #warning SDK注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应
     NSString *apnsCertName = nil;
 #if DEBUG
-    apnsCertName = @"SCD";
+    apnsCertName = @"develop";
 #else
-    apnsCertName = @"SC";
+    apnsCertName = @"Hoc";
 #endif
     EMOptions *options = [EMOptions optionsWithAppkey:KHXKey];
     options.apnsCertName = apnsCertName;
     [[EMClient sharedClient] initializeSDKWithOptions:options];
+    /**
+     注册APNS离线推送  iOS8 注册APNS
+     */
+    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        [application registerForRemoteNotifications];
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge |
+        UIUserNotificationTypeSound |
+        UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    else{
+        UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeSound |
+        UIRemoteNotificationTypeAlert;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+    }
+    
+    //添加监听在线推送消息
+    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 
 - (void)setupUMPushNoticationWithLaunchOptions:(NSDictionary *)launchOptions {
