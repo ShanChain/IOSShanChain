@@ -2,23 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b5eeb73-8bb1-4ed7-98da-14f41e868722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Model/SavePublishContentModel.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Model/SavePublishContentModel.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DefMacro .h" beforeDir="false" afterPath="$PROJECT_DIR$/DefMacro .h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCDynamicHeadFile.h" beforeDir="false" afterPath="$PROJECT_DIR$/SCDynamicHeadFile.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/Controller/SYScreenDetailController.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Chat/Controller/SYScreenDetailController.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Common/SCAppManager.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Common/SCAppManager.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Common/cache/SCCacheTool.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Common/cache/SCCacheTool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYStoryPublishController.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/Controller/SYStoryPublishController.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/View/SYComposePhotosView.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/View/SYComposePhotosView.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/MainApplication/Story/View/SYWordEditView.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/MainApplication/Story/View/SYWordEditView.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/SCHeaderFile.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/SCHeaderFile.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanChain/Tools/HHTool.h" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/Tools/HHTool.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanChain/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShanChain/Tools/HHTool.m" beforeDir="false" afterPath="$PROJECT_DIR$/ShanChain/Tools/HHTool.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-native/common/utils/SCPropUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-native/common/utils/SCPropUtils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-native/home/square/SquarePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-native/home/square/SquarePage.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,22 +26,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="23" />
+          <entry key="js" value="26" />
+          <entry key="ts" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="23" />
+          <entry key="JavaScript" value="26" />
+          <entry key="TypeScript" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="316" />
+          <entry key="js" value="322" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="316" />
+          <entry key="JavaScript" value="322" />
         </counts>
       </usages-collector>
     </session>
@@ -70,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/react-native/home/square/SquarePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="44" column="44" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+            <state relative-caret-position="1211">
+              <caret line="218" column="19" selection-start-line="218" selection-start-column="11" selection-end-line="218" selection-end-column="19" />
               <folding>
                 <element signature="e#86#125#0" expanded="true" />
               </folding>
@@ -82,7 +71,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react-native/common/utils/SCPropUtils.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
@@ -100,6 +89,7 @@
       <find>PullView</find>
       <find>isContentScroll</find>
       <find>noticePress</find>
+      <find>topicPress</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -113,8 +103,8 @@
         <option value="$PROJECT_DIR$/react-native/home/mine/pages/SettingScreen.js" />
         <option value="$PROJECT_DIR$/react-native/home/mine/MinePage.js" />
         <option value="$PROJECT_DIR$/react-native/index.ios.js" />
-        <option value="$PROJECT_DIR$/react-native/home/square/SquarePage.js" />
         <option value="$PROJECT_DIR$/react-native/common/utils/SCPropUtils.js" />
+        <option value="$PROJECT_DIR$/react-native/home/square/SquarePage.js" />
       </list>
     </option>
   </component>
@@ -1209,6 +1199,13 @@
               <item name="home" type="462c0819:PsiDirectoryNode" />
               <item name="square" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="IOSShanChain" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IOSShanChain" type="462c0819:PsiDirectoryNode" />
+              <item name="react-native" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="story" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -1266,12 +1263,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1538275108158</updated>
-      <workItem from="1538275110550" duration="18009000" />
+      <workItem from="1538275110550" duration="20842000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18009000" />
+    <option name="totallyTimeSpent" value="20842000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1287,12 +1284,12 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23132704" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" weight="0.32803467" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" visible="true" weight="0.20231214" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -1323,13 +1320,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react-native/common/http/CommonUrlMap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="87" column="56" lean-forward="true" selection-start-line="87" selection-start-column="56" selection-end-line="87" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -1388,13 +1378,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react-native/home/square/SquarePage.js">
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="44" column="44" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
-          <folding>
-            <element signature="e#86#125#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="190">
+          <caret line="995" column="4" selection-start-line="995" selection-start-column="4" selection-end-line="995" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-native/common/utils/SCCacheHelper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-native/common/http/CommonUrlMap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="73" column="2" selection-start-line="73" selection-start-column="2" selection-end-line="73" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-native/node_modules/react-native/Libraries/Lists/ListView/ListView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="152" column="4" selection-start-line="152" selection-start-column="4" selection-end-line="152" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1402,6 +1410,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-native/home/square/SquarePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1211">
+          <caret line="218" column="19" selection-start-line="218" selection-start-column="11" selection-end-line="218" selection-end-column="19" />
+          <folding>
+            <element signature="e#86#125#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -112,7 +112,7 @@ class SquarePage extends Component {
 
   refreshData(data) {
     SCNetwork.post(CommonUrlMap.GET_SPACE_LIST_BY_IDS, {
-      jArray: JSON.stringify([data.spaceId]),
+      jArray: JSON.stringify([data.spaceId]), // 从一个对象中解析出字符串  JSON.parse()【从一个字符串中解析出json对象】
       token: data.token
     }).then(result => {
       this.setState({space: result.data[0]})

@@ -70,6 +70,7 @@
 +(void)openAppStore{
     NSString * url = [NSString stringWithFormat:@"itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=%@",AppStoreID];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    
 }
 
 //获取设备当前网络IP地址
