@@ -16,13 +16,13 @@
 #import "UrlConstants.h"
 #import "SCCacheTool.h"
 
-#import "HHBaseModel.h"
+
 
 #define ACCEPT_TYPE_NORMAL @[@"application/json",@"application/xml",@"text/json",@"text/javascript",@"text/html",@"text/plain",@"application/x-www-form-urlencodem"]
 #define ACCEPT_TYPE_IMAGE @[@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json"]
 
 static const BOOL IS_USE_HTTPS = YES;
-
+static double  const  TIME_OUT_INTERVAL = 60.0;
 
 
 @interface SCNetwork ()
@@ -121,6 +121,93 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         }
     }];
 }
+
+- (NSData*)getHttpBody:(NSDictionary*)params{
+    // 过滤空字符串
+    NSMutableDictionary  *mdic = [NSMutableDictionary dictionaryWithCapacity:0];
+    [params enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ((!([obj isKindOfClass:[NSString class]] && NULLString(obj))) && obj) {
+            [mdic setObject:obj forKey:key];
+        }
+    }];
+    // 过滤json里面的转义字符
+    NSData* json = [NSJSONSerialization dataWithJSONObject:mdic.copy options:NSJSONWritingPrettyPrinted error:nil];
+    NSString  *str = [[NSString alloc]initWithData:json encoding:NSUTF8StringEncoding];
+    str = [str stringByReplacingOccurrencesOfString:@"\r\n"withString:@""];
+    str = [str stringByReplacingOccurrencesOfString:@"\n"withString:@""];
+    str = [str stringByReplacingOccurrencesOfString:@"\t"withString:@""];
+    str = [str stringByReplacingOccurrencesOfString:@"\t"withString:@""];
+    str = [str stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    return data;
+}
+
+- (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show success:(void(^)(HHBaseModel *baseModel))success failure:(void(^)(NSError *error))failure
+{
+    
+#if TARGET_OS_IPHONE
+    [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
+        if (status < 1) {
+            [HHTool showError:@"请检查网络设置"];
+            return ;
+            
+        }
+    }];
+#endif
+    if (show) {
+        [HHTool showChrysanthemum];
+    }
+    
+    if (IS_USE_HTTPS) {
+        [_afManager setSecurityPolicy:[self customSecurityPolicy]];
+    }
+    NSString *userId = @"";
+    userId = [[SCCacheTool shareInstance] getCurrentUser];
+    NSString *token = @"";
+    NSString *userIdString = [userId stringByAppendingString:@"_"];
+    if(userId && ![userId isEqualToString:@""] ){
+        token = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:userId andKey:@"token"];
+    }
+    NSMutableDictionary *params = [parameters mutableCopy];
+    if ([token isNotBlank]) {
+        [params setValue:token forKey:@"token"];
+    }
+    url = [SC_BASE_URL stringByAppendingString:url];
+    [self apendTOBaseParams:params];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+    request.timeoutInterval= TIME_OUT_INTERVAL;
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    // 设置body
+    [request setHTTPBody:[self getHttpBody:params]];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
+                                                 @"text/html",
+                                                 @"text/json",
+                                                 @"text/javascript",
+                                                 @"text/plain",
+                                                 nil];
+    manager.responseSerializer = responseSerializer;
+    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (show) {
+            [HHTool dismiss];
+        }
+        if (!error) {
+            HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
+            if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE]) {
+                success(baseModel);
+            }else{
+                if (!NULLString(baseModel.message)) {
+                    [HHTool showError:baseModel.message];
+                }
+            }
+        } else {
+            failure(error);
+            [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
+        }
+    }] resume];
+}
+
 
 - (void)getWithUrl:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
     if (IS_USE_HTTPS) {
@@ -269,6 +356,18 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 - (void)apendTOBaseParams:(NSDictionary*)params{
     [params setValue:@"ios" forKey:@"Os"];
     return;
+}
+
+
++ (void)netWorkStatus:(NetworkStatusBlock)block {
+    
+    // 如果要检测网络状态的变化,必须用检测管理器的单例的startMonitoring
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    // 检测网络连接的单例,网络变化时的回调方法
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        BLOCK_EXEC(block,status);
+    }];
 }
 
 @end

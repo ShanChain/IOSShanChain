@@ -67,6 +67,7 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
 }
 
 - (void)HH_requestData{
+    [HHTool showChrysanthemum];
     self.memberArray = [NSMutableArray array];
     dispatch_group_t   group = dispatch_group_create();
     dispatch_queue_t   queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -87,7 +88,9 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
     });
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        [self requestMembersInfo];
+        [self requestMembersInfoCallBlock:^{
+            [HHTool dismiss];
+        }];
     });
 }
 
@@ -196,7 +199,7 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
     }];
 }
 
-- (void)requestMembersInfo {
+- (void)requestMembersInfoCallBlock:(dispatch_block_t)callBlock{
     //    dispatch_semaphore_wait(self.semaphoreGroup, DISPATCH_TIME_FOREVER);
     //    dispatch_semaphore_wait(self.semaphoreMember, DISPATCH_TIME_FOREVER));
     if (!self.memberArray.count) {
@@ -215,8 +218,10 @@ static NSString * const KSYScreenCellID = @"SYScreenCell";
         }
         //        dispatch_semaphore_signal(WeakSelf.semaphoreMember);
         //        dispatch_semaphore_signal(WeakSelf.semaphoreGroup);
+        BLOCK_EXEC(callBlock);
     } failure:^(NSError *error) {
         SCLog(@"%@",error);
+        BLOCK_EXEC(callBlock);
     }];
 }
 

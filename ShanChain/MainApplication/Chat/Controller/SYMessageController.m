@@ -201,6 +201,7 @@ static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity
 #pragma mark ------------- EaseMessageViewControllerDelegate ----------------
 - (UITableViewCell *)messageViewController:(UITableView *)tableView cellForMessageModel:(id<IMessageModel>)messageModel indexPath:(NSIndexPath *)indexPath {
     NSDictionary *ext = messageModel.message.ext;
+    NSString  *xx = messageModel.message.from;
     if (ext[HX_EXT_MSG_ATTR] == @3) {
         NSString *screenCellIdentifier = [SCScreenCell cellIdentifier];
         SCScreenCell * screenCell = (SCScreenCell *)[tableView dequeueReusableCellWithIdentifier:screenCellIdentifier];

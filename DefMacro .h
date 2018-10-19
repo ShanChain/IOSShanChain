@@ -12,7 +12,7 @@
 
 #define AppStoreID  @"1296793048"
 #define IP_ADDRESS  @"192.168.0.115"
-
+#define BMKAPPKEY   @"Tn2qg4L9kQO4xoAYXCevnyXiMyjGGf68"
 
 //重写NSLog
 #ifdef DEBUG

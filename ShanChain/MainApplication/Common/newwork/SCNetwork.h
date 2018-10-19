@@ -11,6 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
+#import "HHBaseModel.h"
 
 //static NSString * const SC_BASE_URL = @"https://api.shanchain.com";
 //static NSString * const SC_BASE_URL = @"http://47.91.178.114:8080";
@@ -21,6 +22,7 @@
 @interface SCNetwork : NSObject
 
 +(SCNetwork *)shareInstance;
+typedef void (^NetworkStatusBlock)(AFNetworkReachabilityStatus status);
 
 
 - (void)postWithUrl:(NSString *)url
@@ -45,6 +47,9 @@
 - (void)rnRequest:(NSDictionary *)options
   successCallback:(RCTResponseSenderBlock)successCallback
     errorCallBack:(RCTResponseErrorBlock)errorCallBack;
+
+
+- (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show success:(void(^)(HHBaseModel *baseModel))success failure:(void(^)(NSError *error))failure;
 
 @end
 
