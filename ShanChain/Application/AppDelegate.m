@@ -36,6 +36,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     [self setupHXConfigWithApplication:application];
@@ -91,7 +93,9 @@
     if(string){
         [[SCCacheTool shareInstance] setCacheValue:string withUserID:@"0" andKey:CACHE_DEVICE_TOKEN];
     }
-    [[EMClient sharedClient] bindDeviceToken:deviceToken];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[EMClient sharedClient] bindDeviceToken:deviceToken];
+    });
     SCLog(@"DeviceToken: %@", string);
 }
 
@@ -156,26 +160,50 @@
     EMOptions *options = [EMOptions optionsWithAppkey:KHXKey];
     options.apnsCertName = apnsCertName;
     [[EMClient sharedClient] initializeSDKWithOptions:options];
-    /**
-     注册APNS离线推送  iOS8 注册APNS
-     */
-    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
-        [application registerForRemoteNotifications];
-        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge |
-        UIUserNotificationTypeSound |
-        UIUserNotificationTypeAlert;
+    
+    EMPushOptions *pushOptions = [[EMClient sharedClient] pushOptions];
+    pushOptions.displayStyle = EMPushDisplayStyleMessageSummary; // 显示消息内容
+    // options.displayStyle = EMPushDisplayStyleSimpleBanner // 显示“您有一条新消息”
+    EMError *error = [[EMClient sharedClient] updatePushOptionsToServer]; // 更新配置到服务器，该方法为同步方法，如果需要，请放到单独线程
+    if(!error) {
+        // 成功
+    }else {
+        // 失败
+    }
+    //iOS10 注册APNs
+    if (NSClassFromString(@"UNUserNotificationCenter")) {
+        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert completionHandler:^(BOOL granted, NSError *error) {
+            if (granted) {
+#if !TARGET_IPHONE_SIMULATOR
+                dispatch_main_async_safe(^{
+                    [application registerForRemoteNotifications];
+                });
+#endif
+            }
+        }];
+        return;
+    }
+    
+    if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
         [application registerUserNotificationSettings:settings];
     }
-    else{
+    
+#if !TARGET_IPHONE_SIMULATOR
+    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        [application registerForRemoteNotifications];
+    }else{
         UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge |
         UIRemoteNotificationTypeSound |
         UIRemoteNotificationTypeAlert;
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
     }
+#endif
     
     //添加监听在线推送消息
-    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+  //  [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 
 - (void)setupUMPushNoticationWithLaunchOptions:(NSDictionary *)launchOptions {
@@ -372,5 +400,8 @@
 //- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
 //    return YES;
 //}
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [application registerForRemoteNotifications];
+}
 
 @end

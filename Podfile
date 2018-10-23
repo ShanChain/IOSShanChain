@@ -1,21 +1,30 @@
 platform :ios,'8.0'
-def pods
+
+target 'ShanChain' do
+    use_frameworks!
+    
+    pod 'BaiduMapKit', '~> 4.0.0'
+    pod 'JMessage', '~> 3.3.0’
+    pod 'RxSwift', '~> 3.6.1'
+    pod 'RxCocoa', '~> 3.6.1'
+    pod 'YHPopupView'
+    pod 'YHPhotoKit'
+    pod 'MBProgressHUD', '~> 1.0.0'
+    
+    
     pod 'UMengAnalytics-NO-IDFA'
     pod 'RedpacketAliAuthLib','~> 1.1.4'
-    pod 'MBProgressHUD', '~> 1.1.0'
     pod 'Hyphenate'
     pod 'AliyunOSSiOS'
     pod 'YYModel'
-    pod 'BaiduMapKit', '~> 4.0.0'
-     
-
+    
     pod 'mob_sharesdk'
     pod 'mob_sharesdk/ShareSDKUI'
     pod 'mob_sharesdk/ShareSDKPlatforms/QQ'
     pod 'mob_sharesdk/ShareSDKPlatforms/SinaWeibo'
-    pod 'mob_sharesdk/ShareSDKPlatforms/WeChat'  
-
- 
+    pod 'mob_sharesdk/ShareSDKPlatforms/WeChat'
+    
+    
     #react-native
     pod ‘React’, :path => './react-native/node_modules/react-native', :subspecs => [
     'Core',             #核心库
@@ -36,7 +45,13 @@ def pods
     'RCTLinkingIOS'
     ]
     pod 'yoga', :path => './react-native/node_modules/react-native/ReactCommon/yoga'
+    
 end
-target 'ShanChain' do
-	pods
-end
+
+
+#def pods
+#
+#
+#    
+#end
+

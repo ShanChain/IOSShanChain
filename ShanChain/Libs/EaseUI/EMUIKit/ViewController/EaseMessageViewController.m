@@ -26,6 +26,7 @@
 #import "UIImage+EMGIF.h"
 #import "EaseLocalDefine.h"
 #import "EaseSDKHelper.h"
+#import <UserNotifications/UserNotifications.h>
 
 #define KHintAdjustY    50
 
@@ -1583,8 +1584,11 @@ typedef enum : NSUInteger {
                 [self.conversation markMessageAsReadWithId:message.messageId error:nil];
             }
         }
+        
     }
 }
+
+
 
 - (void)didReceiveCmdMessages:(NSArray *)aCmdMessages
 {

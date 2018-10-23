@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *latLabel;
 @property (weak, nonatomic) IBOutlet UILabel *longLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *joinBtn;
 
 @property (weak, nonatomic) IBOutlet BMKMapView *mapView;
 
@@ -137,8 +138,6 @@
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
-    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,
-          userLocation.location.coordinate.longitude);
     
     //从manager获取左边
     CLLocationCoordinate2D coordinate = userLocation.location.coordinate;//位置坐标
@@ -146,8 +145,6 @@
     self.mapView.centerCoordinate = coordinate;
     if ((userLocation.location.coordinate.latitude != 0 || userLocation.location.coordinate.longitude != 0))
     {
-        
-        
         //发送反编码请求
         //[self sendBMKReverseGeoCodeOptionRequest];
         
@@ -166,7 +163,7 @@
     }
     
     //关闭坐标更新
-    [self.locService stopUserLocationService];
+   // [self.locService stopUserLocationService];
 }
 
 //地图定位

@@ -22,27 +22,27 @@
 #define RN_RES_PATH @"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"
 
 
-#if DEBUG
+//#if DEBUG
+//
+//#define RN_DEBUG @"false"
+//
+//#if TARGET_OS_SIMULATOR
+//#warning "DEBUG SIMULATOR"
+//
+//#define RN_RES_PATH @"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"
+//
+//#else
+//#warning "DEBUG DEVICE"
+//
+//#define RN_RES_PATH  [NSString stringWithFormat:@"http://%@:8081/index.ios.bundle?platform=ios&dev=true",IP_ADDRESS]
+//#endif
+//#else
+////release
+//#define RN_DEBUG @"true"
+//
+//#endif
 
-#define RN_DEBUG @"false"
-
-#if TARGET_OS_SIMULATOR
-#warning "DEBUG SIMULATOR"
-
-#define RN_RES_PATH @"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"
-
-#else
-#warning "DEBUG DEVICE"
-
-#define RN_RES_PATH  [NSString stringWithFormat:@"http://%@:8081/index.ios.bundle?platform=ios&dev=true",IP_ADDRESS]
-#endif
-#else
-//release
 #define RN_DEBUG @"true"
-
-#endif
-
-
 
 
 

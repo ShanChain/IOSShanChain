@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BMKTestLocationViewController">
             <connections>
                 <outlet property="detailsLabel" destination="WP4-Hd-7nw" id="njd-Hk-faK"/>
+                <outlet property="joinBtn" destination="pM6-5B-P9i" id="rUv-ii-3K3"/>
                 <outlet property="latLabel" destination="Pb4-tP-8mx" id="CZq-yj-Ikt"/>
                 <outlet property="longLabel" destination="BRq-1t-XvX" id="glj-7r-czG"/>
                 <outlet property="mapView" destination="Ejm-4t-9dd" id="pzp-7y-vVN"/>
@@ -58,24 +59,54 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="269.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdc-08-2Cr">
+                    <rect key="frame" x="0.0" y="397.5" width="375" height="269.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="进入广场和同区块的朋友聊天吧！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsX-2B-tIl">
+                            <rect key="frame" x="57" y="20" width="260" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pM6-5B-P9i">
+                            <rect key="frame" x="137.5" y="91" width="100" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="6QB-ut-gRg"/>
+                                <constraint firstAttribute="height" constant="40" id="Ycl-YE-Yce"/>
+                            </constraints>
+                            <state key="normal" title="进入广场"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="AsX-2B-tIl" firstAttribute="centerX" secondItem="qdc-08-2Cr" secondAttribute="centerX" id="MBk-vB-idD"/>
+                        <constraint firstItem="pM6-5B-P9i" firstAttribute="top" secondItem="AsX-2B-tIl" secondAttribute="bottom" constant="50" id="YKv-BK-p3t"/>
+                        <constraint firstItem="pM6-5B-P9i" firstAttribute="centerX" secondItem="qdc-08-2Cr" secondAttribute="centerX" id="jUB-KY-xEo"/>
+                        <constraint firstItem="AsX-2B-tIl" firstAttribute="top" secondItem="qdc-08-2Cr" secondAttribute="top" constant="20" id="lQA-s9-faX"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.3806344499830373" green="0.37835520177954607" blue="0.38291369818652854" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="Ejm-4t-9dd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0Xc-v8-xXG"/>
                 <constraint firstItem="WP4-Hd-7nw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="13M-Di-43f"/>
+                <constraint firstItem="qdc-08-2Cr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1Qq-X4-QIH"/>
                 <constraint firstItem="WP4-Hd-7nw" firstAttribute="top" secondItem="BRq-1t-XvX" secondAttribute="bottom" constant="10" id="2Ns-ye-hC3"/>
                 <constraint firstItem="Pb4-tP-8mx" firstAttribute="top" secondItem="AXZ-xU-L2p" secondAttribute="bottom" constant="10" id="4V4-Ge-GaX"/>
                 <constraint firstAttribute="trailing" secondItem="Ejm-4t-9dd" secondAttribute="trailing" id="FGV-kN-2cT"/>
+                <constraint firstItem="qdc-08-2Cr" firstAttribute="top" secondItem="AXZ-xU-L2p" secondAttribute="bottom" id="Jgo-Ba-yZZ"/>
                 <constraint firstAttribute="trailing" secondItem="AXZ-xU-L2p" secondAttribute="trailing" id="Jw8-Xp-8WI"/>
                 <constraint firstItem="AXZ-xU-L2p" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="NYb-iH-EOa"/>
                 <constraint firstItem="Pb4-tP-8mx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="OA1-6J-JPQ"/>
                 <constraint firstAttribute="trailing" secondItem="WP4-Hd-7nw" secondAttribute="trailing" constant="10" id="TqP-8H-xjE"/>
                 <constraint firstItem="AXZ-xU-L2p" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="X8y-sJ-mD8"/>
+                <constraint firstAttribute="trailing" secondItem="qdc-08-2Cr" secondAttribute="trailing" id="ZVd-ea-gEA"/>
                 <constraint firstItem="AXZ-xU-L2p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aul-SO-TEh"/>
                 <constraint firstItem="AXZ-xU-L2p" firstAttribute="top" secondItem="Ejm-4t-9dd" secondAttribute="bottom" id="eNh-ah-K2q"/>
                 <constraint firstItem="BRq-1t-XvX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="kad-mg-iCY"/>
                 <constraint firstItem="BRq-1t-XvX" firstAttribute="top" secondItem="Pb4-tP-8mx" secondAttribute="bottom" constant="10" id="kzX-Vh-yYL"/>
                 <constraint firstItem="Ejm-4t-9dd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rq0-lA-mOh"/>
+                <constraint firstAttribute="bottom" secondItem="qdc-08-2Cr" secondAttribute="bottom" id="zPg-Vt-Z12"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>

@@ -16,6 +16,7 @@
 #import "SYContactModel.h"
 #import "EaseTextView.h"
 #import "SYFriendHomePageController.h"
+#import <UserNotifications/UserNotifications.h>
 
 #define kHaveUnreadAtMessage    @"kHaveAtMessage"
 static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
@@ -120,9 +121,9 @@ static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity
         startMessageId = [(EMMessage *)self.messsagesSource.firstObject messageId];
     }
     SCLog(@"startMessageID ------- %@",startMessageId);
-    [EMClient.sharedClient.chatManager asyncFetchHistoryMessagesFromServer:self.conversation.conversationId conversationType:self.conversation.type startMessageId:startMessageId pageSize:10 complation:^(EMCursorResult *aResult, EMError *aError) {
-         [super tableViewDidTriggerHeaderRefresh];
-     }];
+    [EMClient.sharedClient.chatManager asyncFetchHistoryMessagesFromServer:self.conversation.conversationId conversationType:self.conversation.type startMessageId:startMessageId pageSize:10 completion:^(EMCursorResult *aResult, EMError *aError) {
+        [super tableViewDidTriggerHeaderRefresh];
+    }];
 }
 
 #pragma mark ----------  UIAlertViewDelegate ----------------
@@ -499,9 +500,38 @@ static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity
 - (void)messagesDidReceive:(NSArray *)aMessages {
     for (EMMessage *message in aMessages) {
         // 消息中的扩展属性
-        NSDictionary *ext = message.ext;
-        NSString * msgAttr = [ext objectForKey:@"msgAttr"];
+//        NSDictionary *ext = message.ext;
+//        NSString * msgAttr = [ext objectForKey:@"msgAttr"];
+        [self _configurationRemotelyPush:message];
     }
 }
+
+- (void)_configurationRemotelyPush:(EMMessage*)message{
+    
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    // App在后台
+    if (state == UIApplicationStateBackground) {
+        //发送本地推送
+        if (NSClassFromString(@"UNUserNotificationCenter")) { // ios 10
+            // 设置触发时间
+            UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:0.01 repeats:NO];
+            UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+            content.sound = [UNNotificationSound defaultSound];
+            // 提醒，可以根据需要进行弹出，比如显示消息详情，或者是显示“您有一条新消息”
+            content.body = @"您有一条新消息";
+            UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:message.messageId content:content trigger:trigger];
+            [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:nil];
+        }else {
+            UILocalNotification *notification = [[UILocalNotification alloc] init];
+            notification.fireDate = [NSDate date]; //触发通知的时间
+            notification.alertBody = @"您有一条新消息";
+            notification.alertAction = @"Open";
+            notification.timeZone = [NSTimeZone defaultTimeZone];
+            notification.soundName = UILocalNotificationDefaultSoundName;
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
+}
+
 
 @end
