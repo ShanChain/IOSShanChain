@@ -17,7 +17,7 @@
 + (void)initialize{
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:RGB(102, 102, 102),NSFontAttributeName:[UIFont systemFontOfSize:18.0f]}];
     
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bg_image_disabled"] forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bg_image_disabled"] forBarMetrics:UIBarMetricsDefault];
     
 }
 

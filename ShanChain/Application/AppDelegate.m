@@ -27,7 +27,9 @@
 #import "VersionUtils.h"
 #import "BMKTestLocationViewController.h"
 
-@interface AppDelegate ()<UNUserNotificationCenterDelegate, UIAlertViewDelegate,UIApplicationDelegate>
+#define JMSSAGE_APPKEY  @"0a20b6277a625655791e3cd9"
+
+@interface AppDelegate ()<UNUserNotificationCenterDelegate, UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate>
 
 @property (nonatomic, strong) BMKMapManager *mapManager;
 
@@ -46,20 +48,22 @@
     
     [self setupMapConfig];
     
+    [self setJMessageSDK:launchOptions];
+    
     [self setupUMPushNoticationWithLaunchOptions:launchOptions];
    
     UIViewController *rootVc = nil;
     rootVc = [[SCTabbarController alloc]init];
-    if ([[SCAppManager shareInstance] isLogin]) {
-        rootVc = [[SCTabbarController alloc]init];
-    } else {
-        SCLoginController *loginVC=[[SCLoginController alloc]init];
-        rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
-    }
+//    if ([[SCAppManager shareInstance] isLogin]) {
+//        rootVc = [[SCTabbarController alloc]init];
+//    } else {
+//        SCLoginController *loginVC=[[SCLoginController alloc]init];
+//        rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
+//    }
 //
     // 测试代码
-//    BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-//    rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:locationVC];
+    BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+    rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:locationVC];
 
     self.window.rootViewController = rootVc;
     
@@ -73,6 +77,23 @@
     return YES;
 }
 
+- (void)setJMessageSDK:(NSDictionary *)launchOptions{
+    [JMessage setupJMessage:launchOptions appKey:JMSSAGE_APPKEY channel:nil apsForProduction:NO category:nil messageRoaming:YES];
+    // Required - 注册 APNs 通知
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [JMessage registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                      UIUserNotificationTypeSound |
+                                                      UIUserNotificationTypeAlert)
+                                          categories:nil];
+    } else {
+        //categories 必须为nil
+        [JMessage registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                      UIRemoteNotificationTypeSound |
+                                                      UIRemoteNotificationTypeAlert)
+                                          categories:nil];
+    }
+}
 
 - (void)setBMKManager{
     
@@ -97,6 +118,7 @@
         [[EMClient sharedClient] bindDeviceToken:deviceToken];
     });
     SCLog(@"DeviceToken: %@", string);
+    [JMessage registerDeviceToken:deviceToken];
 }
 
 // 注册deviceToken失败
@@ -363,6 +385,12 @@
 
 
 
+- (void)resetBadge:(UIApplication*)application{
+    application.applicationIconBadgeNumber = 0;
+    [application cancelAllLocalNotifications];
+    [JMessage resetBadge];
+}
+
 #pragma mark -
 + (AppDelegate *)sharedInstance {
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -376,6 +404,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [[EMClient sharedClient] applicationDidEnterBackground:application];
+    [self resetBadge:application];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -384,6 +413,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     [[EMClient sharedClient] applicationWillEnterForeground:application];
+    [self resetBadge:application];
 }
 
 
@@ -402,6 +432,17 @@
 //}
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [application registerForRemoteNotifications];
+}
+
+//MARK: - JMessage Delegate
+-(void)onDBMigrateStart{
+    [HHTool show:@"数据库升级中"];
+}
+-(void)onDBMigrateFinishedWithError:(NSError *)error{
+    [HHTool dismiss];
+    if (!error) {
+        [HHTool showSucess:@"数据库升级完成"];
+    }
 }
 
 @end

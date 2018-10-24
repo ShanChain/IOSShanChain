@@ -38,6 +38,7 @@
 #import "AFNetworking.h"
 #import "APIClient.h"
 
+#import "UIColor+Extention.h"
 #import "NSObject+MJKeyValue.h"
 //#import "API.h"
 #import "SCMD5Tool.h"
@@ -77,6 +78,7 @@
 #import "UITableView+Registered.h"
 #import "NSObject+AutoProperty.h"
 #import <YYModel/YYModel.h>
+#import <JMessage/JMessage.h>
 
 
 // 百度地图

@@ -9,22 +9,30 @@
 #import "BMKTestLocationViewController.h"
 #import "UITextView+Placeholder.h"
 #import "UIViewController+SYBase.h"
+#import "ShanChain-Swift.h"
+#import "UIView+LSCore.h"
 
-@interface BMKTestLocationViewController ()<UITableViewDataSource, UITableViewDelegate,CLLocationManagerDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,BMKMapViewDelegate>
+static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
+
+@interface BMKTestLocationViewController ()< UITableViewDelegate,CLLocationManagerDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,BMKMapViewDelegate>
 @property (nonatomic, strong)BMKLocationService *locService;
 @property (nonatomic, strong)BMKGeoCodeSearch *searcher;
 @property BOOL isGeoSearch;
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @property (nonatomic,copy)   NSString  *latitude;
 @property (nonatomic,copy)   NSString  *longitude;
 @property (nonatomic,assign)  CLLocationCoordinate2D   pt;
+@property (weak, nonatomic) IBOutlet UILabel *locationLb;
 
-@property (weak, nonatomic) IBOutlet UILabel *latLabel;
-@property (weak, nonatomic) IBOutlet UILabel *longLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailsLabel;
+@property (weak, nonatomic) IBOutlet UIView *lcView;
+
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;
+@property (weak, nonatomic) IBOutlet UIView *moreView;
+
+@property (weak, nonatomic) IBOutlet UIButton *noteBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *footprintBtn;
 
 @property (weak, nonatomic) IBOutlet BMKMapView *mapView;
 
@@ -35,8 +43,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"百度地图测试";
+    ViewRadius(self.joinBtn, 10);
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self.lcView addRoundedCorners:UIRectCornerTopRight|UIRectCornerBottomRight withRadii:CGSizeMake(self.view.height/2.0, self.view.height/2.0)];
+    [self.moreView addRoundedCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight withRadii:CGSizeMake(self.view.height/2.0, self.view.height/2.0)];
     [self pn_ConfigurationMapView];
-    self.textView.placeholder = @"请输入URL...";
     _locService = [[BMKLocationService alloc]init];//定位功能的初始化
     _locService.delegate = self;//设置代理位self
     _locService.desiredAccuracy = kCLLocationAccuracyBest;
@@ -85,7 +96,7 @@
 - (void)pn_ConfigurationMapView{
     [self.mapView setMapType:BMKMapTypeStandard];//标准地图
     self.mapView.userTrackingMode = BMKUserTrackingModeNone;// 定位模式
-    self.mapView.zoomLevel = 21;//地图级别
+    self.mapView.zoomLevel = 20;//地图级别
     self.mapView.showsUserLocation = YES; //是否显示定位图层
     // _mapView.compassPosition = CGPointMake(ScreenWidth - 50, 25);//指南针的位置
     //打开实时路况图层
@@ -115,14 +126,20 @@
 - (void)tap{
     [self.view endEditing:YES];
 }
+- (IBAction)notePressed:(id)sender {
+}
+
+// 足迹
+- (IBAction)footprintPressed:(id)sender {
+}
 
 - (void)determine{
-    [[SCNetwork shareInstance]HH_postWithUrl:self.textView.text params:@{@"latitude":self.latitude,@"longitude":self.longitude} showLoading:YES success:^(HHBaseModel *baseModel) {
-        [HHTool showSucess:baseModel.message];
-//            [self hrShowAlertWithTitle:nil message:[NSString stringWithFormat:@"latitude:%@\nlongitude:",latitude,longitude] buttonsTitles:@[@"确定"] andHandler:nil];
-    } failure:^(NSError *error) {
-        
-    }];
+//    [[SCNetwork shareInstance]HH_postWithUrl:self.textView.text params:@{@"latitude":self.latitude,@"longitude":self.longitude} showLoading:YES success:^(HHBaseModel *baseModel) {
+//        [HHTool showSucess:baseModel.message];
+////            [self hrShowAlertWithTitle:nil message:[NSString stringWithFormat:@"latitude:%@\nlongitude:",latitude,longitude] buttonsTitles:@[@"确定"] andHandler:nil];
+//    } failure:^(NSError *error) {
+//        
+//    }];
 }
 
 #pragma mark - BMK_LocationDelegate 百度地图
@@ -153,8 +170,11 @@
         NSString *longitude = [NSString stringWithFormat:@"%f",userLocation.location.coordinate.longitude];
         self.longitude = longitude;
         
-        self.latLabel.text = [NSString stringWithFormat:@"维度:%@",latitude];
-        self.longLabel.text = [NSString stringWithFormat:@"经度:%@",longitude];
+        NSString *long_title = coordinate.longitude > 0 ?@"东经":@"西经";
+        NSString *lat_title = coordinate.latitude > 0 ?@"北纬":@"南纬";
+        self.locationLb.text = [NSString stringWithFormat:@"%@%ld°%@%ld°",long_title,(long)longitude.integerValue,lat_title,(long)latitude.integerValue];
+        
+      
         
 //        [self reverseGeoCodeWithLatitude:latitude withLongitude:longitude];
         
@@ -183,17 +203,33 @@
     
     if (error == BMK_SEARCH_NO_ERROR) {
         //在此处理正常结果
-        self.detailsLabel.text = [NSString stringWithFormat:@"详细地址:%@ \n %@ \n ",result.address,result.sematicDescription];
     }
     else {
         NSLog(@"抱歉，未找到结果");
     }
 }
 
+- (IBAction)joinPressed:(id)sender{
+    
+    [HHTool mainWindow].rootViewController = nil;
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:kCurrentUserName]){
+        JCMainTabBarController  *tabBarVC = [[JCMainTabBarController alloc]init];
+        [HHTool mainWindow].rootViewController = tabBarVC;
+//        JCConversationListViewController *chatListView = [[JCConversationListViewController alloc]init];
+//         [self.navigationController pushViewController:chatListView animated:YES];
+    }else{
+        JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:[JCLoginViewController new]];
+       // [self.navigationController pushViewController:nav animated:YES];
+        [HHTool mainWindow].rootViewController = nav;
 
+    }
+}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
        [self.view endEditing:YES];
 }
+
+
+
 
 @end

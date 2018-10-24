@@ -20,4 +20,6 @@
 + (void)openAppStore;
 //获取设备当前网络IP地址
 +(NSString *)getDeviceIPIpAddresses;
+//获取当前window
++ (UIWindow *)mainWindow;
 @end

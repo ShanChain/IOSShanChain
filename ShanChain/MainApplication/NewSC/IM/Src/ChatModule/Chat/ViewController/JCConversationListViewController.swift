@@ -19,6 +19,7 @@ class JCConversationListViewController: UIViewController {
         super.viewDidLoad()
         _init()
     }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -95,7 +96,8 @@ class JCConversationListViewController: UIViewController {
         if #available(iOS 10.0, *) {
             navigationController?.tabBarItem.badgeColor = UIColor(netHex: 0xEB424C)
         }
-
+        
+    
         let appDelegate = UIApplication.shared.delegate
         let window = appDelegate?.window!
         window?.addSubview(titleTipsView)
@@ -134,10 +136,12 @@ class JCConversationListViewController: UIViewController {
     }
     
     private func _setupNavigation() {
+        
         addButton.addTarget(self, action: #selector(_clickNavRightButton(_:)), for: .touchUpInside)
         addButton.setImage(UIImage.loadImage("com_icon_add"), for: .normal)
         let item = UIBarButtonItem(customView: addButton)
         navigationItem.rightBarButtonItem =  item
+    
     }
     
     func _updateBadge() {

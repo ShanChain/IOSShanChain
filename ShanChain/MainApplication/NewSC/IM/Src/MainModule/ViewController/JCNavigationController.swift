@@ -72,7 +72,7 @@ final class JCNavigationController: UINavigationController {
     //MARK: - private func
     private func _init() {
         let navBar = UINavigationBar.appearance()
-//        self.navigationBar.isTranslucent = false
+        self.navigationBar.isTranslucent = true
         navBar.barTintColor = UIColor(netHex: 0x2dd0cf)
         navBar.tintColor = .white
         var attrs = [String : AnyObject]()

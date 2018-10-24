@@ -164,6 +164,7 @@ class JCChatViewController: UIViewController {
     }()
     fileprivate lazy var leftButton: UIButton = {
         let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 90, height: 65 / 3))
+        
         leftButton.setImage(UIImage.loadImage("com_icon_back"), for: .normal)
         leftButton.setImage(UIImage.loadImage("com_icon_back"), for: .highlighted)
         leftButton.addTarget(self, action: #selector(_back), for: .touchUpInside)
@@ -755,6 +756,8 @@ extension JCChatViewController: YHPhotoPickerViewControllerDelegate, UINavigatio
 // MARK: - JCMessageDelegate
 extension JCChatViewController: JCMessageDelegate {
 
+
+    
     func message(message: JCMessageType, videoData data: Data?) {
         if let data = data {
             JCVideoManager.playVideo(data: data, currentViewController: self)
