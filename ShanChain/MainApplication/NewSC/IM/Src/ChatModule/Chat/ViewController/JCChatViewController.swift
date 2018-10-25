@@ -16,14 +16,18 @@ class JCChatViewController: UIViewController {
     fileprivate var isGroup = false
     
     //MARK - life cycle
+    // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
     public required init(conversation: JMSGConversation) {
         self.conversation = conversation
         super.init(nibName: nil, bundle: nil)
         automaticallyAdjustsScrollViewInsets = false;
+        // if let 关键字是一个组合关键字。我们主要使用它解决Optional对象解包时产生空对象的处理
         if let draft = JCDraft.getDraft(conversation) {
-            self.draft = draft
+            // 不为空时执行
+            self.draft = draft // 获取编辑未发出的草稿
         }
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -48,6 +52,9 @@ class JCChatViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         toolbar.isHidden = false
+//        JMSGChatRoom.getListWithAppKey(nil, start: 0, count: 10) { (result, error) in
+//
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -59,20 +66,24 @@ class JCChatViewController: UIViewController {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         if let group = conversation.target as? JMSGGroup {
+            // 如果是群组获取群组昵称
             self.title = group.displayName()
         }
+        // 增加侧滑返回
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         navigationController?.navigationBar.isTranslucent = true
+        // 更新草稿内容
         JCDraft.update(text: toolbar.text, conversation: conversation)
     }
     
     deinit {
+        //析构函数 类似OC的delloc
         NotificationCenter.default.removeObserver(self)
-        JMessage.remove(self, with: conversation)
+        JMessage.remove(self, with: conversation)// 移除监听(delegate)
     }
     
     private var draft: String?
@@ -82,6 +93,7 @@ class JCChatViewController: UIViewController {
     var chatViewLayout: JCChatViewLayout = .init()
     var chatView: JCChatView!
     fileprivate lazy var reminds: [JCRemind] = []
+    //UIDocumentInteractionController  强大的文档阅读器
     fileprivate lazy var documentInteractionController = UIDocumentInteractionController()
     
     fileprivate lazy var imagePicker: UIImagePickerController = {
@@ -101,7 +113,7 @@ class JCChatViewController: UIViewController {
         picker.delegate = self
         return picker
     }()
-    
+    // 表情对象数组
     fileprivate lazy var _emoticonGroups: [JCCEmoticonGroup] = {
         var groups: [JCCEmoticonGroup] = []
         if let group = JCCEmoticonGroup(identifier: "com.apple.emoji") {
@@ -112,6 +124,7 @@ class JCChatViewController: UIViewController {
         }
         return groups
     }()
+    // emoji发送按钮
     fileprivate lazy var _emoticonSendBtn: UIButton = {
         var button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -120,22 +133,25 @@ class JCChatViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundImage(UIImage.loadImage("chat_emoticon_btn_send_blue"), for: .normal)
         button.setBackgroundImage(UIImage.loadImage("chat_emoticon_btn_send_gray"), for: .disabled)
+
         button.addTarget(self, action: #selector(_sendHandler), for: .touchUpInside)
         return button
     }()
+    // emoji展示视图
     fileprivate lazy var emoticonView: JCEmoticonInputView = {
         let emoticonView = JCEmoticonInputView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 275))
         emoticonView.delegate = self
         emoticonView.dataSource = self
         return emoticonView
     }()
-    
+    // 点击+显示  消息类型展示视图
     fileprivate lazy var toolboxView: SAIToolboxInputView = {
         var toolboxView = SAIToolboxInputView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 197))
         toolboxView.delegate = self
         toolboxView.dataSource = self
         return toolboxView
     }()
+    // 消息类型展示视图内容  icon和title
     fileprivate lazy var _toolboxItems: [SAIToolboxItem] = {
         return [
             SAIToolboxItem("page:pic", "照片", UIImage.loadImage("chat_tool_pic")),
@@ -162,6 +178,7 @@ class JCChatViewController: UIViewController {
         recordHelper.delegate = self
         return recordHelper
     }()
+    // 左上角返回按钮
     fileprivate lazy var leftButton: UIButton = {
         let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 90, height: 65 / 3))
         
@@ -170,18 +187,19 @@ class JCChatViewController: UIViewController {
         leftButton.addTarget(self, action: #selector(_back), for: .touchUpInside)
         leftButton.setTitle("会话", for: .normal)
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        leftButton.contentHorizontalAlignment = .left
+        leftButton.contentHorizontalAlignment = .left //title和icon在左边
         return leftButton
     }()
     
     private func _init() {
         myAvator = UIImage.getMyAvator()
-        isGroup = conversation.ex.isGroup
+        isGroup = conversation.ex.isGroup //是否是群聊
         _updateTitle()
         view.backgroundColor = .white
         JMessage.add(self, with: conversation)
         _setupNavigation()
         _loadMessage(messagePage)
+        // 添加点击视图回收键盘手势
         let tap = UITapGestureRecognizer(target: self, action: #selector(_tapView))
         tap.delegate = self
         chatView.addGestureRecognizer(tap)
@@ -211,6 +229,7 @@ class JCChatViewController: UIViewController {
         } else {
             title = conversation.title
         }
+       
     }
 
 
@@ -218,8 +237,9 @@ class JCChatViewController: UIViewController {
         _removeAllMessage()
         messagePage = 0
         _loadMessage(messagePage)
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            self.chatView.scrollToLast(animated: false)
+            self.chatView.scrollToLast(animated: false)// 根据消息滑到指定位置
         }
     }
     
@@ -237,6 +257,7 @@ class JCChatViewController: UIViewController {
     private func _setupNavigation() {
         let navButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         if isGroup {
+            
             navButton.setImage(UIImage.loadImage("com_icon_group_w"), for: .normal)
             navButton.addTarget(self, action: #selector(_getGroupInfo), for: .touchUpInside)
         } else {
@@ -257,8 +278,8 @@ class JCChatViewController: UIViewController {
     }
     
     fileprivate func _loadMessage(_ page: Int) {
-
-        let messages = conversation.messageArrayFromNewest(withOffset: NSNumber(value: jMessageCount), limit: NSNumber(value: 17))
+       // 分页获取消息
+        let messages:[JMSGMessage] = conversation.messageArrayFromNewest(withOffset: NSNumber(value: jMessageCount), limit: NSNumber(value: 17))
         if messages.count == 0 {
             return
         }
@@ -306,12 +327,14 @@ class JCChatViewController: UIViewController {
         if isNewMessage {
             jMessageCount += 1
         }
+   
         return message.parseMessage(self, { [weak self] (message, data) in
             self?.updateMediaMessage(message, data: data)
         })
     }
 
     // MARK: - send message
+    // 所有发送的消息最终都会走到这里统一处理
     func send(_ message: JCMessage, _ jmessage: JMSGMessage) {
         if isNeedInsertTimeLine(jmessage.timestamp.intValue) {
             let timeContent = JCMessageTimeLineContent(date: Date(timeIntervalSince1970: TimeInterval(jmessage.timestamp.intValue / 1000)))
@@ -338,7 +361,7 @@ class JCChatViewController: UIViewController {
         chatView.scrollToLast(animated: false)
         conversation.send(jmessage, optionalContent: JMSGOptionalContent.ex.default)
     }
-
+  // 发送文本
     func send(forText text: NSAttributedString) {
         let message = JCMessage(content: JCMessageTextContent(attributedText: text))
         let content = JMSGTextContent(text: text.string)
@@ -346,7 +369,7 @@ class JCChatViewController: UIViewController {
         reminds.removeAll()
         send(message, msg)
     }
-    
+    // 发送emoji
     func send(forLargeEmoticon emoticon: JCCEmoticonLarge) {
         guard let image = emoticon.contents as? UIImage else {
             return
@@ -362,7 +385,7 @@ class JCChatViewController: UIViewController {
         message.options.showsTips = true
         send(message, msg)
     }
-    
+    // 发送图片
     func send(forImage image: UIImage) {
         let data = UIImageJPEGRepresentation(image, 1.0)!
         let content = JMSGImageContent(imageData: data)
@@ -377,7 +400,7 @@ class JCChatViewController: UIViewController {
         let msg = JCMessage(content: imageContent)
         send(msg, message)
     }
-    
+    // 发送音频
     func send(voiceData: Data, duration: Double) {
         let voiceContent = JCMessageVoiceContent()
         voiceContent.data = voiceData
@@ -389,7 +412,7 @@ class JCChatViewController: UIViewController {
         let msg = JCMessage(content: voiceContent)
         send(msg, message)
     }
-    
+    // 发送文件
     func send(fileData: Data) {
         let videoContent = JCMessageVideoContent()
         videoContent.data = fileData
@@ -401,7 +424,7 @@ class JCChatViewController: UIViewController {
         let msg = JCMessage(content: videoContent)
         send(msg, message)
     }
-    
+    // 发送地址
     func send(address: String, lon: NSNumber, lat: NSNumber) {
         let locationContent = JCMessageLocationContent()
         locationContent.address = address
@@ -414,7 +437,7 @@ class JCChatViewController: UIViewController {
         let msg = JCMessage(content: locationContent)
         send(msg, message)
     }
-    
+    // 键盘发送改变通知
     func keyboardFrameChanged(_ notification: Notification) {
         let dic = NSDictionary(dictionary: (notification as NSNotification).userInfo!)
         let keyboardValue = dic.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
@@ -432,7 +455,7 @@ class JCChatViewController: UIViewController {
             self.isFristLaunch = false
         }
     }
-    
+    // 点击emoji发送按钮发送编辑好的文本
     func _sendHandler() {
         let text = toolbar.attributedText
         if text != nil && (text?.length)! > 0 {
@@ -440,13 +463,13 @@ class JCChatViewController: UIViewController {
             toolbar.attributedText = nil
         }
     }
-    
+    // 单聊 进入聊天设置
     func _getSingleInfo() {
         let vc = JCSingleSettingViewController()
         vc.user = conversation.target as! JMSGUser
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+    // 群聊 进入群聊设置
     func _getGroupInfo() {
         let vc = JCGroupSettingViewController()
         let group = conversation.target as! JMSGGroup
@@ -457,7 +480,7 @@ class JCChatViewController: UIViewController {
 
 //MARK: - JMSGMessage Delegate
 extension JCChatViewController: JMessageDelegate {
-    
+    // 更新媒体消息
     fileprivate func updateMediaMessage(_ message: JMSGMessage, data: Data) {
         DispatchQueue.main.async {
             if let index = self.messages.index(message) {
@@ -490,6 +513,7 @@ extension JCChatViewController: JMessageDelegate {
         }
     }
     
+    // 更新左上角badge 显示未读消息数
     func _updateBadge() {
         JMSGConversation.allConversations { (result, error) in
             guard let conversations = result as? [JMSGConversation] else {
@@ -504,6 +528,7 @@ extension JCChatViewController: JMessageDelegate {
         }
     }
     
+    // 接收消息(服务器端下发的)回调
     func onReceive(_ message: JMSGMessage!, error: Error!) {
         if error != nil {
             return
@@ -534,6 +559,7 @@ extension JCChatViewController: JMessageDelegate {
         _updateBadge()
     }
     
+    // 发送消息成功的回调
     func onSendMessageResponse(_ message: JMSGMessage!, error: Error!) {
         if let error = error as NSError? {
             if error.code == 803009 {
@@ -550,6 +576,7 @@ extension JCChatViewController: JMessageDelegate {
         }
     }
     
+    // 监听消息撤回事件
     func onReceive(_ retractEvent: JMSGMessageRetractEvent!) {
         if let index = messages.index(retractEvent.retractMessage) {
             let msg = _parseMessage(retractEvent.retractMessage, false)
@@ -557,17 +584,18 @@ extension JCChatViewController: JMessageDelegate {
             chatView.update(msg, at: index)
         }
     }
-    
+    // 同步离线消息、离线事件通知
     func onSyncOfflineMessageConversation(_ conversation: JMSGConversation!, offlineMessages: [JMSGMessage]!) {
         let msgs = offlineMessages.sorted(by: { (m1, m2) -> Bool in
             return m1.timestamp.intValue < m2.timestamp.intValue
         })
         for item in msgs {
-            let message = _parseMessage(item)
+            let message = _parseMessage(item)//先解析成JCMessage
             messages.append(message)
             chatView.append(message)
-            updateUnread([message])
-            conversation.clearUnreadCount()
+            updateUnread([message]) // 更新状态为已读
+            conversation.clearUnreadCount() // 清除会话未读数
+            // isRoll 判断用户是否在滚动视图
             if !chatView.isRoll {
                 chatView.scrollToLast(animated: true)
             }
@@ -575,6 +603,7 @@ extension JCChatViewController: JMessageDelegate {
         _updateBadge()
     }
     
+    // 监听消息回执状态变更事件
     func onReceive(_ receiptEvent: JMSGMessageReceiptStatusChangeEvent!) {
         for message in receiptEvent.messages! {
             if let index = messages.index(message) {
@@ -677,7 +706,8 @@ extension JCChatViewController: SAIToolboxInputViewDataSource, SAIToolboxInputVi
                 PHPhotoLibrary.requestAuthorization({ (status) in
                     DispatchQueue.main.sync {
                         if status != .authorized {
-                            JCAlertView.bulid().setTitle("无权限访问照片").setMessage("请在设备的设置-极光 IM中允许访问照片。").setDelegate(self).addCancelButton("好的").addButton("去设置").setTag(10001).show()
+                            // 适配国际化  此处得修改
+                            JCAlertView.bulid().setTitle("无权限访问照片").setMessage("请在设备的设置-马甲APP中允许访问照片。").setDelegate(self).addCancelButton("好的").addButton("去设置").setTag(10001).show()
                         } else {
                             self._pushToSelectPhotos()
                         }
@@ -1249,6 +1279,7 @@ extension JCChatViewController: UIGestureRecognizerDelegate {
 
 extension JCChatViewController: UIDocumentInteractionControllerDelegate {
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        //这个地方需要返回给一个控制器用于展现documentController在其上面，所以我们就返回当前控制器self
         return self
     }
     func documentInteractionControllerViewForPreview(_ controller: UIDocumentInteractionController) -> UIView? {

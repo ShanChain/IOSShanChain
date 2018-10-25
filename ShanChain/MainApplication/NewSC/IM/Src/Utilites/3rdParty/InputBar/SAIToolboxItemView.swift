@@ -9,7 +9,7 @@
 import UIKit
 
 internal class SAIToolboxItemView: UICollectionViewCell {
-    
+  // 其中willSet是值将要改变时触发，存在一个newValue的变量。didSet是值已经改变触发，存在一个oldValue的变量。
     var item: SAIToolboxItem? {
         didSet {
             _titleLabel.text = item?.name
@@ -25,6 +25,7 @@ internal class SAIToolboxItemView: UICollectionViewCell {
         _titleLabel.font = UIFont.systemFont(ofSize: 12)
         _titleLabel.textColor = .gray
         _titleLabel.textAlignment = .center
+        // 某个View需要使用auto layout布局，需要设置起translatesAutoresizingMaskIntoConstraints属性设置为NO
         _titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         _iconView.contentMode = .scaleAspectFit
@@ -37,7 +38,6 @@ internal class SAIToolboxItemView: UICollectionViewCell {
         
         contentView.addSubview(_iconView)
         contentView.addSubview(_titleLabel)
-        
         addConstraints([
             _SAInputLayoutConstraintMake(_iconView, .centerX, .equal, self, .centerX),
             _SAInputLayoutConstraintMake(_iconView, .centerY, .equal, self, .centerY, -12),

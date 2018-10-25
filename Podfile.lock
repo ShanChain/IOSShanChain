@@ -2,9 +2,9 @@ PODS:
   - AliyunOSSiOS (2.10.7)
   - BaiduMapKit (4.0.0)
   - Hyphenate (3.5.1)
-  - JCore (1.1.9)
-  - JMessage (3.3.0):
-    - JCore (~> 1.1.1)
+  - JCore (1.2.5)
+  - JMessage (3.7.0):
+    - JCore (~> 1.0)
   - MBProgressHUD (1.0.0)
   - mob_sharesdk (4.2.0):
     - mob_sharesdk/ShareSDK (= 4.2.0)
@@ -84,7 +84,7 @@ DEPENDENCIES:
   - AliyunOSSiOS
   - BaiduMapKit (~> 4.0.0)
   - Hyphenate
-  - JMessage (~> 3.3.0)
+  - JMessage (~> 3.7.0)
   - MBProgressHUD (~> 1.0.0)
   - mob_sharesdk
   - mob_sharesdk/ShareSDKPlatforms/QQ
@@ -145,8 +145,8 @@ SPEC CHECKSUMS:
   AliyunOSSiOS: 602b6a4e70e62a5f0a6431c20496343141d7e66f
   BaiduMapKit: 8fa2eb2ca81b92b740b19d9ff3b59d751d3e92e1
   Hyphenate: 02e3934f1bef0c25e6e5f46bd0940df740922957
-  JCore: 27598485098d0db99d2812cba048003457d08cfb
-  JMessage: a3cb40117796058fbdd8831777db7e09d7da37d8
+  JCore: 14706de2640b25fb77dbd02332696491407f37c9
+  JMessage: 90c194ca878a1724694da320aad4867b489276e9
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   mob_sharesdk: fc8a9aab921c08e5e88a5b1f36229c6d406a2ff8
   MOBFoundation: 11500153c10d83e4ac341f6ad6301b3998ce6db2
@@ -161,6 +161,6 @@ SPEC CHECKSUMS:
   yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: acf742fedfc09849814683a4630e10d4d4f544da
+PODFILE CHECKSUM: 9fafd4818fd157c1ddd36a0d39cd427f88a4ce60
 
 COCOAPODS: 1.5.3

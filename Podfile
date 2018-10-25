@@ -4,7 +4,7 @@ target 'ShanChain' do
     use_frameworks!
     
     pod 'BaiduMapKit', '~> 4.0.0'
-    pod 'JMessage', '~> 3.3.0’
+    pod 'JMessage', '~> 3.7.0’
     pod 'RxSwift', '~> 3.6.1'
     pod 'RxCocoa', '~> 3.6.1'
     pod 'YHPopupView'

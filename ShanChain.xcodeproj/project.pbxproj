@@ -233,6 +233,7 @@
 		223F9A48217F12B80031DB95 /* JCAddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A32217F12B80031DB95 /* JCAddFriendViewController.swift */; };
 		223F9A4B2180421E0031DB95 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A4A2180421E0031DB95 /* UIColor+Extention.m */; };
 		223F9A4E218067650031DB95 /* UIView+LSCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A4D218067650031DB95 /* UIView+LSCore.m */; };
+		223F9A502181CC4F0031DB95 /* HHChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A4F2181CC4F0031DB95 /* HHChatRoomViewController.swift */; };
 		2242C0002159C34E00707024 /* UIView+NoDataImgShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFF92159C34D00707024 /* UIView+NoDataImgShow.m */; };
 		2242C0012159C34E00707024 /* UIViewController+NoDataTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFFA2159C34D00707024 /* UIViewController+NoDataTip.m */; };
 		2242C0022159C34E00707024 /* YYHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFFD2159C34D00707024 /* YYHud.m */; };
@@ -957,6 +958,7 @@
 		223F9A4A2180421E0031DB95 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
 		223F9A4C218067650031DB95 /* UIView+LSCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+LSCore.h"; sourceTree = "<group>"; };
 		223F9A4D218067650031DB95 /* UIView+LSCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LSCore.m"; sourceTree = "<group>"; };
+		223F9A4F2181CC4F0031DB95 /* HHChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHChatRoomViewController.swift; sourceTree = "<group>"; };
 		2242BFF72159C34D00707024 /* UIView+NoDataImgShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NoDataImgShow.h"; sourceTree = "<group>"; };
 		2242BFF82159C34D00707024 /* UIViewController+NoDataTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NoDataTip.h"; sourceTree = "<group>"; };
 		2242BFF92159C34D00707024 /* UIView+NoDataImgShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NoDataImgShow.m"; sourceTree = "<group>"; };
@@ -2042,6 +2044,7 @@
 				223F98C2217F12030031DB95 /* JCForwardViewController.swift */,
 				223F98C3217F12030031DB95 /* FileManagerViewController.swift */,
 				223F98C4217F12030031DB95 /* JCChatViewController.swift */,
+				223F9A4F2181CC4F0031DB95 /* HHChatRoomViewController.swift */,
 				223F98C5217F12030031DB95 /* ImageFileViewController.swift */,
 				223F98C6217F12030031DB95 /* JCFileDownloadViewController.swift */,
 				223F98C7217F12030031DB95 /* JCGroupMembersViewController.swift */,
@@ -5067,6 +5070,7 @@
 				4852A1171FCE9F0300CDD7BE /* SYMarkModel.m in Sources */,
 				4852A0C91FCE9F0300CDD7BE /* SYContactModel.m in Sources */,
 				485E66601F42873F00B158BF /* MJRefreshGifHeader.m in Sources */,
+				223F9A502181CC4F0031DB95 /* HHChatRoomViewController.swift in Sources */,
 				223F9A0C217F12040031DB95 /* DLUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

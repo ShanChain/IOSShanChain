@@ -146,8 +146,8 @@
         </view>
     </objects>
     <resources>
-        <image name="067操作_选点_定位2" width="78" height="66"/>
+        <image name="067操作_选点_定位2" width="235" height="200"/>
         <image name="历史记录" width="200" height="200"/>
-        <image name="注意 (1)" width="66" height="66"/>
+        <image name="注意 (1)" width="200" height="200"/>
     </resources>
 </document>

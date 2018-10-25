@@ -71,7 +71,7 @@ extension UIImage {
         return image
     }
 
-    
+    //static func 禁止这个方法被重写
     static func getMyAvator() -> UIImage? {
         if let data = UserDefaults.standard.object(forKey: kLastUserAvator) as? Data {
             let avatorData = NSKeyedUnarchiver.unarchiveObject(with: data) as! Data
