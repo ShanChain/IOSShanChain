@@ -53,6 +53,64 @@
     return backButton;
 }
 
+- (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector title:(NSString*)title tintColor:(UIColor *)tintColor
+{
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:title style:(UIBarButtonItemStylePlain) target:target action:selector];
+    item.tintColor = tintColor;
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
+    [array addObject:item];
+    self.navigationItem.leftBarButtonItems = array;
+}
+
+
+
+- (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector image:(UIImage *)image selectedImage:(UIImage *)selectedImage
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    
+    [button setImage:image forState:UIControlStateNormal];
+    [button setImage:selectedImage forState:UIControlStateSelected];
+    button.adjustsImageWhenHighlighted = NO;
+    button.frame = CGRectMake(0, 0, image.size.width <= 25 ? 25 : image.size.width, image.size.height);
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
+    [array addObject:item];
+    self.navigationItem.leftBarButtonItems = array;
+}
+
+- (void)addRightBarButtonItemWithTarget:(id)target sel:(SEL)selector image:(UIImage *)image selectedImage:(UIImage *)selectedImage
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    
+    [button setImage:image forState:UIControlStateNormal];
+    [button setImage:selectedImage forState:UIControlStateSelected];
+    button.frame = CGRectMake(0, 0, image.size.width <= 25 ? 25 : image.size.width, image.size.height);
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.rightBarButtonItems];
+    [array addObject:item];
+    self.navigationItem.rightBarButtonItems = array;
+}
+
+- (void)addRightBarButtonItemWithTarget:(id)target sel:(SEL)selector title:(NSString*)title tintColor:(UIColor *)tintColor
+
+{
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(0, 0, 80,30);
+    [button.titleLabel setTextAlignment:NSTextAlignmentRight];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    [button setTitle:title forState:(UIControlStateNormal)];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [button setTitleColor:tintColor forState:UIControlStateNormal];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.rightBarButtonItems];
+    [array addObject:item];
+    self.navigationItem.rightBarButtonItems = array;
+}
+
 - (void)backToPoppedController {
     [self.navigationController popViewControllerAnimated:true];
 }

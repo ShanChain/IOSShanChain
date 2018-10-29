@@ -51,10 +51,14 @@ class HHChatRoomViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         toolbar.isHidden = false
+        
+        
         //        JMSGChatRoom.getListWithAppKey(nil, start: 0, count: 10) { (result, error) in
         //
         //        }
     }
+    
+  
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -69,7 +73,7 @@ class HHChatRoomViewController: UIViewController {
             self.title = group.displayName()
         }
         // 增加侧滑返回
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+      //  navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -112,6 +116,9 @@ class HHChatRoomViewController: UIViewController {
         picker.delegate = self
         return picker
     }()
+    
+  
+    
     // 表情对象数组
     fileprivate lazy var _emoticonGroups: [JCCEmoticonGroup] = {
         var groups: [JCCEmoticonGroup] = []
@@ -177,18 +184,6 @@ class HHChatRoomViewController: UIViewController {
         recordHelper.delegate = self
         return recordHelper
     }()
-    // 左上角返回按钮
-    fileprivate lazy var leftButton: UIButton = {
-        let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 90, height: 65 / 3))
-        
-        leftButton.setImage(UIImage.loadImage("sc_com_icon_user"), for: .normal)
-        leftButton.setImage(UIImage.loadImage("sc_com_icon_user"), for: .highlighted)
-        leftButton.addTarget(self, action: #selector(_back), for: .touchUpInside)
-        leftButton.setTitle("会话", for: .normal)
-        leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        leftButton.contentHorizontalAlignment = .left //title和icon在左边
-        return leftButton
-    }()
     
     private func _init() {
         myAvator = UIImage.getMyAvator()
@@ -203,12 +198,21 @@ class HHChatRoomViewController: UIViewController {
         chatView.addGestureRecognizer(tap)
         view.addSubview(chatView)
         
-       
+       // 置顶消息
+        let topView:RoomTopView = RoomTopView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(self.view.width), height: 50))
+        view.addSubview(topView)
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_reloadMessage), name: NSNotification.Name(rawValue: kReloadAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
+        
+        self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
+            if direction == CWDrawerTransitionDirection.fromLeft{
+                self._maskAnimationFromLeft()
+            }
+        }
     }
     
     func _updateFileMessage(_ notification: Notification) {
@@ -253,20 +257,24 @@ class HHChatRoomViewController: UIViewController {
     }
     
     private func _setupNavigation() {
-        let navButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        navButton.setImage(UIImage.loadImage("com_icon_group_w"), for: .normal)
-        navButton.addTarget(self, action: #selector(_getGroupInfo), for: .touchUpInside)
-        let item1 = UIBarButtonItem(customView: navButton)
-        navigationItem.rightBarButtonItems =  [item1]
-        
-        let item2 = UIBarButtonItem(customView: leftButton)
-        navigationItem.leftBarButtonItems =  [item2]
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), image: UIImage.init(named: "sc_com_icon_user"), selectedImage: UIImage.init(named: "sc_com_icon_user"))
+        self.addNavigationRight(withImageName: "sc_com_icon_close", withTarget: self, withAction: #selector(_closePage))
+        navigationController?.navigationBar.barTintColor = .white
+        var attrs = [String : AnyObject]()
+        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18)
+        attrs[NSForegroundColorAttributeName] = UIColor.black
+        navigationController?.navigationBar.titleTextAttributes = attrs
+//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
-    func _back() {
-        navigationController?.popViewController(animated: true)
+    func _closePage(){
+        self.navigationController?.popViewController(animated: true)
+    }
+  
+    func _maskAnimationFromLeft(){
+        let vc = LeftViewController()
+        self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
     }
     
     fileprivate func _loadMessage(_ page: Int) {
@@ -1049,6 +1057,11 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
             inputBar.deselectBarAllItem()
             return
         }
+        if item.identifier == "kb:task" {
+            // 发布任务
+            return;
+        }
+        
         if let kb = inputView(with: item) {
             inputBar.setInputMode(.selecting(kb), animated: true)
         }

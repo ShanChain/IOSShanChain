@@ -234,6 +234,21 @@
 		223F9A4B2180421E0031DB95 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A4A2180421E0031DB95 /* UIColor+Extention.m */; };
 		223F9A4E218067650031DB95 /* UIView+LSCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A4D218067650031DB95 /* UIView+LSCore.m */; };
 		223F9A502181CC4F0031DB95 /* HHChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A4F2181CC4F0031DB95 /* HHChatRoomViewController.swift */; };
+		223F9A5C21829BA80031DB95 /* CWInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A5221829BA70031DB95 /* CWInteractiveTransition.m */; };
+		223F9A5D21829BA80031DB95 /* UIViewController+CWLateralSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A5521829BA70031DB95 /* UIViewController+CWLateralSlide.m */; };
+		223F9A5E21829BA80031DB95 /* CWLateralSlideAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A5821829BA70031DB95 /* CWLateralSlideAnimator.m */; };
+		223F9A5F21829BA80031DB95 /* CWDrawerTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A5921829BA70031DB95 /* CWDrawerTransition.m */; };
+		223F9A6021829BA80031DB95 /* CWLateralSlideConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A5B21829BA70031DB95 /* CWLateralSlideConfiguration.m */; };
+		223F9A6A2182A9B10031DB95 /* CWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A632182A9B10031DB95 /* CWTableViewCell.m */; };
+		223F9A6B2182A9B10031DB95 /* CWTableViewCellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A652182A9B10031DB95 /* CWTableViewCellInfo.m */; };
+		223F9A6C2182A9B20031DB95 /* CWTableViewInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A672182A9B10031DB95 /* CWTableViewInfo.m */; };
+		223F9A6D2182A9B20031DB95 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A692182A9B10031DB95 /* LeftViewController.m */; };
+		223F9A722182AEC10031DB95 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 223F9A6F2182AEC00031DB95 /* 2.jpg */; };
+		223F9A732182AEC10031DB95 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 223F9A702182AEC00031DB95 /* 1.jpg */; };
+		223F9A742182AEC10031DB95 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 223F9A712182AEC00031DB95 /* 0.jpg */; };
+		223F9A792182C4570031DB95 /* RoomTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A782182C4570031DB95 /* RoomTopView.swift */; };
+		223F9A7B2182C46D0031DB95 /* RoomTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223F9A7A2182C46D0031DB95 /* RoomTopView.xib */; };
+		223F9A7E2182E94C0031DB95 /* UIView+property.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A7D2182E94C0031DB95 /* UIView+property.m */; };
 		2242C0002159C34E00707024 /* UIView+NoDataImgShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFF92159C34D00707024 /* UIView+NoDataImgShow.m */; };
 		2242C0012159C34E00707024 /* UIViewController+NoDataTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFFA2159C34D00707024 /* UIViewController+NoDataTip.m */; };
 		2242C0022159C34E00707024 /* YYHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242BFFD2159C34D00707024 /* YYHud.m */; };
@@ -959,6 +974,31 @@
 		223F9A4C218067650031DB95 /* UIView+LSCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+LSCore.h"; sourceTree = "<group>"; };
 		223F9A4D218067650031DB95 /* UIView+LSCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LSCore.m"; sourceTree = "<group>"; };
 		223F9A4F2181CC4F0031DB95 /* HHChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHChatRoomViewController.swift; sourceTree = "<group>"; };
+		223F9A5221829BA70031DB95 /* CWInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWInteractiveTransition.m; sourceTree = "<group>"; };
+		223F9A5321829BA70031DB95 /* CWDrawerTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWDrawerTransition.h; sourceTree = "<group>"; };
+		223F9A5421829BA70031DB95 /* CWLateralSlideAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWLateralSlideAnimator.h; sourceTree = "<group>"; };
+		223F9A5521829BA70031DB95 /* UIViewController+CWLateralSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWLateralSlide.m"; sourceTree = "<group>"; };
+		223F9A5621829BA70031DB95 /* CWLateralSlideConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWLateralSlideConfiguration.h; sourceTree = "<group>"; };
+		223F9A5721829BA70031DB95 /* CWInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWInteractiveTransition.h; sourceTree = "<group>"; };
+		223F9A5821829BA70031DB95 /* CWLateralSlideAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWLateralSlideAnimator.m; sourceTree = "<group>"; };
+		223F9A5921829BA70031DB95 /* CWDrawerTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWDrawerTransition.m; sourceTree = "<group>"; };
+		223F9A5A21829BA70031DB95 /* UIViewController+CWLateralSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWLateralSlide.h"; sourceTree = "<group>"; };
+		223F9A5B21829BA70031DB95 /* CWLateralSlideConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWLateralSlideConfiguration.m; sourceTree = "<group>"; };
+		223F9A622182A9B10031DB95 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		223F9A632182A9B10031DB95 /* CWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewCell.m; sourceTree = "<group>"; };
+		223F9A642182A9B10031DB95 /* CWTableViewInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewInfo.h; sourceTree = "<group>"; };
+		223F9A652182A9B10031DB95 /* CWTableViewCellInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewCellInfo.m; sourceTree = "<group>"; };
+		223F9A662182A9B10031DB95 /* CWTableViewCellInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewCellInfo.h; sourceTree = "<group>"; };
+		223F9A672182A9B10031DB95 /* CWTableViewInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewInfo.m; sourceTree = "<group>"; };
+		223F9A682182A9B10031DB95 /* CWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewCell.h; sourceTree = "<group>"; };
+		223F9A692182A9B10031DB95 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		223F9A6F2182AEC00031DB95 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		223F9A702182AEC00031DB95 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		223F9A712182AEC00031DB95 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
+		223F9A782182C4570031DB95 /* RoomTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTopView.swift; sourceTree = "<group>"; };
+		223F9A7A2182C46D0031DB95 /* RoomTopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomTopView.xib; sourceTree = "<group>"; };
+		223F9A7C2182E94B0031DB95 /* UIView+property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+property.h"; sourceTree = "<group>"; };
+		223F9A7D2182E94C0031DB95 /* UIView+property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+property.m"; sourceTree = "<group>"; };
 		2242BFF72159C34D00707024 /* UIView+NoDataImgShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NoDataImgShow.h"; sourceTree = "<group>"; };
 		2242BFF82159C34D00707024 /* UIViewController+NoDataTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NoDataTip.h"; sourceTree = "<group>"; };
 		2242BFF92159C34D00707024 /* UIView+NoDataImgShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NoDataImgShow.m"; sourceTree = "<group>"; };
@@ -1955,6 +1995,7 @@
 		223F9888217F12030031DB95 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				223F9A772182C43A0031DB95 /* XibView */,
 				223F9889217F12030031DB95 /* Model */,
 				223F9890217F12030031DB95 /* View */,
 				223F98BA217F12030031DB95 /* ViewController */,
@@ -2498,9 +2539,63 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		223F9A5121829BA70031DB95 /* CWLateralSlide */ = {
+			isa = PBXGroup;
+			children = (
+				223F9A6E2182AEC00031DB95 /* Images */,
+				223F9A612182A9B10031DB95 /* TableViewWidget */,
+				223F9A5221829BA70031DB95 /* CWInteractiveTransition.m */,
+				223F9A5321829BA70031DB95 /* CWDrawerTransition.h */,
+				223F9A5421829BA70031DB95 /* CWLateralSlideAnimator.h */,
+				223F9A5521829BA70031DB95 /* UIViewController+CWLateralSlide.m */,
+				223F9A5621829BA70031DB95 /* CWLateralSlideConfiguration.h */,
+				223F9A5721829BA70031DB95 /* CWInteractiveTransition.h */,
+				223F9A5821829BA70031DB95 /* CWLateralSlideAnimator.m */,
+				223F9A5921829BA70031DB95 /* CWDrawerTransition.m */,
+				223F9A5A21829BA70031DB95 /* UIViewController+CWLateralSlide.h */,
+				223F9A5B21829BA70031DB95 /* CWLateralSlideConfiguration.m */,
+			);
+			path = CWLateralSlide;
+			sourceTree = "<group>";
+		};
+		223F9A612182A9B10031DB95 /* TableViewWidget */ = {
+			isa = PBXGroup;
+			children = (
+				223F9A692182A9B10031DB95 /* LeftViewController.m */,
+				223F9A622182A9B10031DB95 /* LeftViewController.h */,
+				223F9A672182A9B10031DB95 /* CWTableViewInfo.m */,
+				223F9A642182A9B10031DB95 /* CWTableViewInfo.h */,
+				223F9A652182A9B10031DB95 /* CWTableViewCellInfo.m */,
+				223F9A662182A9B10031DB95 /* CWTableViewCellInfo.h */,
+				223F9A682182A9B10031DB95 /* CWTableViewCell.h */,
+				223F9A632182A9B10031DB95 /* CWTableViewCell.m */,
+			);
+			path = TableViewWidget;
+			sourceTree = "<group>";
+		};
+		223F9A6E2182AEC00031DB95 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				223F9A6F2182AEC00031DB95 /* 2.jpg */,
+				223F9A702182AEC00031DB95 /* 1.jpg */,
+				223F9A712182AEC00031DB95 /* 0.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		223F9A772182C43A0031DB95 /* XibView */ = {
+			isa = PBXGroup;
+			children = (
+				223F9A782182C4570031DB95 /* RoomTopView.swift */,
+				223F9A7A2182C46D0031DB95 /* RoomTopView.xib */,
+			);
+			path = XibView;
+			sourceTree = "<group>";
+		};
 		2242BFF52159C34D00707024 /* PublicService */ = {
 			isa = PBXGroup;
 			children = (
+				223F9A5121829BA70031DB95 /* CWLateralSlide */,
 				2242BFF62159C34D00707024 /* noDataTip */,
 				2242BFFB2159C34D00707024 /* YYHud */,
 			);
@@ -2612,6 +2707,8 @@
 		332AB6261F4ED8C900888313 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				223F9A7C2182E94B0031DB95 /* UIView+property.h */,
+				223F9A7D2182E94C0031DB95 /* UIView+property.m */,
 				223F9A492180421D0031DB95 /* UIColor+Extention.h */,
 				223F9A4A2180421E0031DB95 /* UIColor+Extention.m */,
 				22631C4E216DE85200D5AB0B /* UIViewController+BackButtonHandler.h */,
@@ -4340,6 +4437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B7CCFC1EC5865700FB6378 /* LaunchScreen.storyboard in Resources */,
+				223F9A732182AEC10031DB95 /* 1.jpg in Resources */,
 				223F9A04217F12040031DB95 /* area.plist in Resources */,
 				2281A21A216B6351009E95EE /* index.ios.js in Resources */,
 				4852A0D31FCE9F0300CDD7BE /* SCMessageSettingCell.xib in Resources */,
@@ -4349,6 +4447,7 @@
 				4852A0E41FCE9F0300CDD7BE /* SYScreenInsideCell.xib in Resources */,
 				2242C0042159C34E00707024 /* YYHud.xcassets in Resources */,
 				892B39D91FE8B0B400292A75 /* SYmarkCollectionViewCell.xib in Resources */,
+				223F9A7B2182C46D0031DB95 /* RoomTopView.xib in Resources */,
 				2218E18B217605DA00719844 /* BMKTestLocationViewController.xib in Resources */,
 				22284A7E2179825700CDC86C /* InfoPlist.strings in Resources */,
 				4852A0D51FCE9F0300CDD7BE /* SCPersonalCollectionCell.xib in Resources */,
@@ -4367,6 +4466,7 @@
 				48AC035F1F95AAE70040B54F /* RNBundle in Resources */,
 				48718D711F42277400010AA0 /* MJPhotoBrowser.bundle in Resources */,
 				223F996A217F12040031DB95 /* yh_image_picked@3x.png in Resources */,
+				223F9A742182AEC10031DB95 /* 0.jpg in Resources */,
 				4852A0DE1FCE9F0300CDD7BE /* SYNoticeCell.xib in Resources */,
 				223F99BD217F12040031DB95 /* icon_baidu_marker.png in Resources */,
 				4852A1361FCE9F0300CDD7BE /* SYStoryRoleSelectCell.xib in Resources */,
@@ -4378,6 +4478,7 @@
 				4852A0D91FCE9F0300CDD7BE /* SYChatListCell.xib in Resources */,
 				22284A8B217983DC00CDC86C /* Localizable.strings in Resources */,
 				223F9A06217F12040031DB95 /* addressCode in Resources */,
+				223F9A722182AEC10031DB95 /* 2.jpg in Resources */,
 				4852A1321FCE9F0300CDD7BE /* SYStoryRoleCollectionCell.xib in Resources */,
 				4852A1281FCE9F0300CDD7BE /* SCTopCell.xib in Resources */,
 				4852A12E1FCE9F0300CDD7BE /* SYMarkCollection2Cell.xib in Resources */,
@@ -4560,6 +4661,7 @@
 				48718D2D1F42277400010AA0 /* AFSecurityPolicy.m in Sources */,
 				485E65FD1F42862900B158BF /* NSDateFormatter+Category.m in Sources */,
 				223F99B1217F12040031DB95 /* JCEmoticonTabItemView.swift in Sources */,
+				223F9A7E2182E94C0031DB95 /* UIView+property.m in Sources */,
 				223F99C2217F12040031DB95 /* JCMyInfoCell.swift in Sources */,
 				4852A0CE1FCE9F0300CDD7BE /* SCContactFriendCell.m in Sources */,
 				4852A1291FCE9F0300CDD7BE /* SYComposePhotosView.m in Sources */,
@@ -4610,6 +4712,7 @@
 				223F998C217F12040031DB95 /* JCBusinessCardContentView.swift in Sources */,
 				223F9975217F12040031DB95 /* JCMessageAvatarView.swift in Sources */,
 				48718D741F42277400010AA0 /* MJPhotoProgressView.m in Sources */,
+				223F9A5D21829BA80031DB95 /* UIViewController+CWLateralSlide.m in Sources */,
 				223F9A3D217F12B80031DB95 /* JCGroupListViewController.swift in Sources */,
 				485E661F1F42862900B158BF /* EaseTextView.m in Sources */,
 				89E031561FCF916C0089240B /* SCAliyunUploadMananger.m in Sources */,
@@ -4628,6 +4731,7 @@
 				89500F581FEB395200732CEB /* SCStoryPublishDashboardView.m in Sources */,
 				33C1A17B1F4C50FB003E22CA /* MASConstraint.m in Sources */,
 				485E661D1F42862900B158BF /* EaseChatToolbarItem.m in Sources */,
+				223F9A5E21829BA80031DB95 /* CWLateralSlideAnimator.m in Sources */,
 				890AF0CB1FECEE4F00396169 /* SCDynamicToolBar.m in Sources */,
 				4852A0E51FCE9F0300CDD7BE /* SYScreenMessageCell.m in Sources */,
 				485E65E51F42862900B158BF /* UIImage+EMMultiFormat.m in Sources */,
@@ -4650,6 +4754,7 @@
 				485E65E31F42862900B158BF /* UIButton+EMWebCache.m in Sources */,
 				48718D2C1F42277400010AA0 /* AFNetworkReachabilityManager.m in Sources */,
 				223F9988217F12040031DB95 /* JCMessageLocationContentView.swift in Sources */,
+				223F9A6D2182A9B20031DB95 /* LeftViewController.m in Sources */,
 				223F99F7217F12040031DB95 /* SAIToolboxItemView.swift in Sources */,
 				223F99F2217F12040031DB95 /* SAIInputBackgroundView.swift in Sources */,
 				8916D1331FDAA7CB0058DD0B /* SYWordReadView.m in Sources */,
@@ -4764,6 +4869,7 @@
 				4852A1231FCE9F0300CDD7BE /* ICChatBoxMoreViewItem.m in Sources */,
 				4852A1731FCE9F7200CDD7BE /* SCNetworkError.m in Sources */,
 				223F99DE217F12040031DB95 /* Array+JChat.swift in Sources */,
+				223F9A5C21829BA80031DB95 /* CWInteractiveTransition.m in Sources */,
 				223F9971217F12040031DB95 /* JCRemind.swift in Sources */,
 				485E65B51F42862900B158BF /* EMCDDeviceManager+Remind.m in Sources */,
 				223F99D7217F12040031DB95 /* JCNetworkManager.swift in Sources */,
@@ -4889,6 +4995,7 @@
 				223F9A47217F12B80031DB95 /* JCFriendSettingViewController.swift in Sources */,
 				223F9A37217F12B80031DB95 /* JCTableViewCell.swift in Sources */,
 				485E65FC1F42862900B158BF /* NSDate+Category.m in Sources */,
+				223F9A6A2182A9B10031DB95 /* CWTableViewCell.m in Sources */,
 				89500F5B1FEB589700732CEB /* SCPhotoDisplayView.m in Sources */,
 				223F99F5217F12040031DB95 /* SAIInputAccessoryViewLayout.swift in Sources */,
 				48718D991F42277400010AA0 /* UIButton+WebCache.m in Sources */,
@@ -4915,6 +5022,7 @@
 				485E65B21F42862900B158BF /* EMCDDeviceManager+Media.m in Sources */,
 				4852A0C11FCE9F0300CDD7BE /* SYNoticeController.m in Sources */,
 				223F99C5217F12040031DB95 /* JCMyAvatorCell.swift in Sources */,
+				223F9A792182C4570031DB95 /* RoomTopView.swift in Sources */,
 				223F99E9217F12040031DB95 /* ThemeManager.swift in Sources */,
 				4852A1491FCE9F0400CDD7BE /* SCNavigatorModule.m in Sources */,
 				485E65EC1F42862900B158BF /* PSTCollectionViewCell.m in Sources */,
@@ -4964,9 +5072,11 @@
 				223F998F217F12040031DB95 /* JCGroupSettingCell.swift in Sources */,
 				485E65D51F42862900B158BF /* MWPhotoBrowser.m in Sources */,
 				332AB5F11F4ED69F00888313 /* TYLinkTextStorage.m in Sources */,
+				223F9A6B2182A9B10031DB95 /* CWTableViewCellInfo.m in Sources */,
 				89500F551FEA5B2000732CEB /* SCStoryRecordController.m in Sources */,
 				48718D931F42277400010AA0 /* SDWebImageCompat.m in Sources */,
 				48718D731F42277400010AA0 /* MJPhotoLoadingView.m in Sources */,
+				223F9A6C2182A9B20031DB95 /* CWTableViewInfo.m in Sources */,
 				223F9976217F12040031DB95 /* JCChatViewLayout.swift in Sources */,
 				223F996F217F12040031DB95 /* JCMessage.swift in Sources */,
 				222C3100215A27FE009871C7 /* HHBaseModel.m in Sources */,
@@ -5018,6 +5128,7 @@
 				223F998A217F12040031DB95 /* JCMessageTimeLineContent.swift in Sources */,
 				223F99F4217F12040031DB95 /* SAIInputAccessoryView.swift in Sources */,
 				48718D941F42277400010AA0 /* SDWebImageDecoder.m in Sources */,
+				223F9A6021829BA80031DB95 /* CWLateralSlideConfiguration.m in Sources */,
 				223F999E217F12040031DB95 /* FileViewController.swift in Sources */,
 				223F99B3217F12040031DB95 /* JCEmoticonBackgroundView.swift in Sources */,
 				223F99C7217F12040031DB95 /* JCButtonCell.swift in Sources */,
@@ -5028,6 +5139,7 @@
 				4852A1031FCE9F0300CDD7BE /* SYStoryRealTimeController.m in Sources */,
 				4852A0CC1FCE9F0300CDD7BE /* SYMyGroupModel.m in Sources */,
 				223F9991217F12040031DB95 /* JCChatViewLayoutAttributes.swift in Sources */,
+				223F9A5F21829BA80031DB95 /* CWDrawerTransition.m in Sources */,
 				223F9A07217F12040031DB95 /* JCLocation.swift in Sources */,
 				223F9A4E218067650031DB95 /* UIView+LSCore.m in Sources */,
 				48718D701F42277400010AA0 /* MJPhoto.m in Sources */,

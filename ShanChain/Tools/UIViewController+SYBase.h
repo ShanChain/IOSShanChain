@@ -18,4 +18,11 @@
 
 - (void)backToPoppedController;
 
+
+- (void)addRightBarButtonItemWithTarget:(id)target sel:(SEL)selector image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
+- (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
+
+- (void)addRightBarButtonItemWithTarget:(id)target sel:(SEL)selector title:(NSString*)title tintColor:(UIColor *)tintColor;
+- (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector title:(NSString*)title tintColor:(UIColor *)tintColor;
+
 @end

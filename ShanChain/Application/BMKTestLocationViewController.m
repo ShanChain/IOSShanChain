@@ -84,6 +84,11 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 -(void)viewWillAppear:(BOOL)animated{
     [self.mapView viewWillAppear];
     self.mapView.delegate = self;
+    [[SCNetwork shareInstance]HH_postWithUrl:@"/v1/task/urge" params:@{} showLoading:YES success:^(HHBaseModel *baseModel) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -172,7 +177,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         
         NSString *long_title = coordinate.longitude > 0 ?@"东经":@"西经";
         NSString *lat_title = coordinate.latitude > 0 ?@"北纬":@"南纬";
-        self.locationLb.text = [NSString stringWithFormat:@"%@%ld°%@%ld°",long_title,(long)longitude.integerValue,lat_title,(long)latitude.integerValue];
+        self.locationLb.text = [NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude];
         
       
         
@@ -210,6 +215,8 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 }
 
 - (IBAction)joinPressed:(id)sender{
+    
+
     
     [HHTool mainWindow].rootViewController = nil;
     if ([[NSUserDefaults standardUserDefaults]objectForKey:kCurrentUserName]){

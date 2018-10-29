@@ -121,6 +121,7 @@ final class ThemeManager: NSObject {
         }
 
         guard let themeBundlePath = Bundle.path(forResource: themeBundleName, ofType: "bundle", inDirectory: Bundle.main.bundlePath) else {
+          
             return nil
         }
         guard let themeBundle = Bundle(path: themeBundlePath) else {
@@ -162,6 +163,10 @@ final class ThemeManager: NSObject {
         if let image = image {
             memoryCache.setObject(image, forKey: name as NSString)
         }
+        if image == nil {
+            image = UIImage.init(named: imageName)
+        }
+        
         return image
     }
 

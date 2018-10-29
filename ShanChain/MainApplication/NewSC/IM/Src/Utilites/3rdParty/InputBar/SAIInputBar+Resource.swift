@@ -43,10 +43,12 @@ public extension SAIInputBar {
     private func _setupForDefault() {
         
         let lbs = [
-            _barItem("kb:audio", "YH_KB_Voice", "YH_KB_Keyboard"),
+            _barItem("kb:task", "sc_com_icon_publishTask", "sc_com_icon_publishTask"), // 发布任务
+            _barItem("kb:audio", "YH_KB_Voice", "YH_KB_Keyboard")
+            
         ]
         let rbs = [
-            _barItem("kb:emoticon", "YH_KB_Emotion", "YH_KB_Emotion"),
+            _barItem("kb:emoticon", "笑脸", "笑脸"),
             _barItem("kb:toolbox", "YH_KB_More", "YH_KB_More"),
         ]
         setBarItems(lbs, atPosition: .left)

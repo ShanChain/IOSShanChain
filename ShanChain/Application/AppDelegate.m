@@ -73,7 +73,7 @@
     
     [self checkGuideView];
     
-    
+
     return YES;
 }
 

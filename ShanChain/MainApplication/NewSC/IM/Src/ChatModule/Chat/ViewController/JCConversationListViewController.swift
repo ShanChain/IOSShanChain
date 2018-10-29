@@ -245,7 +245,8 @@ extension JCConversationListViewController: UITableViewDelegate, UITableViewData
             return
         }
         cell.bindConversation(conversation)
-        let vc = JCChatViewController(conversation: conversation)
+        // JCChatViewController
+        let vc = HHChatRoomViewController(conversation: conversation)
         navigationController?.pushViewController(vc, animated: true)
     }
     

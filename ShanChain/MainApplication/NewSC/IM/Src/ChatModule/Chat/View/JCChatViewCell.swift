@@ -162,6 +162,7 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         guard let layoutInfo = _layoutAttributes?.info else {
             return
         }
+        
         // update bubble view layout
         if let view = _bubbleView {
             view.frame = layoutInfo.layoutedRect(with: .bubble)

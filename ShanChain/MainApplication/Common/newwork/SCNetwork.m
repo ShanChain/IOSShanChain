@@ -164,7 +164,6 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     NSString *userId = @"";
     userId = [[SCCacheTool shareInstance] getCurrentUser];
     NSString *token = @"";
-    NSString *userIdString = [userId stringByAppendingString:@"_"];
     if(userId && ![userId isEqualToString:@""] ){
         token = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:userId andKey:@"token"];
     }

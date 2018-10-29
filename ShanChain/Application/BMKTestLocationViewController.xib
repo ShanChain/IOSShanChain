@@ -34,23 +34,15 @@
                     <rect key="frame" x="330" y="0.0" width="40" height="100"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSO-kJ-2gY">
-                            <rect key="frame" x="4" y="10" width="33" height="33"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="33" id="KKm-QK-42d"/>
-                                <constraint firstAttribute="height" constant="33" id="yPm-sd-6DG"/>
-                            </constraints>
-                            <state key="normal" image="注意 (1)"/>
+                            <rect key="frame" x="12" y="10" width="17" height="22"/>
+                            <state key="normal" image="sc_com_icon_note"/>
                             <connections>
                                 <action selector="notePressed:" destination="-1" eventType="touchUpInside" id="6fs-T0-a3l"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSu-bb-2eK">
-                            <rect key="frame" x="4" y="51" width="33" height="33"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="33" id="UJg-gK-iyz"/>
-                                <constraint firstAttribute="width" constant="33" id="xTR-cP-1zJ"/>
-                            </constraints>
-                            <state key="normal" image="历史记录"/>
+                            <rect key="frame" x="12" y="40" width="13" height="22"/>
+                            <state key="normal" image="sc_com_icon_footprint"/>
                             <connections>
                                 <action selector="footprintPressed:" destination="-1" eventType="touchUpInside" id="uQE-uu-rlX"/>
                             </connections>
@@ -102,15 +94,11 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tba-kx-DAE">
                     <rect key="frame" x="0.0" y="395" width="220" height="40"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="067操作_选点_定位2" translatesAutoresizingMaskIntoConstraints="NO" id="epG-xm-oq2">
-                            <rect key="frame" x="5" y="4" width="39" height="33"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="33" id="4jU-KI-ity"/>
-                                <constraint firstAttribute="width" constant="39" id="icC-VV-LtT"/>
-                            </constraints>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sc_com.icon_location" translatesAutoresizingMaskIntoConstraints="NO" id="epG-xm-oq2">
+                            <rect key="frame" x="5" y="13" width="13" height="15"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h75-GX-KFN">
-                            <rect key="frame" x="49" y="11" width="38" height="18"/>
+                            <rect key="frame" x="23" y="11" width="38" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -146,8 +134,8 @@
         </view>
     </objects>
     <resources>
-        <image name="067操作_选点_定位2" width="235" height="200"/>
-        <image name="历史记录" width="200" height="200"/>
-        <image name="注意 (1)" width="200" height="200"/>
+        <image name="sc_com.icon_location" width="13" height="15"/>
+        <image name="sc_com_icon_footprint" width="13" height="17"/>
+        <image name="sc_com_icon_note" width="17" height="17"/>
     </resources>
 </document>
