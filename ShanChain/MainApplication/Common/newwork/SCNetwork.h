@@ -49,7 +49,7 @@ typedef void (^NetworkStatusBlock)(AFNetworkReachabilityStatus status);
     errorCallBack:(RCTResponseErrorBlock)errorCallBack;
 
 
-- (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show success:(void(^)(HHBaseModel *baseModel))success failure:(void(^)(NSError *error))failure;
+- (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show callBlock:(void(^)(HHBaseModel *baseModel,NSError *error))callBlock;
 
 @end
 

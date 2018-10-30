@@ -34,14 +34,14 @@
                     <rect key="frame" x="330" y="0.0" width="40" height="100"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSO-kJ-2gY">
-                            <rect key="frame" x="12" y="10" width="17" height="22"/>
+                            <rect key="frame" x="8" y="10" width="25" height="25"/>
                             <state key="normal" image="sc_com_icon_note"/>
                             <connections>
                                 <action selector="notePressed:" destination="-1" eventType="touchUpInside" id="6fs-T0-a3l"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSu-bb-2eK">
-                            <rect key="frame" x="12" y="40" width="13" height="22"/>
+                            <rect key="frame" x="10" y="43" width="20" height="25"/>
                             <state key="normal" image="sc_com_icon_footprint"/>
                             <connections>
                                 <action selector="footprintPressed:" destination="-1" eventType="touchUpInside" id="uQE-uu-rlX"/>
@@ -53,8 +53,8 @@
                         <constraint firstItem="hSO-kJ-2gY" firstAttribute="top" secondItem="2TG-Z8-dnu" secondAttribute="top" constant="10" id="3ee-TO-ccP"/>
                         <constraint firstAttribute="height" constant="100" id="Ipa-4z-32O"/>
                         <constraint firstItem="NSu-bb-2eK" firstAttribute="top" secondItem="hSO-kJ-2gY" secondAttribute="bottom" constant="8" symbolic="YES" id="W2e-3h-mI8"/>
-                        <constraint firstItem="NSu-bb-2eK" firstAttribute="leading" secondItem="hSO-kJ-2gY" secondAttribute="leading" id="eBy-cM-PgE"/>
                         <constraint firstItem="hSO-kJ-2gY" firstAttribute="centerX" secondItem="2TG-Z8-dnu" secondAttribute="centerX" id="rVx-Rl-yQE"/>
+                        <constraint firstItem="NSu-bb-2eK" firstAttribute="centerX" secondItem="2TG-Z8-dnu" secondAttribute="centerX" id="rhK-Ub-Uv4"/>
                         <constraint firstAttribute="width" constant="40" id="vqo-T8-nxE"/>
                     </constraints>
                 </view>
@@ -95,10 +95,10 @@
                     <rect key="frame" x="0.0" y="395" width="220" height="40"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sc_com.icon_location" translatesAutoresizingMaskIntoConstraints="NO" id="epG-xm-oq2">
-                            <rect key="frame" x="5" y="13" width="13" height="15"/>
+                            <rect key="frame" x="5" y="8" width="21" height="25"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h75-GX-KFN">
-                            <rect key="frame" x="23" y="11" width="38" height="18"/>
+                            <rect key="frame" x="31" y="11" width="38" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -134,8 +134,8 @@
         </view>
     </objects>
     <resources>
-        <image name="sc_com.icon_location" width="13" height="15"/>
-        <image name="sc_com_icon_footprint" width="13" height="17"/>
-        <image name="sc_com_icon_note" width="17" height="17"/>
+        <image name="sc_com.icon_location" width="21" height="25"/>
+        <image name="sc_com_icon_footprint" width="20" height="25"/>
+        <image name="sc_com_icon_note" width="25" height="25"/>
     </resources>
 </document>

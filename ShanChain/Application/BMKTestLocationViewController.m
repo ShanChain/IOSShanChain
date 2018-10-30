@@ -36,6 +36,8 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 @property (weak, nonatomic) IBOutlet BMKMapView *mapView;
 
+@property (nonatomic,assign)  BOOL    isLBS;
+
 @end
 
 @implementation BMKTestLocationViewController
@@ -79,16 +81,57 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         
     });
     
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.mapView viewWillAppear];
-    self.mapView.delegate = self;
-    [[SCNetwork shareInstance]HH_postWithUrl:@"/v1/task/urge" params:@{} showLoading:YES success:^(HHBaseModel *baseModel) {
-        
-    } failure:^(NSError *error) {
-        
+    
+}
+
+- (void)sc_addOverlay{
+    // 添加折线覆盖物
+   // CLLocationCoordinate2D coor = CLLocationCoordinate2DMake(39.90868, 116.3956);//原始坐标
+    
+    //转换国测坐标（google地图、soso地图、aliyun地图、mapabc地图和amap地图所用坐标）至百度坐标
+//    CLLocationCoordinate2D testdic =  BMKCoordTrans(coor,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+    
+    CLLocationCoordinate2D coor[5] = {0};
+    coor[0].latitude = 20.046381;
+    coor[0].longitude = 110.325502;
+  //  coor[0] = BMKCoordTrans(coor[0],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+    
+    
+    coor[1].latitude = 20.046381;
+    coor[1].longitude = 110.331246;
+  //  coor[1] = BMKCoordTrans(coor[1],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+    
+    coor[2].latitude = 20.051780;
+    coor[2].longitude = 110.331246;
+ //   coor[2] = BMKCoordTrans(coor[2],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+    
+    coor[3].latitude = 20.051780;
+    coor[3].longitude = 110.325502;
+//    coor[3] = BMKCoordTrans(coor[3],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+    
+    coor[4].latitude = 20.046381;
+    coor[4].longitude = 110.325502;
+ //   coor[4] = BMKCoordTrans(coor[4],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+    
+    BMKPolyline* polyline = [BMKPolyline polylineWithCoordinates:coor count:5];
+    [self.mapView addOverlay:polyline];
+}
+
+- (void)sc_getLbsCoordinate{
+    if (!self.latitude || !self.longitude || self.isLBS) {
+        return;
+    }
+    weakify(self);
+    [[SCNetwork shareInstance]HH_postWithUrl:GETCOORDINATE params:@{@"latitude":self.latitude,@"longitude":self.longitude} showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
+        weak_self.isLBS = YES;
+        [weak_self sc_addOverlay];
     }];
+ 
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -103,11 +146,13 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     self.mapView.userTrackingMode = BMKUserTrackingModeNone;// 定位模式
     self.mapView.zoomLevel = 20;//地图级别
     self.mapView.showsUserLocation = YES; //是否显示定位图层
+    self.mapView.delegate = self;
     // _mapView.compassPosition = CGPointMake(ScreenWidth - 50, 25);//指南针的位置
     //打开实时路况图层
     //    [_mapView setTrafficEnabled:YES];
     //设定地图View能否支持用户多点缩放(双指)
     self.mapView.zoomEnabled = YES;
+   
     //设置地图上是否显示比例尺
     self.mapView.showMapScaleBar = YES;
     // 隐藏百度地图的logo
@@ -145,6 +190,9 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 //    } failure:^(NSError *error) {
 //        
 //    }];
+
+   
+    
 }
 
 #pragma mark - BMK_LocationDelegate 百度地图
@@ -160,11 +208,13 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
-    
     //从manager获取左边
     CLLocationCoordinate2D coordinate = userLocation.location.coordinate;//位置坐标
     self.pt = coordinate;
-    self.mapView.centerCoordinate = coordinate;
+    if (!self.isLBS) {
+        self.mapView.centerCoordinate = coordinate;
+    }
+    
     if ((userLocation.location.coordinate.latitude != 0 || userLocation.location.coordinate.longitude != 0))
     {
         //发送反编码请求
@@ -175,6 +225,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         NSString *longitude = [NSString stringWithFormat:@"%f",userLocation.location.coordinate.longitude];
         self.longitude = longitude;
         
+        [self sc_getLbsCoordinate];// 上传用户实时坐标
         NSString *long_title = coordinate.longitude > 0 ?@"东经":@"西经";
         NSString *lat_title = coordinate.latitude > 0 ?@"北纬":@"南纬";
         self.locationLb.text = [NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude];
@@ -213,6 +264,52 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         NSLog(@"抱歉，未找到结果");
     }
 }
+
+// AnnotationView
+- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
+        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
+        BMKPinAnnotationView*annotationView = (BMKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
+        if (annotationView == nil) {
+            annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
+        }
+        annotationView.pinColor = BMKPinAnnotationColorPurple;
+        annotationView.canShowCallout= YES;      //设置气泡可以弹出，默认为NO
+        annotationView.animatesDrop=YES;         //设置标注动画显示，默认为NO
+        annotationView.draggable = YES;          //设置标注可以拖动，默认为NO
+        return annotationView;
+    }
+    return nil;
+}
+
+- (void)mapView:(BMKMapView *)mapView annotationView:(BMKAnnotationView *)view didChangeDragState:(BMKAnnotationViewDragState)newState
+   fromOldState:(BMKAnnotationViewDragState)oldState{
+    if (newState == BMKAnnotationViewDragStateEnding) {
+        [mapView.annotations enumerateObjectsUsingBlock:^(BMKPointAnnotation *  _Nonnull pointAnnotation, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([pointAnnotation.title isEqualToString:@"您当前位置"]) {
+               // CLLocationCoordinate2D  coods = pointAnnotation.coordinate;
+                
+            }
+        }];
+    }
+}
+
+// Override
+- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay{
+    if ([overlay isKindOfClass:[BMKPolyline class]]){
+        BMKPolylineView* polylineView = [[BMKPolylineView alloc] initWithOverlay:overlay];
+        polylineView.strokeColor = [[UIColor alloc]initWithRed:0 green:0 blue:0 alpha:1];
+        polylineView.fillColor = [[UIColor alloc]initWithRed:0 green:0 blue:0 alpha:1];
+        polylineView.lineWidth = 1.0;
+        polylineView.lineDash = YES;
+        return polylineView;
+    }
+    return nil;
+}
+
+
+
 
 - (IBAction)joinPressed:(id)sender{
     

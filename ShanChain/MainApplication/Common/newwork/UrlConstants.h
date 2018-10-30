@@ -86,6 +86,8 @@
 #define  SET_DEVICE_TOKEN @"/v1/user/deviceToken"
 #define BIND_OTHER_ACCOUNT @"/v1/user/bind_other_account"
 
+#define  GETCOORDINATE  @"/v1/lbs/coordinate" // 上传用户实时坐标
+
 #pragma mark - 登录注册
 //创建用户
 #define COMMONUSERLOGINTHIRD @"/v1/user/third_login"

@@ -37,15 +37,6 @@ class RoomTopView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-  
-    func loadViewFromNib() -> UIView {
-        let className = type(of: self)
-        let bundle = Bundle(for: className)
-        let name = NSStringFromClass(className).components(separatedBy: ".").last
-        let nib = UINib(nibName: name!, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        return view
-    }
     
 
 }

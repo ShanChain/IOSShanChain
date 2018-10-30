@@ -27,6 +27,10 @@
 		222C30FD215A21D3009871C7 /* ShareSaveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C30FC215A21D3009871C7 /* ShareSaveModel.m */; };
 		222C3100215A27FE009871C7 /* HHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C30FF215A27FE009871C7 /* HHBaseModel.m */; };
 		222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C3102215A38E0009871C7 /* UIImage+MingleChang.m */; };
+		222EF6122186A40B005B89EF /* PublishTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6112186A40B005B89EF /* PublishTaskView.swift */; };
+		222EF6142186A417005B89EF /* PublishTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 222EF6132186A417005B89EF /* PublishTaskView.xib */; };
+		222EF6162186B999005B89EF /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6152186B999005B89EF /* NSObject+extension.swift */; };
+		222EF6182187E527005B89EF /* DefConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6172187E526005B89EF /* DefConst.swift */; };
 		223F9876217F0C880031DB95 /* SCImManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F9875217F0C880031DB95 /* SCImManager.swift */; };
 		223F9878217F0DF00031DB95 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F9877217F0DF00031DB95 /* libstdc++.6.0.9.tbd */; };
 		223F987A217F0E440031DB95 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F9879217F0E440031DB95 /* CoreAudio.framework */; };
@@ -751,6 +755,10 @@
 		222C30FF215A27FE009871C7 /* HHBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHBaseModel.m; sourceTree = "<group>"; };
 		222C3101215A38DF009871C7 /* UIImage+MingleChang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MingleChang.h"; sourceTree = "<group>"; };
 		222C3102215A38E0009871C7 /* UIImage+MingleChang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MingleChang.m"; sourceTree = "<group>"; };
+		222EF6112186A40B005B89EF /* PublishTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishTaskView.swift; sourceTree = "<group>"; };
+		222EF6132186A417005B89EF /* PublishTaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishTaskView.xib; sourceTree = "<group>"; };
+		222EF6152186B999005B89EF /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
+		222EF6172187E526005B89EF /* DefConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefConst.swift; sourceTree = "<group>"; };
 		223F9874217F0C870031DB95 /* ShanChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShanChain-Bridging-Header.h"; sourceTree = "<group>"; };
 		223F9875217F0C880031DB95 /* SCImManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCImManager.swift; sourceTree = "<group>"; };
 		223F9877217F0DF00031DB95 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -2273,6 +2281,7 @@
 				223F9912217F12040031DB95 /* UISearchBar+JChat.swift */,
 				223F9913217F12040031DB95 /* Date+JChat.swift */,
 				223F9914217F12040031DB95 /* String+JChat.swift */,
+				222EF6152186B999005B89EF /* NSObject+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2588,6 +2597,8 @@
 			children = (
 				223F9A782182C4570031DB95 /* RoomTopView.swift */,
 				223F9A7A2182C46D0031DB95 /* RoomTopView.xib */,
+				222EF6112186A40B005B89EF /* PublishTaskView.swift */,
+				222EF6132186A417005B89EF /* PublishTaskView.xib */,
 			);
 			path = XibView;
 			sourceTree = "<group>";
@@ -2855,6 +2866,7 @@
 				33D0F2611F9EDD6600469594 /* SCDynamicHeadFile.h */,
 				996049981ED8347A007634EE /* SCHeaderFile.h */,
 				1873FA0D212E882900C1088E /* DefMacro .h */,
+				222EF6172187E526005B89EF /* DefConst.swift */,
 				22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */,
 				223F9874217F0C870031DB95 /* ShanChain-Bridging-Header.h */,
 				33B7CD051EC5865700FB6378 /* ShanChainTests */,
@@ -4489,6 +4501,7 @@
 				4852A0E61FCE9F0300CDD7BE /* SYScreenMessageCell.xib in Resources */,
 				223F99BA217F12040031DB95 /* 定位1.png in Resources */,
 				33B7CCF71EC5865700FB6378 /* Main.storyboard in Resources */,
+				222EF6142186A417005B89EF /* PublishTaskView.xib in Resources */,
 				892B39E91FE8EC0300292A75 /* AliyunImageSource.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4693,6 +4706,7 @@
 				223F99FE217F12040031DB95 /* SAIInputBarDisplayable.swift in Sources */,
 				4852A1151FCE9F0300CDD7BE /* SYFriend.m in Sources */,
 				22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */,
+				222EF6162186B999005B89EF /* NSObject+extension.swift in Sources */,
 				485E66641F42873F00B158BF /* MJRefreshConst.m in Sources */,
 				223F997B217F12040031DB95 /* JCGroupMemberCell.swift in Sources */,
 				485E66161F42862900B158BF /* EaseBubbleView+Image.m in Sources */,
@@ -4916,6 +4930,7 @@
 				223F9999217F12040031DB95 /* JCUpdateMemberCell.swift in Sources */,
 				223F99A0217F12040031DB95 /* GroupAvatorViewController.swift in Sources */,
 				332AB6571F4ED8C900888313 /* Util.m in Sources */,
+				222EF6122186A40B005B89EF /* PublishTaskView.swift in Sources */,
 				22EBC11321533BAE00C11359 /* MCDate.m in Sources */,
 				4852A1721FCE9F7200CDD7BE /* SCNetwork.m in Sources */,
 				8916D1211FDA33BE0058DD0B /* SYUIFactory.m in Sources */,
@@ -5027,6 +5042,7 @@
 				4852A1491FCE9F0400CDD7BE /* SCNavigatorModule.m in Sources */,
 				485E65EC1F42862900B158BF /* PSTCollectionViewCell.m in Sources */,
 				2242C0002159C34E00707024 /* UIView+NoDataImgShow.m in Sources */,
+				222EF6182187E527005B89EF /* DefConst.swift in Sources */,
 				4852A14B1FCE9F0400CDD7BE /* SCPhotoLibrary.m in Sources */,
 				4852A0DB1FCE9F0300CDD7BE /* SYMeetSomeHeadView.m in Sources */,
 				223F9A44217F12B80031DB95 /* JCGroupNameViewController.swift in Sources */,
@@ -5392,7 +5408,7 @@
 					"\"${PODS_ROOT}/Headers/Public/yoga\"",
 				);
 				INFOPLIST_FILE = ShanChain/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5458,7 +5474,7 @@
 					"\"${PODS_ROOT}/Headers/Public/yoga\"",
 				);
 				INFOPLIST_FILE = ShanChain/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

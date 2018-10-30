@@ -41,4 +41,14 @@ extension UIView {
     var centerY: CGFloat {
         return (frame.origin.y + frame.size.height) / 2
     }
+    
+    func loadViewFromNib() -> UIView {
+        let className = type(of: self)
+        let bundle = Bundle(for: className)
+        let name = NSStringFromClass(className).components(separatedBy: ".").last
+        let nib = UINib(nibName: name!, bundle: bundle)
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        return view
+    }
+    
 }

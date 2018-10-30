@@ -142,9 +142,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     return data;
 }
 
-- (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show success:(void(^)(HHBaseModel *baseModel))success failure:(void(^)(NSError *error))failure
-{
-    
+- (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show callBlock:(void(^)(HHBaseModel *baseModel,NSError *error))callBlock{
 #if TARGET_OS_IPHONE
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {
@@ -194,18 +192,24 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         if (!error) {
             HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
             if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE]) {
-                success(baseModel);
+                callBlock(baseModel,nil);
             }else{
                 if (!NULLString(baseModel.message)) {
                     [HHTool showError:baseModel.message];
                 }
             }
         } else {
-            failure(error);
+            callBlock(error,nil);
             [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
         }
     }] resume];
 }
+
+//- (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show success:(void(^)(HHBaseModel *baseModel))success failure:(void(^)(NSError *error))failure
+//{
+//    
+//
+//}
 
 
 - (void)getWithUrl:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{

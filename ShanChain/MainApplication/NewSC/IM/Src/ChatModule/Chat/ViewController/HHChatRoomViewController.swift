@@ -90,6 +90,7 @@ class HHChatRoomViewController: UIViewController {
     }
     
     private var draft: String?
+    // 底部toolBar
     fileprivate lazy var toolbar: SAIInputBar = SAIInputBar(type: .default)
     fileprivate lazy var inputViews: [String: UIView] = [:]
     fileprivate weak var inputItem: SAIInputItem?
@@ -207,7 +208,7 @@ class HHChatRoomViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_reloadMessage), name: NSNotification.Name(rawValue: kReloadAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
-        
+        // 抽屉
         self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
             if direction == CWDrawerTransitionDirection.fromLeft{
                 self._maskAnimationFromLeft()
@@ -1029,6 +1030,29 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
             view.dataSource = self
             inputViews[item.identifier] = view
             return view
+   
+        case "kb:task":
+            // 发布任务
+            UIView .animate(withDuration: 0.2) {
+//                if let pubTaskView = PublishTaskView.newInstance() {
+//                    pubTaskView.frame = CGRect(x: 0, y: UIDevice.current.navBarHeight + 50, width: Int(UIScreen.main.bounds.width), height: 400)
+//                     HHTool.mainWindow().addSubview(pubTaskView)
+//                }
+                let pubTaskView:PublishTaskView? =
+//                    PublishTaskView(frame:CGRect(origin: self.view.origin, size: CGSize(width: 300, height: 380)))
+                    PublishTaskView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight + 50, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight) - 50))
+                
+                pubTaskView?.setPbCallClosure(closure: { (text) in
+                    pubTaskView?.dismiss()
+                    self.toolbar.isHidden = false
+                    
+                })
+              //  HHTool.mainWindow().addSubview(pubTaskView)
+                self.view.addSubview(pubTaskView!)
+                self.toolbar.isHidden = true
+                
+            }
+            return nil
         default:
             return nil
         }
@@ -1058,7 +1082,7 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
             return
         }
         if item.identifier == "kb:task" {
-            // 发布任务
+         
             return;
         }
         
