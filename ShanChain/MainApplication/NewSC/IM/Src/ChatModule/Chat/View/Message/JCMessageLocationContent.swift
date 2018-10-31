@@ -22,5 +22,6 @@ class JCMessageLocationContent: NSObject, JCMessageContentType {
     
     open func sizeThatFits(_ size: CGSize) -> CGSize {
         return .init(width: 141, height: 91)
+        
     }
 }

@@ -167,6 +167,7 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         if let view = _bubbleView {
             view.frame = layoutInfo.layoutedRect(with: .bubble)
         }
+        
         // update visit card view layout
         if let view = _cardView as? UIView {
             view.frame = layoutInfo.layoutedRect(with: .card)
@@ -317,7 +318,7 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     private func _commonInit() {
     }
     
-    fileprivate var _bubbleView: UIImageView?
+    fileprivate var _bubbleView: UIImageView? //显示框
     
     fileprivate var _cardView: JCMessageContentViewType?
     fileprivate var _avatarView: JCMessageContentViewType?

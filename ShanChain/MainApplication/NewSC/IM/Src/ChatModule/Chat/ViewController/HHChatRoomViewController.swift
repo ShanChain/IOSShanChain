@@ -192,7 +192,7 @@ class HHChatRoomViewController: UIViewController {
         view.backgroundColor = .white
         JMessage.add(self, with: conversation)
         _setupNavigation()
-        _loadMessage(messagePage)
+        _loadMessage(messagePage) // 加载会话消息
         // 添加点击视图回收键盘手势
         let tap = UITapGestureRecognizer(target: self, action: #selector(_tapView))
         tap.delegate = self
@@ -235,7 +235,7 @@ class HHChatRoomViewController: UIViewController {
         
     }
     
-    
+    // 刷新消息（界面）
     func _reloadMessage() {
         _removeAllMessage()
         messagePage = 0
@@ -301,7 +301,7 @@ class HHChatRoomViewController: UIViewController {
             chatView.insert(contentsOf: msgs, at: 0)
         } else {
             minIndex = msgs.count - 1
-            chatView.append(contentsOf: msgs)
+            chatView.append(contentsOf: msgs)// msgs:[JCMessage]
         }
         self.messages.insert(contentsOf: msgs, at: 0)
     }
@@ -552,6 +552,7 @@ extension HHChatRoomViewController: JMessageDelegate {
             if error.code == 803009 {
                 MBProgressHUD_JChat.show(text: "发送失败，消息中包含敏感词", view: view, 2.0)
             }
+            
             if error.code == 803005 {
                 MBProgressHUD_JChat.show(text: "您已不是群成员", view: view, 2.0)
             }
@@ -773,7 +774,19 @@ extension HHChatRoomViewController: YHPhotoPickerViewControllerDelegate, UINavig
 // MARK: - JCMessageDelegate
 extension HHChatRoomViewController: JCMessageDelegate {
     
+    // 领取任务
+    func message(message: JCMessageType, receiveTask taskID: String) {
+        
+    }
     
+    // 评论
+    func message(message: JCMessageType, commentTask taskID: String) {
+        
+    }
+    // 点赞
+    func message(message: JCMessageType, likeTask taskID: String) {
+        
+    }
     
     func message(message: JCMessageType, videoData data: Data?) {
         if let data = data {
@@ -839,7 +852,7 @@ extension HHChatRoomViewController: JCMessageDelegate {
             }
         }
     }
-    
+    // 点击个人名片名片
     func message(message: JCMessageType, user: JMSGUser?, businessCardName: String, businessCardAppKey: String) {
         if let user = user {
             let vc = JCUserInfoViewController()
@@ -1034,28 +1047,60 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
         case "kb:task":
             // 发布任务
             UIView .animate(withDuration: 0.2) {
-//                if let pubTaskView = PublishTaskView.newInstance() {
-//                    pubTaskView.frame = CGRect(x: 0, y: UIDevice.current.navBarHeight + 50, width: Int(UIScreen.main.bounds.width), height: 400)
-//                     HHTool.mainWindow().addSubview(pubTaskView)
-//                }
                 let pubTaskView:PublishTaskView? =
-//                    PublishTaskView(frame:CGRect(origin: self.view.origin, size: CGSize(width: 300, height: 380)))
-                    PublishTaskView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight + 50, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight) - 50))
+                    PublishTaskView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight)))
+                pubTaskView?.cornerRadius = 0.01
+                // 点击发布任务回调
                 
-                pubTaskView?.setPbCallClosure(closure: { (text) in
+                pubTaskView?.setPbCallClosure(closure: { [weak self] (text,isPut)  in
                     pubTaskView?.dismiss()
-                    self.toolbar.isHidden = false
-                    
+                    self?.toolbar.isHidden = false
+                    if isPut == false{
+                        return
+                    }
+                    let content:JMSGCustomContent =
+                        //JMSGTextContent.init(text:(self.FuWenBenDemo()?.string)!)
+                        JMSGCustomContent.init(customDictionary: [CUSTOM_CONTENT:text,CUSTOM_REWARD:"赏金: 8SEAT",CUSTOM_COMPLETETIME:"完成时限 12:00 2018-10-20"])
+                    let singleMessage:JMSGMessage = JMSGMessage.createSingleMessage(with: content, username: "11111")
+                
+                    JMSGMessage.send(singleMessage)
+                    self?._reloadMessage()// 刷新界面
+                   
                 })
-              //  HHTool.mainWindow().addSubview(pubTaskView)
-                self.view.addSubview(pubTaskView!)
-                self.toolbar.isHidden = true
+                
+               self.view.addSubview(pubTaskView!)
+               self.toolbar.isHidden = true
                 
             }
             return nil
         default:
             return nil
         }
+    }
+    
+    fileprivate func FuWenBenDemo() -> NSMutableAttributedString?{
+        
+        //定义富文本即有格式的字符串
+        let attributedStrM : NSMutableAttributedString = NSMutableAttributedString()
+        
+        let qiuxuewei : NSAttributedString = NSAttributedString(string: "人类不相信罗辑", attributes: [ NSBackgroundColorAttributeName : UIColor.red,NSForegroundColorAttributeName : UIColor.green, NSFontAttributeName : UIFont.boldSystemFont(ofSize: 28.0)]) //(string: "邱学伟")
+        //是
+        let shi : NSAttributedString = NSAttributedString(string: "呵呵", attributes: [NSForegroundColorAttributeName : UIColor.blue, NSFontAttributeName : UIFont.systemFont(ofSize: 10.0)])
+        //大帅哥
+        let dashuaige : NSAttributedString = NSAttributedString(string: "时间简史", attributes: [NSForegroundColorAttributeName : UIColor.lightGray, NSFontAttributeName : UIFont.systemFont(ofSize: 42.0)])
+        //笑脸图片
+        
+        let smileImage : UIImage = UIImage.loadImage("笑脸")!
+        let textAttachment : NSTextAttachment = NSTextAttachment()
+        textAttachment.image = smileImage
+        textAttachment.bounds = CGRect(x: 0, y: -4, width: 22, height: 22)
+        
+        attributedStrM.append(qiuxuewei)
+        attributedStrM.append(shi)
+        attributedStrM.append(dashuaige)
+        attributedStrM.append(NSAttributedString(attachment: textAttachment))
+        
+        return attributedStrM;
     }
     
     open func inputViewContentSize(_ inputView: UIView) -> CGSize {

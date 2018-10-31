@@ -20,38 +20,48 @@ extension UIView {
     }
 }
 
-typealias Task = (_ cancel : Bool) -> Void
 
-func delay(_ time: TimeInterval, task: @escaping ()->()) ->  Task? {
-    
-    func dispatch_later(block: @escaping ()->()) {
-        let t = DispatchTime.now() + time
-        DispatchQueue.main.asyncAfter(deadline: t, execute: block)
+extension String{
+    // 高度自适应
+    func heightForAdaptive(Font font:UIFont , _ width:CGFloat ) -> CGFloat {
+        let attr = NSMutableAttributedString(string: self, attributes: [
+            NSFontAttributeName:font
+            ])
+        let mattrSize = attr.boundingRect(with:  CGSize(width: width, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin,.usesFontLeading], context: nil)
+        return mattrSize.height
     }
-    var closure: (()->Void)? = task
-    var result: Task?
-    
-    let delayedClosure: Task = {
-        cancel in
-        if let internalClosure = closure {
-            if (cancel == false) {
-                DispatchQueue.main.async(execute: internalClosure)
-            }
-        }
-        closure = nil
-        result = nil
-    }
-    
-    result = delayedClosure
-    
-    dispatch_later {
-        if let delayedClosure = result {
-            delayedClosure(false)
-        }
-    }
-    return result
+ 
 }
 
-func cancel(_ task: Task?) {
-    task?(true)
+// MARK: - 时间转换
+extension Date {
+    
+    static func getDate(dateStr: String, format: String) -> Date? {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = format
+        
+        let date = dateFormatter.date(from: dateStr)
+        return date
+    }
+    
+    func getComponent(component: Calendar.Component) -> Int {
+        let calendar = Calendar.current
+        return calendar.component(component, from: self)
+    }
+    
+    func getString(format: String) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = format
+        
+        let dateString = dateFormatter.string(from: self)
+        return dateString
+    }
+    
 }
+

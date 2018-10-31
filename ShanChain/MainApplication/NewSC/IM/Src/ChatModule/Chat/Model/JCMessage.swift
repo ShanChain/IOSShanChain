@@ -142,6 +142,17 @@ extension JMSGMessage {
             let noticeContent = JCMessageNoticeContent(text: content.promptText)
             msg = JCMessage(content: noticeContent)
             msg.options.showsTips = false
+        case .custom:
+            let content = self.content as! JMSGCustomContent
+            if  let customDictionary = content.customDictionary{
+                let taskContent = HHPublishTaskContent()
+                taskContent.delegate = delegate
+                taskContent.taskContent = customDictionary[CUSTOM_CONTENT] as? String
+                taskContent.reward = customDictionary[CUSTOM_REWARD] as? String
+                taskContent.completeTime = customDictionary[CUSTOM_COMPLETETIME] as? String
+                msg = JCMessage(content: taskContent)
+            }
+            
         default:
             msg = JCMessage(content: JCMessageNoticeContent.unsupport)
         }

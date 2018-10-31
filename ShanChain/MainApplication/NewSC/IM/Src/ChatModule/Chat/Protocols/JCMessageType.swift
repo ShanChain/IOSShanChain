@@ -42,4 +42,11 @@ import JMessage
     @objc optional func tapAvatarView(message: JCMessageType)
     @objc optional func longTapAvatarView(message: JCMessageType)
     @objc optional func tapUnreadTips(message: JCMessageType)
+    
+    // 领取任务
+    @objc optional func message(message:JCMessageType, receiveTask taskID:String)
+    // 评论
+    @objc optional func message(message:JCMessageType, commentTask taskID:String)
+    // 点赞
+    @objc optional func message(message:JCMessageType, likeTask taskID:String)
 }

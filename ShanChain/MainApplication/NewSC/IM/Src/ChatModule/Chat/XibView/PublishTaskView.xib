@@ -25,6 +25,7 @@
             <connections>
                 <outlet property="contentView" destination="uNg-Bb-bhT" id="JeQ-8v-cWG"/>
                 <outlet property="publishBtn" destination="rlG-pe-nwl" id="OYY-YX-wlv"/>
+                <outlet property="selectTimeTextFid" destination="NmS-Y0-c50" id="Wca-d8-w4R"/>
                 <outlet property="taskDesTextFid" destination="UBL-wm-vNQ" id="TZt-9n-MXg"/>
             </connections>
         </placeholder>
@@ -45,9 +46,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c40-xe-eCh">
-                            <rect key="frame" x="287" y="10" width="13" height="22"/>
+                            <rect key="frame" x="287" y="5" width="26" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="sc_com_icon_close"/>
+                            <connections>
+                                <action selector="_close:" destination="-1" eventType="touchUpInside" id="n5v-No-cOn"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="83L-hz-C6n">
                             <rect key="frame" x="0.0" y="76" width="315" height="60"/>
@@ -132,18 +136,11 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="3"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="nfL-3h-yz8"/>
+            <point key="canvasLocation" x="33.5" y="65.5"/>
         </view>
     </objects>
     <resources>

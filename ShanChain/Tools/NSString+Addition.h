@@ -21,6 +21,12 @@
  */
 - (CGSize)sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize;
 
+//长度自适应
+- (CGFloat)widthForFont:(UIFont *)font;
+
+//高度自适应
+- (CGFloat)heightForFont:(UIFont *)font width:(CGFloat)width;
+
 - (BOOL)isNotBlank;
 
 @end

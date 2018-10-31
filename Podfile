@@ -10,6 +10,7 @@ target 'ShanChain' do
     pod 'YHPopupView'
     pod 'YHPhotoKit'
     pod 'MBProgressHUD', '~> 1.0.0'
+    pod 'IQKeyboardManager'
     
     
     pod 'UMengAnalytics-NO-IDFA'

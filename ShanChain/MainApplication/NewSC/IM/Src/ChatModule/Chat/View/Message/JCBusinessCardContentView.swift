@@ -30,7 +30,6 @@ class JCBusinessCardContentView: UIView, JCMessageContentViewType {
         _appKey = content.appKey
         
         userNameLabel.text = "用户名：\(String(describing: _userName!))"
-        
         if let userName = _userName {
             JMSGUser.userInfoArray(withUsernameArray: [userName], completionHandler: { (result, error) in
                 let users = result as? [JMSGUser]
@@ -119,6 +118,7 @@ class JCBusinessCardContentView: UIView, JCMessageContentViewType {
     }
     
     func _clickCell() {
+        // 点击名片走代理方法
         _delegate?.message?(message: _message, user: _user, businessCardName: _userName!, businessCardAppKey: _appKey!)
     }
 

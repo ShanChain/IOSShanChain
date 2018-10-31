@@ -30,5 +30,6 @@
 #import "HHTool.h"
 #import "DefMacro .h"
 #import "Masonry.h"
+#import "NSString+Addition.h"
 
 #endif /* ShanChain_Bridging_Header_h */

@@ -267,6 +267,11 @@
 		2281A221216D9E83009E95EE /* NSObject+AutoProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A21C216D9E81009E95EE /* NSObject+AutoProperty.m */; };
 		2281A222216D9E84009E95EE /* UITableView+Registered.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A21D216D9E82009E95EE /* UITableView+Registered.m */; };
 		2281A223216D9E84009E95EE /* NSObject+Runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A220216D9E83009E95EE /* NSObject+Runtime.m */; };
+		22D2477D21883596009C1E6A /* AppDelegate+Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D2477C21883596009C1E6A /* AppDelegate+Config.m */; };
+		22D2478121893C6E009C1E6A /* HHPublishTaskContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */; };
+		22D2478321893D40009C1E6A /* HHPublishTaskContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478221893D40009C1E6A /* HHPublishTaskContent.swift */; };
+		22D247852189CA4B009C1E6A /* YLDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D247842189CA4B009C1E6A /* YLDatePicker.swift */; };
+		22D247872189CA8C009C1E6A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D247862189CA8C009C1E6A /* UIView+Extension.swift */; };
 		22EBC11321533BAE00C11359 /* MCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EBC11121533BA800C11359 /* MCDate.m */; };
 		33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33055FE91F0503AC005740E0 /* StoreKit.framework */; };
 		332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5D91F4ED69F00888313 /* NSMutableAttributedString+TY.m */; };
@@ -1032,6 +1037,12 @@
 		2281A21E216D9E82009E95EE /* UITableView+Registered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Registered.h"; sourceTree = "<group>"; };
 		2281A21F216D9E83009E95EE /* NSObject+AutoProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AutoProperty.h"; sourceTree = "<group>"; };
 		2281A220216D9E83009E95EE /* NSObject+Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Runtime.m"; sourceTree = "<group>"; };
+		22D2477B21883596009C1E6A /* AppDelegate+Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Config.h"; sourceTree = "<group>"; };
+		22D2477C21883596009C1E6A /* AppDelegate+Config.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Config.m"; sourceTree = "<group>"; };
+		22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHPublishTaskContentView.swift; sourceTree = "<group>"; };
+		22D2478221893D40009C1E6A /* HHPublishTaskContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHPublishTaskContent.swift; sourceTree = "<group>"; };
+		22D247842189CA4B009C1E6A /* YLDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLDatePicker.swift; sourceTree = "<group>"; };
+		22D247862189CA8C009C1E6A /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentConfiguration.h; sourceTree = "<group>"; };
 		22EBC11121533BA800C11359 /* MCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDate.m; sourceTree = "<group>"; };
 		22EBC11221533BA900C11359 /* MCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDate.h; sourceTree = "<group>"; };
@@ -2068,12 +2079,14 @@
 				223F98A4217F12030031DB95 /* JCMessageVideoContent.swift */,
 				223F98A5217F12030031DB95 /* JCMessageNoticeContent.swift */,
 				223F98A6217F12030031DB95 /* JCBusinessCardContent.swift */,
+				22D2478221893D40009C1E6A /* HHPublishTaskContent.swift */,
 				223F98A7217F12030031DB95 /* JCMessageNoticeContentView.swift */,
 				223F98A8217F12030031DB95 /* JCMessageLocationContentView.swift */,
 				223F98A9217F12030031DB95 /* JACMessageImageContentView.swift */,
 				223F98AA217F12030031DB95 /* JCMessageTimeLineContent.swift */,
 				223F98AB217F12030031DB95 /* JCMessageFileContentView.swift */,
 				223F98AC217F12030031DB95 /* JCBusinessCardContentView.swift */,
+				22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */,
 				223F98AD217F12030031DB95 /* JCMessageVoiceContent.swift */,
 				223F98AE217F12030031DB95 /* JCMessageTextContentView.swift */,
 			);
@@ -2270,6 +2283,7 @@
 		223F9909217F12040031DB95 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				22D247862189CA8C009C1E6A /* UIView+Extension.swift */,
 				223F990A217F12040031DB95 /* UIView+JChat.swift */,
 				223F990B217F12040031DB95 /* MBProgressHUD+JChat.swift */,
 				223F990C217F12040031DB95 /* NSLayoutConstraint+JChat.swift */,
@@ -2459,6 +2473,7 @@
 		223F995B217F12040031DB95 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				22D247842189CA4B009C1E6A /* YLDatePicker.swift */,
 				223F995C217F12040031DB95 /* JCFPSLabel.swift */,
 				223F995D217F12040031DB95 /* JCAppManager.swift */,
 				223F995E217F12040031DB95 /* Log.swift */,
@@ -4310,6 +4325,8 @@
 			children = (
 				9960490D1ED7C44F007634EE /* AppDelegate.h */,
 				9960490E1ED7C44F007634EE /* AppDelegate.m */,
+				22D2477B21883596009C1E6A /* AppDelegate+Config.h */,
+				22D2477C21883596009C1E6A /* AppDelegate+Config.m */,
 				2218E187217605D900719844 /* BMKTestLocationViewController.h */,
 				2218E188217605DA00719844 /* BMKTestLocationViewController.m */,
 				2218E189217605DA00719844 /* BMKTestLocationViewController.xib */,
@@ -4573,6 +4590,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShanChain/Pods-ShanChain-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AliyunOSSiOS/AliyunOSSiOS.framework",
 				"${PODS_ROOT}/Hyphenate/iOS_Pods_IMFullSDK_V3.5.1/Hyphenate.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/React/React.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -4586,6 +4604,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AliyunOSSiOS.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hyphenate.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -4627,6 +4646,7 @@
 			files = (
 				223F9A02217F12040031DB95 /* JCRecordingView.swift in Sources */,
 				4852A0C51FCE9F0300CDD7BE /* SYScreenDetailController.m in Sources */,
+				22D247852189CA4B009C1E6A /* YLDatePicker.swift in Sources */,
 				4852A16B1FCE9F7200CDD7BE /* CacheModel.m in Sources */,
 				48718D2E1F42277400010AA0 /* AFURLRequestSerialization.m in Sources */,
 				223F99CF217F12040031DB95 /* JCMineViewController.swift in Sources */,
@@ -4694,6 +4714,7 @@
 				33403F6C1F15BEE400666634 /* SCBase64.m in Sources */,
 				22631C4F216DE85200D5AB0B /* UIViewController+BackButtonHandler.m in Sources */,
 				485E66571F42873F00B158BF /* MJRefreshComponent.m in Sources */,
+				22D2478121893C6E009C1E6A /* HHPublishTaskContentView.swift in Sources */,
 				48718DA01F42277400010AA0 /* UIView+WebCacheOperation.m in Sources */,
 				332AB6491F4ED8C900888313 /* Constants.m in Sources */,
 				332AB5F21F4ED69F00888313 /* TYTextContainer+Extended.m in Sources */,
@@ -4925,6 +4946,7 @@
 				485E65D61F42862900B158BF /* MWTapDetectingImageView.m in Sources */,
 				332D3E471F500331001ADDB3 /* NSObject+MJProperty.m in Sources */,
 				4852A0DD1FCE9F0300CDD7BE /* SYNoticeCell.m in Sources */,
+				22D2477D21883596009C1E6A /* AppDelegate+Config.m in Sources */,
 				4852A1041FCE9F0300CDD7BE /* SYStoryRecommendController.m in Sources */,
 				223F99B6217F12040031DB95 /* JCEmoticonPageView.swift in Sources */,
 				223F9999217F12040031DB95 /* JCUpdateMemberCell.swift in Sources */,
@@ -5000,6 +5022,7 @@
 				223F9A3F217F12B80031DB95 /* JCVerificationDetailViewController.swift in Sources */,
 				485E65E71F42862900B158BF /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				4852A13B1FCE9F0400CDD7BE /* SCBaseVC.m in Sources */,
+				22D247872189CA8C009C1E6A /* UIView+Extension.swift in Sources */,
 				4852A0F91FCE9F0300CDD7BE /* SYComposeTrendController.m in Sources */,
 				485E66171F42862900B158BF /* EaseBubbleView+Location.m in Sources */,
 				332AB5F31F4ED69F00888313 /* TYTextContainer.m in Sources */,
@@ -5161,6 +5184,7 @@
 				48718D701F42277400010AA0 /* MJPhoto.m in Sources */,
 				223F99F1217F12040031DB95 /* SAIInputTextField.swift in Sources */,
 				223F99EA217F12040031DB95 /* Extensions.swift in Sources */,
+				22D2478321893D40009C1E6A /* HHPublishTaskContent.swift in Sources */,
 				890AF0AE1FEBBB3300396169 /* SCShareManager.m in Sources */,
 				223F99C8217F12040031DB95 /* JCDatePickerViwe.swift in Sources */,
 				899CD91F1FD958E7007D3D7A /* SYAuxiliaryAddController.m in Sources */,
