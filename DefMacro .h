@@ -95,6 +95,44 @@ view.layer.rasterizationScale = [UIScreen mainScreen].scale;
 // 16进制转颜色(0x067AB5)
 #define RGB_HEX(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
+//获取相机权限状态
+#define CameraStatus [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo]
+#define CameraDenied ((CameraStatus == AVAuthorizationStatusRestricted)||(CameraStatus == AVAuthorizationStatusDenied))
+#define CameraAllowed (!CameraDenyed)
 
+/** 定位权限*/
+#define LocationStatus [CLLocationManager authorizationStatus];
+#define LocationAllowed ([CLLocationManager locationServicesEnabled] && !((status == kCLAuthorizationStatusDenied) || (status == kCLAuthorizationStatusRestricted)))
+#define LocationDenied (!LocationAllowed)
+
+/** 消息推送权限*/
+#define PushClose (([[UIDevice currentDevice].systemVersion floatValue]>=8.0f)?(UIUserNotificationTypeNone == [[UIApplication sharedApplication] currentUserNotificationSettings].types):(UIRemoteNotificationTypeNone == [[UIApplication sharedApplication] enabledRemoteNotificationTypes]))
+#define PushOpen (!PushClose)
+
+
+//NSUserDefaults 实例化
+#define USER_DEFAULT [NSUserDefaults standardUserDefaults]
+
+//获取temp
+#define kPathTemp NSTemporaryDirectory()
+
+//获取沙盒Document
+#define kPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) firstObject]
+
+//获取沙盒Cache
+#define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES) firstObject]
+
+
+//获取通知中心
+#define NotificationCenter [NSNotificationCenter defaultCenter]
+
+//快速发通知
+#define Post_Notify(_notificationName, _obj, _userInfoDictionary) [[NSNotificationCenter defaultCenter] postNotificationName: _notificationName object: _obj userInfo: _userInfoDictionary];
+
+//添加观察者
+#define Add_Observer(_notificationName, _observer, _observerSelector, _obj) [[NSNotificationCenter defaultCenter] addObserver:_observer selector:@selector(_observerSelector) name:_notificationName object: _obj];
+
+//移除观察者
+#define Remove_Observer(_observer) [[NSNotificationCenter defaultCenter] removeObserver: _observer];
 
 #endif /* DefMacro__h */

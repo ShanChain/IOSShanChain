@@ -11,7 +11,7 @@ target 'ShanChain' do
     pod 'YHPhotoKit'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'IQKeyboardManager'
-    
+    pod 'SnapKit', '~> 4.0.0'
     
     pod 'UMengAnalytics-NO-IDFA'
     pod 'RedpacketAliAuthLib','~> 1.1.4'

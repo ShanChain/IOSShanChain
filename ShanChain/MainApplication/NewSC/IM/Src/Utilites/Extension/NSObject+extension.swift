@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias TapClosure = () -> Void
+
 extension UIView {
     @IBInspectable var cornerRadius: CGFloat {
         get {
@@ -18,6 +20,7 @@ extension UIView {
             layer.masksToBounds = newValue > 0
         }
     }
+
 }
 
 

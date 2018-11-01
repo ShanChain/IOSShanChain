@@ -53,19 +53,19 @@ class PublishTaskView: UIView {
         self.frame = frame;
         makeView.frame = frame
         contentView = loadViewFromNib()
-       // self.translatesAutoresizingMaskIntoConstraints = false
         publishBtn.addTarget(self, action: #selector(_publishPressed), for: .touchUpInside)
         
         //添加蒙版
        
         makeView.backgroundColor = .black
-        makeView.alpha = 0.15
+        makeView.alpha = 0.2
         addSubview(makeView)
         addSubview(contentView)
         show()
        
         let tap = UITapGestureRecognizer(target: self, action: #selector(_tapSelectTime))
         selectTimeTextFid.addGestureRecognizer(tap)
+        
         
     }
     
@@ -76,9 +76,6 @@ class PublishTaskView: UIView {
         datePicker.show()
     }
     
-    func setPbCallClosure(closure:@escaping PublishClosure){
-        self.pbCallClosure = closure
-    }
     
     required init?(coder aDecoder: NSCoder) {
         makeView = UIView()
@@ -108,6 +105,7 @@ class PublishTaskView: UIView {
         animation.fromValue = NSNumber.init(value: 1.0)
         animation.toValue = NSNumber.init(value: 0.01)
         animation.isRemovedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
         layer.add(animation, forKey: "scale-layer")
       _ = delay(0.45) {
            self.removeFromSuperview()

@@ -8,6 +8,9 @@
 
 import UIKit
 
+typealias ExpandClosure = (_ isExpand:Bool) -> Void
+
+
 class RoomTopView: UIView {
 
     @IBOutlet weak var rewardLb: UILabel!
@@ -20,23 +23,36 @@ class RoomTopView: UIView {
         // Drawing code
     }
     */
+    var isExpand:Bool = false
+    var nomalFrame:CGRect
+    var expandFrame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+    var expandClosure:ExpandClosure?
+    var recognizer:UISwipeGestureRecognizer?
+    
+    
     var contentView:UIView!
     override init(frame: CGRect) {
+        nomalFrame = frame
         super.init(frame: frame)
         contentView = loadViewFromNib()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        //contentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentView)
         
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        contentView = loadViewFromNib()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(contentView)
         fatalError("init(coder:) has not been implemented")
     }
     
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        UIView.animate(withDuration: 0.5, animations: {
+            self.frame = self.isExpand ? self.nomalFrame:self.expandFrame
+        }) { (complete) in
+            self.isExpand = !self.isExpand
+            self.expandClosure!(self.isExpand)
+        }
+    }
 
 }

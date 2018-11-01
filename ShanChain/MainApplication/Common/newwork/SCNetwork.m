@@ -24,6 +24,7 @@
 static const BOOL IS_USE_HTTPS = YES;
 static double  const  TIME_OUT_INTERVAL = 60.0;
 
+typedef void (^NetworkStatusBlock)(AFNetworkReachabilityStatus status);
 
 @interface SCNetwork ()
 
@@ -178,12 +179,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     // 设置body
     [request setHTTPBody:[self getHttpBody:params]];
     AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
-    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
-                                                 @"text/html",
-                                                 @"text/json",
-                                                 @"text/javascript",
-                                                 @"text/plain",
-                                                 nil];
+    responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPT_TYPE_NORMAL];
     manager.responseSerializer = responseSerializer;
     [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (show) {

@@ -126,11 +126,11 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     if (!self.latitude || !self.longitude || self.isLBS) {
         return;
     }
-    weakify(self);
-    [[SCNetwork shareInstance]HH_postWithUrl:GETCOORDINATE params:@{@"latitude":self.latitude,@"longitude":self.longitude} showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
-        weak_self.isLBS = YES;
-        [weak_self sc_addOverlay];
-    }];
+//    weakify(self);
+//    [[SCNetwork shareInstance]HH_postWithUrl:GETCOORDINATE params:@{@"latitude":self.latitude,@"longitude":self.longitude} showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
+//        weak_self.isLBS = YES;
+//        [weak_self sc_addOverlay];
+//    }];
  
 }
 

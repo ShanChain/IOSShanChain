@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+@_exported import SnapKit
+
 let SCREEN_HEIGHT = Int(UIScreen.main.bounds.size.height)
 let SCREEN_WIDTH = Int(UIScreen.main.bounds.size.width)
 let kApplicationStatusBarHeight = Int(UIApplication.shared.statusBarFrame.size.height)

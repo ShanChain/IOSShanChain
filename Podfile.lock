@@ -75,6 +75,7 @@ PODS:
   - RxCocoa (3.6.1):
     - RxSwift (~> 3.6)
   - RxSwift (3.6.1)
+  - SnapKit (4.0.1)
   - UMengAnalytics-NO-IDFA (4.2.5)
   - YHPhotoKit (0.2.1)
   - YHPopupView (0.3.0)
@@ -112,6 +113,7 @@ DEPENDENCIES:
   - RedpacketAliAuthLib (~> 1.1.4)
   - RxCocoa (~> 3.6.1)
   - RxSwift (~> 3.6.1)
+  - SnapKit (~> 4.0.0)
   - UMengAnalytics-NO-IDFA
   - YHPhotoKit
   - YHPopupView
@@ -133,6 +135,7 @@ SPEC REPOS:
     - RedPacketAlipay
     - RxCocoa
     - RxSwift
+    - SnapKit
     - UMengAnalytics-NO-IDFA
     - YHPhotoKit
     - YHPopupView
@@ -159,12 +162,13 @@ SPEC CHECKSUMS:
   RedPacketAlipay: a5de6db2e2671fc9255d6d396be869e3ba2f0489
   RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
   RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   YHPhotoKit: e88368af1fca0a110d41b88417088f7e49876981
   YHPopupView: 96d9c05c79a2a17cf69c3def09e5305cfae9e8e8
   yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 00f76f191ade95680c6596bd650fc896cc9ac066
+PODFILE CHECKSUM: 38bdd30f936ca5803952bbc5877eb82c93dfe158
 
 COCOAPODS: 1.5.3

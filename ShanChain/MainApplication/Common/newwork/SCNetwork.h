@@ -22,7 +22,7 @@
 @interface SCNetwork : NSObject
 
 +(SCNetwork *)shareInstance;
-typedef void (^NetworkStatusBlock)(AFNetworkReachabilityStatus status);
+
 
 
 - (void)postWithUrl:(NSString *)url

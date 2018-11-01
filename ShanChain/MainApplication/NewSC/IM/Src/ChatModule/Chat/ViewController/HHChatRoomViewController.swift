@@ -201,7 +201,11 @@ class HHChatRoomViewController: UIViewController {
         
        // 置顶消息
         let topView:RoomTopView = RoomTopView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(self.view.width), height: 50))
+        topView.expandClosure = { [weak self] (isExpand) in
+            self?.toolbar.isHidden = isExpand
+        }
         view.addSubview(topView)
+      
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
@@ -270,7 +274,12 @@ class HHChatRoomViewController: UIViewController {
     }
     
     func _closePage(){
-        self.navigationController?.popViewController(animated: true)
+        self.hrShowAlert(withTitle: nil, message: "确定要离开广场吗?", buttonsTitles: ["确认","取消"]) { (action, index) in
+            if index == 0{
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
     }
   
     func _maskAnimationFromLeft(){
@@ -776,9 +785,14 @@ extension HHChatRoomViewController: JCMessageDelegate {
     
     // 领取任务
     func message(message: JCMessageType, receiveTask taskID: String) {
-        
+        let rect = CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight))
+        let recieveView:RecieveTaskView = RecieveTaskView(frame: rect)
+        recieveView.closure = {[weak self] (conversation) in
+            self?.toolbar.isHidden = false
+        }
+        self.toolbar.isHidden = true
+        self.view.addSubview(recieveView)
     }
-    
     // 评论
     func message(message: JCMessageType, commentTask taskID: String) {
         
@@ -1052,7 +1066,7 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
                 pubTaskView?.cornerRadius = 0.01
                 // 点击发布任务回调
                 
-                pubTaskView?.setPbCallClosure(closure: { [weak self] (text,isPut)  in
+                pubTaskView?.pbCallClosure = { [weak self] (text,isPut)  in
                     pubTaskView?.dismiss()
                     self?.toolbar.isHidden = false
                     if isPut == false{
@@ -1062,11 +1076,14 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
                         //JMSGTextContent.init(text:(self.FuWenBenDemo()?.string)!)
                         JMSGCustomContent.init(customDictionary: [CUSTOM_CONTENT:text,CUSTOM_REWARD:"赏金: 8SEAT",CUSTOM_COMPLETETIME:"完成时限 12:00 2018-10-20"])
                     let singleMessage:JMSGMessage = JMSGMessage.createSingleMessage(with: content, username: "11111")
-                
+                    
                     JMSGMessage.send(singleMessage)
                     self?._reloadMessage()// 刷新界面
-                   
-                })
+                }
+//                pubTaskView?.setPbCallClosure(closure: { [weak self] (text,isPut)  in
+//                    
+//                   
+//                })
                 
                self.view.addSubview(pubTaskView!)
                self.toolbar.isHidden = true

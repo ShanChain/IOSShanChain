@@ -272,6 +272,8 @@
 		22D2478321893D40009C1E6A /* HHPublishTaskContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478221893D40009C1E6A /* HHPublishTaskContent.swift */; };
 		22D247852189CA4B009C1E6A /* YLDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D247842189CA4B009C1E6A /* YLDatePicker.swift */; };
 		22D247872189CA8C009C1E6A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D247862189CA8C009C1E6A /* UIView+Extension.swift */; };
+		22D247892189D5A8009C1E6A /* RecieveTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D247882189D5A8009C1E6A /* RecieveTaskView.swift */; };
+		22D2478B2189D5B3009C1E6A /* RecieveTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D2478A2189D5B3009C1E6A /* RecieveTaskView.xib */; };
 		22EBC11321533BAE00C11359 /* MCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EBC11121533BA800C11359 /* MCDate.m */; };
 		33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33055FE91F0503AC005740E0 /* StoreKit.framework */; };
 		332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5D91F4ED69F00888313 /* NSMutableAttributedString+TY.m */; };
@@ -1043,6 +1045,8 @@
 		22D2478221893D40009C1E6A /* HHPublishTaskContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHPublishTaskContent.swift; sourceTree = "<group>"; };
 		22D247842189CA4B009C1E6A /* YLDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLDatePicker.swift; sourceTree = "<group>"; };
 		22D247862189CA8C009C1E6A /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		22D247882189D5A8009C1E6A /* RecieveTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecieveTaskView.swift; sourceTree = "<group>"; };
+		22D2478A2189D5B3009C1E6A /* RecieveTaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecieveTaskView.xib; sourceTree = "<group>"; };
 		22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentConfiguration.h; sourceTree = "<group>"; };
 		22EBC11121533BA800C11359 /* MCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDate.m; sourceTree = "<group>"; };
 		22EBC11221533BA900C11359 /* MCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDate.h; sourceTree = "<group>"; };
@@ -2614,6 +2618,8 @@
 				223F9A7A2182C46D0031DB95 /* RoomTopView.xib */,
 				222EF6112186A40B005B89EF /* PublishTaskView.swift */,
 				222EF6132186A417005B89EF /* PublishTaskView.xib */,
+				22D247882189D5A8009C1E6A /* RecieveTaskView.swift */,
+				22D2478A2189D5B3009C1E6A /* RecieveTaskView.xib */,
 			);
 			path = XibView;
 			sourceTree = "<group>";
@@ -4470,6 +4476,7 @@
 				223F9A04217F12040031DB95 /* area.plist in Resources */,
 				2281A21A216B6351009E95EE /* index.ios.js in Resources */,
 				4852A0D31FCE9F0300CDD7BE /* SCMessageSettingCell.xib in Resources */,
+				22D2478B2189D5B3009C1E6A /* RecieveTaskView.xib in Resources */,
 				223F99BB217F12040031DB95 /* 定位2.png in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
 				4852A0D11FCE9F0300CDD7BE /* SCMessageCell.xib in Resources */,
@@ -4595,6 +4602,7 @@
 				"${BUILT_PRODUCTS_DIR}/React/React.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YHPhotoKit/YHPhotoKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YHPopupView/YHPopupView.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
@@ -4609,6 +4617,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YHPhotoKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YHPopupView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
@@ -4649,6 +4658,7 @@
 				22D247852189CA4B009C1E6A /* YLDatePicker.swift in Sources */,
 				4852A16B1FCE9F7200CDD7BE /* CacheModel.m in Sources */,
 				48718D2E1F42277400010AA0 /* AFURLRequestSerialization.m in Sources */,
+				22D247892189D5A8009C1E6A /* RecieveTaskView.swift in Sources */,
 				223F99CF217F12040031DB95 /* JCMineViewController.swift in Sources */,
 				223F9A0B217F12040031DB95 /* DLFixedTabbarView.m in Sources */,
 				485E65E41F42862900B158BF /* UIImage+EMGIF.m in Sources */,
