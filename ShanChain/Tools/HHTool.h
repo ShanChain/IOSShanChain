@@ -23,4 +23,6 @@
 +(NSString *)getDeviceIPIpAddresses;
 //获取当前window
 + (UIWindow *)mainWindow;
+
+
 @end

@@ -68,10 +68,10 @@ class HHChatRoomViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-        if let group = conversation.target as? JMSGGroup {
-            // 如果是群组获取群组昵称
-            self.title = group.displayName()
-        }
+//        if let group = conversation.target as? JMSGGroup {
+//            // 如果是群组获取群组昵称
+//            self.title = group.displayName()
+//        }
         // 增加侧滑返回
       //  navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
@@ -188,7 +188,7 @@ class HHChatRoomViewController: UIViewController {
     
     private func _init() {
         myAvator = UIImage.getMyAvator()
-        _updateTitle()
+      //  _updateTitle()
         view.backgroundColor = .white
         JMessage.add(self, with: conversation)
         _setupNavigation()
@@ -205,8 +205,6 @@ class HHChatRoomViewController: UIViewController {
             self?.toolbar.isHidden = isExpand
         }
         view.addSubview(topView)
-      
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
@@ -265,10 +263,18 @@ class HHChatRoomViewController: UIViewController {
         self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), image: UIImage.init(named: "sc_com_icon_user"), selectedImage: UIImage.init(named: "sc_com_icon_user"))
         self.addNavigationRight(withImageName: "sc_com_icon_close", withTarget: self, withAction: #selector(_closePage))
         navigationController?.navigationBar.barTintColor = .white
-        var attrs = [String : AnyObject]()
-        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18)
-        attrs[NSForegroundColorAttributeName] = UIColor.black
-        navigationController?.navigationBar.titleTextAttributes = attrs
+//        var attrs = [String : AnyObject]()
+//        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18)
+//        attrs[NSForegroundColorAttributeName] = UIColor.black
+//        navigationController?.navigationBar.titleTextAttributes = attrs
+        // titleView
+        let navTitleView:RoomNavTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        navigationController?.navigationBar.addSubview(navTitleView)
+        navTitleView.snp.makeConstraints { (mark) in
+            mark.centerX.centerY.equalTo( (navigationController?.navigationBar)!)
+            mark.width.equalTo(200)
+            mark.height.equalTo(44)
+        }
 //        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
 //        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }

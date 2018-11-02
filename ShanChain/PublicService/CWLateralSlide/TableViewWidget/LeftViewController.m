@@ -9,6 +9,8 @@
 #import "LeftViewController.h"
 #import "CWTableViewInfo.h"
 #import "UIViewController+CWLateralSlide.h"
+#import "ShanChain-Swift.h"
+#import "SCBaseNavigationController.h"
 
 @interface LeftViewController ()
 
@@ -62,9 +64,44 @@
 
 #pragma mark - cell点击事件
 - (void)didSelectCell:(CWTableViewCellInfo *)cellInfo indexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.titleArray.count - 1) { // 点击最后一个主动收起抽屉
-        [self dismissViewControllerAnimated:YES completion:nil];
+    
+    TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
+    taskVC.title = @"悬赏任务";
+    JCMainTabBarController  *tab = (JCMainTabBarController*)[HHTool mainWindow].rootViewController;
+    JCNavigationController *nav = tab.selectedViewController;
+    if (!nav) {
         return;
+    }
+    
+    switch (indexPath.row) {
+        case 0:
+            // 我的钱包
+            
+            break;
+        case 1:
+            // 我的任务
+        {
+            
+            [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+            
+            
+            break;
+        case 2:
+            //我的消息
+            
+            break;
+        case 3:
+            // 我的收藏
+            
+            break;
+        case 4:
+            //我的认证
+            
+            break;
+        default:
+            break;
     }
     
 }

@@ -33,5 +33,6 @@
 #import "NSString+Addition.h"
 #import "UIViewController+HRAlertViewController.h"
 #import "SCNetwork.h"
+#import "MJRefresh.h"
 
 #endif /* ShanChain_Bridging_Header_h */

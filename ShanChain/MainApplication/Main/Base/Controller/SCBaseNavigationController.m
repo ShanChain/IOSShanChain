@@ -45,7 +45,7 @@
         
         UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
         backButton.frame = CGRectMake(0, 0, 40, 40);
-        [backButton setImage:[UIImage imageNamed:@"nav_btn_back_default"]  forState:UIControlStateNormal];
+//        [backButton setImage:[UIImage imageNamed:@"nav_btn_back_default"]  forState:UIControlStateNormal];
         backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 15);
         [backButton addTarget:self action:@selector(backToPoppedController:) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];

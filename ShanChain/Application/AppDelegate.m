@@ -49,7 +49,7 @@
     [self setupUMPushNoticationWithLaunchOptions:launchOptions];
    
     UIViewController *rootVc = nil;
-    rootVc = [[SCTabbarController alloc]init];
+   // rootVc = [[SCTabbarController alloc]init];
 //    if ([[SCAppManager shareInstance] isLogin]) {
 //        rootVc = [[SCTabbarController alloc]init];
 //    } else {

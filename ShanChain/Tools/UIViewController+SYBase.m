@@ -63,7 +63,6 @@
 }
 
 
-
 - (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector image:(UIImage *)image selectedImage:(UIImage *)selectedImage
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -73,6 +72,25 @@
     [button setImage:selectedImage forState:UIControlStateSelected];
     button.adjustsImageWhenHighlighted = NO;
     button.frame = CGRectMake(0, 0, image.size.width <= 25 ? 25 : image.size.width, image.size.height);
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
+    [array addObject:item];
+    self.navigationItem.leftBarButtonItems = array;
+}
+
+- (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector image:(UIImage *)image selectedImage:(UIImage *)selectedImage isCircle:(BOOL)isCircle
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    
+    [button setImage:image forState:UIControlStateNormal];
+    [button setImage:selectedImage forState:UIControlStateSelected];
+    button.adjustsImageWhenHighlighted = NO;
+    button.frame = CGRectMake(0, 0, image.size.width <= 25 ? 25 : 30, 30);
+    button.contentMode = UIViewContentModeCenter;
+    if (isCircle) {
+        [button _setCornerRadiusCircle];
+    }
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
     NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
     [array addObject:item];

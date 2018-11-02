@@ -77,6 +77,7 @@
 #import "NSObject+Runtime.h"
 #import "UITableView+Registered.h"
 #import "NSObject+AutoProperty.h"
+#import "UIView+property.h"
 #import <YYModel/YYModel.h>
 #import <JMessage/JMessage.h>
 

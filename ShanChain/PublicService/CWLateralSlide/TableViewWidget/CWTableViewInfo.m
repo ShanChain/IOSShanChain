@@ -35,6 +35,7 @@
     _tableView.dataSource = self;
     _tableView.rowHeight = 50;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableView.tableFooterView = [UIView new];
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }

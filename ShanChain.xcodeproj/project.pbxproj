@@ -243,10 +243,6 @@
 		223F9A5E21829BA80031DB95 /* CWLateralSlideAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A5821829BA70031DB95 /* CWLateralSlideAnimator.m */; };
 		223F9A5F21829BA80031DB95 /* CWDrawerTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A5921829BA70031DB95 /* CWDrawerTransition.m */; };
 		223F9A6021829BA80031DB95 /* CWLateralSlideConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A5B21829BA70031DB95 /* CWLateralSlideConfiguration.m */; };
-		223F9A6A2182A9B10031DB95 /* CWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A632182A9B10031DB95 /* CWTableViewCell.m */; };
-		223F9A6B2182A9B10031DB95 /* CWTableViewCellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A652182A9B10031DB95 /* CWTableViewCellInfo.m */; };
-		223F9A6C2182A9B20031DB95 /* CWTableViewInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A672182A9B10031DB95 /* CWTableViewInfo.m */; };
-		223F9A6D2182A9B20031DB95 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F9A692182A9B10031DB95 /* LeftViewController.m */; };
 		223F9A722182AEC10031DB95 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 223F9A6F2182AEC00031DB95 /* 2.jpg */; };
 		223F9A732182AEC10031DB95 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 223F9A702182AEC00031DB95 /* 1.jpg */; };
 		223F9A742182AEC10031DB95 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 223F9A712182AEC00031DB95 /* 0.jpg */; };
@@ -259,6 +255,8 @@
 		2242C0032159C34E00707024 /* YYHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2242BFFE2159C34D00707024 /* YYHud.xib */; };
 		2242C0042159C34E00707024 /* YYHud.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2242BFFF2159C34D00707024 /* YYHud.xcassets */; };
 		2242C0072159C3AB00707024 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242C0062159C3AB00707024 /* UIColor+Extention.m */; };
+		225052BC218BF58C001FBD65 /* TaskListContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */; };
+		225052BE218BF67E001FBD65 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225052BD218BF67E001FBD65 /* TaskListViewController.swift */; };
 		22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */; };
 		22631C4C216DDA3200D5AB0B /* SavePublishContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4B216DDA3200D5AB0B /* SavePublishContentModel.m */; };
 		22631C4F216DE85200D5AB0B /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4D216DE85100D5AB0B /* UIViewController+BackButtonHandler.m */; };
@@ -267,6 +265,12 @@
 		2281A221216D9E83009E95EE /* NSObject+AutoProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A21C216D9E81009E95EE /* NSObject+AutoProperty.m */; };
 		2281A222216D9E84009E95EE /* UITableView+Registered.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A21D216D9E82009E95EE /* UITableView+Registered.m */; };
 		2281A223216D9E84009E95EE /* NSObject+Runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A220216D9E83009E95EE /* NSObject+Runtime.m */; };
+		2293A73F218C3B5100FB977C /* RoomNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293A73E218C3B5100FB977C /* RoomNavTitleView.swift */; };
+		2293A741218C3B5A00FB977C /* RoomNavTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2293A740218C3B5A00FB977C /* RoomNavTitleView.xib */; };
+		2293A74B218C4ED700FB977C /* CWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2293A744218C4ED700FB977C /* CWTableViewCell.m */; };
+		2293A74C218C4ED700FB977C /* CWTableViewCellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2293A746218C4ED700FB977C /* CWTableViewCellInfo.m */; };
+		2293A74D218C4ED700FB977C /* CWTableViewInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2293A748218C4ED700FB977C /* CWTableViewInfo.m */; };
+		2293A74E218C4ED700FB977C /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2293A74A218C4ED700FB977C /* LeftViewController.m */; };
 		22D2477D21883596009C1E6A /* AppDelegate+Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D2477C21883596009C1E6A /* AppDelegate+Config.m */; };
 		22D2478121893C6E009C1E6A /* HHPublishTaskContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */; };
 		22D2478321893D40009C1E6A /* HHPublishTaskContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478221893D40009C1E6A /* HHPublishTaskContent.swift */; };
@@ -629,7 +633,6 @@
 		48AC035F1F95AAE70040B54F /* RNBundle in Resources */ = {isa = PBXBuildFile; fileRef = 48AC035E1F95AAE70040B54F /* RNBundle */; };
 		48ACC9501FE4ECF100D29EB9 /* VersionUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 48ACC94E1FE4ECF000D29EB9 /* VersionUtils.m */; };
 		48F90FCA1FDEE276001AB1CF /* NotificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F90FC91FDEE276001AB1CF /* NotificationHandler.m */; };
-		821A3FCFC08011F7EFD5D39A /* Pods_ShanChain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9D6CD2BCD8D7F8763C8B7F /* Pods_ShanChain.framework */; };
 		890A020A1FE2208D0069186F /* SYMessageNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 890A02091FE2208D0069186F /* SYMessageNormalCell.m */; };
 		890AF0AE1FEBBB3300396169 /* SCShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 890AF0AD1FEBBB3300396169 /* SCShareManager.m */; };
 		890AF0B51FECDF4100396169 /* SCDynamicStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 890AF0B41FECDF4100396169 /* SCDynamicStatusFrame.m */; };
@@ -999,14 +1002,6 @@
 		223F9A5921829BA70031DB95 /* CWDrawerTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWDrawerTransition.m; sourceTree = "<group>"; };
 		223F9A5A21829BA70031DB95 /* UIViewController+CWLateralSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWLateralSlide.h"; sourceTree = "<group>"; };
 		223F9A5B21829BA70031DB95 /* CWLateralSlideConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWLateralSlideConfiguration.m; sourceTree = "<group>"; };
-		223F9A622182A9B10031DB95 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
-		223F9A632182A9B10031DB95 /* CWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewCell.m; sourceTree = "<group>"; };
-		223F9A642182A9B10031DB95 /* CWTableViewInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewInfo.h; sourceTree = "<group>"; };
-		223F9A652182A9B10031DB95 /* CWTableViewCellInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewCellInfo.m; sourceTree = "<group>"; };
-		223F9A662182A9B10031DB95 /* CWTableViewCellInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewCellInfo.h; sourceTree = "<group>"; };
-		223F9A672182A9B10031DB95 /* CWTableViewInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewInfo.m; sourceTree = "<group>"; };
-		223F9A682182A9B10031DB95 /* CWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewCell.h; sourceTree = "<group>"; };
-		223F9A692182A9B10031DB95 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		223F9A6F2182AEC00031DB95 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		223F9A702182AEC00031DB95 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		223F9A712182AEC00031DB95 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
@@ -1024,6 +1019,8 @@
 		2242BFFF2159C34D00707024 /* YYHud.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YYHud.xcassets; sourceTree = "<group>"; };
 		2242C0052159C3AA00707024 /* UIColor+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extention.h"; sourceTree = "<group>"; };
 		2242C0062159C3AB00707024 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
+		225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListContainerViewController.swift; sourceTree = "<group>"; };
+		225052BD218BF67E001FBD65 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		22631C48216DD6E800D5AB0B /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		22631C4A216DDA3200D5AB0B /* SavePublishContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavePublishContentModel.h; sourceTree = "<group>"; };
@@ -1039,6 +1036,16 @@
 		2281A21E216D9E82009E95EE /* UITableView+Registered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Registered.h"; sourceTree = "<group>"; };
 		2281A21F216D9E83009E95EE /* NSObject+AutoProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AutoProperty.h"; sourceTree = "<group>"; };
 		2281A220216D9E83009E95EE /* NSObject+Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Runtime.m"; sourceTree = "<group>"; };
+		2293A73E218C3B5100FB977C /* RoomNavTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomNavTitleView.swift; sourceTree = "<group>"; };
+		2293A740218C3B5A00FB977C /* RoomNavTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomNavTitleView.xib; sourceTree = "<group>"; };
+		2293A743218C4ED700FB977C /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		2293A744218C4ED700FB977C /* CWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewCell.m; sourceTree = "<group>"; };
+		2293A745218C4ED700FB977C /* CWTableViewInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewInfo.h; sourceTree = "<group>"; };
+		2293A746218C4ED700FB977C /* CWTableViewCellInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewCellInfo.m; sourceTree = "<group>"; };
+		2293A747218C4ED700FB977C /* CWTableViewCellInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewCellInfo.h; sourceTree = "<group>"; };
+		2293A748218C4ED700FB977C /* CWTableViewInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewInfo.m; sourceTree = "<group>"; };
+		2293A749218C4ED700FB977C /* CWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewCell.h; sourceTree = "<group>"; };
+		2293A74A218C4ED700FB977C /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		22D2477B21883596009C1E6A /* AppDelegate+Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Config.h"; sourceTree = "<group>"; };
 		22D2477C21883596009C1E6A /* AppDelegate+Config.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Config.m"; sourceTree = "<group>"; };
 		22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHPublishTaskContentView.swift; sourceTree = "<group>"; };
@@ -1927,7 +1934,6 @@
 				89500F521FEA553300732CEB /* AliyunVideoCore.framework in Frameworks */,
 				485E65BB1F42862900B158BF /* libopencore-amrwb.a in Frameworks */,
 				33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */,
-				821A3FCFC08011F7EFD5D39A /* Pods_ShanChain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2009,6 +2015,7 @@
 		223F9887217F12030031DB95 /* ChatModule */ = {
 			isa = PBXGroup;
 			children = (
+				225052BA218BF4EC001FBD65 /* Task */,
 				223F9888217F12030031DB95 /* Chat */,
 				223F98D2217F12040031DB95 /* Input */,
 			);
@@ -2100,6 +2107,7 @@
 		223F98BA217F12030031DB95 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2293A742218C4ED700FB977C /* PersonalCenter */,
 				223F98BB217F12030031DB95 /* ScanQRCodeViewController.swift */,
 				223F98BC217F12030031DB95 /* FriendsBusinessCardViewController.swift */,
 				223F98BD217F12030031DB95 /* UnreadListViewController.swift */,
@@ -2571,7 +2579,6 @@
 			isa = PBXGroup;
 			children = (
 				223F9A6E2182AEC00031DB95 /* Images */,
-				223F9A612182A9B10031DB95 /* TableViewWidget */,
 				223F9A5221829BA70031DB95 /* CWInteractiveTransition.m */,
 				223F9A5321829BA70031DB95 /* CWDrawerTransition.h */,
 				223F9A5421829BA70031DB95 /* CWLateralSlideAnimator.h */,
@@ -2584,21 +2591,6 @@
 				223F9A5B21829BA70031DB95 /* CWLateralSlideConfiguration.m */,
 			);
 			path = CWLateralSlide;
-			sourceTree = "<group>";
-		};
-		223F9A612182A9B10031DB95 /* TableViewWidget */ = {
-			isa = PBXGroup;
-			children = (
-				223F9A692182A9B10031DB95 /* LeftViewController.m */,
-				223F9A622182A9B10031DB95 /* LeftViewController.h */,
-				223F9A672182A9B10031DB95 /* CWTableViewInfo.m */,
-				223F9A642182A9B10031DB95 /* CWTableViewInfo.h */,
-				223F9A652182A9B10031DB95 /* CWTableViewCellInfo.m */,
-				223F9A662182A9B10031DB95 /* CWTableViewCellInfo.h */,
-				223F9A682182A9B10031DB95 /* CWTableViewCell.h */,
-				223F9A632182A9B10031DB95 /* CWTableViewCell.m */,
-			);
-			path = TableViewWidget;
 			sourceTree = "<group>";
 		};
 		223F9A6E2182AEC00031DB95 /* Images */ = {
@@ -2620,6 +2612,8 @@
 				222EF6132186A417005B89EF /* PublishTaskView.xib */,
 				22D247882189D5A8009C1E6A /* RecieveTaskView.swift */,
 				22D2478A2189D5B3009C1E6A /* RecieveTaskView.xib */,
+				2293A73E218C3B5100FB977C /* RoomNavTitleView.swift */,
+				2293A740218C3B5A00FB977C /* RoomNavTitleView.xib */,
 			);
 			path = XibView;
 			sourceTree = "<group>";
@@ -2654,6 +2648,30 @@
 				2242BFFF2159C34D00707024 /* YYHud.xcassets */,
 			);
 			path = YYHud;
+			sourceTree = "<group>";
+		};
+		225052BA218BF4EC001FBD65 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */,
+				225052BD218BF67E001FBD65 /* TaskListViewController.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		2293A742218C4ED700FB977C /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				2293A743218C4ED700FB977C /* LeftViewController.h */,
+				2293A74A218C4ED700FB977C /* LeftViewController.m */,
+				2293A744218C4ED700FB977C /* CWTableViewCell.m */,
+				2293A749218C4ED700FB977C /* CWTableViewCell.h */,
+				2293A745218C4ED700FB977C /* CWTableViewInfo.h */,
+				2293A748218C4ED700FB977C /* CWTableViewInfo.m */,
+				2293A746218C4ED700FB977C /* CWTableViewCellInfo.m */,
+				2293A747218C4ED700FB977C /* CWTableViewCellInfo.h */,
+			);
+			path = PersonalCenter;
 			sourceTree = "<group>";
 		};
 		33055FE81F0503AC005740E0 /* Frameworks */ = {
@@ -4512,6 +4530,7 @@
 				223F996B217F12040031DB95 /* emoticons.bundle in Resources */,
 				223F99EE217F12040031DB95 /* JCMessageImageCollectionViewCell.xib in Resources */,
 				4852A0D91FCE9F0300CDD7BE /* SYChatListCell.xib in Resources */,
+				2293A741218C3B5A00FB977C /* RoomNavTitleView.xib in Resources */,
 				22284A8B217983DC00CDC86C /* Localizable.strings in Resources */,
 				223F9A06217F12040031DB95 /* addressCode in Resources */,
 				223F9A722182AEC10031DB95 /* 2.jpg in Resources */,
@@ -4598,6 +4617,7 @@
 				"${BUILT_PRODUCTS_DIR}/AliyunOSSiOS/AliyunOSSiOS.framework",
 				"${PODS_ROOT}/Hyphenate/iOS_Pods_IMFullSDK_V3.5.1/Hyphenate.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/React/React.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -4613,6 +4633,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AliyunOSSiOS.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hyphenate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -4670,6 +4691,7 @@
 				332AB6551F4ED8C900888313 /* UIImage+Resize.m in Sources */,
 				223F9A0E217F12040031DB95 /* DLSlideView.m in Sources */,
 				4852A12D1FCE9F0300CDD7BE /* SYMarkCollection2Cell.m in Sources */,
+				2293A74C218C4ED700FB977C /* CWTableViewCellInfo.m in Sources */,
 				223F9993217F12040031DB95 /* JCChatViewCell.swift in Sources */,
 				4852A1161FCE9F0300CDD7BE /* SYFriendGroup.m in Sources */,
 				485E66681F42873F00B158BF /* UIView+MJExtension.m in Sources */,
@@ -4685,6 +4707,7 @@
 				223F9A36217F12B80031DB95 /* JCDoubleButtonCell.swift in Sources */,
 				223F99A9217F12040031DB95 /* JCUpdateMemberViewController.swift in Sources */,
 				4852A12B1FCE9F0300CDD7BE /* SYMarkCollection1Cell.m in Sources */,
+				2293A73F218C3B5100FB977C /* RoomNavTitleView.swift in Sources */,
 				48718D9E1F42277400010AA0 /* UIImageView+WebCache.m in Sources */,
 				4852A17E1FCEDF6000CDD7BE /* SYStoryMarkFavoriteCell.m in Sources */,
 				33C1A17A1F4C50FB003E22CA /* MASCompositeConstraint.m in Sources */,
@@ -4702,6 +4725,7 @@
 				223F99D8217F12040031DB95 /* UIView+JChat.swift in Sources */,
 				890A020A1FE2208D0069186F /* SYMessageNormalCell.m in Sources */,
 				48718D2D1F42277400010AA0 /* AFSecurityPolicy.m in Sources */,
+				225052BC218BF58C001FBD65 /* TaskListContainerViewController.swift in Sources */,
 				485E65FD1F42862900B158BF /* NSDateFormatter+Category.m in Sources */,
 				223F99B1217F12040031DB95 /* JCEmoticonTabItemView.swift in Sources */,
 				223F9A7E2182E94C0031DB95 /* UIView+property.m in Sources */,
@@ -4752,6 +4776,7 @@
 				223F9A00217F12040031DB95 /* JCAudioPlayerHelper.swift in Sources */,
 				48718D9F1F42277400010AA0 /* UIView+WebCache.m in Sources */,
 				4852A1751FCE9F7200CDD7BE /* JsonTool.m in Sources */,
+				2293A74B218C4ED700FB977C /* CWTableViewCell.m in Sources */,
 				4852A0DF1FCE9F0300CDD7BE /* SYScanView.m in Sources */,
 				48718D9C1F42277400010AA0 /* UIImage+WebP.m in Sources */,
 				223F998C217F12040031DB95 /* JCBusinessCardContentView.swift in Sources */,
@@ -4799,7 +4824,6 @@
 				485E65E31F42862900B158BF /* UIButton+EMWebCache.m in Sources */,
 				48718D2C1F42277400010AA0 /* AFNetworkReachabilityManager.m in Sources */,
 				223F9988217F12040031DB95 /* JCMessageLocationContentView.swift in Sources */,
-				223F9A6D2182A9B20031DB95 /* LeftViewController.m in Sources */,
 				223F99F7217F12040031DB95 /* SAIToolboxItemView.swift in Sources */,
 				223F99F2217F12040031DB95 /* SAIInputBackgroundView.swift in Sources */,
 				8916D1331FDAA7CB0058DD0B /* SYWordReadView.m in Sources */,
@@ -4827,6 +4851,7 @@
 				33C1A17F1F4C50FB003E22CA /* MASViewConstraint.m in Sources */,
 				485E66151F42862900B158BF /* EaseBubbleView+Gif.m in Sources */,
 				332AB6511F4ED8C900888313 /* NSString+URL.m in Sources */,
+				2293A74E218C4ED700FB977C /* LeftViewController.m in Sources */,
 				332AB6531F4ED8C900888313 /* UIBarButtonItem+Extension.m in Sources */,
 				4852A1371FCE9F0300CDD7BE /* SYTextView.m in Sources */,
 				4852A1711FCE9F7200CDD7BE /* SCCacheTool.m in Sources */,
@@ -5037,13 +5062,13 @@
 				485E66171F42862900B158BF /* EaseBubbleView+Location.m in Sources */,
 				332AB5F31F4ED69F00888313 /* TYTextContainer.m in Sources */,
 				485E65B81F42862900B158BF /* wav.mm in Sources */,
+				2293A74D218C4ED700FB977C /* CWTableViewInfo.m in Sources */,
 				485E65D11F42862900B158BF /* MWCaptionView.m in Sources */,
 				223F99ED217F12040031DB95 /* Reachability.m in Sources */,
 				485E66041F42862900B158BF /* EaseEmoji.m in Sources */,
 				223F9A47217F12B80031DB95 /* JCFriendSettingViewController.swift in Sources */,
 				223F9A37217F12B80031DB95 /* JCTableViewCell.swift in Sources */,
 				485E65FC1F42862900B158BF /* NSDate+Category.m in Sources */,
-				223F9A6A2182A9B10031DB95 /* CWTableViewCell.m in Sources */,
 				89500F5B1FEB589700732CEB /* SCPhotoDisplayView.m in Sources */,
 				223F99F5217F12040031DB95 /* SAIInputAccessoryViewLayout.swift in Sources */,
 				48718D991F42277400010AA0 /* UIButton+WebCache.m in Sources */,
@@ -5121,11 +5146,9 @@
 				223F998F217F12040031DB95 /* JCGroupSettingCell.swift in Sources */,
 				485E65D51F42862900B158BF /* MWPhotoBrowser.m in Sources */,
 				332AB5F11F4ED69F00888313 /* TYLinkTextStorage.m in Sources */,
-				223F9A6B2182A9B10031DB95 /* CWTableViewCellInfo.m in Sources */,
 				89500F551FEA5B2000732CEB /* SCStoryRecordController.m in Sources */,
 				48718D931F42277400010AA0 /* SDWebImageCompat.m in Sources */,
 				48718D731F42277400010AA0 /* MJPhotoLoadingView.m in Sources */,
-				223F9A6C2182A9B20031DB95 /* CWTableViewInfo.m in Sources */,
 				223F9976217F12040031DB95 /* JCChatViewLayout.swift in Sources */,
 				223F996F217F12040031DB95 /* JCMessage.swift in Sources */,
 				222C3100215A27FE009871C7 /* HHBaseModel.m in Sources */,
@@ -5203,6 +5226,7 @@
 				4809ECA91FE28230009FFF4A /* SCDatePicker.m in Sources */,
 				892B3A041FE9126A00292A75 /* SCAliyunPlayerVodView.m in Sources */,
 				485E65B01F42862900B158BF /* EMAudioPlayerUtil.m in Sources */,
+				225052BE218BF67E001FBD65 /* TaskListViewController.swift in Sources */,
 				485E65B11F42862900B158BF /* EMAudioRecorderUtil.m in Sources */,
 				223F998D217F12040031DB95 /* JCMessageVoiceContent.swift in Sources */,
 				485E66051F42862900B158BF /* EaseEmojiEmoticons.m in Sources */,
