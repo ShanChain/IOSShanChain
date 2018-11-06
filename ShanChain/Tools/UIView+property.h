@@ -20,6 +20,7 @@
 + (instancetype)instanceWithView;
 - (void)_setCornerRadius:(CGFloat)radius;
 -(void)_setCornerRadiusCircle;
+-(void)preventImageViewExtrudeDeformation;
 @end
 
 

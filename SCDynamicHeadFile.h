@@ -96,6 +96,7 @@
 #define DSStatusNormalTextDidSelectedNotification @"DSStatusNormalTextDidSelectedNotification"
 
 
+#define Theme_ViewBackgroundColor RGB(245,245,245)
 
 
 #endif /* SCDynamicHeadFile_h */

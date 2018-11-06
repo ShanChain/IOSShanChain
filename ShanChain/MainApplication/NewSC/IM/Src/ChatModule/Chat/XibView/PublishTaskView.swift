@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias PublishClosure = (_ text:String, _ isPut:Bool) ->Void //定义闭包类型
+typealias PublishClosure = (_ text:String, _ reward:String , _ time:String, _ isPut:Bool) ->Void //定义闭包类型
 
 @IBDesignable
 class PublishTaskView: UIView {
@@ -19,6 +19,7 @@ class PublishTaskView: UIView {
     @IBOutlet weak var publishBtn: UIButton!
     
    
+    @IBOutlet weak var rewardTextFid: UITextField!
     @IBOutlet  var contentView: UIView!
     
     @IBOutlet weak var selectTimeTextFid: UITextField!
@@ -116,11 +117,30 @@ class PublishTaskView: UIView {
         
     }
     
+    func _verification() -> Bool {
+        if (self.taskDesTextFid.text?.isEmpty)!{
+            HHTool.showError("请描述任务内容")
+            return false
+        }
+        if (self.rewardTextFid.text?.isEmpty)!{
+            HHTool.showError("请输入赏金")
+            return false
+        }
+        
+        if (self.selectTimeTextFid.text?.isEmpty)!{
+            HHTool.showError("请选择时间")
+            return false
+        }
+        
+        return true
+    }
     @IBAction func _close(_ sender: UIButton) {
-       self.pbCallClosure!(self.taskDesTextFid.text!,false)
+        self.pbCallClosure!(self.taskDesTextFid.text!,(self.rewardTextFid.text)!,(self.selectTimeTextFid.text)!,false)
     }
     func _publishPressed(){
-        self.pbCallClosure!(self.taskDesTextFid.text!,true)
+        if _verification(){
+        self.pbCallClosure!(self.taskDesTextFid.text!,(self.rewardTextFid.text)!,(self.selectTimeTextFid.text)!,true)
+        }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
          self.endEditing(true)

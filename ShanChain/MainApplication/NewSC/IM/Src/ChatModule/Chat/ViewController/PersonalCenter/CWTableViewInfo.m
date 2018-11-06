@@ -8,6 +8,9 @@
 
 #import "CWTableViewInfo.h"
 #import "CWTableViewCell.h"
+#import "LeftWalletTableViewCell.h"
+
+#define CellID @"LeftWalletTableViewCell"
 
 @interface CWTableViewInfo ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -33,9 +36,9 @@
     _tableView = [[UITableView alloc] initWithFrame:frame style:style];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.rowHeight = 50;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _tableView.tableFooterView = [UIView new];
+    [_tableView registerNib:[UINib nibWithNibName:CellID bundle:nil] forCellReuseIdentifier:CellID];
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
@@ -73,17 +76,26 @@
     return _cellInfoArray.count;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        return 100;
+    }
+    return 50;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.selectionStyle = 0;
+}
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    
-    CWTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellReusaId"];
+    LeftWalletTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
     CWTableViewCellInfo *cellInfo = _cellInfoArray[indexPath.row];
-    
-    if (cell == nil) {
-        cell = [[CWTableViewCell alloc] initWithStyle:cellInfo.cellStyle reuseIdentifier:@"CellReusaId"];
-    }
-    
     cell.cellInfo = cellInfo;
+    if (indexPath.row != 0) {
+        cell.seatMoneyLb.text  = @"";
+        cell.contentLb.text = @"";
+    }
     return cell;
 }
 

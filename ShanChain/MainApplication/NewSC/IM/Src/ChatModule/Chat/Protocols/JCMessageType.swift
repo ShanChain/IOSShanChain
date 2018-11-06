@@ -12,6 +12,7 @@ import JMessage
 @objc public enum MessageTargetType: Int {
     case single = 0
     case group
+    case chatRoom
 }
 
 @objc public protocol JCMessageType: class {

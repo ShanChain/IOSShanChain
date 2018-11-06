@@ -195,7 +195,6 @@ extension ExJMessage where Base: JMSGMessage {
         let message: JMSGMessage!
         if conversation.ex.isGroup && reminds != nil {
             let group = conversation.target as! JMSGGroup
-
             if reminds!.count > 0 {
                 var users: [JMSGUser] = []
                 var isAtAll = false
@@ -215,7 +214,13 @@ extension ExJMessage where Base: JMSGMessage {
                 message = JMSGMessage.createGroupMessage(with: content, groupId: group.gid)
             }
         } else {
-            message = JMSGMessage.createSingleMessage(with: content, username: JMSGUser.myInfo().username)
+            if conversation.ex.isChatRoom{
+                let chatRoom = conversation.target as? JMSGChatRoom
+                message = JMSGMessage.createChatRoomMessage(with: content, chatRoomId: (chatRoom?.roomID)!)
+            }else{
+                message = JMSGMessage.createSingleMessage(with: content, username: JMSGUser.myInfo().username)
+            }
+         
         }
         return message
     }

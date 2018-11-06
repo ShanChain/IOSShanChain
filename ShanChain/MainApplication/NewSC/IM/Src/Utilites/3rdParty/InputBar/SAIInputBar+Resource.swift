@@ -44,12 +44,12 @@ public extension SAIInputBar {
         
         let lbs = [
             _barItem("kb:task", "sc_com_icon_publishTask", "sc_com_icon_publishTask"), // 发布任务
-            _barItem("kb:audio", "YH_KB_Voice", "YH_KB_Keyboard")
+            _barItem("kb:audio", "YH_KB_Voice", "sc_com_icon_sendText")
             
         ]
         let rbs = [
-            _barItem("kb:emoticon", "笑脸", "笑脸"),
-            _barItem("kb:toolbox", "YH_KB_More", "YH_KB_More"),
+            _barItem("kb:emoticon", "sc_com_icon_smileyFace", "sc_com_icon_smileyFace"),
+            _barItem("kb:toolbox", "sc_com_icon_sendMore", "sc_com_icon_sendMore"),
         ]
         setBarItems(lbs, atPosition: .left)
         setBarItems(rbs, atPosition: .right)

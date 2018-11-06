@@ -22,6 +22,7 @@
 #import "VersionUtils.h"
 #import "BMKTestLocationViewController.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "ShanChain-Swift.h"
 
 #define JMSSAGE_APPKEY  @"0a20b6277a625655791e3cd9"
 
@@ -59,7 +60,7 @@
 //
     // 测试代码
     BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-    rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:locationVC];
+    rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
 
     self.window.rootViewController = rootVc;
     
@@ -87,6 +88,7 @@
 
 - (void)setJMessageSDK:(NSDictionary *)launchOptions{
     [JMessage setupJMessage:launchOptions appKey:JMSSAGE_APPKEY channel:nil apsForProduction:NO category:nil messageRoaming:YES];
+    [JMessage setDebugMode];
     // Required - 注册 APNs 通知
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories

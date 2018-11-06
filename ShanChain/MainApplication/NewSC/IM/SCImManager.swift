@@ -12,7 +12,7 @@ import Foundation
 public let CUSTOM_CONTENT =  "CUSTOM_CONTENT"
 public let CUSTOM_REWARD =   "CUSTOM_REWARD"
 public let CUSTOM_COMPLETETIME = "CUSTOM_COMPLETETIME"
-
+public let TEST_ROOM_ID   = "15198852"
 
 typealias Task = (_ cancel : Bool) -> Void
 

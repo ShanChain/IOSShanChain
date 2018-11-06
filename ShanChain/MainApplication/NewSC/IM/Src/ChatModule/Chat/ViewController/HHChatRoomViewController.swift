@@ -26,6 +26,7 @@ class HHChatRoomViewController: UIViewController {
             // 不为空时执行
             self.draft = draft // 获取编辑未发出的草稿
         }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,10 +36,20 @@ class HHChatRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _init()
+        
+
+        JMSGChatRoom.getChatRoomInfos(withRoomIds: [TEST_ROOM_ID]) { (result, error) in
+            printLog(result)
+        }
+        JMSGChatRoom.getMyChatRoomListCompletionHandler { (result, error) in
+            printLog(result)
+        }
     }
+    
     
     override func loadView() {
         super.loadView()
+        edgesForExtendedLayout = .all
         let frame = CGRect(x: 0, y: 64, width: self.view.width, height: self.view.height - 64)
         chatView = JCChatView(frame: frame, chatViewLayout: chatViewLayout)
         chatView.delegate = self
@@ -51,18 +62,13 @@ class HHChatRoomViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         toolbar.isHidden = false
-        
-        
-        //        JMSGChatRoom.getListWithAppKey(nil, start: 0, count: 10) { (result, error) in
-        //
-        //        }
+        navTitleView?.isHidden = false
     }
-    
-  
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        navTitleView.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,9 +90,11 @@ class HHChatRoomViewController: UIViewController {
     }
     
     deinit {
+        
         //析构函数 类似OC的delloc
         NotificationCenter.default.removeObserver(self)
         JMessage.remove(self, with: conversation)// 移除监听(delegate)
+        navTitleView.removeFromSuperview()
     }
     
     private var draft: String?
@@ -180,6 +188,7 @@ class HHChatRoomViewController: UIViewController {
     fileprivate var jMessageCount = 0
     fileprivate var isFristLaunch = true
     fileprivate var recordingHub: JCRecordingView!
+    fileprivate var navTitleView:RoomNavTitleView!
     fileprivate lazy var recordHelper: JCRecordVoiceHelper = {
         let recordHelper = JCRecordVoiceHelper()
         recordHelper.delegate = self
@@ -205,6 +214,7 @@ class HHChatRoomViewController: UIViewController {
             self?.toolbar.isHidden = isExpand
         }
         view.addSubview(topView)
+        chatView.frame = CGRect(x: 0, y: topView.y + topView.height, width: self.view.width, height: self.view.height - 64 - topView.height)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
@@ -268,7 +278,8 @@ class HHChatRoomViewController: UIViewController {
 //        attrs[NSForegroundColorAttributeName] = UIColor.black
 //        navigationController?.navigationBar.titleTextAttributes = attrs
         // titleView
-        let navTitleView:RoomNavTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        navTitleView.backgroundColor =  navigationController?.navigationBar.barTintColor
         navigationController?.navigationBar.addSubview(navTitleView)
         navTitleView.snp.makeConstraints { (mark) in
             mark.centerX.centerY.equalTo( (navigationController?.navigationBar)!)
@@ -280,9 +291,17 @@ class HHChatRoomViewController: UIViewController {
     }
     
     func _closePage(){
+//        if conversation.conversationType == .chatRoom{
+//            
+//        }
+        // 从登录页rootViewController过来的
+        if navigationController?.viewControllers.count == 1 {
+            
+        }
         self.hrShowAlert(withTitle: nil, message: "确定要离开广场吗?", buttonsTitles: ["确认","取消"]) { (action, index) in
             if index == 0{
                 self.navigationController?.popViewController(animated: true)
+                
             }
         }
         
@@ -327,11 +346,11 @@ class HHChatRoomViewController: UIViewController {
             minTime = time
             return true
         }
-        if (time - maxTime) >= 5 * 60000 {
+        if (time - maxTime) >= 5 * 60000 { // 超过五分钟显示时间
             maxTime = time
             return true
         }
-        if (minTime - time) >= 5 * 60000 {
+        if (minTime - time) >= 5 * 60000 { // 少于当前消息列表五分钟显示时间
             minTime = time
             return true
         }
@@ -352,7 +371,7 @@ class HHChatRoomViewController: UIViewController {
     // MARK: - send message
     // 所有发送的消息最终都会走到这里统一处理
     func send(_ message: JCMessage, _ jmessage: JMSGMessage) {
-        if isNeedInsertTimeLine(jmessage.timestamp.intValue) {
+        if isNeedInsertTimeLine(jmessage.timestamp.intValue) {// 是否显示时间
             let timeContent = JCMessageTimeLineContent(date: Date(timeIntervalSince1970: TimeInterval(jmessage.timestamp.intValue / 1000)))
             let m = JCMessage(content: timeContent)
             m.options.showsTips = false
@@ -365,12 +384,19 @@ class HHChatRoomViewController: UIViewController {
         message.sender = currentUser
         message.options.alignment = .right
         message.options.state = .sending
+
         if let group = conversation.target as? JMSGGroup {
             message.targetType = .group
             message.unreadCount = group.memberArray().count - 1
         } else {
-            message.targetType = .single
-            message.unreadCount = 1
+            if let chatRoom = conversation.target as? JMSGChatRoom{
+                message.targetType = .chatRoom
+                message.unreadCount = chatRoom.totalMemberCount
+            }else{
+                message.targetType = .single
+                message.unreadCount = 1
+            }
+           
         }
         chatView.append(message)
         messages.append(message)
@@ -384,7 +410,18 @@ class HHChatRoomViewController: UIViewController {
         let msg = JMSGMessage.ex.createMessage(conversation, content, reminds)
         reminds.removeAll()
         send(message, msg)
+        
+ 
+        
     }
+    // 发送自定义消息
+    func send(forCustom customDictionary:NSDictionary){
+        let customMessage = JCMessage(content: HHPublishTaskContent(customDictionary: customDictionary as! Dictionary<String, Any>))
+        let customContent = JMSGCustomContent.init(customDictionary:customDictionary as? [AnyHashable : Any])
+        let customMsg = JMSGMessage.ex.createMessage(conversation, customContent, nil)
+        send(customMessage, customMsg)
+    }
+    
     // 发送emoji
     func send(forLargeEmoticon emoticon: JCCEmoticonLarge) {
         guard let image = emoticon.contents as? UIImage else {
@@ -496,6 +533,9 @@ class HHChatRoomViewController: UIViewController {
 
 //MARK: - JMSGMessage Delegate
 extension HHChatRoomViewController: JMessageDelegate {
+    
+
+    
     // 更新媒体消息
     fileprivate func updateMediaMessage(_ message: JMSGMessage, data: Data) {
         DispatchQueue.main.async {
@@ -529,36 +569,46 @@ extension HHChatRoomViewController: JMessageDelegate {
         }
     }
     
-    
+    // 接收聊天室的消息
+    func onReceiveChatRoomConversation(_ conversation: JMSGConversation!, messages: [JMSGMessage]!) {
+        
+        for message in messages{
+            _handleMessage(message: message)
+        }
+       
+    }
     // 接收消息(服务器端下发的)回调
     func onReceive(_ message: JMSGMessage!, error: Error!) {
         if error != nil {
             return
         }
+       _handleMessage(message: message)
+    }
+    // 处理接收到的消息
+    func _handleMessage(message:JMSGMessage){
         let message = _parseMessage(message)
         // TODO: 这个判断是sdk bug导致的，暂时只能这么改
-        if messages.contains(where: { (m) -> Bool in
+        if self.messages.contains(where: { (m) -> Bool in
             return m.msgId == message.msgId
         }) {
             let indexs = chatView.indexPathsForVisibleItems
             for index in indexs {
-                var m = messages[index.row]
+                var m = self.messages[index.row]
                 if !m.msgId.isEmpty {
-                    m = _parseMessage(conversation.message(withMessageId: m.msgId)!, false)
+                    m = self._parseMessage(conversation.message(withMessageId: m.msgId)!, false)
                     chatView.update(m, at: index.row)
                 }
             }
             return
         }
         
-        messages.append(message)
+        self.messages.append(message)
         chatView.append(message)
         updateUnread([message])
         conversation.clearUnreadCount()
         if !chatView.isRoll {
             chatView.scrollToLast(animated: true)
         }
-
     }
     
     // 发送消息成功的回调
@@ -1072,24 +1122,18 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
                 pubTaskView?.cornerRadius = 0.01
                 // 点击发布任务回调
                 
-                pubTaskView?.pbCallClosure = { [weak self] (text,isPut)  in
+                pubTaskView?.pbCallClosure = { [weak self] (text,reward,time,isPut)  in
                     pubTaskView?.dismiss()
                     self?.toolbar.isHidden = false
                     if isPut == false{
                         return
                     }
-                    let content:JMSGCustomContent =
-                        //JMSGTextContent.init(text:(self.FuWenBenDemo()?.string)!)
-                        JMSGCustomContent.init(customDictionary: [CUSTOM_CONTENT:text,CUSTOM_REWARD:"赏金: 8SEAT",CUSTOM_COMPLETETIME:"完成时限 12:00 2018-10-20"])
-                    let singleMessage:JMSGMessage = JMSGMessage.createSingleMessage(with: content, username: "11111")
-                    
-                    JMSGMessage.send(singleMessage)
-                    self?._reloadMessage()// 刷新界面
+//                    let content:JMSGCustomContent =
+//                        JMSGCustomContent.init(customDictionary: [CUSTOM_CONTENT:text,CUSTOM_REWARD:"赏金: 8SEAT",CUSTOM_COMPLETETIME:"完成时限 12:00 2018-10-20"])
+//                    let roomMessage:JMSGMessage = JMSGMessage.createChatRoomMessage(with: content, chatRoomId: TEST_ROOM_ID)
+//
+                    self?.send(forCustom: [CUSTOM_CONTENT:text,CUSTOM_REWARD:"赏金:" + reward + " SEAT",CUSTOM_COMPLETETIME:"完成时限" + time])
                 }
-//                pubTaskView?.setPbCallClosure(closure: { [weak self] (text,isPut)  in
-//                    
-//                   
-//                })
                 
                self.view.addSubview(pubTaskView!)
                self.toolbar.isHidden = true
@@ -1101,30 +1145,6 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
         }
     }
     
-    fileprivate func FuWenBenDemo() -> NSMutableAttributedString?{
-        
-        //定义富文本即有格式的字符串
-        let attributedStrM : NSMutableAttributedString = NSMutableAttributedString()
-        
-        let qiuxuewei : NSAttributedString = NSAttributedString(string: "人类不相信罗辑", attributes: [ NSBackgroundColorAttributeName : UIColor.red,NSForegroundColorAttributeName : UIColor.green, NSFontAttributeName : UIFont.boldSystemFont(ofSize: 28.0)]) //(string: "邱学伟")
-        //是
-        let shi : NSAttributedString = NSAttributedString(string: "呵呵", attributes: [NSForegroundColorAttributeName : UIColor.blue, NSFontAttributeName : UIFont.systemFont(ofSize: 10.0)])
-        //大帅哥
-        let dashuaige : NSAttributedString = NSAttributedString(string: "时间简史", attributes: [NSForegroundColorAttributeName : UIColor.lightGray, NSFontAttributeName : UIFont.systemFont(ofSize: 42.0)])
-        //笑脸图片
-        
-        let smileImage : UIImage = UIImage.loadImage("笑脸")!
-        let textAttachment : NSTextAttachment = NSTextAttachment()
-        textAttachment.image = smileImage
-        textAttachment.bounds = CGRect(x: 0, y: -4, width: 22, height: 22)
-        
-        attributedStrM.append(qiuxuewei)
-        attributedStrM.append(shi)
-        attributedStrM.append(dashuaige)
-        attributedStrM.append(NSAttributedString(attachment: textAttachment))
-        
-        return attributedStrM;
-    }
     
     open func inputViewContentSize(_ inputView: UIView) -> CGSize {
         return CGSize(width: view.frame.width, height: 216)

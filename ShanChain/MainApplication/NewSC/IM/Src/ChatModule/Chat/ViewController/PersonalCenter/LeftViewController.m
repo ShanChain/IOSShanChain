@@ -12,12 +12,13 @@
 #import "ShanChain-Swift.h"
 #import "SCBaseNavigationController.h"
 
-@interface LeftViewController ()
+@interface LeftViewController ()<DUX_UploadUserIconDelegate>
 
 @property (nonatomic,weak) UITableView *tableView;
 
 @property (nonatomic,strong) NSArray *imageArray;
 @property (nonatomic,strong) NSArray *titleArray;
+@property (nonatomic,copy)   UIImageView   *icon;
 
 @end
 
@@ -32,14 +33,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = Theme_ViewBackgroundColor;
+    self.tableView.backgroundColor = Theme_ViewBackgroundColor;
     [self setupHeader];
     [self setupTableView];
     
 }
 
 - (void)setupHeader {
-    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kCWSCREENWIDTH * 0.75, 200)];
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kCWSCREENWIDTH * 0.75, 100)];
     imageV.backgroundColor = [UIColor clearColor];
     imageV.contentMode = UIViewContentModeScaleAspectFill;
     imageV.image = [UIImage imageNamed:@"1.jpg"];
@@ -50,26 +52,70 @@
     layerView.layer.shadowOffset = CGSizeMake(0, 7);
     layerView.layer.shadowOpacity = 0.3;
     layerView.layer.shadowRadius = 6;
-    layerView.layer.cornerRadius = 3;
+    [layerView _setCornerRadiusCircle];
     layerView.layer.shadowColor = [UIColor blackColor].CGColor;
     [self.view addSubview:layerView];
+    [layerView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changesIcon)]];
     [layerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@40);
-        make.top.equalTo(@40);
+        make.left.equalTo(@20);
+        make.top.equalTo(@50);
         make.width.height.equalTo(@64);
     }];
     
     UIImageView  *img = [[UIImageView alloc]init];
     img.image = [UIImage imageNamed:@"abs_addanewrole_def_photo_default"];
-    [img _setCornerRadiusCircle];
+    _icon = img;
     [layerView addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(layerView);
     }];
     [layerView signleDragable];
+    [img _setCornerRadiusCircle];
+    
+    UILabel  *nikeNameLb = [[UILabel alloc]init];
+    nikeNameLb.textColor = [UIColor whiteColor];
+    nikeNameLb.font = Font(17);
+    nikeNameLb.text = @"陈叔爱吃盐焗鸡";
+    [self.view addSubview:nikeNameLb];
+    [nikeNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.topMargin.equalTo(layerView).offset(-5);
+        make.left.equalTo(layerView.mas_right).offset(10);
+        make.width.mas_lessThanOrEqualTo(self.view.height - 150);
+        make.height.equalTo(@25);
+    }];
+    
+    UILabel  *signatureLb = [[UILabel alloc]init];
+    signatureLb.textColor = [UIColor whiteColor];
+    signatureLb.font = Font(13);
+    signatureLb.text = @"一直在努力的路上";
+    [self.view addSubview:signatureLb];
+    [signatureLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(nikeNameLb.mas_bottom).offset(10);
+        make.left.equalTo(layerView.mas_right).offset(10);
+        make.width.mas_lessThanOrEqualTo(self.view.height - 150);
+        make.height.equalTo(@25);
+    }];
+    
+    
+    UIButton  *editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [editBtn setImage:[UIImage imageNamed:@"发任务"] forState:0];
+    [editBtn addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:editBtn];
+    [editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(nikeNameLb.mas_right).offset(15);
+        make.firstBaseline.equalTo(nikeNameLb);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
 
 }
 
+- (void)edit{
+    DLog(@"编辑");
+}
+
+- (void)changesIcon{
+    [UPLOAD_IMAGE showActionSheetInFatherViewController:self imageTag:100 delegate:self];
+}
 - (void)setupTableView {
     
     _tableViewInfo = [[CWTableViewInfo alloc] initWithFrame:CGRectMake(0, 300, kCWSCREENWIDTH * 0.75, CGRectGetHeight(self.view.bounds)-300) style:UITableViewStylePlain];
@@ -159,6 +205,12 @@
                         @"我的认证"];
     }
     return _titleArray;
+}
+
+#pragma mark -- DUX_UploadUserIconDelegate
+
+-(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag{
+    _icon.image = image;
 }
 
 

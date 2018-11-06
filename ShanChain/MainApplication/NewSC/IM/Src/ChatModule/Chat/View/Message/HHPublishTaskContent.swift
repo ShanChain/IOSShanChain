@@ -17,13 +17,12 @@ class HHPublishTaskContent: NSObject,JCMessageContentType{
         super.init()
     }
     
-    public init(text: String) {
-        self.text = NSAttributedString(string: text)
+    public init(customDictionary:Dictionary<String, Any>) {
+        self.text =  NSAttributedString(string: "this is a test text")
         super.init()
-    }
-    public init(attributedText: NSAttributedString) {
-        self.text = attributedText
-        super.init()
+        self.taskContent = customDictionary[CUSTOM_CONTENT] as? String
+        self.reward = customDictionary[CUSTOM_REWARD] as? String
+        self.completeTime = customDictionary[CUSTOM_COMPLETETIME] as? String
     }
     
     

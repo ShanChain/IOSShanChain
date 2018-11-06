@@ -11,6 +11,12 @@ import JMessage
 
 let kConversationSticky = "kConversationSticky"
 
+@objc public enum ConversationType:Int{
+    case single = 1
+    case group
+    case chatRoom
+}
+
 extension ExJMessage where Base: JMSGConversation {
 
     /**
@@ -19,7 +25,16 @@ extension ExJMessage where Base: JMSGConversation {
     var isGroup: Bool {
         return base.conversationType == .group
     }
-
+    
+    var isChatRoom: Bool{
+        return base.conversationType == .chatRoom
+    }
+    
+    
+    var conversationType:ConversationType{
+        return ConversationType(rawValue: base.conversationType.rawValue)!
+    }
+        
     var stickyTime: Int {
         guard let extras = base.getExtras() else {
             return 0

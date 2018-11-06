@@ -27,13 +27,13 @@ open class JCMessage: NSObject, JCMessageType {
     open var content: JCMessageContentType
     open let options: JCMessageOptions
     open var updateSizeIfNeeded: Bool = false
-    open var unreadCount: Int = 0
+    open var unreadCount: Int = 0  //消息未读数
     open var targetType: MessageTargetType = .single
 }
 
 extension JMSGMessage {
     typealias Callback = (JMSGMessage, Data) -> Void
-
+   // 解析消息，得到JCMessage
     func parseMessage(_ delegate: JCMessageDelegate, _ updateMediaMessage: Callback? = nil) -> JCMessage {
 
         var msg: JCMessage!
@@ -41,7 +41,9 @@ extension JMSGMessage {
         let isCurrent = fromUser.isEqual(to: currentUser)
         let state = self.ex.state
         let isGroup = targetType == .group
-
+       
+      
+        
         switch(contentType) {
         case .text:
             if ex.isBusinessCard {
@@ -162,11 +164,16 @@ extension JMSGMessage {
                 msg.options.showsCard = !isCurrent
             }
         }
-        if isGroup {
+    
+        switch targetType {
+        case .group:
             msg.targetType = .group
-        } else {
+        case .chatRoom:
+            msg.targetType = .chatRoom
+        default:
             msg.targetType = .single
         }
+        
         msg.msgId = self.msgId
         msg.options.state = state
         if isCurrent {

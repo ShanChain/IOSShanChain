@@ -12,4 +12,6 @@
 
 - (void) makeTextStyleWithTitle:(NSString *)title withColor:(UIColor *)color withFont:(UIFont *)font withAlignment:(UITextAlignment)alignment;
 
+- (NSInteger)needLinesWithWidth:(CGFloat)width;
+
 @end

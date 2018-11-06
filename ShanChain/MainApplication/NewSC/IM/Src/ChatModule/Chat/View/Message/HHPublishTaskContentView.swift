@@ -36,6 +36,9 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
         contentLabel.text = _taskContent
         completeTimeLabel.text = _completeTime
         
+       let lineNumber = contentLabel.needLines(withWidth: CGFloat(self.contentLabelWidth))
+        contentLabel.textAlignment = lineNumber > 1 ? .left : .center
+        
         //自适应 更新frame
         if let  taskContent = _taskContent {
             contentLabel.frame = CGRect(x: 20, y: 50, width: self.contentLabelWidth, height: Int((taskContent.heightForAdaptive(Font: Font(14), CGFloat(self.contentLabelWidth))) + 10))

@@ -153,7 +153,11 @@
 }
 
 
-
+-(void)preventImageViewExtrudeDeformation{
+    self.contentMode = UIViewContentModeScaleAspectFill;
+    self.clipsToBounds = YES;
+    [self setContentScaleFactor:[[UIScreen mainScreen] scale]];
+}
 
 
 @end

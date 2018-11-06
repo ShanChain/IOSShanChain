@@ -212,7 +212,16 @@ class JCLoginViewController: UIViewController {
                 UserDefaults.standard.set(password, forKey: kCurrentUserPassword)
                 let appDelegate = UIApplication.shared.delegate
                 let window = appDelegate?.window!
-                window?.rootViewController = JCMainTabBarController()
+            //    window?.rootViewController = JCMainTabBarController()
+//                let conversation = JMSGConversation.chatRoomConversation(withRoomId: "15198852")
+                JMSGConversation.createChatRoomConversation(withRoomId: TEST_ROOM_ID) { (result, error) in
+                    let conv = result as! JMSGConversation
+                    let nav = JCNavigationController(rootViewController: HHChatRoomViewController(conversation: conv))
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)
+                    window?.rootViewController = nav
+                }
+              
+                
             } else {
                 MBProgressHUD_JChat.show(text: "\(String.errorAlert(error! as NSError))", view: self.view)
             }

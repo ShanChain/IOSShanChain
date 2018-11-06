@@ -86,7 +86,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.mapView viewWillAppear];
-    
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)sc_addOverlay{
@@ -314,19 +314,23 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 - (IBAction)joinPressed:(id)sender{
     
-
-    
-    [HHTool mainWindow].rootViewController = nil;
+    if (self.navigationController.navigationBarHidden) {
+        self.navigationController.navigationBarHidden = NO;
+    }
+   // [HHTool mainWindow].rootViewController = nil;
     if ([[NSUserDefaults standardUserDefaults]objectForKey:kCurrentUserName]){
-        JCMainTabBarController  *tabBarVC = [[JCMainTabBarController alloc]init];
-        [HHTool mainWindow].rootViewController = tabBarVC;
+//        JCMainTabBarController  *tabBarVC = [[JCMainTabBarController alloc]init];
+//        [HHTool mainWindow].rootViewController = tabBarVC;
 //        JCConversationListViewController *chatListView = [[JCConversationListViewController alloc]init];
 //         [self.navigationController pushViewController:chatListView animated:YES];
+        HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:[JMSGConversation chatRoomConversationWithRoomId:Test_RoomID]];
+        [self.navigationController pushViewController:roomVC animated:YES];
     }else{
         JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:[JCLoginViewController new]];
        // [self.navigationController pushViewController:nav animated:YES];
         [HHTool mainWindow].rootViewController = nav;
-
+        
+ 
     }
 }
 
