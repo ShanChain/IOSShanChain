@@ -25,4 +25,6 @@
 
 - (void)popToViewControllerClass:(Class)viewControllerClass withAnimation:(BOOL)animated;
 
+- (void)pushPage:(UIViewController *)viewController Animated:(BOOL)animated;
+
 @end

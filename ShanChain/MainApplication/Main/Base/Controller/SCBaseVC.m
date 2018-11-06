@@ -47,6 +47,7 @@
     [self registerNotification];
     // 静态布局
     [self layoutUI];
+    [self showNavigationBarWithNormalColor];
 }
 
 - (void)layoutUI {
@@ -97,6 +98,42 @@
     [self.navigationController popToRootViewControllerAnimated:animated];
 }
 
+- (void)pushPage:(UIViewController *)viewController Animated:(BOOL)animated{
+    if (self.navigationController.navigationBarHidden) {
+        self.navigationController.navigationBarHidden = NO;
+    }
+    [self.navigationController pushViewController:viewController animated:animated];
+}
+
+
+- (void)showNavigationBarWithNormalColor {
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithString:@"4FD1F6"];
+    [self.navigationController.navigationBar setBackgroundImage:nil  forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+   // self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];    
+    if (self.navigationItem.titleView && [self.navigationItem.titleView isKindOfClass:[UILabel class]]) {
+        UILabel *textLabel = (UILabel *)self.navigationItem.titleView;
+        textLabel.textColor = [UIColor blackColor];
+        
+    }
+
+    if (![self.navigationController.viewControllers.firstObject isEqual:self]) {
+        
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        [button setImage:[UIImage imageNamed:@"sc_com_icon_back"] forState:UIControlStateNormal];
+        //        [button setBackgroundImage:[UIImage imageNamed:@"arrowLeft.png"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(_back) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    }
+}
+
+- (void)_back {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -274,6 +274,11 @@
 		2293A755218FEA7F00FB977C /* CWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2293A753218FEA7F00FB977C /* CWTableViewCell.m */; };
 		2293A759218FEAB600FB977C /* LeftWalletTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2293A757218FEAB600FB977C /* LeftWalletTableViewCell.m */; };
 		2293A75A218FEAB600FB977C /* LeftWalletTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2293A758218FEAB600FB977C /* LeftWalletTableViewCell.xib */; };
+		22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9176E21918710002E5240 /* HHChatRoomViewController.xib */; };
+		22C917762191BDE5002E5240 /* MapFootprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917742191BDE5002E5240 /* MapFootprintViewController.swift */; };
+		22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917752191BDE5002E5240 /* MapFootprintViewController.xib */; };
+		22C9177B2191C06D002E5240 /* MapFootprintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917792191C06D002E5240 /* MapFootprintCell.swift */; };
+		22C9177C2191C06D002E5240 /* MapFootprintCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9177A2191C06D002E5240 /* MapFootprintCell.xib */; };
 		22D2477D21883596009C1E6A /* AppDelegate+Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D2477C21883596009C1E6A /* AppDelegate+Config.m */; };
 		22D2478121893C6E009C1E6A /* HHPublishTaskContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */; };
 		22D2478321893D40009C1E6A /* HHPublishTaskContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478221893D40009C1E6A /* HHPublishTaskContent.swift */; };
@@ -701,6 +706,7 @@
 		89E031561FCF916C0089240B /* SCAliyunUploadMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E031551FCF916C0089240B /* SCAliyunUploadMananger.m */; };
 		89E031591FD004550089240B /* SYStoryTransmitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E031581FD004540089240B /* SYStoryTransmitController.m */; };
 		89E0315C1FD026D40089240B /* SYComposePhotoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E0315B1FD026D30089240B /* SYComposePhotoViewCell.m */; };
+		9384F567A3FBF24D4092C609 /* Pods_ShanChain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9D6CD2BCD8D7F8763C8B7F /* Pods_ShanChain.framework */; };
 		9960490F1ED7C44F007634EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9960490E1ED7C44F007634EE /* AppDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -1054,6 +1060,11 @@
 		2293A756218FEAB600FB977C /* LeftWalletTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftWalletTableViewCell.h; sourceTree = "<group>"; };
 		2293A757218FEAB600FB977C /* LeftWalletTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftWalletTableViewCell.m; sourceTree = "<group>"; };
 		2293A758218FEAB600FB977C /* LeftWalletTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftWalletTableViewCell.xib; sourceTree = "<group>"; };
+		22C9176E21918710002E5240 /* HHChatRoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHChatRoomViewController.xib; sourceTree = "<group>"; };
+		22C917742191BDE5002E5240 /* MapFootprintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFootprintViewController.swift; sourceTree = "<group>"; };
+		22C917752191BDE5002E5240 /* MapFootprintViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFootprintViewController.xib; sourceTree = "<group>"; };
+		22C917792191C06D002E5240 /* MapFootprintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFootprintCell.swift; sourceTree = "<group>"; };
+		22C9177A2191C06D002E5240 /* MapFootprintCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFootprintCell.xib; sourceTree = "<group>"; };
 		22D2477B21883596009C1E6A /* AppDelegate+Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Config.h"; sourceTree = "<group>"; };
 		22D2477C21883596009C1E6A /* AppDelegate+Config.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Config.m"; sourceTree = "<group>"; };
 		22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHPublishTaskContentView.swift; sourceTree = "<group>"; };
@@ -1942,6 +1953,7 @@
 				89500F521FEA553300732CEB /* AliyunVideoCore.framework in Frameworks */,
 				485E65BB1F42862900B158BF /* libopencore-amrwb.a in Frameworks */,
 				33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */,
+				9384F567A3FBF24D4092C609 /* Pods_ShanChain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1974,6 +1986,9 @@
 		223F9872217F0BB70031DB95 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				22C917782191C04B002E5240 /* View */,
+				22C917742191BDE5002E5240 /* MapFootprintViewController.swift */,
+				22C917752191BDE5002E5240 /* MapFootprintViewController.xib */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -2127,6 +2142,7 @@
 				223F98C3217F12030031DB95 /* FileManagerViewController.swift */,
 				223F98C4217F12030031DB95 /* JCChatViewController.swift */,
 				223F9A4F2181CC4F0031DB95 /* HHChatRoomViewController.swift */,
+				22C9176E21918710002E5240 /* HHChatRoomViewController.xib */,
 				223F98C5217F12030031DB95 /* ImageFileViewController.swift */,
 				223F98C6217F12030031DB95 /* JCFileDownloadViewController.swift */,
 				223F98C7217F12030031DB95 /* JCGroupMembersViewController.swift */,
@@ -2689,6 +2705,15 @@
 				2293A756218FEAB600FB977C /* LeftWalletTableViewCell.h */,
 				2293A757218FEAB600FB977C /* LeftWalletTableViewCell.m */,
 				2293A758218FEAB600FB977C /* LeftWalletTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		22C917782191C04B002E5240 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22C917792191C06D002E5240 /* MapFootprintCell.swift */,
+				22C9177A2191C06D002E5240 /* MapFootprintCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4515,12 +4540,14 @@
 				223F9A04217F12040031DB95 /* area.plist in Resources */,
 				2281A21A216B6351009E95EE /* index.ios.js in Resources */,
 				4852A0D31FCE9F0300CDD7BE /* SCMessageSettingCell.xib in Resources */,
+				22C9177C2191C06D002E5240 /* MapFootprintCell.xib in Resources */,
 				22D2478B2189D5B3009C1E6A /* RecieveTaskView.xib in Resources */,
 				223F99BB217F12040031DB95 /* 定位2.png in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
 				4852A0D11FCE9F0300CDD7BE /* SCMessageCell.xib in Resources */,
 				4852A0E41FCE9F0300CDD7BE /* SYScreenInsideCell.xib in Resources */,
 				2242C0042159C34E00707024 /* YYHud.xcassets in Resources */,
+				22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */,
 				892B39D91FE8B0B400292A75 /* SYmarkCollectionViewCell.xib in Resources */,
 				223F9A7B2182C46D0031DB95 /* RoomTopView.xib in Resources */,
 				2218E18B217605DA00719844 /* BMKTestLocationViewController.xib in Resources */,
@@ -4534,6 +4561,7 @@
 				485E65AF1F42862900B158BF /* EaseUI.podspec in Resources */,
 				223F99E8217F12040031DB95 /* defaultTheme.bundle in Resources */,
 				3356B16C1F32F50700027E23 /* api.shanchain.com.cer in Resources */,
+				22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */,
 				485E66631F42873F00B158BF /* MJRefresh.bundle in Resources */,
 				223F99BC217F12040031DB95 /* jiantou2@2x.png in Resources */,
 				485E65F71F42862900B158BF /* MWPhotoBrowser.bundle in Resources */,
@@ -4636,6 +4664,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShanChain/Pods-ShanChain-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ASExtendedCircularMenu/ASExtendedCircularMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/AliyunOSSiOS/AliyunOSSiOS.framework",
 				"${PODS_ROOT}/Hyphenate/iOS_Pods_IMFullSDK_V3.5.1/Hyphenate.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
@@ -4652,6 +4681,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASExtendedCircularMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AliyunOSSiOS.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hyphenate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
@@ -5169,8 +5199,10 @@
 				223F998F217F12040031DB95 /* JCGroupSettingCell.swift in Sources */,
 				485E65D51F42862900B158BF /* MWPhotoBrowser.m in Sources */,
 				332AB5F11F4ED69F00888313 /* TYLinkTextStorage.m in Sources */,
+				22C917762191BDE5002E5240 /* MapFootprintViewController.swift in Sources */,
 				89500F551FEA5B2000732CEB /* SCStoryRecordController.m in Sources */,
 				48718D931F42277400010AA0 /* SDWebImageCompat.m in Sources */,
+				22C9177B2191C06D002E5240 /* MapFootprintCell.swift in Sources */,
 				48718D731F42277400010AA0 /* MJPhotoLoadingView.m in Sources */,
 				223F9976217F12040031DB95 /* JCChatViewLayout.swift in Sources */,
 				223F996F217F12040031DB95 /* JCMessage.swift in Sources */,

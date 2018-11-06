@@ -23,12 +23,11 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 @property (nonatomic,copy)   NSString  *latitude;
 @property (nonatomic,copy)   NSString  *longitude;
 @property (nonatomic,assign)  CLLocationCoordinate2D   pt;
-@property (weak, nonatomic) IBOutlet UILabel *locationLb;
 
-@property (weak, nonatomic) IBOutlet UIView *lcView;
+@property (weak, nonatomic) IBOutlet UIButton *locationBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;
-@property (weak, nonatomic) IBOutlet UIView *moreView;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *noteBtn;
 
@@ -36,25 +35,31 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 @property (weak, nonatomic) IBOutlet BMKMapView *mapView;
 
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+
 @property (nonatomic,assign)  BOOL    isLBS;
 
 @end
 
 @implementation BMKTestLocationViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"百度地图测试";
-    ViewRadius(self.joinBtn, 10);
+- (void)sc_ConfigurationUI{
+    
+    [self.view bringSubviewToFront:self.bottomView];
+    [self.joinBtn _setCornerRadiusCircle];
+    [self.noteBtn _setCornerRadiusCircle];
+    [self.footprintBtn _setCornerRadiusCircle];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    [self.lcView addRoundedCorners:UIRectCornerTopRight|UIRectCornerBottomRight withRadii:CGSizeMake(self.view.height/2.0, self.view.height/2.0)];
-    [self.moreView addRoundedCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight withRadii:CGSizeMake(self.view.height/2.0, self.view.height/2.0)];
     [self pn_ConfigurationMapView];
     _locService = [[BMKLocationService alloc]init];//定位功能的初始化
     _locService.delegate = self;//设置代理位self
     _locService.desiredAccuracy = kCLLocationAccuracyBest;
     [_locService startUserLocationService];//启动定位服务
-    [self addNavigationRightWithName:@"确定" withTarget:self withAction:@selector(determine)];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self sc_ConfigurationUI];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //初始化检索对象
         _searcher =[[BMKGeoCodeSearch alloc]init];
@@ -77,7 +82,6 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         annotation.coordinate = self.pt;
         annotation.title = @"您当前位置";
         [self.mapView addAnnotation:annotation];
-        
         
     });
     
@@ -182,6 +186,8 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 // 足迹
 - (IBAction)footprintPressed:(id)sender {
+    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]init];
+    [self pushPage:footprintVC Animated:YES];
 }
 
 - (void)determine{
@@ -229,8 +235,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         [self sc_getLbsCoordinate];// 上传用户实时坐标
         NSString *long_title = coordinate.longitude > 0 ?@"东经":@"西经";
         NSString *lat_title = coordinate.latitude > 0 ?@"北纬":@"南纬";
-        self.locationLb.text = [NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude];
-        
+        [self.locationBtn setTitle:[NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude] forState:0];
       
         
 //        [self reverseGeoCodeWithLatitude:latitude withLongitude:longitude];
@@ -314,9 +319,6 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 - (IBAction)joinPressed:(id)sender{
     
-    if (self.navigationController.navigationBarHidden) {
-        self.navigationController.navigationBarHidden = NO;
-    }
    // [HHTool mainWindow].rootViewController = nil;
     if ([[NSUserDefaults standardUserDefaults]objectForKey:kCurrentUserName]){
 //        JCMainTabBarController  *tabBarVC = [[JCMainTabBarController alloc]init];
@@ -324,7 +326,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 //        JCConversationListViewController *chatListView = [[JCConversationListViewController alloc]init];
 //         [self.navigationController pushViewController:chatListView animated:YES];
         HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:[JMSGConversation chatRoomConversationWithRoomId:Test_RoomID]];
-        [self.navigationController pushViewController:roomVC animated:YES];
+        [self pushPage:roomVC Animated:YES];
     }else{
         JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:[JCLoginViewController new]];
        // [self.navigationController pushViewController:nav animated:YES];

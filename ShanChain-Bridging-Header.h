@@ -21,7 +21,7 @@
 #import "DLSlideView.h"
 #import "DLTabedSlideView.h"
 #import "FMDB.h"
-#import "MJRefresh.h"
+
 
 #import "UIViewController+CWLateralSlide.h"
 #import "LeftViewController.h"
@@ -34,5 +34,6 @@
 #import "UIViewController+HRAlertViewController.h"
 #import "SCNetwork.h"
 #import "MJRefresh.h"
+#import "SCBaseVC.h"
 
 #endif /* ShanChain_Bridging_Header_h */

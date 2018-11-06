@@ -26,7 +26,7 @@ target 'ShanChain' do
     pod 'mob_sharesdk/ShareSDKPlatforms/SinaWeibo'
     pod 'mob_sharesdk/ShareSDKPlatforms/WeChat'
     
-    
+    pod ‘ASExtendedCircularMenu’, :git => 'https://github.com/anshul18895/ASExtendedCircularMenu'    
     #react-native
     pod ‘React’, :path => './react-native/node_modules/react-native', :subspecs => [
     'Core',             #核心库

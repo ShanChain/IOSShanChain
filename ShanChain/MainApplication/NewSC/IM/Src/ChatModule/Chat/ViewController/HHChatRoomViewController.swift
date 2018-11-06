@@ -10,22 +10,25 @@
 import UIKit
 import YHPhotoKit
 import MobileCoreServices
+import ASExtendedCircularMenu
 
-class HHChatRoomViewController: UIViewController {
+class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
+    @IBOutlet weak var taskButton: ASCircularMenuButton!
     open var conversation: JMSGConversation
-    
+    let colourArray: [UIColor] = [.red , .blue , .green]
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
     public required init(conversation: JMSGConversation) {
         self.conversation = conversation
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "HHChatRoomViewController", bundle: nil) // 加载xib视图
         automaticallyAdjustsScrollViewInsets = false;
         // if let 关键字是一个组合关键字。我们主要使用它解决Optional对象解包时产生空对象的处理
         if let draft = JCDraft.getDraft(conversation) {
             // 不为空时执行
             self.draft = draft // 获取编辑未发出的草稿
         }
+        
         
     }
     
@@ -36,19 +39,15 @@ class HHChatRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _init()
-        
-
-        JMSGChatRoom.getChatRoomInfos(withRoomIds: [TEST_ROOM_ID]) { (result, error) in
-            printLog(result)
-        }
-        JMSGChatRoom.getMyChatRoomListCompletionHandler { (result, error) in
-            printLog(result)
-        }
+        view.bringSubview(toFront: taskButton)
+        configureDynamicCircularMenuButton(button: taskButton, numberOfMenuItems: 2)
+        taskButton.menuButtonSize = .small
     }
     
     
+    
     override func loadView() {
-        super.loadView()
+       super.loadView()
         edgesForExtendedLayout = .all
         let frame = CGRect(x: 0, y: 64, width: self.view.width, height: self.view.height - 64)
         chatView = JCChatView(frame: frame, chatViewLayout: chatViewLayout)
@@ -57,6 +56,28 @@ class HHChatRoomViewController: UIViewController {
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         toolbar.delegate = self
         toolbar.text = draft
+        
+    }
+    
+    func buttonForIndexAt(_ menuButton: ASCircularMenuButton, indexForButton: Int) -> UIButton {
+        let button: UIButton = UIButton()
+        //        if menuButton == taskButton{
+        //            button.setBackgroundImage(UIImage.init(named: "shareicon.\(indexForButton + 1)"), for: .normal)
+        //        }
+        if menuButton == taskButton{
+             button.backgroundColor = SC_ThemeMainColor
+             button.setBackgroundImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
+            
+        }
+        
+        return button
+    }
+    
+    func didClickOnCircularMenuButton(_ menuButton: ASCircularMenuButton, indexForButton: Int, button: UIButton) {
+        if menuButton == taskButton{
+            
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -213,6 +234,8 @@ class HHChatRoomViewController: UIViewController {
         topView.expandClosure = { [weak self] (isExpand) in
             self?.toolbar.isHidden = isExpand
         }
+    
+        
         view.addSubview(topView)
         chatView.frame = CGRect(x: 0, y: topView.y + topView.height, width: self.view.width, height: self.view.height - 64 - topView.height)
         
@@ -1392,4 +1415,8 @@ extension HHChatRoomViewController: UIDocumentInteractionControllerDelegate {
         return view.frame
     }
 }
+
+
+
+
 
