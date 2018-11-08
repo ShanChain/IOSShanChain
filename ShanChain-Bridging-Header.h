@@ -31,6 +31,7 @@
 #import "DefMacro .h"
 #import "Masonry.h"
 #import "NSString+Addition.h"
+#import "NSString+Extension.h"
 #import "UIViewController+HRAlertViewController.h"
 #import "SCNetwork.h"
 #import "MJRefresh.h"

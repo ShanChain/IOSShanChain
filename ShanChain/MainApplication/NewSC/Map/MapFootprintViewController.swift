@@ -8,6 +8,13 @@
 
 import UIKit
 
+
+enum ControllerType:Int{
+    case footprint
+    case collection
+}
+
+
 class MapFootprintViewController: SCBaseVC {
     
 
@@ -15,18 +22,35 @@ class MapFootprintViewController: SCBaseVC {
     
     fileprivate  let  k_cellID  = "MapFootprintCell"
     
+    fileprivate var type:ControllerType = .footprint
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "足迹"
+        
         tableView.rowHeight = 150
         tableView.register(UINib.init(nibName: k_cellID, bundle: nil), forCellReuseIdentifier: k_cellID)
         tableView.reloadData()
         // Do any additional setup after loading the view.
     }
-   
-
+    
+     public required init(type:Int){
+        self.type = ControllerType.init(rawValue: type)!
+        super.init(nibName:"MapFootprintViewController" , bundle: nil)
+        switch self.type {
+        case .footprint:
+            title = "足迹"
+        case .collection:
+            title = "收藏夹"
+        }
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
-
 
 extension MapFootprintViewController:UITableViewDelegate,UITableViewDataSource{
     

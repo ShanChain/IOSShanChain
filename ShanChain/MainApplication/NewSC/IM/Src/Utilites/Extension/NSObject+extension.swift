@@ -20,11 +20,31 @@ extension UIView {
             layer.masksToBounds = newValue > 0
         }
     }
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue > 0 ? newValue : 0
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor {
+        get {
+            return UIColor(cgColor: layer.borderColor!)
+        }
+        set {
+            layer.borderColor = newValue.cgColor
+        }
+    }
 
 }
 
 extension UILabel{
     func needLines(withWidth width: CGFloat) -> Int {
+        if (self.text?.isEmpty)! {
+            return 1
+        }
         //创建一个labe
         let label = UILabel()
         //font和当前label保持一致
@@ -33,6 +53,7 @@ extension UILabel{
         var sum: Int = 0
         //总行数受换行符影响，所以这里计算总行数，需要用换行符分隔这段文字，然后计算每段文字的行数，相加即是总行数。
         let splitText = text?.components(separatedBy: "\n")
+       
         for sText: String in splitText! {
             label.text = sText
             //获取这段文字一行需要的size

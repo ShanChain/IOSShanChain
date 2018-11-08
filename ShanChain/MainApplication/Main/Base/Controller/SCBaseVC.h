@@ -27,4 +27,6 @@
 
 - (void)pushPage:(UIViewController *)viewController Animated:(BOOL)animated;
 
+- (void)showNavigationBarWithNormalColor;
+
 @end
