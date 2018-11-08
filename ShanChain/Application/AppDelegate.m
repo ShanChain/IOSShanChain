@@ -108,7 +108,7 @@
 - (void)setBMKManager{
     
     _mapManager = [[BMKMapManager alloc]init];
- //  [BMKMapManager setCoordinateTypeUsedInBaiduMapSDK:BMK_COORDTYPE_GPS];
+  // [BMKMapManager setCoordinateTypeUsedInBaiduMapSDK:BMK_COORDTYPE_GPS];
     // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
     BOOL ret = [_mapManager start:BMKAPPKEY  generalDelegate:nil];
     if (!ret) {

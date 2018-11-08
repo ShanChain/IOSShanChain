@@ -52,6 +52,7 @@ class TaskListContainerViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "悬赏任务"
         view.backgroundColor = UIColor.white
         automaticallyAdjustsScrollViewInsets = false
         view.addSubview(pageView)

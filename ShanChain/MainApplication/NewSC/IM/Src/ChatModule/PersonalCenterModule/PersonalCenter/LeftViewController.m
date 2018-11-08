@@ -162,7 +162,6 @@
         {
             
             TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
-            taskVC.title = @"悬赏任务";
             [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
             
         }

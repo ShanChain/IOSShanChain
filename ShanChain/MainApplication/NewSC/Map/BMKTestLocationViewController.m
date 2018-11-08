@@ -62,31 +62,6 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self sc_ConfigurationUI];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //初始化检索对象
-        _searcher =[[BMKGeoCodeSearch alloc]init];
-        _searcher.delegate = self;
-        //发起逆地理编码检索
-        // {self.latitude.doubleValue, self.longitude.doubleValue}
-        BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
-        reverseGeoCodeSearchOption.reverseGeoPoint = self.pt;
-        BOOL flag = [_searcher reverseGeoCode:reverseGeoCodeSearchOption];
-        if(flag)
-        {
-            NSLog(@"逆geo检索发送成功");
-        }
-        else
-        {
-            NSLog(@"逆geo检索发送失败");
-        }
-        
-        BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
-        annotation.coordinate = self.pt;
-        annotation.title = @"您当前位置";
-        [self.mapView addAnnotation:annotation];
-        
-    });
-    
     
 }
 
@@ -102,7 +77,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     //转换国测坐标（google地图、soso地图、aliyun地图、mapabc地图和amap地图所用坐标）至百度坐标
 //    CLLocationCoordinate2D testdic =  BMKCoordTrans(coor,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
     
-    CLLocationCoordinate2D coor[5] = {0};
+    CLLocationCoordinate2D coor[4] = {0};
     coor[0].latitude = 20.046381;
     coor[0].longitude = 110.325502;
   //  coor[0] = BMKCoordTrans(coor[0],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
@@ -120,12 +95,15 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     coor[3].longitude = 110.325502;
 //    coor[3] = BMKCoordTrans(coor[3],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
     
-    coor[4].latitude = 20.046381;
-    coor[4].longitude = 110.325502;
+//    coor[4].latitude = 20.046381;
+//    coor[4].longitude = 110.325502;
  //   coor[4] = BMKCoordTrans(coor[4],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
     
-    BMKPolyline* polyline = [BMKPolyline polylineWithCoordinates:coor count:5];
-    [self.mapView addOverlay:polyline];
+//    BMKPolyline* polyline = [BMKPolyline polylineWithCoordinates:coor count:5];
+//    [self.mapView addOverlay:polyline];
+    
+    BMKPolygon*  polygon = [BMKPolygon polygonWithCoordinates:coor count:4];
+    [_mapView addOverlay:polygon];
 }
 
 - (void)sc_getLbsCoordinate{
@@ -151,9 +129,10 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 - (void)pn_ConfigurationMapView{
     [self.mapView setMapType:BMKMapTypeStandard];//标准地图
     self.mapView.userTrackingMode = BMKUserTrackingModeNone;// 定位模式
-    self.mapView.zoomLevel = 20;//地图级别
+    self.mapView.zoomLevel = 18;//地图级别
     self.mapView.showsUserLocation = YES; //是否显示定位图层
     self.mapView.delegate = self;
+    self.mapView.mapScaleBarPosition = CGPointMake(50, 50);
     // _mapView.compassPosition = CGPointMake(ScreenWidth - 50, 25);//指南针的位置
     //打开实时路况图层
     //    [_mapView setTrafficEnabled:YES];
@@ -215,6 +194,33 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     NSLog(@"地图定位失败======%@",error);
 }
 
+- (void)mapViewDidFinishLoading:(BMKMapView *)mapView{
+    //初始化检索对象
+    _searcher =[[BMKGeoCodeSearch alloc]init];
+    _searcher.delegate = self;
+    //发起逆地理编码检索
+    // {self.latitude.doubleValue, self.longitude.doubleValue}
+    BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
+    reverseGeoCodeSearchOption.reverseGeoPoint = self.pt;
+    BOOL flag = [_searcher reverseGeoCode:reverseGeoCodeSearchOption];
+    if(flag)
+    {
+        NSLog(@"逆geo检索发送成功");
+    }
+    else
+    {
+        NSLog(@"逆geo检索发送失败");
+    }
+    
+    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+    annotation.coordinate = self.pt;
+    annotation.title = @"您当前位置";
+    [self.mapView addAnnotation:annotation];
+    
+    [self sc_addOverlay];
+}
+
+
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
@@ -262,7 +268,13 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     return _locService;
 }
 
+- (void)mapView:(BMKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
+    NSLog(@"regionWillChangeAnimated == %f",mapView.zoomLevel);
+}
 
+- (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+    NSLog(@"regionDidChangeAnimated == %f",mapView.zoomLevel);
+}
 
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
     
@@ -315,10 +327,26 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         polylineView.lineDash = YES;
         return polylineView;
     }
+    
+    if ([overlay isKindOfClass:[BMKPolygon class]]){
+        BMKPolygonView* polygonView = [[BMKPolygonView alloc] initWithOverlay:overlay];
+        polygonView.strokeColor = [[UIColor alloc] initWithRed:0.0 green:0 blue:0.5 alpha:1];
+//        polygonView.fillColor = [[UIColor alloc] initWithRed:0 green:1 blue:1 alpha:0.2];
+        polygonView.lineWidth =2.0;
+        polygonView.lineDash = YES;
+        return polygonView;
+    }
+    
     return nil;
 }
 
+- (void)mapView:(BMKMapView *)mapView onClickedBMKOverlayView:(BMKOverlayView *)overlayView{
+    
+}
 
+- (void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate{
+    
+}
 
 
 - (IBAction)joinPressed:(id)sender{

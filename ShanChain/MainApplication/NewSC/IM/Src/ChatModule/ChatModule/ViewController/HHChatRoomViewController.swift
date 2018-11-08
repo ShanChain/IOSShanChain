@@ -12,6 +12,7 @@ import YHPhotoKit
 import MobileCoreServices
 import ASExtendedCircularMenu
 
+
 class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     @IBOutlet weak var taskButton: ASCircularMenuButton!
@@ -77,7 +78,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     func didClickOnCircularMenuButton(_ menuButton: ASCircularMenuButton, indexForButton: Int, button: UIButton) {
-        if  indexForButton == 1{
+        if  indexForButton == 0{
             // 发布任务
             UIView .animate(withDuration: 0.2) {
                 let pubTaskView:PublishTaskView? =
@@ -99,6 +100,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                 self.toolbar.isHidden = true
                 
             }
+        }else{
+             let vc = TaskListContainerViewController()
+             self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }
