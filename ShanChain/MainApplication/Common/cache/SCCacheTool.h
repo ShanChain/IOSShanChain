@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SavePublishContentModel.h"
+#import "SCCharacterModel.h"
 
 @interface SCCacheTool : NSObject
 
@@ -82,5 +83,7 @@
 
 
 @property   (nonatomic,strong)  SavePublishContentModel  *editContentModel;
+@property   (nonatomic,strong)  SCCharacterModel         *characterModel;
+
 
 @end

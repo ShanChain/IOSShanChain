@@ -182,6 +182,7 @@ extension UIView {
             zm_damping = damping
             signleAnimator()
             signleAddPanGesture()
+            
         }
     }
     

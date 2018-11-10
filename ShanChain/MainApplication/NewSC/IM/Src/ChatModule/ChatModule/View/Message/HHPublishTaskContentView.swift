@@ -56,6 +56,9 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
        addSubview(contentLabel)
        addSubview(completeTimeLabel)
        addSubview(receiveBtn)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(_tapAction))
+        addGestureRecognizer(tap)
+        
     }
     
     
@@ -151,14 +154,9 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
         _delegate?.message?(message: _message, receiveTask: "111")
     }
     
-    func _comment(){
-        // 评论
-        _delegate?.message?(message: _message, commentTask: "111")
+     func _tapAction(){
+        _delegate?.clickTaskMessage!(message: _message, tuple: ("1111"))
     }
     
-    func _like()  {
-        // 点赞
-        _delegate?.message?(message: _message, likeTask: "111")
-    }
     
 }

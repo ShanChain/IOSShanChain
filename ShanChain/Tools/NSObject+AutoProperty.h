@@ -19,6 +19,9 @@ typedef NS_ENUM(NSInteger, AppNetworkReachabilityStatus) {
 
 @interface NSObject (AutoProperty)
 
+
+@property  (nonatomic,strong)  NSString     *mark; //唯一标记
+
 //字典转模型
 +(void)printPropertyWithDict:(NSDictionary *)dict;
 

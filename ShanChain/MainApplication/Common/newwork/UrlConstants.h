@@ -86,7 +86,8 @@
 #define  SET_DEVICE_TOKEN @"/v1/user/deviceToken"
 #define BIND_OTHER_ACCOUNT @"/v1/user/bind_other_account"
 
-#define  GETCOORDINATE  @"/v1/lbs/coordinate" // 上传用户实时坐标
+#define  GETCOORDINATE  @"/v1/lbs/coordinate/infos" // 获取当前位置及周边聊天室信息
+#define  COORDINATEINFO  @"/v1/lbs/coordinate/info" // 获获取当前位置聊天室信息
 
 #pragma mark - 登录注册
 //创建用户

@@ -12,6 +12,10 @@
 		2218E191217606D900719844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E190217606D900719844 /* QuartzCore.framework */; };
 		2218E193217606E200719844 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E192217606E200719844 /* OpenGLES.framework */; };
 		2218E195217606FA00719844 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E194217606FA00719844 /* Security.framework */; };
+		221BBD3121955E6D0004EE03 /* SC_URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD3021955E6C0004EE03 /* SC_URL.swift */; };
+		221BBD352195889C0004EE03 /* SCCharacterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD342195889C0004EE03 /* SCCharacterModel.m */; };
+		221BBD372195A5300004EE03 /* JGUserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD362195A5300004EE03 /* JGUserLoginService.swift */; };
+		221BBD3A2196B76B0004EE03 /* CoordnateInfosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD392196B76B0004EE03 /* CoordnateInfosModel.m */; };
 		221E355B215C6100003FAA73 /* UIImageView+sd.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355A215C6100003FAA73 /* UIImageView+sd.m */; };
 		221E355E215C6C83003FAA73 /* UIViewController+HRAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355D215C6C83003FAA73 /* UIViewController+HRAlertViewController.m */; };
 		2228491D2176DD0F00CDC86C /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222849182176DD0E00CDC86C /* BaiduMapAPI_Cloud.framework */; };
@@ -286,6 +290,12 @@
 		22C917A22192E4D1002E5240 /* LeftWalletTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C9179B2192E4D1002E5240 /* LeftWalletTableViewCell.m */; };
 		22C917A62192E5AA002E5240 /* RealNameVeifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917A42192E5AA002E5240 /* RealNameVeifiedViewController.swift */; };
 		22C917A72192E5AA002E5240 /* RealNameVeifiedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917A52192E5AA002E5240 /* RealNameVeifiedViewController.xib */; };
+		22C917A9219424B5002E5240 /* TaskListBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917A8219424B5002E5240 /* TaskListBackView.swift */; };
+		22C917AB219424FF002E5240 /* TaskListBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917AA219424FF002E5240 /* TaskListBackView.xib */; };
+		22C917AE21943014002E5240 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917AC21943014002E5240 /* TaskDetailsViewController.swift */; };
+		22C917AF21943014002E5240 /* TaskDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917AD21943014002E5240 /* TaskDetailsViewController.xib */; };
+		22C917B22194402D002E5240 /* TaskContentDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917B02194402D002E5240 /* TaskContentDetailsCell.swift */; };
+		22C917B32194402D002E5240 /* TaskContentDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917B12194402D002E5240 /* TaskContentDetailsCell.xib */; };
 		22D2477D21883596009C1E6A /* AppDelegate+Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D2477C21883596009C1E6A /* AppDelegate+Config.m */; };
 		22D2478121893C6E009C1E6A /* HHPublishTaskContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */; };
 		22D2478321893D40009C1E6A /* HHPublishTaskContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2478221893D40009C1E6A /* HHPublishTaskContent.swift */; };
@@ -757,6 +767,12 @@
 		2218E190217606D900719844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2218E192217606E200719844 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2218E194217606FA00719844 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		221BBD3021955E6C0004EE03 /* SC_URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SC_URL.swift; sourceTree = "<group>"; };
+		221BBD332195889C0004EE03 /* SCCharacterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCharacterModel.h; sourceTree = "<group>"; };
+		221BBD342195889C0004EE03 /* SCCharacterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCharacterModel.m; sourceTree = "<group>"; };
+		221BBD362195A5300004EE03 /* JGUserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGUserLoginService.swift; sourceTree = "<group>"; };
+		221BBD382196B76B0004EE03 /* CoordnateInfosModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordnateInfosModel.h; sourceTree = "<group>"; };
+		221BBD392196B76B0004EE03 /* CoordnateInfosModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordnateInfosModel.m; sourceTree = "<group>"; };
 		221E3559215C6100003FAA73 /* UIImageView+sd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+sd.h"; sourceTree = "<group>"; };
 		221E355A215C6100003FAA73 /* UIImageView+sd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+sd.m"; sourceTree = "<group>"; };
 		221E355C215C6C83003FAA73 /* UIViewController+HRAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HRAlertViewController.h"; sourceTree = "<group>"; };
@@ -1079,6 +1095,12 @@
 		22C9179C2192E4D1002E5240 /* CWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewCell.h; sourceTree = "<group>"; };
 		22C917A42192E5AA002E5240 /* RealNameVeifiedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNameVeifiedViewController.swift; sourceTree = "<group>"; };
 		22C917A52192E5AA002E5240 /* RealNameVeifiedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RealNameVeifiedViewController.xib; sourceTree = "<group>"; };
+		22C917A8219424B5002E5240 /* TaskListBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListBackView.swift; sourceTree = "<group>"; };
+		22C917AA219424FF002E5240 /* TaskListBackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListBackView.xib; sourceTree = "<group>"; };
+		22C917AC21943014002E5240 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
+		22C917AD21943014002E5240 /* TaskDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskDetailsViewController.xib; sourceTree = "<group>"; };
+		22C917B02194402D002E5240 /* TaskContentDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskContentDetailsCell.swift; sourceTree = "<group>"; };
+		22C917B12194402D002E5240 /* TaskContentDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskContentDetailsCell.xib; sourceTree = "<group>"; };
 		22D2477B21883596009C1E6A /* AppDelegate+Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Config.h"; sourceTree = "<group>"; };
 		22D2477C21883596009C1E6A /* AppDelegate+Config.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Config.m"; sourceTree = "<group>"; };
 		22D2478021893C6E009C1E6A /* HHPublishTaskContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHPublishTaskContentView.swift; sourceTree = "<group>"; };
@@ -1988,6 +2010,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		221BBD32219588360004EE03 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				221BBD332195889C0004EE03 /* SCCharacterModel.h */,
+				221BBD342195889C0004EE03 /* SCCharacterModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		223F9871217F0BB70031DB95 /* NewSC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2265,6 +2296,7 @@
 			isa = PBXGroup;
 			children = (
 				223F98ED217F12040031DB95 /* UserDefaultValidationService.swift */,
+				221BBD362195A5300004EE03 /* JGUserLoginService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2701,6 +2733,8 @@
 				22C9178521928468002E5240 /* View */,
 				225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */,
 				225052BD218BF67E001FBD65 /* TaskListViewController.swift */,
+				22C917AC21943014002E5240 /* TaskDetailsViewController.swift */,
+				22C917AD21943014002E5240 /* TaskDetailsViewController.xib */,
 			);
 			path = TaskModule;
 			sourceTree = "<group>";
@@ -2718,6 +2752,8 @@
 		22C9177E219274A8002E5240 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				221BBD382196B76B0004EE03 /* CoordnateInfosModel.h */,
+				221BBD392196B76B0004EE03 /* CoordnateInfosModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2727,6 +2763,10 @@
 			children = (
 				22C91787219284B5002E5240 /* TaskListCell.swift */,
 				22C91788219284B5002E5240 /* TaskListCell.xib */,
+				22C917A8219424B5002E5240 /* TaskListBackView.swift */,
+				22C917AA219424FF002E5240 /* TaskListBackView.xib */,
+				22C917B02194402D002E5240 /* TaskContentDetailsCell.swift */,
+				22C917B12194402D002E5240 /* TaskContentDetailsCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3016,6 +3056,7 @@
 				996049981ED8347A007634EE /* SCHeaderFile.h */,
 				1873FA0D212E882900C1088E /* DefMacro .h */,
 				222EF6172187E526005B89EF /* DefConst.swift */,
+				221BBD3021955E6C0004EE03 /* SC_URL.swift */,
 				22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */,
 				223F9874217F0C870031DB95 /* ShanChain-Bridging-Header.h */,
 				33B7CD051EC5865700FB6378 /* ShanChainTests */,
@@ -3490,6 +3531,7 @@
 		4852A09B1FCE9F0300CDD7BE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				221BBD32219588360004EE03 /* Model */,
 				4852A09C1FCE9F0300CDD7BE /* SCInitPasswordController.h */,
 				4852A09D1FCE9F0300CDD7BE /* SCInitPasswordController.m */,
 				4852A09E1FCE9F0300CDD7BE /* SCLoginController.h */,
@@ -4604,6 +4646,7 @@
 				22C9177C2191C06D002E5240 /* MapFootprintCell.xib in Resources */,
 				22D2478B2189D5B3009C1E6A /* RecieveTaskView.xib in Resources */,
 				223F99BB217F12040031DB95 /* 定位2.png in Resources */,
+				22C917AB219424FF002E5240 /* TaskListBackView.xib in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
 				4852A0D11FCE9F0300CDD7BE /* SCMessageCell.xib in Resources */,
 				4852A0E41FCE9F0300CDD7BE /* SYScreenInsideCell.xib in Resources */,
@@ -4639,6 +4682,7 @@
 				4852A12C1FCE9F0300CDD7BE /* SYMarkCollection1Cell.xib in Resources */,
 				223F99BF217F12040031DB95 /* AddMapTableViewCell.xib in Resources */,
 				4852A0CF1FCE9F0300CDD7BE /* SCContactFriendCell.xib in Resources */,
+				22C917B32194402D002E5240 /* TaskContentDetailsCell.xib in Resources */,
 				223F996B217F12040031DB95 /* emoticons.bundle in Resources */,
 				223F99EE217F12040031DB95 /* JCMessageImageCollectionViewCell.xib in Resources */,
 				4852A0D91FCE9F0300CDD7BE /* SYChatListCell.xib in Resources */,
@@ -4659,6 +4703,7 @@
 				223F99BA217F12040031DB95 /* 定位1.png in Resources */,
 				33B7CCF71EC5865700FB6378 /* Main.storyboard in Resources */,
 				222EF6142186A417005B89EF /* PublishTaskView.xib in Resources */,
+				22C917AF21943014002E5240 /* TaskDetailsViewController.xib in Resources */,
 				892B39E91FE8EC0300292A75 /* AliyunImageSource.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4799,6 +4844,7 @@
 				223F99CF217F12040031DB95 /* JCMineViewController.swift in Sources */,
 				223F9A0B217F12040031DB95 /* DLFixedTabbarView.m in Sources */,
 				485E65E41F42862900B158BF /* UIImage+EMGIF.m in Sources */,
+				221BBD372195A5300004EE03 /* JGUserLoginService.swift in Sources */,
 				48718D751F42277400010AA0 /* MJPhotoToolbar.m in Sources */,
 				4852A0FE1FCE9F0300CDD7BE /* SYStoryConcernController.m in Sources */,
 				485E65DA1F42862900B158BF /* EMSDImageCache.m in Sources */,
@@ -5028,10 +5074,12 @@
 				890AF0BE1FECE0C500396169 /* SCDynamicModel.m in Sources */,
 				223F99C3217F12040031DB95 /* JCJChatInfoCell.swift in Sources */,
 				485E65F61F42862900B158BF /* PSTGridLayoutSection.m in Sources */,
+				22C917AE21943014002E5240 /* TaskDetailsViewController.swift in Sources */,
 				485E65EB1F42862900B158BF /* PSTCollectionView.m in Sources */,
 				223F9A15217F12040031DB95 /* JCVideoManager.swift in Sources */,
 				33C1A17E1F4C50FB003E22CA /* MASViewAttribute.m in Sources */,
 				4852A1061FCE9F0300CDD7BE /* SYStoryRoleSelectController.m in Sources */,
+				22C917A9219424B5002E5240 /* TaskListBackView.swift in Sources */,
 				223F9A3E217F12B80031DB95 /* JCMoreResultViewController.swift in Sources */,
 				4852A1261FCE9F0300CDD7BE /* SCSeFriendCell.m in Sources */,
 				485E66201F42862900B158BF /* EaseFaceView.m in Sources */,
@@ -5225,6 +5273,7 @@
 				222EF6182187E527005B89EF /* DefConst.swift in Sources */,
 				4852A14B1FCE9F0400CDD7BE /* SCPhotoLibrary.m in Sources */,
 				4852A0DB1FCE9F0300CDD7BE /* SYMeetSomeHeadView.m in Sources */,
+				221BBD352195889C0004EE03 /* SCCharacterModel.m in Sources */,
 				223F9A44217F12B80031DB95 /* JCGroupNameViewController.swift in Sources */,
 				8997A5DD1FE505BA0024B3AB /* SYGuiderScrollview.m in Sources */,
 				332AB5EF1F4ED69F00888313 /* TYImageCache.m in Sources */,
@@ -5233,6 +5282,7 @@
 				4852A1351FCE9F0300CDD7BE /* SYStoryRoleSelectCell.m in Sources */,
 				223F9992217F12040031DB95 /* JCMessageCardView.swift in Sources */,
 				223F999D217F12040031DB95 /* JCConversationListViewController.swift in Sources */,
+				22C917B22194402D002E5240 /* TaskContentDetailsCell.swift in Sources */,
 				890AF0C51FECEE2600396169 /* SCDynamicDetailView.m in Sources */,
 				485E661B1F42862900B158BF /* EaseBubbleView.m in Sources */,
 				485E65FE1F42862900B158BF /* NSString+Valid.m in Sources */,
@@ -5330,6 +5380,7 @@
 				485E66021F42862900B158BF /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
 				8951B5881FE0F7A300961544 /* SYPoppedAuxiliaryView.m in Sources */,
 				89E031501FCECBA70089240B /* GWLPhotoGroupDetailController.m in Sources */,
+				221BBD3A2196B76B0004EE03 /* CoordnateInfosModel.m in Sources */,
 				8952A03A1FDB916200312243 /* SYStoryNovelReadController.m in Sources */,
 				4852A1031FCE9F0300CDD7BE /* SYStoryRealTimeController.m in Sources */,
 				4852A0CC1FCE9F0300CDD7BE /* SYMyGroupModel.m in Sources */,
@@ -5342,6 +5393,7 @@
 				223F99EA217F12040031DB95 /* Extensions.swift in Sources */,
 				22D2478321893D40009C1E6A /* HHPublishTaskContent.swift in Sources */,
 				890AF0AE1FEBBB3300396169 /* SCShareManager.m in Sources */,
+				221BBD3121955E6D0004EE03 /* SC_URL.swift in Sources */,
 				223F99C8217F12040031DB95 /* JCDatePickerViwe.swift in Sources */,
 				899CD91F1FD958E7007D3D7A /* SYAuxiliaryAddController.m in Sources */,
 				223F99CD217F12040031DB95 /* JCRegisterInfoViewController.swift in Sources */,

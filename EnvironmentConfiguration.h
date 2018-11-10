@@ -13,7 +13,7 @@
 #define Prtocol @"http://"
 
 
-#define PN_ENVIRONMENT 3
+#define PN_ENVIRONMENT 2
 
 
 #if PN_ENVIRONMENT == 0
@@ -40,8 +40,10 @@
 
 #elif PN_ENVIRONMENT == 2
 
-#define HostName @"95.169.24.11"
-#define PORT @"8081"
+#define HostName @"test.qianqianshijie.com"
+#define Base_url [NSString stringWithFormat:@"%@%@",Prtocol,HostName]
+#define SC_BASE_PORT_8082  Base_url
+#define SC_BASE_PORT_8083  Base_url
 
 
 #elif PN_ENVIRONMENT == 3

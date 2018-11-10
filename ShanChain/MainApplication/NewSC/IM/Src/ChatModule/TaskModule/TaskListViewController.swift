@@ -19,7 +19,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         let H: CGFloat = glt_iphoneX ? (self.view.bounds.height - 64 - 24 - 34) : self.view.bounds.height  - 64
         let tableView = self.tableViewConfig(CGRect(x: 0, y: 0, width: self.view.bounds.width, height: H), self, self, nil)
         tableView.register(UINib.init(nibName: H_TaskListCellID, bundle: nil), forCellReuseIdentifier: H_TaskListCellID)
-        tableView.estimatedRowHeight = 50
+        tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         return tableView
     }()
@@ -106,7 +106,14 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("点击了第\(indexPath.row + 1)行")
+        let cell = tableView.cellForRow(at: indexPath) as? TaskListCell
+        if (cell?.revealedCardIsFlipped)!{
+            cell?.flipRevealedCardBack()
+        }else{
+            let backView = TaskListBackView(frame: (cell?.frame)!)
+            cell?.flipRevealedCard(toView: backView)
+        }
+        
     }
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 100.0

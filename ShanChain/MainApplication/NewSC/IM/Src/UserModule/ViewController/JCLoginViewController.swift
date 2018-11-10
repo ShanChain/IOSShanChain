@@ -196,36 +196,41 @@ class JCLoginViewController: UIViewController {
         }
         
         MBProgressHUD_JChat.showMessage(message: "登录中", toView: view)
-        JMSGUser.login(withUsername: username, password: password) { (result, error) in
-            MBProgressHUD_JChat.hide(forView: self.view, animated: true)
-            if error == nil {
-                UserDefaults.standard.set(username, forKey: kLastUserName)
-                JMSGUser.myInfo().thumbAvatarData({ (data, id, error) in
-                    if let data = data {
-                        let imageData = NSKeyedArchiver.archivedData(withRootObject: data)
-                        UserDefaults.standard.set(imageData, forKey: kLastUserAvator)
-                    } else {
-                        UserDefaults.standard.removeObject(forKey: kLastUserAvator)
-                    }
-                })
-                UserDefaults.standard.set(username, forKey: kCurrentUserName)
-                UserDefaults.standard.set(password, forKey: kCurrentUserPassword)
+        JGUserLoginService.jg_userLogin(username: username, password: password, loginComplete: { (result, error) in
+            if error == nil{
                 let appDelegate = UIApplication.shared.delegate
                 let window = appDelegate?.window!
-            //    window?.rootViewController = JCMainTabBarController()
-//                let conversation = JMSGConversation.chatRoomConversation(withRoomId: "15198852")
                 JMSGConversation.createChatRoomConversation(withRoomId: TEST_ROOM_ID) { (result, error) in
                     let conv = result as! JMSGConversation
                     let nav = JCNavigationController(rootViewController: HHChatRoomViewController(conversation: conv, isJoinChat: true))
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)
                     window?.rootViewController = nav
                 }
-              
-                
-            } else {
-                MBProgressHUD_JChat.show(text: "\(String.errorAlert(error! as NSError))", view: self.view)
+            }else{
+                MBProgressHUD_JChat.show(text: "\(String.errorAlert(error as! NSError))", view: self.view)
             }
-        }
+        })
+        
+//        JMSGUser.login(withUsername: username, password: password) { (result, error) in
+//            MBProgressHUD_JChat.hide(forView: self.view, animated: true)
+//            if error == nil {
+//                UserDefaults.standard.set(username, forKey: kLastUserName)
+//                JMSGUser.myInfo().thumbAvatarData({ (data, id, error) in
+//                    if let data = data {
+//                        let imageData = NSKeyedArchiver.archivedData(withRootObject: data)
+//                        UserDefaults.standard.set(imageData, forKey: kLastUserAvator)
+//                    } else {
+//                        UserDefaults.standard.removeObject(forKey: kLastUserAvator)
+//                    }
+//                })
+//                UserDefaults.standard.set(username, forKey: kCurrentUserName)
+//                UserDefaults.standard.set(password, forKey: kCurrentUserPassword)
+//
+//
+//            } else {
+//                MBProgressHUD_JChat.show(text: "\(String.errorAlert(error! as NSError))", view: self.view)
+//            }
+//        }
     }
     
     func _clickRegisterButton() {

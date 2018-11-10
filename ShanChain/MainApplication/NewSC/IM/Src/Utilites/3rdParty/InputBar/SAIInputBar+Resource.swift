@@ -43,7 +43,7 @@ public extension SAIInputBar {
     private func _setupForDefault() {
         
         let lbs = [
-            _barItem("kb:task", "sc_com_icon_publishTask", "sc_com_icon_publishTask"), // 发布任务
+//            _barItem("kb:task", "sc_com_icon_publishTask", "sc_com_icon_publishTask"), // 发布任务
             _barItem("kb:audio", "YH_KB_Voice", "sc_com_icon_sendText")
             
         ]

@@ -19,7 +19,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     @IBOutlet weak var joinCahtView: UIView!
     open var conversation: JMSGConversation
-
+    
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
     public required init(conversation: JMSGConversation, isJoinChat:Bool) {
@@ -52,9 +52,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     
     override func loadView() {
-       super.loadView()
+        super.loadView()
         edgesForExtendedLayout = .all
-        let frame = CGRect(x: 0, y: 64, width: self.view.width, height: self.view.height - 64)
+        let frame = CGRect(x: 0, y: 64, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64)
         chatView = JCChatView(frame: frame, chatViewLayout: chatViewLayout)
         chatView.delegate = self
         chatView.messageDelegate = self
@@ -70,7 +70,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         if menuButton == taskButton{
             button.backgroundColor = SC_ThemeMainColor
             button .setImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
-//             button.setBackgroundImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
+            //             button.setBackgroundImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
             
         }
         
@@ -78,22 +78,27 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     func didClickOnCircularMenuButton(_ menuButton: ASCircularMenuButton, indexForButton: Int, button: UIButton) {
-        if  indexForButton == 0{
+        if  indexForButton == 1{
             // 发布任务
             UIView .animate(withDuration: 0.2) {
                 let pubTaskView:PublishTaskView? =
-                    PublishTaskView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight)))
+                    PublishTaskView(frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
                 pubTaskView?.cornerRadius = 0.01
                 pubTaskView?.borderColor = .clear
                 // 点击发布任务回调
                 
-                pubTaskView?.pbCallClosure = { [weak self] (text,reward,time,isPut)  in
+                pubTaskView?.pbCallClosure = { [weak self] (dataString,reward,time,timestamp,isPut)  in
                     pubTaskView?.dismiss()
                     self?.toolbar.isHidden = false
                     if isPut == false{
                         return
                     }
-                    self?.send(forCustom: [CUSTOM_CONTENT:text,CUSTOM_REWARD:"赏金:" + reward + " SEAT",CUSTOM_COMPLETETIME:"完成时限" + time])
+                    
+                    SCNetwork.shareInstance().hh_post(withUrl: TASK_ADD_URL, params: ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":"12766207","time":timestamp], showLoading: true, call: { (result, error) in
+                        
+                        
+                    })
+                    self?.send(forCustom: [CUSTOM_CONTENT:dataString,CUSTOM_REWARD:"赏金:" + reward + " SEAT",CUSTOM_COMPLETETIME:"完成时限" + time])
                 }
                 
                 self.view.addSubview(pubTaskView!)
@@ -101,14 +106,16 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                 
             }
         }else{
-             let vc = TaskListContainerViewController()
-             self.navigationController?.pushViewController(vc, animated: true)
+            // 查看任务
+            let vc = TaskListContainerViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }
     
     @IBAction func joinAction(_ sender: Any) {
         isJoinChatRoom = true
+        taskButton.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,9 +125,11 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         if !isJoinChatRoom {
             toolbar.isHidden = true
             joinCahtView.isHidden = false
+            taskButton.isHidden = true
         }else{
             toolbar.isHidden = false
             joinCahtView.isHidden = true
+            taskButton.isHidden = false
         }
         navigationController?.navigationBar.barTintColor = .white
     }
@@ -129,18 +138,14 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         navTitleView.isHidden = true
-       
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-//        if let group = conversation.target as? JMSGGroup {
-//            // 如果是群组获取群组昵称
-//            self.title = group.displayName()
-//        }
         // 增加侧滑返回
-      //  navigationController?.interactivePopGestureRecognizer?.delegate = self
+        //  navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -148,14 +153,18 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         navigationController?.navigationBar.isTranslucent = true
         // 更新草稿内容
         JCDraft.update(text: toolbar.text, conversation: conversation)
+        JMessage.remove(self, with: conversation)// 移除监听(delegate)
+        if conversation.conversationType == .chatRoom{
+            let chatRoom = conversation.target as? JMSGChatRoom
+            JMSGChatRoom.leaveChatRoom(withRoomId: (chatRoom?.roomID)!, completionHandler: nil)
+        }
     }
     
     deinit {
-        
         //析构函数 类似OC的delloc
         NotificationCenter.default.removeObserver(self)
-        JMessage.remove(self, with: conversation)// 移除监听(delegate)
         navTitleView.removeFromSuperview()
+       
     }
     
     private var draft: String?
@@ -164,9 +173,11 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             if !newValue {
                 toolbar.isHidden = true
                 joinCahtView.isHidden = false
+                taskButton.isHidden = true
             }else{
                 toolbar.isHidden = false
                 joinCahtView.isHidden = true
+                taskButton.isHidden = false
             }
         }
     }
@@ -198,7 +209,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         return picker
     }()
     
-  
+    
     
     // 表情对象数组
     fileprivate lazy var _emoticonGroups: [JCCEmoticonGroup] = {
@@ -269,7 +280,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     private func _init() {
         myAvator = UIImage.getMyAvator()
-      //  _updateTitle()
+        //  _updateTitle()
         view.backgroundColor = .white
         JMessage.add(self, with: conversation)
         _setupNavigation()
@@ -280,15 +291,14 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         chatView.addGestureRecognizer(tap)
         view.addSubview(chatView)
         
-       // 置顶消息
-        let topView:RoomTopView = RoomTopView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(self.view.width), height: 50))
-        topView.expandClosure = { [weak self] (isExpand) in
-            self?.toolbar.isHidden = isExpand
-        }
-    
-        
-        view.addSubview(topView)
-        chatView.frame = CGRect(x: 0, y: topView.y + topView.height, width: self.view.width, height: self.view.height - 64 - topView.height)
+        // 置顶消息
+        //        let topView:RoomTopView = RoomTopView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(self.view.width), height: 50))
+        //        topView.expandClosure = { [weak self] (isExpand) in
+        //            self?.toolbar.isHidden = isExpand
+        //        }
+        //
+        //        view.addSubview(topView)
+        //        chatView.frame = CGRect(x: 0, y: Int(topView.y + topView.height), width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64 - Int(topView.height))
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
@@ -347,10 +357,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), image: UIImage.init(named: "sc_com_icon_user"), selectedImage: UIImage.init(named: "sc_com_icon_user"))
         self.addNavigationRight(withImageName: "sc_com_icon_close", withTarget: self, withAction: #selector(_closePage))
         navigationController?.navigationBar.barTintColor = .white
-//        var attrs = [String : AnyObject]()
-//        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18)
-//        attrs[NSForegroundColorAttributeName] = UIColor.black
-//        navigationController?.navigationBar.titleTextAttributes = attrs
+        //        var attrs = [String : AnyObject]()
+        //        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18)
+        //        attrs[NSForegroundColorAttributeName] = UIColor.black
+        //        navigationController?.navigationBar.titleTextAttributes = attrs
         // titleView
         navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
         navTitleView.backgroundColor =  navigationController?.navigationBar.barTintColor
@@ -360,14 +370,14 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             mark.width.equalTo(200)
             mark.height.equalTo(44)
         }
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        //        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        //        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     func _closePage(){
-//        if conversation.conversationType == .chatRoom{
-//            
-//        }
+        //        if conversation.conversationType == .chatRoom{
+        //
+        //        }
         // 从登录页rootViewController过来的
         if navigationController?.viewControllers.count == 1 {
             
@@ -380,7 +390,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
         
     }
-  
+    
     func _maskAnimationFromLeft(){
         let vc = LeftViewController()
         self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
@@ -458,7 +468,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         message.sender = currentUser
         message.options.alignment = .right
         message.options.state = .sending
-
+        
         if let group = conversation.target as? JMSGGroup {
             message.targetType = .group
             message.unreadCount = group.memberArray().count - 1
@@ -470,7 +480,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                 message.targetType = .single
                 message.unreadCount = 1
             }
-           
+            
         }
         chatView.append(message)
         messages.append(message)
@@ -485,13 +495,13 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         reminds.removeAll()
         send(message, msg)
         
- 
+        
         
     }
     // 发送自定义消息
     func send(forCustom customDictionary:NSDictionary){
-        let customMessage = JCMessage(content: HHPublishTaskContent(customDictionary: customDictionary as! Dictionary<String, Any>))
-        let customContent = JMSGCustomContent.init(customDictionary:customDictionary as? [AnyHashable : Any])
+        let customMessage = JCMessage(content: HHPublishTaskContent(customDictionary: customDictionary as! Dictionary<String, Any>, delegate: self))
+        let customContent = JMSGCustomContent.init(customDictionary: customDictionary as? [AnyHashable : Any])
         let customMsg = JMSGMessage.ex.createMessage(conversation, customContent, nil)
         send(customMessage, customMsg)
     }
@@ -647,16 +657,16 @@ extension HHChatRoomViewController: JMessageDelegate {
         
         for message in messages{
             _handleMessage(message: message)
-          
+            
         }
-       
+        
     }
     // 接收消息(服务器端下发的)回调
     func onReceive(_ message: JMSGMessage!, error: Error!) {
         if error != nil {
             return
         }
-       _handleMessage(message: message)
+        _handleMessage(message: message)
     }
     // 处理接收到的消息
     func _handleMessage(message:JMSGMessage){
@@ -727,7 +737,7 @@ extension HHChatRoomViewController: JMessageDelegate {
                 chatView.scrollToLast(animated: true)
             }
         }
-  
+        
     }
     
     // 监听消息回执状态变更事件
@@ -923,13 +933,10 @@ extension HHChatRoomViewController: JCMessageDelegate {
         self.toolbar.isHidden = true
         self.view.addSubview(recieveView)
     }
-    // 评论
-    func message(message: JCMessageType, commentTask taskID: String) {
-        
-    }
-    // 点赞
-    func message(message: JCMessageType, likeTask taskID: String) {
-        
+    
+    func clickTaskMessage(message: JCMessageType, tuple: (String)) {
+        let detailsVC = TaskDetailsViewController(taskID: "1111")
+        navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     func message(message: JCMessageType, videoData data: Data?) {
@@ -1187,7 +1194,7 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
             view.dataSource = self
             inputViews[item.identifier] = view
             return view
-   
+            
         case "kb:task":
             return nil
         default:
@@ -1220,7 +1227,7 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
             return
         }
         if item.identifier == "kb:task" {
-         
+            
             return;
         }
         
@@ -1252,9 +1259,9 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
     
     func inputBar(_ inputBar: SAIInputBar, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let currentIndex = range.location
-//        if !isGroup {
-//            return true
-//        }
+        //        if !isGroup {
+        //            return true
+        //        }
         if string == "@" {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
                 let vc = JCRemindListViewController()

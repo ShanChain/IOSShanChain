@@ -26,6 +26,7 @@ class JCDocumentViewController: UIViewController, CustomNavigation {
         webView.backgroundColor = .white
         webView.scrollView.isDirectionalLockEnabled = true
         webView.scrollView.showsHorizontalScrollIndicator = false
+       
         return webView
     }()
     private var fileUrl: URL?

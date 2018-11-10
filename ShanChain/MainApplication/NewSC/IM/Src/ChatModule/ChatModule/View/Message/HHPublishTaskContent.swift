@@ -17,12 +17,13 @@ class HHPublishTaskContent: NSObject,JCMessageContentType{
         super.init()
     }
     
-    public init(customDictionary:Dictionary<String, Any>) {
+    public init(customDictionary:Dictionary<String, Any> , delegate:Any) {
         self.text =  NSAttributedString(string: "this is a test text")
         super.init()
         self.taskContent = customDictionary[CUSTOM_CONTENT] as? String
         self.reward = customDictionary[CUSTOM_REWARD] as? String
         self.completeTime = customDictionary[CUSTOM_COMPLETETIME] as? String
+        self.delegate = delegate as? JCMessageDelegate
     }
     
     
@@ -46,7 +47,7 @@ class HHPublishTaskContent: NSObject,JCMessageContentType{
         mattr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 14), range: NSMakeRange(0, mattr.length))
         let mattrSize = mattr.boundingRect(with: CGSize(width: Double(SCREEN_WIDTH - 120), height: Double(MAXFLOAT)), options: [.usesLineFragmentOrigin,.usesFontLeading], context: nil)
         self.text = mattr
-        return .init(width: CGFloat(SCREEN_WIDTH - 120), height: mattrSize.height + 140)
+        return .init(width: CGFloat(SCREEN_WIDTH - 120), height: mattrSize.height + 200)
     }
     
 }

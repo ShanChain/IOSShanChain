@@ -50,6 +50,7 @@
         _phoneValueFiled.layer.masksToBounds = YES;
         _phoneValueFiled.layer.cornerRadius = 8.0f;
         _phoneValueFiled.layer.borderWidth = 1.0;
+        _phoneValueFiled.keyboardType = UIKeyboardTypeNumberPad;
         _phoneValueFiled.layer.borderColor = [RGB(221, 221, 221)CGColor];
         UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 44)];
         leftView.backgroundColor = [UIColor clearColor];
@@ -170,26 +171,26 @@
 #pragma mark -系统方法
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:self.view.window];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardDidShow:)
+//                                                 name:UIKeyboardWillShowNotification
+//                                               object:self.view.window];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardDidHide:)
+//                                                 name:UIKeyboardWillHideNotification
+//                                               object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:UIKeyboardWillShowNotification
+//                                                  object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:UIKeyboardWillHideNotification
+//                                                  object:nil];
 }
 
 - (void)viewDidLoad {
@@ -350,6 +351,8 @@
                 
                 [[SCNetwork shareInstance]postWithUrl:COMMONUSERREGISTER parameters:params success:^(id responseObject) {
                     [SYProgressHUD showSuccess:@"注册成功"];
+                    
+                    
                     [self.navigationController popViewControllerAnimated:YES];
                 } failure:nil];
             } else {

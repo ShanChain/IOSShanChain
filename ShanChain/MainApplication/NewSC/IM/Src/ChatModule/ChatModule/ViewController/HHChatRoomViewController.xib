@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EG1-qW-GSb" customClass="ASCircularMenuButton" customModule="ASExtendedCircularMenu">
-                    <rect key="frame" x="315" y="80" width="40" height="40"/>
+                    <rect key="frame" x="315" y="30" width="40" height="40"/>
                     <color key="backgroundColor" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="N8h-so-USN"/>
@@ -71,7 +71,7 @@
             <constraints>
                 <constraint firstItem="2TR-qW-ZZa" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="6pK-CQ-KoV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EG1-qW-GSb" secondAttribute="trailing" constant="20" id="NRJ-RY-Jub"/>
-                <constraint firstItem="EG1-qW-GSb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="60" id="k0u-kv-lDh"/>
+                <constraint firstItem="EG1-qW-GSb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="k0u-kv-lDh"/>
                 <constraint firstItem="2TR-qW-ZZa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="kVA-HK-Sr6"/>
                 <constraint firstItem="2TR-qW-ZZa" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="sDN-6p-vAa"/>
             </constraints>

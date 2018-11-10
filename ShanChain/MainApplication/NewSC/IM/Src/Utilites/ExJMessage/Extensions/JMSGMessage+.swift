@@ -214,7 +214,7 @@ extension ExJMessage where Base: JMSGMessage {
                 message = JMSGMessage.createGroupMessage(with: content, groupId: group.gid)
             }
         } else {
-            if conversation.ex.isChatRoom{
+            if conversation.conversationType == .chatRoom{
                 let chatRoom = conversation.target as? JMSGChatRoom
                 message = JMSGMessage.createChatRoomMessage(with: content, chatRoomId: (chatRoom?.roomID)!)
             }else{

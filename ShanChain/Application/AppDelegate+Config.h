@@ -12,5 +12,6 @@
 
 - (void)setupUMPushNoticationWithLaunchOptions:(NSDictionary *)launchOptions;
 - (void)setupHXConfigWithApplication:(UIApplication *)application;
+- (void)setIQkeyboard;
 
 @end

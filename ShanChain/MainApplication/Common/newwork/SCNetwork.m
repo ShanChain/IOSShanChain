@@ -169,6 +169,9 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     NSMutableDictionary *params = [parameters mutableCopy];
     if ([token isNotBlank]) {
         [params setValue:token forKey:@"token"];
+    }else{
+        [params setValue:@"3_69eb6205f2714244b306b07c6d1d7d1a1541750543777" forKey:@"token"];
+        [params setObject:@"95" forKey:@"characterId"];
     }
     url = [SC_BASE_URL stringByAppendingString:url];
     [self apendTOBaseParams:params];
@@ -222,7 +225,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     }
     
     NSMutableDictionary *params = [parameters mutableCopy];
-    if([parameters objectForKey:@"token"] == nil || [parameters objectForKey:@"token"] == @""){
+    if([parameters objectForKey:@"token"] == nil || [[parameters objectForKey:@"token"]  isEqual: @""]){
         [params setValue:token forKey:@"token"];
     }
     if([url hasPrefix:@"/"]) {

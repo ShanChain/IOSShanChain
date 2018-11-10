@@ -81,6 +81,7 @@
 #import "UIView+property.h"
 #import <YYModel/YYModel.h>
 #import <JMessage/JMessage.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 
 // 百度地图

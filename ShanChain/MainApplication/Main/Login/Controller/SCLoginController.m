@@ -17,6 +17,9 @@
 #import "SCCacheTool.h"
 #import "SYStoryMarkController.h"
 #import "SCBaseNavigationController.h"
+#import "ShanChain-Swift.h"
+#import "BMKTestLocationViewController.h"
+#import "SCCharacterModel.h"
 
 @interface SCLoginController ()<UITextFieldDelegate>{
     BOOL _keyboardIsShown;
@@ -159,19 +162,29 @@
 }
 
 #pragma mark -系统方法
-- (void)registerNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:self.view.window];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
-}
+//- (void)registerNotification {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:self.view.window];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=RGB(255, 255, 255);
     
-    self.title=@"登录千千世界";
+    self.title=@"登录马甲";
     [self makeSubViews];
     [self setKeyBoardAutoHidden];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].enable = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -273,10 +286,13 @@
     [params setObject:userId forKey:@"userId"];
     [[SCNetwork shareInstance]postWithUrl:STORYCHARACTERGETCURRENT parameters:params success:^(id responseObject) {
         NSDictionary *data = responseObject[@"data"];
+        SCCharacterModel *characterModel = [SCCharacterModel yy_modelWithDictionary:data];
+        [SCCacheTool shareInstance].characterModel = characterModel;
         if (data != [NSNull null] && data[@"characterInfo"]) {
             NSDictionary *characterInfo = data[@"characterInfo"];
             if (characterInfo[@"characterId"]) {
-                NSString *spaceId = [characterInfo[@"spaceId"] stringValue];
+              //  NSString *spaceId = [characterInfo[@"spaceId"] stringValue];
+                NSString *spaceId = @"";
                 NSString *characterId = [characterInfo[@"characterId"] stringValue];
                 NSDictionary *hxInfo = data[@"hxAccount"];
                 NSString *hxUserName = hxInfo[@"hxUserName"];
@@ -286,27 +302,39 @@
                 NSMutableDictionary *params1 = [NSMutableDictionary dictionary];
                 [params1 setObject:spaceId forKey:@"spaceId"];
                 [params1 setObject:token forKey:@"token"];
-                [[SCNetwork shareInstance]postWithUrl:GET_SPACE_BY_ID parameters:params1 success:^(id responseObject) {
-                    NSDictionary *data = responseObject[@"data"];
-                    NSString *spaceInfo = @"";
-                    NSString *spaceName = @"";
-                    spaceName = data[@"name"];
-                    spaceInfo = [JsonTool stringFromDictionary:data];
-                    if(![spaceInfo isEqualToString:@""]){
-                        [[SCCacheTool shareInstance] setCacheValue:spaceName withUserID:userId andKey:CACHE_SPACE_NAME];
-                        [[SCCacheTool shareInstance] setCacheValue:spaceInfo withUserID:userId andKey:CACHE_SPACE_INFO];
+                
+                [JGUserLoginService jg_userLoginWithUsername:characterModel.hxAccount.hxUserName password:characterModel.hxAccount.hxPassword loginComplete:^(id _Nonnull result, NSError * _Nonnull error) {
+                    [SYProgressHUD hideHUD];
+                    if (!error) {
+                        // 登录成功 
+                        UIViewController *rootVc = nil;
+                        BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+                        rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
+                        //                    SCTabbarController *tabbarC=[[SCTabbarController alloc]init];
+                        [HHTool mainWindow].rootViewController=rootVc;
                     }
-                    [SYProgressHUD hideHUD];
-                    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
-                    SCTabbarController *tabbarC=[[SCTabbarController alloc]init];
-                    keyWindow.rootViewController=tabbarC;
-                } failure:^(NSError *error) {
-                    SCLog(@"%@",error);
-                    [SYProgressHUD hideHUD];
-                    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
-                    SCTabbarController *tabbarC=[[SCTabbarController alloc]init];
-                    keyWindow.rootViewController=tabbarC;
                 }];
+                
+         
+//                [[SCNetwork shareInstance]postWithUrl:GET_SPACE_BY_ID parameters:params1 success:^(id responseObject) {
+//                    NSDictionary *data = responseObject[@"data"];
+//                    NSString *spaceInfo = @"";
+//                    NSString *spaceName = @"";
+//                    spaceName = data[@"name"];
+//                    spaceInfo = [JsonTool stringFromDictionary:data];
+//                    if(![spaceInfo isEqualToString:@""]){
+//                        [[SCCacheTool shareInstance] setCacheValue:spaceName withUserID:userId andKey:CACHE_SPACE_NAME];
+//                        [[SCCacheTool shareInstance] setCacheValue:spaceInfo withUserID:userId andKey:CACHE_SPACE_INFO];
+//                    }
+//                    [SYProgressHUD hideHUD];
+//
+//                } failure:^(NSError *error) {
+//                    SCLog(@"%@",error);
+//                    [SYProgressHUD hideHUD];
+//                    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+//                    SCTabbarController *tabbarC=[[SCTabbarController alloc]init];
+//                    keyWindow.rootViewController=tabbarC;
+//                }];
             } else {
                 [SYProgressHUD hideHUD];
             }
@@ -348,36 +376,36 @@
     [self.navigationController pushViewController:forgetPwdVC animated:YES];
 }
 
-- (void)keyboardDidShow:(NSNotification*)notification {
-    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
-    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    // 第三方键盘回调三次问题，监听仅执行最后一次
-    if ( begin.size.height>0 && (begin.origin.y-end.origin.y>0) ) {
-        if (_keyboardIsShown) {
-            return ;
-        }
-        NSDictionary *userInfo = [notification userInfo];
-        CGFloat h = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,0);
-        WS(weakSelf);
-        [Util commonViewAnimation:^{
-            weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, 0);
-        }
-                       completion:nil];
-        
-        _keyboardIsShown = YES;
-    }
-}
-
-- (void)keyboardDidHide:(NSNotification *)notification {
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,0);
-    WS(weakSelf);
-    [Util commonViewAnimation:^{
-        weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, 0);
-    } completion:nil];
-    
-    _keyboardIsShown = NO;
-}
+//- (void)keyboardDidShow:(NSNotification*)notification {
+//    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
+//    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+//    // 第三方键盘回调三次问题，监听仅执行最后一次
+//    if ( begin.size.height>0 && (begin.origin.y-end.origin.y>0) ) {
+//        if (_keyboardIsShown) {
+//            return ;
+//        }
+//        NSDictionary *userInfo = [notification userInfo];
+//        CGFloat h = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+//        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,0);
+//        WS(weakSelf);
+//        [Util commonViewAnimation:^{
+//            weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, 0);
+//        }
+//                       completion:nil];
+//
+//        _keyboardIsShown = YES;
+//    }
+//}
+//
+//- (void)keyboardDidHide:(NSNotification *)notification {
+//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,0);
+//    WS(weakSelf);
+//    [Util commonViewAnimation:^{
+//        weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, 0);
+//    } completion:nil];
+//
+//    _keyboardIsShown = NO;
+//}
 
 - (void)weiXinLoginBtnClick{
     [self thirdLoginClickWithPlatformType:SSDKPlatformTypeWechat];

@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias PublishClosure = (_ text:String, _ reward:String , _ time:String, _ isPut:Bool) ->Void //定义闭包类型
+typealias PublishClosure = (_ text:String, _ reward:String , _ time:String, _ timestamp:String, _ isPut:Bool) ->Void //定义闭包类型
 
 @IBDesignable
 class PublishTaskView: UIView {
@@ -27,7 +27,8 @@ class PublishTaskView: UIView {
     var pbCallClosure:PublishClosure?
     let kDuration = 0.5
     
-     private let makeView:UIView
+    private let makeView:UIView
+    private var timestamp = Date().timeStamp
     
     
     override init(frame: CGRect) {
@@ -55,6 +56,8 @@ class PublishTaskView: UIView {
     func _tapSelectTime(){
         let datePicker = YLDatePicker(currentDate: nil, minLimitDate: Date(), maxLimitDate: nil, datePickerType: .YMDHm) { [weak self] (date) in
             self?.selectTimeTextFid.text = date.getString(format: "yyyy-MM-dd HH:mm")
+            self?.endEditing(true)
+            self?.timestamp = String(Int(date.timeIntervalSince1970))
         }
         datePicker.show()
     }
@@ -117,11 +120,11 @@ class PublishTaskView: UIView {
         return true
     }
     @IBAction func _close(_ sender: UIButton) {
-        self.pbCallClosure!(self.taskDesTextFid.text!,(self.rewardTextFid.text)!,(self.selectTimeTextFid.text)!,false)
+        self.pbCallClosure!(self.taskDesTextFid.text!,(self.rewardTextFid.text)!,(self.selectTimeTextFid.text)!,timestamp,false)
     }
     func _publishPressed(){
         if _verification(){
-        self.pbCallClosure!(self.taskDesTextFid.text!,(self.rewardTextFid.text)!,(self.selectTimeTextFid.text)!,true)
+        self.pbCallClosure!(self.taskDesTextFid.text!,(self.rewardTextFid.text)!,(self.selectTimeTextFid.text)!,timestamp,true)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

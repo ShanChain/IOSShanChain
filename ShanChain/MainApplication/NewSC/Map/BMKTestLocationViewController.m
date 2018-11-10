@@ -11,6 +11,9 @@
 #import "UIViewController+SYBase.h"
 #import "ShanChain-Swift.h"
 #import "UIView+LSCore.h"
+#import "CoordnateInfosModel.h"
+#import "SCLoginController.h"
+#import "SCBaseNavigationController.h"
 
 static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
@@ -38,6 +41,11 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (nonatomic,assign)  BOOL    isLBS;
+
+@property (nonatomic,strong)  NSArray  <CoordnateInfosModel*> *roomInfos;
+
+@property (nonatomic,copy)    NSString   *currentRoomId; //当前的聊天室ID
+@property (nonatomic,copy)    NSString   *currentRoomName; //当前的聊天室名称
 
 @end
 
@@ -70,53 +78,50 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     self.navigationController.navigationBarHidden = YES;
 }
 
-- (void)sc_addOverlay{
-    // 添加折线覆盖物
-   // CLLocationCoordinate2D coor = CLLocationCoordinate2DMake(39.90868, 116.3956);//原始坐标
-    
-    //转换国测坐标（google地图、soso地图、aliyun地图、mapabc地图和amap地图所用坐标）至百度坐标
-//    CLLocationCoordinate2D testdic =  BMKCoordTrans(coor,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
-    
-    CLLocationCoordinate2D coor[4] = {0};
-    coor[0].latitude = 20.046381;
-    coor[0].longitude = 110.325502;
-  //  coor[0] = BMKCoordTrans(coor[0],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
-    
-    
-    coor[1].latitude = 20.046381;
-    coor[1].longitude = 110.331246;
-  //  coor[1] = BMKCoordTrans(coor[1],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
-    
-    coor[2].latitude = 20.051780;
-    coor[2].longitude = 110.331246;
- //   coor[2] = BMKCoordTrans(coor[2],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
-    
-    coor[3].latitude = 20.051780;
-    coor[3].longitude = 110.325502;
-//    coor[3] = BMKCoordTrans(coor[3],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
-    
-//    coor[4].latitude = 20.046381;
-//    coor[4].longitude = 110.325502;
- //   coor[4] = BMKCoordTrans(coor[4],BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
-    
-//    BMKPolyline* polyline = [BMKPolyline polylineWithCoordinates:coor count:5];
-//    [self.mapView addOverlay:polyline];
-    
-    BMKPolygon*  polygon = [BMKPolygon polygonWithCoordinates:coor count:4];
-    [_mapView addOverlay:polygon];
+- (void)sc_addOverlayWithCoordnates{
+  
+    for (CoordnateInfosModel * Coordnatemodel in self.roomInfos) {
+        [self sc_addOverlayWithModel:Coordnatemodel];
+    }
+}
+
+
+- (NSDictionary*)getParameter{
+    if (NULLString(self.latitude) || NULLString(self.longitude)) {
+        return @{};
+    }
+    return @{@"latitude":self.latitude,@"longitude":self.longitude};
 }
 
 - (void)sc_getLbsCoordinate{
     if (!self.latitude || !self.longitude || self.isLBS) {
         return;
     }
-//    weakify(self);
-//    [[SCNetwork shareInstance]HH_postWithUrl:GETCOORDINATE params:@{@"latitude":self.latitude,@"longitude":self.longitude} showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
-//        weak_self.isLBS = YES;
-//        [weak_self sc_addOverlay];
-//    }];
-    
- 
+    weakify(self);
+    [[SCNetwork shareInstance]getWithUrl:GETCOORDINATE parameters:[self getParameter] success:^(id responseObject) {
+        NSArray  *arr = responseObject[@"data"][@"room"];
+        if(arr.count > 0){
+            NSMutableArray  *mAry = [NSMutableArray arrayWithCapacity:0];
+            [arr enumerateObjectsUsingBlock:^(id  _Nonnull dic, NSUInteger idx, BOOL * _Nonnull stop) {
+                CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
+                [mAry addObject:model];
+            }];
+            weak_self.roomInfos = mAry.copy;
+        }
+        
+        if(weak_self.roomInfos.count > 0){
+            [weak_self sc_addOverlayWithCoordnates];
+            [weak_self setChatRoomCenterPoint];
+        }
+         weak_self.isLBS = YES;
+    } failure:^(NSError *error) {
+         weak_self.isLBS = YES;
+    }];
+}
+
+- (void)setChatRoomCenterPoint{
+    CoordnateInfosModel *model = self.roomInfos.firstObject;
+    [self sc_configurationMapViewCenterLocationWithModel:model];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -129,11 +134,10 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 - (void)pn_ConfigurationMapView{
     [self.mapView setMapType:BMKMapTypeStandard];//标准地图
     self.mapView.userTrackingMode = BMKUserTrackingModeNone;// 定位模式
-    self.mapView.zoomLevel = 18;//地图级别
+    self.mapView.zoomLevel = 16;//地图级别
     self.mapView.showsUserLocation = YES; //是否显示定位图层
     self.mapView.delegate = self;
-    self.mapView.mapScaleBarPosition = CGPointMake(50, 50);
-    // _mapView.compassPosition = CGPointMake(ScreenWidth - 50, 25);//指南针的位置
+    self.mapView.mapScaleBarPosition = CGPointMake(100, 100);
     //打开实时路况图层
     //    [_mapView setTrafficEnabled:YES];
     //设定地图View能否支持用户多点缩放(双指)
@@ -155,14 +159,12 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
             }];
         }
     }];
-    UITapGestureRecognizer  *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap)];
-    [self.mapView addGestureRecognizer:tap];
+
 }
 
-- (void)tap{
-    [self.view endEditing:YES];
-}
+// 复位
 - (IBAction)notePressed:(id)sender {
+    self.mapView.centerCoordinate = self.pt;
 }
 
 // 足迹
@@ -172,17 +174,6 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
           Animated:YES];
 }
 
-- (void)determine{
-//    [[SCNetwork shareInstance]HH_postWithUrl:self.textView.text params:@{@"latitude":self.latitude,@"longitude":self.longitude} showLoading:YES success:^(HHBaseModel *baseModel) {
-//        [HHTool showSucess:baseModel.message];
-////            [self hrShowAlertWithTitle:nil message:[NSString stringWithFormat:@"latitude:%@\nlongitude:",latitude,longitude] buttonsTitles:@[@"确定"] andHandler:nil];
-//    } failure:^(NSError *error) {
-//        
-//    }];
-
-   
-    
-}
 
 #pragma mark - BMK_LocationDelegate 百度地图
 /**
@@ -212,12 +203,8 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         NSLog(@"逆geo检索发送失败");
     }
     
-    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
-    annotation.coordinate = self.pt;
-    annotation.title = @"您当前位置";
-    [self.mapView addAnnotation:annotation];
+
     
-    [self sc_addOverlay];
 }
 
 
@@ -229,6 +216,12 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     self.pt = coordinate;
     if (!self.isLBS) {
         self.mapView.centerCoordinate = coordinate;
+        if(self.mapView.annotations.count == 0){
+            BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+            annotation.coordinate = coordinate;
+            annotation.title = @"您当前位置";
+            [self.mapView addAnnotation:annotation];
+        }
     }
     
     if ((userLocation.location.coordinate.latitude != 0 || userLocation.location.coordinate.longitude != 0))
@@ -240,13 +233,8 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         self.latitude = latitude;
         NSString *longitude = [NSString stringWithFormat:@"%f",userLocation.location.coordinate.longitude];
         self.longitude = longitude;
-        
-        [self sc_getLbsCoordinate];// 上传用户实时坐标
-        NSString *long_title = coordinate.longitude > 0 ?@"东经":@"西经";
-        NSString *lat_title = coordinate.latitude > 0 ?@"北纬":@"南纬";
-        [self.locationBtn setTitle:[NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude] forState:0];
-      
-        
+        [self sc_getLbsCoordinate];// 上传用户实时坐标获取聊天室
+        [self configurationLocationButtonTitle:coordinate];
 //        [self reverseGeoCodeWithLatitude:latitude withLongitude:longitude];
         
     }else{
@@ -256,6 +244,15 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     //关闭坐标更新
    // [self.locService stopUserLocationService];
 }
+
+- (void)configurationLocationButtonTitle:(CLLocationCoordinate2D)coordinate{
+    NSString *long_title = coordinate.longitude > 0 ?@"东经":@"西经";
+    NSString *lat_title = coordinate.latitude > 0 ?@"北纬":@"南纬";
+    NSString  *roomName = [NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude];
+    [self.locationBtn setTitle:roomName forState:0];
+    self.currentRoomName = roomName;
+}
+
 
 //地图定位
 - (BMKLocationService *)locService
@@ -334,6 +331,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 //        polygonView.fillColor = [[UIColor alloc] initWithRed:0 green:1 blue:1 alpha:0.2];
         polygonView.lineWidth =2.0;
         polygonView.lineDash = YES;
+        
         return polygonView;
     }
     
@@ -341,13 +339,58 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 }
 
 - (void)mapView:(BMKMapView *)mapView onClickedBMKOverlayView:(BMKOverlayView *)overlayView{
+    NSLog(@"onClickedBMKOverlayView");
     
 }
+
 
 - (void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate{
-    
+    NSString  *latitude = [NSString stringWithFormat:@"%f",coordinate.latitude];
+    NSString  *longitude = [NSString stringWithFormat:@"%f",coordinate.longitude];
+    weakify(self);
+    [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
+        NSDictionary  *dic = responseObject[@"data"];
+        if (dic.allValues > 0) {
+            CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
+            [weak_self sc_configurationMapViewCenterLocationWithModel:model];
+            __block  BOOL isContainRoom = NO;
+            [self.mapView.overlays enumerateObjectsUsingBlock:^(BMKPolygon *  _Nonnull polygon, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([polygon.mark isEqualToString:model.roomId]) {
+                    isContainRoom = YES;
+                }
+            }];
+            if (!isContainRoom) {
+                [self sc_addOverlayWithModel:model];
+            }
+        }
+    } failure:nil];
 }
 
+#pragma mark -- 添加地址围栏
+- (void)sc_addOverlayWithModel:(CoordnateInfosModel*)model{
+    CLLocationCoordinate2D coor[4] = {0};
+    for (int i = 0; i < model.coordinates.count; i++) {
+        CLLocationCoordinate2D transfromCoord =  CLLocationCoordinate2DMake(model.coordinates[i].latitude.doubleValue, model.coordinates[i].longitude.doubleValue);
+        CLLocationCoordinate2D transToCoord = BMKCoordTrans(transfromCoord,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+        coor[i].latitude = transToCoord.latitude;
+        coor[i].longitude = transToCoord.longitude;
+    }
+    BMKPolygon*  polygon = [BMKPolygon polygonWithCoordinates:coor count:4];
+    polygon.mark = model.roomId;
+    [_mapView addOverlay:polygon];
+}
+
+- (void)sc_configurationMapViewCenterLocationWithModel:(CoordnateInfosModel*)model{
+    self.mapView.centerCoordinate = [self BD09TransfromGPSCoordinateFrom:CLLocationCoordinate2DMake(model.latitude, model.longitude)];
+    self.mapView.zoomLevel = 17;
+    [self configurationLocationButtonTitle:self.mapView.centerCoordinate];
+    self.currentRoomId = model.roomId;
+}
+
+// 坐标转换 BD09 -> GPS
+- (CLLocationCoordinate2D)BD09TransfromGPSCoordinateFrom:(CLLocationCoordinate2D)transfromCoord{
+    return  BMKCoordTrans(transfromCoord,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+}
 
 - (IBAction)joinPressed:(id)sender{
     
@@ -357,19 +400,41 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 //        [HHTool mainWindow].rootViewController = tabBarVC;
 //        JCConversationListViewController *chatListView = [[JCConversationListViewController alloc]init];
 //         [self.navigationController pushViewController:chatListView animated:YES];
-        HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:[JMSGConversation chatRoomConversationWithRoomId:Test_RoomID] isJoinChat:NO];
-        [self pushPage:roomVC Animated:YES];
-    }else{
-        JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:[JCLoginViewController new]];
-       // [self.navigationController pushViewController:nav animated:YES];
-        [HHTool mainWindow].rootViewController = nav;
         
+        // 创建会话 有的话直接返回
+        [JGUserLoginService jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
+            if (error) {
+                [HHTool showError:@"会话不能为空"];
+                return;
+            }
+            
+            // 获取会话成功
+            [JMSGChatRoom enterChatRoomWithRoomId:self.currentRoomId completionHandler:^(JMSGConversation * resultObject, NSError *error) {
+                if (!error) {
+                    // 加入聊天室成功 进入聊天室页面
+                    HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO];
+                    roomVC.title = self.currentRoomName;
+                    [self pushPage:roomVC Animated:YES];
+                }
+                [HHTool showError:error.localizedDescription];
+            }];
+            
+        }];
+//        JMSGConversation *conversation = [JMSGConversation chatRoomConversationWithRoomId:Test_RoomID];
+      
+
+    }else{
+        SCLoginController *loginVC=[[SCLoginController alloc]init];
+        [HHTool mainWindow].rootViewController = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
+//        JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:[JCLoginViewController new]];
+//        [HHTool mainWindow].rootViewController = nav;
  
     }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
        [self.view endEditing:YES];
+  
 }
 
 
