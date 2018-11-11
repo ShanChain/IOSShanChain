@@ -16,6 +16,7 @@
 		221BBD352195889C0004EE03 /* SCCharacterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD342195889C0004EE03 /* SCCharacterModel.m */; };
 		221BBD372195A5300004EE03 /* JGUserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD362195A5300004EE03 /* JGUserLoginService.swift */; };
 		221BBD3A2196B76B0004EE03 /* CoordnateInfosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD392196B76B0004EE03 /* CoordnateInfosModel.m */; };
+		221BBD3C21982D1E0004EE03 /* TaskAddModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD3B21982D1E0004EE03 /* TaskAddModel.swift */; };
 		221E355B215C6100003FAA73 /* UIImageView+sd.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355A215C6100003FAA73 /* UIImageView+sd.m */; };
 		221E355E215C6C83003FAA73 /* UIViewController+HRAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355D215C6C83003FAA73 /* UIViewController+HRAlertViewController.m */; };
 		2228491D2176DD0F00CDC86C /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222849182176DD0E00CDC86C /* BaiduMapAPI_Cloud.framework */; };
@@ -773,6 +774,7 @@
 		221BBD362195A5300004EE03 /* JGUserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGUserLoginService.swift; sourceTree = "<group>"; };
 		221BBD382196B76B0004EE03 /* CoordnateInfosModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordnateInfosModel.h; sourceTree = "<group>"; };
 		221BBD392196B76B0004EE03 /* CoordnateInfosModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordnateInfosModel.m; sourceTree = "<group>"; };
+		221BBD3B21982D1E0004EE03 /* TaskAddModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddModel.swift; sourceTree = "<group>"; };
 		221E3559215C6100003FAA73 /* UIImageView+sd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+sd.h"; sourceTree = "<group>"; };
 		221E355A215C6100003FAA73 /* UIImageView+sd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+sd.m"; sourceTree = "<group>"; };
 		221E355C215C6C83003FAA73 /* UIViewController+HRAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HRAlertViewController.h"; sourceTree = "<group>"; };
@@ -2774,6 +2776,7 @@
 		22C9178621928468002E5240 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				221BBD3B21982D1E0004EE03 /* TaskAddModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4909,6 +4912,7 @@
 				332D3E451F500331001ADDB3 /* NSObject+MJCoding.m in Sources */,
 				33403F6C1F15BEE400666634 /* SCBase64.m in Sources */,
 				22631C4F216DE85200D5AB0B /* UIViewController+BackButtonHandler.m in Sources */,
+				221BBD3C21982D1E0004EE03 /* TaskAddModel.swift in Sources */,
 				485E66571F42873F00B158BF /* MJRefreshComponent.m in Sources */,
 				22D2478121893C6E009C1E6A /* HHPublishTaskContentView.swift in Sources */,
 				48718DA01F42277400010AA0 /* UIView+WebCacheOperation.m in Sources */,

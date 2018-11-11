@@ -123,6 +123,8 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     }];
 }
 
+
+
 - (NSData*)getHttpBody:(NSDictionary*)params{
     // 过滤空字符串
     NSMutableDictionary  *mdic = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -176,7 +178,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     url = [SC_BASE_URL stringByAppendingString:url];
     [self apendTOBaseParams:params];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:params error:nil];
     request.timeoutInterval= TIME_OUT_INTERVAL;
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     // 设置body
@@ -204,12 +206,38 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     }] resume];
 }
 
-//- (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show success:(void(^)(HHBaseModel *baseModel))success failure:(void(^)(NSError *error))failure
-//{
-//    
-//
-//}
-
+-(void)v1_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock{
+#if TARGET_OS_IPHONE
+    [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
+        if (status < 1) {
+            [HHTool showError:@"请检查网络设置"];
+            return ;
+            
+        }
+    }];
+#endif
+    if (show) {
+        [HHTool showChrysanthemum];
+    }
+    [self postWithUrl:url parameters:parameters success:^(id responseObject) {
+        if (show) {
+            [HHTool dismiss];
+        }
+      
+        HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
+        if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE]) {
+                callBlock(baseModel,nil);
+        }else{
+                if (!NULLString(baseModel.message)) {
+                    [HHTool showError:baseModel.message];
+                }
+        }
+        
+    } failure:^(NSError *error) {
+        callBlock(error,nil);
+        [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
+    }];
+}
 
 - (void)getWithUrl:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
     if (IS_USE_HTTPS) {

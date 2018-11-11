@@ -37,5 +37,6 @@
 #import "SCNetwork.h"
 #import "MJRefresh.h"
 #import "SCBaseVC.h"
+#import "SCCacheTool.h"
 
 #endif /* ShanChain_Bridging_Header_h */

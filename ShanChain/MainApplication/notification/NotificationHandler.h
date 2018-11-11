@@ -48,6 +48,7 @@ static NSString * const MSG_KEY_NEW_MODEL_EXAMINE = @"MSG_NEW_MODEL_EXAMINE";//�
 static NSString * const MSG_KEY_ACCOUT_BE_UPDATE = @"MSG_ACCOUT_BE_UPDATE";//账号绑定信息修改
 static NSString * const MSG_KEY_GLOBLE_NOTICE = @"MSG_GLOBLE_NOTICE";//官方手工发布通知
 
+
 @interface NotificationHandler : NSObject
 
 

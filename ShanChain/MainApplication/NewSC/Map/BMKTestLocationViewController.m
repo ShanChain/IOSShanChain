@@ -137,6 +137,10 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     self.mapView.zoomLevel = 16;//地图级别
     self.mapView.showsUserLocation = YES; //是否显示定位图层
     self.mapView.delegate = self;
+    self.mapView.buildingsEnabled = YES;
+
+
+    
     self.mapView.mapScaleBarPosition = CGPointMake(100, 100);
     //打开实时路况图层
     //    [_mapView setTrafficEnabled:YES];
@@ -382,7 +386,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 - (void)sc_configurationMapViewCenterLocationWithModel:(CoordnateInfosModel*)model{
     self.mapView.centerCoordinate = [self BD09TransfromGPSCoordinateFrom:CLLocationCoordinate2DMake(model.latitude, model.longitude)];
-    self.mapView.zoomLevel = 17;
+    self.mapView.zoomLevel = 17.95;
     [self configurationLocationButtonTitle:self.mapView.centerCoordinate];
     self.currentRoomId = model.roomId;
 }
@@ -402,23 +406,15 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 //         [self.navigationController pushViewController:chatListView animated:YES];
         
         // 创建会话 有的话直接返回
-        [JGUserLoginService jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
+        weakify(self);
+        [JGUserLoginService
+         jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
             if (error) {
                 [HHTool showError:@"会话不能为空"];
                 return;
             }
             
-            // 获取会话成功
-            [JMSGChatRoom enterChatRoomWithRoomId:self.currentRoomId completionHandler:^(JMSGConversation * resultObject, NSError *error) {
-                if (!error) {
-                    // 加入聊天室成功 进入聊天室页面
-                    HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO];
-                    roomVC.title = self.currentRoomName;
-                    [self pushPage:roomVC Animated:YES];
-                }
-                [HHTool showError:error.localizedDescription];
-            }];
-            
+             [weak_self enterChatRoom];
         }];
 //        JMSGConversation *conversation = [JMSGConversation chatRoomConversationWithRoomId:Test_RoomID];
       
@@ -428,9 +424,42 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         [HHTool mainWindow].rootViewController = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
 //        JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:[JCLoginViewController new]];
 //        [HHTool mainWindow].rootViewController = nav;
- 
     }
 }
+
+// 加入聊天室
+- (void)enterChatRoom{
+    weakify(self);
+    [HHTool showChrysanthemum];
+    [JMSGChatRoom enterChatRoomWithRoomId:self.currentRoomId completionHandler:^(JMSGConversation * resultObject, NSError *error) {
+        if (!error) {
+            // 加入聊天室成功 进入聊天室页面
+            [HHTool dismiss];
+            HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO];
+            roomVC.title = self.currentRoomName;
+            [self pushPage:roomVC Animated:YES];
+        }else{
+            if (error.code == 851003) {
+                // 已经在聊天室了，先退出，再进入
+                [JMSGChatRoom leaveChatRoomWithRoomId:self.currentRoomId completionHandler:^(id resultObject, NSError *error) {
+                    strongify(self);
+                    [HHTool dismiss];
+                    if (!error) {
+                        [self enterChatRoom];
+                    }else{
+                        [HHTool showError:error.localizedDescription];
+                    }
+                }];
+            
+            }else{
+                [HHTool dismiss];
+                [HHTool showError:error.localizedDescription];
+            }
+        }
+        
+    }];
+}
+
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
        [self.view endEditing:YES];

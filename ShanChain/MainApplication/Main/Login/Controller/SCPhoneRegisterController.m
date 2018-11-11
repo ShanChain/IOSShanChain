@@ -71,6 +71,7 @@
         _verCodeValueFiled.clearButtonMode=UITextFieldViewModeWhileEditing;
         _verCodeValueFiled.textAlignment=NSTextAlignmentLeft;
         _verCodeValueFiled.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _verCodeValueFiled.keyboardType = UIKeyboardTypeNumberPad;
         _verCodeValueFiled.layer.masksToBounds = YES;
         _verCodeValueFiled.layer.cornerRadius = 8.0f;
         _verCodeValueFiled.layer.borderWidth = 1.0;
@@ -349,7 +350,9 @@
                 [params setObject:encryptAccount forKey:@"encryptAccount"];
                 [params setObject:encryptAccount1 forKey:@"encryptPassword"];
                 
+                [HHTool showChrysanthemum];
                 [[SCNetwork shareInstance]postWithUrl:COMMONUSERREGISTER parameters:params success:^(id responseObject) {
+                    [HHTool dismiss];
                     [SYProgressHUD showSuccess:@"注册成功"];
                     
                     

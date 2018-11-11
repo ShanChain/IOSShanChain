@@ -67,6 +67,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     fileprivate let buttonTitles = ["查看任务","发布任务"]
     func buttonForIndexAt(_ menuButton: ASCircularMenuButton, indexForButton: Int) -> UIButton {
         let button: UIButton = UIButton()
+
         if menuButton == taskButton{
             button.backgroundColor = SC_ThemeMainColor
             button .setImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
@@ -93,11 +94,16 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                     if isPut == false{
                         return
                     }
+                
+//                    SCNetwork.shareInstance().hh_post(withUrl: TASK_ADD_URL, params: ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":"12766207","time":timestamp], showLoading: true, call: { (result, error) in
+//                        
+//                    })
                     
-                    SCNetwork.shareInstance().hh_post(withUrl: TASK_ADD_URL, params: ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":"12766207","time":timestamp], showLoading: true, call: { (result, error) in
-                        
-                        
+                    let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
+                    SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":"12766207","time":timestamp,"characterId":characterId], showLoading: true, call: { (baseModel, error) in
+                         
                     })
+                    
                     self?.send(forCustom: [CUSTOM_CONTENT:dataString,CUSTOM_REWARD:"赏金:" + reward + " SEAT",CUSTOM_COMPLETETIME:"完成时限" + time])
                 }
                 

@@ -43,6 +43,7 @@ static NSString * const MSG_WHERE_CHAT_MENU = @"chat_menu";
 static NSString * const MSG_WHERE_SPACE_MENU = @"space_menu";
 
 
+
 @implementation NotificationHandler
 
 + (void) handlerNotificationWithCustom:(NSDictionary *)customDic{

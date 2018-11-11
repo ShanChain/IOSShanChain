@@ -339,11 +339,12 @@
                 [SYProgressHUD hideHUD];
             }
         } else {
-            [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:@"" chatacterId:@"" hxUserName:@"" hxPassword:@""];
-            UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
-            SYStoryMarkController *vc=[[SYStoryMarkController alloc] init];
-            SCBaseNavigationController *nav = [[SCBaseNavigationController alloc] initWithRootViewController: vc];
-            keyWindow.rootViewController = nav;
+            [HHTool showError:@"登录出错..."];
+//            [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:@"" chatacterId:@"" hxUserName:@"" hxPassword:@""];
+//            UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+//            SYStoryMarkController *vc=[[SYStoryMarkController alloc] init];
+//            SCBaseNavigationController *nav = [[SCBaseNavigationController alloc] initWithRootViewController: vc];
+//            keyWindow.rootViewController = nav;
         }
     } failure:^(NSError *error) {
         SCLog(@"%@",error);
