@@ -23,7 +23,14 @@ class RecieveTaskView: UIView {
     private let makeView:UIView
     let kDuration = 0.5
     var closure:RecieveClosure?
-        
+    var recieTaskModel:TaskRecieveSuccessModel?
+    
+    
+    convenience init(recieTaskModel:TaskRecieveSuccessModel,frame:CGRect) {
+        self.init(frame: frame)
+        self.recieTaskModel = recieTaskModel
+    }
+    
     override init(frame: CGRect) {
         makeView = UIView()
         super.init(frame: frame)

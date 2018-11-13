@@ -127,8 +127,8 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 -(void)viewWillDisappear:(BOOL)animated
 {
     [self.mapView viewWillDisappear];
-    self.mapView.delegate = nil; // 不用时，置nil
-    self.searcher.delegate = nil;
+//    self.mapView.delegate = nil; // 不用时，置nil
+//    self.searcher.delegate = nil;
 }
 
 - (void)pn_ConfigurationMapView{
@@ -424,19 +424,22 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         [HHTool mainWindow].rootViewController = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
 //        JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:[JCLoginViewController new]];
 //        [HHTool mainWindow].rootViewController = nav;
+
     }
 }
 
+    
 // 加入聊天室
 - (void)enterChatRoom{
     weakify(self);
+   __block HHChatRoomViewController *roomVC;
     [HHTool showChrysanthemum];
     [JMSGChatRoom enterChatRoomWithRoomId:self.currentRoomId completionHandler:^(JMSGConversation * resultObject, NSError *error) {
         if (!error) {
             // 加入聊天室成功 进入聊天室页面
             [HHTool dismiss];
-            HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO];
-            roomVC.title = self.currentRoomName;
+          
+            roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO navTitle:self.currentRoomName];
             [self pushPage:roomVC Animated:YES];
         }else{
             if (error.code == 851003) {

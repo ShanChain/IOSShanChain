@@ -8,35 +8,36 @@
 
 import UIKit
 
-class TaskAddModel: NSObject {
+class TaskAddModel:HandyJSON{
    
-    var task:TaskAddModel_task = TaskAddModel_task()
+    var Task:TaskAddModel_task?
     var PublishTime:String = ""
-    
+    required init() {}
     
 }
 
-class TaskAddModel_task: NSObject {
+class TaskAddModel_task: HandyJSON {
     
-    var taskId:String = ""
-    var verify:String = ""
-    var bounty:String = ""
-    var topping:String = ""
-    var intro:String = ""
-    var roomId:String = ""
-    var statusHistory:String = ""
-    var createTime:String = ""
-    var expiryTime:String = ""
-    var status:String = ""
-    var receiveCount:String = ""
-    var commentCount:String = ""
-    var supportCount:String = ""
-    var characterId:String = ""
-    var verifyTime:String = ""
-    var unfinishedTime:String = ""
-    var currency:String = ""
-    var releaseHash:String = ""
-    var lastHash:String = ""
-    var userId:String = ""
+    var taskId:String?
+    var verify:String?
+    var bounty:String?
+    var topping:String?
+    var intro:String?
+    var roomId:String?
+    var statusHistory:String?
+    var createTime:String?
+    var expiryTime:String?
+    var status:String?
+    var receiveCount:String?
+    var commentCount:String?
+    var supportCount:String?
+    var characterId:String?
+    var verifyTime:String?
+    var unfinishedTime:String?
+    var currency:String?
+    var releaseHash:String?
+    var lastHash:String?
+    var userId:String?
     
+    required init() {}
 }

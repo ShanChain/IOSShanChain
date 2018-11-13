@@ -29,4 +29,8 @@
  *  获得与当前时间的差距
  */
 - (NSDateComponents *)deltaWithNow;
+    
+    // 根据时间戳获取当前显示时间
++(NSString*)ChatingTime:(NSString *)timestring;
+    
 @end

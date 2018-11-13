@@ -200,7 +200,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 }
             }
         } else {
-            callBlock(error,nil);
+            callBlock(nil,error);
             [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
         }
     }] resume];
@@ -234,7 +234,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         }
         
     } failure:^(NSError *error) {
-        callBlock(error,nil);
+        callBlock(nil,error);
         [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
     }];
 }

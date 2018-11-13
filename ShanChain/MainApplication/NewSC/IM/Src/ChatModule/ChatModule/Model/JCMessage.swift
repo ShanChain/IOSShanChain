@@ -147,11 +147,7 @@ extension JMSGMessage {
         case .custom:
             let content = self.content as! JMSGCustomContent
             if  let customDictionary = content.customDictionary{
-                let taskContent = HHPublishTaskContent()
-                taskContent.delegate = delegate
-                taskContent.taskContent = customDictionary[AnyHashable(CUSTOM_CONTENT)] as? String
-                taskContent.reward = customDictionary[AnyHashable(CUSTOM_REWARD)] as? String
-                taskContent.completeTime = customDictionary[AnyHashable(CUSTOM_COMPLETETIME)] as? String
+                let taskContent = HHPublishTaskContent(customDictionary: customDictionary as! Dictionary<String, Any>, delegate: delegate)
                 msg = JCMessage(content: taskContent)
             }
             

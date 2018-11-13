@@ -99,7 +99,7 @@
     
     
     UIButton  *editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [editBtn setImage:[UIImage imageNamed:@"发任务"] forState:0];
+    [editBtn setImage:[UIImage imageNamed:@"sc_com_icon_edit"] forState:0];
     [editBtn addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:editBtn];
     [editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -213,7 +213,6 @@
                         @"personal_news_icons",
                         @"personal_order_icons",
                         @"personal_preview_icons",
-                        @"personal_service_icons",
                         @"personal_service_icons"];
     }
     return _imageArray;
@@ -226,7 +225,6 @@
                         @"我的消息",
                         @"我的收藏",
                         @"实名认证",
-                        @"账号与安全",
                         @"设置"];
     }
     return _titleArray;

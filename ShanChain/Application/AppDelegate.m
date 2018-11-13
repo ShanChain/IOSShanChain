@@ -57,11 +57,14 @@
             if (!error) {
                 BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
                 rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
+            }else{
+                [HHTool showError:@"登录极光失败"];
             }
         }];
     } else {
         SCLoginController *loginVC=[[SCLoginController alloc]init];
         rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
+       
     }
 //    BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
 //    rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
@@ -96,6 +99,12 @@
                                                       UIRemoteNotificationTypeAlert)
                                           categories:nil];
     }
+    
+//     UIImage  *defaultImage = [UIImage imageNamed:@"sc_com_icon_DefaultAvatar"];
+//     NSData *imagedata= UIImagePNGRepresentation(defaultImage);
+//    [JMSGUser updateMyAvatarWithData:imagedata avatarFormat:nil completionHandler:^(id resultObject, NSError *error) {
+//    
+//    }];
 }
 
 - (void)setBMKManager{

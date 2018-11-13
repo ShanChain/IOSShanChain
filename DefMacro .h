@@ -15,6 +15,8 @@
 #define BMKAPPKEY   @"Lp5FSsHWUaVvhgsKfsveuZXRP3LsqEB6"
 
 
+#define Theme_MainThemeColor RGB(115, 207, 242)
+
 //重写NSLog
 #ifdef DEBUG
 # define DLog(fmt, ...) NSLog((@"[文件名:%s]\n" "[函数名:%s]\n" "[行号:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);

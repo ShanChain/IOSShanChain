@@ -27,6 +27,7 @@ class TaskListCell: UITableViewCell {
     @IBOutlet weak var locactionLabel: UILabel!
     
 
+    @IBOutlet weak var tagIcon: UIImageView!
     
     @IBOutlet weak var issueDateLabel: UILabel!
     
@@ -56,7 +57,7 @@ class TaskListCell: UITableViewCell {
         self.revealedCardFlipView = toView
         toView.isHidden = true
         self.addSubview(toView)
-    
+        layer.masksToBounds = true
         self.revealedCardIsFlipped = true
         UIApplication.shared.keyWindow?.endEditing(true)
         let originalShouldRasterize = self.layer.shouldRasterize

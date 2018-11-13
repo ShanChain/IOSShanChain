@@ -11,12 +11,18 @@ import LTScrollView
 
 private let glt_iphoneX = (UIScreen.main.bounds.height == 812.0)
 
+enum TaskListType {
+    case all
+    case my
+}
+
+
 class TaskListContainerViewController: SCBaseVC {
 
 
     private lazy var viewControllers: [UIViewController] = {
-        let listVc = TaskListViewController()
-        let myVc = TaskListViewController()
+        let listVc = TaskListViewController(type: TaskListType.all)
+        let myVc = TaskListViewController(type: TaskListType.my)
         return [listVc, myVc]
     }()
    
@@ -36,6 +42,7 @@ class TaskListContainerViewController: SCBaseVC {
         layout.pageBottomLineColor = kNavBlueColor
         layout.bottomLineColor = kNavBlueColor;
         layout.sliderWidth = 100
+        layout.titleViewBgColor = .white
         
         return layout
     }()

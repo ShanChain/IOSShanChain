@@ -23,6 +23,7 @@ class HHPublishTaskContent: NSObject,JCMessageContentType{
         self.taskContent = customDictionary[CUSTOM_CONTENT] as? String
         self.reward = customDictionary[CUSTOM_REWARD] as? String
         self.completeTime = customDictionary[CUSTOM_COMPLETETIME] as? String
+        self.taskId = customDictionary[CUSTOM_TASKID] as? String
         self.delegate = delegate as? JCMessageDelegate
     }
     
@@ -36,6 +37,7 @@ class HHPublishTaskContent: NSObject,JCMessageContentType{
     open var taskContent: String?
     open var reward:String?
     open var completeTime:String?
+    open var taskId:String?
     
     open var text:NSAttributedString
     

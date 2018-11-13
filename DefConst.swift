@@ -10,12 +10,15 @@ import Foundation
 
 
 @_exported import SnapKit
+@_exported import HandyJSON
 
 let SCREEN_HEIGHT = Int(UIScreen.main.bounds.size.height)
 let SCREEN_WIDTH = Int(UIScreen.main.bounds.size.width)
 let kApplicationStatusBarHeight = Int(UIApplication.shared.statusBarFrame.size.height)
 let kNavBlueColor = RGB(115, 207, 242)
 let SC_ThemeMainColor = _ThemeMainColor()
+let SC_ThemeBackgroundViewColor = RGB(242, 242, 242)
+let SC_defaultImage = UIImage.loadImage("sc_com_icon_DefaultAvatar")
 
 func IS_IPHONE_X() ->Bool{
     if UIScreen.main.bounds.height == 812 {

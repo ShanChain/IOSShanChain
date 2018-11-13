@@ -29,9 +29,15 @@ class PublishTaskView: UIView {
     
     private let makeView:UIView
     private var timestamp = Date().timeStamp
+    private var taskModel:TaskAddModel?
     
     
-    override init(frame: CGRect) {
+    convenience init(taskModel:TaskAddModel?, frame: CGRect) {
+        self.init(frame: frame)
+        self.taskModel = taskModel
+    }
+    
+    override init(frame: CGRect ) {
         makeView = UIView()
         super.init(frame: frame)
         self.frame = frame;
@@ -57,7 +63,7 @@ class PublishTaskView: UIView {
         let datePicker = YLDatePicker(currentDate: nil, minLimitDate: Date(), maxLimitDate: nil, datePickerType: .YMDHm) { [weak self] (date) in
             self?.selectTimeTextFid.text = date.getString(format: "yyyy-MM-dd HH:mm")
             self?.endEditing(true)
-            self?.timestamp = String(Int(date.timeIntervalSince1970))
+            self?.timestamp = String(Int(date.timeIntervalSince1970*1000))
         }
         datePicker.show()
     }

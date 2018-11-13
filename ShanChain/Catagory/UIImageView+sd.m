@@ -20,7 +20,10 @@
     }    
     [self sd_setImageWithURL:[NSURL URLWithString: imageUrl] placeholderImage:placeholder];
 }
-
+    
+- (void)_sd_setImageWithURLString:(NSString *)urlString{
+    [self _sd_setImageWithURLString:urlString placeholderImage:nil];
+}
 -(void)preventImageViewExtrudeDeformation{
     self.contentMode = UIViewContentModeScaleAspectFill;
     self.clipsToBounds = YES;

@@ -31,7 +31,7 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
         _reward = content.reward
         _taskContent = content.taskContent
         _completeTime = content.completeTime
-        
+        _taskId = content.taskId
         rewardLabel.text = _reward
         contentLabel.text = _taskContent
         completeTimeLabel.text = _completeTime
@@ -66,6 +66,7 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
     private var _taskContent: String?
     private var _reward: String?
     private var _completeTime: String?
+    private var _taskId:String?
     private var _message: JCMessageType!
     private var _user: JMSGUser?
     
@@ -98,11 +99,13 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
     
     private lazy var receiveBtn:UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setTitle("领取任务", for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = UIColor(netHex: 0x56D1F4)
+        btn.setTitle("查看任务", for: .normal)
+        btn.setTitleColor(SC_ThemeMainColor, for: .normal)
         btn.layer.cornerRadius = 20
+        btn.borderColor = SC_ThemeMainColor
+        btn.borderWidth = 1.0
         btn.titleLabel?.font = Font(13)
+        btn.isUserInteractionEnabled = false
         btn.addTarget(self, action: #selector(_receiveTask), for: .touchUpInside)
         return btn
     }()
@@ -150,12 +153,12 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
 //    }()
     
     func _receiveTask(){
-        // 领取任务
+        // 查看任务
         _delegate?.message?(message: _message, receiveTask: "111")
     }
     
      func _tapAction(){
-        _delegate?.clickTaskMessage!(message: _message, tuple: ("1111"))
+        _delegate?.clickTaskMessage!(message: _message, tuple: [CUSTOM_CONTENT:_taskContent as AnyObject,CUSTOM_REWARD:_reward as AnyObject,CUSTOM_COMPLETETIME:_completeTime as AnyObject,CUSTOM_TASKID:_taskId as AnyObject])
     }
     
     

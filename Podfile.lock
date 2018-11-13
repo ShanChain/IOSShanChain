@@ -2,6 +2,7 @@ PODS:
   - AliyunOSSiOS (2.10.7)
   - ASExtendedCircularMenu (0.1.1)
   - BaiduMapKit (4.0.0)
+  - HandyJSON (4.1.3)
   - Hyphenate (3.5.1)
   - IQKeyboardManager (6.2.0)
   - JCore (1.2.5)
@@ -88,6 +89,7 @@ DEPENDENCIES:
   - AliyunOSSiOS
   - ASExtendedCircularMenu (from `https://github.com/anshul18895/ASExtendedCircularMenu`)
   - BaiduMapKit (~> 4.0.0)
+  - HandyJSON (~> 4.1.1)
   - Hyphenate
   - IQKeyboardManager
   - JMessage (~> 3.7.0)
@@ -128,6 +130,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AliyunOSSiOS
     - BaiduMapKit
+    - HandyJSON
     - Hyphenate
     - IQKeyboardManager
     - JCore
@@ -163,6 +166,7 @@ SPEC CHECKSUMS:
   AliyunOSSiOS: 602b6a4e70e62a5f0a6431c20496343141d7e66f
   ASExtendedCircularMenu: c6012cee87d7686981c2f0d184a461ae41c5dac0
   BaiduMapKit: 8fa2eb2ca81b92b740b19d9ff3b59d751d3e92e1
+  HandyJSON: bc81fbeb62d65ae5d5942ed29bc4a8265d18c1e8
   Hyphenate: 02e3934f1bef0c25e6e5f46bd0940df740922957
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   JCore: 14706de2640b25fb77dbd02332696491407f37c9
@@ -183,6 +187,6 @@ SPEC CHECKSUMS:
   yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: d777d0cde3316bafd4a04c9987f1c9ec0c7487aa
+PODFILE CHECKSUM: e86cdd19853096ac928fa9a9ff14447680e7cf8f
 
 COCOAPODS: 1.5.3

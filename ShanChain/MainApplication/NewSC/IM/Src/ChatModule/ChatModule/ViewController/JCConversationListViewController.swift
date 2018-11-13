@@ -283,7 +283,7 @@ extension JCConversationListViewController: UITableViewDelegate, UITableViewData
         
         var vc:UIViewController
         if conversation.conversationType == .chatRoom  {
-            vc =  HHChatRoomViewController(conversation: conversation, isJoinChat: true)
+            vc =  HHChatRoomViewController(conversation: conversation, isJoinChat: true, navTitle: "聊天室")
         }else{
             vc = JCChatViewController(conversation: conversation)
         }

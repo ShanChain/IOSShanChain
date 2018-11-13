@@ -13,6 +13,7 @@ import MobileCoreServices
 import ASExtendedCircularMenu
 
 
+
 class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     @IBOutlet weak var taskButton: ASCircularMenuButton!
@@ -22,17 +23,20 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
-    public required init(conversation: JMSGConversation, isJoinChat:Bool) {
+    public required init(conversation: JMSGConversation, isJoinChat:Bool, navTitle:String) {
+        self.navTitle = navTitle
         self.conversation = conversation
         self.isJoinChatRoom = isJoinChat
         super.init(nibName: "HHChatRoomViewController", bundle: nil) // 加载xib视图
         automaticallyAdjustsScrollViewInsets = false;
+        self.title = navTitle
         // if let 关键字是一个组合关键字。我们主要使用它解决Optional对象解包时产生空对象的处理
         if let draft = JCDraft.getDraft(conversation) {
             // 不为空时执行
             self.draft = draft // 获取编辑未发出的草稿
         }
-        
+       
+        SCCacheTool.shareInstance().chatRoomId = self.currentChatRoomID
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -83,28 +87,35 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             // 发布任务
             UIView .animate(withDuration: 0.2) {
                 let pubTaskView:PublishTaskView? =
-                    PublishTaskView(frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
+                    PublishTaskView(taskModel: self._taskModel, frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
                 pubTaskView?.cornerRadius = 0.01
                 pubTaskView?.borderColor = .clear
                 // 点击发布任务回调
-                
                 pubTaskView?.pbCallClosure = { [weak self] (dataString,reward,time,timestamp,isPut)  in
                     pubTaskView?.dismiss()
                     self?.toolbar.isHidden = false
                     if isPut == false{
                         return
                     }
-                
-//                    SCNetwork.shareInstance().hh_post(withUrl: TASK_ADD_URL, params: ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":"12766207","time":timestamp], showLoading: true, call: { (result, error) in
-//                        
-//                    })
                     
                     let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
-                    SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":"12766207","time":timestamp,"characterId":characterId], showLoading: true, call: { (baseModel, error) in
-                         
+                    let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self?.currentChatRoomID ?? "","time":timestamp,"characterId":characterId]
+                    // 添加任务
+                    HHTool.showChrysanthemum()
+                    SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: params, showLoading: true, call: { (baseModel, error) in
+                        HHTool.dismiss()
+                        if((error) != nil){
+                            HHTool .showError("发布失败")
+                            return
+                        }
+                        let dict = baseModel?.data as!Dictionary<String, Any>
+                        if let model = TaskAddModel.deserialize(from: dict) {
+                            self?._taskModel = model
+                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:"赏金:" + (model.Task?.bounty)! ,CUSTOM_COMPLETETIME:"完成时限" + time,CUSTOM_TASKID:model.Task?.taskId ?? ""])
+                        }
+                       
                     })
                     
-                    self?.send(forCustom: [CUSTOM_CONTENT:dataString,CUSTOM_REWARD:"赏金:" + reward + " SEAT",CUSTOM_COMPLETETIME:"完成时限" + time])
                 }
                 
                 self.view.addSubview(pubTaskView!)
@@ -154,6 +165,13 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         //  navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
+    fileprivate var currentChatRoomID:String?{
+        if conversation.conversationType == .chatRoom{
+            let chatRoom = conversation.target as? JMSGChatRoom
+            return  chatRoom?.roomID
+        }
+        return ""
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         navigationController?.navigationBar.isTranslucent = true
@@ -174,6 +192,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     private var draft: String?
+    private var navTitle:String?
     fileprivate var isJoinChatRoom:Bool = false{
         willSet{
             if !newValue {
@@ -187,6 +206,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             }
         }
     }
+    var _taskModel:TaskAddModel?
+    
     // 底部toolBar
     fileprivate lazy var toolbar: SAIInputBar = SAIInputBar(type: .default)
     fileprivate lazy var inputViews: [String: UIView] = [:]
@@ -316,6 +337,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                 self._maskAnimationFromLeft()
             }
         }
+        
+      
+        
     }
     
     func _updateFileMessage(_ notification: Notification) {
@@ -369,6 +393,12 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         //        navigationController?.navigationBar.titleTextAttributes = attrs
         // titleView
         navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        navTitleView.positionBtn .setTitle(self.navTitle, for: .normal)
+        
+        if let chatRoom = conversation.target as? JMSGChatRoom{
+             navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)", for: .normal)
+        }
+      
         navTitleView.backgroundColor =  navigationController?.navigationBar.barTintColor
         navigationController?.navigationBar.addSubview(navTitleView)
         navTitleView.snp.makeConstraints { (mark) in
@@ -930,21 +960,22 @@ extension HHChatRoomViewController: YHPhotoPickerViewControllerDelegate, UINavig
 extension HHChatRoomViewController: JCMessageDelegate {
     
     // 领取任务
-    func message(message: JCMessageType, receiveTask taskID: String) {
-        let rect = CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight))
-        let recieveView:RecieveTaskView = RecieveTaskView(frame: rect)
-        recieveView.closure = {[weak self] (conversation) in
-            self?.toolbar.isHidden = false
-        }
-        self.toolbar.isHidden = true
-        self.view.addSubview(recieveView)
-    }
+//    func message(message: JCMessageType, receiveTask taskID: String) {
+//        let rect = CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight))
+//        let recieveView:RecieveTaskView = RecieveTaskView(frame: rect)
+//        recieveView.closure = {[weak self] (conversation) in
+//            self?.toolbar.isHidden = false
+//        }
+//        self.toolbar.isHidden = true
+//        self.view.addSubview(recieveView)
+//    }
     
-    func clickTaskMessage(message: JCMessageType, tuple: (String)) {
-        let detailsVC = TaskDetailsViewController(taskID: "1111")
+   
+    
+    func clickTaskMessage(message: JCMessageType, tuple: [String : AnyObject]?) {
+        let detailsVC = TaskDetailsViewController(taskID: tuple![CUSTOM_TASKID] as! String, content: tuple![CUSTOM_CONTENT] as! String, reward: tuple![CUSTOM_REWARD] as! String, time: tuple![CUSTOM_COMPLETETIME] as! String)
         navigationController?.pushViewController(detailsVC, animated: true)
     }
-    
     func message(message: JCMessageType, videoData data: Data?) {
         if let data = data {
             JCVideoManager.playVideo(data: data, currentViewController: self)

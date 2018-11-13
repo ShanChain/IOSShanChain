@@ -12,14 +12,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TaskDetailsViewController" customModule="ShanChain" customModuleProvider="target">
             <connections>
-                <outlet property="headerCollectionBtn" destination="lz3-SJ-cl3" id="Ydl-PK-lLj"/>
+                <outlet property="bottomSendView" destination="8B4-GX-hI7" id="rFw-wP-yVD"/>
                 <outlet property="headerCommentBtn" destination="CGJ-pc-8XT" id="AKT-U3-Aqj"/>
                 <outlet property="headerContentLb" destination="rCi-hT-E6m" id="vR2-8v-RXQ"/>
                 <outlet property="headerDateLb" destination="TFq-Vx-oL1" id="7IM-GR-7XM"/>
                 <outlet property="headerDeadlineLb" destination="bbs-3o-nT2" id="Anp-lg-qRM"/>
                 <outlet property="headerIcon" destination="ffH-ed-cKK" id="lwo-Yj-g7m"/>
+                <outlet property="headerLikeBtn" destination="lz3-SJ-cl3" id="Vue-nN-f6w"/>
                 <outlet property="headerNameLb" destination="Ztk-7q-DHr" id="G9S-Sb-TFu"/>
                 <outlet property="headerRewardLb" destination="NUH-KM-121" id="MdQ-PU-w29"/>
+                <outlet property="sendBtn" destination="fq0-aw-i5y" id="klY-TH-eVq"/>
+                <outlet property="sendTextView" destination="vRc-D9-ICZ" id="xL2-lP-qfY"/>
                 <outlet property="tableHeaderView" destination="bWw-cF-fEO" id="OK2-Gs-Inh"/>
                 <outlet property="tableView" destination="lgX-gz-7Fm" id="wdG-Bl-DHW"/>
                 <outlet property="taskTriggerBtn" destination="XT6-yH-ehf" id="M3P-9f-08W"/>
@@ -48,9 +51,10 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lgX-gz-7Fm" secondAttribute="bottom" id="vNo-Jh-Yji"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="40.5" y="83.5"/>
         </view>
         <view contentMode="scaleToFill" id="bWw-cF-fEO">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="268"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sc_com_icon_wechat" translatesAutoresizingMaskIntoConstraints="NO" id="ffH-ed-cKK">
@@ -78,20 +82,20 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机房环境好的设计开发和数据库等符合设计开发还是尽快发货的时间开放和手机卡" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCi-hT-E6m">
-                    <rect key="frame" x="65" y="104.5" width="245" height="61"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机房环境好的设计开发和数据库" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCi-hT-E6m">
+                    <rect key="frame" x="65" y="104.5" width="245" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成时限:2018:-10-20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbs-3o-nT2">
-                    <rect key="frame" x="111.5" y="180.5" width="152" height="18"/>
+                    <rect key="frame" x="111.5" y="140" width="152" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XT6-yH-ehf">
-                    <rect key="frame" x="132" y="213.5" width="110" height="30"/>
+                    <rect key="frame" x="132" y="173" width="110" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="0du-wW-g3Z"/>
                         <constraint firstAttribute="height" constant="30" id="X9F-QL-InN"/>
@@ -110,40 +114,49 @@
                             <color key="value" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="receiveTaskAction:" destination="-1" eventType="touchUpInside" id="fex-o3-QDO"/>
+                    </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGh-UC-RAb">
-                    <rect key="frame" x="0.0" y="258.5" width="375" height="0.5"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGh-UC-RAb">
+                    <rect key="frame" x="0.0" y="218" width="375" height="0.5"/>
                     <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="851-c1-9yH"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEc-PS-Qjl">
-                    <rect key="frame" x="0.0" y="299.5" width="375" height="0.5"/>
+                    <rect key="frame" x="0.0" y="267.5" width="375" height="0.5"/>
                     <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="Y7M-bG-4FC"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="x7a-aG-t4v">
-                    <rect key="frame" x="0.0" y="259" width="375" height="41"/>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="x7a-aG-t4v">
+                    <rect key="frame" x="0.0" y="218.5" width="375" height="49.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGJ-pc-8XT">
-                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="41"/>
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="49.5"/>
                             <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="150" image="sc_com_icon_comment">
                                 <color key="titleColor" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="commentAction:" destination="-1" eventType="touchUpInside" id="hYU-H9-ngj"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lz3-SJ-cl3">
-                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="41"/>
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="49.5"/>
                             <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="150" image="sc_com_icon_unlike">
                                 <color key="titleColor" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="selected" image="sc_com_icon_like"/>
+                            <connections>
+                                <action selector="likeAction:" destination="-1" eventType="touchUpInside" id="DNB-9O-0gO"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
@@ -178,8 +191,70 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="zey-OG-YdG"/>
-            <point key="canvasLocation" x="43.5" y="626"/>
+            <point key="canvasLocation" x="43.5" y="610"/>
         </view>
+        <view contentMode="scaleToFill" id="8B4-GX-hI7">
+            <rect key="frame" x="0.0" y="0.0" width="523" height="281"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fq0-aw-i5y">
+                    <rect key="frame" x="428" y="226" width="80" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="CoW-9K-4we"/>
+                        <constraint firstAttribute="height" constant="40" id="PVp-4Q-IBH"/>
+                    </constraints>
+                    <state key="normal" title="发送">
+                        <color key="titleColor" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="sendTaskCommentAction:" destination="-1" eventType="touchUpInside" id="T8e-Vm-Clc"/>
+                    </connections>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vRc-D9-ICZ">
+                    <rect key="frame" x="15" y="150" width="393" height="121"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textView>
+                <view alpha="0.050000000000000003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1C2-aS-Wvj">
+                    <rect key="frame" x="0.0" y="0.0" width="523" height="140"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="NqD-5O-sd9" appends="YES" id="FlN-NY-nFE"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vRc-D9-ICZ" firstAttribute="top" secondItem="KhK-dG-97y" secondAttribute="top" constant="150" id="Fpy-kg-fIe"/>
+                <constraint firstItem="KhK-dG-97y" firstAttribute="trailing" secondItem="fq0-aw-i5y" secondAttribute="trailing" constant="15" id="GtD-73-eaT"/>
+                <constraint firstItem="KhK-dG-97y" firstAttribute="bottom" secondItem="vRc-D9-ICZ" secondAttribute="bottom" constant="10" id="NAq-fL-rue"/>
+                <constraint firstItem="KhK-dG-97y" firstAttribute="bottom" secondItem="fq0-aw-i5y" secondAttribute="bottom" constant="15" id="O0y-1O-ELA"/>
+                <constraint firstItem="vRc-D9-ICZ" firstAttribute="leading" secondItem="KhK-dG-97y" secondAttribute="leading" constant="15" id="UJe-Lb-7jj"/>
+                <constraint firstItem="KhK-dG-97y" firstAttribute="trailing" secondItem="1C2-aS-Wvj" secondAttribute="trailing" id="rOD-a8-KTr"/>
+                <constraint firstItem="1C2-aS-Wvj" firstAttribute="top" secondItem="KhK-dG-97y" secondAttribute="top" id="rRz-zX-muN"/>
+                <constraint firstItem="1C2-aS-Wvj" firstAttribute="leading" secondItem="KhK-dG-97y" secondAttribute="leading" id="t8I-4s-FMc"/>
+                <constraint firstItem="vRc-D9-ICZ" firstAttribute="top" secondItem="1C2-aS-Wvj" secondAttribute="bottom" constant="10" id="tbd-dO-Cu9"/>
+                <constraint firstItem="fq0-aw-i5y" firstAttribute="leading" secondItem="vRc-D9-ICZ" secondAttribute="trailing" constant="20" id="xZC-jy-QLO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="KhK-dG-97y"/>
+            <point key="canvasLocation" x="86.5" y="1156.5"/>
+        </view>
+        <tapGestureRecognizer id="NqD-5O-sd9">
+            <connections>
+                <action selector="hiddenTextView:" destination="-1" id="SfL-DR-7HJ"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="sc_com_icon_comment" width="18" height="18"/>

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2207068621996AFA00404459 /* AddTaskCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207068521996AFA00404459 /* AddTaskCommentModel.swift */; };
+		220706882199768F00404459 /* TaskCommentListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220706872199768F00404459 /* TaskCommentListModel.swift */; };
+		2207068A219A66A600404459 /* TaskDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070689219A66A600404459 /* TaskDetailsModel.swift */; };
+		2207068D219A81E800404459 /* PersonalChatInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207068B219A81E800404459 /* PersonalChatInfoViewController.swift */; };
+		2207068E219A81E800404459 /* PersonalChatInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207068C219A81E800404459 /* PersonalChatInfoViewController.xib */; };
+		22070690219AA3EF00404459 /* TaskRecieveSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207068F219AA3EF00404459 /* TaskRecieveSuccessModel.swift */; };
+		22070692219AC0A400404459 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070691219AC0A300404459 /* TaskListModel.swift */; };
+		22070696219AE5E400404459 /* TaskListTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070695219AE5E400404459 /* TaskListTableHeaderView.swift */; };
+		22070698219AE5EE00404459 /* TaskListTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22070697219AE5EE00404459 /* TaskListTableHeaderView.xib */; };
+		2207069C219AEBE700404459 /* ShowSelectTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22070699219AEBE700404459 /* ShowSelectTableView.m */; };
+		2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207069A219AEBE700404459 /* ShowSelectTableView.xib */; };
 		2218E18D217606B200719844 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E18C217606B200719844 /* MobileCoreServices.framework */; };
 		2218E18F217606C900719844 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E18E217606C900719844 /* CoreLocation.framework */; };
 		2218E191217606D900719844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E190217606D900719844 /* QuartzCore.framework */; };
@@ -763,6 +774,18 @@
 
 /* Begin PBXFileReference section */
 		1873FA0D212E882900C1088E /* DefMacro .h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DefMacro .h"; sourceTree = "<group>"; };
+		2207068521996AFA00404459 /* AddTaskCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskCommentModel.swift; sourceTree = "<group>"; };
+		220706872199768F00404459 /* TaskCommentListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommentListModel.swift; sourceTree = "<group>"; };
+		22070689219A66A600404459 /* TaskDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsModel.swift; sourceTree = "<group>"; };
+		2207068B219A81E800404459 /* PersonalChatInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatInfoViewController.swift; sourceTree = "<group>"; };
+		2207068C219A81E800404459 /* PersonalChatInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalChatInfoViewController.xib; sourceTree = "<group>"; };
+		2207068F219AA3EF00404459 /* TaskRecieveSuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRecieveSuccessModel.swift; sourceTree = "<group>"; };
+		22070691219AC0A300404459 /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
+		22070695219AE5E400404459 /* TaskListTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListTableHeaderView.swift; sourceTree = "<group>"; };
+		22070697219AE5EE00404459 /* TaskListTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListTableHeaderView.xib; sourceTree = "<group>"; };
+		22070699219AEBE700404459 /* ShowSelectTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowSelectTableView.m; sourceTree = "<group>"; };
+		2207069A219AEBE700404459 /* ShowSelectTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowSelectTableView.xib; sourceTree = "<group>"; };
+		2207069B219AEBE700404459 /* ShowSelectTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSelectTableView.h; sourceTree = "<group>"; };
 		2218E18C217606B200719844 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2218E18E217606C900719844 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2218E190217606D900719844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -2202,6 +2225,8 @@
 				223F98CA217F12030031DB95 /* JCUpdateMemberViewController.swift */,
 				223F98CB217F12030031DB95 /* JCRemindListViewController.swift */,
 				223F98CC217F12030031DB95 /* JCDocumentViewController.swift */,
+				2207068B219A81E800404459 /* PersonalChatInfoViewController.swift */,
+				2207068C219A81E800404459 /* PersonalChatInfoViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2769,6 +2794,8 @@
 				22C917AA219424FF002E5240 /* TaskListBackView.xib */,
 				22C917B02194402D002E5240 /* TaskContentDetailsCell.swift */,
 				22C917B12194402D002E5240 /* TaskContentDetailsCell.xib */,
+				22070695219AE5E400404459 /* TaskListTableHeaderView.swift */,
+				22070697219AE5EE00404459 /* TaskListTableHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2777,6 +2804,11 @@
 			isa = PBXGroup;
 			children = (
 				221BBD3B21982D1E0004EE03 /* TaskAddModel.swift */,
+				2207068521996AFA00404459 /* AddTaskCommentModel.swift */,
+				220706872199768F00404459 /* TaskCommentListModel.swift */,
+				22070689219A66A600404459 /* TaskDetailsModel.swift */,
+				2207068F219AA3EF00404459 /* TaskRecieveSuccessModel.swift */,
+				22070691219AC0A300404459 /* TaskListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2908,6 +2940,9 @@
 		332AB6261F4ED8C900888313 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				2207069B219AEBE700404459 /* ShowSelectTableView.h */,
+				22070699219AEBE700404459 /* ShowSelectTableView.m */,
+				2207069A219AEBE700404459 /* ShowSelectTableView.xib */,
 				2293A74F218FE31F00FB977C /* DUX_UploadUserIcon.h */,
 				2293A750218FE32000FB977C /* DUX_UploadUserIcon.m */,
 				223F9A7C2182E94B0031DB95 /* UIView+property.h */,
@@ -4651,12 +4686,14 @@
 				223F99BB217F12040031DB95 /* 定位2.png in Resources */,
 				22C917AB219424FF002E5240 /* TaskListBackView.xib in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
+				2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */,
 				4852A0D11FCE9F0300CDD7BE /* SCMessageCell.xib in Resources */,
 				4852A0E41FCE9F0300CDD7BE /* SYScreenInsideCell.xib in Resources */,
 				2242C0042159C34E00707024 /* YYHud.xcassets in Resources */,
 				22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */,
 				892B39D91FE8B0B400292A75 /* SYmarkCollectionViewCell.xib in Resources */,
 				22C917A12192E4D1002E5240 /* LeftWalletTableViewCell.xib in Resources */,
+				22070698219AE5EE00404459 /* TaskListTableHeaderView.xib in Resources */,
 				223F9A7B2182C46D0031DB95 /* RoomTopView.xib in Resources */,
 				22284A7E2179825700CDC86C /* InfoPlist.strings in Resources */,
 				4852A0D51FCE9F0300CDD7BE /* SCPersonalCollectionCell.xib in Resources */,
@@ -4699,6 +4736,7 @@
 				223F9969217F12040031DB95 /* yh_image_picked@2x.png in Resources */,
 				22C917A72192E5AA002E5240 /* RealNameVeifiedViewController.xib in Resources */,
 				89E031531FCECBA70089240B /* GWLPhotoSelector.bundle in Resources */,
+				2207068E219A81E800404459 /* PersonalChatInfoViewController.xib in Resources */,
 				22C9178E2192BA76002E5240 /* HHDefaultCell.xib in Resources */,
 				33B7CCF91EC5865700FB6378 /* Assets.xcassets in Resources */,
 				223F9967217F12040031DB95 /* yh_image_no_picked@2x.png in Resources */,
@@ -4778,6 +4816,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShanChain/Pods-ShanChain-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ASExtendedCircularMenu/ASExtendedCircularMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/AliyunOSSiOS/AliyunOSSiOS.framework",
+				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${PODS_ROOT}/Hyphenate/iOS_Pods_IMFullSDK_V3.5.1/Hyphenate.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
@@ -4795,6 +4834,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASExtendedCircularMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AliyunOSSiOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hyphenate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
@@ -4856,6 +4896,7 @@
 				332AB6551F4ED8C900888313 /* UIImage+Resize.m in Sources */,
 				223F9A0E217F12040031DB95 /* DLSlideView.m in Sources */,
 				4852A12D1FCE9F0300CDD7BE /* SYMarkCollection2Cell.m in Sources */,
+				22070690219AA3EF00404459 /* TaskRecieveSuccessModel.swift in Sources */,
 				223F9993217F12040031DB95 /* JCChatViewCell.swift in Sources */,
 				4852A1161FCE9F0300CDD7BE /* SYFriendGroup.m in Sources */,
 				485E66681F42873F00B158BF /* UIView+MJExtension.m in Sources */,
@@ -4928,6 +4969,7 @@
 				4852A1151FCE9F0300CDD7BE /* SYFriend.m in Sources */,
 				22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */,
 				222EF6162186B999005B89EF /* NSObject+extension.swift in Sources */,
+				2207068D219A81E800404459 /* PersonalChatInfoViewController.swift in Sources */,
 				485E66641F42873F00B158BF /* MJRefreshConst.m in Sources */,
 				223F997B217F12040031DB95 /* JCGroupMemberCell.swift in Sources */,
 				485E66161F42862900B158BF /* EaseBubbleView+Image.m in Sources */,
@@ -4986,6 +5028,7 @@
 				223F9A13217F12040031DB95 /* JCFileManager.swift in Sources */,
 				9960490F1ED7C44F007634EE /* AppDelegate.m in Sources */,
 				4852A16D1FCE9F7200CDD7BE /* FMDatabaseAdditions.m in Sources */,
+				2207068621996AFA00404459 /* AddTaskCommentModel.swift in Sources */,
 				485E65D31F42862900B158BF /* MWGridViewController.m in Sources */,
 				485E65E31F42862900B158BF /* UIButton+EMWebCache.m in Sources */,
 				48718D2C1F42277400010AA0 /* AFNetworkReachabilityManager.m in Sources */,
@@ -5047,6 +5090,7 @@
 				332AB64E1F4ED8C900888313 /* NSString+Addition.m in Sources */,
 				223F9998217F12040031DB95 /* JCSingleSettingCell.swift in Sources */,
 				223F9A01217F12040031DB95 /* JCRecordVoiceHelper.swift in Sources */,
+				2207069C219AEBE700404459 /* ShowSelectTableView.m in Sources */,
 				223F99AC217F12040031DB95 /* JCMessageOptions.swift in Sources */,
 				4852A0C71FCE9F0300CDD7BE /* SYBigDramaModel.m in Sources */,
 				332AB5F51F4ED69F00888313 /* TYViewStorage.m in Sources */,
@@ -5147,6 +5191,7 @@
 				4852A0D01FCE9F0300CDD7BE /* SCMessageCell.m in Sources */,
 				223F99AF217F12040031DB95 /* JCMessageContentViewType.swift in Sources */,
 				332AB64F1F4ED8C900888313 /* NSString+Emoji.m in Sources */,
+				22070692219AC0A400404459 /* TaskListModel.swift in Sources */,
 				485E660A1F42862900B158BF /* EaseLocationViewController.m in Sources */,
 				4852A1221FCE9F0300CDD7BE /* ICChatBoxMoreView.m in Sources */,
 				485E65D61F42862900B158BF /* MWTapDetectingImageView.m in Sources */,
@@ -5206,6 +5251,7 @@
 				485E65FB1F42862900B158BF /* EaseUserModel.m in Sources */,
 				223F99D0217F12040031DB95 /* JCMyInfoViewController.swift in Sources */,
 				223F99E4217F12040031DB95 /* JMSGOptionalContent+.swift in Sources */,
+				2207068A219A66A600404459 /* TaskDetailsModel.swift in Sources */,
 				223F9974217F12040031DB95 /* GroupAvatorCell.swift in Sources */,
 				48718D9A1F42277400010AA0 /* UIImage+GIF.m in Sources */,
 				48718D911F42277400010AA0 /* SDImageCache.m in Sources */,
@@ -5247,6 +5293,7 @@
 				4852A0D21FCE9F0300CDD7BE /* SCMessageSettingCell.m in Sources */,
 				4852A1051FCE9F0300CDD7BE /* SYStoryRoleController.m in Sources */,
 				223F99E3217F12040031DB95 /* ExJMessage.swift in Sources */,
+				22070696219AE5E400404459 /* TaskListTableHeaderView.swift in Sources */,
 				223F9A11217F12040031DB95 /* Log.swift in Sources */,
 				332AB6501F4ED8C900888313 /* NSString+Extension.m in Sources */,
 				223F996E217F12040031DB95 /* JCCEmoticonGroup.swift in Sources */,
@@ -5423,6 +5470,7 @@
 				2281A221216D9E83009E95EE /* NSObject+AutoProperty.m in Sources */,
 				4852A0C31FCE9F0300CDD7BE /* SYPasserByController.m in Sources */,
 				2281A218216B2CB0009E95EE /* HHTool.m in Sources */,
+				220706882199768F00404459 /* TaskCommentListModel.swift in Sources */,
 				8952A02F1FDB7A6500312243 /* SYProgressHUD.m in Sources */,
 				892B3A0A1FE91EFD00292A75 /* SCStoryPublishVideoController.m in Sources */,
 				4852A1001FCE9F0300CDD7BE /* SYStoryController.m in Sources */,

@@ -47,5 +47,5 @@ import JMessage
     // 领取任务
     @objc optional func message(message:JCMessageType, receiveTask taskID:String)
     // 点击任务详情
-    @objc optional func clickTaskMessage(message:JCMessageType, tuple:(String))
+    @objc optional func clickTaskMessage(message:JCMessageType, tuple:[String:AnyObject]?)
 }

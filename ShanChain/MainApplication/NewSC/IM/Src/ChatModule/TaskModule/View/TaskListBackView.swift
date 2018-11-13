@@ -14,6 +14,7 @@ class TaskListBackView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView = loadViewFromNib()
+        self.frame = frame
         //contentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentView)
         

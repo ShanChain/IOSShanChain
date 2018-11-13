@@ -12,6 +12,7 @@ import Foundation
 public let CUSTOM_CONTENT =  "dataString"
 public let CUSTOM_REWARD =   "bounty"
 public let CUSTOM_COMPLETETIME = "time"
+public let CUSTOM_TASKID = "taskId"
 public let TEST_ROOM_ID   = "15198852"
 
 

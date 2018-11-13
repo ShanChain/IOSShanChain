@@ -8,6 +8,9 @@
 
 import UIKit
 
+typealias LikeClosure = (_ idx:Int) ->Void
+
+
 class TaskContentDetailsCell: UITableViewCell {
 
     
@@ -20,6 +23,15 @@ class TaskContentDetailsCell: UITableViewCell {
     @IBOutlet weak var contentLb: UILabel!
     
     @IBOutlet weak var timeLb: UILabel!
+    
+    
+    @IBOutlet weak var likeBtn: UIButton!
+    
+    var likeBlock:LikeClosure?
+    
+    @IBAction func likeAction(_ sender: UIButton) {
+        self.likeBlock!(sender.tag)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

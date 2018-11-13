@@ -68,4 +68,54 @@
     int unit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     return [calendar components:unit fromDate:self toDate:[NSDate date] options:0];
 }
+    
+ // 根据时间戳获取当前显示时间
++(NSString*)ChatingTime:(NSString *)timestring{
+    
+    
+    int timestamp =  timestring.length > 11 ? [timestring intValue]/1000:[timestring intValue];
+    
+    // 创建日历对象
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    // 获取当前时间
+    NSDate *currentDate = [NSDate date];
+    
+    // 获取当前时间的年、月、日。利用日历
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear| NSCalendarUnitMonth|NSCalendarUnitDay fromDate:currentDate];
+    NSInteger currentYear = components.year;
+    NSInteger currentMonth = components.month;
+    NSInteger currentDay = components.day;
+    
+    
+    // 获取消息发送时间的年、月、日
+    NSDate *msgDate = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    components = [calendar components:NSCalendarUnitYear| NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour fromDate:msgDate];
+    CGFloat msgYear = components.year;
+    CGFloat msgMonth = components.month;
+    CGFloat msgDay = components.day;
+    CGFloat msghours = components.hour;
+    // 进行判断
+    NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+    if (currentYear == msgYear && currentMonth == msgMonth && currentDay == msgDay) {
+        //今天
+        if (msghours<12) {
+            dateFmt.dateFormat = @"上午 hh:mm";
+        }else{
+            dateFmt.dateFormat = @"下午 hh:mm";
+        }
+        
+    }else if (currentYear == msgYear && currentMonth == msgMonth && currentDay-1 == msgDay ){
+        //昨天
+        dateFmt.dateFormat = @"昨天 HH:mm";
+    }else{
+        //昨天以前
+        dateFmt.dateFormat = @"YYYY-MM-dd HH:mm";
+    }
+    // 返回处理后的结果
+    return [dateFmt stringFromDate:msgDate];
+    
+}
+
+    
 @end

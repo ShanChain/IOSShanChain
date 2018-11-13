@@ -202,7 +202,8 @@ class JCLoginViewController: UIViewController {
                 let window = appDelegate?.window!
                 JMSGConversation.createChatRoomConversation(withRoomId: TEST_ROOM_ID) { (result, error) in
                     let conv = result as! JMSGConversation
-                    let nav = JCNavigationController(rootViewController: HHChatRoomViewController(conversation: conv, isJoinChat: true))
+                    let nav = JCNavigationController(rootViewController: HHChatRoomViewController(conversation: conv, isJoinChat: true, navTitle: "聊天室"))
+                    
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)
                     window?.rootViewController = nav
                 }

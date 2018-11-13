@@ -84,6 +84,6 @@
 
 @property   (nonatomic,strong)  SavePublishContentModel  *editContentModel;
 @property   (nonatomic,strong)  SCCharacterModel         *characterModel;
-
+@property   (nonatomic,copy)    NSString            *chatRoomId;
 
 @end

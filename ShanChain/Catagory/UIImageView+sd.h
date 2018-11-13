@@ -12,6 +12,7 @@
 
 -(void)_sd_setImageWithURLString:(NSString*)urlString placeholderImage:(UIImage *)placeholder;
 
+-(void)_sd_setImageWithURLString:(NSString*)urlString;
 //防止网络加载的图片被拉伸变形
 - (void)preventImageViewExtrudeDeformation;
 
