@@ -84,7 +84,7 @@ class TaskDetailsViewController: SCBaseVC {
         
         headerIcon._setCornerRadiusCircle()
         
-        headerDeadlineLb.text = self.time
+        headerDeadlineLb.text = NSDate.chatingTime(self.time)
         headerContentLb.text = self.taskContent
         headerRewardLb.text = self.reward
         sendTextView.delegate = self
@@ -145,6 +145,18 @@ class TaskDetailsViewController: SCBaseVC {
             let dict = baseModel?.data as! Dictionary<String,Any>
             if let model = TaskRecieveSuccessModel.deserialize(from: dict){
                 let successView:RecieveTaskView = RecieveTaskView(recieTaskModel: model, frame: self.view.frame)
+                successView.closure = { (HxUserName) in
+                    JMSGConversation.createSingleConversation(withUsername: HxUserName, completionHandler: { (result, error) in
+                        if error == nil {
+                            let conv = result as! JMSGConversation
+                            let vc = JCChatViewController(conversation: conv)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    })
+                    
+                }
+                self.view.addSubview(successView)
             }
             
             

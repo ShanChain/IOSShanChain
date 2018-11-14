@@ -14,6 +14,8 @@ class TaskRecieveSuccessModel: HandyJSON {
     var PublishTime:String?
     var HxUserName:String?
     var ExpiryTime:String?
+    var intro:String?
+    var bounty:String?
     var TaskReceive:TaskRecieveSuccessModel_TaskReceive?
     
     required init() {}

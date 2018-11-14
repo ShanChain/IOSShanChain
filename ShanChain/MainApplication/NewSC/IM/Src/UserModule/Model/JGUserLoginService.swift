@@ -14,6 +14,26 @@ typealias CreateChatRoomConversationComplete = (_ resultObject:JMSGConversation?
 
 class JGUserLoginService: NSObject {
     
+  // 设置极光用户信息
+    open static func jg_SetUserInfo(nickNmae:String?, signature:String?,icon:String?, complete:@escaping JMSGCompletionHandler){
+        
+        let userInfo = JMSGUserInfo()
+//        if let icon = icon {
+//            let data = NSData.init(contentsOf: NSURL.fileURL(withPath: icon))
+//            var str: String? = nil
+//            if let aData = data {
+//                str = String(data: aData as Data, encoding: .utf8)
+//            }
+//            let subData: Data? = str?.data(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
+//            userInfo.avatarData = subData!
+//        }
+        
+        userInfo.signature = signature ?? ""
+        userInfo.nickname = nickNmae ?? ""
+        JMSGUser.updateMyInfo(with: userInfo, completionHandler: complete)
+    }
+    
+  // 极光登录
   open static func  jg_userLogin(username: String, password: String , loginComplete:@escaping LoginComplete ){
         JMSGUser.login(withUsername: username, password: password) { (result, error) in
             if error == nil {
@@ -26,6 +46,7 @@ class JGUserLoginService: NSObject {
                         UserDefaults.standard.removeObject(forKey: kLastUserAvator)
                     }
                 })
+                
                 UserDefaults.standard.set(username, forKey: kCurrentUserName)
                 UserDefaults.standard.set(password, forKey: kCurrentUserPassword)
 
@@ -37,6 +58,7 @@ class JGUserLoginService: NSObject {
         }
     }
     
+    // 获取会话
     open static  func jg_createChatRoomConversation(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
         
         if let roomConversation = JMSGConversation.chatRoomConversation(withRoomId: roomId){

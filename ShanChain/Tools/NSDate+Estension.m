@@ -73,7 +73,7 @@
 +(NSString*)ChatingTime:(NSString *)timestring{
     
     
-    int timestamp =  timestring.length > 11 ? [timestring intValue]/1000:[timestring intValue];
+    NSInteger timestamp =  timestring.length > 11 ? [timestring integerValue]/1000:[timestring integerValue];
     
     // 创建日历对象
     NSCalendar *calendar = [NSCalendar currentCalendar];

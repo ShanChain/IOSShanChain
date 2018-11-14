@@ -29,16 +29,19 @@ class RecieveTaskView: UIView {
     convenience init(recieTaskModel:TaskRecieveSuccessModel,frame:CGRect) {
         self.init(frame: frame)
         self.recieTaskModel = recieTaskModel
+        contentLabel.text = self.recieTaskModel?.intro
+        rewardLabel.text = "赏金\(self.recieTaskModel?.bounty ?? "") SEAT"
+        completeTimeLabel.text = "完成期限:\(self.recieTaskModel?.TaskReceive?.completeTime ?? "")"
+        let  height = (self.recieTaskModel?.intro?.heightForAdaptive(Font: Font(14), CGFloat(SCREEN_WIDTH - 100)))! + 330.0
+        contentViewHeight.constant = height
     }
     
     override init(frame: CGRect) {
         makeView = UIView()
         super.init(frame: frame)
+        makeView.frame = frame
         spView = loadViewFromNib()
         
-        contentLabel.text = "分类看见对方离开手机打开了附件是考虑到福建省了房间都是离开房间是龙卷风多凉快圣诞节疯狂老师福建省了肯德基逢狼时刻福建省了会计法看风景了深刻的纠纷类似的看法讲述了快递费讲述了快捷方式离开就分手快乐发生了纠纷空间裂缝是肯定就发了多少空间是快捷方式来看大嫁风尚开房记录是福建省了房价来说"
-        let  height = (contentLabel.text?.heightForAdaptive(Font: Font(14), CGFloat(SCREEN_WIDTH - 100)))! + 330.0
-        contentViewHeight.constant = height
         //添加蒙版
         makeView.backgroundColor = .black
         makeView.alpha = 0.2
@@ -88,7 +91,7 @@ class RecieveTaskView: UIView {
     
     // 联系赏主
     @IBAction func contactPressed(_ sender: UIButton) {
-        closure!("111")
+        closure!((self.recieTaskModel?.HxUserName)!)
         dismiss()
     }
     
@@ -97,7 +100,6 @@ class RecieveTaskView: UIView {
         for view in subviews {
             if view == makeView{
                 if(!contentView.frame.contains(point)){
-                    closure!("111")
                     dismiss()
                     
                 }

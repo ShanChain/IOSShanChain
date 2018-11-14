@@ -111,7 +111,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                         let dict = baseModel?.data as!Dictionary<String, Any>
                         if let model = TaskAddModel.deserialize(from: dict) {
                             self?._taskModel = model
-                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:"赏金:" + (model.Task?.bounty)! ,CUSTOM_COMPLETETIME:"完成时限" + time,CUSTOM_TASKID:model.Task?.taskId ?? ""])
+                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:"赏金:" + (model.Task?.bounty)! ,CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
                         }
                        
                     })

@@ -21,6 +21,8 @@ enum StatusCode:Int{
 
 private let glt_iphoneX = (UIScreen.main.bounds.height == 812.0)
 private let H_TaskListCellID = "TaskListCell"
+private let H_TaskListPersonalCellID = "TaskListPersonalCell"
+
 
 class TaskListViewController: SCBaseVC,LTTableViewProtocal {
     
@@ -50,8 +52,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
     let titles:Dictionary<String,String>
     var statusCode:StatusCode = StatusCode.squareAll
     
-    
-    var selectEntitys:[ShowSelectEntity]{
+    func _getEntitys() -> [ShowSelectEntity] {
         var mAry:[ShowSelectEntity] = []
         for (key,value) in self.titles {
             mAry.append(ShowSelectEntity.newInitialization(withValue: value, key:key))
@@ -59,10 +60,12 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         return mAry
     }
     
+    var selectEntitys:[ShowSelectEntity] = []
     fileprivate lazy var tableView: UITableView = {
         let H: CGFloat = glt_iphoneX ? (self.view.bounds.height - 64 - 24 - 34) : self.view.bounds.height  - 64
         let tableView = self.tableViewConfig(CGRect(x: 10, y: 30, width: self.view.bounds.width - 20, height: H), self, self, nil)
         tableView.register(UINib.init(nibName: H_TaskListCellID, bundle: nil), forCellReuseIdentifier: H_TaskListCellID)
+        tableView.register(UINib.init(nibName: H_TaskListPersonalCellID, bundle: nil), forCellReuseIdentifier: H_TaskListPersonalCellID)
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
@@ -99,6 +102,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectEntitys = _getEntitys()
         view.backgroundColor = SC_ThemeBackgroundViewColor
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
         view.addSubview(topView)
@@ -220,6 +224,14 @@ extension TaskListViewController {
         return cell as! T
     }
     
+    public func cellWithPersonalTableView<T:TaskListPersonalCell>(_ tableView: UITableView,cellForRowAt indexPath: IndexPath) -> T {
+        var identifier = NSStringFromClass(T.self)
+        identifier = configIdentifier(&identifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier)
+        return cell as! T
+    }
+    
+    
     public func tableViewConfig(_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableViewStyle?) -> UITableView  {
         let tableView = UITableView(frame:  CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), style: style ?? .plain)
         tableView.delegate = delegate
@@ -262,26 +274,36 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = cellWithTableView(tableView, cellForRowAt: indexPath)
+        
         let content = dataList[indexPath.section];
-        cell.rewardLabel.text = "\(content.bounty ?? "") SEAT"
-        cell.contentLabel.text = content.intro
-        cell.icon._sd_setImage(withURLString: content.headImg, placeholderImage: SC_defaultImage)
-        cell.issueLabel.text = "\(content.name ?? "")发布的:"
-        cell.issueDateLabel.text = "\(NSDate.chatingTime(content.expiryTime) ?? "") 前"
-        cell.locactionLabel.text = "来自:\(content.roomName ?? "")"
-        cell.cornerRadius = 10.0
+        if self.type == TaskListType.all {
+            let cell = cellWithTableView(tableView, cellForRowAt: indexPath)
+            cell.delegate = self
+            cell.listModel = content
+            return cell
+        }
+        let cell = cellWithPersonalTableView(tableView, cellForRowAt: indexPath)
+        cell.delegate = self
+        cell.listModel = content
         return cell
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let cell = tableView.cellForRow(at: indexPath) as? TaskListCell
-        if (cell?.revealedCardIsFlipped)!{
-            cell?.flipRevealedCardBack()
+    
+        let content = dataList[indexPath.section];
+        if self.type == TaskListType.all {
+       //  let  cell = (tableView.cellForRow(at: indexPath) as?  TaskListCell)!
         }else{
-            let backView = TaskListBackView(frame: (cell?.frame)!)
-            cell?.flipRevealedCard(toView: backView)
+          let  cell = (tableView.cellForRow(at: indexPath) as?  TaskListPersonalCell)!
+            if (cell.revealedCardIsFlipped){
+                cell.flipRevealedCardBack()
+            }else{
+                let backView = TaskListBackView(listModel: content, frame: cell.frame)
+                cell.flipRevealedCard(toView: backView)
+            }
         }
+  
         
     }
     
@@ -294,4 +316,16 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 100.0
 //    }
+}
+
+extension TaskListViewController:TaskListCellProtocol{
+    
+    func callBack(listModel: TaskListModel) {
+        if(!listModel.isReceived){
+            let detailsVC = TaskDetailsViewController(taskID: listModel.taskId!, content: listModel.intro!, reward: listModel.bounty!, time: listModel.expiryTime!)
+            navigationController?.pushViewController(detailsVC, animated: true)
+        }
+       
+    }
+    
 }

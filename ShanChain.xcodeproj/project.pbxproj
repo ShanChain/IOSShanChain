@@ -14,8 +14,6 @@
 		2207068E219A81E800404459 /* PersonalChatInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207068C219A81E800404459 /* PersonalChatInfoViewController.xib */; };
 		22070690219AA3EF00404459 /* TaskRecieveSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207068F219AA3EF00404459 /* TaskRecieveSuccessModel.swift */; };
 		22070692219AC0A400404459 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070691219AC0A300404459 /* TaskListModel.swift */; };
-		22070696219AE5E400404459 /* TaskListTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070695219AE5E400404459 /* TaskListTableHeaderView.swift */; };
-		22070698219AE5EE00404459 /* TaskListTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22070697219AE5EE00404459 /* TaskListTableHeaderView.xib */; };
 		2207069C219AEBE700404459 /* ShowSelectTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22070699219AEBE700404459 /* ShowSelectTableView.m */; };
 		2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207069A219AEBE700404459 /* ShowSelectTableView.xib */; };
 		220706A1219BC6B600404459 /* EditPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2207069F219BC6B600404459 /* EditPersonalInfoViewController.m */; };
@@ -273,6 +271,9 @@
 		2242C0072159C3AB00707024 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242C0062159C3AB00707024 /* UIColor+Extention.m */; };
 		225052BC218BF58C001FBD65 /* TaskListContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */; };
 		225052BE218BF67E001FBD65 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225052BD218BF67E001FBD65 /* TaskListViewController.swift */; };
+		22563F5D219C07E4004E34BB /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22563F5C219C07E4004E34BB /* BaseProtocol.swift */; };
+		22563F60219C3929004E34BB /* TaskListPersonalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22563F5E219C3929004E34BB /* TaskListPersonalCell.swift */; };
+		22563F61219C3929004E34BB /* TaskListPersonalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22563F5F219C3929004E34BB /* TaskListPersonalCell.xib */; };
 		22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */; };
 		22631C4C216DDA3200D5AB0B /* SavePublishContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4B216DDA3200D5AB0B /* SavePublishContentModel.m */; };
 		22631C4F216DE85200D5AB0B /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4D216DE85100D5AB0B /* UIViewController+BackButtonHandler.m */; };
@@ -783,8 +784,6 @@
 		2207068C219A81E800404459 /* PersonalChatInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalChatInfoViewController.xib; sourceTree = "<group>"; };
 		2207068F219AA3EF00404459 /* TaskRecieveSuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRecieveSuccessModel.swift; sourceTree = "<group>"; };
 		22070691219AC0A300404459 /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
-		22070695219AE5E400404459 /* TaskListTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListTableHeaderView.swift; sourceTree = "<group>"; };
-		22070697219AE5EE00404459 /* TaskListTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListTableHeaderView.xib; sourceTree = "<group>"; };
 		22070699219AEBE700404459 /* ShowSelectTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowSelectTableView.m; sourceTree = "<group>"; };
 		2207069A219AEBE700404459 /* ShowSelectTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowSelectTableView.xib; sourceTree = "<group>"; };
 		2207069B219AEBE700404459 /* ShowSelectTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSelectTableView.h; sourceTree = "<group>"; };
@@ -1080,6 +1079,9 @@
 		2242C0062159C3AB00707024 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
 		225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListContainerViewController.swift; sourceTree = "<group>"; };
 		225052BD218BF67E001FBD65 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
+		22563F5C219C07E4004E34BB /* BaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
+		22563F5E219C3929004E34BB /* TaskListPersonalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPersonalCell.swift; sourceTree = "<group>"; };
+		22563F5F219C3929004E34BB /* TaskListPersonalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListPersonalCell.xib; sourceTree = "<group>"; };
 		22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		22631C48216DD6E800D5AB0B /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		22631C4A216DDA3200D5AB0B /* SavePublishContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavePublishContentModel.h; sourceTree = "<group>"; };
@@ -2761,6 +2763,7 @@
 		225052BA218BF4EC001FBD65 /* TaskModule */ = {
 			isa = PBXGroup;
 			children = (
+				22563F5B219BFE7A004E34BB /* Protocol */,
 				22C9178621928468002E5240 /* Model */,
 				22C9178521928468002E5240 /* View */,
 				225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */,
@@ -2769,6 +2772,14 @@
 				22C917AD21943014002E5240 /* TaskDetailsViewController.xib */,
 			);
 			path = TaskModule;
+			sourceTree = "<group>";
+		};
+		22563F5B219BFE7A004E34BB /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				22563F5C219C07E4004E34BB /* BaseProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		22C917782191C04B002E5240 /* View */ = {
@@ -2799,8 +2810,8 @@
 				22C917AA219424FF002E5240 /* TaskListBackView.xib */,
 				22C917B02194402D002E5240 /* TaskContentDetailsCell.swift */,
 				22C917B12194402D002E5240 /* TaskContentDetailsCell.xib */,
-				22070695219AE5E400404459 /* TaskListTableHeaderView.swift */,
-				22070697219AE5EE00404459 /* TaskListTableHeaderView.xib */,
+				22563F5E219C3929004E34BB /* TaskListPersonalCell.swift */,
+				22563F5F219C3929004E34BB /* TaskListPersonalCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4701,7 +4712,6 @@
 				22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */,
 				892B39D91FE8B0B400292A75 /* SYmarkCollectionViewCell.xib in Resources */,
 				22C917A12192E4D1002E5240 /* LeftWalletTableViewCell.xib in Resources */,
-				22070698219AE5EE00404459 /* TaskListTableHeaderView.xib in Resources */,
 				223F9A7B2182C46D0031DB95 /* RoomTopView.xib in Resources */,
 				22284A7E2179825700CDC86C /* InfoPlist.strings in Resources */,
 				4852A0D51FCE9F0300CDD7BE /* SCPersonalCollectionCell.xib in Resources */,
@@ -4729,6 +4739,7 @@
 				223F99BD217F12040031DB95 /* icon_baidu_marker.png in Resources */,
 				4852A1361FCE9F0300CDD7BE /* SYStoryRoleSelectCell.xib in Resources */,
 				4852A12C1FCE9F0300CDD7BE /* SYMarkCollection1Cell.xib in Resources */,
+				22563F61219C3929004E34BB /* TaskListPersonalCell.xib in Resources */,
 				223F99BF217F12040031DB95 /* AddMapTableViewCell.xib in Resources */,
 				4852A0CF1FCE9F0300CDD7BE /* SCContactFriendCell.xib in Resources */,
 				22C917B32194402D002E5240 /* TaskContentDetailsCell.xib in Resources */,
@@ -4977,6 +4988,7 @@
 				223F99FE217F12040031DB95 /* SAIInputBarDisplayable.swift in Sources */,
 				4852A1151FCE9F0300CDD7BE /* SYFriend.m in Sources */,
 				22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */,
+				22563F5D219C07E4004E34BB /* BaseProtocol.swift in Sources */,
 				222EF6162186B999005B89EF /* NSObject+extension.swift in Sources */,
 				2207068D219A81E800404459 /* PersonalChatInfoViewController.swift in Sources */,
 				485E66641F42873F00B158BF /* MJRefreshConst.m in Sources */,
@@ -5302,7 +5314,6 @@
 				4852A0D21FCE9F0300CDD7BE /* SCMessageSettingCell.m in Sources */,
 				4852A1051FCE9F0300CDD7BE /* SYStoryRoleController.m in Sources */,
 				223F99E3217F12040031DB95 /* ExJMessage.swift in Sources */,
-				22070696219AE5E400404459 /* TaskListTableHeaderView.swift in Sources */,
 				223F9A11217F12040031DB95 /* Log.swift in Sources */,
 				332AB6501F4ED8C900888313 /* NSString+Extension.m in Sources */,
 				223F996E217F12040031DB95 /* JCCEmoticonGroup.swift in Sources */,
@@ -5375,6 +5386,7 @@
 				485E665B1F42873F00B158BF /* MJRefreshAutoNormalFooter.m in Sources */,
 				4852A1701FCE9F7200CDD7BE /* FMResultSet.m in Sources */,
 				48718D971F42277400010AA0 /* SDWebImageManager.m in Sources */,
+				22563F60219C3929004E34BB /* TaskListPersonalCell.swift in Sources */,
 				223F998F217F12040031DB95 /* JCGroupSettingCell.swift in Sources */,
 				485E65D51F42862900B158BF /* MWPhotoBrowser.m in Sources */,
 				332AB5F11F4ED69F00888313 /* TYLinkTextStorage.m in Sources */,

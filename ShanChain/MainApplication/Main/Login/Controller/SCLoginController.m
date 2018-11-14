@@ -21,6 +21,8 @@
 #import "BMKTestLocationViewController.h"
 #import "SCCharacterModel.h"
 
+#define K_USERNAME @"K_USERNAME"
+
 @interface SCLoginController ()<UITextFieldDelegate>{
     BOOL _keyboardIsShown;
 }
@@ -62,6 +64,9 @@
         leftView.backgroundColor = [UIColor clearColor];
         _nameField.leftView = leftView;
         _nameField.delegate = self;
+        if (!NULLString([[NSUserDefaults standardUserDefaults]objectForKey:K_USERNAME])) {
+            _nameField.text = [[NSUserDefaults standardUserDefaults]objectForKey:K_USERNAME];
+        }
     }
     return _nameField;
 }
@@ -266,6 +271,7 @@
             if (data[@"userInfo"] != [NSNull null]) {
                 NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] initWithDictionary:data[@"userInfo"]];
                 [userInfo setObject:data[@"token"] forKey:@"token"];
+                [[NSUserDefaults standardUserDefaults]setObject:userName forKey:K_USERNAME];
                 [WeakSelf successLoginedWithContent:userInfo];
             } else {
                 [SYProgressHUD showError:@"用户信息不存在"];
@@ -306,7 +312,14 @@
                 [JGUserLoginService jg_userLoginWithUsername:characterModel.hxAccount.hxUserName password:characterModel.hxAccount.hxPassword loginComplete:^(id _Nonnull result, NSError * _Nonnull error) {
                     [SYProgressHUD hideHUD];
                     if (!error) {
-                        // 登录成功 
+                        // 登录成功
+                        // 设置个人信息
+                        [JGUserLoginService jg_SetUserInfoWithNickNmae:characterModel.characterInfo.name signature:characterModel.characterInfo.signature icon:characterModel.characterInfo.headImg complete:^(id _Nullable result , NSError * _Nullable error) {
+                            if (!error) {
+                                DLog(@"设置信息成功");
+                            }
+                        }];
+                        
                         UIViewController *rootVc = nil;
                         BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
                         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];

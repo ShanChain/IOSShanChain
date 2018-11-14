@@ -10,7 +10,7 @@ import UIKit
 import YHPhotoKit
 import MobileCoreServices
 
-class JCChatViewController: UIViewController {
+class JCChatViewController: SCBaseVC {
     
     open var conversation: JMSGConversation
     fileprivate var isGroup = false

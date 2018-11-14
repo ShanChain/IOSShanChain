@@ -13,18 +13,18 @@
 #define Prtocol @"http://"
 
 
-#define PN_ENVIRONMENT 4
+#define PN_ENVIRONMENT 0
 
 
 #if PN_ENVIRONMENT == 0
 
-#define HostName @"95.169.24.11"
+#define HostName @"67.218.159.56"
 #define PORT @"8081"
 #define Base_url [NSString stringWithFormat:@"%@%@:%@",Prtocol,HostName,PORT]
 
 
-#define SC_BASE_PORT_8082  @"http://95.169.24.11:8082"
-#define SC_BASE_PORT_8083  @"http://95.169.24.11:8083"
+#define SC_BASE_PORT_8082  @"http://67.218.159.56:8082"
+#define SC_BASE_PORT_8083  @"http://67.218.159.56:8083"
 
 /******************************************/
 

@@ -352,7 +352,9 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     NSString  *latitude = [NSString stringWithFormat:@"%f",coordinate.latitude];
     NSString  *longitude = [NSString stringWithFormat:@"%f",coordinate.longitude];
     weakify(self);
+    [HHTool show:@"正在为您查找当前地址匹配的聊天室..."];
     [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
+        [HHTool dismiss];
         NSDictionary  *dic = responseObject[@"data"];
         if (dic.allValues > 0) {
             CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
@@ -367,7 +369,9 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
                 [self sc_addOverlayWithModel:model];
             }
         }
-    } failure:nil];
+    } failure:^(NSError *error) {
+        [HHTool showError:error.localizedDescription];
+    }];
 }
 
 #pragma mark -- 添加地址围栏

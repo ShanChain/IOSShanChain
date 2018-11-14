@@ -34,7 +34,7 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
         _taskId = content.taskId
         rewardLabel.text = _reward
         contentLabel.text = _taskContent
-        completeTimeLabel.text = _completeTime
+        completeTimeLabel.text = NSDate.chatingTime(_completeTime)
         
        let lineNumber = contentLabel.needLines(withWidth: CGFloat(self.contentLabelWidth))
         contentLabel.textAlignment = lineNumber > 1 ? .left : .center

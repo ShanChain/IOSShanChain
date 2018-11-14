@@ -1,14 +1,14 @@
 //
-//  TaskListCell.swift
+//  TaskListPersonalCell.swift
 //  ShanChain
 //
-//  Created by 千千世界 on 2018/11/7.
+//  Created by 千千世界 on 2018/11/14.
 //  Copyright © 2018年 ShanChain. All rights reserved.
 //
 
 import UIKit
 
-class TaskListCell: UITableViewCell{
+class TaskListPersonalCell: UITableViewCell {
 
     @IBOutlet weak var icon: UIImageView!
     
@@ -20,18 +20,18 @@ class TaskListCell: UITableViewCell{
     @IBOutlet weak var contentLabel: UILabel!
     
     
-    @IBOutlet weak var completeBtn: UIButton!
-    
-    
     @IBOutlet weak var locactionLabel: UILabel!
     
-
+    
     @IBOutlet weak var tagIcon: UIImageView!
     
     @IBOutlet weak var issueDateLabel: UILabel!
     
     
-    @IBOutlet weak var centerStatusBtn: UIButton!
+    @IBOutlet weak var statusBtn: UIButton!
+    
+    
+    @IBOutlet weak var statusBtnWidth: NSLayoutConstraint!
     var revealedCardIsFlipped: Bool = false //是否翻转到反面
     private var revealedCardFlipView: UIView?  // 翻转反面视图
     
@@ -49,14 +49,12 @@ class TaskListCell: UITableViewCell{
             self.issueDateLabel.text = "\(NSDate.chatingTime(_listModel?.expiryTime) ?? "") 前"
             self.locactionLabel.text = "来自:\(_listModel?.roomName ?? "")"
             self.cornerRadius = 10.0
-            if (_listModel?.isReceived)! {
-                self.centerStatusBtn.setTitle("已被领取", for: .normal)
-                self.centerStatusBtn.setTitleColor(UIColor.gray, for: .normal)
-                self.centerStatusBtn.borderColor = UIColor.gray
+            self.statusBtn.setTitle(_listModel?.personalStatusBtnTuple.title, for: .normal)
+            self.statusBtnWidth.constant = CGFloat((_listModel?.personalStatusBtnTuple.width)!)
+            if _listModel?.personalStatusBtnTuple.isClick  == true {
+                self.statusBtn.borderColor = SC_ThemeMainColor
             }else{
-                self.centerStatusBtn.setTitle("查看任务", for: .normal)
-                self.centerStatusBtn.setTitleColor(SC_ThemeMainColor, for: .normal)
-                self.centerStatusBtn.borderColor = SC_ThemeMainColor
+                self.statusBtn.borderColor = .gray
             }
             
         }
@@ -67,27 +65,25 @@ class TaskListCell: UITableViewCell{
         }
         
     }
-   
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-       icon._setCornerRadiusCircle()
-       
-        
+        icon._setCornerRadiusCircle()
         
     }
-
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
         
     }
     
-   open func flipRevealedCard(toView: UIView, completion: (() -> Void)? = nil) {
-     if(self.revealedCardIsFlipped == true) {
-        return
-     }
+    open func flipRevealedCard(toView: UIView, completion: (() -> Void)? = nil) {
+        if(self.revealedCardIsFlipped == true) {
+            return
+        }
         toView.removeFromSuperview()
         toView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         self.revealedCardFlipView = toView
@@ -129,13 +125,11 @@ class TaskListCell: UITableViewCell{
             })
         }
     }
- 
     
-    @IBAction func centerStatusAction(_ sender: UIButton) {
+    
+    @IBAction func clickBtnAction(_ sender: UIButton) {
         if let delegate = delegate {
             delegate.callBack(listModel: _listModel!)
         }
     }
-    
-    
 }

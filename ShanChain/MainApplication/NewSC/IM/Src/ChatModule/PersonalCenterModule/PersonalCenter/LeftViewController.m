@@ -57,7 +57,6 @@
     layerView.layer.shadowOffset = CGSizeMake(0, 7);
     layerView.layer.shadowOpacity = 0.3;
     layerView.layer.shadowRadius = 6;
-    [layerView _setCornerRadiusCircle];
     layerView.layer.shadowColor = [UIColor blackColor].CGColor;
     [self.view addSubview:layerView];
     [layerView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changesIcon)]];
@@ -66,15 +65,16 @@
         make.top.equalTo(@50);
         make.width.height.equalTo(@64);
     }];
+    [layerView signleDragable];
+    [layerView _setCornerRadiusCircle];
     
     UIImageView  *img = [[UIImageView alloc]init];
-    img.image = [UIImage imageNamed:@"abs_addanewrole_def_photo_default"];
+    [img _sd_setImageWithURLString:[JMSGUser myInfo].avatar placeholderImage:[UIImage imageNamed:@"abs_addanewrole_def_photo_default"]];
     _icon = img;
     [layerView addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(layerView);
     }];
-    [layerView signleDragable];
     [img _setCornerRadiusCircle];
     
     UILabel  *nikeNameLb = [[UILabel alloc]init];
@@ -92,7 +92,7 @@
     UILabel  *signatureLb = [[UILabel alloc]init];
     signatureLb.textColor = [UIColor whiteColor];
     signatureLb.font = Font(13);
-    signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.intro;
+    signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.intro ? :@"暂无签名";
     [self.view addSubview:signatureLb];
     [signatureLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(nikeNameLb.mas_bottom).offset(10);
@@ -248,21 +248,22 @@
             _icon.image = image;
         }
     }];
+
     
-    [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
-        NSString *urlJson = @{@"headImg":url}.mj_JSONString;
-        NSDictionary  *params = @{@"characterId":[SCCacheTool shareInstance].getCurrentCharacterId,@"headImg":urlJson};
-        [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:params showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
-            if(error){
-                
-            }
-            
-            
-        }];
-        
-    } withErrorCallBack:^(NSError *error) {
-        
-    }];
+//    [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
+//        NSString *urlJson = @{@"headImg":url}.mj_JSONString;
+//        NSDictionary  *params = @{@"characterId":[SCCacheTool shareInstance].getCurrentCharacterId,@"headImg":urlJson};
+//        [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:params showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+//            if(error){
+//
+//            }
+//
+//
+//        }];
+//
+//    } withErrorCallBack:^(NSError *error) {
+//
+//    }];
     
 }
 
