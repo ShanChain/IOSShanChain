@@ -59,7 +59,6 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         return mAry
     }
     
-        
     fileprivate lazy var tableView: UITableView = {
         let H: CGFloat = glt_iphoneX ? (self.view.bounds.height - 64 - 24 - 34) : self.view.bounds.height  - 64
         let tableView = self.tableViewConfig(CGRect(x: 10, y: 30, width: self.view.bounds.width - 20, height: H), self, self, nil)
@@ -89,8 +88,8 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         headerView.addSubview(btn)
         btn.snp.makeConstraints { (mark) in
             mark.centerY.equalTo(headerView)
-            mark.left.equalTo(0)
-            mark.size.equalTo(CGSize(width: headerView.width, height: 30))
+            mark.left.right.equalTo(headerView)
+            mark.height.equalTo(30)
         }
         
         return headerView
@@ -112,6 +111,8 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
             automaticallyAdjustsScrollViewInsets = false
         }
         _requstData(false) {}
+        
+       
     }
    
     func _getUrl() -> String {

@@ -11,6 +11,8 @@
 #import "UIViewController+CWLateralSlide.h"
 #import "ShanChain-Swift.h"
 #import "SCBaseNavigationController.h"
+#import "EditPersonalInfoViewController.h"
+#import "SCAliyunUploadMananger.h"
 
 #define HeaderViewHeight 200
 
@@ -22,6 +24,8 @@
 @property (nonatomic,strong) NSArray *titleArray;
 @property (nonatomic,copy)   UIImageView   *icon;
 
+    //阿里云参数
+@property(nonatomic,strong)NSDictionary *aliDict;
 @end
 
 @implementation LeftViewController
@@ -76,7 +80,7 @@
     UILabel  *nikeNameLb = [[UILabel alloc]init];
     nikeNameLb.textColor = [UIColor whiteColor];
     nikeNameLb.font = Font(17);
-    nikeNameLb.text = @"陈叔爱吃盐焗鸡";
+    nikeNameLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.name;
     [self.view addSubview:nikeNameLb];
     [nikeNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.topMargin.equalTo(layerView).offset(-5);
@@ -88,7 +92,7 @@
     UILabel  *signatureLb = [[UILabel alloc]init];
     signatureLb.textColor = [UIColor whiteColor];
     signatureLb.font = Font(13);
-    signatureLb.text = @"一直在努力的路上";
+    signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.intro;
     [self.view addSubview:signatureLb];
     [signatureLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(nikeNameLb.mas_bottom).offset(10);
@@ -111,7 +115,8 @@
 }
 
 - (void)edit{
-    DLog(@"编辑");
+    
+    [self didSelectCell:nil indexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
 }
 
 - (void)changesIcon{
@@ -192,6 +197,11 @@
             
             
             break;
+        case 5:
+        {
+            EditPersonalInfoViewController *editVC = [[EditPersonalInfoViewController alloc]init];
+            [nav.topViewController.navigationController pushViewController:editVC animated:YES];
+        }
         default:
             break;
     }
@@ -212,7 +222,6 @@
                         @"personal_myservice_icons",
                         @"personal_news_icons",
                         @"personal_order_icons",
-                        @"personal_preview_icons",
                         @"personal_service_icons"];
     }
     return _imageArray;
@@ -224,7 +233,6 @@
                         @"我的任务",
                         @"我的消息",
                         @"我的收藏",
-                        @"实名认证",
                         @"设置"];
     }
     return _titleArray;
@@ -233,7 +241,29 @@
 #pragma mark -- DUX_UploadUserIconDelegate
 
 -(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag{
-    _icon.image = image;
+    NSData *imageData = UIImagePNGRepresentation(image);
+    [JMSGUser updateMyAvatarWithData:imageData avatarFormat:@"png" completionHandler:^(id resultObject, NSError *error) {
+        if(!error){
+            NSLog(@"更换极光头像成功");
+            _icon.image = image;
+        }
+    }];
+    
+    [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
+        NSString *urlJson = @{@"headImg":url}.mj_JSONString;
+        NSDictionary  *params = @{@"characterId":[SCCacheTool shareInstance].getCurrentCharacterId,@"headImg":urlJson};
+        [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:params showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+            if(error){
+                
+            }
+            
+            
+        }];
+        
+    } withErrorCallBack:^(NSError *error) {
+        
+    }];
+    
 }
 
 

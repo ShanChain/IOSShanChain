@@ -58,6 +58,7 @@
 #import "JsonTool.h"
 #import "BaseConstants.h"
 #import "SCBaseViewController.h"
+#import "SCBaseVC.h"
 #import "RNConstants.h"
 #import "DUX_UploadUserIcon.h"
 

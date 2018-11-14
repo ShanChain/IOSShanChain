@@ -18,6 +18,8 @@
 		22070698219AE5EE00404459 /* TaskListTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22070697219AE5EE00404459 /* TaskListTableHeaderView.xib */; };
 		2207069C219AEBE700404459 /* ShowSelectTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22070699219AEBE700404459 /* ShowSelectTableView.m */; };
 		2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207069A219AEBE700404459 /* ShowSelectTableView.xib */; };
+		220706A1219BC6B600404459 /* EditPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2207069F219BC6B600404459 /* EditPersonalInfoViewController.m */; };
+		220706A2219BC6B600404459 /* EditPersonalInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220706A0219BC6B600404459 /* EditPersonalInfoViewController.xib */; };
 		2218E18D217606B200719844 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E18C217606B200719844 /* MobileCoreServices.framework */; };
 		2218E18F217606C900719844 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E18E217606C900719844 /* CoreLocation.framework */; };
 		2218E191217606D900719844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E190217606D900719844 /* QuartzCore.framework */; };
@@ -786,6 +788,9 @@
 		22070699219AEBE700404459 /* ShowSelectTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowSelectTableView.m; sourceTree = "<group>"; };
 		2207069A219AEBE700404459 /* ShowSelectTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowSelectTableView.xib; sourceTree = "<group>"; };
 		2207069B219AEBE700404459 /* ShowSelectTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSelectTableView.h; sourceTree = "<group>"; };
+		2207069E219BC6B600404459 /* EditPersonalInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditPersonalInfoViewController.h; sourceTree = "<group>"; };
+		2207069F219BC6B600404459 /* EditPersonalInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditPersonalInfoViewController.m; sourceTree = "<group>"; };
+		220706A0219BC6B600404459 /* EditPersonalInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPersonalInfoViewController.xib; sourceTree = "<group>"; };
 		2218E18C217606B200719844 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2218E18E217606C900719844 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2218E190217606D900719844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -2825,6 +2830,9 @@
 		22C917902192E4D1002E5240 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2207069E219BC6B600404459 /* EditPersonalInfoViewController.h */,
+				2207069F219BC6B600404459 /* EditPersonalInfoViewController.m */,
+				220706A0219BC6B600404459 /* EditPersonalInfoViewController.xib */,
 				22C917962192E4D1002E5240 /* LeftViewController.m */,
 				22C917912192E4D1002E5240 /* LeftViewController.h */,
 				22C917922192E4D1002E5240 /* CWTableViewInfo.h */,
@@ -4715,6 +4723,7 @@
 				48AC035F1F95AAE70040B54F /* RNBundle in Resources */,
 				48718D711F42277400010AA0 /* MJPhotoBrowser.bundle in Resources */,
 				223F996A217F12040031DB95 /* yh_image_picked@3x.png in Resources */,
+				220706A2219BC6B600404459 /* EditPersonalInfoViewController.xib in Resources */,
 				223F9A742182AEC10031DB95 /* 0.jpg in Resources */,
 				4852A0DE1FCE9F0300CDD7BE /* SYNoticeCell.xib in Resources */,
 				223F99BD217F12040031DB95 /* icon_baidu_marker.png in Resources */,
@@ -5379,6 +5388,7 @@
 				222C3100215A27FE009871C7 /* HHBaseModel.m in Sources */,
 				223F99D3217F12040031DB95 /* JCRegisterViewController.swift in Sources */,
 				223F99A5217F12040031DB95 /* JCFileDownloadViewController.swift in Sources */,
+				220706A1219BC6B600404459 /* EditPersonalInfoViewController.m in Sources */,
 				48718D961F42277400010AA0 /* SDWebImageDownloaderOperation.m in Sources */,
 				332F483D1F25CA45002C4D12 /* CalendarViewController.m in Sources */,
 				223F9A3A217F12B80031DB95 /* JCContacterCell.swift in Sources */,

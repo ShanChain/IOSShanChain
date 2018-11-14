@@ -13,7 +13,7 @@
 #define Prtocol @"http://"
 
 
-#define PN_ENVIRONMENT 0
+#define PN_ENVIRONMENT 4
 
 
 #if PN_ENVIRONMENT == 0
@@ -55,6 +55,11 @@
 
 
 #else
+
+#define HostName @"2zgjurtx0g.51http.tech"
+#define Base_url [NSString stringWithFormat:@"%@%@",Prtocol,HostName]
+#define SC_BASE_PORT_8082  Base_url
+#define SC_BASE_PORT_8083  Base_url
 
 #endif
 
