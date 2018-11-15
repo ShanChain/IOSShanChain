@@ -332,6 +332,17 @@ static NSDateFormatter* DateFormat(){
 - (void)cacheCharacterInfo:(NSDictionary *)characterInfo withUserId:(NSString *)userId {
         [self setCacheValue:[JsonTool stringFromDictionary:characterInfo] withUserID:userId andKey:CACHE_CHARACTER_INFO];
 }
-    
+
+
+-(SCCharacterModel *)characterModel{
+    if (!_characterModel) {
+        _characterModel = [[SCCharacterModel alloc]init];
+        SCCharacterModel_characterInfo  *info = [SCCharacterModel_characterInfo mj_objectWithKeyValues:[self getCharacterInfo]];
+        _characterModel.characterInfo = info;
+        
+    }
+    return _characterModel;
+}
+
 @end
     

@@ -42,7 +42,7 @@ class TaskListCell: UITableViewCell{
         
         set{
             _listModel = newValue
-            self.rewardLabel.text = "\(_listModel?.bounty ?? "") SEAT"
+            self.rewardLabel.text = "￥ \(_listModel?.bounty ?? "")"
             self.contentLabel.text = _listModel?.intro
             self.icon._sd_setImage(withURLString: _listModel?.headImg, placeholderImage: SC_defaultImage)
             self.issueLabel.text = "\(_listModel?.name ?? "")发布的:"

@@ -22,7 +22,7 @@
 
 @property (nonatomic,strong) NSArray *imageArray;
 @property (nonatomic,strong) NSArray *titleArray;
-@property (nonatomic,copy)   UIImageView   *icon;
+@property (nonatomic,strong)   UIImageView   *icon;
 
     //阿里云参数
 @property(nonatomic,strong)NSDictionary *aliDict;
@@ -66,21 +66,29 @@
         make.width.height.equalTo(@64);
     }];
     [layerView signleDragable];
-    [layerView _setCornerRadiusCircle];
+    
     
     UIImageView  *img = [[UIImageView alloc]init];
-    [img _sd_setImageWithURLString:[JMSGUser myInfo].avatar placeholderImage:[UIImage imageNamed:@"abs_addanewrole_def_photo_default"]];
-    _icon = img;
+    NSString  *headImg = [[[SCCacheTool shareInstance] getCharacterInfo]objectForKey:@"headImg"];
+    UIImage *image = [UIImage imageFromURLString:headImg];
+    image = [image mc_resetToSize:CGSizeMake(64, 64)];
+    image = [image cutCircleImage];
+    img.image = image;
+    
+    self.icon = img;
     [layerView addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(layerView);
     }];
-    [img _setCornerRadiusCircle];
+    img.contentMode = UIViewContentModeCenter;
+    [img preventImageViewExtrudeDeformation];
+    
     
     UILabel  *nikeNameLb = [[UILabel alloc]init];
     nikeNameLb.textColor = [UIColor whiteColor];
     nikeNameLb.font = Font(17);
-    nikeNameLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.name;
+    NSString  *name = [[[SCCacheTool shareInstance] getCharacterInfo]objectForKey:@"name"];
+    nikeNameLb.text = name;
     [self.view addSubview:nikeNameLb];
     [nikeNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.topMargin.equalTo(layerView).offset(-5);
@@ -157,6 +165,19 @@
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString  *title = self.titleArray[indexPath.row];
+    if ([title isEqualToString:@"我的任务"]) {
+        TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
+        [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
+    }else if ([title isEqualToString:@"我的消息"]){
+        JCConversationListViewController *conversationListVC = [[JCConversationListViewController alloc]init];
+        [nav.topViewController.navigationController pushViewController:conversationListVC animated:YES];
+    }else if ([title isEqualToString:@"我的钱包"]){
+        //
+    }else{
+        return;
+    }
     switch (indexPath.row) {
         case 0:
             // 我的钱包
@@ -166,8 +187,7 @@
             // 我的任务
         {
             
-            TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
-            [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
+           
             
         }
             
@@ -176,8 +196,7 @@
         case 2:
             //我的消息
         {
-            JCConversationListViewController *conversationListVC = [[JCConversationListViewController alloc]init];
-            [nav.topViewController.navigationController pushViewController:conversationListVC animated:YES];
+            
         }
             
             break;
@@ -241,6 +260,9 @@
 #pragma mark -- DUX_UploadUserIconDelegate
 
 -(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag{
+    
+    image = [image mc_resetToSize:CGSizeMake(64, 64)];
+    image = [image cutCircleImage];
     NSData *imageData = UIImagePNGRepresentation(image);
     [JMSGUser updateMyAvatarWithData:imageData avatarFormat:@"png" completionHandler:^(id resultObject, NSError *error) {
         if(!error){

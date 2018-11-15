@@ -384,7 +384,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     private func _setupNavigation() {
-        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), image: UIImage.init(named: "sc_com_icon_user"), selectedImage: UIImage.init(named: "sc_com_icon_user"))
+        
+        let leftImageName = SCCacheTool.shareInstance().getCharacterInfo()["headImg"]
+        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName as! String, selectedImageName: leftImageName as! String)
+        
         self.addNavigationRight(withImageName: "sc_com_icon_close", withTarget: self, withAction: #selector(_closePage))
         navigationController?.navigationBar.barTintColor = .white
         //        var attrs = [String : AnyObject]()
@@ -1055,6 +1058,7 @@ extension HHChatRoomViewController: JCMessageDelegate {
         alertView.show()
     }
     
+    //点击头像
     func tapAvatarView(message: JCMessageType) {
         toolbar.resignFirstResponder()
         if message.options.alignment == .right {

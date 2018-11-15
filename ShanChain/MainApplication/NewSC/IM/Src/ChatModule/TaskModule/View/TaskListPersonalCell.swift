@@ -42,10 +42,17 @@ class TaskListPersonalCell: UITableViewCell {
         
         set{
             _listModel = newValue
-            self.rewardLabel.text = "\(_listModel?.bounty ?? "") SEAT"
+            self.rewardLabel.text = "￥ \(_listModel?.bounty ?? "")"
             self.contentLabel.text = _listModel?.intro
-            self.icon._sd_setImage(withURLString: _listModel?.headImg, placeholderImage: SC_defaultImage)
-            self.issueLabel.text = "\(_listModel?.name ?? "")发布的:"
+          
+            
+            if (_listModel?.isMyBublish)! {
+                self.issueLabel.text = "\(_listModel?.name ?? "")发布的:"
+            }else{
+                self.issueLabel.text = "\(_listModel?.name ?? "")领取的:"
+            }
+            
+            
             self.issueDateLabel.text = "\(NSDate.chatingTime(_listModel?.expiryTime) ?? "") 前"
             self.locactionLabel.text = "来自:\(_listModel?.roomName ?? "")"
             self.cornerRadius = 10.0
@@ -53,9 +60,17 @@ class TaskListPersonalCell: UITableViewCell {
             self.statusBtnWidth.constant = CGFloat((_listModel?.personalStatusBtnTuple.width)!)
             if _listModel?.personalStatusBtnTuple.isClick  == true {
                 self.statusBtn.borderColor = SC_ThemeMainColor
+                self.statusBtn.setTitleColor(SC_ThemeMainColor, for: .normal)
             }else{
                 self.statusBtn.borderColor = .gray
+                self.statusBtn.setTitleColor(.gray, for: .normal)
             }
+            
+            self.icon._sd_setImage(withURLString: _listModel?.headImg, placeholderImage: SC_defaultImage)
+            self.tagIcon.isHidden = !(_listModel?.isHiddenIcon)!
+            self.issueLabel.isHidden = (_listModel?.isHiddenIcon)!
+            self.icon.isHidden = (_listModel?.isHiddenIcon)!
+            self.statusBtn.isHidden = (_listModel?.isHiddenIcon)!
             
         }
         

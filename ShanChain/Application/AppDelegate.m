@@ -53,14 +53,11 @@
     
     if ([[SCAppManager shareInstance] isLogin]) {
 //        rootVc = [[SCTabbarController alloc]init];
-        [JGUserLoginService jg_automaticLoginWithLoginComplete:^(id _Nullable result, NSError * _Nullable error) {
-            if (!error) {
-                BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-                rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
-            }else{
-                [HHTool showError:@"登录极光失败"];
-            }
-        }];
+        if ([[NSUserDefaults standardUserDefaults]objectForKey:kJCCurrentUserName]) {
+            BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+            rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
+        }
+    
     } else {
         SCLoginController *loginVC=[[SCLoginController alloc]init];
         rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
@@ -85,6 +82,7 @@
 - (void)setJMessageSDK:(NSDictionary *)launchOptions{
     [JMessage setupJMessage:launchOptions appKey:JMSSAGE_APPKEY channel:nil apsForProduction:NO category:nil messageRoaming:YES];
     [JMessage setDebugMode];
+    [JMessage addDelegate:self withConversation:nil];
     // Required - 注册 APNs 通知
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
@@ -110,7 +108,7 @@
 - (void)setBMKManager{
     
     _mapManager = [[BMKMapManager alloc]init];
-   [BMKMapManager setCoordinateTypeUsedInBaiduMapSDK:BMK_COORDTYPE_GPS];
+   [BMKMapManager setCoordinateTypeUsedInBaiduMapSDK:BMK_COORDTYPE_BD09LL];
     // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
     BOOL ret = [_mapManager start:BMKAPPKEY  generalDelegate:nil];
     if (!ret) {

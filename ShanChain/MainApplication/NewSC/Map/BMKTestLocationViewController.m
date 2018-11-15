@@ -352,7 +352,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     NSString  *latitude = [NSString stringWithFormat:@"%f",coordinate.latitude];
     NSString  *longitude = [NSString stringWithFormat:@"%f",coordinate.longitude];
     weakify(self);
-    [HHTool show:@"正在为您查找当前地址匹配的聊天室..."];
+    [HHTool show:@"正在为您查找当前地址匹配的广场..."];
     [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
         [HHTool dismiss];
         NSDictionary  *dic = responseObject[@"data"];
@@ -379,7 +379,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     CLLocationCoordinate2D coor[4] = {0};
     for (int i = 0; i < model.coordinates.count; i++) {
         CLLocationCoordinate2D transfromCoord =  CLLocationCoordinate2DMake(model.coordinates[i].latitude.doubleValue, model.coordinates[i].longitude.doubleValue);
-        CLLocationCoordinate2D transToCoord = BMKCoordTrans(transfromCoord,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+        CLLocationCoordinate2D transToCoord = [self BD09TransfromGPSCoordinateFrom:transfromCoord];
         coor[i].latitude = transToCoord.latitude;
         coor[i].longitude = transToCoord.longitude;
     }
@@ -397,7 +397,8 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 // 坐标转换 BD09 -> GPS
 - (CLLocationCoordinate2D)BD09TransfromGPSCoordinateFrom:(CLLocationCoordinate2D)transfromCoord{
-    return  BMKCoordTrans(transfromCoord,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
+    return transfromCoord;
+    //return  BMKCoordTrans(transfromCoord,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
 }
 
 - (IBAction)joinPressed:(id)sender{
@@ -408,21 +409,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 //        [HHTool mainWindow].rootViewController = tabBarVC;
 //        JCConversationListViewController *chatListView = [[JCConversationListViewController alloc]init];
 //         [self.navigationController pushViewController:chatListView animated:YES];
-        
-        // 创建会话 有的话直接返回
-        weakify(self);
-        [JGUserLoginService
-         jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
-            if (error) {
-                [HHTool showError:@"会话不能为空"];
-                return;
-            }
-            
-             [weak_self enterChatRoom];
-        }];
-//        JMSGConversation *conversation = [JMSGConversation chatRoomConversationWithRoomId:Test_RoomID];
-      
-
+        [self getAllChatRoomConversation];
     }else{
         SCLoginController *loginVC=[[SCLoginController alloc]init];
         [HHTool mainWindow].rootViewController = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
@@ -432,7 +419,78 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     }
 }
 
-    
+
+
+
+
+
+
+- (void)jg_automaticLoginComplete:(dispatch_block_t)complete{
+    [JGUserLoginService jg_automaticLoginWithLoginComplete:^(id _Nullable result, NSError * _Nullable error) {
+        if (!error) {
+            BLOCK_EXEC(complete);
+        }else{
+            [HHTool showError:error.localizedDescription];
+            return ;
+        }
+    }];
+}
+
+- (void)createChatRoomConversation{
+    // 创建会话 有的话直接返回
+    weakify(self);
+    [JGUserLoginService
+     jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
+         strongify(self);
+         if (!error) {
+              [self enterChatRoom];
+             return ;
+         }
+         if (error.code == 863004) {
+             // 未登录
+             [self jg_automaticLoginComplete:^{
+                 [self enterChatRoom];
+             }];
+         }
+         [HHTool showError:error.localizedDescription];
+     }];
+}
+
+- (void)getAllChatRoomConversation{
+    weakify(self);
+    [JMSGConversation allChatRoomConversation:^(id resultObject, NSError *error) {
+         strongify(self);
+        if (error) {
+            if (error.code == 863004) {
+                // 未登录
+                [self jg_automaticLoginComplete:^{
+                    [self createChatRoomConversation];
+                }];
+            }else{
+                [self createChatRoomConversation];
+            }
+            return ;
+        }
+        
+        NSArray <JMSGConversation*> *conversations = resultObject;
+        __block  BOOL  isEnter = NO;
+        if (conversations.count > 0) {
+            [conversations enumerateObjectsUsingBlock:^(JMSGConversation * _Nonnull conversation, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([conversation.target isKindOfClass:[JMSGChatRoom class]]) {
+                    if ([((JMSGChatRoom*)conversation.target).roomID isEqualToString:self.currentRoomId]) {
+                        [self enterChatRoom];
+                        isEnter = YES;
+                    }
+                }
+            }];
+        }
+        
+        if (!isEnter) {
+            [self createChatRoomConversation];
+        }
+    }];
+}
+
 // 加入聊天室
 - (void)enterChatRoom{
     weakify(self);

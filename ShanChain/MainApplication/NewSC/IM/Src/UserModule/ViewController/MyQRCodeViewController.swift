@@ -88,7 +88,7 @@ class MyQRCodeViewController: UIViewController {
     
     private func _bindData() {
         let user = JMSGUser.myInfo()
-        let username = user.username
+        let nickname = user.nickname
         let appkey = user.appKey
         
         user.thumbAvatarData { (data, id, error) in
@@ -98,8 +98,8 @@ class MyQRCodeViewController: UIViewController {
                 self.avator.image = UIImage.loadImage("com_icon_user_80")
             }
         }
-        usernameLabel.text = "用户名：\(username)"
-        let url = "{\"type\":\"user\",\"user\": {\"appkey\":\"\(appkey ?? "")\",\"username\": \"\(username)\",\"platform\": \"iOS\"}}"
+        usernameLabel.text = "用户名：\(nickname)"
+        let url = "{\"type\":\"user\",\"user\": {\"appkey\":\"\(appkey ?? "")\",\"username\": \"\(nickname)\",\"platform\": \"iOS\"}}"
         qrcode.image = createQRForString(qrString: url, qrImageName: nil)
     }
     

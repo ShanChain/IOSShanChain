@@ -9,7 +9,7 @@
 import UIKit
 import YHPopupView
 
-class JCMyInfoViewController: UIViewController {
+class JCMyInfoViewController: SCBaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()

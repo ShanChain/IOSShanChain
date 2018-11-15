@@ -46,7 +46,13 @@ class JGUserLoginService: NSObject {
                         UserDefaults.standard.removeObject(forKey: kLastUserAvator)
                     }
                 })
-                
+                let characterModel:SCCharacterModel =  SCCacheTool.shareInstance().characterModel
+                JMSGUser.updateMyInfo(withParameter: characterModel.characterInfo.name, userFieldType: .fieldsNickname, completionHandler: nil)
+                let image = UIImage.init(fromURLString: characterModel.characterInfo.headImg)
+                if let imageData = UIImagePNGRepresentation(image!){
+                    JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar, completionHandler: nil)
+                }
+             
                 UserDefaults.standard.set(username, forKey: kCurrentUserName)
                 UserDefaults.standard.set(password, forKey: kCurrentUserPassword)
 

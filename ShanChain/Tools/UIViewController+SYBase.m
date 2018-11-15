@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+SYBase.h"
-
+#import  "UIButton+WebCache.h"
 @implementation UIViewController (SYBase)
 
 #pragma mark ------------------- add navigation bar ----------------------------------
@@ -44,8 +44,14 @@
     [backButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     backButton.frame = CGRectMake(0, 0, 60, 44);
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, -15);
-    [backButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    [backButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateHighlighted];
+    if ([imageName hasPrefix:@"http://"] || [imageName hasPrefix:@"https://"] ) {
+        [backButton sd_setImageWithURL:[NSURL URLWithString:imageName] forState:UIControlStateNormal];
+        [backButton sd_setImageWithURL:[NSURL URLWithString:imageName] forState:UIControlStateHighlighted];
+    }else{
+        [backButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        [backButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateHighlighted];
+    }
+    
     UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action: nil];
     [flexItem setWidth:-15];
@@ -62,16 +68,30 @@
     self.navigationItem.leftBarButtonItems = array;
 }
 
-
-- (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector image:(UIImage *)image selectedImage:(UIImage *)selectedImage
+- (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector imageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     
+    UIImage  *image;
+    if ([imageName hasPrefix:@"http://"] || [imageName hasPrefix:@"https://"]) {
+        image = [UIImage imageFromURLString:imageName];
+        image = [image mc_resetToSize:CGSizeMake(30, 30)];
+    }
+    UIImage  *selectedImage;
+    if ([selectedImageName hasPrefix:@"http://"] || [selectedImageName hasPrefix:@"https://"]) {
+        selectedImage = [UIImage imageFromURLString:imageName];
+        selectedImage = [selectedImage mc_resetToSize:CGSizeMake(30, 30)];
+    }
+    
     [button setImage:image forState:UIControlStateNormal];
     [button setImage:selectedImage forState:UIControlStateSelected];
-    button.adjustsImageWhenHighlighted = NO;
-    button.frame = CGRectMake(0, 0, image.size.width <= 25 ? 25 : image.size.width, image.size.height);
+  //  button.adjustsImageWhenHighlighted = NO;
+//    button.frame = CGRectMake(0, 0, image.size.width <= 25 ? 25 : image.size.width, image.size.height);
+    button.frame = CGRectMake(0, 0, 30, 30);
+    ViewBorderRadius(button, 15, 1, Theme_MainThemeColor);
+    button.contentMode = UIViewContentModeCenter;
+    [button preventImageViewExtrudeDeformation];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
     NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
     [array addObject:item];

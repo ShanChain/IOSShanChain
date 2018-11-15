@@ -139,7 +139,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
     
     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
         SCNetwork.shareInstance().v1_post(withUrl: _getUrl(), params: _requstPrameter(isLoad), showLoading: true) { (baseModel, error) in
-            complete()
+            
             if (error != nil){
                 return
             }
@@ -163,7 +163,14 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
                 
             }
             
-       
+            if(self.dataList.count == 0){
+                self.noDataTipShow(self.tableView, content: "您还没有任务记录喔，到广场中去发布你的第一个任务，或者领取任务吧~", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
+                
+            }else{
+                self.noDataTipDismiss()
+            }
+            
+            complete()
         }
     }
     
@@ -173,13 +180,13 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         return ["characterId":characterId,"page":pageStr,"size":size,"roomId":chatRoomId]
     }
     return  ["characterId":characterId,"page":pageStr,"size":size]
-}
-    
+ }
     
 }
 
 
 extension TaskListViewController {
+    
     
     fileprivate func reftreshData()  {
         tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
@@ -285,6 +292,14 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = cellWithPersonalTableView(tableView, cellForRowAt: indexPath)
         cell.delegate = self
         cell.listModel = content
+        
+        let lastCell = tableView.visibleCells.last as? TaskListPersonalCell
+        if let lastCell = lastCell {
+            if (lastCell.revealedCardIsFlipped){
+                lastCell.flipRevealedCardBack()
+            }
+        }
+        
         return cell
         
     }
@@ -300,6 +315,8 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.flipRevealedCardBack()
             }else{
                 let backView = TaskListBackView(listModel: content, frame: cell.frame)
+                backView.tag = indexPath.section;
+                backView.delegate = self
                 cell.flipRevealedCard(toView: backView)
             }
         }
@@ -308,7 +325,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-         return 10.0
+         return 5.0
     }
     
     
@@ -320,6 +337,24 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TaskListViewController:TaskListCellProtocol{
     
+    func urgeComplete(listModel: TaskListModel, view: TaskListBackView) {
+        requestListCellDelegateWithUrl(url: TASK_URGE_URL, listModel: listModel, view: view)
+    }
+    
+    
+    func publishConfirmComplete(listModel: TaskListModel, view: TaskListBackView) {
+       requestListCellDelegateWithUrl(url: TASK_CONRIRM_COMPLETE_URL, listModel: listModel, view: view)
+    }
+    
+    func receiveCompleted(listModel: TaskListModel, view: TaskListBackView) {
+       requestListCellDelegateWithUrl(url: RECEIVE_ACCOMPLISH_URL, listModel: listModel, view: view)
+    }
+    
+    func receiveCancel(listModel: TaskListModel, view: TaskListBackView) {
+       requestListCellDelegateWithUrl(url: TASK_CANCEL_URL, listModel: listModel, view: view)
+    }
+    
+    
     func callBack(listModel: TaskListModel) {
         if(!listModel.isReceived){
             let detailsVC = TaskDetailsViewController(taskID: listModel.taskId!, content: listModel.intro!, reward: listModel.bounty!, time: listModel.expiryTime!)
@@ -327,5 +362,21 @@ extension TaskListViewController:TaskListCellProtocol{
         }
        
     }
+    
+    
+    fileprivate func requestListCellDelegateWithUrl(url:String,listModel:TaskListModel,view:TaskListBackView){
+        SCNetwork.shareInstance().v1_post(withUrl: url, params: ["characterId":characterId,"taskId":listModel.taskId!,"userId":SCCacheTool.shareInstance().getCurrentUser()], showLoading: true) { (baseModel, error) in
+            if((error) != nil){
+                HHTool.showError(error?.localizedDescription)
+                return
+            }
+            self._requstData(false, {
+                view.listModel = self.dataList[view.tag]
+                self.tableView.reloadData()
+            })
+            
+        }
+    }
+    
     
 }

@@ -59,4 +59,16 @@
     
     return scaledImage;   //返回的就是已经改变的图片
 }
+
++ (UIImage *) imageFromURLString: (NSString *) urlstring
+
+{
+    
+    return [UIImage imageWithData:[NSData  dataWithContentsOfURL:[NSURL URLWithString:urlstring]]];
+    
+    
+}
+
+
+
 @end

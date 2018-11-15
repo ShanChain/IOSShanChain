@@ -44,7 +44,7 @@ class JCConversationListViewController: SCBaseVC {
     }
     
     fileprivate var isConnecting = false
-    fileprivate let customizeSection = 0
+    fileprivate let customizeSection = 10
     
     private lazy var addButton = UIButton(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
     private lazy var searchController: JCSearchController = JCSearchController(searchResultsController: JCNavigationController(rootViewController: JCSearchResultViewController()))
@@ -222,7 +222,7 @@ extension JCConversationListViewController: UITableViewDelegate, UITableViewData
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-         return 2
+         return 1
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -265,11 +265,11 @@ extension JCConversationListViewController: UITableViewDelegate, UITableViewData
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if showNetworkTips && (indexPath.section == 1 && indexPath.row == 0) {
+        if showNetworkTips && (indexPath.section == 0 && indexPath.row == 0) {
             return 
         }
         
-        if indexPath.section == 0 {
+        if indexPath.section == customizeSection {
             return
         }
         

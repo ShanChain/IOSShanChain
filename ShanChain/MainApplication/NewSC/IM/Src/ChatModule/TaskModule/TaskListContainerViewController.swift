@@ -64,7 +64,7 @@ class TaskListContainerViewController: SCBaseVC {
         automaticallyAdjustsScrollViewInsets = false
         view.addSubview(pageView)
         navigationController?.navigationBar.barTintColor = kNavBlueColor
-        addRightBarButtonItem(withTarget: self, sel: #selector(_add), image: UIImage.loadImage("sc_com_icon_whiteAdd"), selectedImage: UIImage.loadImage("sc_com_icon_whiteAdd"))
+//        addRightBarButtonItem(withTarget: self, sel: #selector(_add), image: UIImage.loadImage("sc_com_icon_whiteAdd"), selectedImage: UIImage.loadImage("sc_com_icon_whiteAdd"))
         //        simpleManagerConfig()
         
         pageView.didSelectIndexBlock = {(_, index) in

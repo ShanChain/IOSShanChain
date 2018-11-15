@@ -80,7 +80,7 @@
    
    
     _tipImage = [[UIImageView alloc] init];
-    if (_tipLabel.superview) {
+    if (self.tipLabel.superview) {
         _tipImage.contentMode = UIViewContentModeScaleAspectFit;
     }else{
         _tipImage.contentMode = UIViewContentModeScaleAspectFill;
@@ -130,7 +130,7 @@
         
             self.tipButton.hidden = YES;
         }
-        _tipLabel.text = content == nil ? @"数据加载中..." : content;
+        self.tipLabel.text = content == nil ? @"数据加载中..." : content;
         
     } else {
         
@@ -141,7 +141,7 @@
     
             UIImage *imageTmp = image == nil ? [UIImage imageNamed:TipImageDefault] : image;
             _tipImage.image = imageTmp;
-           _tipLabel.text = content == nil ? TipLabelDefault : content;
+           self.tipLabel.text = content == nil ? TipLabelDefault : content;
 
     }
 
@@ -152,9 +152,9 @@
 - (void)update:(NSString *)content image:(UIImage *)image
 {
     _tipButton.hidden = YES;
-    if (content) {
-        [self addSubview:_tipLabel];
-        _tipLabel.text = content == nil ? TipLabelDefault : content;
+    if (!NULLString(content)) {
+        [self addSubview:self.tipLabel];
+        self.tipLabel.text = content == nil ? TipLabelDefault : content;
     }
     UIImage *imageTmp = image == nil ? [UIImage imageNamed:TipImageDefault] : image;
     _tipImage.image = imageTmp;

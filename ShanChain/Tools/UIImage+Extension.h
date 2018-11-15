@@ -10,5 +10,5 @@
 + (UIImage *) imageWithName:(NSString *) imageName;
 + (UIImage *) resizableImageWithName:(NSString *)imageName;
 - (UIImage*) scaleImageWithSize:(CGSize)size;
-
++ (UIImage *)imageFromURLString:(NSString *) urlstring;
 @end

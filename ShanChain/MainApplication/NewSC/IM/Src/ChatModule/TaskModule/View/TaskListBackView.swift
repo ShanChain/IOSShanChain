@@ -32,56 +32,71 @@ class TaskListBackView: UIView {
     
     var contentView:UIView!
     
-    
-    var listModel:TaskListModel?
+    var _listEntity:TaskListModel?
+    var listModel:TaskListModel{
+        set{
+            _listEntity = newValue
+            if _listEntity != nil {
+                self.leftBtn.setTitle(_listEntity!.backViewLeftBtnTuple.title, for: .normal)
+                self.leftBtn.isHidden = !_listEntity!.backViewLeftBtnTuple.isShow
+                self.leftBtn.borderColor = _listEntity!.backViewLeftBtnTuple.color
+                self.leftBtn.setTitleColor(_listEntity!.backViewLeftBtnTuple.color, for: .normal)
+                self.leftBtnWidth.constant = CGFloat(_listEntity!.backViewLeftBtnTuple.width)
+                self.leftBtn.isUserInteractionEnabled = _listEntity!.backViewLeftBtnTuple.isClick
+                
+                
+                
+                self.centerBtn.setTitle(_listEntity!.backViewCenterBtnTuple.title, for: .normal)
+                self.centerBtn.isHidden = !_listEntity!.backViewCenterBtnTuple.isShow
+                self.centerBtn.borderColor = _listEntity!.backViewCenterBtnTuple.color
+                self.centerBtn.setTitleColor(_listEntity!.backViewCenterBtnTuple.color, for: .normal)
+                self.centerBtnWidth.constant = CGFloat(_listEntity!.backViewCenterBtnTuple.width)
+                self.centerBtn.isUserInteractionEnabled = _listEntity!.backViewCenterBtnTuple.isClick
+                
+                self.rightBtn.setTitle(_listEntity!.backViewRightBtnTuple.title, for: .normal)
+                self.rightBtn.isHidden = !_listEntity!.backViewRightBtnTuple.isShow
+                self.rightBtn.borderColor = _listEntity!.backViewRightBtnTuple.color
+                self.rightBtn.setTitleColor(_listEntity!.backViewRightBtnTuple.color, for: .normal)
+                self.rightBtnWidth.constant = CGFloat(_listEntity!.backViewRightBtnTuple.width)
+                self.rightBtn.isUserInteractionEnabled = _listEntity!.backViewRightBtnTuple.isClick
+                
+                self.timeLabel0.text = "发布时间 \(NSDate.chatingTime(_listEntity!.createTime) ?? "")"
+                if let receiveTime = _listEntity!.receiveTime{
+                    self.timeLabel1.isHidden = false
+                    self.timeLabel1.text = "领取时间 \(NSDate.chatingTime(receiveTime)!)"
+                }else{
+                    self.timeLabel1.isHidden = true
+                }
+                
+                if let expiryTime = _listEntity!.expiryTime{
+                    self.timeLabel2.isHidden = false
+                    self.timeLabel2.text = "完成时间 \(NSDate.chatingTime(expiryTime)!)"
+                }else{
+                    self.timeLabel2.isHidden = true
+                }
+                
+                if let verifyTime = _listEntity!.verifyTime{
+                    self.timeLabel3.isHidden = false
+                    self.timeLabel3.text = "确认时间 \(NSDate.chatingTime(verifyTime)!)"
+                }else{
+                    self.timeLabel3.isHidden = true
+                }
+            }
+            
+            
+        }
+        
+        get{
+            return _listEntity!
+        }
+    }
+    weak var delegate:TaskListCellProtocol?
     convenience init(listModel:TaskListModel,frame:CGRect) {
         self.init(frame: frame)
         self.listModel = listModel
         
-        self.leftBtn.setTitle(listModel.backViewLeftBtnTuple.title, for: .normal)
-        self.leftBtn.isHidden = !listModel.backViewLeftBtnTuple.isShow
-        self.leftBtn.borderColor = listModel.backViewLeftBtnTuple.color
-        self.leftBtn.setTitleColor(listModel.backViewLeftBtnTuple.color, for: .normal)
-        self.leftBtnWidth.constant = CGFloat(listModel.backViewLeftBtnTuple.width)
-        self.leftBtn.isUserInteractionEnabled = listModel.backViewLeftBtnTuple.isClick
         
-        
-        
-        self.centerBtn.setTitle(listModel.backViewCenterBtnTuple.title, for: .normal)
-        self.centerBtn.isHidden = !listModel.backViewCenterBtnTuple.isShow
-        self.centerBtn.borderColor = listModel.backViewCenterBtnTuple.color
-        self.centerBtn.setTitleColor(listModel.backViewCenterBtnTuple.color, for: .normal)
-        self.centerBtnWidth.constant = CGFloat(listModel.backViewCenterBtnTuple.width)
-        self.centerBtn.isUserInteractionEnabled = listModel.backViewCenterBtnTuple.isClick
-        
-        self.rightBtn.setTitle(listModel.backViewRightBtnTuple.title, for: .normal)
-        self.rightBtn.isHidden = !listModel.backViewRightBtnTuple.isShow
-        self.rightBtn.borderColor = listModel.backViewRightBtnTuple.color
-        self.rightBtn.setTitleColor(listModel.backViewRightBtnTuple.color, for: .normal)
-        self.rightBtnWidth.constant = CGFloat(listModel.backViewRightBtnTuple.width)
-        self.rightBtn.isUserInteractionEnabled = listModel.backViewRightBtnTuple.isClick
-        
-        self.timeLabel0.text = "发布时间 \(listModel.createTime ?? "")"
-        if let receiveTime = listModel.ReceiveTime{
-            self.timeLabel1.text = "领取时间 \(receiveTime)"
-        }else{
-            self.timeLabel1.text = ""
-        }
-        
-        if let expiryTime = listModel.expiryTime{
-            self.timeLabel2.text = "完成时间 \(expiryTime)"
-        }else{
-            self.timeLabel2.text = ""
-        }
-        
-        if let verifyTime = listModel.verifyTime{
-            self.timeLabel3.text = "完成时间 \(verifyTime)"
-            self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: 200)
-        }else{
-            self.timeLabel3.text = ""
-        }
-        
-      
+//     self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: CGFloat(listModel.backViewHeight))
         
     }
     
@@ -97,5 +112,37 @@ class TaskListBackView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    @IBAction func centerBtnAction(_ sender: UIButton) {
+        guard delegate != nil else {
+            return
+        }
+        
+        if self.listModel.backViewRightBtnTuple.title == "催他完成" {
+            delegate?.urgeComplete(listModel: listModel, view: self)
+        }
+    }
+    
+    @IBAction func rightBtnAction(_ sender: UIButton) {
+        guard delegate != nil else {
+            return
+        }
+        if self.listModel.backViewRightBtnTuple.title == "已完成" {
+            delegate?.receiveCompleted(listModel: listModel, view: self)
+        }
+        
+        if self.listModel.backViewRightBtnTuple.title == "确认完成" {
+            delegate?.publishConfirmComplete(listModel: listModel, view: self)
+        }
+    }
+    
+    @IBAction func leftBtnAction(_ sender: UIButton){
+        
+        guard delegate != nil else {
+            return
+        }
+        if self.listModel.backViewLeftBtnTuple.title == "取消任务" {
+            delegate?.receiveCancel(listModel: listModel, view: self)
+        }
+    }
 }

@@ -96,6 +96,8 @@
 #define DSStatusNormalTextDidSelectedNotification @"DSStatusNormalTextDidSelectedNotification"
 
 
+#define kJCCurrentUserName   @"kJCCurrentUserName" //极光登录用户名
+
 #define Theme_ViewBackgroundColor RGB(245,245,245)
 
 
