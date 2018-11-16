@@ -16,4 +16,7 @@
 
 - (void)setImageNormal:(NSString *)normal withImageHighlighted:(NSString *)hl;
 
+// 可以移动
+- (void)setFreeMovement;
+
 @end

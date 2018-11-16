@@ -631,6 +631,9 @@ static int const TagDetailField = 100004;
     return true;
 }
 
+
+
+
 - (void)keyboardDidShow:(NSNotification*)notification {
     CGRect begin = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect end = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];

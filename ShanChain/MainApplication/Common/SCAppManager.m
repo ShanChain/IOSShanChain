@@ -16,10 +16,12 @@
 #import "SCLoginController.h"
 #import "SCBaseNavigationController.h"
 #import <React/RCTBundleURLProvider.h>
+#import "ShanChain-Swift.h"
+
 //#import "JsonTool.h"
 //开发时改成自己的IP
-#define RN_RES_PATH @"http://192.168.1.103:8081/index.ios.bundle?platform=ios&dev=true"
-#define RN_RES_PATH @"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"
+#define RN_RES_PATH @"http://192.168.137.217:8081/index.ios.bundle?platform=ios&dev=true"
+//#define RN_RES_PATH @"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"
 
 
 //#if DEBUG
@@ -135,7 +137,18 @@ static SCAppManager *instance = nil;
     if(visibleVc.navigationController != nil){
         [visibleVc.navigationController pushViewController:rnVc animated:animated];
     }else{
-        [((UITabBarController*)[self getRootViewController]).selectedViewController.navigationController pushViewController:rnVc animated:animated];
+        
+        JCNavigationController *nav;
+        if ([[HHTool mainWindow].rootViewController isKindOfClass:[JCMainTabBarController  class]]) {
+            JCMainTabBarController  *tab = (JCMainTabBarController*)[HHTool mainWindow].rootViewController;
+            JCNavigationController *navController = tab.selectedViewController;
+            nav = navController;
+        }else{
+            nav = (JCNavigationController*)[HHTool mainWindow].rootViewController;
+        }
+        
+        [nav.topViewController.navigationController pushViewController:rnVc animated:animated];
+//        [((UITabBarController*)[self getRootViewController]).selectedViewController.navigationController pushViewController:rnVc animated:animated];
     }
 }
 
@@ -211,7 +224,9 @@ static SCAppManager *instance = nil;
     [[SCCacheTool shareInstance]setCacheValue:characterId withUserID:userId andKey:CACHE_CHARACTER_ID];
     [[SCCacheTool shareInstance]setCacheValue:spaceId withUserID:userId andKey:CACHE_SPACE_ID];
     [[SCCacheTool shareInstance] setCacheValue:userId withUserID:@"0" andKey:CACHE_CUR_USER];
-    [[SCCacheTool shareInstance] setCacheValue:token withUserID:userId  andKey:CACHE_TOKEN];
+    if (!NULLString(token)) {
+        [[SCCacheTool shareInstance] setCacheValue:token withUserID:userId  andKey:CACHE_TOKEN];
+    }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:userId forKey:@"userId"];

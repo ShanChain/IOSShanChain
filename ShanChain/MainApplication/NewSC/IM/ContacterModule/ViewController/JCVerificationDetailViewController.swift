@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JCVerificationDetailViewController: UIViewController {
+class JCVerificationDetailViewController: SCBaseVC {
     
     var verificationInfo: JCVerificationInfo!
     

@@ -52,6 +52,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         taskButton.menuButtonSize = .medium
         taskButton.menuRedius = 70
         taskButton.circularButtonPositon = .topRight
+        
     }
     
     
@@ -71,7 +72,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     fileprivate let buttonTitles = ["查看任务","发布任务"]
     func buttonForIndexAt(_ menuButton: ASCircularMenuButton, indexForButton: Int) -> UIButton {
         let button: UIButton = UIButton()
-
         if menuButton == taskButton{
             button.backgroundColor = SC_ThemeMainColor
             button .setImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
@@ -424,6 +424,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         self.hrShowAlert(withTitle: nil, message: "确定要离开广场吗?", buttonsTitles: ["确认","取消"]) { (action, index) in
             if index == 0{
                 self.navigationController?.popViewController(animated: true)
+                if let chatRoom = self.conversation.target as? JMSGChatRoom{
+                   JMSGChatRoom.leaveChatRoom(withRoomId: chatRoom.roomID, completionHandler: nil)
+                }
                 
             }
         }
@@ -718,8 +721,15 @@ extension HHChatRoomViewController: JMessageDelegate {
             for index in indexs {
                 var m = self.messages[index.row]
                 if !m.msgId.isEmpty {
-                    m = self._parseMessage(conversation.message(withMessageId: m.msgId)!, false)
-                    chatView.update(m, at: index.row)
+                    do{
+                       m =  self._parseMessage(conversation.message(withMessageId: m.msgId)!, false)
+                        chatView.update(m, at: index.row)
+                    }catch{
+                        printLog(error)
+                    }
+                    
+            
+                    
                 }
             }
             return

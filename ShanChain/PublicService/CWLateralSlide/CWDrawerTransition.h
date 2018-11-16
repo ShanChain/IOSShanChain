@@ -38,6 +38,8 @@ typedef NS_ENUM(NSUInteger,CWDrawerAnimationType) {
 
 + (void)releaseInstance;
 
+- (void)singleTap;
+
 @end
 
 

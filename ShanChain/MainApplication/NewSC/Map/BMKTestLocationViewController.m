@@ -441,15 +441,14 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     weakify(self);
     [JGUserLoginService
      jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
-         strongify(self);
          if (!error) {
-              [self enterChatRoom];
+              [weak_self enterChatRoom];
              return ;
          }
          if (error.code == 863004) {
              // 未登录
-             [self jg_automaticLoginComplete:^{
-                 [self enterChatRoom];
+             [weak_self jg_automaticLoginComplete:^{
+                 [weak_self enterChatRoom];
              }];
          }
          [HHTool showError:error.localizedDescription];
@@ -507,10 +506,9 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
             if (error.code == 851003) {
                 // 已经在聊天室了，先退出，再进入
                 [JMSGChatRoom leaveChatRoomWithRoomId:self.currentRoomId completionHandler:^(id resultObject, NSError *error) {
-                    strongify(self);
                     [HHTool dismiss];
                     if (!error) {
-                        [self enterChatRoom];
+                        [weak_self enterChatRoom];
                     }else{
                         [HHTool showError:error.localizedDescription];
                     }

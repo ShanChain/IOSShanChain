@@ -92,10 +92,8 @@
     LeftWalletTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
     CWTableViewCellInfo *cellInfo = _cellInfoArray[indexPath.row];
     cell.cellInfo = cellInfo;
-    if (indexPath.row != 0) {
-        cell.seatMoneyLb.text  = @"";
-        cell.contentLb.text = @"";
-    }
+    cell.seatMoneyLb.text  = @"";
+    cell.contentLb.text = @"";
     return cell;
 }
 

@@ -43,7 +43,6 @@ static NSString * const MSG_WHERE_CHAT_MENU = @"chat_menu";
 static NSString * const MSG_WHERE_SPACE_MENU = @"space_menu";
 
 
-
 @implementation NotificationHandler
 
 + (void) handlerNotificationWithCustom:(NSDictionary *)customDic{
@@ -64,6 +63,7 @@ static NSString * const MSG_WHERE_SPACE_MENU = @"space_menu";
     NSDictionary *actionBody = msgBody[@"action_body"];
     NSDictionary *params = actionBody[@"params"];
     NSString *time = customDic[@"create_time"];
+    
     
     @try {
         if([msgBody[@"action_type"] isEqualToString:@"open_page"]){

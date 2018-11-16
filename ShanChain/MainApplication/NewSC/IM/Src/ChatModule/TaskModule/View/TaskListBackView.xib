@@ -144,6 +144,7 @@
                 <constraint firstItem="1d3-du-EPy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="r3U-qO-KTf"/>
                 <constraint firstItem="14Z-lk-aBM" firstAttribute="top" secondItem="dAW-Z1-org" secondAttribute="bottom" constant="12" id="uv7-uf-LTP"/>
                 <constraint firstItem="yf5-0r-fOi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="xEp-VT-8Fj"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="u5T-NP-qpd" secondAttribute="bottom" constant="20" id="xHx-I9-lc7"/>
                 <constraint firstItem="dAW-Z1-org" firstAttribute="top" secondItem="yf5-0r-fOi" secondAttribute="bottom" constant="12" id="zYd-jl-u51"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

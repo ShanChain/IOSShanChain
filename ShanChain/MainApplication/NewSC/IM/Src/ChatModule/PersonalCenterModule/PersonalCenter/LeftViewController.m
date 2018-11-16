@@ -13,6 +13,8 @@
 #import "SCBaseNavigationController.h"
 #import "EditPersonalInfoViewController.h"
 #import "SCAliyunUploadMananger.h"
+#import "MyWalletViewController.h"
+#import "NotificationHandler.h"
 
 #define HeaderViewHeight 200
 
@@ -45,11 +47,24 @@
     
 }
 
+-(void)setIconImage{
+    NSString  *headImg = [SCCacheTool shareInstance].characterModel.characterInfo.headImg;
+    UIImage *headImage = [UIImage imageFromURLString:headImg];
+    headImage = [headImage mc_resetToSize:CGSizeMake(64, 64)];
+    headImage = [headImage cutCircleImage];
+    if (headImg) {
+        self.icon.image = headImage;
+    }else{
+        self.icon.image = [UIImage imageNamed:DefaultAvatar];
+    }
+}
+
 - (void)setupHeader {
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kCWSCREENWIDTH * 0.75, HeaderViewHeight)];
     imageV.backgroundColor = [UIColor clearColor];
-    imageV.contentMode = UIViewContentModeScaleAspectFill;
-    imageV.image = [UIImage imageNamed:@"1.jpg"];
+    UIImage *image = [UIImage imageNamed:@"icon_background"];
+    [image mc_resetToSize:CGSizeMake(kCWSCREENWIDTH * 0.75, HeaderViewHeight)];
+    imageV.image = image;
     [self.view addSubview:imageV];
     
 
@@ -69,13 +84,8 @@
     
     
     UIImageView  *img = [[UIImageView alloc]init];
-    NSString  *headImg = [[[SCCacheTool shareInstance] getCharacterInfo]objectForKey:@"headImg"];
-    UIImage *image = [UIImage imageFromURLString:headImg];
-    image = [image mc_resetToSize:CGSizeMake(64, 64)];
-    image = [image cutCircleImage];
-    img.image = image;
-    
     self.icon = img;
+    [self setIconImage];
     [layerView addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(layerView);
@@ -87,26 +97,27 @@
     UILabel  *nikeNameLb = [[UILabel alloc]init];
     nikeNameLb.textColor = [UIColor whiteColor];
     nikeNameLb.font = Font(17);
-    NSString  *name = [[[SCCacheTool shareInstance] getCharacterInfo]objectForKey:@"name"];
+    NSString  *name = [SCCacheTool shareInstance].characterModel.characterInfo.name ? :@"暂无昵称";
     nikeNameLb.text = name;
     [self.view addSubview:nikeNameLb];
     [nikeNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.topMargin.equalTo(layerView).offset(-5);
         make.left.equalTo(layerView.mas_right).offset(10);
-        make.width.mas_lessThanOrEqualTo(self.view.height - 150);
+        make.width.equalTo(@100);
         make.height.equalTo(@25);
     }];
     
     UILabel  *signatureLb = [[UILabel alloc]init];
     signatureLb.textColor = [UIColor whiteColor];
     signatureLb.font = Font(13);
-    signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.intro ? :@"暂无签名";
+    signatureLb.numberOfLines = 0;
+    signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.signature ? :@"暂无签名";
     [self.view addSubview:signatureLb];
     [signatureLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(nikeNameLb.mas_bottom).offset(10);
+        make.top.equalTo(nikeNameLb.mas_bottom).offset(20);
         make.left.equalTo(layerView.mas_right).offset(10);
-        make.width.mas_lessThanOrEqualTo(self.view.height - 150);
-        make.height.equalTo(@25);
+        make.width.right.equalTo(@-40);
+        make.height.equalTo(@80);
     }];
     
     
@@ -123,11 +134,28 @@
 }
 
 - (void)edit{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    EditPersonalInfoViewController *editVC = [[EditPersonalInfoViewController alloc]init];
+    [[self mainNav].topViewController.navigationController pushViewController:editVC animated:YES];
+}
+
+
+
+- (JCNavigationController*)mainNav{
+    JCNavigationController *nav;
+    if ([[HHTool mainWindow].rootViewController isKindOfClass:[JCMainTabBarController  class]]) {
+        JCMainTabBarController  *tab = (JCMainTabBarController*)[HHTool mainWindow].rootViewController;
+        JCNavigationController *navController = tab.selectedViewController;
+        nav = navController;
+    }else{
+        nav = (JCNavigationController*)[HHTool mainWindow].rootViewController;
+    }
     
-    [self didSelectCell:nil indexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+    return nav;
 }
 
 - (void)changesIcon{
+   
     [UPLOAD_IMAGE showActionSheetInFatherViewController:self imageTag:100 delegate:self];
 }
 - (void)setupTableView {
@@ -150,16 +178,7 @@
 #pragma mark - cell点击事件
 - (void)didSelectCell:(CWTableViewCellInfo *)cellInfo indexPath:(NSIndexPath *)indexPath {
     
-    JCNavigationController *nav;
-    if ([[HHTool mainWindow].rootViewController isKindOfClass:[JCMainTabBarController  class]]) {
-        JCMainTabBarController  *tab = (JCMainTabBarController*)[HHTool mainWindow].rootViewController;
-         JCNavigationController *navController = tab.selectedViewController;
-         nav = navController;
-    }else{
-         nav = (JCNavigationController*)[HHTool mainWindow].rootViewController;
-    }
-
-    
+    JCNavigationController *nav = [self mainNav];
     if (!nav) {
         return;
     }
@@ -175,55 +194,59 @@
         [nav.topViewController.navigationController pushViewController:conversationListVC animated:YES];
     }else if ([title isEqualToString:@"我的钱包"]){
         //
+        MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
+        [nav.topViewController.navigationController pushViewController:walletVC animated:YES];
+    }else if ([title isEqualToString:@"设置"]){
+        [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
     }else{
-        return;
+                                                                 
     }
-    switch (indexPath.row) {
-        case 0:
-            // 我的钱包
-            
-            break;
-        case 1:
-            // 我的任务
-        {
-            
-           
-            
-        }
-            
-            
-            break;
-        case 2:
-            //我的消息
-        {
-            
-        }
-            
-            break;
-        case 3:
-            // 我的收藏
-        {
-            MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:1];
-            [nav.topViewController.navigationController pushViewController:footprintVC animated:YES];
-        }
-            break;
-        case 4:
-            //实名认证
-        {
-            RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
-            [nav.topViewController.navigationController pushViewController:realNameVC animated:YES];
-        }
-            
-            
-            break;
-        case 5:
-        {
-            EditPersonalInfoViewController *editVC = [[EditPersonalInfoViewController alloc]init];
-            [nav.topViewController.navigationController pushViewController:editVC animated:YES];
-        }
-        default:
-            break;
-    }
+//    switch (indexPath.row) {
+//        case 0:
+//            // 我的钱包
+//
+//            break;
+//        case 1:
+//            // 我的任务
+//        {
+//
+//
+//
+//        }
+//
+//
+//            break;
+//        case 2:
+//            //我的消息
+//        {
+//
+//        }
+//
+//            break;
+//        case 3:
+//            // 我的收藏
+//        {
+//            MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:1];
+//            [nav.topViewController.navigationController pushViewController:footprintVC animated:YES];
+//        }
+//            break;
+//        case 4:
+//            //实名认证
+//        {
+//            RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
+//            [nav.topViewController.navigationController pushViewController:realNameVC animated:YES];
+//        }
+//
+//
+//            break;
+//        case 5:
+//        {
+//            EditPersonalInfoViewController *editVC = [[EditPersonalInfoViewController alloc]init];
+//            [nav.topViewController.navigationController pushViewController:editVC animated:YES];
+//        }
+//        default:
+//            break;
+//    }
     
 }
 
@@ -261,31 +284,37 @@
 
 -(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag{
     
+     [[CWMaskView shareInstance]singleTap];
     image = [image mc_resetToSize:CGSizeMake(64, 64)];
     image = [image cutCircleImage];
-    NSData *imageData = UIImagePNGRepresentation(image);
-    [JMSGUser updateMyAvatarWithData:imageData avatarFormat:@"png" completionHandler:^(id resultObject, NSError *error) {
-        if(!error){
-            NSLog(@"更换极光头像成功");
-            _icon.image = image;
-        }
-    }];
+//    NSData *imageData = UIImagePNGRepresentation(image);
+//    [JMSGUser updateMyAvatarWithData:imageData avatarFormat:@"png" completionHandler:^(id resultObject, NSError *error) {
+//        if(!error){
+//            NSLog(@"更换极光头像成功");
+//            _icon.image = image;
+//        }
+//    }];
 
     
-//    [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
-//        NSString *urlJson = @{@"headImg":url}.mj_JSONString;
-//        NSDictionary  *params = @{@"characterId":[SCCacheTool shareInstance].getCurrentCharacterId,@"headImg":urlJson};
-//        [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:params showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
-//            if(error){
-//
-//            }
-//
-//
-//        }];
-//
-//    } withErrorCallBack:^(NSError *error) {
-//
-//    }];
+    [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
+        if (!NULLString(url)) {
+            [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:@{@"headImg":url} showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+                if(!error){
+                    if (baseModel.data[@"characterInfo"] && [baseModel.data[@"characterInfo"] isKindOfClass:[NSDictionary class]]) {
+                        SCCharacterModel_characterInfo *info = [SCCharacterModel_characterInfo mj_objectWithKeyValues:baseModel.data[@"characterInfo"]];
+                        [SCCacheTool shareInstance].characterModel.characterInfo = info;
+                        [self setIconImage];
+                        
+            
+                    }
+                }
+                
+            }];
+        }
+
+    } withErrorCallBack:^(NSError *error) {
+
+    }];
     
 }
 

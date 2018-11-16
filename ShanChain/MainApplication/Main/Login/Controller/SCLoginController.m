@@ -237,9 +237,9 @@
     self.forgetPwdBtn.frame=CGRectMake(SCREEN_WIDTH-40-60, CGRectGetMaxY(self.pwdField.frame) + 5, 60, 16);
     self.loginBtn.frame=CGRectMake(40, CGRectGetMaxY(self.pwdField.frame) + 50, SCREEN_WIDTH - 40 * 2, 44);
     self.registerBtn.frame=CGRectMake(40, CGRectGetMaxY(self.loginBtn.frame) + KSCMargin, SCREEN_WIDTH- 40 * 2, 44);
-//    self.rnDemoBtn.frame=CGRectMake(KSCMargin, CGRectGetMaxY(self.registerBtn.frame) + KSCMargin, SCREEN_WIDTH-30, 40);
+    //    self.rnDemoBtn.frame=CGRectMake(KSCMargin, CGRectGetMaxY(self.registerBtn.frame) + KSCMargin, SCREEN_WIDTH-30, 40);
     
-
+    
     self.socialView.frame=CGRectMake(45,SCREEN_HEIGHT-70.0/667*SCREEN_HEIGHT - IPHONE_NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH - 45 * 2 , 50);
     self.socialBtn.frame = CGRectMake((SCREEN_WIDTH-75)/2,CGRectGetMinY(self.socialView.frame) - 45, 75,20);
     self.weiBtn.frame=CGRectMake(0, 0, 50, 50);
@@ -256,7 +256,7 @@
         NSString *typeAppend = [@"USER_TYPE_MOBILE" stringByAppendingString:[NSString stringWithFormat:@"%.0f",time]];
         
         NSString *encryptAccount = [SCAES encryptShanChainWithPaddingString:typeAppend withContent:self.nameField.text];
-
+        
         NSString *encryptPassword = [SCAES encryptShanChainWithPaddingString:[typeAppend stringByAppendingString:self.nameField.text] withContent:pwdMD5];
         
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -287,17 +287,25 @@
 - (void)successLoginedWithContent:(NSDictionary *)content {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSString *userId = [content[@"userId"] stringValue];
-    NSString *token = [[userId stringByAppendingString:@"_"] stringByAppendingString:content[@"token"]];
+    NSString  *tk;
+    if ([content[@"token"] isKindOfClass:[NSDictionary class]]) {
+        NSDictionary  *tkDic = content[@"token"];
+        tk = tkDic[@"token"];
+    }else{
+        tk = content[@"token"];
+    }
+    NSString *token = [[userId stringByAppendingString:@"_"] stringByAppendingString:tk];
+    
     [params setObject:[[userId stringByAppendingString:@"_"] stringByAppendingString:content[@"token"]]  forKey:@"token"];
     [params setObject:userId forKey:@"userId"];
     [[SCNetwork shareInstance]postWithUrl:STORYCHARACTERGETCURRENT parameters:params success:^(id responseObject) {
         NSDictionary *data = responseObject[@"data"];
         SCCharacterModel *characterModel = [SCCharacterModel yy_modelWithDictionary:data];
         [SCCacheTool shareInstance].characterModel = characterModel;
-        if (data != [NSNull null] && data[@"characterInfo"]) {
+        if (data  && data[@"characterInfo"]) {
             NSDictionary *characterInfo = data[@"characterInfo"];
             if (characterInfo[@"characterId"]) {
-              //  NSString *spaceId = [characterInfo[@"spaceId"] stringValue];
+                //  NSString *spaceId = [characterInfo[@"spaceId"] stringValue];
                 NSString *spaceId = @"";
                 NSString *characterId = [characterInfo[@"characterId"] stringValue];
                 NSDictionary *hxInfo = data[@"hxAccount"];
@@ -328,36 +336,36 @@
                     }
                 }];
                 
-         
-//                [[SCNetwork shareInstance]postWithUrl:GET_SPACE_BY_ID parameters:params1 success:^(id responseObject) {
-//                    NSDictionary *data = responseObject[@"data"];
-//                    NSString *spaceInfo = @"";
-//                    NSString *spaceName = @"";
-//                    spaceName = data[@"name"];
-//                    spaceInfo = [JsonTool stringFromDictionary:data];
-//                    if(![spaceInfo isEqualToString:@""]){
-//                        [[SCCacheTool shareInstance] setCacheValue:spaceName withUserID:userId andKey:CACHE_SPACE_NAME];
-//                        [[SCCacheTool shareInstance] setCacheValue:spaceInfo withUserID:userId andKey:CACHE_SPACE_INFO];
-//                    }
-//                    [SYProgressHUD hideHUD];
-//
-//                } failure:^(NSError *error) {
-//                    SCLog(@"%@",error);
-//                    [SYProgressHUD hideHUD];
-//                    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
-//                    SCTabbarController *tabbarC=[[SCTabbarController alloc]init];
-//                    keyWindow.rootViewController=tabbarC;
-//                }];
+                
+                //                [[SCNetwork shareInstance]postWithUrl:GET_SPACE_BY_ID parameters:params1 success:^(id responseObject) {
+                //                    NSDictionary *data = responseObject[@"data"];
+                //                    NSString *spaceInfo = @"";
+                //                    NSString *spaceName = @"";
+                //                    spaceName = data[@"name"];
+                //                    spaceInfo = [JsonTool stringFromDictionary:data];
+                //                    if(![spaceInfo isEqualToString:@""]){
+                //                        [[SCCacheTool shareInstance] setCacheValue:spaceName withUserID:userId andKey:CACHE_SPACE_NAME];
+                //                        [[SCCacheTool shareInstance] setCacheValue:spaceInfo withUserID:userId andKey:CACHE_SPACE_INFO];
+                //                    }
+                //                    [SYProgressHUD hideHUD];
+                //
+                //                } failure:^(NSError *error) {
+                //                    SCLog(@"%@",error);
+                //                    [SYProgressHUD hideHUD];
+                //                    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+                //                    SCTabbarController *tabbarC=[[SCTabbarController alloc]init];
+                //                    keyWindow.rootViewController=tabbarC;
+                //                }];
             } else {
                 [SYProgressHUD hideHUD];
             }
         } else {
             [HHTool showError:@"登录出错..."];
-//            [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:@"" chatacterId:@"" hxUserName:@"" hxPassword:@""];
-//            UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
-//            SYStoryMarkController *vc=[[SYStoryMarkController alloc] init];
-//            SCBaseNavigationController *nav = [[SCBaseNavigationController alloc] initWithRootViewController: vc];
-//            keyWindow.rootViewController = nav;
+            //            [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:@"" chatacterId:@"" hxUserName:@"" hxPassword:@""];
+            //            UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+            //            SYStoryMarkController *vc=[[SYStoryMarkController alloc] init];
+            //            SCBaseNavigationController *nav = [[SCBaseNavigationController alloc] initWithRootViewController: vc];
+            //            keyWindow.rootViewController = nav;
         }
     } failure:^(NSError *error) {
         SCLog(@"%@",error);
@@ -372,7 +380,7 @@
 
 -(void)rnBtnClicked{
     NSURL *jsCodeLocation;
-
+    
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
     
     RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
@@ -434,6 +442,7 @@
 }
 
 - (void)thirdLoginClickWithPlatformType:(SSDKPlatformType)type {
+    [SYProgressHUD showMessage:@"登录中……"];
     [ShareSDK getUserInfo:type onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error){
         if (state == SSDKResponseStateSuccess) {
             NSString *pwd = [user.credential.token substringToIndex:16];
@@ -461,13 +470,14 @@
             [params setObject:user.nickname forKey:@"nickName"];
             [params setObject:loginTypeStr forKey:@"userType"];
             [params setObject:user.icon forKey:@"headIcon"];
-
+            
             [params setObject:[NSString stringWithFormat:@"%ld",(long)user.gender] forKey:@"sex"];
             [params setObject:[NSString stringWithFormat:@"%0.f",time] forKey:@"Timestamp"];
             
             [params setObject:encryptAccount forKey:@"encryptOpenId"];
             [params setObject:encryptPassword forKey:@"encryptToken16"];
             WS(WeakSelf);
+            [SYProgressHUD hideHUD];
             [[SCNetwork shareInstance]postWithUrl:COMMONUSERLOGINTHIRD parameters:params success:^(id responseObject) {
                 [SYProgressHUD showSuccess:@"正在获取数据"];
                 NSDictionary *data = responseObject[@"data"];
@@ -478,6 +488,7 @@
         } else {
             SCLog(@"%@",error);
             [SYProgressHUD showError:@"三方登陆失败"];
+            [SYProgressHUD hideHUD];
         }
     }];
 }

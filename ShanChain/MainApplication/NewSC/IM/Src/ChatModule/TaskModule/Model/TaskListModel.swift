@@ -79,7 +79,8 @@ class TaskListModel: HandyJSON {
     var backViewCenterBtnTuple:(title:String,isShow:Bool,color:UIColor,isClick:Bool,width:Int){
         if Int(status!)! == 10 {
             if isMyBublish == true{
-                return ("催他完成",true,SC_ThemeMainColor,true,120)
+               // return ("催他完成",true,SC_ThemeMainColor,true,120)
+                return ("正在完成",true,.gray,true,120)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }

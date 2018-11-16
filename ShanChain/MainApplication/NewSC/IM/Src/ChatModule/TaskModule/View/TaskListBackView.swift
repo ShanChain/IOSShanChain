@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class TaskListBackView: UIView {
 
     
@@ -81,6 +83,7 @@ class TaskListBackView: UIView {
                 }else{
                     self.timeLabel3.isHidden = true
                 }
+                
             }
             
             
@@ -103,9 +106,11 @@ class TaskListBackView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView = loadViewFromNib()
-        self.frame = frame
         //contentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentView)
+        contentView.snp.makeConstraints { (mark) in
+             mark.edges.equalTo(self)
+        }
         
     }
     

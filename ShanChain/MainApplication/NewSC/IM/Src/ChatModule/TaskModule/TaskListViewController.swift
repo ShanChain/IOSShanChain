@@ -77,12 +77,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         let headerView:UIView = UIView(frame: CGRect(x: 10, y: 0, width: self.view.bounds.width - 20, height: 30))
         headerView.backgroundColor = self.view.backgroundColor
         let btn:UIButton = UIButton.init(type: .custom)
-        if (self.type == TaskListType.all){
-           btn.setTitle("全部任务", for: .normal)
-        }else{
-            btn.setTitle("我发布的", for: .normal)
-        }
-        
+        btn.setTitle("全部任务", for: .normal)
         btn.setTitleColor(.black, for: .normal)
         btn.titleLabel?.font = Font(15)
         btn.addTarget(self, action: #selector(clickSelectStatusAction(_:)), for:.touchUpInside)
@@ -165,7 +160,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
             
             if(self.dataList.count == 0){
                 self.noDataTipShow(self.tableView, content: "您还没有任务记录喔，到广场中去发布你的第一个任务，或者领取任务吧~", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
-                
+                self.tableView.contentOffset = self.view.center;
             }else{
                 self.noDataTipDismiss()
             }
@@ -293,7 +288,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         cell.listModel = content
         
-        let lastCell = tableView.visibleCells.last as? TaskListPersonalCell
+        let lastCell = tableView.visibleCells.first as? TaskListPersonalCell
         if let lastCell = lastCell {
             if (lastCell.revealedCardIsFlipped){
                 lastCell.flipRevealedCardBack()
@@ -317,7 +312,9 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
                 let backView = TaskListBackView(listModel: content, frame: cell.frame)
                 backView.tag = indexPath.section;
                 backView.delegate = self
-                cell.flipRevealedCard(toView: backView)
+                cell.flipRevealedCard(toView: backView) {
+                   
+                }
             }
         }
   
@@ -336,6 +333,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TaskListViewController:TaskListCellProtocol{
+   
     
     func urgeComplete(listModel: TaskListModel, view: TaskListBackView) {
         requestListCellDelegateWithUrl(url: TASK_URGE_URL, listModel: listModel, view: view)

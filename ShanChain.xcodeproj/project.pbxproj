@@ -278,6 +278,9 @@
 		22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */; };
 		22631C4C216DDA3200D5AB0B /* SavePublishContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4B216DDA3200D5AB0B /* SavePublishContentModel.m */; };
 		22631C4F216DE85200D5AB0B /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4D216DE85100D5AB0B /* UIViewController+BackButtonHandler.m */; };
+		22680AB6219E779000F2FA5B /* XMWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AB4219E779000F2FA5B /* XMWebView.m */; };
+		22680ABA219E786400F2FA5B /* MyWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AB8219E786400F2FA5B /* MyWalletViewController.m */; };
+		22680ABB219E786400F2FA5B /* MyWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22680AB9219E786400F2FA5B /* MyWalletViewController.xib */; };
 		2281A218216B2CB0009E95EE /* HHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A217216B2CB0009E95EE /* HHTool.m */; };
 		2281A21A216B6351009E95EE /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 2281A219216B6350009E95EE /* index.ios.js */; };
 		2281A221216D9E83009E95EE /* NSObject+AutoProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A21C216D9E81009E95EE /* NSObject+AutoProperty.m */; };
@@ -1090,6 +1093,11 @@
 		22631C4B216DDA3200D5AB0B /* SavePublishContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavePublishContentModel.m; sourceTree = "<group>"; };
 		22631C4D216DE85100D5AB0B /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		22631C4E216DE85200D5AB0B /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
+		22680AB4219E779000F2FA5B /* XMWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMWebView.m; sourceTree = "<group>"; };
+		22680AB5219E779000F2FA5B /* XMWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMWebView.h; sourceTree = "<group>"; };
+		22680AB7219E786400F2FA5B /* MyWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWalletViewController.h; sourceTree = "<group>"; };
+		22680AB8219E786400F2FA5B /* MyWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWalletViewController.m; sourceTree = "<group>"; };
+		22680AB9219E786400F2FA5B /* MyWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletViewController.xib; sourceTree = "<group>"; };
 		2281A216216B2CB0009E95EE /* HHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHTool.h; sourceTree = "<group>"; };
 		2281A217216B2CB0009E95EE /* HHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHTool.m; sourceTree = "<group>"; };
 		2281A219216B6350009E95EE /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = "react-native/index.ios.js"; sourceTree = SOURCE_ROOT; };
@@ -2733,6 +2741,7 @@
 		2242BFF52159C34D00707024 /* PublicService */ = {
 			isa = PBXGroup;
 			children = (
+				22680AB3219E779000F2FA5B /* XMWebView */,
 				223F9A5121829BA70031DB95 /* CWLateralSlide */,
 				2242BFF62159C34D00707024 /* noDataTip */,
 				2242BFFB2159C34D00707024 /* YYHud */,
@@ -2782,6 +2791,15 @@
 				22563F5C219C07E4004E34BB /* BaseProtocol.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		22680AB3219E779000F2FA5B /* XMWebView */ = {
+			isa = PBXGroup;
+			children = (
+				22680AB4219E779000F2FA5B /* XMWebView.m */,
+				22680AB5219E779000F2FA5B /* XMWebView.h */,
+			);
+			path = XMWebView;
 			sourceTree = "<group>";
 		};
 		22C917782191C04B002E5240 /* View */ = {
@@ -2853,6 +2871,9 @@
 				22C917942192E4D1002E5240 /* CWTableViewCellInfo.h */,
 				22C917952192E4D1002E5240 /* CWTableViewInfo.m */,
 				22C917972192E4D1002E5240 /* View */,
+				22680AB7219E786400F2FA5B /* MyWalletViewController.h */,
+				22680AB8219E786400F2FA5B /* MyWalletViewController.m */,
+				22680AB9219E786400F2FA5B /* MyWalletViewController.xib */,
 			);
 			path = PersonalCenter;
 			sourceTree = "<group>";
@@ -4757,6 +4778,7 @@
 				22563F67219D7CDF004E34BB /* LaunchScreenImage.png in Resources */,
 				4852A1281FCE9F0300CDD7BE /* SCTopCell.xib in Resources */,
 				4852A12E1FCE9F0300CDD7BE /* SYMarkCollection2Cell.xib in Resources */,
+				22680ABB219E786400F2FA5B /* MyWalletViewController.xib in Resources */,
 				223F9969217F12040031DB95 /* yh_image_picked@2x.png in Resources */,
 				22C917A72192E5AA002E5240 /* RealNameVeifiedViewController.xib in Resources */,
 				89E031531FCECBA70089240B /* GWLPhotoSelector.bundle in Resources */,
@@ -4907,6 +4929,7 @@
 				22D247852189CA4B009C1E6A /* YLDatePicker.swift in Sources */,
 				4852A16B1FCE9F7200CDD7BE /* CacheModel.m in Sources */,
 				48718D2E1F42277400010AA0 /* AFURLRequestSerialization.m in Sources */,
+				22680AB6219E779000F2FA5B /* XMWebView.m in Sources */,
 				22D247892189D5A8009C1E6A /* RecieveTaskView.swift in Sources */,
 				223F99CF217F12040031DB95 /* JCMineViewController.swift in Sources */,
 				223F9A0B217F12040031DB95 /* DLFixedTabbarView.m in Sources */,
@@ -5030,6 +5053,7 @@
 				223F99F3217F12040031DB95 /* SAIToolboxItem.swift in Sources */,
 				2242C0072159C3AB00707024 /* UIColor+Extention.m in Sources */,
 				4852A0B81FCE9F0300CDD7BE /* SYBigDramaController.m in Sources */,
+				22680ABA219E786400F2FA5B /* MyWalletViewController.m in Sources */,
 				89500F581FEB395200732CEB /* SCStoryPublishDashboardView.m in Sources */,
 				33C1A17B1F4C50FB003E22CA /* MASConstraint.m in Sources */,
 				485E661D1F42862900B158BF /* EaseChatToolbarItem.m in Sources */,
@@ -5739,7 +5763,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f64def29-37e5-4cab-a3b1-13c509ed4ae8";
+				PROVISIONING_PROFILE = "7c8b30e3-2d30-42a5-9125-899341b3cb87";
 				PROVISIONING_PROFILE_SPECIFIER = adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5805,7 +5829,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f64def29-37e5-4cab-a3b1-13c509ed4ae8";
+				PROVISIONING_PROFILE = "7c8b30e3-2d30-42a5-9125-899341b3cb87";
 				PROVISIONING_PROFILE_SPECIFIER = adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

@@ -98,7 +98,8 @@ open class JCMessageVoiceContentView: UIView, JCMessageContentViewType {
             }
         }
         JCAudioPlayerHelper.sharedInstance.delegate = self
-        JCAudioPlayerHelper.sharedInstance.managerAudioWithData(_data!, toplay: true)
+        let content:JCMessageVoiceContent = _message.content as! JCMessageVoiceContent
+        JCAudioPlayerHelper.sharedInstance.managerAudioWithData(content.data!, toplay: true)
         _animationView.startAnimating()
     }
 

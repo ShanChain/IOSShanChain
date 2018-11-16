@@ -139,7 +139,7 @@
 - (void)checkGuideView {
     NSString *hasEnter = [NSUserDefaults.standardUserDefaults objectForKey:[@"qianqianfirstenter-" stringByAppendingString:XcodeAppVersion]];
     if (!hasEnter) {
-        SYGuiderScrollview *scrollView = [[SYGuiderScrollview alloc] initWithFrame: self.window.rootViewController.view.frame];
+        SYGuiderScrollview *scrollView = [[SYGuiderScrollview alloc] initWithFrame:[UIScreen mainScreen].bounds];
         [UIApplication.sharedApplication.keyWindow addSubview: scrollView];
     }
 }

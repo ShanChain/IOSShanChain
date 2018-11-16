@@ -11,5 +11,6 @@
 @interface NSString (URL)
 
 - (NSString *)URLEncodedString;
+- (NSMutableDictionary *)getURLParameters;
 
 @end

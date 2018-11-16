@@ -94,7 +94,19 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     }
     [self apendTOBaseParams:params];
     _afManager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPT_TYPE_NORMAL];
-    [_afManager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
+    id kparameters;
+    if ([url containsString:CHANGE_USER_CHARACTER]) {
+        NSMutableDictionary  *mDic = [NSMutableDictionary dictionaryWithCapacity:0];
+        [mDic setObject:[SCCacheTool shareInstance].characterModel.characterInfo.characterId forKey:@"characterId"];
+        [mDic setObject:token forKey:@"token"];
+        [mDic  setObject:userId forKey:@"userId"];
+        [mDic  setObject:params.mj_JSONString forKey:@"dataString"];
+        kparameters = mDic.copy;
+    }else{
+        kparameters = params;
+    }
+    [_afManager POST:url parameters:kparameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] isEqualToString:SC_COMMON_SUC_CODE]) {
             success(responseObject);
         } else {
@@ -206,7 +218,8 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     }] resume];
 }
 
--(void)v1_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock{
+
+-(void)v1_postWithUrl:(NSString *)url params:(id)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock{
 #if TARGET_OS_IPHONE
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {

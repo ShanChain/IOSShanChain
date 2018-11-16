@@ -9,6 +9,13 @@
 #import "SCAliyunUploadMananger.h"
 #import "SCNetworkError.h"
 
+@interface SCAliyunUploadMananger ()
+
+@property  (nonatomic,strong)  OSSClient*  ossClient;
+
+@end
+
+
 @implementation SCAliyunUploadMananger
 
 static SCAliyunUploadMananger *instance = nil;
@@ -93,7 +100,7 @@ static SCAliyunUploadMananger *instance = nil;
     NSString *endpoint = params[@"endPoint"];
     
     id<OSSCredentialProvider> credential = [[OSSStsTokenCredentialProvider alloc] initWithAccessKeyId:kAliFileAccessKeyId secretKeyId:kAliFileAccessKeySecret securityToken:kAliFileSecurityToken];
-    OSSClient *client = [[OSSClient alloc] initWithEndpoint:endpoint credentialProvider:credential];
+    [SCAliyunUploadMananger shareInstance].ossClient = [[OSSClient alloc] initWithEndpoint:endpoint credentialProvider:credential];
     //
     OSSPutObjectRequest *put = [OSSPutObjectRequest new];
     put.bucketName = params[@"bucket"];
@@ -102,11 +109,13 @@ static SCAliyunUploadMananger *instance = nil;
     
     put.uploadProgress = ^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
         // 异步
+         NSLog(@"bytesSent ==%lld,totalByteSent== %lld, totalBytesExpectedToSend ==%lld", bytesSent, totalByteSent, totalBytesExpectedToSend);
     };
     
-    OSSTask *putTask = [client putObject:put];
+    OSSTask *putTask = [[SCAliyunUploadMananger shareInstance].ossClient putObject:put];
     [putTask continueWithBlock:^id(OSSTask *task) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             if (!task.error) {
                 SCLog(@"阿里云!");
                 cb(url);

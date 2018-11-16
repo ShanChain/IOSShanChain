@@ -79,6 +79,7 @@
  */
 - (void)cacheCharacterInfo:(NSDictionary *)characterInfo withUserId:(NSString *)userId;
 
+
 - (NSMutableDictionary *)getCharacterInfo;
 
 

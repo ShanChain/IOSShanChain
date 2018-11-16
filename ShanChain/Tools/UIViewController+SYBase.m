@@ -77,11 +77,17 @@
     if ([imageName hasPrefix:@"http://"] || [imageName hasPrefix:@"https://"]) {
         image = [UIImage imageFromURLString:imageName];
         image = [image mc_resetToSize:CGSizeMake(30, 30)];
+        if (!image) {
+            image = [UIImage imageNamed:DefaultAvatar];
+        }
     }
     UIImage  *selectedImage;
     if ([selectedImageName hasPrefix:@"http://"] || [selectedImageName hasPrefix:@"https://"]) {
         selectedImage = [UIImage imageFromURLString:imageName];
         selectedImage = [selectedImage mc_resetToSize:CGSizeMake(30, 30)];
+        if (!selectedImage) {
+            selectedImage = [UIImage imageNamed:DefaultAvatar];
+        }
     }
     
     [button setImage:image forState:UIControlStateNormal];

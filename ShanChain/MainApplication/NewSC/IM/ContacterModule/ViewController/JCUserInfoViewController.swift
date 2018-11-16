@@ -9,7 +9,7 @@
 import UIKit
 import JMessage
 
-class JCUserInfoViewController: UIViewController {
+class JCUserInfoViewController: SCBaseVC {
     
     var user: JMSGUser!
     var isOnConversation = false

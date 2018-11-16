@@ -191,6 +191,7 @@ class TaskDetailsViewController: SCBaseVC {
             taskTriggerBtn.borderWidth = 1
             taskTriggerBtn.setTitleColor(SC_ThemeMainColor, for: .normal)
         }
+        headerDateLb.text = NSDate.chatingTime(taskDetailsModel!.publishTime) ?? ""
     }
     
     @IBAction func sendTaskCommentAction(_ sender: UIButton) {

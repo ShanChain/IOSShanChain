@@ -20,6 +20,7 @@ class TaskDetailsModel: HandyJSON {
     var status:String?
     var supportCount:String?
     var taskId:String?
+    var publishTime:String?
     
     // 任务是否被领取
     func isReceive() -> Bool{

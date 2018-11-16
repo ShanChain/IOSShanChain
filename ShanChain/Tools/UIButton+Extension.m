@@ -26,4 +26,26 @@
     [self setTitleColor:color forState:UIControlStateNormal];
 }
 
+
+- (void)setFreeMovement{
+    [self addTarget:self action:@selector(dragMoving:withEvent: )forControlEvents: UIControlEventTouchDragInside];
+    [self addTarget:self action:@selector(dragEnded:withEvent: )forControlEvents:UIControlEventTouchUpOutside];
+}
+
+- (void) dragMoving: (UIControl *) c withEvent:ev
+{
+    c.center = [[[ev allTouches] anyObject] locationInView:self];
+}
+
+- (void) dragEnded: (UIControl *) c withEvent:ev
+{
+    c.center = [[[ev allTouches] anyObject] locationInView:self];
+}
+
+-(void)buttonAction:(UIButton *)sender
+{
+    NSLog(@"起飞");
+}
+
+
 @end

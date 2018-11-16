@@ -48,9 +48,9 @@
     // 第一栏
     UIView *view1 = [[UIView alloc] init];
     [self addSubview:view1];
-    view1.backgroundColor = RGB_HEX(0x49B8FD);
     view1.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     UIImageView *one = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_icon_1"]];
+    one.frame = CGRectMake(0, 0, view1.width, view1.height);
     one.contentMode = UIViewContentModeScaleToFill;
     [view1 addSubview:one];
 //    CGSize size = one.image.size;
@@ -85,11 +85,10 @@
     // 第二栏
     UIView *view2 = [[UIView alloc] init];
     [self addSubview:view2];
-    view2.backgroundColor = RGB_HEX(0xF5B32B);
     view2.frame = CGRectMake(self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
     UIImageView *two = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_icon_2"]];
+    two.frame  = CGRectMake(0, 0, view2.width, view2.height);
     two.contentMode = UIViewContentModeScaleToFill;
-
     [view2 addSubview:two];
 //    [two mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.centerY.equalTo(view2).with.offset(10);
@@ -119,11 +118,10 @@
     // 第三栏
     UIView *view3 = [[UIView alloc] init];
     [self addSubview:view3];
-    view3.backgroundColor = RGB_HEX(0x80C40D);
     view3.frame = CGRectMake(2 * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
     UIImageView *three = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_icon_3"]];
     three.contentMode = UIViewContentModeScaleToFill;
-
+    three.frame  = CGRectMake(0, 0, view3.width, view3.height);
     [view3 addSubview:three];
 //    [three mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.centerY.equalTo(view3).with.offset(10);

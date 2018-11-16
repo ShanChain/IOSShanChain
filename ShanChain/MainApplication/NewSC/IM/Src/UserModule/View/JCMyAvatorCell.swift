@@ -61,7 +61,7 @@ class JCMyAvatorCell: UITableViewCell {
     }
     
     func bindData(user: JMSGUser) {
-        nameLabel.text =  "用户名：" + user.nickname!
+        nameLabel.text =  "用户名：" + user.username
         user.thumbAvatarData { (data, username, error) in
             if let imageData = data {
                 let image = UIImage(data: imageData)

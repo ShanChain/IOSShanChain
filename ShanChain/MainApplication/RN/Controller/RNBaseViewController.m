@@ -47,7 +47,12 @@
         rootView.frame  =  CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height - 20);
     }
     rootView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    [self setNeedsStatusBarAppearanceUpdate];
     [self.view addSubview:rootView];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,6 +69,7 @@
 }
 
 #pragma mark <Rotate>
+
 
 - (BOOL)shouldAutorotate
 {
