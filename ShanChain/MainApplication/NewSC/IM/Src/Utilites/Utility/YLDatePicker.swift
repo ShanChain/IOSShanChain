@@ -68,7 +68,7 @@ public class YLDatePicker: UIView {
     }()
     
     fileprivate var minLimitDate = Date.init(timeIntervalSince1970: TimeInterval(0)) // 默认最小时间
-    fileprivate var maxLimitDate = Date.init(timeIntervalSince1970: TimeInterval(9999999999)) // 默认最大时间
+    fileprivate var maxLimitDate = Date.init(timeIntervalSince1970: TimeInterval(99999999)) // 默认最大时间
     
     convenience init(currentDate: Date?, minLimitDate: Date?, maxLimitDate: Date?, datePickerType: YLDatePickerType?, _ doneBlock: @escaping DoneBlock) {
         self.init()

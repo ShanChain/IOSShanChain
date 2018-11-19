@@ -271,11 +271,19 @@
 
 - (NSArray *)titleArray{
     if (_titleArray == nil) {
-        _titleArray = @[@"我的钱包",
-                        @"我的任务",
-                        @"我的消息",
-                        @"我的收藏",
-                        @"设置"];
+        if ([SCCacheTool shareInstance].status.integerValue == 0) {
+            _titleArray = @[
+                            @"我的消息",
+                            @"我的收藏",
+                            @"设置"];
+        }else{
+            _titleArray = @[@"我的钱包",
+                            @"我的任务",
+                            @"我的消息",
+                            @"我的收藏",
+                            @"设置"];
+        }
+     
     }
     return _titleArray;
 }

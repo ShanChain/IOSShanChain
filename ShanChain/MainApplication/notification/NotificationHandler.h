@@ -49,6 +49,7 @@ static NSString * const MSG_KEY_ACCOUT_BE_UPDATE = @"MSG_ACCOUT_BE_UPDATE";//账
 static NSString * const MSG_KEY_GLOBLE_NOTICE = @"MSG_GLOBLE_NOTICE";//官方手工发布通知
 
 static NSString * const kUpdateUserInfo = @"kUpdateUserInfo"; // 修改个人信息
+static NSString * const kLoginSuccess = @"kLoginSuccess"; // 登录成功
 
 @interface NotificationHandler : NSObject
 

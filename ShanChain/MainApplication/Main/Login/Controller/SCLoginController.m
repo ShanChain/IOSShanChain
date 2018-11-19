@@ -220,9 +220,9 @@
     [self.scrollView addSubview:self.socialBtn];
     [self.scrollView addSubview:self.socialView];
     
-    [self.socialView addSubview:self.weiBtn];
-    [self.socialView addSubview:self.qqBtn];
-    [self.socialView addSubview:self.weibBtn];
+//    [self.socialView addSubview:self.weiBtn];
+//    [self.socialView addSubview:self.qqBtn];
+//    [self.socialView addSubview:self.weibBtn];
     
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -316,7 +316,7 @@
                 NSMutableDictionary *params1 = [NSMutableDictionary dictionary];
                 [params1 setObject:spaceId forKey:@"spaceId"];
                 [params1 setObject:token forKey:@"token"];
-                
+                [[NSNotificationCenter defaultCenter]postNotificationName:kLoginSuccess object:nil];
                 [JGUserLoginService jg_userLoginWithUsername:characterModel.hxAccount.hxUserName password:characterModel.hxAccount.hxPassword loginComplete:^(id _Nonnull result, NSError * _Nonnull error) {
                     [SYProgressHUD hideHUD];
                     if (!error) {

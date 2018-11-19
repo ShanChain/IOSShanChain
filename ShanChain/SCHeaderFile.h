@@ -83,6 +83,7 @@
 #import <YYModel/YYModel.h>
 #import <JMessage/JMessage.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "NotificationHandler.h"
 
 
 // 百度地图

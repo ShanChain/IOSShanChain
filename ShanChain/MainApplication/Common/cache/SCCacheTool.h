@@ -86,5 +86,6 @@
 @property   (nonatomic,strong)  SavePublishContentModel  *editContentModel;
 @property   (nonatomic,strong)  SCCharacterModel         *characterModel;
 @property   (nonatomic,copy)    NSString            *chatRoomId;
+@property   (nonatomic,copy)    NSString            *status;//0 未上  1 以上
 
 @end

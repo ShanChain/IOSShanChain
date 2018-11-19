@@ -99,7 +99,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     if ([url containsString:CHANGE_USER_CHARACTER]) {
         NSMutableDictionary  *mDic = [NSMutableDictionary dictionaryWithCapacity:0];
         [mDic setObject:[SCCacheTool shareInstance].characterModel.characterInfo.characterId forKey:@"characterId"];
-        [mDic setObject:token forKey:@"token"];
+        [mDic  setObject:token forKey:@"token"];
         [mDic  setObject:userId forKey:@"userId"];
         [mDic  setObject:params.mj_JSONString forKey:@"dataString"];
         kparameters = mDic.copy;

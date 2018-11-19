@@ -132,7 +132,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     @IBAction func joinAction(_ sender: Any) {
         isJoinChatRoom = true
-        taskButton.isHidden = false
+        if SCCacheTool.shareInstance().status ==  "1" {
+            taskButton.isHidden = false
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,8 +149,13 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }else{
             toolbar.isHidden = false
             joinCahtView.isHidden = true
-            taskButton.isHidden = false
+            
+            if SCCacheTool.shareInstance().status ==  "1" {
+                taskButton.isHidden = false
+            }
+            
         }
+        
         navigationController?.navigationBar.barTintColor = .white
     }
     
@@ -202,7 +210,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             }else{
                 toolbar.isHidden = false
                 joinCahtView.isHidden = true
-                taskButton.isHidden = false
+                if SCCacheTool.shareInstance().status == "1"{
+                    taskButton.isHidden = false
+                }
             }
         }
     }

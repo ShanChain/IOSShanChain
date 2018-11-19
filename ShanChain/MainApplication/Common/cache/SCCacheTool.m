@@ -344,7 +344,12 @@ static NSDateFormatter* DateFormat(){
     return _characterModel;
 }
 
-
+- (NSString *)status{
+    if ([_status isKindOfClass:[NSNumber class]]) {
+        return [NSString stringWithFormat:@"%@",_status];
+    }
+    return _status;
+}
 
 @end
     

@@ -152,6 +152,7 @@
         NSDictionary *dictionary = responseObject[@"data"];
         if (dictionary != [NSNull null]) {
             NSString *version = dictionary[@"version"];
+            [SCCacheTool shareInstance].status = dictionary[@"status"];
             if (version && [VersionUtils compareVersion:XcodeAppVersion withServerVersion:version]) {
                 if ([dictionary[@"forceUpdate"] isEqualToString:@"true"]) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新版本有较大改进，请更新" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
