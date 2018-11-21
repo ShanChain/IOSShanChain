@@ -243,7 +243,7 @@
 }
 
 -(void)getVerCodeAction{
-    [self isMobilePhone:self.phoneValueFiled.text];
+ //   [self isMobilePhone:self.phoneValueFiled.text];
     if ([self.phoneValueFiled.text length]!=0) {
         if ([self.phoneValueFiled becomeFirstResponder]) {
             __block NSInteger time = 59; //倒计时时间

@@ -45,5 +45,9 @@
 #import "UIViewController+NoDataTip.h"
 #import "UIImage+Extension.h"
 #import "UIButton+Extension.h"
+#import "UITextView+Placeholder.h"
+#import "CoordnateInfosModel.h"
+#import "EditInfoService.h"
+#import "MCDate.h"
 
 #endif /* ShanChain_Bridging_Header_h */

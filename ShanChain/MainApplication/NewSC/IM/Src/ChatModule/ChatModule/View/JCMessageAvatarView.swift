@@ -47,12 +47,13 @@ open class JCMessageAvatarView: UIImageView, JCMessageContentViewType {
     
     private var message: JCMessageType!
     private lazy var userDefaultIcon = UIImage.loadImage("com_icon_user_36")
-    
+    // private lazy var userDefaultIcon = HHTool.getHeadImage(with: self.size)
     private func _commonInit() {
         image = userDefaultIcon
         isUserInteractionEnabled = true
         layer.masksToBounds = true
-
+        backgroundColor = UIColor.clear
+        self._setCornerRadiusCircle()
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(_tapHandler))
         self.addGestureRecognizer(tapGR)
 

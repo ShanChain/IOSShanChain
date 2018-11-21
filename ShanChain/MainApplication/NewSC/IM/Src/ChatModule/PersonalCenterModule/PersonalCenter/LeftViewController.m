@@ -103,7 +103,7 @@
     [nikeNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.topMargin.equalTo(layerView).offset(-5);
         make.left.equalTo(layerView.mas_right).offset(10);
-        make.width.equalTo(@100);
+        make.width.equalTo(@120);
         make.height.equalTo(@25);
     }];
     
@@ -274,13 +274,11 @@
         if ([SCCacheTool shareInstance].status.integerValue == 0) {
             _titleArray = @[
                             @"我的消息",
-                            @"我的收藏",
                             @"设置"];
         }else{
             _titleArray = @[@"我的钱包",
                             @"我的任务",
                             @"我的消息",
-                            @"我的收藏",
                             @"设置"];
         }
      
@@ -311,8 +309,9 @@
                     if (baseModel.data[@"characterInfo"] && [baseModel.data[@"characterInfo"] isKindOfClass:[NSDictionary class]]) {
                         SCCharacterModel_characterInfo *info = [SCCharacterModel_characterInfo mj_objectWithKeyValues:baseModel.data[@"characterInfo"]];
                         [SCCacheTool shareInstance].characterModel.characterInfo = info;
+                        [[SCCacheTool shareInstance] cacheCharacterInfo:baseModel.data[@"characterInfo"] withUserId:[SCCacheTool shareInstance].getCurrentUser];
                         [self setIconImage];
-                        
+                        [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateAvatarSuccess object:nil];
             
                     }
                 }

@@ -131,11 +131,17 @@ class TaskListModel: HandyJSON {
     
     var personalStatusBtnTuple:(title:String,isClick:Bool,width:Int){
         if Int(status!)! == 10 {
-            return ("正在完成",false,80)
+            if isMyBublish == true{
+                return ("对方正在完成",false,140)
+            }
+            return ("正在完成",true,80)
         }
         
         if Int(status!)! == 15 {
-            return ("待赏主确认",false,100)
+            if isMyBublish == true{
+                return ("去确认",true,100)
+            }
+            return ("待赏主确认",false,120)
         }
         
         if Int(status!)! == 20 {

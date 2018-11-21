@@ -320,6 +320,10 @@ static NSDateFormatter* DateFormat(){
     return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:CACHE_GDATA];
 }
 
+- (NSString*)getHeadImg{
+    return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:@"headImg"];
+}
+
 - (NSMutableDictionary *)getCharacterInfo {
     NSMutableDictionary *characterInfo = [JsonTool dictionaryFromString:[self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:CACHE_CHARACTER_INFO]];
     if (!characterInfo) {

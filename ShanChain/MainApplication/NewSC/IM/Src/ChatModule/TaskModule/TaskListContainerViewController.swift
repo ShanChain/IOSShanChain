@@ -30,6 +30,8 @@ class TaskListContainerViewController: SCBaseVC {
         return ["任务列表","我的任务"]
     }()
     
+    var isSelectMyTask:Bool = false
+    
     private lazy var layout: LTLayout = {
         let layout = LTLayout()
         layout.sliderWidth = CGFloat(SCREEN_WIDTH/2)

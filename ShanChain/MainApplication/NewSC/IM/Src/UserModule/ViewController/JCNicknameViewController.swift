@@ -85,13 +85,20 @@ class JCNicknameViewController: UIViewController {
     func _saveNickname() {
         nicknameTextField.resignFirstResponder()
         let nickname = nicknameTextField.text!
-        JMSGUser.updateMyInfo(withParameter: nickname, userFieldType: .fieldsNickname) { (resultObject, error) -> Void in
-            if error == nil {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
+        EditInfoService.sc_editPersonalInfo(["name":nickname]) { (isSuccess) in
+            if isSuccess{
                 self.navigationController?.popViewController(animated: true)
-            } else {
-                print("error:\(String(describing: error?.localizedDescription))")
             }
+            
         }
+        
+//        JMSGUser.updateMyInfo(withParameter: nickname, userFieldType: .fieldsNickname) { (resultObject, error) -> Void in
+//            if error == nil {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
+//                self.navigationController?.popViewController(animated: true)
+//            } else {
+//                print("error:\(String(describing: error?.localizedDescription))")
+//            }
+//        }
     }
 }

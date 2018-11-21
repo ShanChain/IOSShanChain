@@ -73,6 +73,7 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         return JCMessageTipsView.self
     }
     
+    // 头像视图
     open class var avatarViewClass: JCMessageContentViewType.Type {
         return JCMessageAvatarView.self
     }

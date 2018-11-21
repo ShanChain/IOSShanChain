@@ -9,7 +9,8 @@
 #import "MyWalletViewController.h"
 #import "XMWebView.h"
 
-#define WalletURL @"http://m.qianqianshijie.com/wallet"
+//#define WalletURL @"http://m.qianqianshijie.com/wallet"
+#define WalletURL @"http://h5.qianqianshijie.com/wallet"
 
 @interface MyWalletViewController ()<XMWebViewDelegate>
 

@@ -84,6 +84,7 @@
 #import <JMessage/JMessage.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "NotificationHandler.h"
+#import "EditInfoService.h"
 
 
 // 百度地图

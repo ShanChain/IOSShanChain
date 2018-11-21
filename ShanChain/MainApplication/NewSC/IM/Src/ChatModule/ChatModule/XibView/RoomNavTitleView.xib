@@ -29,13 +29,13 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-17" maxY="0.0"/>
-                    <state key="normal" title="东经122°南纬103°" image="sc_com_icon_unCollection">
+                    <state key="normal" title="东经122°南纬103°" image="sc_com_icon_unCollection_">
                         <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" image="sc_com_icon_collection"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xR6-7y-xjV">
-                    <rect key="frame" x="91" y="19" width="29" height="15"/>
+                    <rect key="frame" x="86.5" y="19" width="38" height="15"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="899" image="sc_com_icon_team">
                         <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,7 +56,7 @@
     </objects>
     <resources>
         <image name="sc_com_icon_collection" width="13" height="12"/>
-        <image name="sc_com_icon_team" width="6" height="4"/>
-        <image name="sc_com_icon_unCollection" width="13" height="12"/>
+        <image name="sc_com_icon_team" width="15" height="11"/>
+        <image name="sc_com_icon_unCollection_" width="16" height="16"/>
     </resources>
 </document>

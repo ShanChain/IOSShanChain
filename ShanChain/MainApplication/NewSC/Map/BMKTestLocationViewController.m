@@ -41,11 +41,14 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (nonatomic,assign)  BOOL    isLBS;
+@property (nonatomic,assign)  BOOL    isClickJoin;
 
 @property (nonatomic,strong)  NSArray  <CoordnateInfosModel*> *roomInfos;
 
 @property (nonatomic,copy)    NSString   *currentRoomId; //当前的聊天室ID
 @property (nonatomic,copy)    NSString   *currentRoomName; //当前的聊天室名称
+
+
 
 @end
 
@@ -63,8 +66,16 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     _locService.delegate = self;//设置代理位self
     _locService.desiredAccuracy = kCLLocationAccuracyBest;
     [_locService startUserLocationService];//启动定位服务
-    
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
+}
+
+- (void)kJMSGNetworkDidSetupNotification{
+    [HHTool dismiss];
+    if (self.isClickJoin) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self getAllChatRoomConversation];
+        });
+    }
 }
 
 - (void)viewDidLoad {
@@ -173,9 +184,10 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 // 足迹
 - (IBAction)footprintPressed:(id)sender {
-    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:0];
-    [self pushPage:footprintVC
-          Animated:YES];
+    [HHTool showSucess:@"改功能暂未开通，敬请期待~"];
+//    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:0];
+//    [self pushPage:footprintVC
+//          Animated:YES];
 }
 
 
@@ -218,6 +230,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     //从manager获取左边
     CLLocationCoordinate2D coordinate = userLocation.location.coordinate;//位置坐标
     self.pt = coordinate;
+    [SCCacheTool shareInstance].pt = coordinate;
     if (!self.isLBS) {
         self.mapView.centerCoordinate = coordinate;
         if(self.mapView.annotations.count == 0){
@@ -237,6 +250,9 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         self.latitude = latitude;
         NSString *longitude = [NSString stringWithFormat:@"%f",userLocation.location.coordinate.longitude];
         self.longitude = longitude;
+        
+        
+        
         [self sc_getLbsCoordinate];// 上传用户实时坐标获取聊天室
         [self configurationLocationButtonTitle:coordinate];
 //        [self reverseGeoCodeWithLatitude:latitude withLongitude:longitude];
@@ -409,7 +425,14 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 //        [HHTool mainWindow].rootViewController = tabBarVC;
 //        JCConversationListViewController *chatListView = [[JCConversationListViewController alloc]init];
 //         [self.navigationController pushViewController:chatListView animated:YES];
-        [self getAllChatRoomConversation];
+        
+        if ([SCCacheTool shareInstance].isJGSetup) {
+            [self getAllChatRoomConversation];
+        }else{
+            [HHTool show:@"正在获取该元社区信息，请稍等"];
+            self.isClickJoin = YES;
+        }
+        
     }else{
         SCLoginController *loginVC=[[SCLoginController alloc]init];
         [HHTool mainWindow].rootViewController = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
@@ -418,7 +441,6 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
     }
 }
-
 
 
 

@@ -85,14 +85,20 @@ class JCSignatureViewController: UIViewController {
     //MARK: - click func
     func _saveSignature() {
         signatureTextView.resignFirstResponder()
-        JMSGUser.updateMyInfo(withParameter: signatureTextView.text!, userFieldType: .fieldsSignature) { (resultObject, error) -> Void in
-            if error == nil {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
+        EditInfoService.sc_editPersonalInfo(["signature":signatureTextView.text!]) { (isSuccess) in
+            if isSuccess{
                 self.navigationController?.popViewController(animated: true)
-            } else {
-                print("error:\(String(describing: error?.localizedDescription))")
             }
         }
+
+//        JMSGUser.updateMyInfo(withParameter: signatureTextView.text!, userFieldType: .fieldsSignature) { (resultObject, error) -> Void in
+//            if error == nil {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
+//                self.navigationController?.popViewController(animated: true)
+//            } else {
+//                print("error:\(String(describing: error?.localizedDescription))")
+//            }
+//        }
     }
 }
 

@@ -50,6 +50,7 @@ static NSString * const MSG_KEY_GLOBLE_NOTICE = @"MSG_GLOBLE_NOTICE";//官方手
 
 static NSString * const kUpdateUserInfo = @"kUpdateUserInfo"; // 修改个人信息
 static NSString * const kLoginSuccess = @"kLoginSuccess"; // 登录成功
+static NSString * const kUpdateAvatarSuccess = @"kUpdateAvatarSuccess"; // 修改头像成功
 
 @interface NotificationHandler : NSObject
 

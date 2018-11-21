@@ -73,10 +73,22 @@
     
     [self checkGuideView];
     
-
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidCloseNotification) name:kJMSGNetworkDidCloseNotification object:nil];
+    
+    [EditInfoService sc_requstWalletCurrency];
     return YES;
 }
 
+
+- (void)kJMSGNetworkDidSetupNotification{
+    [SCCacheTool shareInstance].isJGSetup = YES;
+}
+
+- (void)kJMSGNetworkDidCloseNotification{
+    
+}
 
 
 - (void)setJMessageSDK:(NSDictionary *)launchOptions{

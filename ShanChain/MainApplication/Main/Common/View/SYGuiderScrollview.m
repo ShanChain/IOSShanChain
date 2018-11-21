@@ -20,7 +20,7 @@
     if (!_enterButton) {
         _enterButton = [[UIButton alloc] init];
         [_enterButton setTitleColor:RGB_HEX(0xFFFFFF) forState:UIControlStateNormal];
-        [_enterButton setTitle:@"加入千千世界" forState:UIControlStateNormal];
+        [_enterButton setTitle:@"加入元社区" forState:UIControlStateNormal];
         [_enterButton setFont:[UIFont systemFontOfSize:14]];
         _enterButton.backgroundColor = [UIColor clearColor];
         [_enterButton addTarget:self action:@selector(enterQianQian:) forControlEvents:UIControlEventTouchUpInside];

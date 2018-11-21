@@ -62,12 +62,13 @@ class JCMyAvatorCell: UITableViewCell {
     
     func bindData(user: JMSGUser) {
         nameLabel.text =  "用户名：" + user.username
+      
         user.thumbAvatarData { (data, username, error) in
             if let imageData = data {
                 let image = UIImage(data: imageData)
                 self.avatorView.image = image
             } else {
-                self.avatorView.image = self.defaultAvator
+                self.avatorView.image = HHTool.getHeadImage(with:  self.avatorView.size)
             }
         }
     }

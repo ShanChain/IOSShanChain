@@ -217,7 +217,7 @@
     [self.scrollView addSubview:self.registerBtn];
     [self.scrollView addSubview:self.rnDemoBtn];
     [self.scrollView addSubview:self.forgetPwdBtn];
-    [self.scrollView addSubview:self.socialBtn];
+   // [self.scrollView addSubview:self.socialBtn];
     [self.scrollView addSubview:self.socialView];
     
 //    [self.socialView addSubview:self.weiBtn];

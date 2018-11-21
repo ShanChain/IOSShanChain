@@ -177,7 +177,7 @@ class TaskDetailsViewController: SCBaseVC {
     func _configurationDetailsUI(){
         headerDeadlineLb.text = "完成时限: \(NSDate.chatingTime(taskDetailsModel!.expiryTime) ?? "")"
         headerContentLb.text =  taskDetailsModel!.intro
-        headerRewardLb.text = "赏金 ￥\(taskDetailsModel!.bounty ?? "")"
+        headerRewardLb.text = "赏金 \(taskDetailsModel!.bounty ?? "") SEAT"
         headerIcon._sd_setImage(withURLString: taskDetailsModel?.headImg)
         headerNameLb.text = taskDetailsModel!.name
         headerLikeBtn.setTitle(taskDetailsModel!.supportCount, for: .normal)

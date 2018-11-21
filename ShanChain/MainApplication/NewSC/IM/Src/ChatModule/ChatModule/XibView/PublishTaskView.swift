@@ -14,7 +14,8 @@ typealias PublishClosure = (_ text:String, _ reward:String , _ time:String, _ ti
 class PublishTaskView: UIView {
 
  
-    @IBOutlet weak var taskDesTextFid: UITextField!
+
+    @IBOutlet weak var taskDesTextFid: UITextView!
     
     @IBOutlet weak var publishBtn: UIButton!
     
@@ -24,6 +25,8 @@ class PublishTaskView: UIView {
     
     @IBOutlet weak var selectTimeTextFid: UITextField!
     
+    
+    @IBOutlet weak var exchangeRateLabel: UILabel!
     var pbCallClosure:PublishClosure?
     let kDuration = 0.5
     
@@ -44,7 +47,7 @@ class PublishTaskView: UIView {
         makeView.frame = frame
         contentView = loadViewFromNib()
         publishBtn.addTarget(self, action: #selector(_publishPressed), for: .touchUpInside)
-        
+        taskDesTextFid.placeholder = "请输入任务内容"
         //添加蒙版
        
         makeView.backgroundColor = .black
@@ -55,13 +58,14 @@ class PublishTaskView: UIView {
        
         let tap = UITapGestureRecognizer(target: self, action: #selector(_tapSelectTime))
         selectTimeTextFid.addGestureRecognizer(tap)
-        
-        
+        taskDesTextFid.delegate = self
+        exchangeRateLabel.text = "1 SEAT = \(SCCacheTool.shareInstance().currencyModel.rate!)￥"
     }
     
     func _tapSelectTime(){
-        let datePicker = YLDatePicker(currentDate: nil, minLimitDate: Date(), maxLimitDate: nil, datePickerType: .YMDHm) { [weak self] (date) in
-            self?.selectTimeTextFid.text = date.getString(format: "yyyy-MM-dd HH:mm")
+        
+        let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddHours(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMDHm) { [weak self] (date) in
+            self?.selectTimeTextFid.text = date.getString(format: "YYYY-MM-dd HH:mm")
             self?.endEditing(true)
             self?.timestamp = String(Int(date.timeIntervalSince1970*1000))
         }
@@ -136,6 +140,40 @@ class PublishTaskView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
          self.endEditing(true)
          self.taskDesTextFid.resignFirstResponder()
+    }
+    
+    
+}
+
+extension PublishTaskView:UITextViewDelegate{
+    
+    
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        if (text == "\n") {
+//            textView.resignFirstResponder()
+//            return false
+//        }
+//        let str = "\(textView.text)\(text)"
+//        
+//        if str.count > 30 {
+//            //textView.text = (str as NSString?)?.substring(to: 30)
+//            textView.text = str.prefix(30)
+//            
+//            HHTool.showError("不能超过30个字")
+//            return false
+//        }
+//        return true
+//    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.markedTextRange == nil {
+            let text = textView.text!
+            if text.characters.count > 30 {
+                let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 30))
+                let subText = text.substring(with: range)
+                textView.text = subText
+            }
+        }
     }
     
     

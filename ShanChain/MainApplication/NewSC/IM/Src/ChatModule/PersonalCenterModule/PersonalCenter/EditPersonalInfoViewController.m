@@ -8,6 +8,7 @@
 
 #import "EditPersonalInfoViewController.h"
 #import "UITextView+Placeholder.h"
+#import "EditInfoService.h"
 
 @interface EditPersonalInfoViewController ()<UITextViewDelegate,UITextFieldDelegate>
 
@@ -24,13 +25,21 @@
     [super viewDidLoad];
     self.title = @"修改个人资料";
     // CHARCTER_MODIFY_URL
+    SCCharacterModel_characterInfo *info =  [SCCacheTool shareInstance].characterModel.characterInfo;
+    if (!NULLString(info.name)) {
+        self.nickNameFid.text = info.name;
+    }
+    
+    if (!NULLString(info.signature)) {
+        self.signatureTextView.text = info.signature;
+    }
+    
     self.signatureTextView.placeholder = @"请输入签名...";
     self.signatureTextView.delegate = self;
     [self addRightBarButtonItemWithTarget:self sel:@selector(determine) title:@"确定" tintColor:[UIColor whiteColor]];
 }
 
 - (void)determine{
-    
     if (NULLString(self.nickNameFid.text) && NULLString(self.signatureTextView.text)) {
         [HHTool showError:@"昵称和签名不能为空"];
         return;
@@ -47,17 +56,10 @@
     }
     
     if (mDic.allKeys.count > 0) {
-        [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:mDic.copy showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
-            if (!error) {
-                [HHTool showSucess:baseModel.message];
-                if (baseModel.data[@"characterInfo"] && [baseModel.data[@"characterInfo"] isKindOfClass:[NSDictionary class]]) {
-                    SCCharacterModel_characterInfo *info = [SCCharacterModel_characterInfo mj_objectWithKeyValues:baseModel.data[@"characterInfo"]];
-                    [SCCacheTool shareInstance].characterModel.characterInfo = info;
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-                
-            }else{
-                [HHTool showError:error.localizedDescription];
+        weakify(self);
+        [EditInfoService sc_editPersonalInfo:mDic callBlock:^(BOOL isSuccess) {
+            if (isSuccess) {
+                [weak_self.navigationController popViewControllerAnimated:YES];
             }
         }];
     }

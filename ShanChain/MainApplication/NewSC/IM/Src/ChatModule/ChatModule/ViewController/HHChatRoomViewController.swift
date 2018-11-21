@@ -111,7 +111,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                         let dict = baseModel?.data as!Dictionary<String, Any>
                         if let model = TaskAddModel.deserialize(from: dict) {
                             self?._taskModel = model
-                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:"赏金:" + (model.Task?.bounty)! ,CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
+                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:"赏金:" + (model.Task?.bounty)! + " SEAT" ,CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
                         }
                        
                     })
@@ -131,9 +131,27 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     @IBAction func joinAction(_ sender: Any) {
-        isJoinChatRoom = true
-        if SCCacheTool.shareInstance().status ==  "1" {
-            taskButton.isHidden = false
+        
+        HHTool.showChrysanthemum()
+        SCNetwork.shareInstance().getWithUrl(COORDINATE_URL, parameters:["latitude":String(SCCacheTool.shareInstance().pt.latitude),"longitude":String(SCCacheTool.shareInstance().pt.longitude)], success: { (result) in
+            HHTool.dismiss()
+            let dic = result as! Dictionary<String, Any>
+            let data = dic["data"] as? Dictionary<String, Any>
+            if data != nil && (data?.values.count)! > 0{
+                let roomId:String = data!["roomId"] as! String
+                if roomId == self.currentChatRoomID{
+                    self.isJoinChatRoom = true
+                    if SCCacheTool.shareInstance().status ==  "1" {
+                       self.taskButton.isHidden = false
+                    }
+                }else{
+                    self.hrShowAlert(withTitle: "温馨提示", message: "您未处于该元社区的地理位置，还不能加入聊天喔~")
+                }
+            }
+            
+        }) { (error) in
+            HHTool.dismiss()
+            HHTool.showError(error?.localizedDescription)
         }
         
     }
@@ -186,10 +204,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         // 更新草稿内容
         JCDraft.update(text: toolbar.text, conversation: conversation)
         JMessage.remove(self, with: conversation)// 移除监听(delegate)
-        if conversation.conversationType == .chatRoom{
-            let chatRoom = conversation.target as? JMSGChatRoom
-            JMSGChatRoom.leaveChatRoom(withRoomId: (chatRoom?.roomID)!, completionHandler: nil)
-        }
+//        if conversation.conversationType == .chatRoom{
+//            let chatRoom = conversation.target as? JMSGChatRoom
+//            JMSGChatRoom.leaveChatRoom(withRoomId: (chatRoom?.roomID)!, completionHandler: nil)
+//        }
     }
     
     deinit {
@@ -341,6 +359,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_reloadMessage), name: NSNotification.Name(rawValue: kReloadAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_closeChatRoom), name:  NSNotification.Name(rawValue: kJMSGNetworkDidCloseNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
+        
+        
         // 抽屉
         self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
             if direction == CWDrawerTransitionDirection.fromLeft{
@@ -350,6 +372,19 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         
       
         
+    }
+    
+    // tcp长链接被关闭
+    func _closeChatRoom()  {
+        self.hrShowAlert(withTitle: nil, message: "当前广场连接已被断开", buttonsTitles: ["确认"]) { (action, index) in
+            if index == 0{
+                self.navigationController?.popViewController(animated: true)
+                if let chatRoom = self.conversation.target as? JMSGChatRoom{
+                    JMSGChatRoom.leaveChatRoom(withRoomId: chatRoom.roomID, completionHandler: nil)
+                }
+                
+            }
+        }
     }
     
     func _updateFileMessage(_ notification: Notification) {
@@ -393,11 +428,15 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         toolbar.resignFirstResponder()
     }
     
+    func _updateAvatar(){
+        let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
+        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
+    }
+    
     private func _setupNavigation() {
         
-        let leftImageName = SCCacheTool.shareInstance().getCharacterInfo()["headImg"]
-        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName as! String, selectedImageName: leftImageName as! String)
-        
+      
+        _updateAvatar()
         self.addNavigationRight(withImageName: "sc_com_icon_close", withTarget: self, withAction: #selector(_closePage))
         navigationController?.navigationBar.barTintColor = .white
         //        var attrs = [String : AnyObject]()
@@ -737,8 +776,6 @@ extension HHChatRoomViewController: JMessageDelegate {
                     }catch{
                         printLog(error)
                     }
-                    
-            
                     
                 }
             }

@@ -23,6 +23,6 @@
 +(NSString *)getDeviceIPIpAddresses;
 //获取当前window
 + (UIWindow *)mainWindow;
-
++ (UIImage*)getHeadImageWithSize:(CGSize)size;
 
 @end

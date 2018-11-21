@@ -73,6 +73,23 @@
     
 }
 
++(UIImage*)getHeadImageWithSize:(CGSize)size{
+    
+    if ([SCCacheTool shareInstance].headImage) {
+        return [SCCacheTool shareInstance].headImage;
+    }
+    
+    NSString  *headImg = [SCCacheTool shareInstance].characterModel.characterInfo.headImg;
+    if (NULLString(headImg)) {
+        return [UIImage imageNamed:@"com_icon_user_80"];
+    }
+    UIImage *headImage = [UIImage imageFromURLString:headImg];
+    headImage = [headImage mc_resetToSize:size];
+    headImage = [headImage cutCircleImage];
+    [SCCacheTool shareInstance].headImage = headImage;
+    return headImage;
+}
+
 //获取设备当前网络IP地址
 +(NSString *)getDeviceIPIpAddresses{
     int sockfd =socket(AF_INET,SOCK_DGRAM, 0);

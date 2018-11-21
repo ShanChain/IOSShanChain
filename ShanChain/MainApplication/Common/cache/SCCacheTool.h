@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SavePublishContentModel.h"
 #import "SCCharacterModel.h"
+#import "EditInfoService.h"
 
 @interface SCCacheTool : NSObject
 
@@ -61,6 +62,8 @@
 - (NSString *)getGdata;
 
 - (NSString *)getUserToken;
+
+- (NSString *)getHeadImg;
 /*
     "characterInfo": {
     "characterId": 2351,
@@ -85,7 +88,11 @@
 
 @property   (nonatomic,strong)  SavePublishContentModel  *editContentModel;
 @property   (nonatomic,strong)  SCCharacterModel         *characterModel;
+@property   (nonatomic,strong)  WalletCurrencyModel         *currencyModel;
+
 @property   (nonatomic,copy)    NSString            *chatRoomId;
 @property   (nonatomic,copy)    NSString            *status;//0 未上  1 以上
-
+@property   (nonatomic,assign)   BOOL   isJGSetup; //极光sdk是否连接成功
+@property   (nonatomic,strong)    UIImage  *headImage;
+@property   (nonatomic,assign)      CLLocationCoordinate2D   pt; //用户当前的经纬度
 @end

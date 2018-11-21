@@ -99,9 +99,9 @@
     button.contentMode = UIViewContentModeCenter;
     [button preventImageViewExtrudeDeformation];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
-    NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
-    [array addObject:item];
-    self.navigationItem.leftBarButtonItems = array;
+//    NSMutableArray *array = [NSMutableArray arrayWithArray:self.navigationItem.leftBarButtonItems];
+//    [array addObject:item];
+    self.navigationItem.leftBarButtonItems = @[item];
 }
 
 - (void)addLeftBarButtonItemWithTarget:(id)target sel:(SEL)selector image:(UIImage *)image selectedImage:(UIImage *)selectedImage isCircle:(BOOL)isCircle
