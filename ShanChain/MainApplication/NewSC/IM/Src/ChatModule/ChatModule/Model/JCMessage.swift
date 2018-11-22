@@ -41,7 +41,7 @@ extension JMSGMessage {
         let isCurrent = fromUser.isEqual(to: currentUser)
         let state = self.ex.state
         let isGroup = targetType == .group
-       
+        let isChatRoom = targetType == .chatRoom
       
         
         switch(contentType) {
@@ -156,7 +156,7 @@ extension JMSGMessage {
         }
         if msg.options.alignment != .center {
             msg.options.alignment = isCurrent ? .right : .left
-            if isGroup {
+            if isGroup || isChatRoom{
                 msg.options.showsCard = !isCurrent
             }
         }
@@ -175,6 +175,11 @@ extension JMSGMessage {
         if isCurrent {
             msg.senderAvator = UIImage.getMyAvator()
         }
+        
+        if fromUser.username == "154269377600600163e0aa658733729" {
+           
+        }
+        
         msg.sender = fromUser
         msg.name = fromUser.displayName()
         msg.unreadCount = getUnreadCount()

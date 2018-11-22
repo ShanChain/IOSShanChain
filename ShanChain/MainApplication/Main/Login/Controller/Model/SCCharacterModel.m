@@ -27,4 +27,11 @@
 
 @implementation SCCharacterModel_characterInfo
 
+-(NSString *)headImg{
+    if (!_headImg) {
+        return DefaultAvatar;
+    }
+    return _headImg;
+}
+
 @end

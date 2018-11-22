@@ -14,6 +14,9 @@
 
 +(void)sc_editPersonalInfo:(NSDictionary *)params callBlock:(void (^)(BOOL  isSuccess))callBlock;
 
+// 更新头像
++ (void)sc_uploadImage:(UIImage *)image withCompressionQuality:(CGFloat)cq callBlock:(void (^)(BOOL))callBlock;
+
 // 请求当前汇率
 +(void)sc_requstWalletCurrency;
 

@@ -13,7 +13,7 @@
 #define Prtocol @"http://"
 
 
-#define PN_ENVIRONMENT 3
+#define PN_ENVIRONMENT 2
 
 
 #if PN_ENVIRONMENT == 0

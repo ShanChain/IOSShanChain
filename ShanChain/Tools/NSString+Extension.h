@@ -61,6 +61,8 @@
 
 #pragma makr -- 富文本 给一段字符串设置两种不同的字体和颜色
 + (NSMutableAttributedString *)setAttrFirstString:(NSString *)string1 color:(UIColor *)color1 font:(UIFont *)font1 secendString:(NSString *)string2 color:(UIColor *)color2 font:(UIFont *)font2;
+#pragma makr -- 富文本 给一段字符串设置三种不同的字体和颜色
++ (NSMutableAttributedString *)setAttrFirstString:(NSString *)string1 color:(UIColor *)color1 font:(UIFont *)font1 secendString:(NSString *)string2 color:(UIColor *)color2 font:(UIFont *)font2 threeString:(NSString *)string3 color:(UIColor *)color3 font:(UIFont *)font3;
 
 
 //在当前日期，获取用户类型

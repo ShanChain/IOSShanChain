@@ -9,8 +9,18 @@
 #import "MyWalletViewController.h"
 #import "XMWebView.h"
 
-//#define WalletURL @"http://m.qianqianshijie.com/wallet"
+#if PN_ENVIRONMENT == 3  //生产环境
+
 #define WalletURL @"http://h5.qianqianshijie.com/wallet"
+
+#else
+
+#define WalletURL @"http://m.qianqianshijie.com/wallet"
+
+#endif
+
+
+
 
 @interface MyWalletViewController ()<XMWebViewDelegate>
 

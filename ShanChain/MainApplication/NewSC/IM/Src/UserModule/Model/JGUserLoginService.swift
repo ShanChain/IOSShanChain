@@ -17,7 +17,6 @@ class JGUserLoginService: NSObject {
   // 设置极光用户信息
     open static func jg_SetUserInfo(nickNmae:String?, signature:String?,icon:String?, complete:@escaping JMSGCompletionHandler){
         
-        let userInfo = JMSGUserInfo()
 //        if let icon = icon {
 //            let data = NSData.init(contentsOf: NSURL.fileURL(withPath: icon))
 //            var str: String? = nil
@@ -28,9 +27,33 @@ class JGUserLoginService: NSObject {
 //            userInfo.avatarData = subData!
 //        }
         
-        userInfo.signature = signature ?? ""
-        userInfo.nickname = nickNmae ?? ""
-        JMSGUser.updateMyInfo(with: userInfo, completionHandler: complete)
+      
+        EditInfoService.sc_editPersonalInfo(["name":nickNmae ?? "" ,"signature":signature ?? ""]) { (isSuccess) in
+            complete(isSuccess,nil)
+        }
+        
+        if let icon = icon{
+            var headImage = UIImage.init(fromURLString: icon)
+            headImage = headImage?.mc_reset(to: CGSize(width: 64, height: 64))
+            headImage = headImage?.cutCircle()
+            EditInfoService.sc_uploadImage(headImage, withCompressionQuality: 1.0) { (isSuccess) in
+                
+            }
+        }
+        
+         let characterModel:SCCharacterModel =  SCCacheTool.shareInstance().characterModel
+        JMSGUser.updateMyInfo(withParameter: characterModel.characterInfo.name, userFieldType: .fieldsNickname, completionHandler: nil)
+        if characterModel.characterInfo.headImg != nil{
+            let image = UIImage.init(fromURLString: characterModel.characterInfo.headImg)
+            if let image = image{
+                if let imageData = UIImagePNGRepresentation(image){
+                    JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar, completionHandler: nil)
+                }
+            }
+            
+        }
+        
+        
     }
     
   // 极光登录
@@ -47,15 +70,18 @@ class JGUserLoginService: NSObject {
                     }
                 })
                 let characterModel:SCCharacterModel =  SCCacheTool.shareInstance().characterModel
-                JMSGUser.updateMyInfo(withParameter: characterModel.characterInfo.name, userFieldType: .fieldsNickname, completionHandler: nil)
-                if characterModel.characterInfo.headImg != nil{
-                    let image = UIImage.init(fromURLString: characterModel.characterInfo.headImg)
-                    if let imageData = UIImagePNGRepresentation(image!){
-                        JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar, completionHandler: nil)
-                    }
+                
+                DispatchQueue.global().async {
+                    JGUserLoginService.jg_SetUserInfo(nickNmae: characterModel.characterInfo.name, signature: characterModel.characterInfo.signature, icon: characterModel.characterInfo.headImg, complete: { (result, error) in
+                        if error == nil{
+                          printLog("极光信息更新成功")
+                        }
+                    })
                 }
                 
-             
+                
+         
+                
                 UserDefaults.standard.set(username, forKey: kCurrentUserName)
                 UserDefaults.standard.set(password, forKey: kCurrentUserPassword)
 

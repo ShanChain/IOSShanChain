@@ -321,13 +321,6 @@
                     [SYProgressHUD hideHUD];
                     if (!error) {
                         // 登录成功
-                        // 设置个人信息
-                        [JGUserLoginService jg_SetUserInfoWithNickNmae:characterModel.characterInfo.name signature:characterModel.characterInfo.signature icon:characterModel.characterInfo.headImg complete:^(id _Nullable result , NSError * _Nullable error) {
-                            if (!error) {
-                                DLog(@"设置信息成功");
-                            }
-                        }];
-                        
                         UIViewController *rootVc = nil;
                         BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
                         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];

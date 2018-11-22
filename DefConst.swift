@@ -18,6 +18,7 @@ let kApplicationStatusBarHeight = Int(UIApplication.shared.statusBarFrame.size.h
 let kNavBlueColor = RGB(115, 207, 242)
 let SC_ThemeMainColor = _ThemeMainColor()
 let SC_ThemeBackgroundViewColor = RGB(242, 242, 242)
+let SC_EmphasisColor = UIColor.black // 主要字体颜色
 let SC_defaultImage = UIImage.loadImage("sc_com_icon_DefaultAvatar")
 
 func IS_IPHONE_X() ->Bool{

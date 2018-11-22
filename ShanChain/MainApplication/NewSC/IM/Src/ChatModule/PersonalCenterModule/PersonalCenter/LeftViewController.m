@@ -291,6 +291,10 @@
 -(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag{
     
      [[CWMaskView shareInstance]singleTap];
+    
+    if (!image) {
+        return;
+    }
     image = [image mc_resetToSize:CGSizeMake(64, 64)];
     image = [image cutCircleImage];
 //    NSData *imageData = UIImagePNGRepresentation(image);
@@ -302,25 +306,17 @@
 //    }];
 
     
+    weakify(self);
     [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
         if (!NULLString(url)) {
-            [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:@{@"headImg":url} showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
-                if(!error){
-                    if (baseModel.data[@"characterInfo"] && [baseModel.data[@"characterInfo"] isKindOfClass:[NSDictionary class]]) {
-                        SCCharacterModel_characterInfo *info = [SCCharacterModel_characterInfo mj_objectWithKeyValues:baseModel.data[@"characterInfo"]];
-                        [SCCacheTool shareInstance].characterModel.characterInfo = info;
-                        [[SCCacheTool shareInstance] cacheCharacterInfo:baseModel.data[@"characterInfo"] withUserId:[SCCacheTool shareInstance].getCurrentUser];
-                        [self setIconImage];
-                        [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateAvatarSuccess object:nil];
-            
-                    }
+            [EditInfoService sc_editPersonalInfo:@{@"headImg":url} callBlock:^(BOOL isSuccess) {
+                if (isSuccess) {
+                    [weak_self setIconImage];
                 }
-                
             }];
         }
-
     } withErrorCallBack:^(NSError *error) {
-
+        [HHTool showError:error.localizedDescription];
     }];
     
 }

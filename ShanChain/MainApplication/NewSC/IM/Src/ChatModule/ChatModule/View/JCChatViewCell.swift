@@ -41,6 +41,7 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         
         let avatarView = _avatarView as? JCMessageAvatarView
         if avatarView != nil {
+            avatarView?._setCornerRadiusCircle()
             avatarView?.delegate = self.delegate
         }
         _contentView?.apply(message)
@@ -138,8 +139,10 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         if options.showsAvatar {
             if _avatarView == nil {
                 _avatarView = type(of: self).avatarViewClass._init()
+            
             }
             if let view = _avatarView as? UIView, view.superview == nil {
+                view._setCornerRadiusCircle()
                 contentView.addSubview(view)
             }
         } else {

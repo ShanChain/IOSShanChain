@@ -325,6 +325,26 @@
 }
 
 
++ (NSMutableAttributedString *)setAttrFirstString:(NSString *)string1 color:(UIColor *)color1 font:(UIFont *)font1 secendString:(NSString *)string2 color:(UIColor *)color2 font:(UIFont *)font2 threeString:(NSString *)string3 color:(UIColor *)color3 font:(UIFont *)font3
+{
+    NSString *oneString = ![string1 isNotEmpty]?@" ":string1;
+    NSString *twoString = ![string2 isNotEmpty]?@" ":string2;
+    NSString *threeString = ![string3 isNotEmpty]?@" ":string3;
+    
+    NSString *needString = [NSString stringWithFormat:@"%@%@%@",oneString,twoString,threeString];
+    NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithString:needString];
+    [resultString addAttribute:NSFontAttributeName value:font1 range:NSMakeRange(0, oneString.length)];
+    [resultString addAttribute:NSForegroundColorAttributeName value:color1 range:NSMakeRange(0, oneString.length)];
+    
+    [resultString addAttribute:NSFontAttributeName value:font2 range:NSMakeRange(oneString.length, twoString.length)];
+    [resultString addAttribute:NSForegroundColorAttributeName value:color2 range:NSMakeRange(oneString.length, twoString.length)];
+    
+    [resultString addAttribute:NSFontAttributeName value:font3 range:NSMakeRange(oneString.length + twoString.length, threeString.length)];
+    [resultString addAttribute:NSForegroundColorAttributeName value:color3 range:NSMakeRange(oneString.length + twoString.length, threeString.length)];
+    
+    return resultString;
+}
+
 
 //在当前日期，获取用户类型 comparedDateString:乘机时间
 - (BOOL)isBabyWithComparedDateString:(NSString *)comparedDateString {

@@ -7,8 +7,19 @@
 //
 
 #import "EditInfoService.h"
+#import "SCAliyunUploadMananger.h"
 
 @implementation EditInfoService
+
++ (void)sc_uploadImage:(UIImage *)image withCompressionQuality:(CGFloat)cq callBlock:(void (^)(BOOL))callBlock{
+    [SCAliyunUploadMananger uploadImage:image withCompressionQuality:cq withCallBack:^(NSString *url) {
+        if (!NULLString(url)) {
+            [EditInfoService sc_editPersonalInfo:@{@"headImg":url} callBlock:callBlock];
+        }
+    } withErrorCallBack:^(NSError *error) {
+        [HHTool showError:error.localizedDescription];
+    }];
+}
 
 +(void)sc_editPersonalInfo:(NSDictionary *)params callBlock:(void (^)(BOOL))callBlock{
     [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:params.copy showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
@@ -17,7 +28,8 @@
             if (baseModel.data[@"characterInfo"] && [baseModel.data[@"characterInfo"] isKindOfClass:[NSDictionary class]]) {
                 SCCharacterModel_characterInfo *info = [SCCharacterModel_characterInfo mj_objectWithKeyValues:baseModel.data[@"characterInfo"]];
                 [SCCacheTool shareInstance].characterModel.characterInfo = info;
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"kUpdateUserInfo" object:nil];
+                 [[SCCacheTool shareInstance] cacheCharacterInfo:baseModel.data[@"characterInfo"] withUserId:[SCCacheTool shareInstance].getCurrentUser];
+                [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateAvatarSuccess object:nil];
             }
             BLOCK_EXEC(callBlock,YES);
         }else{

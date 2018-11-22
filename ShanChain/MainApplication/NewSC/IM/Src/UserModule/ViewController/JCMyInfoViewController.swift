@@ -264,25 +264,38 @@ extension JCMyInfoViewController: UINavigationControllerDelegate, UIImagePickerC
         if image != nil {
             MBProgressHUD_JChat.showMessage(message: "正在上传", toView: view)
             
-            guard let imageData = UIImageJPEGRepresentation(image!, 0.8) else {
-                return
+            EditInfoService.sc_uploadImage(image, withCompressionQuality: 1.0) { (isSuccess) in
+                if isSuccess == true {
+                    MBProgressHUD_JChat.show(text: "上传成功", view: self.view)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
+                    self.tableview.reloadData()
+                    guard let imageData = UIImageJPEGRepresentation(image!, 0.8) else {
+                        return
+                    }
+                    let avatorData = NSKeyedArchiver.archivedData(withRootObject: imageData)
+                    UserDefaults.standard.set(avatorData, forKey: kLastUserAvator)
+                }else{
+                    MBProgressHUD_JChat.show(text: "上传失败", view: self.view)
+                }
+                
             }
             
-            JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar) { (resultObject, error) -> Void in
-                DispatchQueue.main.async(execute: { () -> Void in
-                     MBProgressHUD_JChat.hide(forView: self.view, animated: true)
-                    if error == nil {
-                        MBProgressHUD_JChat.show(text: "上传成功", view: self.view)
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
-                        self.tableview.reloadData()
-                        let avatorData = NSKeyedArchiver.archivedData(withRootObject: imageData)
-                        UserDefaults.standard.set(avatorData, forKey: kLastUserAvator)
-                        
-                    } else {
-                        MBProgressHUD_JChat.show(text: "上传失败", view: self.view)
-                    }
-                })
-            }
+
+//            JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar) { (resultObject, error) -> Void in
+//                DispatchQueue.main.async(execute: { () -> Void in
+//                     MBProgressHUD_JChat.hide(forView: self.view, animated: true)
+//                    if error == nil {
+//                        MBProgressHUD_JChat.show(text: "上传成功", view: self.view)
+//                        NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
+//                        self.tableview.reloadData()
+//                        let avatorData = NSKeyedArchiver.archivedData(withRootObject: imageData)
+//                        UserDefaults.standard.set(avatorData, forKey: kLastUserAvator)
+//
+//                    } else {
+//                        MBProgressHUD_JChat.show(text: "上传失败", view: self.view)
+//                    }
+//                })
+//            }
         }
         
         picker.dismiss(animated: true, completion: nil)

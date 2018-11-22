@@ -86,7 +86,7 @@ class TaskDetailsViewController: SCBaseVC {
         
         headerDeadlineLb.text = NSDate.chatingTime(self.time)
         headerContentLb.text = self.taskContent
-        headerRewardLb.text = self.reward
+        headerRewardLb.attributedText = NSString.setAttrFirst("赏金 ", color: SC_EmphasisColor, font: Font(13), secendString: self.reward , color: SC_ThemeMainColor, font: Font(16), threeString: " SEAT", color: SC_EmphasisColor, font: Font(13))
         sendTextView.delegate = self
         
     }

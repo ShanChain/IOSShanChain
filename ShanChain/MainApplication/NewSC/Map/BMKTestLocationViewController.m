@@ -115,7 +115,9 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
             NSMutableArray  *mAry = [NSMutableArray arrayWithCapacity:0];
             [arr enumerateObjectsUsingBlock:^(id  _Nonnull dic, NSUInteger idx, BOOL * _Nonnull stop) {
                 CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
-                [mAry addObject:model];
+                if (model) {
+                    [mAry addObject:model];
+                }
             }];
             weak_self.roomInfos = mAry.copy;
         }
@@ -535,7 +537,6 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
                         [HHTool showError:error.localizedDescription];
                     }
                 }];
-            
             }else{
                 [HHTool dismiss];
                 [HHTool showError:error.localizedDescription];

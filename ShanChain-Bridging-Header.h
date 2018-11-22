@@ -49,5 +49,6 @@
 #import "CoordnateInfosModel.h"
 #import "EditInfoService.h"
 #import "MCDate.h"
+#import "UIImage+MingleChang.h"
 
 #endif /* ShanChain_Bridging_Header_h */
