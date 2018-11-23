@@ -11,15 +11,17 @@ import LTScrollView
 
 private let glt_iphoneX = (UIScreen.main.bounds.height == 812.0)
 
-enum TaskListType {
-    case all
+enum TaskListType:Int{
+    case all = 0
     case my
 }
 
 
 class TaskListContainerViewController: SCBaseVC {
 
-
+    
+    
+    public var _scrollToIndex:TaskListType = .all
     private lazy var viewControllers: [UIViewController] = {
         let listVc = TaskListViewController(type: TaskListType.all)
         let myVc = TaskListViewController(type: TaskListType.my)
@@ -55,6 +57,7 @@ class TaskListContainerViewController: SCBaseVC {
         let H: CGFloat = glt_iphoneX ? (self.view.bounds.height - Y - 34) : self.view.bounds.height - Y
         let pageView = LTPageView(frame: CGRect(x: 0, y: Y, width: self.view.bounds.width, height: H), currentViewController: self, viewControllers: self.viewControllers, titles: self.titles, layout: self.layout)
         pageView.isClickScrollAnimation = true
+        pageView.scrollToIndex(index: self._scrollToIndex.rawValue)
         return pageView
     }()
     

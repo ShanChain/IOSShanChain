@@ -287,13 +287,6 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
     return _locService;
 }
 
-- (void)mapView:(BMKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-    NSLog(@"regionWillChangeAnimated == %f",mapView.zoomLevel);
-}
-
-- (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-    NSLog(@"regionDidChangeAnimated == %f",mapView.zoomLevel);
-}
 
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
     
@@ -551,7 +544,6 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
        [self.view endEditing:YES];
   
 }
-
 
 
 @end

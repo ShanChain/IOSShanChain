@@ -280,24 +280,16 @@ extension JCMyInfoViewController: UINavigationControllerDelegate, UIImagePickerC
                 
             }
             
-
-//            JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar) { (resultObject, error) -> Void in
-//                DispatchQueue.main.async(execute: { () -> Void in
-//                     MBProgressHUD_JChat.hide(forView: self.view, animated: true)
-//                    if error == nil {
-//                        MBProgressHUD_JChat.show(text: "上传成功", view: self.view)
-//                        NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
-//                        self.tableview.reloadData()
-//                        let avatorData = NSKeyedArchiver.archivedData(withRootObject: imageData)
-//                        UserDefaults.standard.set(avatorData, forKey: kLastUserAvator)
-//
-//                    } else {
-//                        MBProgressHUD_JChat.show(text: "上传失败", view: self.view)
-//                    }
-//                })
-//            }
+            guard let imageData = UIImageJPEGRepresentation(image!, 0.8) else {
+                return
+            }
+            JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar) { (resultObject, error) -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
+                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
+                    self.tableview.reloadData()
+                })
+            }
         }
-        
         picker.dismiss(animated: true, completion: nil)
     }
 }

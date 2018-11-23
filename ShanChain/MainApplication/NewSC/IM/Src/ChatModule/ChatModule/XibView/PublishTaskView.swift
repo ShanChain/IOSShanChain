@@ -59,6 +59,7 @@ class PublishTaskView: UIView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(_tapSelectTime))
         selectTimeTextFid.addGestureRecognizer(tap)
         taskDesTextFid.delegate = self
+        rewardTextFid.delegate = self;
         exchangeRateLabel.text = "1 SEAT = \(SCCacheTool.shareInstance().currencyModel.rate!)￥"
     }
     
@@ -145,6 +146,52 @@ class PublishTaskView: UIView {
     
 }
 
+extension PublishTaskView:UITextFieldDelegate{
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var text:String = "\(textField.text ?? "")\(string)"
+        if text.length > 4 {
+            let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 4))
+            let subText = text.substring(with: range)
+            text = subText
+            textField.text = subText
+            return false
+        }
+        
+        if textField == rewardTextFid && (text.length) > 0{
+            calculatingExchangeRate(rmb:text)
+        }else{
+            exchangeRateLabel.text = "1 SEAT = \(SCCacheTool.shareInstance().currencyModel.rate!)￥"
+        }
+        return true
+    }
+    
+    func calculatingExchangeRate(rmb:String){
+        if Float(rmb) == nil {
+            HHTool.showError("金额格式不正确")
+            return
+        }
+        let rete:Float = Float(SCCacheTool.shareInstance().currencyModel.rate!)
+        let seat:Float = Float(rmb)!/rete
+         exchangeRateLabel.text = "\(rmb) ￥ = \(formatFloat(seat) ?? "")SEAT"
+    }
+    
+    func formatFloat(_ f: Float) -> String? {
+        if fmodf(f, 1) == 0 {
+            //如果有一位小数点
+            return String(format: "%.0f", f)
+        } else if fmodf(f * 10, 1) == 0 {
+            //如果有两位小数点
+            return String(format: "%.1f", f)
+        } else if fmodf(f * 100, 1) == 0 {
+            return String(format: "%.2f", f)
+        } else{
+            return String(format: "%.3f", f)
+        }
+    }
+    
+}
+
 extension PublishTaskView:UITextViewDelegate{
     
     
@@ -175,6 +222,5 @@ extension PublishTaskView:UITextViewDelegate{
             }
         }
     }
-    
     
 }

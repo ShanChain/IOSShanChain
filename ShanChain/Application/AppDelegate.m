@@ -21,6 +21,7 @@
 #import "SYGuiderScrollview.h"
 #import "VersionUtils.h"
 #import "BMKTestLocationViewController.h"
+#import "UncaughtExceptionHandler.h"
 #import "ShanChain-Swift.h"
 
 #define JMSSAGE_APPKEY  @"0a20b6277a625655791e3cd9"
@@ -77,7 +78,9 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidCloseNotification) name:kJMSGNetworkDidCloseNotification object:nil];
     
-    [EditInfoService sc_requstWalletCurrency];
+    [EditInfoService sc_requstWalletCurrency]; // 获取当前汇率
+    // 捕获异常
+    InstallExceptionHandler();
     return YES;
 }
 

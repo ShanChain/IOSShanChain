@@ -206,6 +206,11 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         _contentView?.apply(message)
         
         if let view = _bubbleView {
+            
+            if  message.contentType == .custom || message.contentType == .image{
+                view.isHidden = true
+            }
+            
             switch options.alignment {
             case .left:
                 view.image = recive_nor

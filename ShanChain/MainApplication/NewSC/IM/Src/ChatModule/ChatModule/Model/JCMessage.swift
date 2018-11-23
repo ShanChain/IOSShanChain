@@ -29,6 +29,7 @@ open class JCMessage: NSObject, JCMessageType {
     open var updateSizeIfNeeded: Bool = false
     open var unreadCount: Int = 0  //消息未读数
     open var targetType: MessageTargetType = .single
+    open var contentType:JMSGContentType = .text
 }
 
 extension JMSGMessage {
@@ -42,7 +43,7 @@ extension JMSGMessage {
         let state = self.ex.state
         let isGroup = targetType == .group
         let isChatRoom = targetType == .chatRoom
-      
+       
         
         switch(contentType) {
         case .text:
@@ -172,16 +173,27 @@ extension JMSGMessage {
         
         msg.msgId = self.msgId
         msg.options.state = state
-        if isCurrent {
-            msg.senderAvator = UIImage.getMyAvator()
+//        if isCurrent {
+//            msg.senderAvator = UIImage.getMyAvator()
+//        }
+        
+        fromUser.thumbAvatarData { (data, username, error) in
+            if let imageData = data {
+                let image = UIImage(data: imageData)
+                 msg.senderAvator = image
+            } else {
+                 msg.senderAvator = UIImage.loadImage("com_icon_user_80")
+            }
         }
         
         if fromUser.username == "154269377600600163e0aa658733729" {
            
         }
         
+        msg.contentType = contentType
         msg.sender = fromUser
-        msg.name = fromUser.displayName()
+        msg.name = fromName
+      //  msg.name = fromUser.displayName()
         msg.unreadCount = getUnreadCount()
         return msg
     }

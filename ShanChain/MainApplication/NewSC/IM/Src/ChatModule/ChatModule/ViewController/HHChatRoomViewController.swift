@@ -20,7 +20,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     @IBOutlet weak var joinCahtView: UIView!
     open var conversation: JMSGConversation
-    
+    var maskView:UIView! // 蒙版
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
     public required init(conversation: JMSGConversation, isJoinChat:Bool, navTitle:String) {
@@ -46,6 +46,12 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         _init()
+        maskView = UIView.init(frame: CGRect(x: 0.0, y: 0.0, width: view.width, height: view.height))
+//        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
+        maskView.backgroundColor = UIColor.black.withAlphaComponent(0.35)
+        maskView.isHidden = true
+        view.addSubview(maskView)
+        view.bringSubview(toFront: maskView)
         view.bringSubview(toFront: taskButton)
         view.bringSubview(toFront: joinCahtView)
         configureDynamicCircularMenuButton(button: taskButton, numberOfMenuItems: buttonTitles.count)
@@ -55,6 +61,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         
     }
     
+//    func hiddenMaskView(){
+//        maskView.isHidden = true
+//    }
     
     override func loadView() {
         super.loadView()
@@ -66,9 +75,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         toolbar.delegate = self
         toolbar.text = draft
-        
     }
-    
     fileprivate let buttonTitles = ["查看任务","发布任务"]
     func buttonForIndexAt(_ menuButton: ASCircularMenuButton, indexForButton: Int) -> UIButton {
         let button: UIButton = UIButton()
@@ -97,7 +104,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                     if isPut == false{
                         return
                     }
-                    
                     let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
                     let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self?.currentChatRoomID ?? "","time":timestamp,"characterId":characterId]
                     // 添加任务
@@ -125,9 +131,20 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }else{
             // 查看任务
             let vc = TaskListContainerViewController()
+            vc._scrollToIndex = .my
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
+    }
+    
+    func willShowForMenuButton(){
+        maskView.isHidden = false
+        toolbar.isHidden = true
+    }
+    
+    func didDisappearForMenuButton(){
+         maskView.isHidden = true
+        toolbar.isHidden = false
     }
     
     @IBAction func joinAction(_ sender: Any) {
@@ -334,6 +351,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }()
     
     private func _init() {
+      
         myAvator = UIImage.getMyAvator()
         //  _updateTitle()
         view.backgroundColor = .white
@@ -432,7 +450,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
         self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
     }
-    
     private func _setupNavigation() {
         
       
@@ -451,7 +468,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
              navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)", for: .normal)
         }
       
-        navTitleView.backgroundColor =  navigationController?.navigationBar.barTintColor
+        navTitleView.backgroundColor = UIColor.clear
         navigationController?.navigationBar.addSubview(navTitleView)
         navTitleView.snp.makeConstraints { (mark) in
             mark.centerX.centerY.equalTo( (navigationController?.navigationBar)!)
@@ -555,10 +572,18 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
         message.msgId = jmessage.msgId
         message.name = currentUser.displayName()
-        message.senderAvator = myAvator
         message.sender = currentUser
         message.options.alignment = .right
         message.options.state = .sending
+        currentUser.thumbAvatarData { (data, username, error) in
+            if let imageData = data {
+                let image = UIImage(data: imageData)
+                message.senderAvator = image
+            } else {
+                message.senderAvator = self.myAvator
+            }
+        }
+        
         
         if let group = conversation.target as? JMSGGroup {
             message.targetType = .group
@@ -759,7 +784,7 @@ extension HHChatRoomViewController: JMessageDelegate {
         }
         _handleMessage(message: message)
     }
-    // 处理接收到的消息
+    // 处理接收到的消息 
     func _handleMessage(message:JMSGMessage){
         let message = _parseMessage(message)
         // TODO: 这个判断是sdk bug导致的，暂时只能这么改

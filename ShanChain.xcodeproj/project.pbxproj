@@ -30,6 +30,8 @@
 		221BBD3C21982D1E0004EE03 /* TaskAddModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD3B21982D1E0004EE03 /* TaskAddModel.swift */; };
 		221E355B215C6100003FAA73 /* UIImageView+sd.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355A215C6100003FAA73 /* UIImageView+sd.m */; };
 		221E355E215C6C83003FAA73 /* UIViewController+HRAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355D215C6C83003FAA73 /* UIViewController+HRAlertViewController.m */; };
+		2226DB7621A7ACD9002F6195 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226DB7221A7ACD9002F6195 /* UncaughtExceptionHandler.m */; };
+		2226DB7721A7ACD9002F6195 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226DB7521A7ACD9002F6195 /* Aspects.m */; };
 		2228491D2176DD0F00CDC86C /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222849182176DD0E00CDC86C /* BaiduMapAPI_Cloud.framework */; };
 		2228491E2176DD0F00CDC86C /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222849192176DD0E00CDC86C /* BaiduMapAPI_Map.framework */; };
 		2228491F2176DD0F00CDC86C /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228491A2176DD0E00CDC86C /* BaiduMapAPI_Search.framework */; };
@@ -280,7 +282,7 @@
 		22680AB6219E779000F2FA5B /* XMWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AB4219E779000F2FA5B /* XMWebView.m */; };
 		22680ABA219E786400F2FA5B /* MyWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AB8219E786400F2FA5B /* MyWalletViewController.m */; };
 		22680ABB219E786400F2FA5B /* MyWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22680AB9219E786400F2FA5B /* MyWalletViewController.xib */; };
-		22680ABD21A4218900F2FA5B /* LaunchScreenImage_.png in Resources */ = {isa = PBXBuildFile; fileRef = 22680ABC21A4218900F2FA5B /* LaunchScreenImage_.png */; };
+		22680ABD21A4218900F2FA5B /* LaunchScreenImageIcon_.png in Resources */ = {isa = PBXBuildFile; fileRef = 22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon_.png */; };
 		22680AC221A445FA00F2FA5B /* EditInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AC121A445FA00F2FA5B /* EditInfoService.m */; };
 		2281A218216B2CB0009E95EE /* HHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A217216B2CB0009E95EE /* HHTool.m */; };
 		2281A21A216B6351009E95EE /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 2281A219216B6350009E95EE /* index.ios.js */; };
@@ -811,6 +813,10 @@
 		221E355A215C6100003FAA73 /* UIImageView+sd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+sd.m"; sourceTree = "<group>"; };
 		221E355C215C6C83003FAA73 /* UIViewController+HRAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HRAlertViewController.h"; sourceTree = "<group>"; };
 		221E355D215C6C83003FAA73 /* UIViewController+HRAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HRAlertViewController.m"; sourceTree = "<group>"; };
+		2226DB7121A7ACD9002F6195 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		2226DB7221A7ACD9002F6195 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
+		2226DB7421A7ACD9002F6195 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		2226DB7521A7ACD9002F6195 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		222849182176DD0E00CDC86C /* BaiduMapAPI_Cloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Cloud.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Cloud.framework; sourceTree = "<group>"; };
 		222849192176DD0E00CDC86C /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
 		2228491A2176DD0E00CDC86C /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Search.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
@@ -1098,7 +1104,7 @@
 		22680AB7219E786400F2FA5B /* MyWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWalletViewController.h; sourceTree = "<group>"; };
 		22680AB8219E786400F2FA5B /* MyWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWalletViewController.m; sourceTree = "<group>"; };
 		22680AB9219E786400F2FA5B /* MyWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletViewController.xib; sourceTree = "<group>"; };
-		22680ABC21A4218900F2FA5B /* LaunchScreenImage_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenImage_.png; sourceTree = "<group>"; };
+		22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenImageIcon_.png; sourceTree = "<group>"; };
 		22680AC021A445FA00F2FA5B /* EditInfoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditInfoService.h; sourceTree = "<group>"; };
 		22680AC121A445FA00F2FA5B /* EditInfoService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditInfoService.m; sourceTree = "<group>"; };
 		2281A216216B2CB0009E95EE /* HHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHTool.h; sourceTree = "<group>"; };
@@ -2062,6 +2068,24 @@
 				221BBD342195889C0004EE03 /* SCCharacterModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2226DB7021A7ACD9002F6195 /* ExceptionHandler */ = {
+			isa = PBXGroup;
+			children = (
+				2226DB7121A7ACD9002F6195 /* UncaughtExceptionHandler.h */,
+				2226DB7221A7ACD9002F6195 /* UncaughtExceptionHandler.m */,
+			);
+			path = ExceptionHandler;
+			sourceTree = "<group>";
+		};
+		2226DB7321A7ACD9002F6195 /* Aspects */ = {
+			isa = PBXGroup;
+			children = (
+				2226DB7421A7ACD9002F6195 /* Aspects.h */,
+				2226DB7521A7ACD9002F6195 /* Aspects.m */,
+			);
+			path = Aspects;
 			sourceTree = "<group>";
 		};
 		223F9871217F0BB70031DB95 /* NewSC */ = {
@@ -3194,7 +3218,7 @@
 				33B7CCF51EC5865700FB6378 /* Main.storyboard */,
 				33B7CCF81EC5865700FB6378 /* Assets.xcassets */,
 				33B7CCFA1EC5865700FB6378 /* LaunchScreen.storyboard */,
-				22680ABC21A4218900F2FA5B /* LaunchScreenImage_.png */,
+				22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon_.png */,
 				33B7CCFD1EC5865700FB6378 /* Info.plist */,
 				33B7CCED1EC5865700FB6378 /* main.m */,
 			);
@@ -4576,6 +4600,8 @@
 		996048EF1ED7C21E007634EE /* Catagory */ = {
 			isa = PBXGroup;
 			children = (
+				2226DB7321A7ACD9002F6195 /* Aspects */,
+				2226DB7021A7ACD9002F6195 /* ExceptionHandler */,
 				221E355C215C6C83003FAA73 /* UIViewController+HRAlertViewController.h */,
 				221E355D215C6C83003FAA73 /* UIViewController+HRAlertViewController.m */,
 				221E3559215C6100003FAA73 /* UIImageView+sd.h */,
@@ -4785,7 +4811,7 @@
 				4852A0D91FCE9F0300CDD7BE /* SYChatListCell.xib in Resources */,
 				2293A741218C3B5A00FB977C /* RoomNavTitleView.xib in Resources */,
 				22284A8B217983DC00CDC86C /* Localizable.strings in Resources */,
-				22680ABD21A4218900F2FA5B /* LaunchScreenImage_.png in Resources */,
+				22680ABD21A4218900F2FA5B /* LaunchScreenImageIcon_.png in Resources */,
 				223F9A06217F12040031DB95 /* addressCode in Resources */,
 				223F9A722182AEC10031DB95 /* 2.jpg in Resources */,
 				4852A1321FCE9F0300CDD7BE /* SYStoryRoleCollectionCell.xib in Resources */,
@@ -5320,6 +5346,7 @@
 				48718D911F42277400010AA0 /* SDImageCache.m in Sources */,
 				8951B5851FE0CFCD00961544 /* SYStatusTextview.m in Sources */,
 				485E660C1F42862900B158BF /* EaseRefreshTableViewController.m in Sources */,
+				2226DB7621A7ACD9002F6195 /* UncaughtExceptionHandler.m in Sources */,
 				4852A0E31FCE9F0300CDD7BE /* SYScreenInsideCell.m in Sources */,
 				33C1A17D1F4C50FB003E22CA /* MASLayoutConstraint.m in Sources */,
 				485E65DD1F42862900B158BF /* EMSDWebImageDownloader.m in Sources */,
@@ -5376,6 +5403,7 @@
 				22C917842192750E002E5240 /* BMKLocationBottomView.swift in Sources */,
 				485E65B21F42862900B158BF /* EMCDDeviceManager+Media.m in Sources */,
 				4852A0C11FCE9F0300CDD7BE /* SYNoticeController.m in Sources */,
+				2226DB7721A7ACD9002F6195 /* Aspects.m in Sources */,
 				223F99C5217F12040031DB95 /* JCMyAvatorCell.swift in Sources */,
 				223F9A792182C4570031DB95 /* RoomTopView.swift in Sources */,
 				223F99E9217F12040031DB95 /* ThemeManager.swift in Sources */,
@@ -5728,8 +5756,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
@@ -5777,8 +5805,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "186ded0a-4ccf-45e2-ae7c-6e1888a914a1";
-				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
+				PROVISIONING_PROFILE = "9fcc55d3-1839-4c81-a947-48319d398473";
+				PROVISIONING_PROFILE_SPECIFIER = adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -5794,8 +5822,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
@@ -5843,8 +5871,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "186ded0a-4ccf-45e2-ae7c-6e1888a914a1";
-				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
+				PROVISIONING_PROFILE = "9fcc55d3-1839-4c81-a947-48319d398473";
+				PROVISIONING_PROFILE_SPECIFIER = adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -29,6 +29,7 @@ import JMessage
     var updateSizeIfNeeded: Bool { get }
     var unreadCount: Int { get }
     var targetType: MessageTargetType { get }
+    var contentType:JMSGContentType {get}
 }
 
 @objc public protocol JCMessageDelegate: NSObjectProtocol {
