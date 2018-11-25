@@ -46,6 +46,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 @property (nonatomic,strong)  NSArray  <CoordnateInfosModel*> *roomInfos;
 
 @property (nonatomic,copy)    NSString   *currentRoomId; //当前的聊天室ID
+@property (nonatomic,strong)   CoordnateInfosModel   *myLocationCoordModel; //我当前位置所在的聊天室model
 @property (nonatomic,copy)    NSString   *currentRoomName; //当前的聊天室名称
 
 
@@ -115,6 +116,9 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
             NSMutableArray  *mAry = [NSMutableArray arrayWithCapacity:0];
             [arr enumerateObjectsUsingBlock:^(id  _Nonnull dic, NSUInteger idx, BOOL * _Nonnull stop) {
                 CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
+                if (idx == 0) {
+                    self.myLocationCoordModel = model;
+                }
                 if (model) {
                     [mAry addObject:model];
                 }
@@ -181,12 +185,15 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 // 复位
 - (IBAction)notePressed:(id)sender {
-    self.mapView.centerCoordinate = self.pt;
+    self.mapView.centerCoordinate = CLLocationCoordinate2DMake(self.myLocationCoordModel.focusLatitude.floatValue, self.myLocationCoordModel.focusLongitude.floatValue);
+    self.mapView.zoomLevel = 17.95;
+    [self configurationLocationButtonTitle:CLLocationCoordinate2DMake(self.myLocationCoordModel.focusLatitude.floatValue, self.myLocationCoordModel.focusLongitude.floatValue)];
+    self.currentRoomId = self.myLocationCoordModel.roomId;
 }
 
 // 足迹
 - (IBAction)footprintPressed:(id)sender {
-    [HHTool showSucess:@"改功能暂未开通，敬请期待~"];
+    [HHTool showSucess:@"该功能暂未开通，敬请期待~"];
 //    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:0];
 //    [self pushPage:footprintVC
 //          Animated:YES];
