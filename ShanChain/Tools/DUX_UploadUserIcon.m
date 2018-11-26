@@ -47,6 +47,11 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
     }else if (buttonIndex == 1) {
         [self createPhotoView];
     }
+//    BLOCK_EXEC(self.DUX_cancelBlock);
+}
+
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet{
+    BLOCK_EXEC(self.DUX_cancelBlock);
 }
 
 /*  ============================================================  */

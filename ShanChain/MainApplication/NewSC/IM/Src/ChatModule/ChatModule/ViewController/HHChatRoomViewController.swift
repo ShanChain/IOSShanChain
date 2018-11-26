@@ -46,7 +46,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         _init()
-        maskView = UIView.init(frame: CGRect(x: 0.0, y: 0.0, width: view.width, height: view.height))
+        maskView = UIView.init(frame:chatView.frame)
 //        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
         maskView.backgroundColor = UIColor.black.withAlphaComponent(0.35)
         maskView.isHidden = true
@@ -377,7 +377,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_reloadMessage), name: NSNotification.Name(rawValue: kReloadAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(_closeChatRoom), name:  NSNotification.Name(rawValue: kJMSGNetworkDidCloseNotification), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(_closeChatRoom), name:  NSNotification.Name(rawValue: kJMSGNetworkDidCloseNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_closeChatRoom), name: NSNotification.Name.jmsgNetworkDidClose, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
         
         
@@ -387,8 +388,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                 self._maskAnimationFromLeft()
             }
         }
-        
-      
         
     }
     

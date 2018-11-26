@@ -156,7 +156,10 @@
 
 - (void)changesIcon{
    
-    [UPLOAD_IMAGE showActionSheetInFatherViewController:self imageTag:100 delegate:self];
+    [UPLOAD_IMAGE showActionSheetInFatherViewController:[self mainNav].topViewController imageTag:100 delegate:self];
+    [UPLOAD_IMAGE setDUX_cancelBlock:^{
+        [[CWMaskView shareInstance]singleTap];
+    }];
 }
 - (void)setupTableView {
     

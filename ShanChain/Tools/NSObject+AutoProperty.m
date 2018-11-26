@@ -33,13 +33,7 @@
 @implementation NSObject (AutoProperty)
 
 
--(void)setMark:(NSString *)mark{
-        objc_setAssociatedObject(self, @selector(mark), mark, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 
-- (NSString *)mark{
-    return objc_getAssociatedObject(self, _cmd);
-}
 
 
 /**

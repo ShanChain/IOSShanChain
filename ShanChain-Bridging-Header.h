@@ -50,5 +50,6 @@
 #import "EditInfoService.h"
 #import "MCDate.h"
 #import "UIImage+MingleChang.h"
+#import "NSObject+customProperty.h"
 
 #endif /* ShanChain_Bridging_Header_h */

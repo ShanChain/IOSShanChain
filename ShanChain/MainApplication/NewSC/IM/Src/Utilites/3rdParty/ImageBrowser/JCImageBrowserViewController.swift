@@ -31,7 +31,7 @@ class JCImageBrowserViewController: UIViewController {
             imageMessages = getImageMessages(messages)
             if imageMessages.count > 0 {
                 if let index = imageMessages.index(where: { (m) -> Bool in
-                    m.msgId == currentMessage.msgId
+                    m.mark == currentMessage.msgId
                 }) {
                     imgCurrentIndex = index
                 } else {
@@ -51,11 +51,26 @@ class JCImageBrowserViewController: UIViewController {
     func getImageMessages(_ messages: [JCMessageType]) -> [JMSGMessage] {
         var imageMessages: [JMSGMessage] = []
         for message in messages {
-            guard let msg = conversation.message(withMessageId: message.msgId) else {
-                continue
-            }
-            if msg.contentType == .image {
-                imageMessages.append(msg)
+            if message.targetType != .chatRoom{
+                guard let msg = conversation.message(withMessageId: message.msgId) else {
+                    continue
+                }
+                if msg.contentType == .image {
+                    imageMessages.append(msg)
+                }
+            }else{
+                let chatRoom = conversation.target as? JMSGChatRoom
+                guard let jcMessageContent =  message.content as? JCMessageImageContent else{
+                    continue
+                }
+                let data = UIImageJPEGRepresentation(jcMessageContent.image!, 1.0)
+                let jmsgMessageContent:JMSGImageContent = JMSGImageContent.init(imageData:data!)!
+                let msg = JMSGMessage.createChatRoomMessage(with:jmsgMessageContent as JMSGAbstractContent, chatRoomId: (chatRoom?.roomID)!)
+                msg.mark = message.msgId
+                if msg.contentType == .image {
+                    imageMessages.append(msg)
+                }
+              
             }
         }
         return imageMessages

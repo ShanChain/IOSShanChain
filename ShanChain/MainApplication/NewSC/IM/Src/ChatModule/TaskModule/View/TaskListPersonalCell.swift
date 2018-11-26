@@ -47,9 +47,9 @@ class TaskListPersonalCell: UITableViewCell {
           
             
             if (_listModel?.isMyBublish)! {
-                self.issueLabel.text = "\(_listModel?.name ?? "")发布的:"
-            }else{
                 self.issueLabel.text = "\(_listModel?.name ?? "")领取的:"
+            }else{
+                self.issueLabel.text = "\(_listModel?.name ?? "")发布的:"
             }
             
             

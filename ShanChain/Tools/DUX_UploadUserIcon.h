@@ -26,6 +26,7 @@
 
 @property (nonatomic, weak) id <DUX_UploadUserIconDelegate> uploadImageDelegate;
 @property(nonatomic,strong) UIViewController * fatherViewController;
+@property(nonatomic,copy)  void (^DUX_cancelBlock)(void);
 // ** 记录当前imageViewTag值
 @property(nonatomic,assign) NSInteger        tag;
 

@@ -153,6 +153,9 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
                     }
                     self.tableView.reloadData()
                 }else{
+                    if isLoad == false{
+                        self.dataList.removeAll()
+                    }
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
                 
@@ -160,8 +163,9 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
             
             if(self.dataList.count == 0){
                 self.noDataTipShow(self.tableView, content: "您还没有任务记录喔，到广场中去发布你的第一个任务，或者领取任务吧~", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
-                self.tableView.contentOffset = self.view.center;
+                self.tableView.isScrollEnabled = false
             }else{
+                self.tableView.isScrollEnabled = true
                 self.noDataTipDismiss()
             }
             
@@ -272,7 +276,10 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return  dataList.count
+        if dataList.count > 0 {
+            return  dataList.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
