@@ -296,6 +296,10 @@ static NSDateFormatter* DateFormat(){
 }
 
 
+
+- (NSString *)getHxUserName{
+    return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:CACHE_HX_USER_NAME];
+}
 - (NSString *)getCurrentUser {
     return [self getCacheValueInfoWithUserID:@"0" andKey:@"curUser"];
 }
@@ -349,10 +353,11 @@ static NSDateFormatter* DateFormat(){
 }
 
 - (NSString *)status{
-    if ([_status isKindOfClass:[NSNumber class]]) {
-        return [NSString stringWithFormat:@"%@",_status];
-    }
-    return _status;
+    return @"1";
+//    if ([_status isKindOfClass:[NSNumber class]]) {
+//        return [NSString stringWithFormat:@"%@",_status];
+//    }
+//    return _status;
 }
 
 @end

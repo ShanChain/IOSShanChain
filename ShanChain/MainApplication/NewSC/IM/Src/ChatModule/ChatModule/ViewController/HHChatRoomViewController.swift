@@ -604,13 +604,16 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     // 发送文本
     func send(forText text: NSAttributedString) {
+        
+        if text.string.isEmpty{
+            return
+        }
+        
         let message = JCMessage(content: JCMessageTextContent(attributedText: text))
         let content = JMSGTextContent(text: text.string)
         let msg = JMSGMessage.ex.createMessage(conversation, content, reminds)
         reminds.removeAll()
         send(message, msg)
-        
-        
         
     }
     // 发送自定义消息

@@ -64,6 +64,8 @@
 - (NSString *)getUserToken;
 
 - (NSString *)getHeadImg;
+
+- (NSString *)getHxUserName;
 /*
     "characterInfo": {
     "characterId": 2351,

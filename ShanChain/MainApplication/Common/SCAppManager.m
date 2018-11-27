@@ -310,12 +310,17 @@ static SCAppManager *instance = nil;
 }
 
 -(void)logout{
-    NSString *userId = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:@"0" andKey:CACHE_CUR_USER];
-    [[SCCacheTool shareInstance] dropTableWithUserId:userId];
-    [[SCCacheTool shareInstance] setCacheValue:@"" withUserID:@"0" andKey:CACHE_CUR_USER];
     UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
-    SCLoginController *loginVC=[[SCLoginController alloc]init];
-    keyWindow.rootViewController = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
+    SCBaseNavigationController *nav = (SCBaseNavigationController*)keyWindow.rootViewController;
+    [nav.topViewController hrShowAlertWithTitle:nil message:@"是否退出当前账号" buttonsTitles:@[@"取消",@"确定"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+        if (indexOfAction == 1) {
+            NSString *userId = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:@"0" andKey:CACHE_CUR_USER];
+            [[SCCacheTool shareInstance] dropTableWithUserId:userId];
+            [[SCCacheTool shareInstance] setCacheValue:@"" withUserID:@"0" andKey:CACHE_CUR_USER];
+            SCLoginController *loginVC=[[SCLoginController alloc]init];
+            keyWindow.rootViewController = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
+        }
+    }];
     
 }
 

@@ -51,5 +51,9 @@
 #import "MCDate.h"
 #import "UIImage+MingleChang.h"
 #import "NSObject+customProperty.h"
+#import "AppDelegate.h"
+#import "SCAppManager.h"
+
+
 
 #endif /* ShanChain_Bridging_Header_h */

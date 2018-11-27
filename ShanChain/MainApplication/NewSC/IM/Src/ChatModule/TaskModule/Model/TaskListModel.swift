@@ -28,6 +28,7 @@ class TaskListModel: HandyJSON {
     var headImg:String?
     var name:String?
     var roomName:String?
+    var hxUserName:String?
     
     // 全部任务中 任务是否被领取
     var isReceived:Bool{
@@ -38,6 +39,15 @@ class TaskListModel: HandyJSON {
     var isMyBublish:Bool{
         let currentCharacterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
         if (Int(currentCharacterId)! == Int(characterId!)!){
+            return true
+        }
+        return false
+    }
+    
+    // 这条数据是否属于我
+    var isBelongMy:Bool{
+        let myHxUserName:String = SCCacheTool.shareInstance().getHxUserName()
+        if (myHxUserName == hxUserName){
             return true
         }
         return false

@@ -191,6 +191,7 @@
     NSString  *title = self.titleArray[indexPath.row];
     if ([title isEqualToString:@"我的任务"]) {
         TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
+        taskVC._oc_scrollToIndex = 1;
         [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
     }else if ([title isEqualToString:@"我的消息"]){
         JCConversationListViewController *conversationListVC = [[JCConversationListViewController alloc]init];
@@ -199,8 +200,9 @@
         //
         MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:walletVC animated:YES];
-    }else if ([title isEqualToString:@"设置"]){
-        [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
+    }else if ([title isEqualToString:@"退出登录"]){
+        [[SCAppManager shareInstance]logout];
+//        [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
     }else{
                                                                  
     }
@@ -253,12 +255,6 @@
     
 }
 
-- (void)showAlterView {
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"hello world!" message:@"hello world!嘿嘿嘿" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"😂😄" style:UIAlertActionStyleDefault handler:nil];
-    [alertC addAction:action];
-    [self presentViewController:alertC animated:YES completion:nil];
-}
 
 #pragma mark - Getter
 - (NSArray *)imageArray {
@@ -277,12 +273,12 @@
         if ([SCCacheTool shareInstance].status.integerValue == 0) {
             _titleArray = @[
                             @"我的消息",
-                            @"设置"];
+                            @"退出登录"];
         }else{
             _titleArray = @[@"我的钱包",
                             @"我的任务",
                             @"我的消息",
-                            @"设置"];
+                            @"退出登录"];
         }
      
     }
@@ -300,15 +296,6 @@
     }
     image = [image mc_resetToSize:CGSizeMake(64, 64)];
     image = [image cutCircleImage];
-//    NSData *imageData = UIImagePNGRepresentation(image);
-//    [JMSGUser updateMyAvatarWithData:imageData avatarFormat:@"png" completionHandler:^(id resultObject, NSError *error) {
-//        if(!error){
-//            NSLog(@"更换极光头像成功");
-//            _icon.image = image;
-//        }
-//    }];
-
-    
     weakify(self);
     [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
         if (!NULLString(url)) {

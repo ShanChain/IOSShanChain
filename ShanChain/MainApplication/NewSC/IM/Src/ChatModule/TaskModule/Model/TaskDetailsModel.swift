@@ -21,6 +21,8 @@ class TaskDetailsModel: HandyJSON {
     var supportCount:String?
     var taskId:String?
     var publishTime:String?
+    var hxUserName:String?
+    var characterId:String?
     
     // 任务是否被领取
     func isReceive() -> Bool{
@@ -28,6 +30,15 @@ class TaskDetailsModel: HandyJSON {
             return false
         }
         return true
+    }
+    
+    // 是否是我发布的  false:我领取的
+    var isMyBublish:Bool{
+        let currentCharacterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
+        if (Int(currentCharacterId)! == Int(characterId!)!){
+            return true
+        }
+        return false
     }
     
     func receiveBtnTitle() -> String {

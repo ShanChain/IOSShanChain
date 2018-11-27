@@ -341,6 +341,19 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TaskListViewController:TaskListCellProtocol{
    
+    // 点击头像
+    func _clickAvatar(listModel: TaskListModel) {
+        if listModel.isBelongMy == false{
+            JMSGUser.userInfoArray(withUsernameArray: [listModel.hxUserName!]) { (result, error) in
+                if let result = result{
+                    let user:JMSGUser = (result as! Array )[0]
+                    let vc = JCUserInfoViewController()
+                    vc.user = user
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
     
     func urgeComplete(listModel: TaskListModel, view: TaskListBackView) {
         requestListCellDelegateWithUrl(url: TASK_URGE_URL, listModel: listModel, view: view)

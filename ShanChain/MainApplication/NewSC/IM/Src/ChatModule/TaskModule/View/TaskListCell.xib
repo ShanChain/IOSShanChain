@@ -20,8 +20,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="224.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sc_com_icon_wechat" translatesAutoresizingMaskIntoConstraints="NO" id="wwc-if-zES">
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sc_com_icon_wechat" translatesAutoresizingMaskIntoConstraints="NO" id="wwc-if-zES">
                         <rect key="frame" x="15" y="10" width="40" height="40"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="VQZ-xQ-mdm"/>
                             <constraint firstAttribute="height" constant="40" id="hxO-E4-bPW"/>

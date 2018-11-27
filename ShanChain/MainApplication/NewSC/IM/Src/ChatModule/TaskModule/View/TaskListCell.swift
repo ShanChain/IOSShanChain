@@ -71,8 +71,8 @@ class TaskListCell: UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
        icon._setCornerRadiusCircle()
-       
-        
+        let iconTap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(_tapGestureAvatar))
+        icon.addGestureRecognizer(iconTap)
         
     }
 
@@ -137,5 +137,10 @@ class TaskListCell: UITableViewCell{
         }
     }
     
+    func _tapGestureAvatar(){
+        if let delegate = delegate {
+            delegate._clickAvatar(listModel: _listModel!)
+        }
+    }
     
 }

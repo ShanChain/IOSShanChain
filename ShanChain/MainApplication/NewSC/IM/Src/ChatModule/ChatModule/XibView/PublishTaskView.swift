@@ -110,7 +110,6 @@ class PublishTaskView: UIView {
            self.makeView.removeFromSuperview()
         }
  
-        
     }
     
     func _verification() -> Bool {
@@ -130,12 +129,22 @@ class PublishTaskView: UIView {
         
         return true
     }
+    
+   private lazy var _taskReward:String = {
+    if self.rewardTextFid.text?.length == 0{
+        return ""
+    }
+    let index = self.rewardTextFid.text?.index((self.rewardTextFid.text?.startIndex)!, offsetBy: 1)
+       let result = self.rewardTextFid.text?.substring(from: index!)
+       return result!
+    }()
+    
     @IBAction func _close(_ sender: UIButton) {
-        self.pbCallClosure!(self.taskDesTextFid.text!,(self.rewardTextFid.text)!,(self.selectTimeTextFid.text)!,timestamp,false)
+        self.pbCallClosure!(self.taskDesTextFid.text!,(_taskReward),(self.selectTimeTextFid.text)!,timestamp,false)
     }
     func _publishPressed(){
         if _verification(){
-        self.pbCallClosure!(self.taskDesTextFid.text!,(self.rewardTextFid.text)!,(self.selectTimeTextFid.text)!,timestamp,true)
+        self.pbCallClosure!(self.taskDesTextFid.text!,(_taskReward),(self.selectTimeTextFid.text)!,timestamp,true)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -150,20 +159,37 @@ extension PublishTaskView:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var text:String = "\(textField.text ?? "")\(string)"
-        if text.length > 4 {
-            let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 4))
-            let subText = text.substring(with: range)
+        let lmrRange = text.range(of: "￥")
+        if lmrRange == nil && string != ""{
+            text = "￥" + text
+        }
+        // 正在删除
+        if string == "" {
+            let index = text.index(text.startIndex, offsetBy: text.length - 1)
+            let subText = text.substring(to: index)
+            if subText == "￥"{
+                text = ""
+            }else{
+                text = subText
+            }
+            
+        }
+        textField.text = text
+        if text.length > 5 {
+            let index = text.index(text.startIndex, offsetBy: 5)
+            let subText = text.substring(to: index)
             text = subText
             textField.text = subText
             return false
         }
-        
         if textField == rewardTextFid && (text.length) > 0{
-            calculatingExchangeRate(rmb:text)
+            let index = text.index(text.startIndex, offsetBy: 1)
+            let result = text.substring(from: index)
+            calculatingExchangeRate(rmb:result)
         }else{
             exchangeRateLabel.text = "1 SEAT = \(SCCacheTool.shareInstance().currencyModel.rate!)￥"
         }
-        return true
+        return false
     }
     
     func calculatingExchangeRate(rmb:String){
@@ -173,7 +199,7 @@ extension PublishTaskView:UITextFieldDelegate{
         }
         let rete:Float = Float(SCCacheTool.shareInstance().currencyModel.rate!)
         let seat:Float = Float(rmb)!/rete
-         exchangeRateLabel.text = "\(rmb) ￥ = \(formatFloat(seat) ?? "")SEAT"
+         exchangeRateLabel.text = " = \(formatFloat(seat) ?? "")SEAT"
     }
     
     func formatFloat(_ f: Float) -> String? {
@@ -202,11 +228,11 @@ extension PublishTaskView:UITextViewDelegate{
 //        }
 //        let str = "\(textView.text)\(text)"
 //        
-//        if str.count > 30 {
-//            //textView.text = (str as NSString?)?.substring(to: 30)
-//            textView.text = str.prefix(30)
+//        if str.count > 50 {
+//            //textView.text = (str as NSString?)?.substring(to: 50)
+//            textView.text = str.prefix(50)
 //            
-//            HHTool.showError("不能超过30个字")
+//            HHTool.showError("不能超过50个字")
 //            return false
 //        }
 //        return true
@@ -215,10 +241,11 @@ extension PublishTaskView:UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         if textView.markedTextRange == nil {
             let text = textView.text!
-            if text.characters.count > 30 {
-                let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 30))
+            if text.characters.count > 50 {
+                let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 50))
                 let subText = text.substring(with: range)
                 textView.text = subText
+                HHTool.showError("任务描述不能超过50个字")
             }
         }
     }

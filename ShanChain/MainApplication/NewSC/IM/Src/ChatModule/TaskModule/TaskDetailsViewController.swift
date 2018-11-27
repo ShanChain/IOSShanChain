@@ -89,6 +89,9 @@ class TaskDetailsViewController: SCBaseVC {
         headerRewardLb.attributedText = NSString.setAttrFirst("赏金 ", color: SC_EmphasisColor, font: Font(13), secendString: self.reward , color: SC_ThemeMainColor, font: Font(16), threeString: " SEAT", color: SC_EmphasisColor, font: Font(13))
         sendTextView.delegate = self
         
+        let iconTap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(_tapGestureAvatar))
+        headerIcon.addGestureRecognizer(iconTap)
+        
     }
     
     required init(taskID:String,content:String,reward:String,time:String) {
@@ -302,6 +305,22 @@ extension TaskDetailsViewController{
         return ["characterId":characterId,"roomId":self.taskDetailsModel?.roomId ?? "","taskId":self.taskID]
     }
     
+    // 点击头像
+    func _tapGestureAvatar(){
+        if self.taskDetailsModel?.isMyBublish == false{
+            guard let hxUserName = self.taskDetailsModel?.hxUserName else{
+                return
+            }
+            JMSGUser.userInfoArray(withUsernameArray: [hxUserName]) { (result, error) in
+                if let result = result{
+                    let user:JMSGUser = (result as! Array )[0]
+                    let vc = JCUserInfoViewController()
+                    vc.user = user
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
 }
 
 

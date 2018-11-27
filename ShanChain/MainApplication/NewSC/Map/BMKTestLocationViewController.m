@@ -263,7 +263,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
         
         
         [self sc_getLbsCoordinate];// 上传用户实时坐标获取聊天室
-        [self configurationLocationButtonTitle:coordinate];
+       // [self configurationLocationButtonTitle:coordinate];
 //        [self reverseGeoCodeWithLatitude:latitude withLongitude:longitude];
         
     }else{
@@ -315,6 +315,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
             annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
         }
         annotationView.pinColor = BMKPinAnnotationColorPurple;
+        annotationView.enabled3D = YES;
         annotationView.canShowCallout= YES;      //设置气泡可以弹出，默认为NO
         annotationView.animatesDrop=YES;         //设置标注动画显示，默认为NO
         annotationView.draggable = YES;          //设置标注可以拖动，默认为NO

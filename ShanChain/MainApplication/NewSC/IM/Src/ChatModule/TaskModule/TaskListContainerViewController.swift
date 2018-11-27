@@ -19,9 +19,17 @@ enum TaskListType:Int{
 
 class TaskListContainerViewController: SCBaseVC {
 
-    
-    
-    public var _scrollToIndex:TaskListType = .all
+    // 兼容OC
+    public var _oc_scrollToIndex = 1{
+        willSet{
+            if newValue ==  1{
+                _scrollToIndex = .my
+            }else{
+                _scrollToIndex = .all
+            }
+        }
+    }
+    public var _scrollToIndex:TaskListType = .my
     private lazy var viewControllers: [UIViewController] = {
         let listVc = TaskListViewController(type: TaskListType.all)
         let myVc = TaskListViewController(type: TaskListType.my)
@@ -76,7 +84,6 @@ class TaskListContainerViewController: SCBaseVC {
             print("pageView.didSelectIndexBlock", index)
         }
     }
-
     
     func _add() {
         
