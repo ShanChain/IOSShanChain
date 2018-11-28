@@ -451,13 +451,18 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         // titleView
         navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
         navTitleView.positionBtn .setTitle(self.navTitle, for: .normal)
-        navTitleView.numberForPeopleClosure = {[weak self] () in
-            
-        }
         if let chatRoom = conversation.target as? JMSGChatRoom{
              navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)", for: .normal)
         }
-      
+        
+        // 查看聊天室成员
+        navTitleView.numberForPeopleClosure = {[weak self] () in
+            if let chatRoom = self?.conversation.target as? JMSGChatRoom{
+                let vc = HHNumberForPeopleViewController.init(count: chatRoom.totalMemberCount, roomId: (self?.currentChatRoomID!)!)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+           
+        }
         navTitleView.backgroundColor = UIColor.clear
         navigationController?.navigationBar.addSubview(navTitleView)
         navTitleView.snp.makeConstraints { (mark) in

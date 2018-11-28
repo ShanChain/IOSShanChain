@@ -276,9 +276,14 @@
 		2242C0072159C3AB00707024 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242C0062159C3AB00707024 /* UIColor+Extention.m */; };
 		225052BC218BF58C001FBD65 /* TaskListContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */; };
 		225052BE218BF67E001FBD65 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225052BD218BF67E001FBD65 /* TaskListViewController.swift */; };
-		22563F5D219C07E4004E34BB /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22563F5C219C07E4004E34BB /* BaseProtocol.swift */; };
 		22563F60219C3929004E34BB /* TaskListPersonalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22563F5E219C3929004E34BB /* TaskListPersonalCell.swift */; };
 		22563F61219C3929004E34BB /* TaskListPersonalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22563F5F219C3929004E34BB /* TaskListPersonalCell.xib */; };
+		225F83F521AE931D0082C0E1 /* HHNumberForPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F83F321AE931D0082C0E1 /* HHNumberForPeopleViewController.swift */; };
+		225F83F621AE931D0082C0E1 /* HHNumberForPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225F83F421AE931D0082C0E1 /* HHNumberForPeopleViewController.xib */; };
+		225F83FB21AE94120082C0E1 /* HHNumberPeopleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F83F921AE94120082C0E1 /* HHNumberPeopleListCell.swift */; };
+		225F83FC21AE94120082C0E1 /* HHNumberPeopleListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225F83FA21AE94120082C0E1 /* HHNumberPeopleListCell.xib */; };
+		225F83FF21AE96FC0082C0E1 /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F83FE21AE96FB0082C0E1 /* BaseProtocol.swift */; };
+		225F840121AE97D10082C0E1 /* PeopleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F840021AE97D10082C0E1 /* PeopleListModel.swift */; };
 		22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */; };
 		22631C4C216DDA3200D5AB0B /* SavePublishContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4B216DDA3200D5AB0B /* SavePublishContentModel.m */; };
 		22631C4F216DE85200D5AB0B /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4D216DE85100D5AB0B /* UIViewController+BackButtonHandler.m */; };
@@ -1097,9 +1102,14 @@
 		2242C0062159C3AB00707024 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
 		225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListContainerViewController.swift; sourceTree = "<group>"; };
 		225052BD218BF67E001FBD65 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
-		22563F5C219C07E4004E34BB /* BaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
 		22563F5E219C3929004E34BB /* TaskListPersonalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPersonalCell.swift; sourceTree = "<group>"; };
 		22563F5F219C3929004E34BB /* TaskListPersonalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListPersonalCell.xib; sourceTree = "<group>"; };
+		225F83F321AE931D0082C0E1 /* HHNumberForPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHNumberForPeopleViewController.swift; sourceTree = "<group>"; };
+		225F83F421AE931D0082C0E1 /* HHNumberForPeopleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHNumberForPeopleViewController.xib; sourceTree = "<group>"; };
+		225F83F921AE94120082C0E1 /* HHNumberPeopleListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHNumberPeopleListCell.swift; sourceTree = "<group>"; };
+		225F83FA21AE94120082C0E1 /* HHNumberPeopleListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHNumberPeopleListCell.xib; sourceTree = "<group>"; };
+		225F83FE21AE96FB0082C0E1 /* BaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
+		225F840021AE97D10082C0E1 /* PeopleListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListModel.swift; sourceTree = "<group>"; };
 		22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		22631C48216DD6E800D5AB0B /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		22631C4A216DDA3200D5AB0B /* SavePublishContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavePublishContentModel.h; sourceTree = "<group>"; };
@@ -2822,7 +2832,6 @@
 		22563F5B219BFE7A004E34BB /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				22563F5C219C07E4004E34BB /* BaseProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -2830,10 +2839,39 @@
 		225F83F221AE92480082C0E1 /* Chatroom */ = {
 			isa = PBXGroup;
 			children = (
+				225F83FD21AE96400082C0E1 /* Service */,
+				225F83F821AE93D40082C0E1 /* Model */,
+				225F83F721AE93D40082C0E1 /* View */,
 				223F9A4F2181CC4F0031DB95 /* HHChatRoomViewController.swift */,
 				22C9176E21918710002E5240 /* HHChatRoomViewController.xib */,
+				225F83F321AE931D0082C0E1 /* HHNumberForPeopleViewController.swift */,
+				225F83F421AE931D0082C0E1 /* HHNumberForPeopleViewController.xib */,
 			);
 			path = Chatroom;
+			sourceTree = "<group>";
+		};
+		225F83F721AE93D40082C0E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				225F83F921AE94120082C0E1 /* HHNumberPeopleListCell.swift */,
+				225F83FA21AE94120082C0E1 /* HHNumberPeopleListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		225F83F821AE93D40082C0E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				225F840021AE97D10082C0E1 /* PeopleListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		225F83FD21AE96400082C0E1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		22680AB3219E779000F2FA5B /* XMWebView */ = {
@@ -3193,6 +3231,7 @@
 				1873FA0D212E882900C1088E /* DefMacro .h */,
 				222EF6172187E526005B89EF /* DefConst.swift */,
 				221BBD3021955E6C0004EE03 /* SC_URL.swift */,
+				225F83FE21AE96FB0082C0E1 /* BaseProtocol.swift */,
 				22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */,
 				223F9874217F0C870031DB95 /* ShanChain-Bridging-Header.h */,
 				33B7CD051EC5865700FB6378 /* ShanChainTests */,
@@ -4804,6 +4843,7 @@
 				4852A0E11FCE9F0300CDD7BE /* SYScreenCell.xib in Resources */,
 				223F99EC217F12040031DB95 /* blackTheme.bundle in Resources */,
 				222849232176E07500CDC86C /* mapapi.bundle in Resources */,
+				225F83F621AE931D0082C0E1 /* HHNumberForPeopleViewController.xib in Resources */,
 				485E65AF1F42862900B158BF /* EaseUI.podspec in Resources */,
 				223F99E8217F12040031DB95 /* defaultTheme.bundle in Resources */,
 				3356B16C1F32F50700027E23 /* api.shanchain.com.cer in Resources */,
@@ -4829,6 +4869,7 @@
 				223F996B217F12040031DB95 /* emoticons.bundle in Resources */,
 				223F99EE217F12040031DB95 /* JCMessageImageCollectionViewCell.xib in Resources */,
 				4852A0D91FCE9F0300CDD7BE /* SYChatListCell.xib in Resources */,
+				225F83FC21AE94120082C0E1 /* HHNumberPeopleListCell.xib in Resources */,
 				2293A741218C3B5A00FB977C /* RoomNavTitleView.xib in Resources */,
 				22284A8B217983DC00CDC86C /* Localizable.strings in Resources */,
 				22680ABD21A4218900F2FA5B /* LaunchScreenImageIcon_.png in Resources */,
@@ -5075,7 +5116,6 @@
 				223F99FE217F12040031DB95 /* SAIInputBarDisplayable.swift in Sources */,
 				4852A1151FCE9F0300CDD7BE /* SYFriend.m in Sources */,
 				22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */,
-				22563F5D219C07E4004E34BB /* BaseProtocol.swift in Sources */,
 				222EF6162186B999005B89EF /* NSObject+extension.swift in Sources */,
 				2207068D219A81E800404459 /* PersonalChatInfoViewController.swift in Sources */,
 				485E66641F42873F00B158BF /* MJRefreshConst.m in Sources */,
@@ -5157,6 +5197,7 @@
 				223F9986217F12040031DB95 /* JCBusinessCardContent.swift in Sources */,
 				48ACC9501FE4ECF100D29EB9 /* VersionUtils.m in Sources */,
 				485E65E81F42862900B158BF /* UIImageView+EMWebCache.m in Sources */,
+				225F83F521AE931D0082C0E1 /* HHNumberForPeopleViewController.swift in Sources */,
 				4852A1341FCE9F0300CDD7BE /* SYStoryRoleReusableView.m in Sources */,
 				223F999A217F12040031DB95 /* ScanQRCodeViewController.swift in Sources */,
 				485E65F91F42862900B158BF /* EaseConversationModel.m in Sources */,
@@ -5322,6 +5363,7 @@
 				894279851FD129D8007BAEB0 /* SYWordEditView.m in Sources */,
 				4852A1471FCE9F0400CDD7BE /* SCDatePickerMd.m in Sources */,
 				332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */,
+				225F83FB21AE94120082C0E1 /* HHNumberPeopleListCell.swift in Sources */,
 				485E65B61F42862900B158BF /* EMCDDeviceManagerBase.m in Sources */,
 				223F997F217F12040031DB95 /* JCMessageLocationContent.swift in Sources */,
 				223F9A14217F12040031DB95 /* JCConstants.swift in Sources */,
@@ -5420,6 +5462,7 @@
 				223F9A10217F12040031DB95 /* JCAppManager.swift in Sources */,
 				4852A0D81FCE9F0300CDD7BE /* SYChatListCell.m in Sources */,
 				223F99C6217F12040031DB95 /* JCMineInfoCell.swift in Sources */,
+				225F840121AE97D10082C0E1 /* PeopleListModel.swift in Sources */,
 				223F99E7217F12040031DB95 /* Operators.swift in Sources */,
 				2281A223216D9E84009E95EE /* NSObject+Runtime.m in Sources */,
 				22C917842192750E002E5240 /* BMKLocationBottomView.swift in Sources */,
@@ -5436,6 +5479,7 @@
 				222EF6182187E527005B89EF /* DefConst.swift in Sources */,
 				4852A14B1FCE9F0400CDD7BE /* SCPhotoLibrary.m in Sources */,
 				4852A0DB1FCE9F0300CDD7BE /* SYMeetSomeHeadView.m in Sources */,
+				225F83FF21AE96FC0082C0E1 /* BaseProtocol.swift in Sources */,
 				221BBD352195889C0004EE03 /* SCCharacterModel.m in Sources */,
 				223F9A44217F12B80031DB95 /* JCGroupNameViewController.swift in Sources */,
 				8997A5DD1FE505BA0024B3AB /* SYGuiderScrollview.m in Sources */,
