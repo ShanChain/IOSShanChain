@@ -16,6 +16,12 @@ public let CUSTOM_TASKID = "taskId"
 public let TEST_ROOM_ID   = "15198852"
 
 
+public let JMSSAGE_APPKEY   = "0a20b6277a625655791e3cd9"
+public let JM_APPKET   =   "appkey"
+public let JM_USERNAME   = "userName"
+public let JM_COMVERSATION_TYPE  = "conversationType" // 会话类型
+
+
 typealias Task = (_ cancel : Bool) -> Void
 
 func delay(_ time: TimeInterval, task: @escaping ()->()) ->  Task? {

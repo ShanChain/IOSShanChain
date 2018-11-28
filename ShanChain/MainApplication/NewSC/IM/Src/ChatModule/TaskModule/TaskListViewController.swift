@@ -344,7 +344,7 @@ extension TaskListViewController:TaskListCellProtocol{
     // 点击头像
     func _clickAvatar(listModel: TaskListModel) {
         if listModel.isBelongMy == false{
-            JMSGUser.userInfoArray(withUsernameArray: [listModel.hxUserName!]) { (result, error) in
+            JMSGUser.userInfoArray(withUsernameArray: [listModel.hxUserName]) { (result, error) in
                 if let result = result{
                     let user:JMSGUser = (result as! Array )[0]
                     let vc = JCUserInfoViewController()
@@ -381,6 +381,10 @@ extension TaskListViewController:TaskListCellProtocol{
        
     }
     
+    // 发布方点击未完成
+    func publishConfirmUndone(listModel: TaskListModel, view: TaskListBackView) {
+        requestListCellDelegateWithUrl(url: CONFIRM_UNDONE_URL, listModel: listModel, view: view)
+    }
     
     fileprivate func requestListCellDelegateWithUrl(url:String,listModel:TaskListModel,view:TaskListBackView){
         SCNetwork.shareInstance().v1_post(withUrl: url, params: ["characterId":characterId,"taskId":listModel.taskId!,"userId":SCCacheTool.shareInstance().getCurrentUser()], showLoading: true) { (baseModel, error) in

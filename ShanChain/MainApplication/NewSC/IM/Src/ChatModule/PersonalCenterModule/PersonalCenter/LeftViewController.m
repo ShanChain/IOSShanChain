@@ -47,6 +47,11 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+   // [self.view.superview sendSubviewToBack:self.view];
+}
+
 -(void)setIconImage{
     NSString  *headImg = [SCCacheTool shareInstance].characterModel.characterInfo.headImg;
     UIImage *headImage = [UIImage imageFromURLString:headImg];
@@ -201,7 +206,7 @@
         MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:walletVC animated:YES];
     }else if ([title isEqualToString:@"退出登录"]){
-        [[SCAppManager shareInstance]logout];
+        [[SCAppManager shareInstance]selectLogout];
 //        [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
     }else{
                                                                  

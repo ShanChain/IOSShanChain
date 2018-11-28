@@ -150,5 +150,9 @@ class TaskListBackView: UIView {
         if self.listModel.backViewLeftBtnTuple.title == "取消任务" {
             delegate?.receiveCancel(listModel: listModel, view: self)
         }
+        
+        if self.listModel.backViewLeftBtnTuple.title == "未完成" {
+            delegate?.publishConfirmUndone(listModel: listModel, view: self)        }
+        
     }
 }

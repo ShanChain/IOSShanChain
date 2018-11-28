@@ -365,6 +365,15 @@ class JCChatViewController: SCBaseVC {
     func send(forText text: NSAttributedString) {
         let message = JCMessage(content: JCMessageTextContent(attributedText: text))
         let content = JMSGTextContent(text: text.string)
+        content.addStringExtra(JMSSAGE_APPKEY, forKey: JM_APPKET)
+        content.addStringExtra(SCCacheTool.shareInstance().getHxUserName(), forKey: JM_USERNAME)
+        
+        if  ((conversation.target as? JMSGGroup) != nil) {
+           content.addStringExtra("group", forKey: JM_COMVERSATION_TYPE)
+        } else {
+           content.addStringExtra("single", forKey: JM_COMVERSATION_TYPE)
+        }
+        
         let msg = JMSGMessage.ex.createMessage(conversation, content, reminds)
         reminds.removeAll()
         send(message, msg)
@@ -380,6 +389,13 @@ class JCChatViewController: SCBaseVC {
         let message = JCMessage(content: messageContent)
         
         let content = JMSGImageContent(imageData: UIImagePNGRepresentation(image)!)
+        content?.addStringExtra(JMSSAGE_APPKEY, forKey: JM_APPKET)
+        content?.addStringExtra(SCCacheTool.shareInstance().getHxUserName(), forKey: JM_USERNAME)
+        if  ((conversation.target as? JMSGGroup) != nil) {
+            content?.addStringExtra("group", forKey: JM_COMVERSATION_TYPE)
+        } else {
+            content?.addStringExtra("single", forKey: JM_COMVERSATION_TYPE)
+        }
         let msg = JMSGMessage.ex.createMessage(conversation, content!, nil)
         msg.ex.isLargeEmoticon = true
         message.options.showsTips = true
@@ -389,6 +405,13 @@ class JCChatViewController: SCBaseVC {
     func send(forImage image: UIImage) {
         let data = UIImageJPEGRepresentation(image, 1.0)!
         let content = JMSGImageContent(imageData: data)
+        content?.addStringExtra(JMSSAGE_APPKEY, forKey: JM_APPKET)
+        content?.addStringExtra(SCCacheTool.shareInstance().getHxUserName(), forKey: JM_USERNAME)
+        if  ((conversation.target as? JMSGGroup) != nil) {
+            content?.addStringExtra("group", forKey: JM_COMVERSATION_TYPE)
+        } else {
+            content?.addStringExtra("single", forKey: JM_COMVERSATION_TYPE)
+        }
 
         let message = JMSGMessage.ex.createMessage(conversation, content!, nil)
         let imageContent = JCMessageImageContent()
@@ -407,6 +430,13 @@ class JCChatViewController: SCBaseVC {
         voiceContent.duration = duration
         voiceContent.delegate = self
         let content = JMSGVoiceContent(voiceData: voiceData, voiceDuration: NSNumber(value: duration))
+        content.addStringExtra(JMSSAGE_APPKEY, forKey: JM_APPKET)
+        content.addStringExtra(SCCacheTool.shareInstance().getHxUserName(), forKey: JM_USERNAME)
+        if  ((conversation.target as? JMSGGroup) != nil) {
+            content.addStringExtra("group", forKey: JM_COMVERSATION_TYPE)
+        } else {
+            content.addStringExtra("single", forKey: JM_COMVERSATION_TYPE)
+        }
         let message = JMSGMessage.ex.createMessage(conversation, content, nil)
         
         let msg = JCMessage(content: voiceContent)
@@ -419,6 +449,13 @@ class JCChatViewController: SCBaseVC {
         videoContent.delegate = self
         
         let content = JMSGFileContent(fileData: fileData, fileName: "小视频")
+        content.addStringExtra(JMSSAGE_APPKEY, forKey: JM_APPKET)
+        content.addStringExtra(SCCacheTool.shareInstance().getHxUserName(), forKey: JM_USERNAME)
+        if  ((conversation.target as? JMSGGroup) != nil) {
+            content.addStringExtra("group", forKey: JM_COMVERSATION_TYPE)
+        } else {
+            content.addStringExtra("single", forKey: JM_COMVERSATION_TYPE)
+        }
         let message = JMSGMessage.ex.createMessage(conversation, content, nil)
         message.ex.isShortVideo = true
         let msg = JCMessage(content: videoContent)
@@ -433,6 +470,13 @@ class JCChatViewController: SCBaseVC {
         locationContent.delegate = self
         
         let content = JMSGLocationContent(latitude: lat, longitude: lon, scale: NSNumber(value: 1), address: address)
+        content.addStringExtra(JMSSAGE_APPKEY, forKey: JM_APPKET)
+        content.addStringExtra(SCCacheTool.shareInstance().getHxUserName(), forKey: JM_USERNAME)
+        if  ((conversation.target as? JMSGGroup) != nil) {
+            content.addStringExtra("group", forKey: JM_COMVERSATION_TYPE)
+        } else {
+            content.addStringExtra("single", forKey: JM_COMVERSATION_TYPE)
+        }
         let message = JMSGMessage.ex.createMessage(conversation, content, nil)
         let msg = JCMessage(content: locationContent)
         send(msg, message)

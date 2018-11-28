@@ -44,6 +44,7 @@
 - (void)switchRoleWithSpaceId:(NSString *)spaceId modelId:(NSString *)modelId;
 
 - (void)logout;
+- (void)selectLogout;
 
 
 

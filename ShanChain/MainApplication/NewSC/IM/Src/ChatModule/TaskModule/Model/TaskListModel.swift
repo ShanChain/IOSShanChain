@@ -28,7 +28,7 @@ class TaskListModel: HandyJSON {
     var headImg:String?
     var name:String?
     var roomName:String?
-    var hxUserName:String?
+    var hxUserName:String = ""
     
     // 全部任务中 任务是否被领取
     var isReceived:Bool{
@@ -155,7 +155,7 @@ class TaskListModel: HandyJSON {
         }
         
         if Int(status!)! == 20 {
-            return ("已完成",true,60)
+            return ("任务完成",false,100)
         }
         
         if Int(status!)! == 21 {

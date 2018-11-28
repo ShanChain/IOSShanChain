@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HHChatRoomViewController" customModule="ShanChain" customModuleProvider="target">
             <connections>
                 <outlet property="joinCahtView" destination="2TR-qW-ZZa" id="bhX-zb-h5P"/>
+                <outlet property="joinChatViewHeight" destination="WNd-cE-87F" id="tBA-07-tPd"/>
                 <outlet property="taskButton" destination="EG1-qW-GSb" id="VDX-Mo-yAj"/>
                 <outlet property="view" destination="iN0-l3-epB" id="tWm-J4-Zxy"/>
             </connections>
@@ -73,7 +74,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EG1-qW-GSb" secondAttribute="trailing" constant="20" id="NRJ-RY-Jub"/>
                 <constraint firstItem="EG1-qW-GSb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="k0u-kv-lDh"/>
                 <constraint firstItem="2TR-qW-ZZa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="kVA-HK-Sr6"/>
-                <constraint firstItem="2TR-qW-ZZa" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="sDN-6p-vAa"/>
+                <constraint firstItem="2TR-qW-ZZa" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="sDN-6p-vAa"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="44.5" y="75.5"/>

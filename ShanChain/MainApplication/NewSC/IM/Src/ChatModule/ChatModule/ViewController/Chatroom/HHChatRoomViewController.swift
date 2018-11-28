@@ -16,6 +16,7 @@ import ASExtendedCircularMenu
 
 class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
+    @IBOutlet weak var joinChatViewHeight: NSLayoutConstraint!
     @IBOutlet weak var taskButton: ASCircularMenuButton!
     
     @IBOutlet weak var joinCahtView: UIView!
@@ -58,7 +59,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         taskButton.menuButtonSize = .medium
         taskButton.menuRedius = 70
         taskButton.circularButtonPositon = .topRight
-        
+        if isIPhoneX{
+            joinChatViewHeight.constant = 82
+        }
     }
     
 //    func hiddenMaskView(){
@@ -82,8 +85,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         if menuButton == taskButton{
             button.backgroundColor = SC_ThemeMainColor
             button .setImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
-            //             button.setBackgroundImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
-            
         }
         
         return button
@@ -123,7 +124,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                     })
                     
                 }
-                
                 self.view.addSubview(pubTaskView!)
                 self.toolbar.isHidden = true
                 
@@ -355,7 +355,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         myAvator = UIImage.getMyAvator()
         //  _updateTitle()
         view.backgroundColor = .white
-        JMessage.add(self, with: conversation)
+        JMessage.add(self, with: nil)
+        JMessage.setDebugMode()
         _setupNavigation()
         _loadMessage(messagePage) // 加载会话消息
         // 添加点击视图回收键盘手势
@@ -364,20 +365,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         chatView.addGestureRecognizer(tap)
         view.addSubview(chatView)
         
-        // 置顶消息
-        //        let topView:RoomTopView = RoomTopView(frame: CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(self.view.width), height: 50))
-        //        topView.expandClosure = { [weak self] (isExpand) in
-        //            self?.toolbar.isHidden = isExpand
-        //        }
-        //
-        //        view.addSubview(topView)
-        //        chatView.frame = CGRect(x: 0, y: Int(topView.y + topView.height), width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 64 - Int(topView.height))
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_reloadMessage), name: NSNotification.Name(rawValue: kReloadAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(_closeChatRoom), name:  NSNotification.Name(rawValue: kJMSGNetworkDidCloseNotification), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_closeChatRoom), name: NSNotification.Name.jmsgNetworkDidClose, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
         
@@ -388,7 +379,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                 self._maskAnimationFromLeft()
             }
         }
-        
     }
     
     // tcp长链接被关闭
@@ -451,7 +441,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     private func _setupNavigation() {
         
-      
         _updateAvatar()
         self.addNavigationRight(withImageName: "sc_com_icon_close", withTarget: self, withAction: #selector(_closePage))
         navigationController?.navigationBar.barTintColor = .white
@@ -462,7 +451,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         // titleView
         navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
         navTitleView.positionBtn .setTitle(self.navTitle, for: .normal)
-        
+        navTitleView.numberForPeopleClosure = {[weak self] () in
+            
+        }
         if let chatRoom = conversation.target as? JMSGChatRoom{
              navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)", for: .normal)
         }
@@ -479,9 +470,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     func _closePage(){
-        //        if conversation.conversationType == .chatRoom{
-        //
-        //        }
         // 从登录页rootViewController过来的
         if navigationController?.viewControllers.count == 1 {
             

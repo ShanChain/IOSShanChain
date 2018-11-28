@@ -15,7 +15,6 @@
 #import "SCLoginController.h"
 #import "SCBaseNavigationController.h"
 
-static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 
 @interface BMKTestLocationViewController ()< UITableViewDelegate,CLLocationManagerDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,BMKMapViewDelegate>
 @property (nonatomic, strong)BMKLocationService *locService;
@@ -423,7 +422,7 @@ static  NSString  * const kCurrentUserName = @"kJCCurrentUserName";
 - (IBAction)joinPressed:(id)sender{
     
    // [HHTool mainWindow].rootViewController = nil;
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:kCurrentUserName]){
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"kJCCurrentUserName"]){
 //        JCMainTabBarController  *tabBarVC = [[JCMainTabBarController alloc]init];
 //        [HHTool mainWindow].rootViewController = tabBarVC;
 //        JCConversationListViewController *chatListView = [[JCConversationListViewController alloc]init];

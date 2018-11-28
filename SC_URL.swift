@@ -28,9 +28,13 @@ public let ENDTASK_LIST_URL  = "/v1/task/endtask/list" //查询个人已结束�
 
 public let RECEIVE_ACCOMPLISH_URL  = "/v1/task/receive/accomplish" //完成领取任务
 public let TASK_CANCEL_URL  = "/v1/task/cancel" //取消任务
+public let CONFIRM_UNDONE_URL  = "/v1/task/confirm/undone" //未完成
 public let TASK_CONRIRM_COMPLETE_URL  = "/v1/task/confirm/complete" //发布者确认对方完成
 public let TASK_URGE_URL  = "/v1/task/urge" //催促确认/完成任务
 
 public let COORDINATE_URL  = "/v1/lbs/coordinate/info" // 获取当前位置聊天室信息
 public let WALLET_CURRENCY_URL  = "/web/api/wallet/seat/currency" // 获取当前汇率
+
+public let JM_RoomMembers_URL  = "/jm/room/RoomMembers" //获取极光聊天室成员信息
+
 

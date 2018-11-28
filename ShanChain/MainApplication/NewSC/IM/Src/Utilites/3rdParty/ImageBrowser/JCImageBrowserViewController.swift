@@ -55,6 +55,7 @@ class JCImageBrowserViewController: UIViewController {
                 guard let msg = conversation.message(withMessageId: message.msgId) else {
                     continue
                 }
+                 msg.mark = message.msgId
                 if msg.contentType == .image {
                     imageMessages.append(msg)
                 }

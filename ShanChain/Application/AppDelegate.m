@@ -113,11 +113,6 @@
                                           categories:nil];
     }
     
-//     UIImage  *defaultImage = [UIImage imageNamed:@"sc_com_icon_DefaultAvatar"];
-//     NSData *imagedata= UIImagePNGRepresentation(defaultImage);
-//    [JMSGUser updateMyAvatarWithData:imagedata avatarFormat:nil completionHandler:^(id resultObject, NSError *error) {
-//    
-//    }];
 }
 
 - (void)setBMKManager{
@@ -340,6 +335,8 @@
     [application registerForRemoteNotifications];
 }
 
+
+
 //MARK: - JMessage Delegate
 -(void)onDBMigrateStart{
     [HHTool show:@"数据库升级中"];
@@ -350,5 +347,8 @@
         [HHTool showSucess:@"数据库升级完成"];
     }
 }
+
+
+
 
 @end

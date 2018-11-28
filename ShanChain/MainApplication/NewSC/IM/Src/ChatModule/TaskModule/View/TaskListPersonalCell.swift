@@ -61,9 +61,11 @@ class TaskListPersonalCell: UITableViewCell {
             if _listModel?.personalStatusBtnTuple.isClick  == true {
                 self.statusBtn.borderColor = SC_ThemeMainColor
                 self.statusBtn.setTitleColor(SC_ThemeMainColor, for: .normal)
+                self.statusBtn.isUserInteractionEnabled = false
             }else{
                 self.statusBtn.borderColor = .gray
                 self.statusBtn.setTitleColor(.gray, for: .normal)
+                self.statusBtn.isUserInteractionEnabled = true
             }
             
             self.icon._sd_setImage(withURLString: _listModel?.headImg, placeholderImage: SC_defaultImage)

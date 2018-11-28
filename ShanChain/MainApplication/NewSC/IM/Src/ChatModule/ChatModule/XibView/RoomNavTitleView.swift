@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+typealias NumberForPeopleClosure = () -> Void
+
 class RoomNavTitleView: UIView {
 
     @IBOutlet weak var positionBtn: UIButton!
@@ -15,6 +18,8 @@ class RoomNavTitleView: UIView {
     @IBOutlet var contentView: UIView!
     
     @IBOutlet weak var numberForPeopleBtn: UIButton!
+    
+    var numberForPeopleClosure:NumberForPeopleClosure?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,5 +41,10 @@ class RoomNavTitleView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         positionBtn.isSelected = !positionBtn.isSelected
     }
+    
+    @IBAction func numberForPeopleAction(_ sender: UIButton) {
+         numberForPeopleClosure!()
+    }
+    
     
 }

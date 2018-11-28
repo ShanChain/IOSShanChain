@@ -15,6 +15,28 @@
 #define BMKAPPKEY   @"Lp5FSsHWUaVvhgsKfsveuZXRP3LsqEB6"
 #define DefaultAvatar   @"sc_com_icon_DefaultAvatar"
 
+#define JM_APPKET      @"appkey"
+#define JM_USERNAME    @"userName"
+#define JM_COMVERSATION_TYPE   @"conversationType" // 会话类型
+
+
+#define kCurrentUserName  @"kJCCurrentUserName"
+#define kCurrentUserPassword  @"kCurrentUserPassword"
+#define kUpdateUserInfo  @"kUpdateUserInfo"
+#define kUpdateConversation  @"kUpdateConversation"
+#define kUpdateFriendInfo  @"kUpdateFriendInfo"
+#define kUpdateGroupInfo  @"kUpdateGroupInfo"
+#define kLastUserName = @"kLastUserName"
+#define kLastUserAvator  @"kLastUserAvator"
+#define kUpdateFriendList  @"kUpdateFriendList"
+#define kUpdateVerification  @"kUpdateVerification"
+#define kDeleteAllMessage  @"kDeleteAllMessage"
+#define kReloadAllMessage  @"kReloadAllMessage"
+#define kUnreadInvitationCount  @"kUnreadInvitationCount"
+#define kUpdateFileMessage  @"kUpdateFileMessage"
+#define kUpdateAvatarSuccess  @"kUpdateAvatarSuccess" // 修改头像成功
+
+
 #define Theme_MainThemeColor RGB(115, 207, 242)
 
 //重写NSLog

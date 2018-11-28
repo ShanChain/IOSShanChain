@@ -11,6 +11,7 @@
 #import "SCTabbarController.h"
 #import "SYContactsController.h"
 #import "SCTabbarController.h"
+#import "ShanChain-Swift.h"
 
 //action_type
 static NSString * const MSG_ACTION_TYPE = @"action_type";
@@ -51,6 +52,26 @@ static NSString * const MSG_WHERE_SPACE_MENU = @"space_menu";
         return;
     }
     NSString *userId = [[SCCacheTool shareInstance] getCurrentUser];
+      if (!NULLString(customDic[JM_COMVERSATION_TYPE])) {
+                NSString  *conversationType = (NSString*)customDic[JM_COMVERSATION_TYPE];
+                NSString  *userName = customDic[JM_USERNAME];
+                NSString  *appkey = customDic[JM_APPKET];
+                if ([conversationType isEqualToString:@"single"]) {
+                    // 单聊
+                    [JMSGConversation createSingleConversationWithUsername:userName appKey:appkey completionHandler:^(JMSGConversation * conversation, NSError *error) {
+                        if (!error) {
+                            JCChatViewController *chatVC = [[JCChatViewController alloc]initWithConversation:conversation];
+                            [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateConversation object:nil];
+                            JCNavigationController *nav = [NotificationHandler mainNav];
+                            [nav.topViewController.navigationController pushViewController:chatVC animated:YES];
+                        }
+                    }];
+                }else if ([conversationType isEqualToString:@"group"]){
+                    // 群聊
+                }
+            }
+    
+    
     if(customDic[@"send_userId"] != nil && [[customDic[@"send_userId"] stringValue] isEqualToString:userId]){
         return;
     }
@@ -189,4 +210,19 @@ static NSString * const MSG_WHERE_SPACE_MENU = @"space_menu";
     }
     
 }
+
++ (JCNavigationController*)mainNav{
+    JCNavigationController *nav;
+    if ([[HHTool mainWindow].rootViewController isKindOfClass:[JCMainTabBarController  class]]) {
+        JCMainTabBarController  *tab = (JCMainTabBarController*)[HHTool mainWindow].rootViewController;
+        JCNavigationController *navController = tab.selectedViewController;
+        nav = navController;
+    }else{
+        nav = (JCNavigationController*)[HHTool mainWindow].rootViewController;
+    }
+    return nav;
+}
+
+
+
 @end
