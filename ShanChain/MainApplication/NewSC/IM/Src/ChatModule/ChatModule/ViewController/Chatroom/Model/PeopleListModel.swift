@@ -8,6 +8,18 @@
 
 import UIKit
 
-class PeopleListModel: NSObject {
+class PeopleListModel: HandyJSON {
 
+    var username:String?
+    var flag:String?
+    var room_ctime:String?
+    var mtime:String?
+    var ctime:String?
+    var user:JMSGUser?
+    var nickname:String?
+    var iconImage:UIImage = UIImage.loadImage("com_icon_user_40")!
+    required init() {}
+    
+    
+    
 }

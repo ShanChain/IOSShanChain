@@ -21,11 +21,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IJr-hn-2Yr">
-                        <rect key="frame" x="12" y="12" width="40" height="40"/>
+                        <rect key="frame" x="15" y="12" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="bfe-YU-2ff"/>
                             <constraint firstAttribute="height" constant="40" id="ruK-Z3-VTd"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ro3-vY-Wdf">
                         <rect key="frame" x="219" y="17" width="70" height="30"/>
@@ -34,7 +39,9 @@
                             <constraint firstAttribute="height" constant="30" id="K2P-t8-WvV"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="对话"/>
+                        <state key="normal" title="对话">
+                            <color key="titleColor" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="15"/>
@@ -51,7 +58,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4A-Qq-Abi">
-                        <rect key="frame" x="62" y="23" width="37.5" height="18"/>
+                        <rect key="frame" x="65" y="23" width="37.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -59,7 +66,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="ro3-vY-Wdf" secondAttribute="trailing" constant="15" id="2m3-Bx-vpj"/>
-                    <constraint firstItem="IJr-hn-2Yr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="EPJ-aA-ZCe"/>
+                    <constraint firstItem="IJr-hn-2Yr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="EPJ-aA-ZCe"/>
                     <constraint firstItem="x4A-Qq-Abi" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VhW-1k-6bo"/>
                     <constraint firstItem="x4A-Qq-Abi" firstAttribute="leading" secondItem="IJr-hn-2Yr" secondAttribute="trailing" constant="10" id="Zlz-H8-3qb"/>
                     <constraint firstItem="ro3-vY-Wdf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dyc-vt-G5z"/>

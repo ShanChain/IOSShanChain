@@ -20,6 +20,9 @@
 // 请求当前汇率
 +(void)sc_requstWalletCurrency;
 
+// 加入聊天室
++(void)enterChatRoomWithId:(NSString*)roomId callBlock:(void (^)(id resultObject, NSError *error))callBlock;
+
 @end
 
 

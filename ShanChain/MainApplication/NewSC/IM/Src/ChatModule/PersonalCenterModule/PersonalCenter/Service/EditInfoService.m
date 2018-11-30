@@ -53,6 +53,42 @@
     }];
 }
 
+// 加入聊天室
++(void)enterChatRoomWithId:(NSString *)roomId callBlock:(void (^)(id resultObject, NSError *error))callBlock{
+    [HHTool showChrysanthemum];
+    [JMSGChatRoom enterChatRoomWithRoomId:roomId completionHandler:^(JMSGConversation * resultObject, NSError *error) {
+        if (!error) {
+            // 加入聊天室成功 进入聊天室页面
+            [HHTool dismiss];
+            BLOCK_EXEC(callBlock,resultObject,error)
+        }else{
+            if (error.code == 851003) {
+                // 已经在聊天室了，先退出，再进入
+                [JMSGChatRoom leaveChatRoomWithRoomId:roomId completionHandler:^(id resultObject, NSError *error) {
+                    [HHTool dismiss];
+                    if (!error) {
+                        [EditInfoService enterChatRoomWithId:roomId callBlock:callBlock];
+                    }else{
+                        [HHTool showError:error.localizedDescription];
+                    }
+                }];
+            }else if (error.code == 6002){
+                [HHTool showError:@"连接超时，请稍后再试~"];
+            } else{
+                [HHTool dismiss];
+                [HHTool showError:error.localizedDescription];
+            }
+        }
+        
+    }];
+}
+
+
+
+
+
+
+
 @end
 
 

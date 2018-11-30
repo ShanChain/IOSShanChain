@@ -27,11 +27,13 @@ class HHNumberPeopleListCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
     }
     
     
     @IBAction func dialogueAction(_ sender: UIButton) {
-       
+        if let delegate = delegate{
+            delegate.clickDialogueForChat(index: sender.tag)
+        }
     }
 }

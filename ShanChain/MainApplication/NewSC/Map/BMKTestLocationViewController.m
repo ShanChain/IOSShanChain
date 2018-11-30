@@ -30,7 +30,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;
 
-
 @property (weak, nonatomic) IBOutlet UIButton *noteBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *footprintBtn;
@@ -507,7 +506,6 @@
                 }
             }];
         }
-        
         if (!isEnter) {
             [self createChatRoomConversation];
         }
@@ -517,33 +515,13 @@
 // 加入聊天室
 - (void)enterChatRoom{
     weakify(self);
-   __block HHChatRoomViewController *roomVC;
-    [HHTool showChrysanthemum];
-    [JMSGChatRoom enterChatRoomWithRoomId:self.currentRoomId completionHandler:^(JMSGConversation * resultObject, NSError *error) {
-        if (!error) {
-            // 加入聊天室成功 进入聊天室页面
-            [HHTool dismiss];
-          
-            roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO navTitle:self.currentRoomName];
-            [self pushPage:roomVC Animated:YES];
-        }else{
-            if (error.code == 851003) {
-                // 已经在聊天室了，先退出，再进入
-                [JMSGChatRoom leaveChatRoomWithRoomId:self.currentRoomId completionHandler:^(id resultObject, NSError *error) {
-                    [HHTool dismiss];
-                    if (!error) {
-                        [weak_self enterChatRoom];
-                    }else{
-                        [HHTool showError:error.localizedDescription];
-                    }
-                }];
-            }else{
-                [HHTool dismiss];
-                [HHTool showError:error.localizedDescription];
-            }
-        }
-        
+    __block HHChatRoomViewController *roomVC;
+    [EditInfoService enterChatRoomWithId:self.currentRoomId callBlock:^(JMSGConversation * resultObject, NSError *error) {
+        strongify(self)
+        roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO navTitle:self.currentRoomName];
+        [self pushPage:roomVC Animated:YES];
     }];
+    
 }
 
 

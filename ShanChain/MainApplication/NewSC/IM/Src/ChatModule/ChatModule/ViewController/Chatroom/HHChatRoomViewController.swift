@@ -13,13 +13,13 @@ import MobileCoreServices
 import ASExtendedCircularMenu
 
 
-
-class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
+class HHChatRoomViewController: UIViewController{
     
     @IBOutlet weak var joinChatViewHeight: NSLayoutConstraint!
     @IBOutlet weak var taskButton: ASCircularMenuButton!
     
     @IBOutlet weak var joinCahtView: UIView!
+    var suspendBallBtn:SuspendBall?
     open var conversation: JMSGConversation
     var maskView:UIView! // 蒙版
     //MARK - life cycle
@@ -49,16 +49,18 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         _init()
         maskView = UIView.init(frame:chatView.frame)
 //        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
+        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 60, y: 64, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: ["sc_com_icon_item.1","sc_com_icon_item.2"])
+        suspendBallBtn = suspendBall
+        suspendBallBtn?.isHidden = true
         maskView.backgroundColor = UIColor.black.withAlphaComponent(0.35)
         maskView.isHidden = true
         view.addSubview(maskView)
         view.bringSubview(toFront: maskView)
-        view.bringSubview(toFront: taskButton)
+//        view.bringSubview(toFront: taskButton)
         view.bringSubview(toFront: joinCahtView)
-        configureDynamicCircularMenuButton(button: taskButton, numberOfMenuItems: buttonTitles.count)
-        taskButton.menuButtonSize = .medium
-        taskButton.menuRedius = 70
-        taskButton.circularButtonPositon = .topRight
+        
+        view.addSubview(suspendBallBtn!)// 添加悬浮按钮
+        view.bringSubview(toFront: suspendBallBtn!)
         if isIPhoneX{
             joinChatViewHeight.constant = 82
         }
@@ -80,63 +82,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         toolbar.text = draft
     }
     fileprivate let buttonTitles = ["查看任务","发布任务"]
-    func buttonForIndexAt(_ menuButton: ASCircularMenuButton, indexForButton: Int) -> UIButton {
-        let button: UIButton = UIButton()
-        if menuButton == taskButton{
-            button.backgroundColor = SC_ThemeMainColor
-            button .setImage(UIImage.init(named: "sc_com_icon_item.\(indexForButton + 1)"), for: .normal)
-        }
-        
-        return button
-    }
-    
-    func didClickOnCircularMenuButton(_ menuButton: ASCircularMenuButton, indexForButton: Int, button: UIButton) {
-        if  indexForButton == 1{
-            // 发布任务
-            UIView .animate(withDuration: 0.2) {
-                let pubTaskView:PublishTaskView? =
-                    PublishTaskView(taskModel: self._taskModel, frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
-                pubTaskView?.cornerRadius = 0.01
-                pubTaskView?.borderColor = .clear
-                // 点击发布任务回调
-                pubTaskView?.pbCallClosure = { [weak self] (dataString,reward,time,timestamp,isPut)  in
-                    pubTaskView?.dismiss()
-                    self?.toolbar.isHidden = false
-                    if isPut == false{
-                        return
-                    }
-                    let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
-                    let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self?.currentChatRoomID ?? "","time":timestamp,"characterId":characterId]
-                    // 添加任务
-                    HHTool.showChrysanthemum()
-                    SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: params, showLoading: true, call: { (baseModel, error) in
-                        HHTool.dismiss()
-                        if((error) != nil){
-                            HHTool .showError("发布失败")
-                            return
-                        }
-                        let dict = baseModel?.data as!Dictionary<String, Any>
-                        if let model = TaskAddModel.deserialize(from: dict) {
-                            self?._taskModel = model
-                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:model.Task?.bounty ?? "",CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
-                        }
-                       
-                    })
-                    
-                }
-                self.view.addSubview(pubTaskView!)
-                self.toolbar.isHidden = true
-                
-            }
-        }else{
-            // 查看任务
-            let vc = TaskListContainerViewController()
-            vc._scrollToIndex = .my
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-    }
-    
+
     func willShowForMenuButton(){
         maskView.isHidden = false
         toolbar.isHidden = true
@@ -180,13 +126,13 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         if !isJoinChatRoom {
             toolbar.isHidden = true
             joinCahtView.isHidden = false
-            taskButton.isHidden = true
+            suspendBallBtn?.isHidden = true
         }else{
             toolbar.isHidden = false
             joinCahtView.isHidden = true
             
             if SCCacheTool.shareInstance().status ==  "1" {
-                taskButton.isHidden = false
+                suspendBallBtn?.isHidden = false
             }
             
         }
@@ -241,12 +187,12 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             if !newValue {
                 toolbar.isHidden = true
                 joinCahtView.isHidden = false
-                taskButton.isHidden = true
+                suspendBallBtn?.isHidden = true
             }else{
                 toolbar.isHidden = false
                 joinCahtView.isHidden = true
                 if SCCacheTool.shareInstance().status == "1"{
-                    taskButton.isHidden = false
+                    suspendBallBtn?.isHidden = false
                 }
             }
         }
@@ -383,15 +329,23 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     // tcp长链接被关闭
     func _closeChatRoom()  {
-        self.hrShowAlert(withTitle: nil, message: "当前广场连接已被断开", buttonsTitles: ["确认"]) { (action, index) in
-            if index == 0{
-                self.navigationController?.popViewController(animated: true)
-                if let chatRoom = self.conversation.target as? JMSGChatRoom{
-                    JMSGChatRoom.leaveChatRoom(withRoomId: chatRoom.roomID, completionHandler: nil)
-                }
-                
+        HHTool.show("广场链接已断开，正在为您重新连接...")
+        EditInfoService.enterChatRoom(withId: self.currentChatRoomID, call: { (result, error) in
+            HHTool.dismiss()
+            if let conversation = result as? JMSGConversation{
+                self.conversation = conversation
             }
-        }
+        })
+//        self.hrShowAlert(withTitle: nil, message: "当前广场连接已被断开", buttonsTitles: ["确认"]) { (action, index) in
+//            if index == 0{
+//
+////                self.navigationController?.popViewController(animated: true)
+////                if let chatRoom = self.conversation.target as? JMSGChatRoom{
+////                    JMSGChatRoom.leaveChatRoom(withRoomId: chatRoom.roomID, completionHandler: nil)
+////                }
+//
+//            }
+//        }
     }
     
     func _updateFileMessage(_ notification: Notification) {
@@ -481,11 +435,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
         self.hrShowAlert(withTitle: nil, message: "确定要离开广场吗?", buttonsTitles: ["确认","取消"]) { (action, index) in
             if index == 0{
+                JMSGChatRoom.leaveChatRoom(withRoomId: self.currentChatRoomID!, completionHandler: nil)
                 self.navigationController?.popViewController(animated: true)
-                if let chatRoom = self.conversation.target as? JMSGChatRoom{
-                   JMSGChatRoom.leaveChatRoom(withRoomId: chatRoom.roomID, completionHandler: nil)
-                }
-                
             }
         }
         
@@ -542,7 +493,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     // MARK: - parse message
-    fileprivate func _parseMessage(_ message: JMSGMessage, _ isNewMessage: Bool = true) -> JCMessage {
+    fileprivate func _parseMessage(_ message: JMSGMessage, _ isNewMessage: Bool = true)  -> JCMessage {
         if isNewMessage {
             jMessageCount += 1
         }
@@ -781,26 +732,27 @@ extension HHChatRoomViewController: JMessageDelegate {
     }
     // 处理接收到的消息 
     func _handleMessage(message:JMSGMessage){
-        let message = _parseMessage(message)
+        let message =  _parseMessage(message)
         // TODO: 这个判断是sdk bug导致的，暂时只能这么改
-        if self.messages.contains(where: { (m) -> Bool in
-            return m.msgId == message.msgId
-        }) {
-            let indexs = chatView.indexPathsForVisibleItems
-            for index in indexs {
-                var m = self.messages[index.row]
-                if !m.msgId.isEmpty {
-                    do{
-                       m =  self._parseMessage(conversation.message(withMessageId: m.msgId)!, false)
-                        chatView.update(m, at: index.row)
-                    }catch{
-                        printLog(error)
-                    }
-                    
-                }
-            }
-            return
-        }
+//        if self.messages.contains(where: { (m) -> Bool in
+//            return m.msgId == message.msgId
+//        }) {
+//            // 聊天室消息本地不会存储
+//            let indexs = chatView.indexPathsForVisibleItems
+//            for index in indexs {
+//                var m = self.messages[index.row]
+//                if !m.msgId.isEmpty {
+//                    do{
+//                        m =   self._parseMessage((conversation.message(withMessageId: m.msgId))!, false)
+//                        chatView.update(m, at: index.row)
+//                    }catch{
+//                        printLog(error)
+//                    }
+//
+//                }
+//            }
+//            return
+//        }
         
         self.messages.append(message)
         chatView.append(message)
@@ -1568,7 +1520,50 @@ extension HHChatRoomViewController: UIDocumentInteractionControllerDelegate {
     }
 }
 
-
-
+extension HHChatRoomViewController: SuspendBallDelegte{
+    func suspendBall(_ subBall: UIButton!, didSelectTag tag: Int) {
+        self.suspendBallBtn?.showFunction =  !(self.suspendBallBtn?.showFunction)!
+        if tag == 1 {
+            // 发布任务
+            UIView .animate(withDuration: 0.2) {
+                let pubTaskView:PublishTaskView? =
+                    PublishTaskView(taskModel: self._taskModel, frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
+                pubTaskView?.cornerRadius = 0.01
+                pubTaskView?.borderColor = .clear
+                // 点击发布任务回调
+                pubTaskView?.pbCallClosure = { [weak self] (dataString,reward,time,timestamp,isPut)  in
+                    pubTaskView?.dismiss()
+                    self?.toolbar.isHidden = false
+                    if isPut == false{
+                        return
+                    }
+                    let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
+                    let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self?.currentChatRoomID ?? "","time":timestamp,"characterId":characterId]
+                    // 添加任务
+                    HHTool.showChrysanthemum()
+                    SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: params, showLoading: true, call: { (baseModel, error) in
+                        HHTool.dismiss()
+                        if((error) != nil){
+                            HHTool .showError("发布失败")
+                            return
+                        }
+                        let dict = baseModel?.data as!Dictionary<String, Any>
+                        if let model = TaskAddModel.deserialize(from: dict) {
+                            self?._taskModel = model
+                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:model.Task?.bounty ?? "",CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
+                        }
+                    })
+                }
+                self.view.addSubview(pubTaskView!)
+                self.toolbar.isHidden = true
+            }
+        }else if tag == 0{
+            // 查看任务
+            let vc = TaskListContainerViewController()
+            vc._scrollToIndex = .my
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
 
 

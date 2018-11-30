@@ -53,15 +53,19 @@
 }
 
 -(void)setIconImage{
-    NSString  *headImg = [SCCacheTool shareInstance].characterModel.characterInfo.headImg;
-    UIImage *headImage = [UIImage imageFromURLString:headImg];
-    headImage = [headImage mc_resetToSize:CGSizeMake(64, 64)];
-    headImage = [headImage cutCircleImage];
-    if (headImg) {
-        self.icon.image = headImage;
-    }else{
-        self.icon.image = [UIImage imageNamed:DefaultAvatar];
-    }
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString  *headImg = [SCCacheTool shareInstance].characterModel.characterInfo.headImg;
+        UIImage *headImage = [UIImage imageFromURLString:headImg];
+        headImage = [headImage mc_resetToSize:CGSizeMake(64, 64)];
+        headImage = [headImage cutCircleImage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (headImg) {
+                self.icon.image = headImage;
+            }else{
+                self.icon.image = [UIImage imageNamed:DefaultAvatar];
+            }
+        });
+    });
 }
 
 - (void)setupHeader {

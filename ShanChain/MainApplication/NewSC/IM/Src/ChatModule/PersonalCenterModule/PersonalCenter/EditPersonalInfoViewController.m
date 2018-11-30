@@ -32,6 +32,7 @@
     
     if (!NULLString(info.signature)) {
         self.signatureTextView.text = info.signature;
+         self.modifyNameLb.text = [NSString stringWithFormat:@"%ld/30",MIN(self.signatureTextView.text.length, 30)];
     }
     
     self.signatureTextView.placeholder = @"请输入签名...";

@@ -284,6 +284,7 @@
 		225F83FC21AE94120082C0E1 /* HHNumberPeopleListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225F83FA21AE94120082C0E1 /* HHNumberPeopleListCell.xib */; };
 		225F83FF21AE96FC0082C0E1 /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F83FE21AE96FB0082C0E1 /* BaseProtocol.swift */; };
 		225F840121AE97D10082C0E1 /* PeopleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F840021AE97D10082C0E1 /* PeopleListModel.swift */; };
+		225F842221AFD2250082C0E1 /* SuspendBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 225F842021AFD2250082C0E1 /* SuspendBall.m */; };
 		22631C49216DD6E800D5AB0B /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */; };
 		22631C4C216DDA3200D5AB0B /* SavePublishContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4B216DDA3200D5AB0B /* SavePublishContentModel.m */; };
 		22631C4F216DE85200D5AB0B /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 22631C4D216DE85100D5AB0B /* UIViewController+BackButtonHandler.m */; };
@@ -1110,6 +1111,8 @@
 		225F83FA21AE94120082C0E1 /* HHNumberPeopleListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHNumberPeopleListCell.xib; sourceTree = "<group>"; };
 		225F83FE21AE96FB0082C0E1 /* BaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
 		225F840021AE97D10082C0E1 /* PeopleListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListModel.swift; sourceTree = "<group>"; };
+		225F842021AFD2250082C0E1 /* SuspendBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuspendBall.m; sourceTree = "<group>"; };
+		225F842121AFD2250082C0E1 /* SuspendBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuspendBall.h; sourceTree = "<group>"; };
 		22631C47216DD6E800D5AB0B /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		22631C48216DD6E800D5AB0B /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		22631C4A216DDA3200D5AB0B /* SavePublishContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavePublishContentModel.h; sourceTree = "<group>"; };
@@ -2785,6 +2788,7 @@
 		2242BFF52159C34D00707024 /* PublicService */ = {
 			isa = PBXGroup;
 			children = (
+				225F841F21AFD2250082C0E1 /* SuspendBall */,
 				22680AB3219E779000F2FA5B /* XMWebView */,
 				223F9A5121829BA70031DB95 /* CWLateralSlide */,
 				2242BFF62159C34D00707024 /* noDataTip */,
@@ -2872,6 +2876,15 @@
 			children = (
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		225F841F21AFD2250082C0E1 /* SuspendBall */ = {
+			isa = PBXGroup;
+			children = (
+				225F842021AFD2250082C0E1 /* SuspendBall.m */,
+				225F842121AFD2250082C0E1 /* SuspendBall.h */,
+			);
+			path = SuspendBall;
 			sourceTree = "<group>";
 		};
 		22680AB3219E779000F2FA5B /* XMWebView */ = {
@@ -5182,6 +5195,7 @@
 				485E65D31F42862900B158BF /* MWGridViewController.m in Sources */,
 				485E65E31F42862900B158BF /* UIButton+EMWebCache.m in Sources */,
 				48718D2C1F42277400010AA0 /* AFNetworkReachabilityManager.m in Sources */,
+				225F842221AFD2250082C0E1 /* SuspendBall.m in Sources */,
 				223F9988217F12040031DB95 /* JCMessageLocationContentView.swift in Sources */,
 				223F99F7217F12040031DB95 /* SAIToolboxItemView.swift in Sources */,
 				223F99F2217F12040031DB95 /* SAIInputBackgroundView.swift in Sources */,

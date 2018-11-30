@@ -39,6 +39,9 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMn-bv-2a6">
                             <rect key="frame" x="30" y="5" width="315" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="o2r-ve-3Sn"/>
+                            </constraints>
                             <state key="normal" title="加入聊天">
                                 <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -60,11 +63,10 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="dMn-bv-2a6" firstAttribute="centerY" secondItem="2TR-qW-ZZa" secondAttribute="centerY" id="0jn-B4-z2o"/>
                         <constraint firstAttribute="trailing" secondItem="dMn-bv-2a6" secondAttribute="trailing" constant="30" id="5AA-bs-zRo"/>
-                        <constraint firstItem="dMn-bv-2a6" firstAttribute="top" secondItem="2TR-qW-ZZa" secondAttribute="top" constant="5" id="FI6-OA-32H"/>
                         <constraint firstItem="dMn-bv-2a6" firstAttribute="leading" secondItem="2TR-qW-ZZa" secondAttribute="leading" constant="30" id="Ni1-kg-XLm"/>
                         <constraint firstAttribute="height" constant="50" id="WNd-cE-87F"/>
-                        <constraint firstAttribute="bottom" secondItem="dMn-bv-2a6" secondAttribute="bottom" constant="5" id="ot2-ar-gaQ"/>
                     </constraints>
                 </view>
             </subviews>

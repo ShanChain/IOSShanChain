@@ -139,26 +139,26 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
 #pragma mark -系统方法
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:self.view.window];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardDidShow:)
+//                                                 name:UIKeyboardWillShowNotification
+//                                               object:self.view.window];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardDidHide:)
+//                                                 name:UIKeyboardWillHideNotification
+//                                               object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:UIKeyboardWillShowNotification
+//                                                  object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:UIKeyboardWillHideNotification
+//                                                  object:nil];
 }
 -(void)initFromRnData{
     if (self.rnParams != nil) {
@@ -176,6 +176,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initFromRnData];
+    _type = TYPE_RESET_PASSWORD;
    // self.type = TYPE_RESET_PASSWORD;
     self.view.backgroundColor=RGB(255, 255, 255);
     if([_type isEqualToString:TYPE_BIND_MOBILE]){
@@ -369,36 +370,36 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
         }];
     }
 }
-
-- (void)keyboardDidShow:(NSNotification*)notification {
-    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
-    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    
-    // 第三方键盘回调三次问题，监听仅执行最后一次
-    if ( begin.size.height>0 && (begin.origin.y-end.origin.y>0) ) {
-        if (_keyboardIsShown) {
-            return ;
-        }
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,self.scrollViewContentHeight);
-        WS(weakSelf);
-        [Util commonViewAnimation:^{
-            weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, weakSelf.currOffsetY);
-        }
-                       completion:nil];
-        
-        _keyboardIsShown = YES;
-    }
-}
-
-- (void)keyboardDidHide:(NSNotification *)notification {
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,self.scrollViewContentHeight+1);
-    WS(weakSelf);
-    [Util commonViewAnimation:^{
-        weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, 0);
-    } completion:nil];
-    
-    _keyboardIsShown = NO;
-}
+//
+//- (void)keyboardDidShow:(NSNotification*)notification {
+//    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
+//    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+//
+//    // 第三方键盘回调三次问题，监听仅执行最后一次
+//    if ( begin.size.height>0 && (begin.origin.y-end.origin.y>0) ) {
+//        if (_keyboardIsShown) {
+//            return ;
+//        }
+//        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,self.scrollViewContentHeight);
+//        WS(weakSelf);
+//        [Util commonViewAnimation:^{
+//            weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, weakSelf.currOffsetY);
+//        }
+//                       completion:nil];
+//
+//        _keyboardIsShown = YES;
+//    }
+//}
+//
+//- (void)keyboardDidHide:(NSNotification *)notification {
+//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,self.scrollViewContentHeight+1);
+//    WS(weakSelf);
+//    [Util commonViewAnimation:^{
+//        weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, 0);
+//    } completion:nil];
+//
+//    _keyboardIsShown = NO;
+//}
 
 
 //验证手机号码
