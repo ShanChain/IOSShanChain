@@ -89,7 +89,9 @@
     [SCCacheTool shareInstance].isJGSetup = YES;
 }
 
-
+- (void)kJMSGNetworkDidCloseNotification{
+    
+}
 - (void)setJMessageSDK:(NSDictionary *)launchOptions{
     [JMessage setupJMessage:launchOptions appKey:JMSSAGE_APPKEY channel:nil apsForProduction:NO category:nil messageRoaming:YES];
     [JMessage setDebugMode];

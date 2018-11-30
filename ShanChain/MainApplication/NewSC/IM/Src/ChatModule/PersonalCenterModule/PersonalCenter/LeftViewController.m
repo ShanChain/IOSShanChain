@@ -198,18 +198,18 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
     NSString  *title = self.titleArray[indexPath.row];
-    if ([title isEqualToString:@"我的任务"]) {
+    if ([title isEqualToString:NSLocalizedString(@"sc_MyTask", nil)]) {
         TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
         taskVC._oc_scrollToIndex = 1;
         [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
-    }else if ([title isEqualToString:@"我的消息"]){
+    }else if ([title isEqualToString:NSLocalizedString(@"sc_MyMessage", nil)]){
         JCConversationListViewController *conversationListVC = [[JCConversationListViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:conversationListVC animated:YES];
-    }else if ([title isEqualToString:@"我的钱包"]){
+    }else if ([title isEqualToString:NSLocalizedString(@"sc_MyWallet", nil)]){
         //
         MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:walletVC animated:YES];
-    }else if ([title isEqualToString:@"退出登录"]){
+    }else if ([title isEqualToString:NSLocalizedString(@"sc_SignOut", nil)]){
         [[SCAppManager shareInstance]selectLogout];
 //        [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
     }else{
@@ -281,14 +281,15 @@
     if (_titleArray == nil) {
         if ([SCCacheTool shareInstance].status.integerValue == 0) {
             _titleArray = @[
-                            @"我的消息",
-                            @"退出登录"];
+                            NSLocalizedString(@"sc_MyMessage", nil),
+                            NSLocalizedString(@"sc_SignOut", nil)];
         }else{
-            _titleArray = @[@"我的钱包",
-                            @"我的任务",
-                            @"我的消息",
-                            @"退出登录"];
+            _titleArray = @[NSLocalizedString(@"sc_MyWallet", nil),
+                            NSLocalizedString(@"sc_MyTask", nil),
+                            NSLocalizedString(@"sc_MyMessage", nil),
+                            NSLocalizedString(@"sc_SignOut", nil)];
         }
+        
      
     }
     return _titleArray;

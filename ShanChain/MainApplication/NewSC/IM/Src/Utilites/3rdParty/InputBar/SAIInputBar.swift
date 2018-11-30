@@ -234,7 +234,6 @@ open class SAIInputBar: UIView {
         _inputView.updateInputMode(newMode, oldMode: oldMode, animated: animated)
         // unfortunately not update, because I don't know keyboardSize
         //_updateKeyboardKeyboardWithInputMode(newMode, animated: animated)
-        
         delegate?.inputBar?(didChangeMode: self)
     }
     

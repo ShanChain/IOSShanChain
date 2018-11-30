@@ -20,6 +20,9 @@ class HHChatRoomViewController: UIViewController{
     
     @IBOutlet weak var joinCahtView: UIView!
     var suspendBallBtn:SuspendBall?
+    
+    
+    @IBOutlet weak var enterChatBtn: UIButton!
     open var conversation: JMSGConversation
     var maskView:UIView! // 蒙版
     //MARK - life cycle
@@ -52,6 +55,7 @@ class HHChatRoomViewController: UIViewController{
         let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 60, y: 64, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: ["sc_com_icon_item.1","sc_com_icon_item.2"])
         suspendBallBtn = suspendBall
         suspendBallBtn?.isHidden = true
+        suspendBallBtn?.bottomLayGuide = toolbar.contentSize.height
         maskView.backgroundColor = UIColor.black.withAlphaComponent(0.35)
         maskView.isHidden = true
         view.addSubview(maskView)
@@ -61,6 +65,8 @@ class HHChatRoomViewController: UIViewController{
         
         view.addSubview(suspendBallBtn!)// 添加悬浮按钮
         view.bringSubview(toFront: suspendBallBtn!)
+        
+        
         if isIPhoneX{
             joinChatViewHeight.constant = 82
         }
@@ -317,8 +323,7 @@ class HHChatRoomViewController: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_closeChatRoom), name: NSNotification.Name.jmsgNetworkDidClose, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
-        
-        
+         enterChatBtn.setTitle(NSLocalizedString("sc_Join", comment: "字符串"), for: .normal)
         // 抽屉
         self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
             if direction == CWDrawerTransitionDirection.fromLeft{
@@ -433,7 +438,7 @@ class HHChatRoomViewController: UIViewController{
         if navigationController?.viewControllers.count == 1 {
             
         }
-        self.hrShowAlert(withTitle: nil, message: "确定要离开广场吗?", buttonsTitles: ["确认","取消"]) { (action, index) in
+        self.hrShowAlert(withTitle: nil, message: NSLocalizedString("sc_LeaveCommunity", comment: "字符串"), buttonsTitles: [NSLocalizedString("sc_confirm", comment: "字符串"),NSLocalizedString("sc_cancel", comment: "字符串")]) { (action, index) in
             if index == 0{
                 JMSGChatRoom.leaveChatRoom(withRoomId: self.currentChatRoomID!, completionHandler: nil)
                 self.navigationController?.popViewController(animated: true)
@@ -623,6 +628,23 @@ class HHChatRoomViewController: UIViewController{
         let msg = JCMessage(content: videoContent)
         send(msg, message)
     }
+ 
+    // 发送视频
+    func send(videoData: Data,videoUrl :URL) {
+        let videoContent = JCMessageVideoContent()
+        videoContent.data = videoData
+        videoContent.delegate = self
+        let dic = HHTool.getVideoInfo(withSourcePath: videoUrl)
+        let duration:NSNumber = dic!["duration"] as! NSNumber
+        let content = JMSGVideoContent(videoData: videoData, thumbData:UIImagePNGRepresentation(HHTool.getVideoPreViewImage(videoUrl)), duration:duration)
+        let message = JMSGMessage.ex.createMessage(conversation, content, nil)
+        message.ex.isShortVideo = true
+        let msg = JCMessage(content: videoContent)
+        send(msg, message)
+        
+    }
+    
+    
     // 发送地址
     func send(address: String, lon: NSNumber, lat: NSNumber) {
         let locationContent = JCMessageLocationContent()
@@ -983,7 +1005,9 @@ extension HHChatRoomViewController: YHPhotoPickerViewControllerDelegate, UINavig
         let videoUrl = info[UIImagePickerControllerMediaURL] as! URL?
         if videoUrl != nil {
             let data = try! Data(contentsOf: videoUrl!)
-            send(fileData: data)
+            //send(fileData: data)
+            send(videoData: data, videoUrl: videoUrl!)
+            
         }
     }
 }
@@ -1032,6 +1056,7 @@ extension HHChatRoomViewController: JCMessageDelegate {
         }
     }
     
+     // 点击文件
     func message(message: JCMessageType, fileData data: Data?, fileName: String?, fileType: String?) {
         if data == nil {
             let vc = JCFileDownloadViewController()

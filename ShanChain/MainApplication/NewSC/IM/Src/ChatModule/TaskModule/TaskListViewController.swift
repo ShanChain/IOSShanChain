@@ -30,10 +30,11 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
     public required init(type:TaskListType){
         self.type = type
         if self.type == TaskListType.all {
-            self.titles = ["0":"全部任务","1":"未领取任务"]
+            
+            self.titles = ["0":NSLocalizedString("sc_Alltask", comment: "字符串"),"1":NSLocalizedString("sc_Availabletasks", comment: "字符串")]
             self.statusCode = StatusCode.squareAll
         }else{
-            self.titles = ["2":"全部任务","3":"我发布的","4":"我领取的","5":"已结束的"]
+            self.titles = ["2":NSLocalizedString("sc_Alltask", comment: "字符串"),"3":NSLocalizedString("sc_MyPost", comment: "字符串"),"4":NSLocalizedString("sc_Myaccept", comment: "字符串"),"5":NSLocalizedString("sc_Ended", comment: "字符串")]
             self.statusCode = StatusCode.myAll
         }
         super.init(nibName: nil, bundle: nil)
@@ -77,7 +78,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         let headerView:UIView = UIView(frame: CGRect(x: 10, y: 0, width: self.view.bounds.width - 20, height: 30))
         headerView.backgroundColor = self.view.backgroundColor
         let btn:UIButton = UIButton.init(type: .custom)
-        btn.setTitle("全部任务", for: .normal)
+        btn.setTitle(NSLocalizedString("sc_Alltask", comment: "字符串"), for: .normal)
         btn.setTitleColor(.black, for: .normal)
         btn.titleLabel?.font = Font(15)
         btn.addTarget(self, action: #selector(clickSelectStatusAction(_:)), for:.touchUpInside)

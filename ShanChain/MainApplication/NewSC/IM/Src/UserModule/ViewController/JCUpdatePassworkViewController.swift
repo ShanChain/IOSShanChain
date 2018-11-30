@@ -39,7 +39,7 @@ class JCUpdatePassworkViewController: UIViewController {
     }()
     private lazy var updateButton: UIButton = {
         var updateButton = UIButton()
-        updateButton.setTitle("确认", for: .normal)
+        updateButton.setTitle(NSLocalizedString("sc_confirm", comment: "字符串"), for: .normal)
         updateButton.layer.cornerRadius = 3.0
         updateButton.layer.masksToBounds = true
         updateButton.addTarget(self, action: #selector(_updatePasswork), for: .touchUpInside)

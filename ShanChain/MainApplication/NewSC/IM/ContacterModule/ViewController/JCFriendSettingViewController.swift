@@ -173,7 +173,7 @@ extension JCFriendSettingViewController: UITableViewDataSource, UITableViewDeleg
 
 extension JCFriendSettingViewController: JCButtonCellDelegate {
     func buttonCell(clickButton button: UIButton) {
-        let alertView = UIAlertView(title: "删除好友", message: "是否确认删除该好友？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "删除")
+        let alertView = UIAlertView(title: "删除好友", message: "是否确认删除该好友？", delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), otherButtonTitles: "删除")
         alertView.show()
     }
 }

@@ -61,7 +61,7 @@ class JCRemindListViewController: UIViewController {
     
     private func _setupNavigation() {
         cancel.addTarget(self, action: #selector(_clickNavRightButton), for: .touchUpInside)
-        cancel.setTitle("取消", for: .normal)
+        cancel.setTitle(NSLocalizedString("sc_cancel", comment: "字符串"), for: .normal)
         cancel.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         let item = UIBarButtonItem(customView: cancel)
         navigationItem.leftBarButtonItem = item

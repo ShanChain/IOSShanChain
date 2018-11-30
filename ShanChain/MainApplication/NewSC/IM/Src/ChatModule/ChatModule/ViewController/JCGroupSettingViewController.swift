@@ -285,7 +285,7 @@ extension JCGroupSettingViewController: UITableViewDelegate, UITableViewDataSour
                 vc.conversation  = conv
                 navigationController?.pushViewController(vc, animated: true)
             case 3:
-                let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "清空聊天记录")
+                let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), destructiveButtonTitle: nil, otherButtonTitles: "清空聊天记录")
                 actionSheet.tag = 1001
                 actionSheet.show(in: self.view)
             default:
@@ -351,7 +351,7 @@ extension JCGroupSettingViewController: JCMineInfoCellDelegate {
 
 extension JCGroupSettingViewController: JCButtonCellDelegate {
     func buttonCell(clickButton button: UIButton) {
-        let alertView = UIAlertView(title: "退出此群", message: "确定要退出此群？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+        let alertView = UIAlertView(title: "退出此群", message: "确定要退出此群？", delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), otherButtonTitles: "确定")
         alertView.show()
     }
 }

@@ -155,7 +155,7 @@ class MyQRCodeViewController: UIViewController {
     }
     
     func _saveImage() {
-        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "保存图片")
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), destructiveButtonTitle: nil, otherButtonTitles: "保存图片")
         actionSheet.show(in: view)
     }
     

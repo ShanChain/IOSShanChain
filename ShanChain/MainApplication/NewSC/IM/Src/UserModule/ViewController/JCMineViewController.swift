@@ -203,7 +203,7 @@ extension JCMineViewController: JCMineInfoCellDelegate {
 
 extension JCMineViewController: JCButtonCellDelegate {
     func buttonCell(clickButton button: UIButton) {
-        let alertView = UIAlertView(title: "", message: "确定要退出登录？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+        let alertView = UIAlertView(title: "", message: "确定要退出登录？", delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), otherButtonTitles: "确定")
         alertView.show()
     }
 }

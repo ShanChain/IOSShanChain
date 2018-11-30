@@ -192,7 +192,7 @@ class FileManagerViewController: UIViewController {
             tabedSlideView.frame = CGRect(x: tabedSlideView.x, y: tabedSlideView.y, width: tabedSlideView.width, height: tabedSlideView.height + 45)
             barView.isHidden = true
         } else {
-            navRightButton.title = "取消"
+            navRightButton.title = NSLocalizedString("sc_cancel", comment: "字符串")
             tabedSlideView.frame = CGRect(x: tabedSlideView.x, y: tabedSlideView.y, width: tabedSlideView.width, height: tabedSlideView.height - 45)
             barView.isHidden = false
         }

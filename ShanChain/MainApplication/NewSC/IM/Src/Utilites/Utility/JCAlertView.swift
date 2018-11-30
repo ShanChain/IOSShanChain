@@ -109,7 +109,7 @@ extension JCAlertView {
         default :
             break
         }
-        return self.addCancelButton("取消")
+        return self.addCancelButton(NSLocalizedString("sc_cancel", comment: "字符串"))
             .addButton("确定")
     }
 }

@@ -33,7 +33,7 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
     self.fatherViewController = fatherVC;
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
-                                              cancelButtonTitle:@"取消"
+                                              cancelButtonTitle:NSLocalizedString(@"sc_cancel", nil)
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"相册", @"拍照", nil];
     [sheet showInView:fatherVC.view];

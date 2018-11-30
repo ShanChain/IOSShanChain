@@ -128,7 +128,7 @@ MJExtensionCodingImplementation
     ShowSelectEntity  *entity = [[ShowSelectEntity alloc]init];
     entity.value = value;
     entity.key = key;
-    if ([value isEqualToString:@"全部任务"]) {
+    if ([value isEqualToString:NSLocalizedString(@"sc_Alltask",nil)]) {
         entity.isSelect = YES;
     }
     return entity;

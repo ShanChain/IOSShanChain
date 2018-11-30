@@ -122,7 +122,7 @@ class JCRegisterInfoViewController: UIViewController {
      
     func _tapHandler() {
         view.endEditing(true)
-        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "  从相册中选择", "拍照")
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), destructiveButtonTitle: nil, otherButtonTitles: "  从相册中选择", "拍照")
         actionSheet.tag = 1001
         actionSheet.show(in: self.view)
     }

@@ -907,7 +907,7 @@ extension JCChatViewController: JCMessageDelegate {
     
     func clickTips(message: JCMessageType) {
         currentMessage = message
-        let alertView = UIAlertView(title: "重新发送", message: "是否重新发送该消息？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "发送")
+        let alertView = UIAlertView(title: "重新发送", message: "是否重新发送该消息？", delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), otherButtonTitles: "发送")
         alertView.show()
     }
     

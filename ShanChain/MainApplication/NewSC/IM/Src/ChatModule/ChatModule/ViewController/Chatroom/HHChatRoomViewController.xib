@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HHChatRoomViewController" customModule="ShanChain" customModuleProvider="target">
             <connections>
+                <outlet property="enterChatBtn" destination="dMn-bv-2a6" id="KzI-Vu-XgT"/>
                 <outlet property="joinCahtView" destination="2TR-qW-ZZa" id="bhX-zb-h5P"/>
                 <outlet property="joinChatViewHeight" destination="WNd-cE-87F" id="tBA-07-tPd"/>
                 <outlet property="taskButton" destination="EG1-qW-GSb" id="VDX-Mo-yAj"/>

@@ -155,7 +155,7 @@ extension JCSingleSettingViewController: UITableViewDelegate, UITableViewDataSou
                 vc.conversation  = conv
                 navigationController?.pushViewController(vc, animated: true)
             case 2:
-                let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "清空聊天记录")
+                let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), destructiveButtonTitle: nil, otherButtonTitles: "清空聊天记录")
                 actionSheet.tag = 1001
                 actionSheet.show(in: view)
             case 3:
@@ -204,7 +204,7 @@ extension JCSingleSettingViewController: JCMineInfoCellDelegate {
 extension JCSingleSettingViewController: JCButtonCellDelegate {
     func buttonCell(clickButton button: UIButton) {
         if user.isFriend {
-            let alertView = UIAlertView(title: "删除好友", message: "是否确认删除该好友？", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "删除")
+            let alertView = UIAlertView(title: "删除好友", message: "是否确认删除该好友？", delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), otherButtonTitles: "删除")
             alertView.show()
         } else {
             let vc = JCAddFriendViewController()

@@ -30,7 +30,7 @@ class JCDatePickerViwe: UIView {
         var cancelButton = UIButton()
         cancelButton.layer.borderWidth = 0.5
         cancelButton.layer.borderColor = UIColor.gray.cgColor
-        cancelButton.setTitle("取消", for: .normal)
+        cancelButton.setTitle(NSLocalizedString("sc_cancel", comment: "字符串"), for: .normal)
         cancelButton.setTitleColor(.black, for: .normal)
         cancelButton.addTarget(self, action: #selector(_cancel(_:)), for: .touchUpInside)
         return cancelButton

@@ -8,13 +8,14 @@
 
 import UIKit
 
-class JCFileDownloadViewController: UIViewController {
+class JCFileDownloadViewController: SCBaseVC {
     
     var message: JMSGMessage!
     var fileSize: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+         title = "文件预览"
         _init()
     }
 

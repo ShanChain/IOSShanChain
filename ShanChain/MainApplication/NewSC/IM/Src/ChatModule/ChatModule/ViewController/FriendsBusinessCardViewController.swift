@@ -39,7 +39,7 @@ class FriendsBusinessCardViewController: UIViewController {
     fileprivate var searchUser: JMSGUser?
     fileprivate var selectUser: JMSGUser!
 
-    private lazy var navLeftButton: UIBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(_clickNavLeftButton))
+    private lazy var navLeftButton: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("sc_cancel", comment: "字符串"), style: .plain, target: self, action: #selector(_clickNavLeftButton))
 
     fileprivate lazy var tipsView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 64 + 31 + 5, width: self.view.width, height: self.view.height - 31 - 64 - 5))
@@ -227,7 +227,7 @@ extension FriendsBusinessCardViewController: UITableViewDelegate, UITableViewDat
         JCAlertView.bulid().setTitle("发送给：\(displayName)")
             .setMessage(selectUser.displayName() + "的名片")
             .setDelegate(self)
-            .addCancelButton("取消")
+            .addCancelButton(NSLocalizedString("sc_cancel", comment: "字符串"))
             .addButton("确定")
             .show()
     }

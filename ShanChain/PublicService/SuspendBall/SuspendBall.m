@@ -164,6 +164,7 @@ static CGFloat btnSmallImageWidth = 22;
     _superBallBackColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.6];
     _showFunction = NO;
     _stickToScreen = YES;
+    self.bottomLayGuide = 0.0;
 }
 
 - (void)setImageNameGroup:(NSArray *)imageNameGroup
@@ -177,6 +178,10 @@ static CGFloat btnSmallImageWidth = 22;
 {
     _superBallBackColor = superBallBackColor;
     self.backgroundColor = superBallBackColor;
+}
+
+-(void)setBottomLayGuide:(CGFloat)bottomLayGuide{
+     _bottomLayGuide = bottomLayGuide;
 }
 
 #pragma mark - Selector
@@ -204,15 +209,15 @@ static CGFloat btnSmallImageWidth = 22;
                 }];
             }
             
-            if (point.y > KScreenHeight - fullButtonWidth / 2) {
+            if (point.y > KScreenHeight - fullButtonWidth / 2 - self.bottomLayGuide) {
                 [UIView animateWithDuration:0.5 animations:^{
-                    self.lhz_y = KScreenHeight - fullButtonWidth;
+                    self.lhz_y = KScreenHeight - fullButtonWidth - self.bottomLayGuide;
                 }];
             }
             
             if (point.y < KNavBarHeight + fullButtonWidth / 2) {
                 [UIView animateWithDuration:0.5 animations:^{
-                    self.lhz_y = KNavBarHeight;
+                    self.lhz_y = KNavBarHeight - self.bottomLayGuide;
                 }];
             }
             

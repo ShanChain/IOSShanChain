@@ -22,6 +22,8 @@
 #include <net/if.h>
 #include <net/if_dl.h>
 
+#import <AVFoundation/AVFoundation.h>
+
 #define IOS_CELLULAR    @"pdp_ip0"
 #define IOS_WIFI        @"en0"
 //#define IOS_VPN       @"utun0"
@@ -181,6 +183,32 @@
     }else{
         return  [app keyWindow];
     }
+}
+
+
+// 获取视频第一帧
++ (UIImage*) getVideoPreViewImage:(NSURL *)path
+{
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:path options:nil];
+    AVAssetImageGenerator *assetGen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    
+    assetGen.appliesPreferredTrackTransform = YES;
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    CGImageRef image = [assetGen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *videoImage = [[UIImage alloc] initWithCGImage:image];
+    CGImageRelease(image);
+    return videoImage;
+}
+
++ (NSDictionary *)getVideoInfoWithSourcePath:(NSURL *)path{
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:path options:nil];
+    CMTime   time = [asset duration];
+    int seconds = ceil(time.value/time.timescale);
+    NSInteger   fileSize = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithContentsOfURL:path usedEncoding:NSUTF8StringEncoding error:nil]error:nil].fileSize;
+    return @{@"size" : @(fileSize),
+             @"duration" : @(seconds)};
 }
 
 

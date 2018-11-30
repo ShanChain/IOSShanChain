@@ -43,7 +43,7 @@ public class JCAreaPickerView: UIView {
         toolView.addSubview(line)
         
         let cancelButton = UIButton(frame: CGRect(x: 15, y: 0, width: 50, height: 39.5))
-        cancelButton.setTitle("取消", for: .normal)
+        cancelButton.setTitle(NSLocalizedString("sc_cancel", comment: "字符串"), for: .normal)
         cancelButton.setTitleColor(.black, for: .normal)
         cancelButton.addTarget(self, action: #selector(_areaPickerCancel), for: .touchUpInside)
         

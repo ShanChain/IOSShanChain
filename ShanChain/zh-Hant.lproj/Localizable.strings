@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  ShanChain
+
+  Created by 千千世界 on 2018/11/30.
+  Copyright © 2018年 ShanChain. All rights reserved.
+*/
+
+
+"sc_enter" = "进入广场";
+"sc_E" = "东经";
+"sc_W" = "西经";
+"sc_N" = "北纬";
+"sc_S" = "南纬";
+
+
+
+"sc_Join" = "加入聊天";
+"sc_LeaveCommunity" = "确定要离开广场吗？";
+"sc_confirm" = "确认";
+"sc_cancel" = "取消";
+
+
+
+
+"sc_MyWallet" = "我的钱包";
+"sc_MyMessage" = "我的消息";
+"sc_MyTask" = "我的任务";
+"sc_SignOut" = "退出登录";
+
+"sc_RewardTask" = "悬赏任务";
+"sc_MyTask" = "我的任务";
+"sc_Tasklist" = "任务列表";
+
+"sc_Alltask" = "全部任务";
+"sc_MyPost" = "我发布的";
+"sc_Myaccept" = "我领取的";
+"sc_Ended" = "已结束";
+"sc_Availabletasks" = "未领取任务";
+"sc_Waiting" = "对方正在完成";
+"sc_Doing" = "正在完成";
+
+
+
+

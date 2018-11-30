@@ -1,0 +1,40 @@
+/* 
+  Localizable.strings
+  ShanChain
+
+  Created by 千千世界 on 2018/11/30.
+  Copyright © 2018年 ShanChain. All rights reserved.
+*/
+
+"sc_enter" = "Enter \n Meta-Community";
+"sc_E" = "E";
+"sc_W" = "W";
+"sc_N" = "N";
+"sc_S" = "S";
+
+
+"sc_Join" = "Join";
+"sc_LeaveCommunity" = "Are you sure to leave this community?";
+"sc_confirm" = "confirm";
+"sc_cancel" = "cancel";
+
+
+"sc_MyWallet" = "My Wallet";
+"sc_MyMessage" = "My Message";
+"sc_MyTask" = "My Task";
+"sc_SignOut" = "sign out";
+
+
+"sc_RewardTask" = "Reward Task";
+"sc_MyTask" = "My Task";
+"sc_Tasklist" = "Task list";
+
+"sc_Alltask" = "All task";
+"sc_MyPost" = "My Post";
+"sc_Myaccept" = "My accept";
+"sc_Ended" = "Ended";
+"sc_Availabletasks" = "Available tasks";
+"sc_Waiting" = "Waiting...";
+"sc_Doing" = "Doing";
+
+

@@ -48,5 +48,8 @@ typedef void(^FunctionClickAction)(UIButton *);
 //** 代理 */
 @property (nonatomic, weak) id<SuspendBallDelegte> delegate;
 
+
+@property (nonatomic ,assign) CGFloat bottomLayGuide; // 移动距离底部的范围
+
 - (void)suspendBallShow;
 @end

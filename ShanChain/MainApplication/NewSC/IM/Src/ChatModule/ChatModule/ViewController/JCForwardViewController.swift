@@ -73,7 +73,7 @@ class JCForwardViewController: UIViewController {
     
     private func _setupNavigation() {
         cancelButton.addTarget(self, action: #selector(_clickNavleftButton), for: .touchUpInside)
-        cancelButton.setTitle("取消", for: .normal)
+        cancelButton.setTitle(NSLocalizedString("sc_cancel", comment: "字符串"), for: .normal)
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         let item = UIBarButtonItem(customView: cancelButton)
         navigationItem.leftBarButtonItem = item
@@ -210,7 +210,7 @@ extension JCForwardViewController: UITableViewDelegate, UITableViewDataSource {
         JCAlertView.bulid().setTitle("发送给：\(selectUser.displayName())")
             .setMessage(fromUser.displayName() + "的名片")
             .setDelegate(self)
-            .addCancelButton("取消")
+            .addCancelButton(NSLocalizedString("sc_cancel", comment: "字符串"))
             .addButton("确定")
             .setTag(10003)
             .show()

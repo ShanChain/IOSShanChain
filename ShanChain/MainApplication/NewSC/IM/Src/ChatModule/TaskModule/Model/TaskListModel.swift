@@ -90,7 +90,7 @@ class TaskListModel: HandyJSON {
         if Int(status!)! == 10 {
             if isMyBublish == true{
                // return ("催他完成",true,SC_ThemeMainColor,true,120)
-                return ("正在完成",true,.gray,true,120)
+                return (NSLocalizedString("sc_Doing", comment: "字符串"),true,.gray,true,120)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
@@ -142,9 +142,9 @@ class TaskListModel: HandyJSON {
     var personalStatusBtnTuple:(title:String,isClick:Bool,width:Int){
         if Int(status!)! == 10 {
             if isMyBublish == true{
-                return ("对方正在完成",false,140)
+                return (NSLocalizedString("sc_Waiting", comment: "字符串"),false,140)
             }
-            return ("正在完成",true,80)
+            return (NSLocalizedString("sc_Doing", comment: "字符串"),true,80)
         }
         
         if Int(status!)! == 15 {

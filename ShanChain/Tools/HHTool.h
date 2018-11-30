@@ -24,5 +24,16 @@
 //获取当前window
 + (UIWindow *)mainWindow;
 + (UIImage*)getHeadImageWithSize:(CGSize)size;
+// 获取视频第一帧
++ (UIImage*) getVideoPreViewImage:(NSURL *)path;
+
+/**
+ * @method
+ *
+ * @brief 根据路径获取视频时长和大小
+ * @param path       视频路径
+ * @return    字典    @"size"－－文件大小   @"duration"－－视频时长
+ */
++ (NSDictionary *)getVideoInfoWithSourcePath:(NSURL *)path;
 
 @end

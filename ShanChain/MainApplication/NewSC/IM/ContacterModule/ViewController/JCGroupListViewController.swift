@@ -115,7 +115,7 @@ class JCGroupListViewController: UITableViewController {
         JCAlertView.bulid().setTitle("发送给：\(selectGroup.displayName())")
             .setMessage(fromUser!.displayName() + "的名片")
             .setDelegate(self)
-            .addCancelButton("取消")
+            .addCancelButton(NSLocalizedString("sc_cancel", comment: "字符串"))
             .addButton("确定")
             .setTag(10003)
             .show()

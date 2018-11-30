@@ -152,7 +152,7 @@ extension JCImageBrowserViewController: JCImageBrowserCellDelegate {
     
     func longTap(tableviewCell cell: JCMessageImageCollectionViewCell) {
         selectImage = cell.messageImage.image
-        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: "保存到手机")
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), destructiveButtonTitle: nil, otherButtonTitles: "保存到手机")
         actionSheet.show(in: view)
         SAIInputBarLoad()
     }

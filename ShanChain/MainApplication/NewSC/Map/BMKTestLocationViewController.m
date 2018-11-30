@@ -66,6 +66,8 @@
     _locService.desiredAccuracy = kCLLocationAccuracyBest;
     [_locService startUserLocationService];//启动定位服务
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
+    [self.joinBtn setTitle:NSLocalizedString(@"sc_enter", nil) forState:0];
+    
 }
 
 - (void)kJMSGNetworkDidSetupNotification{
@@ -273,8 +275,15 @@
 }
 
 - (void)configurationLocationButtonTitle:(CLLocationCoordinate2D)coordinate{
-    NSString *long_title = coordinate.longitude > 0 ?@"东经":@"西经";
-    NSString *lat_title = coordinate.latitude > 0 ?@"北纬":@"南纬";
+    
+    NSString  *sc_E = NSLocalizedString(@"sc_E", nil);
+    NSString  *sc_W = NSLocalizedString(@"sc_W", nil);
+    NSString  *sc_N = NSLocalizedString(@"sc_N", nil);
+    NSString  *sc_S = NSLocalizedString(@"sc_S", nil);
+    
+    
+    NSString *long_title = coordinate.longitude > 0 ?sc_E:sc_W;
+    NSString *lat_title = coordinate.latitude > 0 ?sc_N:sc_S;
     NSString  *roomName = [NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude];
     [self.locationBtn setTitle:roomName forState:0];
     self.currentRoomName = roomName;

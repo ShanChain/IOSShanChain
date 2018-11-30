@@ -101,6 +101,23 @@ extension JMSGMessage {
                     voiceContent.data = data
                 }
             })
+            
+        case .video:
+            let content = self.content as! JMSGVideoContent
+            let videoContent = JCMessageVideoContent()
+            content.videoData(progress: nil, completionHandler: { (data, objectId, error) in
+                if data != nil{
+                    videoContent.data = data
+                }
+                
+            })
+            content.videoThumbImageData { (data, objectId, error) in
+                if data != nil{
+                    videoContent.image = UIImage.init(data: data!)
+                }
+            }            
+            videoContent.delegate = delegate
+            msg = JCMessage(content: videoContent)
         case .file:
             let content = self.content as! JMSGFileContent
             if ex.isShortVideo {
@@ -113,6 +130,7 @@ extension JMSGMessage {
                 } else {
                     content.fileData({ (data, id, error) in
                         if let data = data {
+                            videoContent.data = data
                             if let updateMediaMessage = updateMediaMessage {
                                 updateMediaMessage(self, data)
                             }
@@ -184,10 +202,6 @@ extension JMSGMessage {
             } else {
                  msg.senderAvator = UIImage.loadImage("com_icon_user_80")
             }
-        }
-        
-        if fromUser.username == "154269377600600163e0aa658733729" {
-           
         }
         
         msg.contentType = contentType

@@ -37,7 +37,7 @@ class TaskListContainerViewController: SCBaseVC {
     }()
    
     private lazy var titles:[String] = {
-        return ["任务列表","我的任务"]
+        return [NSLocalizedString("sc_Tasklist", comment: "字符串"),NSLocalizedString("sc_MyTask", comment: "字符串")]
     }()
     
     var isSelectMyTask:Bool = false
@@ -72,7 +72,7 @@ class TaskListContainerViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "悬赏任务"
+        title = NSLocalizedString("sc_RewardTask", comment: "字符串")
         view.backgroundColor = UIColor.white
         automaticallyAdjustsScrollViewInsets = false
         view.addSubview(pageView)

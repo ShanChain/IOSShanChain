@@ -207,7 +207,7 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         
         if let view = _bubbleView {
             
-            if  message.contentType == .custom || message.contentType == .image{
+            if  message.contentType == .custom || message.contentType == .image || message.contentType == .video{
                 view.isHidden = true
             }
             
