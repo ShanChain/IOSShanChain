@@ -36,8 +36,6 @@
 
 @property (weak, nonatomic) IBOutlet BMKMapView *mapView;
 
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
-
 @property (nonatomic,assign)  BOOL    isLBS;
 @property (nonatomic,assign)  BOOL    isClickJoin;
 
@@ -55,10 +53,15 @@
 
 - (void)sc_ConfigurationUI{
     
-    [self.view bringSubviewToFront:self.bottomView];
     [self.joinBtn _setCornerRadiusCircle];
     [self.noteBtn _setCornerRadiusCircle];
     [self.footprintBtn _setCornerRadiusCircle];
+    
+    [self.mapView bringSubviewToFront:self.joinBtn];
+    [self.mapView bringSubviewToFront:self.noteBtn];
+    [self.mapView bringSubviewToFront:self.footprintBtn];
+    [self.mapView bringSubviewToFront:self.locationBtn];
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self pn_ConfigurationMapView];
     _locService = [[BMKLocationService alloc]init];//定位功能的初始化

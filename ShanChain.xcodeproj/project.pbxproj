@@ -23,8 +23,6 @@
 		2218E191217606D900719844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E190217606D900719844 /* QuartzCore.framework */; };
 		2218E193217606E200719844 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E192217606E200719844 /* OpenGLES.framework */; };
 		2218E195217606FA00719844 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E194217606FA00719844 /* Security.framework */; };
-		221BB90C21B1282E00F85DAE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 221BB90E21B1282E00F85DAE /* InfoPlist.strings */; };
-		221BB91921B12F6000F85DAE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 221BB91B21B12F6000F85DAE /* Localizable.strings */; };
 		221BBD3121955E6D0004EE03 /* SC_URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD3021955E6C0004EE03 /* SC_URL.swift */; };
 		221BBD352195889C0004EE03 /* SCCharacterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD342195889C0004EE03 /* SCCharacterModel.m */; };
 		221BBD372195A5300004EE03 /* JGUserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD362195A5300004EE03 /* JGUserLoginService.swift */; };
@@ -293,6 +291,8 @@
 		22680ABB219E786400F2FA5B /* MyWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22680AB9219E786400F2FA5B /* MyWalletViewController.xib */; };
 		22680ABD21A4218900F2FA5B /* LaunchScreenImageIcon_.png in Resources */ = {isa = PBXBuildFile; fileRef = 22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon_.png */; };
 		22680AC221A445FA00F2FA5B /* EditInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AC121A445FA00F2FA5B /* EditInfoService.m */; };
+		2271056F21B4DA86009FC34D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2271057121B4DA86009FC34D /* InfoPlist.strings */; };
+		2271057321B4DA9B009FC34D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2271057521B4DA9B009FC34D /* Localizable.strings */; };
 		2281A218216B2CB0009E95EE /* HHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A217216B2CB0009E95EE /* HHTool.m */; };
 		2281A21A216B6351009E95EE /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 2281A219216B6350009E95EE /* index.ios.js */; };
 		2281A221216D9E83009E95EE /* NSObject+AutoProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A21C216D9E81009E95EE /* NSObject+AutoProperty.m */; };
@@ -811,10 +811,6 @@
 		2218E190217606D900719844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2218E192217606E200719844 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2218E194217606FA00719844 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		221BB90D21B1282E00F85DAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		221BB91021B128BA00F85DAE /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		221BB91A21B12F6000F85DAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		221BB91C21B12F6300F85DAE /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		221BBD3021955E6C0004EE03 /* SC_URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SC_URL.swift; sourceTree = "<group>"; };
 		221BBD332195889C0004EE03 /* SCCharacterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCharacterModel.h; sourceTree = "<group>"; };
 		221BBD342195889C0004EE03 /* SCCharacterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCharacterModel.m; sourceTree = "<group>"; };
@@ -1128,6 +1124,14 @@
 		22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenImageIcon_.png; sourceTree = "<group>"; };
 		22680AC021A445FA00F2FA5B /* EditInfoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditInfoService.h; sourceTree = "<group>"; };
 		22680AC121A445FA00F2FA5B /* EditInfoService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditInfoService.m; sourceTree = "<group>"; };
+		2271057021B4DA86009FC34D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		2271057221B4DA8B009FC34D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2271057421B4DA9B009FC34D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2271057621B4DA9E009FC34D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2271057721B4DDE5009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		2271057821B4DDE5009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		2271057921B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		2271057A21B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2281A216216B2CB0009E95EE /* HHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHTool.h; sourceTree = "<group>"; };
 		2281A217216B2CB0009E95EE /* HHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHTool.m; sourceTree = "<group>"; };
 		2281A219216B6350009E95EE /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = "react-native/index.ios.js"; sourceTree = SOURCE_ROOT; };
@@ -3292,9 +3296,9 @@
 				33B7CCFA1EC5865700FB6378 /* LaunchScreen.storyboard */,
 				22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon_.png */,
 				33B7CCFD1EC5865700FB6378 /* Info.plist */,
-				221BB90E21B1282E00F85DAE /* InfoPlist.strings */,
-				221BB91B21B12F6000F85DAE /* Localizable.strings */,
 				33B7CCED1EC5865700FB6378 /* main.m */,
+				2271057121B4DA86009FC34D /* InfoPlist.strings */,
+				2271057521B4DA9B009FC34D /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -4813,6 +4817,7 @@
 				en,
 				Base,
 				"zh-Hant",
+				"zh-Hans",
 			);
 			mainGroup = 33B7CCE01EC5865700FB6378;
 			productRefGroup = 33B7CCEA1EC5865700FB6378 /* Products */;
@@ -4836,12 +4841,13 @@
 				223F9A04217F12040031DB95 /* area.plist in Resources */,
 				2281A21A216B6351009E95EE /* index.ios.js in Resources */,
 				4852A0D31FCE9F0300CDD7BE /* SCMessageSettingCell.xib in Resources */,
+				2271056F21B4DA86009FC34D /* InfoPlist.strings in Resources */,
 				22C9177C2191C06D002E5240 /* MapFootprintCell.xib in Resources */,
 				22D2478B2189D5B3009C1E6A /* RecieveTaskView.xib in Resources */,
 				223F99BB217F12040031DB95 /* 定位2.png in Resources */,
 				22C917AB219424FF002E5240 /* TaskListBackView.xib in Resources */,
+				2271057321B4DA9B009FC34D /* Localizable.strings in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
-				221BB91921B12F6000F85DAE /* Localizable.strings in Resources */,
 				2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */,
 				4852A0D11FCE9F0300CDD7BE /* SCMessageCell.xib in Resources */,
 				4852A0E41FCE9F0300CDD7BE /* SYScreenInsideCell.xib in Resources */,
@@ -4860,7 +4866,6 @@
 				225F83F621AE931D0082C0E1 /* HHNumberForPeopleViewController.xib in Resources */,
 				485E65AF1F42862900B158BF /* EaseUI.podspec in Resources */,
 				223F99E8217F12040031DB95 /* defaultTheme.bundle in Resources */,
-				221BB90C21B1282E00F85DAE /* InfoPlist.strings in Resources */,
 				3356B16C1F32F50700027E23 /* api.shanchain.com.cer in Resources */,
 				22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */,
 				485E66631F42873F00B158BF /* MJRefresh.bundle in Resources */,
@@ -5694,20 +5699,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		221BB90E21B1282E00F85DAE /* InfoPlist.strings */ = {
+		2271057121B4DA86009FC34D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				221BB90D21B1282E00F85DAE /* en */,
-				221BB91021B128BA00F85DAE /* zh-Hant */,
+				2271057021B4DA86009FC34D /* zh-Hant */,
+				2271057221B4DA8B009FC34D /* en */,
+				2271057921B4DDE6009FC34D /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		221BB91B21B12F6000F85DAE /* Localizable.strings */ = {
+		2271057521B4DA9B009FC34D /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				221BB91A21B12F6000F85DAE /* en */,
-				221BB91C21B12F6300F85DAE /* zh-Hant */,
+				2271057421B4DA9B009FC34D /* en */,
+				2271057621B4DA9E009FC34D /* zh-Hant */,
+				2271057A21B4DDE6009FC34D /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5717,6 +5724,7 @@
 			children = (
 				33B7CCF61EC5865700FB6378 /* Base */,
 				22284A7A2179819700CDC86C /* zh-Hant */,
+				2271057721B4DDE5009FC34D /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -5726,6 +5734,7 @@
 			children = (
 				33B7CCFB1EC5865700FB6378 /* Base */,
 				22284A7B2179819800CDC86C /* zh-Hant */,
+				2271057821B4DDE5009FC34D /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -5895,7 +5904,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "186ded0a-4ccf-45e2-ae7c-6e1888a914a1";
+				PROVISIONING_PROFILE = "40965167-a231-4f6d-8e89-8927d15f311b";
 				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5961,7 +5970,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "186ded0a-4ccf-45e2-ae7c-6e1888a914a1";
+				PROVISIONING_PROFILE = "40965167-a231-4f6d-8e89-8927d15f311b";
 				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

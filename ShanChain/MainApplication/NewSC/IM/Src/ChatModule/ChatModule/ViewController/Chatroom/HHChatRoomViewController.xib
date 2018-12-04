@@ -24,14 +24,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EG1-qW-GSb" customClass="ASCircularMenuButton" customModule="ASExtendedCircularMenu">
-                    <rect key="frame" x="315" y="30" width="40" height="40"/>
-                    <color key="backgroundColor" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EG1-qW-GSb" customClass="ASCircularMenuButton" customModule="ASExtendedCircularMenu">
+                    <rect key="frame" x="312.5" y="108.5" width="50" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="N8h-so-USN"/>
-                        <constraint firstAttribute="height" constant="40" id="bur-x5-RYI"/>
+                        <constraint firstAttribute="width" constant="50" id="Afk-NC-fCs"/>
+                        <constraint firstAttribute="height" constant="50" id="u5w-E5-9BS"/>
                     </constraints>
-                    <state key="normal" title="赏">
+                    <state key="normal" image="circle">
                         <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
@@ -73,14 +72,17 @@
             </subviews>
             <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="EG1-qW-GSb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="150" id="1PR-Qo-4QK"/>
                 <constraint firstItem="2TR-qW-ZZa" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="6pK-CQ-KoV"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EG1-qW-GSb" secondAttribute="trailing" constant="20" id="NRJ-RY-Jub"/>
-                <constraint firstItem="EG1-qW-GSb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="k0u-kv-lDh"/>
                 <constraint firstItem="2TR-qW-ZZa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="kVA-HK-Sr6"/>
+                <constraint firstItem="EG1-qW-GSb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-200" id="rct-fh-Sgp"/>
                 <constraint firstItem="2TR-qW-ZZa" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="sDN-6p-vAa"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="44.5" y="75.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="circle" width="128" height="128"/>
+    </resources>
 </document>

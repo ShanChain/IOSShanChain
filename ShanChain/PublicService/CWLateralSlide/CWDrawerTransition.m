@@ -284,7 +284,9 @@ static dispatch_once_t cw_onceToken;
 }
 
 // 屏蔽掉touchesbegin的响应链
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event { }
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+}
 
 @end
 

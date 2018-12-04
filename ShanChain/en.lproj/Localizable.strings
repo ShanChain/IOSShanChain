@@ -2,11 +2,13 @@
   Localizable.strings
   ShanChain
 
-  Created by 千千世界 on 2018/11/30.
+  Created by 千千世界 on 2018/12/3.
   Copyright © 2018年 ShanChain. All rights reserved.
 */
 
-"sc_enter" = "Enter \n Meta-Community";
+
+
+"sc_enter" = "Enter";
 "sc_E" = "E";
 "sc_W" = "W";
 "sc_N" = "N";
@@ -36,5 +38,3 @@
 "sc_Availabletasks" = "Available tasks";
 "sc_Waiting" = "Waiting...";
 "sc_Doing" = "Doing";
-
-

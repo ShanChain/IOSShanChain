@@ -13,7 +13,7 @@ import MobileCoreServices
 import ASExtendedCircularMenu
 
 
-class HHChatRoomViewController: UIViewController{
+class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     @IBOutlet weak var joinChatViewHeight: NSLayoutConstraint!
     @IBOutlet weak var taskButton: ASCircularMenuButton!
@@ -60,9 +60,9 @@ class HHChatRoomViewController: UIViewController{
         maskView.isHidden = true
         view.addSubview(maskView)
         view.bringSubview(toFront: maskView)
-//        view.bringSubview(toFront: taskButton)
+        view.bringSubview(toFront: taskButton)
         view.bringSubview(toFront: joinCahtView)
-        
+
         view.addSubview(suspendBallBtn!)// 添加悬浮按钮
         view.bringSubview(toFront: suspendBallBtn!)
         
@@ -70,11 +70,35 @@ class HHChatRoomViewController: UIViewController{
         if isIPhoneX{
             joinChatViewHeight.constant = 82
         }
+        
+        _configureDraggebleCircularMenuButton()
     }
     
 //    func hiddenMaskView(){
 //        maskView.isHidden = true
 //    }
+    
+    let colourArray: [UIColor] = [.red , .blue , .green , .yellow , .purple]
+     func _configureDraggebleCircularMenuButton(){
+        
+        configureDraggebleCircularMenuButton(button: taskButton, numberOfMenuItems: 5, menuRedius: 70, postion: .topRight)
+        taskButton.menuButtonSize = .medium
+        taskButton.sholudMenuButtonAnimate = false
+        taskButton.bottomLayouSafeBorder = toolbar.intrinsicContentSize.height
+    }
+    
+    func buttonForIndexAt(_ menuButton: ASCircularMenuButton, indexForButton: Int) -> UIButton {
+        let button: UIButton = UIButton()
+        if menuButton == taskButton{
+            button.backgroundColor = colourArray[indexForButton]
+        }
+        return button
+    }
+    
+    func didClickOnCircularMenuButton(_ menuButton: ASCircularMenuButton, indexForButton: Int, button: UIButton) {
+        
+        
+    }
     
     override func loadView() {
         super.loadView()
@@ -96,7 +120,7 @@ class HHChatRoomViewController: UIViewController{
     
     func didDisappearForMenuButton(){
          maskView.isHidden = true
-        toolbar.isHidden = false
+         toolbar.isHidden = false
     }
     
     @IBAction func joinAction(_ sender: Any) {
@@ -451,6 +475,8 @@ class HHChatRoomViewController: UIViewController{
         let vc = LeftViewController()
         self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
     }
+    
+  
     
     fileprivate func _loadMessage(_ page: Int) {
         // 分页获取消息
