@@ -13,5 +13,6 @@
 - (void)setupUMPushNoticationWithLaunchOptions:(NSDictionary *)launchOptions;
 - (void)setupHXConfigWithApplication:(UIApplication *)application;
 - (void)setIQkeyboard;
+- (void)setReceiveMonitorNotification; //处理通知
 
 @end

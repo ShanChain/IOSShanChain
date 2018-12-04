@@ -24,9 +24,16 @@
 #import "UncaughtExceptionHandler.h"
 #import "ShanChain-Swift.h"
 
+// 引入 JPush 功能所需头文件
+#import "JPUSHService.h"
+// iOS10 注册 APNs 所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+
 #define JMSSAGE_APPKEY  @"0a20b6277a625655791e3cd9"
 
-@interface AppDelegate ()<UNUserNotificationCenterDelegate, UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate>
+@interface AppDelegate ()<UNUserNotificationCenterDelegate, UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate,JPUSHRegisterDelegate>
 
 @property (nonatomic, strong) BMKMapManager *mapManager;
 
@@ -74,24 +81,36 @@
     
     [self checkGuideView];
     
-    
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidCloseNotification) name:kJMSGNetworkDidCloseNotification object:nil];
+    [self setReceiveMonitorNotification];
     
     [EditInfoService sc_requstWalletCurrency]; // 获取当前汇率
     // 捕获异常
     InstallExceptionHandler();
+    
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        // 可以添加自定义 categories
+        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    
+    
+    // 如需继续使用 pushConfig.plist 文件声明 appKey 等配置内容，请依旧使用 [JPUSHService setupWithOption:launchOptions] 方式初始化。
+    BOOL  isProduction = NO;
+    if (PN_ENVIRONMENT == 3) {
+        isProduction = YES;
+    }
+    [JPUSHService setupWithOption:launchOptions appKey:JMSSAGE_APPKEY
+                          channel:@"App Store"
+                 apsForProduction:isProduction
+            advertisingIdentifier:nil];
     return YES;
 }
 
 
-- (void)kJMSGNetworkDidSetupNotification{
-    [SCCacheTool shareInstance].isJGSetup = YES;
-}
 
-- (void)kJMSGNetworkDidCloseNotification{
-    
-}
 - (void)setJMessageSDK:(NSDictionary *)launchOptions{
     [JMessage setupJMessage:launchOptions appKey:JMSSAGE_APPKEY channel:nil apsForProduction:NO category:nil messageRoaming:YES];
     [JMessage setDebugMode];
@@ -137,11 +156,12 @@
     });
     SCLog(@"DeviceToken: %@", string);
     [JMessage registerDeviceToken:deviceToken];
+    [JPUSHService registerDeviceToken:deviceToken];
 }
 
 // 注册deviceToken失败
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
-    NSLog(@"error -- %@",error);
+     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
 - (void)checkGuideView {
@@ -221,6 +241,9 @@
 
     NSDictionary *custom = userInfo[@"custom"];
     [NotificationHandler handlerNotificationWithCustom:custom];
+    
+    // Required, iOS 7 Support
+    [JPUSHService handleRemoteNotification:userInfo];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^ _Nonnull)(UIBackgroundFetchResult))completionHandler{
@@ -228,6 +251,10 @@
     [UMessage didReceiveRemoteNotification:userInfo];
     NSDictionary *custom = userInfo[@"custom"];
     [NotificationHandler handlerNotificationWithCustom:custom];
+    
+    // Required, For systems with less than or equal to iOS 6
+    [JPUSHService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 //iOS10新增：处理前台收到通知的代理方法
@@ -334,6 +361,36 @@
 }
 
 
+#pragma mark- JPUSHRegisterDelegate
+
+// iOS 12 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification{
+    if (notification && [notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //从通知界面直接进入应用
+    }else{
+        //从通知设置界面进入应用
+    }
+}
+
+// iOS 10 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    // Required
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
+}
+
+// iOS 10 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    // Required
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    completionHandler();  // 系统要求执行这个方法
+}
 
 //MARK: - JMessage Delegate
 -(void)onDBMigrateStart{

@@ -293,6 +293,7 @@
 		22680AC221A445FA00F2FA5B /* EditInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AC121A445FA00F2FA5B /* EditInfoService.m */; };
 		2271056F21B4DA86009FC34D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2271057121B4DA86009FC34D /* InfoPlist.strings */; };
 		2271057321B4DA9B009FC34D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2271057521B4DA9B009FC34D /* Localizable.strings */; };
+		2271057C21B62CCA009FC34D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2271057B21B62CCA009FC34D /* AdSupport.framework */; };
 		2281A218216B2CB0009E95EE /* HHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A217216B2CB0009E95EE /* HHTool.m */; };
 		2281A21A216B6351009E95EE /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 2281A219216B6350009E95EE /* index.ios.js */; };
 		2281A221216D9E83009E95EE /* NSObject+AutoProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A21C216D9E81009E95EE /* NSObject+AutoProperty.m */; };
@@ -1132,6 +1133,7 @@
 		2271057821B4DDE5009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2271057921B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2271057A21B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2271057B21B62CCA009FC34D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2281A216216B2CB0009E95EE /* HHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHTool.h; sourceTree = "<group>"; };
 		2281A217216B2CB0009E95EE /* HHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHTool.m; sourceTree = "<group>"; };
 		2281A219216B6350009E95EE /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = "react-native/index.ios.js"; sourceTree = SOURCE_ROOT; };
@@ -2019,6 +2021,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2271057C21B62CCA009FC34D /* AdSupport.framework in Frameworks */,
 				2226DB7E21AE2CEA002F6195 /* CoreFoundation.framework in Frameworks */,
 				223F987E217F0E5E0031DB95 /* AudioToolbox.framework in Frameworks */,
 				223F987C217F0E530031DB95 /* CFNetwork.framework in Frameworks */,
@@ -3011,6 +3014,7 @@
 		33055FE81F0503AC005740E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2271057B21B62CCA009FC34D /* AdSupport.framework */,
 				2226DB7D21AE2CE9002F6195 /* CoreFoundation.framework */,
 				223F987D217F0E5E0031DB95 /* AudioToolbox.framework */,
 				223F987B217F0E520031DB95 /* CFNetwork.framework */,

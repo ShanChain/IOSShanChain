@@ -16,8 +16,38 @@
 #import "WeiboSDK.h"
 #import "UMMobClick/MobClick.h"
 #import "UMessage.h"
+#import "JPUSHService.h"
+
+
 
 @implementation AppDelegate (Config)
+
+
+- (void)setReceiveMonitorNotification{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidCloseNotification) name:kJMSGNetworkDidCloseNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJPFNetworkDidSetupNotification) name:kJPFNetworkDidSetupNotification object:nil];
+    
+}
+#pragma mark -- JMessage 建立连接成功
+- (void)kJMSGNetworkDidSetupNotification{
+    [SCCacheTool shareInstance].isJGSetup = YES;
+}
+#pragma mark -- JMessage 连接被关闭
+- (void)kJMSGNetworkDidCloseNotification{
+    
+}
+#pragma mark -- JPush 建立连接成功
+- (void)kJPFNetworkDidSetupNotification{
+    NSString  *userID = [SCCacheTool shareInstance].getCurrentUser;
+    if (!NULLString(userID)) {
+        [JPUSHService setAlias:userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            
+        } seq:10];
+    }
+ 
+}
+
 
 - (void)setIQkeyboard{
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量

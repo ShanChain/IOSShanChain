@@ -5,6 +5,7 @@ target 'ShanChain' do
     
     pod 'BaiduMapKit', '~> 4.0.0'
     pod 'JMessage', '~> 3.7.0’
+    pod 'JPush'
     pod 'RxSwift', '~> 3.6.1'
     pod 'RxCocoa', '~> 3.6.1'
     pod 'YHPopupView'
