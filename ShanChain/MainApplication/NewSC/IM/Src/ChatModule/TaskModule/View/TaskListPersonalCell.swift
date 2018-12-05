@@ -42,7 +42,7 @@ class TaskListPersonalCell: UITableViewCell {
         
         set{
             _listModel = newValue
-            self.rewardLabel.text = "￥ \(_listModel?.bounty ?? "")"
+            self.rewardLabel.text = "￥ \(_listModel?.price ?? "")"
             self.contentLabel.text = _listModel?.intro
           
             

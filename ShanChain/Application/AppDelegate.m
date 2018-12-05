@@ -31,11 +31,16 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-#define JMSSAGE_APPKEY  @"0a20b6277a625655791e3cd9"
+// 引入 JSHARE 功能所需头文件
+#import "JSHAREService.h"
+
+
+
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate, UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate,JPUSHRegisterDelegate>
 
 @property (nonatomic, strong) BMKMapManager *mapManager;
+
 
 @end
 
@@ -49,9 +54,8 @@
     
     [self setIQkeyboard];
     [self setBMKManager];
-    
     [self setupMapConfig];
-    
+    [self setupJshareConfig];
     [self setJMessageSDK:launchOptions];
     
     [self setupUMPushNoticationWithLaunchOptions:launchOptions];
@@ -157,6 +161,8 @@
     SCLog(@"DeviceToken: %@", string);
     [JMessage registerDeviceToken:deviceToken];
     [JPUSHService registerDeviceToken:deviceToken];
+    
+   
 }
 
 // 注册deviceToken失败
@@ -390,6 +396,21 @@
         [JPUSHService handleRemoteNotification:userInfo];
     }
     completionHandler();  // 系统要求执行这个方法
+}
+
+#pragma mark -- JShare 相关
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    [JSHAREService handleOpenUrl:url];
+    self.url = url;
+    return YES;
+}
+
+//仅支持 iOS9 以上系统，iOS8 及以下系统不会回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
+    [JSHAREService handleOpenUrl:url];
+    self.url = url;
+    return YES;
 }
 
 //MARK: - JMessage Delegate

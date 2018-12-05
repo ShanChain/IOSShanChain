@@ -11,6 +11,7 @@ import UIKit
 class TaskListModel: HandyJSON {
 
     var bounty:String?
+    var price:String?
     var characterId:String?
     var commentCount:String?
     var createTime:String? //发布时间

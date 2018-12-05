@@ -17,7 +17,7 @@
 #import "UMMobClick/MobClick.h"
 #import "UMessage.h"
 #import "JPUSHService.h"
-
+#import "JSHAREService.h"
 
 
 @implementation AppDelegate (Config)
@@ -27,6 +27,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidCloseNotification) name:kJMSGNetworkDidCloseNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJPFNetworkDidSetupNotification) name:kJPFNetworkDidSetupNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJPFNetworkDidRegisterNotification) name:kJPFNetworkDidRegisterNotification object:nil];
     
 }
 #pragma mark -- JMessage 建立连接成功
@@ -47,7 +48,12 @@
     }
  
 }
-
+#pragma mark -- JPush 注册成功
+- (void)kJPFNetworkDidRegisterNotification{
+    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+        
+    }];
+}
 
 - (void)setIQkeyboard{
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
@@ -61,6 +67,21 @@
     keyboardManager.keyboardDistanceFromTextField = 10.0f; // 输入框距离键盘的距离
 }
 
+- (void)setupJshareConfig{
+    JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
+    config.appKey = JMSSAGE_APPKEY;
+    config.SinaWeiboAppKey = SinaWeibo_AppKey;
+    config.SinaWeiboAppSecret = SinaWeibo_appSecret;
+    config.SinaRedirectUri = @"https://docs.jiguang.cn/jshare/client/iOS/ios_sdk/";
+    config.isSupportWebSina = YES;
+    config.QQAppId = QQ_AppId;
+    config.QQAppKey = QQ_Appkey;
+    config.WeChatAppId = WeChat_AppId;
+    config.WeChatAppSecret = WeChat_appSecret;
+    config.JChatProAuth = JMSSAGE_APPKEY;
+    [JSHAREService setupWithConfig:config];
+    [JSHAREService setDebug:YES];
+}
 
 - (void)setupShareConfig{
     [ShareSDK registerActivePlatforms:@[

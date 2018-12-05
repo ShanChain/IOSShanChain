@@ -54,7 +54,8 @@
 #import "AppDelegate.h"
 #import "SCAppManager.h"
 #import "SuspendBall.h"
-
+#import "UIButton+EnlargeTouchArea.h"
+#import "PublicShareService.h"
 
 
 #endif /* ShanChain_Bridging_Header_h */

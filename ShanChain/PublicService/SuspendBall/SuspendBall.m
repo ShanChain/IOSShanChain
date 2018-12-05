@@ -188,7 +188,6 @@ static CGFloat btnSmallImageWidth = 22;
 //移动悬浮球  在这里添加对悬浮球的边界判断以及是否需要粘性效果
 - (void)moveSuspend:(UIPanGestureRecognizer *)pan
 {
-    
     CGPoint point = [pan locationInView:self.superview];
     self.lhz_centerX = point.x;
     self.lhz_centerY = point.y;

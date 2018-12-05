@@ -294,6 +294,10 @@
 		2271056F21B4DA86009FC34D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2271057121B4DA86009FC34D /* InfoPlist.strings */; };
 		2271057321B4DA9B009FC34D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2271057521B4DA9B009FC34D /* Localizable.strings */; };
 		2271057C21B62CCA009FC34D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2271057B21B62CCA009FC34D /* AdSupport.framework */; };
+		2271057E21B76267009FC34D /* HHShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271057D21B76267009FC34D /* HHShareView.swift */; };
+		2271058021B76273009FC34D /* HHShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2271057F21B76273009FC34D /* HHShareView.xib */; };
+		2271058321B76A66009FC34D /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 2271058221B76A66009FC34D /* UIButton+EnlargeTouchArea.m */; };
+		2271058721B7723D009FC34D /* PublicShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2271058621B7723D009FC34D /* PublicShareService.m */; };
 		2281A218216B2CB0009E95EE /* HHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A217216B2CB0009E95EE /* HHTool.m */; };
 		2281A21A216B6351009E95EE /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 2281A219216B6350009E95EE /* index.ios.js */; };
 		2281A221216D9E83009E95EE /* NSObject+AutoProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281A21C216D9E81009E95EE /* NSObject+AutoProperty.m */; };
@@ -1134,6 +1138,12 @@
 		2271057921B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2271057A21B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2271057B21B62CCA009FC34D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2271057D21B76267009FC34D /* HHShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHShareView.swift; sourceTree = "<group>"; };
+		2271057F21B76273009FC34D /* HHShareView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHShareView.xib; sourceTree = "<group>"; };
+		2271058121B76A66009FC34D /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
+		2271058221B76A66009FC34D /* UIButton+EnlargeTouchArea.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeTouchArea.m"; sourceTree = "<group>"; };
+		2271058521B7723D009FC34D /* PublicShareService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicShareService.h; sourceTree = "<group>"; };
+		2271058621B7723D009FC34D /* PublicShareService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicShareService.m; sourceTree = "<group>"; };
 		2281A216216B2CB0009E95EE /* HHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHTool.h; sourceTree = "<group>"; };
 		2281A217216B2CB0009E95EE /* HHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHTool.m; sourceTree = "<group>"; };
 		2281A219216B6350009E95EE /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = "react-native/index.ios.js"; sourceTree = SOURCE_ROOT; };
@@ -2129,6 +2139,7 @@
 		223F9872217F0BB70031DB95 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				2271058421B77204009FC34D /* Service */,
 				22C917782191C04B002E5240 /* View */,
 				22C9177E219274A8002E5240 /* Model */,
 				22C9177D219274A8002E5240 /* BMKTestLocationViewController.h */,
@@ -2913,12 +2924,23 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		2271058421B77204009FC34D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2271058521B7723D009FC34D /* PublicShareService.h */,
+				2271058621B7723D009FC34D /* PublicShareService.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		22C917782191C04B002E5240 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				22C917792191C06D002E5240 /* MapFootprintCell.swift */,
 				22C9177A2191C06D002E5240 /* MapFootprintCell.xib */,
 				22C917832192750E002E5240 /* BMKLocationBottomView.swift */,
+				2271057D21B76267009FC34D /* HHShareView.swift */,
+				2271057F21B76273009FC34D /* HHShareView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3164,6 +3186,8 @@
 				223F9A4D218067650031DB95 /* UIView+LSCore.m */,
 				2226DB7821ABA553002F6195 /* NSObject+customProperty.h */,
 				2226DB7921ABA553002F6195 /* NSObject+customProperty.m */,
+				2271058121B76A66009FC34D /* UIButton+EnlargeTouchArea.h */,
+				2271058221B76A66009FC34D /* UIButton+EnlargeTouchArea.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -4914,6 +4938,7 @@
 				33B7CCF71EC5865700FB6378 /* Main.storyboard in Resources */,
 				222EF6142186A417005B89EF /* PublishTaskView.xib in Resources */,
 				22C917AF21943014002E5240 /* TaskDetailsViewController.xib in Resources */,
+				2271058021B76273009FC34D /* HHShareView.xib in Resources */,
 				892B39E91FE8EC0300292A75 /* AliyunImageSource.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5257,6 +5282,7 @@
 				223F99E5217F12040031DB95 /* JMSGConversation+.swift in Sources */,
 				485E65DC1F42862900B158BF /* EMSDWebImageDecoder.m in Sources */,
 				485E66071F42862900B158BF /* EaseEmotionManager.m in Sources */,
+				2271058721B7723D009FC34D /* PublicShareService.m in Sources */,
 				485E65FF1F42862900B158BF /* UIViewController+DismissKeyboard.m in Sources */,
 				223F997D217F12040031DB95 /* JCMessageFileContent.swift in Sources */,
 				48718D951F42277400010AA0 /* SDWebImageDownloader.m in Sources */,
@@ -5461,6 +5487,7 @@
 				485E65B81F42862900B158BF /* wav.mm in Sources */,
 				485E65D11F42862900B158BF /* MWCaptionView.m in Sources */,
 				223F99ED217F12040031DB95 /* Reachability.m in Sources */,
+				2271058321B76A66009FC34D /* UIButton+EnlargeTouchArea.m in Sources */,
 				485E66041F42862900B158BF /* EaseEmoji.m in Sources */,
 				223F9A47217F12B80031DB95 /* JCFriendSettingViewController.swift in Sources */,
 				223F9A37217F12B80031DB95 /* JCTableViewCell.swift in Sources */,
@@ -5499,6 +5526,7 @@
 				4852A1491FCE9F0400CDD7BE /* SCNavigatorModule.m in Sources */,
 				485E65EC1F42862900B158BF /* PSTCollectionViewCell.m in Sources */,
 				22C9178D2192BA76002E5240 /* HHDefaultCell.swift in Sources */,
+				2271057E21B76267009FC34D /* HHShareView.swift in Sources */,
 				2242C0002159C34E00707024 /* UIView+NoDataImgShow.m in Sources */,
 				222EF6182187E527005B89EF /* DefConst.swift in Sources */,
 				4852A14B1FCE9F0400CDD7BE /* SCPhotoLibrary.m in Sources */,

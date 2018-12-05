@@ -9,10 +9,19 @@
 #ifndef DefMacro__h
 #define DefMacro__h
 
+#define JMSSAGE_APPKEY  @"0a20b6277a625655791e3cd9"
+#define SinaWeibo_AppKey  @"1752792699"
+#define SinaWeibo_appSecret  @"5e5e8068d9d59243eea2b66c413be68e"
+#define QQ_AppId   @"1106603714"
+#define QQ_Appkey  @"cysXSCMGkW5yGU62"
+#define WeChat_AppId  @"wxf3ca04328ebf58f1"
+#define WeChat_appSecret  @"10f4c1761c9be09d630e766b4a700843"
 
 #define AppStoreID  @"1296793048"
-#define IP_ADDRESS  @"192.168.0.115"
 #define BMKAPPKEY   @"Lp5FSsHWUaVvhgsKfsveuZXRP3LsqEB6"
+
+
+#define IP_ADDRESS  @"192.168.0.115"
 #define DefaultAvatar   @"sc_com_icon_DefaultAvatar"
 
 #define JM_APPKET      @"appkey"

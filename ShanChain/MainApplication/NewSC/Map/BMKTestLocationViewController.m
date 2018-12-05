@@ -34,6 +34,10 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *footprintBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *collapseBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *activeRuleBtn;
+
 @property (weak, nonatomic) IBOutlet BMKMapView *mapView;
 
 @property (nonatomic,assign)  BOOL    isLBS;
@@ -46,6 +50,11 @@
 @property (nonatomic,copy)    NSString   *currentRoomName; //当前的聊天室名称
 
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *joinBtnBottomConstraint;
+
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UILabel *laveDayLabel;
+
 
 @end
 
@@ -57,11 +66,20 @@
     [self.noteBtn _setCornerRadiusCircle];
     [self.footprintBtn _setCornerRadiusCircle];
     
+    [self.mapView bringSubviewToFront:self.topView];
     [self.mapView bringSubviewToFront:self.joinBtn];
     [self.mapView bringSubviewToFront:self.noteBtn];
+    [self.mapView bringSubviewToFront:self.collapseBtn];
     [self.mapView bringSubviewToFront:self.footprintBtn];
     [self.mapView bringSubviewToFront:self.locationBtn];
+    [self.mapView bringSubviewToFront:self.activeRuleBtn];
     
+    
+    [self.topView mas_makeConstraints:^(MASConstraintMaker * x) {
+        x.height.equalTo(@80);
+        x.left.right.equalTo(self.view);
+        x.top.equalTo(self.mas_topLayoutGuide);
+    }];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self pn_ConfigurationMapView];
     _locService = [[BMKLocationService alloc]init];//定位功能的初始化
@@ -70,7 +88,7 @@
     [_locService startUserLocationService];//启动定位服务
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
     [self.joinBtn setTitle:NSLocalizedString(@"sc_enter", nil) forState:0];
-    
+    //self.activeRuleBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
 }
 
 - (void)kJMSGNetworkDidSetupNotification{
@@ -86,7 +104,15 @@
     [super viewDidLoad];
     [self sc_ConfigurationUI];
     
+    MCDate *activeDate = [MCDate dateWithInterval:1545840000];
+    NSInteger  days = [activeDate daysFrom:[MCDate date]];
+    if (days > 0) {
+        self.laveDayLabel.text = [NSString stringWithFormat:@"%ld天",days];
+    }else{
+        self.topView.hidden = YES;
+    }
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.mapView viewWillAppear];
@@ -99,7 +125,6 @@
         [self sc_addOverlayWithModel:Coordnatemodel];
     }
 }
-
 
 - (NSDictionary*)getParameter{
     if (NULLString(self.latitude) || NULLString(self.longitude)) {
@@ -177,14 +202,18 @@
                     obj.hidden = YES;
                     
                 }
-                if ([obj isKindOfClass:NSClassFromString(@"BaseMapScaleView")]) {
-                    
-                }
             }];
         }
     }];
 
 }
+
+- (IBAction)activeRuleAction:(UIButton *)sender {
+    
+    HHShareView  *shreView = [[HHShareView alloc]initWithUid:@"111" frame:self.view.frame];
+    [self.view addSubview:shreView];
+}
+
 
 // 复位
 - (IBAction)notePressed:(id)sender {
@@ -430,6 +459,19 @@
     //return  BMKCoordTrans(transfromCoord,BMK_COORDTYPE_GPS,BMK_COORDTYPE_BD09LL);
 }
 
+
+- (IBAction)collapseAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    [UIView animateWithDuration:0.35 animations:^{
+        if (sender.selected) {
+            self.joinBtnBottomConstraint.constant = IS_IPHONE_X? IPHONE_SAFEBOTTOMAREA_HEIGHT - 100: - 100;
+        }else{
+            self.joinBtnBottomConstraint.constant = 71;
+        }
+        [self.view layoutIfNeeded];
+    }];
+}
+
 - (IBAction)joinPressed:(id)sender{
     
    // [HHTool mainWindow].rootViewController = nil;
@@ -535,6 +577,7 @@
     }];
     
 }
+
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

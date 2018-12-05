@@ -332,12 +332,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
          return 5.0
     }
-    
-    
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100.0
-//    }
+
 }
 
 extension TaskListViewController:TaskListCellProtocol{
@@ -376,7 +371,7 @@ extension TaskListViewController:TaskListCellProtocol{
     
     func callBack(listModel: TaskListModel) {
         if(!listModel.isReceived){
-            let detailsVC = TaskDetailsViewController(taskID: listModel.taskId!, content: listModel.intro!, reward: listModel.bounty!, time: listModel.expiryTime!)
+            let detailsVC = TaskDetailsViewController(taskID: listModel.taskId!, content: listModel.intro!, reward: listModel.price!, time: listModel.expiryTime!)
             navigationController?.pushViewController(detailsVC, animated: true)
         }
        

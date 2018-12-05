@@ -52,9 +52,9 @@
 -(BOOL)isSameMonth:(MCDate *)date;
 -(BOOL)isSameDay:(MCDate *)date;
 
--(BOOL)isEarlierThan:(MCDate *)date;
+-(BOOL)isEarlierThan:(MCDate *)date; // 是否大于当前时间
 -(BOOL)isLaterThan:(MCDate *)date;
--(BOOL)isEarlierThanOrEqualTo:(MCDate *)date;
+-(BOOL)isEarlierThanOrEqualTo:(MCDate *)date; // 大于或等于
 -(BOOL)isLaterThanOrEqualTo:(MCDate *)date;
 
 -(NSInteger)yearsFrom:(MCDate *)date;

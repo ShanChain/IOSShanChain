@@ -11,6 +11,7 @@ import UIKit
 class TaskDetailsModel: HandyJSON {
   
     var bounty:String?
+    var price:String?
     var commentCount:String?
     var expiryTime:String?
     var headImg:String?

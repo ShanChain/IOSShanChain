@@ -38,6 +38,7 @@ class TaskAddModel_task: HandyJSON {
     var releaseHash:String?
     var lastHash:String?
     var userId:String?
+    var price:String?
     
     required init() {}
 }

@@ -49,7 +49,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-   // [self.view.superview sendSubviewToBack:self.view];
+    [self.view.superview sendSubviewToBack:self.view];
+    self.view.backgroundColor = [UIColor clearColor];
+   
 }
 
 -(void)setIconImage{
@@ -165,7 +167,7 @@
 
 - (void)changesIcon{
    
-    [UPLOAD_IMAGE showActionSheetInFatherViewController:[self mainNav].topViewController imageTag:100 delegate:self];
+    [UPLOAD_IMAGE showActionSheetInFatherViewController:self imageTag:100 delegate:self];
     [UPLOAD_IMAGE setDUX_cancelBlock:^{
         [[CWMaskView shareInstance]singleTap];
     }];
@@ -300,7 +302,6 @@
 -(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag{
     
      [[CWMaskView shareInstance]singleTap];
-    
     if (!image) {
         return;
     }

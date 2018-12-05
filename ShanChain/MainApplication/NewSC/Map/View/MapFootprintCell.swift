@@ -35,7 +35,8 @@ class MapFootprintCell: UITableViewCell {
     }
     
     
-    @IBAction func enterAction(_ sender: Any) {
+    @IBAction func enterAction(_ sender: Any){
+        
     }
     
 }

@@ -34,7 +34,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         super.init(nibName: "HHChatRoomViewController", bundle: nil) // 加载xib视图
         automaticallyAdjustsScrollViewInsets = false;
         self.title = navTitle
-        // if let 关键字是一个组合关键字。我们主要使用它解决Optional对象解包时产生空对象的处理
         if let draft = JCDraft.getDraft(conversation) {
             // 不为空时执行
             self.draft = draft // 获取编辑未发出的草稿
@@ -78,12 +77,12 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
 //        maskView.isHidden = true
 //    }
     
-    let colourArray: [UIColor] = [.red , .blue , .green , .yellow , .purple]
+    let colourArray: [UIColor] = [.red , .blue , .green]
      func _configureDraggebleCircularMenuButton(){
         
-        configureDraggebleCircularMenuButton(button: taskButton, numberOfMenuItems: 5, menuRedius: 70, postion: .topRight)
+        configureDraggebleCircularMenuButton(button: taskButton, numberOfMenuItems: 3, menuRedius: 300, postion: .centerTop)
         taskButton.menuButtonSize = .medium
-        taskButton.sholudMenuButtonAnimate = false
+       // taskButton.sholudMenuButtonAnimate = false
         taskButton.bottomLayouSafeBorder = toolbar.intrinsicContentSize.height
     }
     
@@ -115,12 +114,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
 
     func willShowForMenuButton(){
         maskView.isHidden = false
-        toolbar.isHidden = true
     }
     
     func didDisappearForMenuButton(){
          maskView.isHidden = true
-         toolbar.isHidden = false
     }
     
     @IBAction func joinAction(_ sender: Any) {
@@ -1601,7 +1598,7 @@ extension HHChatRoomViewController: SuspendBallDelegte{
                         let dict = baseModel?.data as!Dictionary<String, Any>
                         if let model = TaskAddModel.deserialize(from: dict) {
                             self?._taskModel = model
-                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:model.Task?.bounty ?? "",CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
+                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:model.Task?.price ?? "",CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
                         }
                     })
                 }

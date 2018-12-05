@@ -31,23 +31,49 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
     uploadUserIcon.uploadImageDelegate = aDelegate;
     uploadUserIcon.tag = tag;
     self.fatherViewController = fatherVC;
+    
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"sc_cancel", nil)
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"相册", @"拍照", nil];
     [sheet showInView:fatherVC.view];
+    
+    
+    
+//    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self fromPhotos];
+//    }];
+//    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//         [self createPhotoView];
+//    }];
+//    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//        //跳到创建alertview的方法，一般在点击删除这里按钮之后，都需要一个提示框，提醒用户是否真的删除
+//        [self creatAlertController_alert];
+//    }];
+//
+//    //把action添加到actionSheet里
+//    [actionSheet addAction:action1];
+//    [actionSheet addAction:action2];
+//    [actionSheet addAction:action3];
+    
+    //相当于之前的[actionSheet show];
+    
+    
 }
 
 
 #pragma mark - UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         [self fromPhotos];
     }else if (buttonIndex == 1) {
         [self createPhotoView];
     }
-//    BLOCK_EXEC(self.DUX_cancelBlock);
+  
 }
 
 - (void)actionSheetCancel:(UIActionSheet *)actionSheet{

@@ -33,7 +33,7 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
         _completeTime = content.completeTime
         _taskId = content.taskId
         
-        rewardLabel.attributedText = NSString.setAttrFirst("赏金 ", color: SC_EmphasisColor, font: Font(13), secendString: content.reward ?? "", color: SC_ThemeMainColor, font: Font(16), threeString: " SEAT", color: SC_EmphasisColor, font: Font(13))
+        rewardLabel.attributedText = NSString.setAttrFirst("赏金 ", color: SC_EmphasisColor, font: Font(13), secendString: content.reward ?? "", color: SC_ThemeMainColor, font: Font(16), threeString: " ￥", color: SC_EmphasisColor, font: Font(13))
         contentLabel.text = _taskContent
         completeTimeLabel.text = NSDate.chatingTime(_completeTime)
         

@@ -14,5 +14,6 @@
 - (void)setupHXConfigWithApplication:(UIApplication *)application;
 - (void)setIQkeyboard;
 - (void)setReceiveMonitorNotification; //处理通知
+- (void)setupJshareConfig; // 配置极光分享
 
 @end
