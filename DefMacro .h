@@ -47,7 +47,7 @@
 #define kUpdateAvatarSuccess  @"kUpdateAvatarSuccess" // 修改头像成功
 
 
-#define Theme_MainThemeColor RGB(115, 207, 242)
+#define Theme_MainThemeColor RGB(172, 129, 233)
 
 //重写NSLog
 #ifdef DEBUG

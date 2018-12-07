@@ -25,6 +25,7 @@
 
 
 #import "UIViewController+CWLateralSlide.h"
+#import "UIViewController+BackButtonHandler.h"
 #import "LeftViewController.h"
 #import "UIViewController+SYBase.h"
 #import "UIView+property.h"
@@ -56,6 +57,7 @@
 #import "SuspendBall.h"
 #import "UIButton+EnlargeTouchArea.h"
 #import "PublicShareService.h"
+#import "DUX_UploadUserIcon.h"
 
 
 #endif /* ShanChain_Bridging_Header_h */

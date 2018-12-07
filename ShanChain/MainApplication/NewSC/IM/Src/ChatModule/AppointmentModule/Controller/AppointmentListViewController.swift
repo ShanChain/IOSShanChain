@@ -24,15 +24,20 @@ class AppointmentListViewController: SCBaseVC {
         super.viewDidLoad()
         title = "马甲劵"
         tableView.tableHeaderView = headView
-        tableView.estimatedRowHeight = 100
+         tableView.tableHeaderView?.backgroundColor = SC_ThemeBackgroundViewColor
+        tableView.estimatedRowHeight = 163
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
+        tableView.backgroundColor = SC_ThemeBackgroundViewColor
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title: "我的", tintColor: .black)
+        view.backgroundColor = SC_ThemeBackgroundViewColor
+        headView.backgroundColor = SC_ThemeBackgroundViewColor
     }
     
     func _clickMy(){
-        
+        let vc = MyCardCouponContainerViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -63,12 +68,10 @@ extension AppointmentListViewController:UITableViewDataSource,UITableViewDelegat
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? AppointmentListCell else {
-            return
-        }
-        cell.layer.borderColor = UIColor.lightGray.cgColor
-        cell.layer.borderWidth = 0.5
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard let cell = cell as? AppointmentListCell else {
+//            return
+//        }
+//    }
     
 }

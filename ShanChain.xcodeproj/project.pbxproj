@@ -49,6 +49,9 @@
 		2229ED0D21B9265700E33A8D /* AppointmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED0B21B9265600E33A8D /* AppointmentListCell.xib */; };
 		2229ED1421B9412700E33A8D /* AppointmentCreateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */; };
 		2229ED1721B942A500E33A8D /* AppointmentCreateCardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */; };
+		2229ED1A21BA678200E33A8D /* MyCardCouponContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED1821BA678200E33A8D /* MyCardCouponContainerViewController.swift */; };
+		2229ED1E21BA726800E33A8D /* MyCardCouponListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED1C21BA726800E33A8D /* MyCardCouponListViewController.swift */; };
+		2229ED1F21BA726800E33A8D /* MyCardCouponListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED1D21BA726800E33A8D /* MyCardCouponListViewController.xib */; };
 		222C30FD215A21D3009871C7 /* ShareSaveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C30FC215A21D3009871C7 /* ShareSaveModel.m */; };
 		222C3100215A27FE009871C7 /* HHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C30FF215A27FE009871C7 /* HHBaseModel.m */; };
 		222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C3102215A38E0009871C7 /* UIImage+MingleChang.m */; };
@@ -860,6 +863,9 @@
 		2229ED0B21B9265600E33A8D /* AppointmentListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentListCell.xib; sourceTree = "<group>"; };
 		2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCreateCardViewController.swift; sourceTree = "<group>"; };
 		2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppointmentCreateCardViewController.storyboard; sourceTree = "<group>"; };
+		2229ED1821BA678200E33A8D /* MyCardCouponContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardCouponContainerViewController.swift; sourceTree = "<group>"; };
+		2229ED1C21BA726800E33A8D /* MyCardCouponListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardCouponListViewController.swift; sourceTree = "<group>"; };
+		2229ED1D21BA726800E33A8D /* MyCardCouponListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCardCouponListViewController.xib; sourceTree = "<group>"; };
 		222C30FB215A21D3009871C7 /* ShareSaveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareSaveModel.h; sourceTree = "<group>"; };
 		222C30FC215A21D3009871C7 /* ShareSaveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareSaveModel.m; sourceTree = "<group>"; };
 		222C30FE215A27FE009871C7 /* HHBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHBaseModel.h; sourceTree = "<group>"; };
@@ -2161,6 +2167,9 @@
 				2229ED0721B9256100E33A8D /* AppointmentListViewController.xib */,
 				2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */,
 				2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */,
+				2229ED1821BA678200E33A8D /* MyCardCouponContainerViewController.swift */,
+				2229ED1C21BA726800E33A8D /* MyCardCouponListViewController.swift */,
+				2229ED1D21BA726800E33A8D /* MyCardCouponListViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4957,6 +4966,7 @@
 				48718D711F42277400010AA0 /* MJPhotoBrowser.bundle in Resources */,
 				223F996A217F12040031DB95 /* yh_image_picked@3x.png in Resources */,
 				220706A2219BC6B600404459 /* EditPersonalInfoViewController.xib in Resources */,
+				2229ED1F21BA726800E33A8D /* MyCardCouponListViewController.xib in Resources */,
 				223F9A742182AEC10031DB95 /* 0.jpg in Resources */,
 				2229ED0921B9256100E33A8D /* AppointmentListViewController.xib in Resources */,
 				4852A0DE1FCE9F0300CDD7BE /* SYNoticeCell.xib in Resources */,
@@ -5067,6 +5077,7 @@
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${PODS_ROOT}/Hyphenate/iOS_Pods_IMFullSDK_V3.5.1/Hyphenate.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/LBXScan/LBXScan.framework",
 				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/React/React.framework",
@@ -5076,6 +5087,7 @@
 				"${BUILT_PRODUCTS_DIR}/YHPhotoKit/YHPhotoKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YHPopupView/YHPopupView.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
+				"${BUILT_PRODUCTS_DIR}/ZBarSDK/ZBarSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/yoga/yoga.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -5085,6 +5097,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hyphenate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBXScan.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
@@ -5094,6 +5107,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YHPhotoKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YHPopupView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZBarSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5313,6 +5327,7 @@
 				8951B58B1FE10C5200961544 /* UIViewController+SYBase.m in Sources */,
 				223F9A48217F12B80031DB95 /* JCAddFriendViewController.swift in Sources */,
 				223F9A3B217F12B80031DB95 /* JCUserInfoCell.swift in Sources */,
+				2229ED1A21BA678200E33A8D /* MyCardCouponContainerViewController.swift in Sources */,
 				33C1A17F1F4C50FB003E22CA /* MASViewConstraint.m in Sources */,
 				485E66151F42862900B158BF /* EaseBubbleView+Gif.m in Sources */,
 				22C91789219284B5002E5240 /* TaskListCell.swift in Sources */,
@@ -5329,6 +5344,7 @@
 				33ED5EE91FAAC3D80031709C /* ApprDataPickeryMd.m in Sources */,
 				4852A1741FCE9F7200CDD7BE /* SCAppManager.m in Sources */,
 				4852A1381FCE9F0300CDD7BE /* SYTopDetailHeadView.m in Sources */,
+				2229ED1E21BA726800E33A8D /* MyCardCouponListViewController.swift in Sources */,
 				897B8E061FD69C0E00404E93 /* SYStoryRetweetController.m in Sources */,
 				223F999C217F12040031DB95 /* UnreadListViewController.swift in Sources */,
 				223F999F217F12040031DB95 /* JCSingleSettingViewController.swift in Sources */,

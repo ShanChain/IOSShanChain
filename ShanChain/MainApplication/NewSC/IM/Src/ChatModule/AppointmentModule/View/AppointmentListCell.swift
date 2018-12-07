@@ -22,16 +22,16 @@ class AppointmentListCell: UITableViewCell {
     @IBOutlet weak var nikeNameLb: UILabel!
     
     
-    @IBOutlet weak var statusBtn: UIButton!
-    
     @IBOutlet weak var priceLb: UILabel!
     
+    @IBOutlet weak var bgIcon: UIImageView!
     
+    @IBOutlet weak var statusLb: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.backgroundColor = SC_ThemeBackgroundViewColor
+        contentView.backgroundColor = SC_ThemeBackgroundViewColor
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

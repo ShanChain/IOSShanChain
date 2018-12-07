@@ -15,9 +15,9 @@ import Foundation
 let SCREEN_HEIGHT = Int(UIScreen.main.bounds.size.height)
 let SCREEN_WIDTH = Int(UIScreen.main.bounds.size.width)
 let kApplicationStatusBarHeight = Int(UIApplication.shared.statusBarFrame.size.height)
-let kNavBlueColor = RGB(115, 207, 242)
+let kNavBlueColor = SC_ThemeMainColor
 let SC_ThemeMainColor = _ThemeMainColor()
-let SC_ThemeBackgroundViewColor = RGB(242, 242, 242)
+let SC_ThemeBackgroundViewColor = RGB(245, 245, 245)
 let SC_EmphasisColor = UIColor.black // 主要字体颜色
 let SC_defaultImage = UIImage.loadImage("sc_com_icon_DefaultAvatar")
 
@@ -36,6 +36,6 @@ func RGB(_ r:Int , _ g:Int , _ b:Int) -> UIColor {
 }
 
 func _ThemeMainColor() ->UIColor {
-    return UIColor.init(valueStr: "4FD1F6")
+    return UIColor.init(valueStr: "AC81E9")
 }
 

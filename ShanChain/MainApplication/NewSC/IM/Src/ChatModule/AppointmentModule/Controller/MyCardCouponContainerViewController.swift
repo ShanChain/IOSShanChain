@@ -1,8 +1,8 @@
 //
-//  TaskListContainerViewController.swift
+//  MyCardCouponContainerViewController.swift
 //  ShanChain
 //
-//  Created by 千千世界 on 2018/11/2.
+//  Created by 千千世界 on 2018/12/7.
 //  Copyright © 2018年 ShanChain. All rights reserved.
 //
 
@@ -11,41 +11,46 @@ import LTScrollView
 
 private let glt_iphoneX = (UIScreen.main.bounds.height == 812.0)
 
-enum TaskListType:Int{
-    case all = 0
-    case my
+enum MyCardCouponType:Int{
+    case receive = 0
+    case create
 }
 
-
-class TaskListContainerViewController: SCBaseVC {
-
+class MyCardCouponContainerViewController: SCBaseVC {
+    
+    public var _scrollToIndex:MyCardCouponType = .receive
     // 兼容OC
     public var _oc_scrollToIndex = 1{
         willSet{
             if newValue ==  1{
-                _scrollToIndex = .my
+                _scrollToIndex = .receive
             }else{
-                _scrollToIndex = .all
+                _scrollToIndex = .create
             }
         }
     }
-    public var _scrollToIndex:TaskListType = .my
-    private lazy var viewControllers: [UIViewController] = {
-        let listVc = TaskListViewController(type: TaskListType.all)
-        let myVc = TaskListViewController(type: TaskListType.my)
-        return [listVc, myVc]
-    }()
-   
-    private lazy var titles:[String] = {
-        return [NSLocalizedString("sc_Tasklist", comment: "字符串"),NSLocalizedString("sc_MyTask", comment: "字符串")]
-    }()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "我的马甲劵"
+        view.backgroundColor = SC_ThemeBackgroundViewColor
+        automaticallyAdjustsScrollViewInsets = false
+        view.addSubview(pageView)
+        navigationController?.navigationBar.barTintColor = kNavBlueColor
+        pageView.didSelectIndexBlock = {(_, index) in
+            print("pageView.didSelectIndexBlock", index)
+        }
+        // Do any additional setup after loading the view.
+    }
+
     
-    var isSelectMyTask:Bool = false
+    private lazy var titles:[String] = {
+        return ["我领取的","我创建的"]
+    }()
     
     private lazy var layout: LTLayout = {
         let layout = LTLayout()
         layout.sliderWidth = CGFloat(SCREEN_WIDTH/2)
-       // layout.titleMargin = 10.0
+        // layout.titleMargin = 10.0
         // （屏幕宽度 - 标题总宽度 - 标题间距宽度） / 2 = 最左边以及最右边剩余
         let lrMargin = (self.view.bounds.width - (CGFloat(self.titles.count) * layout.sliderWidth + CGFloat(self.titles.count - 1) * layout.titleMargin)) * 0.5
         layout.lrMargin = lrMargin
@@ -59,6 +64,13 @@ class TaskListContainerViewController: SCBaseVC {
         return layout
     }()
     
+    
+    private lazy var viewControllers: [UIViewController] = {
+        let receiveVc = MyCardCouponListViewController(type: MyCardCouponType.receive)
+        let createVc = MyCardCouponListViewController(type: MyCardCouponType.create)
+        return [receiveVc, createVc]
+    }()
+    
     private lazy var pageView: LTPageView = {
         let statusBarH = UIApplication.shared.statusBarFrame.size.height
         let Y: CGFloat = statusBarH + 44
@@ -68,24 +80,5 @@ class TaskListContainerViewController: SCBaseVC {
         pageView.scrollToIndex(index: self._scrollToIndex.rawValue)
         return pageView
     }()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = NSLocalizedString("sc_RewardTask", comment: "字符串")
-        view.backgroundColor = UIColor.white
-        automaticallyAdjustsScrollViewInsets = false
-        view.addSubview(pageView)
-        navigationController?.navigationBar.barTintColor = kNavBlueColor
-        pageView.didSelectIndexBlock = {(_, index) in
-            print("pageView.didSelectIndexBlock", index)
-        }
-    }
-    
-    func _add() {
-        
-    }
-    
+
 }
-
-

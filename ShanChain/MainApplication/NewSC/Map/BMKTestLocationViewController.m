@@ -478,6 +478,8 @@
         }
         [self.view layoutIfNeeded];
     }];
+    
+   
 }
 
 - (IBAction)joinPressed:(id)sender{
