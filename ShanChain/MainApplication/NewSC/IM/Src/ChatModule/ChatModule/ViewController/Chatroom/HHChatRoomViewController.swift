@@ -95,8 +95,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     func didClickOnCircularMenuButton(_ menuButton: ASCircularMenuButton, indexForButton: Int, button: UIButton) {
-        
-        
+        let appointmentVC = AppointmentListViewController()
+        self.navigationController?.pushViewController(appointmentVC, animated: true)
     }
     
     override func loadView() {

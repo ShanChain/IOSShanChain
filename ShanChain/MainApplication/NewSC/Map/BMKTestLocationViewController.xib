@@ -71,7 +71,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="joinPressed:" destination="-1" eventType="touchUpInside" id="PJW-aj-aLl"/>
+                                <action selector="joinPressed:" destination="-1" eventType="touchUpInside" id="B7t-8Q-WDc"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKL-jd-3ch">
@@ -131,7 +131,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="activeRuleAction:" destination="-1" eventType="touchUpInside" id="FL7-W7-trj"/>
+                                <action selector="activeRuleAction:" destination="-1" eventType="touchUpInside" id="Ao6-xP-Cfk"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsP-Jq-6sr">

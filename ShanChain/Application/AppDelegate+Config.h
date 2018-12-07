@@ -15,5 +15,6 @@
 - (void)setIQkeyboard;
 - (void)setReceiveMonitorNotification; //处理通知
 - (void)setupJshareConfig; // 配置极光分享
+- (void)showAlerWithUserInfo:(NSDictionary*)userInfo andSEL:(SEL)sel;
 
 @end

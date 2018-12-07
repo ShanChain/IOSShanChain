@@ -232,18 +232,8 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [UMessage setAutoAlert:NO];
     [UMessage didReceiveRemoteNotification:userInfo];
-        //定制自定的的弹出框
-//        if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
-//        {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"标题"
-//                                                                message:@"Test On ApplicationStateActive"
-//                                                               delegate:self
-//                                                      cancelButtonTitle:@"确定"
-//                                                      otherButtonTitles:nil];
-//
-//            [alertView show];
-//
-//        }
+
+    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
 
     NSDictionary *custom = userInfo[@"custom"];
     [NotificationHandler handlerNotificationWithCustom:custom];
@@ -260,12 +250,14 @@
     
     // Required, For systems with less than or equal to iOS 6
     [JPUSHService handleRemoteNotification:userInfo];
+     [self showAlerWithUserInfo:userInfo andSEL:_cmd];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
 //iOS10新增：处理前台收到通知的代理方法
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
     NSDictionary * userInfo = notification.request.content.userInfo;
+    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //应用处于前台时的远程推送接受
         //关闭U-Push自带的弹出框
@@ -292,6 +284,7 @@
         //应用处于后台时的本地推送接受
     }
     NSDictionary *custom = userInfo[@"custom"];
+     [self showAlerWithUserInfo:userInfo andSEL:_cmd];
     [NotificationHandler handlerNotificationWithCustom:custom];
 }
 
@@ -376,6 +369,9 @@
     }else{
         //从通知设置界面进入应用
     }
+    
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
 }
 
 // iOS 10 Support
@@ -385,16 +381,20 @@
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
+    
+     [self showAlerWithUserInfo:userInfo andSEL:_cmd];
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
 }
 
-// iOS 10 Support
+// iOS 10 Support  前台点击通知调用方法
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     // Required
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
+    
+    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
     completionHandler();  // 系统要求执行这个方法
 }
 

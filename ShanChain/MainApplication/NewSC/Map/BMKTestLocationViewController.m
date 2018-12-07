@@ -14,6 +14,7 @@
 #import "CoordnateInfosModel.h"
 #import "SCLoginController.h"
 #import "SCBaseNavigationController.h"
+#import "NewYearActivitiesView.h"
 
 
 @interface BMKTestLocationViewController ()< UITableViewDelegate,CLLocationManagerDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,BMKMapViewDelegate>
@@ -103,16 +104,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self sc_ConfigurationUI];
-    
-    MCDate *activeDate = [MCDate dateWithInterval:1545840000];
+    [self sc_newYearActive];
+}
+
+
+
+-(void)sc_newYearActive{
+    MCDate *activeDate = [MCDate dateWithInterval:Test_ActiveTimestamp];
     NSInteger  days = [activeDate daysFrom:[MCDate date]];
     if (days > 0) {
         self.laveDayLabel.text = [NSString stringWithFormat:@"%ld天",days];
     }else{
         self.topView.hidden = YES;
+        NewYearActivitiesView *activeView = [[NewYearActivitiesView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
+        [self.mapView addSubview:activeView];
+        [self.mapView bringSubviewToFront:activeView];
     }
 }
-
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.mapView viewWillAppear];

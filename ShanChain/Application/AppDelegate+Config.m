@@ -210,4 +210,11 @@
     //  [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 
+
+- (void)showAlerWithUserInfo:(NSDictionary*)userInfo andSEL:(SEL)sel{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:userInfo.mj_JSONString message:NSStringFromSelector(sel) delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+    [alert show];
+    
+}
+
 @end

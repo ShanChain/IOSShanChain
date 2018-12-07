@@ -41,6 +41,14 @@
 		222849202176DD0F00CDC86C /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228491B2176DD0F00CDC86C /* BaiduMapAPI_Base.framework */; };
 		222849212176DD0F00CDC86C /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228491C2176DD0F00CDC86C /* BaiduMapAPI_Utils.framework */; };
 		222849232176E07500CDC86C /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 222849222176E07500CDC86C /* mapapi.bundle */; };
+		2229ECFF21B908D200E33A8D /* NewYearActivitiesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2229ECFE21B908D200E33A8D /* NewYearActivitiesView.m */; };
+		2229ED0121B9091B00E33A8D /* NewYearActivitiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED0021B9091B00E33A8D /* NewYearActivitiesView.xib */; };
+		2229ED0821B9256100E33A8D /* AppointmentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED0621B9256100E33A8D /* AppointmentListViewController.swift */; };
+		2229ED0921B9256100E33A8D /* AppointmentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED0721B9256100E33A8D /* AppointmentListViewController.xib */; };
+		2229ED0C21B9265600E33A8D /* AppointmentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED0A21B9265600E33A8D /* AppointmentListCell.swift */; };
+		2229ED0D21B9265700E33A8D /* AppointmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED0B21B9265600E33A8D /* AppointmentListCell.xib */; };
+		2229ED1421B9412700E33A8D /* AppointmentCreateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */; };
+		2229ED1721B942A500E33A8D /* AppointmentCreateCardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */; };
 		222C30FD215A21D3009871C7 /* ShareSaveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C30FC215A21D3009871C7 /* ShareSaveModel.m */; };
 		222C3100215A27FE009871C7 /* HHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C30FF215A27FE009871C7 /* HHBaseModel.m */; };
 		222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C3102215A38E0009871C7 /* UIImage+MingleChang.m */; };
@@ -843,6 +851,15 @@
 		222849222176E07500CDC86C /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		22284A7A2179819700CDC86C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		22284A7B2179819800CDC86C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		2229ECFD21B908D200E33A8D /* NewYearActivitiesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewYearActivitiesView.h; sourceTree = "<group>"; };
+		2229ECFE21B908D200E33A8D /* NewYearActivitiesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewYearActivitiesView.m; sourceTree = "<group>"; };
+		2229ED0021B9091B00E33A8D /* NewYearActivitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewYearActivitiesView.xib; sourceTree = "<group>"; };
+		2229ED0621B9256100E33A8D /* AppointmentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListViewController.swift; sourceTree = "<group>"; };
+		2229ED0721B9256100E33A8D /* AppointmentListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentListViewController.xib; sourceTree = "<group>"; };
+		2229ED0A21B9265600E33A8D /* AppointmentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListCell.swift; sourceTree = "<group>"; };
+		2229ED0B21B9265600E33A8D /* AppointmentListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentListCell.xib; sourceTree = "<group>"; };
+		2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCreateCardViewController.swift; sourceTree = "<group>"; };
+		2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppointmentCreateCardViewController.storyboard; sourceTree = "<group>"; };
 		222C30FB215A21D3009871C7 /* ShareSaveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareSaveModel.h; sourceTree = "<group>"; };
 		222C30FC215A21D3009871C7 /* ShareSaveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareSaveModel.m; sourceTree = "<group>"; };
 		222C30FE215A27FE009871C7 /* HHBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHBaseModel.h; sourceTree = "<group>"; };
@@ -2127,6 +2144,43 @@
 			path = Aspects;
 			sourceTree = "<group>";
 		};
+		2229ED0221B9175300E33A8D /* AppointmentModule */ = {
+			isa = PBXGroup;
+			children = (
+				2229ED0321B9175300E33A8D /* Controller */,
+				2229ED0421B9175300E33A8D /* Model */,
+				2229ED0521B9175300E33A8D /* View */,
+			);
+			path = AppointmentModule;
+			sourceTree = "<group>";
+		};
+		2229ED0321B9175300E33A8D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2229ED0621B9256100E33A8D /* AppointmentListViewController.swift */,
+				2229ED0721B9256100E33A8D /* AppointmentListViewController.xib */,
+				2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */,
+				2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2229ED0421B9175300E33A8D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2229ED0521B9175300E33A8D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2229ED0A21B9265600E33A8D /* AppointmentListCell.swift */,
+				2229ED0B21B9265600E33A8D /* AppointmentListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		223F9871217F0BB70031DB95 /* NewSC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2196,6 +2250,7 @@
 		223F9887217F12030031DB95 /* ChatModule */ = {
 			isa = PBXGroup;
 			children = (
+				2229ED0221B9175300E33A8D /* AppointmentModule */,
 				22C9178F2192E4A8002E5240 /* PersonalCenterModule */,
 				225052BA218BF4EC001FBD65 /* TaskModule */,
 				223F9888217F12030031DB95 /* ChatModule */,
@@ -2841,7 +2896,6 @@
 		225052BA218BF4EC001FBD65 /* TaskModule */ = {
 			isa = PBXGroup;
 			children = (
-				22563F5B219BFE7A004E34BB /* Protocol */,
 				22C9178621928468002E5240 /* Model */,
 				22C9178521928468002E5240 /* View */,
 				225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */,
@@ -2850,13 +2904,6 @@
 				22C917AD21943014002E5240 /* TaskDetailsViewController.xib */,
 			);
 			path = TaskModule;
-			sourceTree = "<group>";
-		};
-		22563F5B219BFE7A004E34BB /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 		225F83F221AE92480082C0E1 /* Chatroom */ = {
@@ -2941,6 +2988,9 @@
 				22C917832192750E002E5240 /* BMKLocationBottomView.swift */,
 				2271057D21B76267009FC34D /* HHShareView.swift */,
 				2271057F21B76273009FC34D /* HHShareView.xib */,
+				2229ECFD21B908D200E33A8D /* NewYearActivitiesView.h */,
+				2229ECFE21B908D200E33A8D /* NewYearActivitiesView.m */,
+				2229ED0021B9091B00E33A8D /* NewYearActivitiesView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4874,6 +4924,7 @@
 				22D2478B2189D5B3009C1E6A /* RecieveTaskView.xib in Resources */,
 				223F99BB217F12040031DB95 /* 定位2.png in Resources */,
 				22C917AB219424FF002E5240 /* TaskListBackView.xib in Resources */,
+				2229ED0D21B9265700E33A8D /* AppointmentListCell.xib in Resources */,
 				2271057321B4DA9B009FC34D /* Localizable.strings in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
 				2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */,
@@ -4896,6 +4947,7 @@
 				223F99E8217F12040031DB95 /* defaultTheme.bundle in Resources */,
 				3356B16C1F32F50700027E23 /* api.shanchain.com.cer in Resources */,
 				22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */,
+				2229ED1721B942A500E33A8D /* AppointmentCreateCardViewController.storyboard in Resources */,
 				485E66631F42873F00B158BF /* MJRefresh.bundle in Resources */,
 				22C91782219274A8002E5240 /* BMKTestLocationViewController.xib in Resources */,
 				223F99BC217F12040031DB95 /* jiantou2@2x.png in Resources */,
@@ -4906,6 +4958,7 @@
 				223F996A217F12040031DB95 /* yh_image_picked@3x.png in Resources */,
 				220706A2219BC6B600404459 /* EditPersonalInfoViewController.xib in Resources */,
 				223F9A742182AEC10031DB95 /* 0.jpg in Resources */,
+				2229ED0921B9256100E33A8D /* AppointmentListViewController.xib in Resources */,
 				4852A0DE1FCE9F0300CDD7BE /* SYNoticeCell.xib in Resources */,
 				223F99BD217F12040031DB95 /* icon_baidu_marker.png in Resources */,
 				4852A1361FCE9F0300CDD7BE /* SYStoryRoleSelectCell.xib in Resources */,
@@ -4931,6 +4984,7 @@
 				89E031531FCECBA70089240B /* GWLPhotoSelector.bundle in Resources */,
 				2207068E219A81E800404459 /* PersonalChatInfoViewController.xib in Resources */,
 				22C9178E2192BA76002E5240 /* HHDefaultCell.xib in Resources */,
+				2229ED0121B9091B00E33A8D /* NewYearActivitiesView.xib in Resources */,
 				33B7CCF91EC5865700FB6378 /* Assets.xcassets in Resources */,
 				223F9967217F12040031DB95 /* yh_image_no_picked@2x.png in Resources */,
 				4852A0E61FCE9F0300CDD7BE /* SYScreenMessageCell.xib in Resources */,
@@ -5108,6 +5162,7 @@
 				223F9A36217F12B80031DB95 /* JCDoubleButtonCell.swift in Sources */,
 				223F99A9217F12040031DB95 /* JCUpdateMemberViewController.swift in Sources */,
 				4852A12B1FCE9F0300CDD7BE /* SYMarkCollection1Cell.m in Sources */,
+				2229ED0C21B9265600E33A8D /* AppointmentListCell.swift in Sources */,
 				2293A73F218C3B5100FB977C /* RoomNavTitleView.swift in Sources */,
 				48718D9E1F42277400010AA0 /* UIImageView+WebCache.m in Sources */,
 				4852A17E1FCEDF6000CDD7BE /* SYStoryMarkFavoriteCell.m in Sources */,
@@ -5139,6 +5194,7 @@
 				485E65D81F42862900B158BF /* MWZoomingScrollView.m in Sources */,
 				485E65B71F42862900B158BF /* amrFileCodec.mm in Sources */,
 				48718D981F42277400010AA0 /* SDWebImagePrefetcher.m in Sources */,
+				2229ED1421B9412700E33A8D /* AppointmentCreateCardViewController.swift in Sources */,
 				223F99E1217F12040031DB95 /* Date+JChat.swift in Sources */,
 				4852A12F1FCE9F0300CDD7BE /* SYmarkCollectionViewCell.m in Sources */,
 				222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */,
@@ -5449,6 +5505,7 @@
 				4852A0DC1FCE9F0300CDD7BE /* SYMessageToolBar.m in Sources */,
 				223F9994217F12040031DB95 /* JCChatViewData.swift in Sources */,
 				223F99F9217F12040031DB95 /* SAIInputTextFieldItem.swift in Sources */,
+				2229ECFF21B908D200E33A8D /* NewYearActivitiesView.m in Sources */,
 				223F9982217F12040031DB95 /* JCMessageVoiceContentView.swift in Sources */,
 				485E66671F42873F00B158BF /* UIScrollView+MJRefresh.m in Sources */,
 				485E65FB1F42862900B158BF /* EaseUserModel.m in Sources */,
@@ -5619,6 +5676,7 @@
 				223F99D2217F12040031DB95 /* JCFeedbackViewController.swift in Sources */,
 				4852A0F51FCE9F0300CDD7BE /* SCSearchController.m in Sources */,
 				4852A1481FCE9F0400CDD7BE /* SCDialogModule.m in Sources */,
+				2229ED0821B9256100E33A8D /* AppointmentListViewController.swift in Sources */,
 				48F90FCA1FDEE276001AB1CF /* NotificationHandler.m in Sources */,
 				4852A0C61FCE9F0300CDD7BE /* SYScreenInsideController.m in Sources */,
 				223F99CE217F12040031DB95 /* JCSignatureViewController.swift in Sources */,

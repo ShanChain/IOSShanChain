@@ -23,6 +23,7 @@
 
 #define IP_ADDRESS  @"192.168.0.115"
 #define DefaultAvatar   @"sc_com_icon_DefaultAvatar"
+#define Test_ActiveTimestamp   1544083753
 
 #define JM_APPKET      @"appkey"
 #define JM_USERNAME    @"userName"
@@ -104,6 +105,12 @@ view.layer.rasterizationScale = [UIScreen mainScreen].scale;
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
+// 弧度转角度
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
+
+// 角度转弧度
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
 
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
