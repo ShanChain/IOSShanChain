@@ -149,7 +149,7 @@
     
     NSMutableString *targetId = nil;
     if (self.isReportPersonal) {
-        targetId = self.userId;
+        targetId = [[NSMutableString alloc]initWithString:self.userId];
         [params setObject:@"USER" forKey:@"reportType"];
         [params setObject:[SCCacheTool shareInstance].getCurrentCharacterId forKey:@"characterId"];
     }else{

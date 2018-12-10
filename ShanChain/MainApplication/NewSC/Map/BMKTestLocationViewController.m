@@ -27,8 +27,6 @@
 @property (nonatomic,copy)   NSString  *longitude;
 @property (nonatomic,assign)  CLLocationCoordinate2D   pt;
 
-@property (weak, nonatomic) IBOutlet UIButton *locationBtn;
-
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *noteBtn;
@@ -56,6 +54,9 @@
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UILabel *laveDayLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *locationLb;
+
+@property (nonatomic,strong)  UIImage  *takeImage;
 
 @end
 
@@ -63,7 +64,7 @@
 
 - (void)sc_ConfigurationUI{
     
-    [self.joinBtn _setCornerRadiusCircle];
+   // [self.joinBtn _setCornerRadiusCircle];
     [self.noteBtn _setCornerRadiusCircle];
     [self.footprintBtn _setCornerRadiusCircle];
     
@@ -72,14 +73,16 @@
     [self.mapView bringSubviewToFront:self.noteBtn];
     [self.mapView bringSubviewToFront:self.collapseBtn];
     [self.mapView bringSubviewToFront:self.footprintBtn];
-    [self.mapView bringSubviewToFront:self.locationBtn];
+    [self.mapView bringSubviewToFront:self.locationLb];
     [self.mapView bringSubviewToFront:self.activeRuleBtn];
     
-    
+    [self.collapseBtn setEnlargeEdgeWithTop:20 right:20 bottom:0 left:20];
     [self.topView mas_makeConstraints:^(MASConstraintMaker * x) {
-        x.height.equalTo(@80);
-        x.left.right.equalTo(self.view);
-        x.top.equalTo(self.mas_topLayoutGuide);
+        x.height.equalTo(@42);
+        x.width.equalTo(@208);
+        x.centerX.equalTo(self.view);
+        x.top.equalTo(@(37 + IPHONE_TOPSENSOR_HEIGHT));
+        //x.top.equalTo(self.mas_topLayoutGuide);
     }];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self pn_ConfigurationMapView];
@@ -90,6 +93,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidSetupNotification) name:kJMSGNetworkDidSetupNotification object:nil];
     [self.joinBtn setTitle:NSLocalizedString(@"sc_enter", nil) forState:0];
     //self.activeRuleBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    
 }
 
 - (void)kJMSGNetworkDidSetupNotification{
@@ -113,7 +117,7 @@
     MCDate *activeDate = [MCDate dateWithInterval:Test_ActiveTimestamp];
     NSInteger  days = [activeDate daysFrom:[MCDate date]];
     if (days > 0) {
-        self.laveDayLabel.text = [NSString stringWithFormat:@"%ld天",days];
+        self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld",days] color:[UIColor redColor] font:Font(18) secendString:@"天" color:Theme_MainTextColor font:Font(14)];
     }else{
         self.topView.hidden = YES;
         NewYearActivitiesView *activeView = [[NewYearActivitiesView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
@@ -139,6 +143,27 @@
         return @{};
     }
     return @{@"latitude":self.latitude,@"longitude":self.longitude};
+}
+
+// 获取区域截图
+- (void)getTakeSnapshot{
+    weakify(self);
+    [self sc_mapViewRestoration:^{
+        strongify(self);
+        __block CGPoint point0;
+        __block CGPoint point2;
+        [self.myLocationCoordModel.coordinates enumerateObjectsUsingBlock:^(CoordnateInfosModel_coordinates * _Nonnull coordinate, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (idx == 0) {
+                point0 = [self.mapView convertCoordinate:CLLocationCoordinate2DMake(coordinate.latitude.floatValue, coordinate.longitude.floatValue) toPointToView:self.mapView];
+            }else if (idx == 2){
+                point2 = [self.mapView convertCoordinate:CLLocationCoordinate2DMake(coordinate.latitude.floatValue, coordinate.longitude.floatValue) toPointToView:self.mapView];
+            }
+        }];
+        
+        UIImage  *takeImage = [self.mapView takeSnapshot:CGRectMake(point0.x, point2.y, point2.x - point0.x, point0.y - point2.y)];
+        self.takeImage = [takeImage mc_resetToSize:CGSizeMake(point2.x - point0.x,  point0.y - point2.y)];
+        [SCCacheTool shareInstance].takeImage = self.takeImage;
+    }];
 }
 
 - (void)sc_getLbsCoordinate{
@@ -218,22 +243,37 @@
 
 - (IBAction)activeRuleAction:(UIButton *)sender {
     
-    HHShareView  *shreView = [[HHShareView alloc]initWithUid:@"111" frame:self.view.frame];
-    [self.view addSubview:shreView];
+    
+    // 福包领取
+//    AppointmentMyReceiveView *receiveView = [[AppointmentMyReceiveView alloc]initWithFrame:self.view.frame];
+//    [self.view addSubview:receiveView];
+    
+    // 我的规则
+    NewYearActivityRuleView *ruleView = [[NewYearActivityRuleView alloc]initWithFrame:self.view.frame];
+    [self.view addSubview:ruleView];
+    
 }
 
 
 // 复位
 - (IBAction)notePressed:(id)sender {
+    [self sc_mapViewRestoration:nil];
+}
+
+- (void)sc_mapViewRestoration:(dispatch_block_t)callback{
     self.mapView.centerCoordinate = CLLocationCoordinate2DMake(self.myLocationCoordModel.focusLatitude.floatValue, self.myLocationCoordModel.focusLongitude.floatValue);
     self.mapView.zoomLevel = 17.95;
     [self configurationLocationButtonTitle:CLLocationCoordinate2DMake(self.myLocationCoordModel.focusLatitude.floatValue, self.myLocationCoordModel.focusLongitude.floatValue)];
     self.currentRoomId = self.myLocationCoordModel.roomId;
+    BLOCK_EXEC(callback);
 }
 
 // 足迹
 - (IBAction)footprintPressed:(id)sender {
-    [HHTool showSucess:@"该功能暂未开通，敬请期待~"];
+    
+    // 活动分享
+        HHShareView  *shareView = [[HHShareView alloc]initWithUid:@"11" frame:self.view.frame shareImage:nil type:4];
+        [self.view addSubview:shareView];
 //    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:0];
 //    [self pushPage:footprintVC
 //          Animated:YES];
@@ -325,7 +365,7 @@
     NSString *long_title = coordinate.longitude > 0 ?sc_E:sc_W;
     NSString *lat_title = coordinate.latitude > 0 ?sc_N:sc_S;
     NSString  *roomName = [NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude];
-    [self.locationBtn setTitle:roomName forState:0];
+    self.locationLb.text = roomName;
     self.currentRoomName = roomName;
 }
 
@@ -424,6 +464,7 @@
         NSDictionary  *dic = responseObject[@"data"];
         if (dic.allValues > 0) {
             CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
+            self.myLocationCoordModel = model;
             [weak_self sc_configurationMapViewCenterLocationWithModel:model];
             __block  BOOL isContainRoom = NO;
             [self.mapView.overlays enumerateObjectsUsingBlock:^(BMKPolygon *  _Nonnull polygon, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -472,9 +513,11 @@
     sender.selected = !sender.selected;
     [UIView animateWithDuration:0.35 animations:^{
         if (sender.selected) {
-            self.joinBtnBottomConstraint.constant = IS_IPHONE_X? IPHONE_SAFEBOTTOMAREA_HEIGHT - 100: - 100;
+            [sender setImage:[UIImage imageNamed:@"sc_com_icon_show"] forState:0];
+            self.joinBtnBottomConstraint.constant = IS_IPHONE_X? IPHONE_SAFEBOTTOMAREA_HEIGHT - 128: - 128;
         }else{
             self.joinBtnBottomConstraint.constant = 71;
+            [sender setImage:[UIImage imageNamed:@"sc_com_icon_collapse"] forState:0];
         }
         [self.view layoutIfNeeded];
     }];
@@ -492,6 +535,7 @@
 //         [self.navigationController pushViewController:chatListView animated:YES];
         
         if ([SCCacheTool shareInstance].isJGSetup) {
+            [HHTool showChrysanthemum];
             [self getAllChatRoomConversation];
         }else{
             [HHTool show:@"正在获取该元社区信息，请稍等"];
@@ -582,12 +626,13 @@
     __block HHChatRoomViewController *roomVC;
     [EditInfoService enterChatRoomWithId:self.currentRoomId callBlock:^(JMSGConversation * resultObject, NSError *error) {
         strongify(self)
+        [self getTakeSnapshot];
         roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO navTitle:self.currentRoomName];
         [self pushPage:roomVC Animated:YES];
+       
     }];
     
 }
-
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

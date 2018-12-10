@@ -9,6 +9,7 @@
 #import "PublicShareService.h"
 #import "JPUSHService.h"
 #import "JSHAREService.h"
+#import "CoordnateInfosModel.h"
 
 @class ShareContentModel;
 
@@ -43,6 +44,7 @@
           BLOCK_EXEC(handler,state,error)
     }];
 }
+
 
 @end
 

@@ -10,6 +10,7 @@ import UIKit
 
 
 typealias NumberForPeopleClosure = () -> Void
+typealias ShareRoomClosure = () -> Void
 
 class RoomNavTitleView: UIView {
 
@@ -19,7 +20,8 @@ class RoomNavTitleView: UIView {
     
     @IBOutlet weak var numberForPeopleBtn: UIButton!
     
-    var numberForPeopleClosure:NumberForPeopleClosure?
+    var numberForPeopleClosure:NumberForPeopleClosure? // 查看成员
+    var shareRoomClosure:ShareRoomClosure? // 分享
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,5 +48,10 @@ class RoomNavTitleView: UIView {
          numberForPeopleClosure!()
     }
     
+    
+    // 分享该聊天室
+    @IBAction func shareRoomAction(_ sender: UIButton) {
+        shareRoomClosure!()
+    }
     
 }

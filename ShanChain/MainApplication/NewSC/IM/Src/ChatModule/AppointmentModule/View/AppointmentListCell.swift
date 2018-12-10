@@ -29,8 +29,8 @@ class AppointmentListCell: UITableViewCell {
     @IBOutlet weak var statusLb: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = SC_ThemeBackgroundViewColor
-        contentView.backgroundColor = SC_ThemeBackgroundViewColor
+        self.backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.clear
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

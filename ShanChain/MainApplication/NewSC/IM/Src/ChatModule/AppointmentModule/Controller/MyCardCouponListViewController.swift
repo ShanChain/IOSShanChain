@@ -31,7 +31,7 @@ class MyCardCouponListViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "马甲劵"
+        title = "我的马甲劵"
         tableView.estimatedRowHeight = 163
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -87,10 +87,25 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
             let section:Int = indexPath.section
             if section % 2 == 0 {
                 cell.bgIcon.image =  UIImage.init(name: "sc_com_icon_CardPackage_1")
+                cell.nameLb.textColor = SC_EmphasisColor
+                cell.nikeNameLb.textColor = SC_EmphasisColor
+                cell.deadlineLb.textColor = SC_EmphasisColor
+                cell.priceLb.textColor = SC_EmphasisColor
+                cell.statusLb.textColor = .white
             }else{
                 cell.bgIcon.image =  UIImage.init(name: "sc_com_icon_CardPackage")
+                cell.nameLb.textColor = .white
+                cell.nikeNameLb.textColor = .white
+                cell.deadlineLb.textColor = .white
+                cell.priceLb.textColor = .white
+                cell.statusLb.textColor = SC_ThemeMainColor
             }
             
         }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+          let vc = MyCardDetailsViewController()
+          navigationController?.pushViewController(vc, animated: true)
+    }
     
 }

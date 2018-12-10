@@ -21,6 +21,7 @@
 - (void)_setCornerRadius:(CGFloat)radius;
 -(void)_setCornerRadiusCircle;
 -(void)preventImageViewExtrudeDeformation;
+- (void)alphaComponentMake; // 视图覆盖蒙版
 @end
 
 

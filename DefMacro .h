@@ -23,7 +23,8 @@
 
 #define IP_ADDRESS  @"192.168.0.115"
 #define DefaultAvatar   @"sc_com_icon_DefaultAvatar"
-#define Test_ActiveTimestamp   1544083753
+#define Test_ActiveTimestamp   1546272000 //活动开始时间戳
+#define Test_ActiveEndTimestamp 1546531200 // 活动结束时间戳
 
 #define JM_APPKET      @"appkey"
 #define JM_USERNAME    @"userName"

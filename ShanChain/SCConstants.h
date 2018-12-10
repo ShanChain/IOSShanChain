@@ -19,6 +19,7 @@
 #define KSYBetweenMargin 8.0f
 // 视图背景色
 #define Theme_ViewBackgroundColor  RGB(245, 245, 245)
+#define Theme_MainTextColor   [UIColor colorWithString:@"#333333"]
 
 //AppDelegate
 #define App_Delegate ((AppDelegate*)[[UIApplication sharedApplication]delegate])

@@ -96,5 +96,6 @@
 @property   (nonatomic,copy)    NSString            *status;//0 未上  1 以上
 @property   (nonatomic,assign)   BOOL   isJGSetup; //极光sdk是否连接成功
 @property   (nonatomic,strong)    UIImage  *headImage;
+@property   (nonatomic,strong)    UIImage  *takeImage; //当前所属聊天室区域截图
 @property   (nonatomic,assign)      CLLocationCoordinate2D   pt; //用户当前的经纬度
 @end

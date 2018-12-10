@@ -159,6 +159,9 @@
     [self setContentScaleFactor:[[UIScreen mainScreen] scale]];
 }
 
+-(void)alphaComponentMake{
+    self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.35];
+}
 
 @end
 

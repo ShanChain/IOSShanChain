@@ -58,11 +58,12 @@
     [HHTool showChrysanthemum];
     [JMSGChatRoom enterChatRoomWithRoomId:roomId completionHandler:^(JMSGConversation * resultObject, NSError *error) {
         if (!error) {
+            BLOCK_EXEC(callBlock,resultObject,error)
             // 加入聊天室成功 进入聊天室页面
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [HHTool dismiss];
             });
-            BLOCK_EXEC(callBlock,resultObject,error)
+            
         }else{
             if (error.code == 851003) {
                 // 已经在聊天室了，先退出，再进入
@@ -76,6 +77,10 @@
                 }];
             }else if (error.code == 6002){
                 [HHTool showError:@"连接超时，请稍后再试~"];
+            }else if (error.code == 800016){
+                // 设备不匹配，重新登录
+                [HHTool dismiss];
+                [[SCAppManager shareInstance]logout];
             } else{
                 [HHTool dismiss];
                 [HHTool showError:error.localizedDescription];
@@ -84,12 +89,6 @@
         
     }];
 }
-
-
-
-
-
-
 
 @end
 

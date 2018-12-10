@@ -122,27 +122,31 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     @IBAction func joinAction(_ sender: Any) {
         
-        HHTool.showChrysanthemum()
-        SCNetwork.shareInstance().getWithUrl(COORDINATE_URL, parameters:["latitude":String(SCCacheTool.shareInstance().pt.latitude),"longitude":String(SCCacheTool.shareInstance().pt.longitude)], success: { (result) in
-            HHTool.dismiss()
-            let dic = result as! Dictionary<String, Any>
-            let data = dic["data"] as? Dictionary<String, Any>
-            if data != nil && (data?.values.count)! > 0{
-                let roomId:String = data!["roomId"] as! String
-                if roomId == self.currentChatRoomID{
-                    self.isJoinChatRoom = true
-                    if SCCacheTool.shareInstance().status ==  "1" {
-                       self.taskButton.isHidden = false
-                    }
-                }else{
-                    self.hrShowAlert(withTitle: "温馨提示", message: "您未处于该元社区的地理位置，还不能加入聊天喔~")
-                }
-            }
-            
-        }) { (error) in
-            HHTool.dismiss()
-            HHTool.showError(error?.localizedDescription)
+        self.isJoinChatRoom = true
+        if SCCacheTool.shareInstance().status ==  "1" {
+            self.taskButton.isHidden = false
         }
+//        HHTool.showChrysanthemum()
+//        SCNetwork.shareInstance().getWithUrl(COORDINATE_URL, parameters:["latitude":String(SCCacheTool.shareInstance().pt.latitude),"longitude":String(SCCacheTool.shareInstance().pt.longitude)], success: { (result) in
+//            HHTool.dismiss()
+//            let dic = result as! Dictionary<String, Any>
+//            let data = dic["data"] as? Dictionary<String, Any>
+//            if data != nil && (data?.values.count)! > 0{
+//                let roomId:String = data!["roomId"] as! String
+//                if roomId == self.currentChatRoomID{
+//                    self.isJoinChatRoom = true
+//                    if SCCacheTool.shareInstance().status ==  "1" {
+//                       self.taskButton.isHidden = false
+//                    }
+//                }else{
+//                    self.hrShowAlert(withTitle: "温馨提示", message: "您未处于该元社区的地理位置，还不能加入聊天喔~")
+//                }
+//            }
+//
+//        }) { (error) in
+//            HHTool.dismiss()
+//            HHTool.showError(error?.localizedDescription)
+//        }
         
     }
     
@@ -443,6 +447,16 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             }
            
         }
+        navTitleView.shareRoomClosure = { [weak self] () in
+            self?.toolbar.isHidden = true
+            let shareView:HHShareView = HHShareView.init(uid: "11", frame: (self?.view.frame)!, shareImage:SCCacheTool.shareInstance().takeImage, type: 2)
+            self?.view.addSubview(shareView)
+            
+            shareView.closure = {[weak self] () in
+                self?.toolbar.isHidden = false
+            }
+        }
+        
         navTitleView.backgroundColor = UIColor.clear
         navigationController?.navigationBar.addSubview(navTitleView)
         navTitleView.snp.makeConstraints { (mark) in

@@ -17,7 +17,7 @@
                 <outlet property="joinBtn" destination="pM6-5B-P9i" id="rUv-ii-3K3"/>
                 <outlet property="joinBtnBottomConstraint" destination="7XD-on-5OD" id="jC0-5O-atS"/>
                 <outlet property="laveDayLabel" destination="46N-PI-f3t" id="6DD-sM-oAd"/>
-                <outlet property="locationBtn" destination="WoM-qB-AjD" id="aHO-zT-3U9"/>
+                <outlet property="locationLb" destination="vUY-7p-XDH" id="TdG-dx-ZzM"/>
                 <outlet property="mapView" destination="Ejm-4t-9dd" id="pzp-7y-vVN"/>
                 <outlet property="noteBtn" destination="tsP-Jq-6sr" id="Hab-PA-1AO"/>
                 <outlet property="topView" destination="YQM-oe-HdN" id="D8l-uW-dS9"/>
@@ -32,75 +32,48 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ejm-4t-9dd" customClass="BMKMapView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoM-qB-AjD">
-                            <rect key="frame" x="87" y="612" width="200" height="40"/>
-                            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="200" id="DVD-gG-ccn"/>
-                                <constraint firstAttribute="height" constant="40" id="XsB-Jw-XVP"/>
-                            </constraints>
-                            <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="南纬30°东经120°">
-                                <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="20"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </button>
                         <button opaque="NO" tag="6666" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pM6-5B-P9i">
-                            <rect key="frame" x="137" y="496" width="100" height="100"/>
-                            <color key="backgroundColor" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="100" id="WK1-jf-EDz"/>
-                                <constraint firstAttribute="width" constant="100" id="v6A-Fq-DaG"/>
-                            </constraints>
-                            <state key="normal" title="进入广场">
+                            <rect key="frame" x="102" y="468" width="170" height="128"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="35"/>
+                            <state key="normal" title="进入广场" backgroundImage="Slice">
                                 <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="5"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="50"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="joinPressed:" destination="-1" eventType="touchUpInside" id="B7t-8Q-WDc"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKL-jd-3ch">
-                            <rect key="frame" x="312" y="619.5" width="25" height="25"/>
+                            <rect key="frame" x="321" y="542" width="34" height="34"/>
                             <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" image="sc_com_icon_footprint"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="34" id="DhJ-d2-1Q9"/>
+                                <constraint firstAttribute="height" constant="34" id="ddY-uT-lfF"/>
+                            </constraints>
+                            <state key="normal" image="sc_com_icon_Popular"/>
                             <connections>
                                 <action selector="footprintPressed:" destination="-1" eventType="touchUpInside" id="RHq-hF-bZb"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjg-SP-qMc">
-                            <rect key="frame" x="171.5" y="466" width="31" height="30"/>
-                            <state key="normal" title="收起"/>
-                            <state key="selected" title="展示"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjg-SP-qMc">
+                            <rect key="frame" x="181" y="446" width="12" height="22"/>
+                            <state key="normal" image="sc_com_icon_collapse"/>
                             <connections>
                                 <action selector="collapseAction:" destination="-1" eventType="touchUpInside" id="Uxe-1F-8ie"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YQM-oe-HdN">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                            <rect key="frame" x="83.5" y="37" width="208" height="42"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离活动开始倒计时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyr-WD-hD3">
-                                    <rect key="frame" x="26" y="31" width="138" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="跨年活动倒计时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyr-WD-hD3">
+                                    <rect key="frame" x="30" y="12.5" width="107.5" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46N-PI-f3t">
-                                    <rect key="frame" x="169" y="28.5" width="33" height="24"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46N-PI-f3t">
+                                    <rect key="frame" x="142" y="9" width="33" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -108,22 +81,25 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="46N-PI-f3t" firstAttribute="leading" secondItem="cyr-WD-hD3" secondAttribute="trailing" constant="5" id="0EL-2P-PlB"/>
-                                <constraint firstAttribute="height" constant="80" id="1KX-jx-eL5"/>
-                                <constraint firstItem="cyr-WD-hD3" firstAttribute="centerY" secondItem="YQM-oe-HdN" secondAttribute="centerY" id="1Yk-5F-GcJ"/>
-                                <constraint firstItem="46N-PI-f3t" firstAttribute="centerY" secondItem="YQM-oe-HdN" secondAttribute="centerY" id="6ie-Wp-gCH"/>
-                                <constraint firstItem="cyr-WD-hD3" firstAttribute="leading" secondItem="YQM-oe-HdN" secondAttribute="leading" constant="26" id="79h-OJ-27P"/>
+                                <constraint firstAttribute="height" constant="42" id="Uwj-Aa-1Pm"/>
+                                <constraint firstAttribute="width" constant="208" id="fju-6n-qfS"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="6Fp-hM-frK">
-                            <rect key="frame" x="325" y="436" width="40" height="40"/>
+                            <rect key="frame" x="325" y="416" width="40" height="40"/>
                             <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="HZu-WS-PBR"/>
                                 <constraint firstAttribute="height" constant="40" id="jtJ-bj-OTV"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="活动规则">
-                                <color key="titleColor" red="0.46666666670000001" green="0.81176470590000005" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -134,9 +110,19 @@
                                 <action selector="activeRuleAction:" destination="-1" eventType="touchUpInside" id="Ao6-xP-Cfk"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="南纬30°东经120°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUY-7p-XDH">
+                            <rect key="frame" x="132.5" y="568" width="110.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsP-Jq-6sr">
-                            <rect key="frame" x="42" y="620" width="25" height="25"/>
+                            <rect key="frame" x="20" y="542" width="34" height="34"/>
                             <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="34" id="tc0-NV-LZK"/>
+                                <constraint firstAttribute="height" constant="34" id="v9r-kZ-6aN"/>
+                            </constraints>
                             <state key="normal" image="sc_com_icon_note"/>
                             <connections>
                                 <action selector="notePressed:" destination="-1" eventType="touchUpInside" id="XNA-fd-1d3"/>
@@ -145,22 +131,22 @@
                     </subviews>
                     <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="tsP-Jq-6sr" firstAttribute="centerY" secondItem="WoM-qB-AjD" secondAttribute="centerY" id="1qY-x9-CZw"/>
-                        <constraint firstAttribute="trailing" secondItem="YQM-oe-HdN" secondAttribute="trailing" id="2a8-RY-8hI"/>
                         <constraint firstItem="Rjg-SP-qMc" firstAttribute="centerX" secondItem="Ejm-4t-9dd" secondAttribute="centerX" id="4u4-YF-X2V"/>
                         <constraint firstItem="pM6-5B-P9i" firstAttribute="top" secondItem="Rjg-SP-qMc" secondAttribute="bottom" id="7Hf-Dc-i2Q"/>
-                        <constraint firstItem="pM6-5B-P9i" firstAttribute="centerX" secondItem="WoM-qB-AjD" secondAttribute="centerX" id="7PW-TA-3kH"/>
                         <constraint firstAttribute="bottom" secondItem="pM6-5B-P9i" secondAttribute="bottom" constant="71" id="7XD-on-5OD"/>
+                        <constraint firstItem="tsP-Jq-6sr" firstAttribute="leading" secondItem="Ejm-4t-9dd" secondAttribute="leading" constant="20" id="AFD-h3-uiN"/>
                         <constraint firstItem="6Fp-hM-frK" firstAttribute="top" secondItem="Rjg-SP-qMc" secondAttribute="top" constant="-30" id="BvD-Vi-zDA"/>
-                        <constraint firstItem="YQM-oe-HdN" firstAttribute="top" secondItem="Ejm-4t-9dd" secondAttribute="top" id="Duo-Zp-y6W"/>
-                        <constraint firstItem="wKL-jd-3ch" firstAttribute="leading" secondItem="WoM-qB-AjD" secondAttribute="trailing" constant="25" id="Oou-W0-4SI"/>
-                        <constraint firstItem="YQM-oe-HdN" firstAttribute="leading" secondItem="Ejm-4t-9dd" secondAttribute="leading" id="PDs-oK-CwZ"/>
+                        <constraint firstItem="vUY-7p-XDH" firstAttribute="top" secondItem="Rjg-SP-qMc" secondAttribute="bottom" constant="100" id="CnJ-rm-N5L"/>
+                        <constraint firstItem="YQM-oe-HdN" firstAttribute="centerX" secondItem="Ejm-4t-9dd" secondAttribute="centerX" id="Pce-GQ-bLA"/>
+                        <constraint firstItem="YQM-oe-HdN" firstAttribute="top" secondItem="Ejm-4t-9dd" secondAttribute="top" constant="37" id="Q3C-0k-thl"/>
                         <constraint firstItem="pM6-5B-P9i" firstAttribute="centerX" secondItem="Ejm-4t-9dd" secondAttribute="centerX" id="R7N-HT-6Ip"/>
+                        <constraint firstItem="pM6-5B-P9i" firstAttribute="centerX" secondItem="Ejm-4t-9dd" secondAttribute="centerX" id="U5t-Z0-iSF"/>
+                        <constraint firstItem="tsP-Jq-6sr" firstAttribute="bottom" secondItem="pM6-5B-P9i" secondAttribute="bottom" constant="-20" id="YZC-ct-f0Q"/>
                         <constraint firstItem="pM6-5B-P9i" firstAttribute="centerX" secondItem="Ejm-4t-9dd" secondAttribute="centerX" id="bQc-xM-dgB"/>
-                        <constraint firstItem="WoM-qB-AjD" firstAttribute="top" secondItem="pM6-5B-P9i" secondAttribute="bottom" constant="16" id="guS-MO-qGE"/>
+                        <constraint firstItem="vUY-7p-XDH" firstAttribute="centerX" secondItem="Ejm-4t-9dd" secondAttribute="centerX" id="deV-Bm-t3p"/>
+                        <constraint firstItem="wKL-jd-3ch" firstAttribute="bottom" secondItem="pM6-5B-P9i" secondAttribute="bottom" constant="-20" id="pCt-tg-197"/>
                         <constraint firstAttribute="trailing" secondItem="6Fp-hM-frK" secondAttribute="trailing" constant="10" id="rQx-aj-S7k"/>
-                        <constraint firstItem="WoM-qB-AjD" firstAttribute="leading" secondItem="tsP-Jq-6sr" secondAttribute="trailing" constant="20" id="sgt-v4-rxG"/>
-                        <constraint firstItem="wKL-jd-3ch" firstAttribute="centerY" secondItem="WoM-qB-AjD" secondAttribute="centerY" id="zTN-uW-eps"/>
+                        <constraint firstAttribute="trailing" secondItem="wKL-jd-3ch" secondAttribute="trailing" constant="20" id="tOd-TO-OId"/>
                     </constraints>
                 </view>
             </subviews>
@@ -175,7 +161,9 @@
         </view>
     </objects>
     <resources>
-        <image name="sc_com_icon_footprint" width="25" height="25"/>
+        <image name="Slice" width="170" height="128"/>
+        <image name="sc_com_icon_Popular" width="19" height="25"/>
+        <image name="sc_com_icon_collapse" width="12" height="12"/>
         <image name="sc_com_icon_note" width="25" height="25"/>
     </resources>
 </document>

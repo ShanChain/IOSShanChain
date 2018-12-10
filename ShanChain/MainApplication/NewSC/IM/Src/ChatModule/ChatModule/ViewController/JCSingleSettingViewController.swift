@@ -40,7 +40,16 @@ class JCSingleSettingViewController: UIViewController, CustomNavigation {
 
         view.addSubview(tableView)
         customLeftBarButton(delegate: self)
+        addRightBarButtonItem(withTarget: self, sel: #selector(_reportAction), image: UIImage.loadImage("Fill-11"), selectedImage: UIImage.loadImage("Fill-11"))
     }
+    
+    func _reportAction(){
+        let reportVC:SCReportController = SCReportController()
+        reportVC.userId = user.username
+        reportVC.isReportPersonal = true
+        navigationController?.pushViewController(reportVC, animated: true)
+    }
+    
 }
 
 extension JCSingleSettingViewController: UITableViewDelegate, UITableViewDataSource {

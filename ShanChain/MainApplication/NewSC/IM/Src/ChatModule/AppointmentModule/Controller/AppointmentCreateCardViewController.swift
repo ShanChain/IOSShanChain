@@ -35,6 +35,8 @@ class AppointmentCreateCardViewController: UITableViewController {
     
     // 充值
     @IBAction func addMoneyAction(_ sender: UIButton) {
+        let walletVC =  MyWalletViewController()
+        navigationController?.pushViewController(walletVC, animated: true)
     }
     
     
@@ -102,6 +104,8 @@ class AppointmentCreateCardViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        
     }
 
     override func navigationShouldPopOnBackButton() -> Bool {
@@ -109,6 +113,7 @@ class AppointmentCreateCardViewController: UITableViewController {
         self.hrShowAlert(withTitle: nil, message: "放弃创建马甲吗？", buttonsTitles: ["返回","确认"]) { (_, index) in
             if index == 1{
                 isClose = true
+                self.navigationController?.popViewController(animated: true)
             }
         }
         return  isClose

@@ -32,6 +32,8 @@ enum JSHAREMediaType:Int{
     case JSHAREText = 1
     case JSHAREImage
     case JSHARELink
+    case JSHARERedenvelope // 红包
+    
     
     case JSHAREAudio
     case JSHAREVideo
@@ -43,18 +45,56 @@ enum JSHAREMediaType:Int{
     case JSHARGraphic
     case JSHAREUndefined
 }
+typealias HHShareViewClosure = () -> Void
 
 class HHShareView: UIView {
 
     
+    @IBOutlet weak var showView: UIView!
     @IBOutlet var contentView: UIView!
-    convenience init(uid:String,frame:CGRect) {
+    
+    private  var shareImage:UIImage?
+    
+    @IBOutlet weak var scaleLb: UILabel!
+    @IBOutlet weak var redenvelopeImageView: UIImageView!
+    private  var shareType:JSHAREMediaType = .JSHAREText
+    
+    var closure:HHShareViewClosure?
+    
+    convenience init(uid:String,frame:CGRect,shareImage:UIImage?,type:Int){
         self.init(frame: frame)
+        self.shareImage = shareImage;
+        self.shareType = JSHAREMediaType.init(rawValue: type)!
+        
+        if self.shareType == .JSHAREImage{
+            if let image = self.shareImage{
+                let imageV = UIImageView.init(image: image)
+                imageV.image = image
+                contentView.addSubview(imageV)
+                imageV.snp.makeConstraints { (make) in
+                    make.centerY.centerX.equalTo(contentView)
+                    make.width.equalTo(image.size.width)
+                    make.height.equalTo(image.size.height)
+                }
+            }
+        }
+        if self.shareType == .JSHARERedenvelope{
+            self.showView.isHidden = true
+            self.redenvelopeImageView.isHidden = false
+            self.scaleLb.isHidden = false
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(closeContentViewAction))
+             self.redenvelopeImageView.addGestureRecognizer(tap)
+        }else{
+            self.showView.isHidden = false
+            self.redenvelopeImageView.isHidden = true
+        }
+      
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = frame
+        self.alphaComponentMake()
         contentView = loadViewFromNib()
         addSubview(contentView)
         
@@ -65,13 +105,13 @@ class HHShareView: UIView {
         }
         
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     @IBAction func closeContentViewAction(_ sender: UIButton) {
         self.removeFromSuperview()
+        closure?()
     }
     
     @IBAction func shareWeChatAction(_ sender: UIButton) {
