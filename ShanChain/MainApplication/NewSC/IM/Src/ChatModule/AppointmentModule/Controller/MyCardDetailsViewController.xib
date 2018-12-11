@@ -23,6 +23,7 @@
                 <outlet property="header_ruleLb" destination="FgE-FO-hnw" id="k7X-EP-xLS"/>
                 <outlet property="header_totalLb" destination="q0d-0s-f4s" id="1pU-xL-hYv"/>
                 <outlet property="header_waitLb" destination="rHV-2Z-aRl" id="9q5-Kr-zXO"/>
+                <outlet property="invalidIcon" destination="66g-TV-cGO" id="4Ai-Qj-8Pm"/>
                 <outlet property="tableHeaderView" destination="hWZ-Eb-hEC" id="Ppc-QQ-qNg"/>
                 <outlet property="tableView" destination="chh-Kb-s8D" id="Zh5-WH-oTQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -137,6 +138,13 @@
                         <constraint firstAttribute="height" constant="30" id="WRC-Dr-IJs"/>
                     </constraints>
                 </stackView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sc_com_icon_card_Invalid" translatesAutoresizingMaskIntoConstraints="NO" id="66g-TV-cGO">
+                    <rect key="frame" x="295" y="0.0" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="407-Km-nyB"/>
+                        <constraint firstAttribute="height" constant="80" id="8cr-oa-UmT"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -153,10 +161,12 @@
                 <constraint firstItem="FgE-FO-hnw" firstAttribute="top" secondItem="lMW-R5-Ovl" secondAttribute="bottom" constant="10" id="aV5-i7-pGD"/>
                 <constraint firstItem="A0K-LY-lxO" firstAttribute="leading" secondItem="vON-oq-Wwh" secondAttribute="leading" id="ewv-ZH-eOb"/>
                 <constraint firstItem="vON-oq-Wwh" firstAttribute="leading" secondItem="khm-te-zSo" secondAttribute="trailing" constant="5" id="hPp-H8-xl3"/>
+                <constraint firstItem="66g-TV-cGO" firstAttribute="top" secondItem="n7j-px-LnY" secondAttribute="top" id="jfp-JK-gTl"/>
                 <constraint firstItem="A0K-LY-lxO" firstAttribute="bottom" secondItem="khm-te-zSo" secondAttribute="bottom" id="kTp-qV-sRg"/>
                 <constraint firstItem="ahE-cz-Jha" firstAttribute="top" secondItem="vON-oq-Wwh" secondAttribute="top" id="n7z-3C-vZj"/>
                 <constraint firstItem="M8J-JJ-d6D" firstAttribute="leading" secondItem="n7j-px-LnY" secondAttribute="leading" id="nVj-No-GLQ"/>
                 <constraint firstItem="q0d-0s-f4s" firstAttribute="top" secondItem="ahE-cz-Jha" secondAttribute="bottom" constant="5" id="ooe-CB-Xhb"/>
+                <constraint firstItem="n7j-px-LnY" firstAttribute="trailing" secondItem="66g-TV-cGO" secondAttribute="trailing" id="prI-If-JE5"/>
                 <constraint firstItem="khm-te-zSo" firstAttribute="leading" secondItem="n7j-px-LnY" secondAttribute="leading" constant="40" id="sf1-Lb-G0w"/>
                 <constraint firstItem="vON-oq-Wwh" firstAttribute="top" secondItem="khm-te-zSo" secondAttribute="top" id="tXX-FT-eED"/>
                 <constraint firstItem="khm-te-zSo" firstAttribute="top" secondItem="n7j-px-LnY" secondAttribute="top" constant="10" id="wie-R9-9aE"/>
@@ -168,5 +178,6 @@
     </objects>
     <resources>
         <image name="QQ" width="40" height="40"/>
+        <image name="sc_com_icon_card_Invalid" width="160" height="160"/>
     </resources>
 </document>

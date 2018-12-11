@@ -46,6 +46,8 @@ class MyCardDetailsViewController: SCBaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+    @IBOutlet weak var invalidIcon: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
       //  tableView.estimatedRowHeight = 60

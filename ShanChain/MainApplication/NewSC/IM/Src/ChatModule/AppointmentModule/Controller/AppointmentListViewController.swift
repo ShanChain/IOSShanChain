@@ -33,6 +33,7 @@ class AppointmentListViewController: SCBaseVC {
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title: "我的", tintColor: .black)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         headView.backgroundColor = SC_ThemeBackgroundViewColor
+        navigationController?.navigationBar.barTintColor = kNavBlueColor
     }
     
     func _clickMy(){

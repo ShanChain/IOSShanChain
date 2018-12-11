@@ -19,12 +19,13 @@
 #if PN_ENVIRONMENT == 0
 
 #define HostName @"67.218.159.56"
-#define PORT @"8081"
+#define PORT @"8082"
 #define Base_url [NSString stringWithFormat:@"%@%@:%@",Prtocol,HostName,PORT]
 
 
 #define SC_BASE_PORT_8082  @"http://67.218.159.56:8082"
 #define SC_BASE_PORT_8083  @"http://67.218.159.56:8083"
+#define SC_BASE_PORT_8081  @"http://67.218.159.56:8081"
 
 /******************************************/
 

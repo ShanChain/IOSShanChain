@@ -37,9 +37,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xR6-7y-xjV">
-                    <rect key="frame" x="86.5" y="19" width="38" height="15"/>
+                    <rect key="frame" x="88" y="16" width="36" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="n61-xh-F7M"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="899" image="sc_com_icon_team">
+                    <state key="normal" title="899人">
                         <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
@@ -49,10 +52,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="xR6-7y-xjV" firstAttribute="top" secondItem="2c6-f3-DzJ" secondAttribute="bottom" id="Eqp-Va-Ksz"/>
                 <constraint firstItem="2c6-f3-DzJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GEk-HA-THO"/>
                 <constraint firstItem="2c6-f3-DzJ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="3" id="K60-Zn-imK"/>
-                <constraint firstItem="xR6-7y-xjV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wnP-21-v4b"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="xR6-7y-xjV" secondAttribute="bottom" id="p98-gS-tTU"/>
+                <constraint firstItem="xR6-7y-xjV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="yPv-2W-NXc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -61,6 +64,5 @@
     </objects>
     <resources>
         <image name="sc_com_icon_shareIcon" width="15" height="15"/>
-        <image name="sc_com_icon_team" width="15" height="11"/>
     </resources>
 </document>

@@ -325,6 +325,8 @@
 		22A2EB9521BE67D800737265 /* AppointmentMyReceiveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EB9421BE67D800737265 /* AppointmentMyReceiveView.xib */; };
 		22A2EB9721BE805500737265 /* NewYearActivityRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EB9621BE805500737265 /* NewYearActivityRuleView.swift */; };
 		22A2EB9921BE806300737265 /* NewYearActivityRuleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EB9821BE806300737265 /* NewYearActivityRuleView.xib */; };
+		22A2EB9B21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EB9A21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift */; };
+		22A2EB9F21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */; };
 		22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9176E21918710002E5240 /* HHChatRoomViewController.xib */; };
 		22C917762191BDE5002E5240 /* MapFootprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917742191BDE5002E5240 /* MapFootprintViewController.swift */; };
 		22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917752191BDE5002E5240 /* MapFootprintViewController.xib */; };
@@ -1196,6 +1198,8 @@
 		22A2EB9421BE67D800737265 /* AppointmentMyReceiveView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentMyReceiveView.xib; sourceTree = "<group>"; };
 		22A2EB9621BE805500737265 /* NewYearActivityRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewYearActivityRuleView.swift; sourceTree = "<group>"; };
 		22A2EB9821BE806300737265 /* NewYearActivityRuleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewYearActivityRuleView.xib; sourceTree = "<group>"; };
+		22A2EB9A21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardReceiveDetailsViewController.swift; sourceTree = "<group>"; };
+		22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyCardReceiveDetailsViewController.storyboard; sourceTree = "<group>"; };
 		22C9176E21918710002E5240 /* HHChatRoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHChatRoomViewController.xib; sourceTree = "<group>"; };
 		22C917742191BDE5002E5240 /* MapFootprintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFootprintViewController.swift; sourceTree = "<group>"; };
 		22C917752191BDE5002E5240 /* MapFootprintViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFootprintViewController.xib; sourceTree = "<group>"; };
@@ -2188,6 +2192,8 @@
 				2229ED1D21BA726800E33A8D /* MyCardCouponListViewController.xib */,
 				22A2EB8A21BE165C00737265 /* MyCardDetailsViewController.swift */,
 				22A2EB8B21BE165C00737265 /* MyCardDetailsViewController.xib */,
+				22A2EB9A21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift */,
+				22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5007,6 +5013,7 @@
 				223F99EE217F12040031DB95 /* JCMessageImageCollectionViewCell.xib in Resources */,
 				4852A0D91FCE9F0300CDD7BE /* SYChatListCell.xib in Resources */,
 				225F83FC21AE94120082C0E1 /* HHNumberPeopleListCell.xib in Resources */,
+				22A2EB9F21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard in Resources */,
 				2293A741218C3B5A00FB977C /* RoomNavTitleView.xib in Resources */,
 				22A2EB9521BE67D800737265 /* AppointmentMyReceiveView.xib in Resources */,
 				22680ABD21A4218900F2FA5B /* LaunchScreenImageIcon.png in Resources */,
@@ -5601,6 +5608,7 @@
 				48718D991F42277400010AA0 /* UIButton+WebCache.m in Sources */,
 				4852A0D21FCE9F0300CDD7BE /* SCMessageSettingCell.m in Sources */,
 				4852A1051FCE9F0300CDD7BE /* SYStoryRoleController.m in Sources */,
+				22A2EB9B21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift in Sources */,
 				223F99E3217F12040031DB95 /* ExJMessage.swift in Sources */,
 				223F9A11217F12040031DB95 /* Log.swift in Sources */,
 				332AB6501F4ED8C900888313 /* NSString+Extension.m in Sources */,

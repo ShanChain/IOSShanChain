@@ -104,8 +104,17 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
         }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          let vc = MyCardDetailsViewController()
-          navigationController?.pushViewController(vc, animated: true)
+        
+        if self.type == .receive {
+            let storyboard = UIStoryboard(name: "MyCardReceiveDetailsViewController", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ReceiveCardID") as? MyCardReceiveDetailsViewController
+            pushPage(vc, animated: true)
+            
+        }else{
+            let vc = MyCardDetailsViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
 }
