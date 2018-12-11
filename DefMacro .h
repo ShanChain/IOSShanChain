@@ -10,8 +10,8 @@
 #define DefMacro__h
 
 #define JMSSAGE_APPKEY  @"0a20b6277a625655791e3cd9"
-#define SinaWeibo_AppKey  @"1752792699"
-#define SinaWeibo_appSecret  @"5e5e8068d9d59243eea2b66c413be68e"
+#define SinaWeibo_AppKey  @"1619531897"
+#define SinaWeibo_appSecret  @"a669a85dffd04fc23f2051c96c73c68f"
 #define QQ_AppId   @"1106603714"
 #define QQ_Appkey  @"cysXSCMGkW5yGU62"
 #define WeChat_AppId  @"wxf3ca04328ebf58f1"

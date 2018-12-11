@@ -588,6 +588,7 @@
 
 - (void)getAllChatRoomConversation{
     weakify(self);
+  
     [JMSGConversation allChatRoomConversation:^(id resultObject, NSError *error) {
          strongify(self);
         if (error) {

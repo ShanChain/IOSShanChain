@@ -20,6 +20,8 @@
 #import "ShanChain-Swift.h"
 #import "BMKTestLocationViewController.h"
 #import "SCCharacterModel.h"
+#import "SCDynamicLoginViewController.h"
+
 
 #define K_USERNAME @"K_USERNAME"
 
@@ -33,6 +35,7 @@
 @property (nonatomic, strong) UIButton      *forgetPwdBtn;
 
 @property (nonatomic, strong) UIButton      *loginBtn;
+@property (nonatomic, strong) UIButton      *dynamicLoginBtn;//动态密码登录
 @property (nonatomic, strong) UIButton      *registerBtn;
 @property (nonatomic, strong) UIButton      *rnDemoBtn;
 @property (nonatomic, strong) UIButton      *socialBtn;
@@ -81,6 +84,7 @@
         _pwdField.secureTextEntry=YES;
         _pwdField.delegate = self;
     }
+
     return _pwdField;
 }
 
@@ -103,17 +107,31 @@
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _loginBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_loginBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [_loginBtn setBackgroundImage:[UIImage imageNamed:@"abs_login_btn_rectangle_default"] forState:UIControlStateNormal];
+        _loginBtn.backgroundColor = Theme_MainThemeColor;
+        ViewRadius(_loginBtn, 8);
     }
     return _loginBtn;
+}
+
+
+- (UIButton *)dynamicLoginBtn{
+    if (!_dynamicLoginBtn) {
+        _dynamicLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_dynamicLoginBtn setTitle:@"动态密码登录" forState:UIControlStateNormal];
+        [_dynamicLoginBtn setTitleColor:Theme_MainThemeColor forState:UIControlStateNormal];
+        _dynamicLoginBtn.titleLabel.textAlignment = 0;
+        _dynamicLoginBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_dynamicLoginBtn addTarget:self action:@selector(dynamicLoginClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _dynamicLoginBtn;
 }
 
 -(UIButton *)registerBtn{
     if (!_registerBtn) {
         _registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_registerBtn setTitle:@"注册" forState:UIControlStateNormal];
-        [_registerBtn setTitleColor:RGB(59, 186, 200) forState:UIControlStateNormal];
-        [_registerBtn makeLayerWithRadius:8.0f withBorderColor:RGB(59, 186, 200) withBorderWidth:1.0f];
+        [_registerBtn setTitleColor:Theme_MainThemeColor forState:UIControlStateNormal];
+        [_registerBtn makeLayerWithRadius:8.0f withBorderColor:Theme_MainThemeColor withBorderWidth:1.0f];
         _registerBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_registerBtn addTarget:self action:@selector(registerBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -214,10 +232,11 @@
     [self.scrollView addSubview:self.nameField];
     [self.scrollView addSubview:self.pwdField];
     [self.scrollView addSubview:self.loginBtn];
+    [self.scrollView addSubview:self.dynamicLoginBtn];
     [self.scrollView addSubview:self.registerBtn];
     [self.scrollView addSubview:self.rnDemoBtn];
     [self.scrollView addSubview:self.forgetPwdBtn];
-   // [self.scrollView addSubview:self.socialBtn];
+    [self.scrollView addSubview:self.socialBtn];
     [self.scrollView addSubview:self.socialView];
     
     [self.socialView addSubview:self.weiBtn];
@@ -235,7 +254,8 @@
     self.nameField.frame=CGRectMake(40, 60.0/667*SCREEN_HEIGHT , SCREEN_WIDTH-40*2, 44);
     self.pwdField.frame=CGRectMake(40, CGRectGetMaxY(self.nameField.frame) + KSCMargin, SCREEN_WIDTH-40 * 2, 44);
     self.forgetPwdBtn.frame=CGRectMake(SCREEN_WIDTH-40-60, CGRectGetMaxY(self.pwdField.frame) + 5, 60, 16);
-    self.loginBtn.frame=CGRectMake(40, CGRectGetMaxY(self.pwdField.frame) + 50, SCREEN_WIDTH - 40 * 2, 44);
+    self.dynamicLoginBtn.frame = CGRectMake(40, CGRectGetMaxY(self.pwdField.frame) + 50, 100, 25);
+    self.loginBtn.frame=CGRectMake(40, CGRectGetMaxY(self.pwdField.frame) + 80, SCREEN_WIDTH - 40 * 2, 44);
     self.registerBtn.frame=CGRectMake(40, CGRectGetMaxY(self.loginBtn.frame) + KSCMargin, SCREEN_WIDTH- 40 * 2, 44);
     //    self.rnDemoBtn.frame=CGRectMake(KSCMargin, CGRectGetMaxY(self.registerBtn.frame) + KSCMargin, SCREEN_WIDTH-30, 40);
     
@@ -245,6 +265,11 @@
     self.weiBtn.frame=CGRectMake(0, 0, 50, 50);
     self.weibBtn.frame=CGRectMake((SCREEN_WIDTH- 50)/2-45, 0, 50, 50);
     self.qqBtn.frame=CGRectMake(self.socialView.frame.size.width - 50, 0, 50, 50);
+}
+
+- (void)dynamicLoginClick{
+    SCDynamicLoginViewController *vc = [[SCDynamicLoginViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loginBtnClick {

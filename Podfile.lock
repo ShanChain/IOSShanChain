@@ -86,6 +86,7 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - ReactiveObjC (2.1.2)
   - RedpacketAliAuthLib (1.1.4):
     - RedPacketAlipay
   - RedPacketAlipay (15.0.2)
@@ -137,6 +138,7 @@ DEPENDENCIES:
   - React/RCTText (from `./react-native/node_modules/react-native`)
   - React/RCTVibration (from `./react-native/node_modules/react-native`)
   - React/RCTWebSocket (from `./react-native/node_modules/react-native`)
+  - ReactiveObjC (~> 2.1.0)
   - RedpacketAliAuthLib (~> 1.1.4)
   - RxCocoa (~> 3.6.1)
   - RxSwift (~> 3.6.1)
@@ -163,6 +165,7 @@ SPEC REPOS:
     - MBProgressHUD
     - mob_sharesdk
     - MOBFoundation
+    - ReactiveObjC
     - RedpacketAliAuthLib
     - RedPacketAlipay
     - RxCocoa
@@ -204,6 +207,7 @@ SPEC CHECKSUMS:
   mob_sharesdk: fc8a9aab921c08e5e88a5b1f36229c6d406a2ff8
   MOBFoundation: 11500153c10d83e4ac341f6ad6301b3998ce6db2
   React: 541ba768b9855e10cdc76f55427a5cd0653ca806
+  ReactiveObjC: 7b6782ae39f9ac0f57205c3b0c0b69b9dd7048c0
   RedpacketAliAuthLib: 6173b52c25ab728db907da89fbcda3200d1cf98a
   RedPacketAlipay: a5de6db2e2671fc9255d6d396be869e3ba2f0489
   RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
@@ -216,6 +220,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: cb13c0aea91f8d7d97aa70844c94c601a161825d
+PODFILE CHECKSUM: 2338f65fbadf9ff21745aca32b44e68598268084
 
 COCOAPODS: 1.5.3

@@ -108,7 +108,7 @@
 
 - (void)showNavigationBarWithNormalColor {
     
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithString:@"4FD1F6"];
+    self.navigationController.navigationBar.barTintColor = Theme_MainThemeColor;
     [self.navigationController.navigationBar setBackgroundImage:nil  forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
    // self.navigationController.navigationBar.translucent = NO;

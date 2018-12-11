@@ -153,7 +153,8 @@
         [_sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _sureBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_sureBtn addTarget:self action:@selector(sureAction) forControlEvents:UIControlEventTouchUpInside];
-        [_sureBtn setBackgroundImage:[UIImage imageNamed:@"abs_login_btn_rectangle_default"] forState:UIControlStateNormal];
+        _sureBtn.backgroundColor = Theme_MainThemeColor;
+        ViewRadius(_sureBtn, 8);
     }
     return _sureBtn;
 }
@@ -162,7 +163,7 @@
     if (!_serviceBtn) {
         _serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_serviceBtn setTitle:@"《千千世界服务条款》" forState:UIControlStateNormal];
-        [_serviceBtn setTitleColor:RGB(59, 187, 202) forState:UIControlStateNormal];
+        [_serviceBtn setTitleColor:Theme_MainThemeColor forState:UIControlStateNormal];
         _serviceBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [_serviceBtn addTarget:self action:@selector(serviceAction) forControlEvents:UIControlEventTouchUpInside];
     }

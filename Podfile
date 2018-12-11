@@ -16,6 +16,7 @@ target 'ShanChain' do
     pod 'SnapKit', '~> 4.0.0'
     pod 'LTScrollView'
     pod 'HandyJSON', '~> 4.1.1'
+    pod 'ReactiveObjC', '~> 2.1.0'
     
     pod 'UMengAnalytics-NO-IDFA'
     pod 'RedpacketAliAuthLib','~> 1.1.4'

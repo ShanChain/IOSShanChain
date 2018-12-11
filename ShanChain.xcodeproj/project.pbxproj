@@ -327,6 +327,8 @@
 		22A2EB9921BE806300737265 /* NewYearActivityRuleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EB9821BE806300737265 /* NewYearActivityRuleView.xib */; };
 		22A2EB9B21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EB9A21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift */; };
 		22A2EB9F21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */; };
+		22A2EBA321BFAE0A00737265 /* SCDynamicLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBA121BFAE0A00737265 /* SCDynamicLoginViewController.m */; };
+		22A2EBA421BFAE0A00737265 /* SCDynamicLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */; };
 		22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9176E21918710002E5240 /* HHChatRoomViewController.xib */; };
 		22C917762191BDE5002E5240 /* MapFootprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917742191BDE5002E5240 /* MapFootprintViewController.swift */; };
 		22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917752191BDE5002E5240 /* MapFootprintViewController.xib */; };
@@ -1200,6 +1202,9 @@
 		22A2EB9821BE806300737265 /* NewYearActivityRuleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewYearActivityRuleView.xib; sourceTree = "<group>"; };
 		22A2EB9A21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardReceiveDetailsViewController.swift; sourceTree = "<group>"; };
 		22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyCardReceiveDetailsViewController.storyboard; sourceTree = "<group>"; };
+		22A2EBA021BFAE0A00737265 /* SCDynamicLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCDynamicLoginViewController.h; sourceTree = "<group>"; };
+		22A2EBA121BFAE0A00737265 /* SCDynamicLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCDynamicLoginViewController.m; sourceTree = "<group>"; };
+		22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCDynamicLoginViewController.xib; sourceTree = "<group>"; };
 		22C9176E21918710002E5240 /* HHChatRoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHChatRoomViewController.xib; sourceTree = "<group>"; };
 		22C917742191BDE5002E5240 /* MapFootprintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFootprintViewController.swift; sourceTree = "<group>"; };
 		22C917752191BDE5002E5240 /* MapFootprintViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFootprintViewController.xib; sourceTree = "<group>"; };
@@ -3849,6 +3854,9 @@
 				4852A09D1FCE9F0300CDD7BE /* SCInitPasswordController.m */,
 				4852A09E1FCE9F0300CDD7BE /* SCLoginController.h */,
 				4852A09F1FCE9F0300CDD7BE /* SCLoginController.m */,
+				22A2EBA021BFAE0A00737265 /* SCDynamicLoginViewController.h */,
+				22A2EBA121BFAE0A00737265 /* SCDynamicLoginViewController.m */,
+				22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */,
 				4852A0A01FCE9F0300CDD7BE /* SCPhoneRegisterController.h */,
 				4852A0A11FCE9F0300CDD7BE /* SCPhoneRegisterController.m */,
 			);
@@ -5036,6 +5044,7 @@
 				223F99BA217F12040031DB95 /* 定位1.png in Resources */,
 				33B7CCF71EC5865700FB6378 /* Main.storyboard in Resources */,
 				222EF6142186A417005B89EF /* PublishTaskView.xib in Resources */,
+				22A2EBA421BFAE0A00737265 /* SCDynamicLoginViewController.xib in Resources */,
 				22C917AF21943014002E5240 /* TaskDetailsViewController.xib in Resources */,
 				2271058021B76273009FC34D /* HHShareView.xib in Resources */,
 				892B39E91FE8EC0300292A75 /* AliyunImageSource.bundle in Resources */,
@@ -5116,6 +5125,7 @@
 				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/React/React.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -5136,6 +5146,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -5323,6 +5334,7 @@
 				485E65E61F42862900B158BF /* UIImage+EMWebP.m in Sources */,
 				33C1A1801F4C50FB003E22CA /* NSArray+MASAdditions.m in Sources */,
 				33C1A17C1F4C50FB003E22CA /* MASConstraintMaker.m in Sources */,
+				22A2EBA321BFAE0A00737265 /* SCDynamicLoginViewController.m in Sources */,
 				4852A0E01FCE9F0300CDD7BE /* SYScreenCell.m in Sources */,
 				4852A1401FCE9F0400CDD7BE /* SCInitPasswordController.m in Sources */,
 				223F9A3C217F12B80031DB95 /* JCVerificationInfoDB.swift in Sources */,
@@ -6000,6 +6012,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
@@ -6066,6 +6080,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
