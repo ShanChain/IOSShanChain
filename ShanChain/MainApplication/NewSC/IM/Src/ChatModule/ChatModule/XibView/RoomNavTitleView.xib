@@ -36,12 +36,13 @@
                         <action selector="shareRoomAction:" destination="-1" eventType="touchUpInside" id="mzE-bZ-khP"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xR6-7y-xjV">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xR6-7y-xjV">
                     <rect key="frame" x="88" y="16" width="36" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="n61-xh-F7M"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-5"/>
                     <state key="normal" title="899人">
                         <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>

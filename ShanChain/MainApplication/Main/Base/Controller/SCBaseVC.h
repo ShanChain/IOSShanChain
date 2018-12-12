@@ -29,4 +29,7 @@
 
 - (void)showNavigationBarWithNormalColor;
 
+//返回到上一层，直到dismiss
+- (UIViewController *)backViewController;
+
 @end

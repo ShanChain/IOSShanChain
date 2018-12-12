@@ -45,9 +45,12 @@
         _contentLabel = [[UILabel alloc]init];
         [_nameLabel makeTextStyleWithTitle:@"感谢你的举报，我们将尽快《千千世界使用协议》进行审核（夜间时段稍有延迟）" withColor:RGB(102, 102, 102) withFont:[UIFont systemFontOfSize:12] withAlignment:NSTextAlignmentCenter];
         _contentLabel.numberOfLines = 0;
-        CGSize maxSize = CGSizeMake(SCREEN_WIDTH - 2 * 60, MAXFLOAT);
-        CGSize textSize = [_contentLabel.text sizeWithFont:DSStatusOriginalNameFont maxSize:maxSize];
-        _contentLabel.frame = (CGRect){{60.0/375*SCREEN_WIDTH , CGRectGetMaxY(self.nameLabel.frame) + 20} , textSize };
+        [_contentLabel sizeToFit];
+//        CGSize maxSize = CGSizeMake(SCREEN_WIDTH - 2 * 60, MAXFLOAT);
+//        CGSize textSize = [_contentLabel.text sizeWithFont:DSStatusOriginalNameFont maxSize:maxSize];
+        _contentLabel.frame = CGRectMake(0, 0, SCREEN_WIDTH - 20, 100);
+        _contentLabel.center = self.view.center;
+       
         
     }
     return _contentLabel;
@@ -86,6 +89,8 @@
     self.title = @"举报成功";
     
     self.view.backgroundColor = RGB(238, 238, 238);
+    [self.navigationItem setHidesBackButton:YES];
+    [self addRightBarButtonItemWithTarget:self sel:@selector(sureBtnClick) title:@"确定" tintColor:UIColor.whiteColor];
     
     [self.view addSubview:self.imgView];
     [self.view addSubview:self.nameLabel];
@@ -95,7 +100,7 @@
 
 - (void)sureBtnClick{
     [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        BLOCK_EXEC(self.successBlock);
+
     }];
 }
 

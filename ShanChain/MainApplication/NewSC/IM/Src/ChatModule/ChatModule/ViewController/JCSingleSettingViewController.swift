@@ -47,7 +47,8 @@ class JCSingleSettingViewController: UIViewController, CustomNavigation {
         let reportVC:SCReportController = SCReportController()
         reportVC.userId = user.username
         reportVC.isReportPersonal = true
-        navigationController?.pushViewController(reportVC, animated: true)
+        let nav:JCNavigationController = JCNavigationController.init(rootViewController: reportVC)
+        navigationController?.present(nav, animated: true)
     }
     
 }
@@ -110,11 +111,11 @@ extension JCSingleSettingViewController: UITableViewDelegate, UITableViewDataSou
                 return
             }
             if !user.isFriend {
-                cell.buttonColor = UIColor(netHex: 0x2dd0cf)
+                cell.buttonColor = SC_ThemeMainColor
                 cell.buttonTitle = "添加好友"
                 cell.delegate = self
             } else {
-                cell.buttonColor = UIColor(netHex: 0xEB424D)
+                cell.buttonColor = SC_ThemeMainColor
                 cell.buttonTitle = "删除好友"
                 cell.delegate = self
             }

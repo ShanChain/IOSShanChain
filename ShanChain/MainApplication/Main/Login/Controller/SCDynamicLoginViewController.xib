@@ -73,10 +73,10 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XuE-d3-fbo">
-                    <rect key="frame" x="40" y="280.5" width="295" height="40"/>
+                    <rect key="frame" x="40" y="280.5" width="295" height="45"/>
                     <color key="backgroundColor" red="0.67450980390000004" green="0.50588235290000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="40c-uy-0I8"/>
+                        <constraint firstAttribute="height" constant="45" id="40c-uy-0I8"/>
                     </constraints>
                     <state key="normal" title="登录">
                         <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

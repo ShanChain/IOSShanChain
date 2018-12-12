@@ -25,6 +25,7 @@ class RoomNavTitleView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.frame = frame;
         contentView = loadViewFromNib()
         addSubview(contentView)
     }

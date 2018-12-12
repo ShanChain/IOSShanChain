@@ -97,16 +97,16 @@
 #pragma mark -系统方法
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:self.view.window];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:self.view.window];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -134,13 +134,16 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(send)];
     
-    [self.navigationItem.rightBarButtonItem setTintColor:RGB(102, 102, 102)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
+    
+    [self.navigationItem.rightBarButtonItem setTintColor:Theme_MainTextColor];
+    [self.navigationItem.leftBarButtonItem setTintColor:Theme_MainTextColor];
 }
 
 -(void)send{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (self.currentIndex < 0 || (self.currentIndex == 5 && ![self.textView.text isNotBlank])) {
-        [SYProgressHUD showError:@"请选择一个或输入其他内容，便于举报"];
+        [HHTool showError:@"请选择一个或输入其他内容，便于举报"];
         return;
     }
     [params setObject:(self.currentIndex == 5 ? self.textView.text : self.titles[self.currentIndex]) forKey:@"reason"];
@@ -154,7 +157,7 @@
         [params setObject:[SCCacheTool shareInstance].getCurrentCharacterId forKey:@"characterId"];
     }else{
         if (![self.detailId isNotBlank]) {
-            [SYProgressHUD showError:@"动态信息有误"];
+            [HHTool showError:@"动态信息有误"];
             return;
         }
         targetId  = [NSMutableString stringWithString:[self.detailId copy]];
@@ -164,24 +167,20 @@
     }
     
     [params setObject:targetId forKey:@"targetId"];
+    [HHTool showChrysanthemum];
     [[SCNetwork shareInstance] postWithUrl:self.isReportPersonal ? REPORT_USER_URL:STORYREPORT parameters:params success:^(id responseObject) {
         SYReportSuccessController *successVC = [[SYReportSuccessController alloc]init];
-        weakify(self);
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//        });
-        successVC.successBlock = ^{
-              [weak_self.navigationController popToRootViewControllerAnimated:YES];
-        };
-        [self.navigationController presentViewController:successVC animated:YES completion:nil];
+        [HHTool dismiss];
+        [self.navigationController pushViewController:successVC animated:YES];
     } failure:^(NSError *error) {
+        [HHTool dismiss];
         SCLog(@"%@",error);
     }];
     
 }
 
 -(void)creatButton {
-    CGFloat btnWidth = (SCREEN_WIDTH - 30)/2;
+   
     for (int i = 0; i < self.titles.count; i++) {
         UIView *containerView = [[UIView alloc] init];
         CGRect viewFrame = CGRectZero;
@@ -200,7 +199,7 @@
         icon.frame = CGRectMake(20, 11, 22, 22);
         [icon setImage:[UIImage imageNamed:@"icon_btn_determine_default"] forState:UIControlStateNormal];
         [icon setImage:[UIImage imageNamed:@"icon_btn_determine_selectsd"] forState:UIControlStateSelected];
-        
+        icon.userInteractionEnabled = NO;
         [containerView addSubview:icon];
 
         UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(62, 0, SCREEN_WIDTH/2 - 80, 44)];
@@ -256,36 +255,8 @@
     self.placeholderLabel.hidden = self.textView.text.length;
 }
 
-- (void)keyboardDidShow:(NSNotification*)notification {
-    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
-    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    
-    // 第三方键盘回调三次问题，监听仅执行最后一次
-    if ( begin.size.height>0 && (begin.origin.y-end.origin.y>0) ) {
-        if (_keyboardIsShown) {
-            return ;
-        }
-        NSDictionary *userInfo = [notification userInfo];
-        CGFloat h = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,0);
-        WS(weakSelf);
-        [Util commonViewAnimation:^{
-            weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, 0);
-        }
-                       completion:nil];
-        _keyboardIsShown = YES;
-    }
-}
-
-- (void)keyboardDidHide:(NSNotification *)notification {
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,self.scrollViewContentHeight+1);
-    WS(weakSelf);
-    [Util commonViewAnimation:^{
-        weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentOffset.x, 0);
-        
-    }
-                   completion:nil];
-    _keyboardIsShown = NO;
+- (void)cancelAction{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -10,7 +10,5 @@
 
 @interface SYReportSuccessController : SCBaseViewController
 
-@property   (nonatomic,copy)  void  (^successBlock) ();
-
 
 @end

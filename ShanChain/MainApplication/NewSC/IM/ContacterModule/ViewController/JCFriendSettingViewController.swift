@@ -61,7 +61,7 @@ extension JCFriendSettingViewController: UITableViewDataSource, UITableViewDeleg
             if user.isFriend {
                 return 3
             }
-            return 2
+            return 3
         }
         return 1
     }
@@ -133,6 +133,9 @@ extension JCFriendSettingViewController: UITableViewDataSource, UITableViewDeleg
                     cell.accessoryType = .none
                     cell.isShowSwitch = true
                     cell.title = "加入黑名单"
+                case 2:
+                    cell.title = "举报"
+                    cell.accessoryType = .disclosureIndicator
                 default:
                     break
                 }
@@ -162,6 +165,13 @@ extension JCFriendSettingViewController: UITableViewDataSource, UITableViewDeleg
                     let nav = JCNavigationController(rootViewController: vc)
                     present(nav, animated: true)
                 }
+            case 2:
+        
+                let reportVC:SCReportController = SCReportController()
+                reportVC.userId = user.username
+                reportVC.isReportPersonal = true
+                let nav:JCNavigationController = JCNavigationController.init(rootViewController: reportVC)
+                navigationController?.present(nav, animated: true)
             default:
                 break
             }

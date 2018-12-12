@@ -11,6 +11,8 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #import "JPUSHService.h"
 #import "JSHAREService.h"
+#import "VerifyCodeModel.h"
+#import "SCLoginDataController.h"
 
 @interface SCDynamicLoginViewController ()
 
@@ -31,10 +33,25 @@
 @property (weak, nonatomic) IBOutlet UIView *line1;
 @property (weak, nonatomic) IBOutlet UIView *line2;
 
+@property  (nonatomic,strong) VerifyCodeModel  *verifyCodeModel;
 
 @end
 
 @implementation SCDynamicLoginViewController
+
+
+- (NSDictionary*)getParameter{
+    
+    NSMutableString  *mStr = [[NSMutableString alloc]init];
+    [mStr appendString:self.verifyCodeFid.text];
+    [mStr appendString:self.verifyCodeModel.salt];
+    [mStr appendString:self.verifyCodeModel.timestamp];
+    NSString *sign = [SCMD5Tool MD5ForUpper32Bate:mStr.copy];
+    if (!NULLString(self.encryptOpenId)) {
+        return  @{@"encryptOpenId":self.encryptOpenId,@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text};
+    }
+    return @{@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text};
+}
 
 
 - (void)setUI{
@@ -44,30 +61,41 @@
         self.titleLb.hidden = YES;
         self.line1.hidden = YES;
         self.line2.hidden = YES;
+        self.title = @"关联手机号";
+    }else{
+        self.title = @"动态验证码登录";
     }
     [self.loginBtn setTitle:self.loginType == LoginType_bindPhoneNumber? @"确定":@"登录" forState:0];
     [self.QQBtn setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
     [self.weiboBtn setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
     [self.wechatBtn setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
     
+    WEAKSELF
     [[self.getVerifyCodeBtn rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(__kindof UIControl * _Nullable x) {
-        if (self.phoneNumberFid.text.length == 0) {
+        if (weakSelf.phoneNumberFid.text.length == 0) {
             [HHTool showError:@"手机号不能为空"];
             return ;
         }
-        if (![self.phoneNumberFid.text isValidPhoneNumber]) {
+        if (![weakSelf.phoneNumberFid.text isValidPhoneNumber]) {
             [HHTool showError:@"请输入的手机号有误"];
             return ;
         }
-        
-        [self.getVerifyCodeBtn startWithTime:59 title:@"重新获取" countDownTitle:@"s" mainColor:Theme_MainTextColor countColor:Theme_MainThemeColor];
+        [[SCNetwork shareInstance] v1_postWithUrl:Verifycode_URL params:@{@"mobile":weakSelf.phoneNumberFid.text} showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
+            if (!baseModel.data && error) {
+                return ;
+            }
+            
+            weakSelf.verifyCodeModel = [VerifyCodeModel yy_modelWithDictionary:baseModel.data];
+            [weakSelf.getVerifyCodeBtn startWithTime:59 title:@"重新获取" countDownTitle:@"s" mainColor:Theme_MainTextColor countColor:Theme_MainThemeColor];
+            
+        }];
     }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"动态验证码登录";
+    
     [self setUI];
     
     RAC(self.loginBtn,enabled) = [RACSignal combineLatest:@[self.phoneNumberFid.rac_textSignal,self.verifyCodeFid.rac_textSignal] reduce:^id _Nullable(NSString *phone , NSString *code){
@@ -89,42 +117,50 @@
     }];
     
 }
+
 - (IBAction)passwordLoginAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)loginAction:(UIButton *)sender {
-  
+    
+    [[SCNetwork shareInstance]v1_postWithUrl:Sms_login_URL params:[self getParameter] showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
+        if (error) {
+            return ;
+        }
+        NSDictionary *data = (NSDictionary*)baseModel.data;
+        NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] initWithDictionary:data[@"userInfo"]];
+        [userInfo setObject:data[@"token"] forKey:@"token"];
+        [SCLoginDataController successLoginedWithContent:userInfo];
+    }];
+    
 }
 - (IBAction)QQLoginAction:(UIButton *)sender {
-    [self otherLoginWithPlatfrom:JSHAREPlatformQQ];
+  
+    [SCLoginDataController otherLoginWithPlatfrom:JSHAREPlatformQQ bindPhoneNumberCallBack:^(NSString *encryptOpenId) {
+        [self bindPhoneNumberWithEncryptOpenId:encryptOpenId];
+    }];
 }
 
 - (IBAction)weiboLoginAction:(UIButton *)sender {
-    [self otherLoginWithPlatfrom:JSHAREPlatformSinaWeibo];
+    
+    [SCLoginDataController otherLoginWithPlatfrom:JSHAREPlatformSinaWeibo bindPhoneNumberCallBack:^(NSString *encryptOpenId) {
+        [self bindPhoneNumberWithEncryptOpenId:encryptOpenId];
+    }];
 }
 
 - (IBAction)wechatLoginAction:(UIButton *)sender {
-    [self otherLoginWithPlatfrom:JSHAREPlatformWechatSession];
+    [SCLoginDataController otherLoginWithPlatfrom:JSHAREPlatformWechatSession bindPhoneNumberCallBack:^(NSString *encryptOpenId) {
+        [self bindPhoneNumberWithEncryptOpenId:encryptOpenId];
+    }];
 }
 
-- (void)otherLoginWithPlatfrom:(JSHAREPlatform)platfrom{
-    [JSHAREService getSocialUserInfo:platfrom handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
-        NSString *alertMessage;
-        NSString *title;
-        if (error) {
-            title = @"失败";
-            alertMessage = @"无法获取到用户信息";
-        }else{
-            title = userInfo.name;
-            alertMessage = [NSString stringWithFormat:@"昵称: %@\n 头像链接: %@\n 性别: %@\n",userInfo.name,userInfo.iconurl,userInfo.gender == 1? @"男" : @"女"];
-        }
-       
-        dispatch_async(dispatch_get_main_queue(), ^{
-             UIAlertView *Alert = [[UIAlertView alloc] initWithTitle:title message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [Alert show];
-        });
-    }];
+// 绑定手机号
+- (void)bindPhoneNumberWithEncryptOpenId:(NSString*)encryptOpenId{
+    SCDynamicLoginViewController *vc = [[SCDynamicLoginViewController alloc]init];
+    vc.loginType = LoginType_bindPhoneNumber;
+    vc.encryptOpenId = encryptOpenId;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

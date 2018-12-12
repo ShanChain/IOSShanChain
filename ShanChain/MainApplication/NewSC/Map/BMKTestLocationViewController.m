@@ -114,6 +114,7 @@
 
 
 -(void)sc_newYearActive{
+    
     MCDate *activeDate = [MCDate dateWithInterval:Test_ActiveTimestamp];
     NSInteger  days = [activeDate daysFrom:[MCDate date]];
     if (days > 0) {

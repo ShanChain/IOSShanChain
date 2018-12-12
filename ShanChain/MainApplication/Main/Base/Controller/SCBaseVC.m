@@ -135,9 +135,32 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//返回到上一层，直到dismiss
+- (UIViewController *)backViewController{
+    if (self.navigationController) {
+        NSInteger index=[self.navigationController.viewControllers indexOfObject:self];
+        if (index>0) {  //不是root，就返回到上一级
+            UIViewController *presentViewController=[self.navigationController.viewControllers objectAtIndex:MAX(index-1, 0)];
+            [self.navigationController popViewControllerAnimated:YES];
+            return presentViewController;
+        }else{
+            [self dismissPrestingViewController];
+            return self.presentingViewController;
+        }
+    }else{
+        [self dismissPrestingViewController];
+        return  self.presentingViewController;
+    }
 }
+
+- (void)dismissPrestingViewController{
+    if (self.presentingViewController) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+        });
+        
+    }
+}
+
 
 @end

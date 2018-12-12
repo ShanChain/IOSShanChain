@@ -18,5 +18,6 @@ typedef NS_ENUM(NSInteger,SC_LoginType) {
 @interface SCDynamicLoginViewController : SCBaseVC
 
 @property  (nonatomic,assign)  SC_LoginType  loginType;
+@property  (nonatomic,copy)    NSString    *encryptOpenId;
 
 @end

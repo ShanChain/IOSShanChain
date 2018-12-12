@@ -107,7 +107,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         kparameters = params;
     }
     [_afManager POST:url parameters:kparameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] isEqualToString:SC_COMMON_SUC_CODE]) {
+        if ([responseObject[@"code"] isEqualToString:SC_COMMON_SUC_CODE] || [responseObject[@"code"] isEqualToString:SC_PHONENUMBER_NOBIND]) {
             success(responseObject);
         } else {
             NSString *msg = responseObject[@"message"];
@@ -236,15 +236,8 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         if (show) {
             [HHTool dismiss];
         }
-      
         HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
-        if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE]) {
-                callBlock(baseModel,nil);
-        }else{
-                if (!NULLString(baseModel.message)) {
-                    [HHTool showError:baseModel.message];
-                }
-        }
+        callBlock(baseModel,nil);
         
     } failure:^(NSError *error) {
         callBlock(nil,error);

@@ -114,6 +114,19 @@
 //注册环信用户
 #define COMMONHXUSERREGISTER @"/hx/user/regist"
 
+// 获取登录验证码
+#define  Verifycode_URL  @"/v1/2.0/sms/login/verifycode"
+// 验证码登录
+#define  Sms_login_URL   @"/v1/2.0/user/sms_login"
+
+// 三方授权登录
+#define  Third_login_URL @"/v1/2.0/user/third_login"
+
+
+#pragma mark ----------- 点亮元社区-------------------
+
+#define  Countdown_URL @"/v1/2.0/light/countdown"  // 活动倒计时
+
 
 #pragma mark ----------- 故事 -------------------
 //点赞

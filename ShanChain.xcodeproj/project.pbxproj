@@ -329,6 +329,8 @@
 		22A2EB9F21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */; };
 		22A2EBA321BFAE0A00737265 /* SCDynamicLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBA121BFAE0A00737265 /* SCDynamicLoginViewController.m */; };
 		22A2EBA421BFAE0A00737265 /* SCDynamicLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */; };
+		22A2EBA721C09A5800737265 /* VerifyCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBA621C09A5800737265 /* VerifyCodeModel.m */; };
+		22A2EBAB21C0A43300737265 /* SCLoginDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBAA21C0A43300737265 /* SCLoginDataController.m */; };
 		22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9176E21918710002E5240 /* HHChatRoomViewController.xib */; };
 		22C917762191BDE5002E5240 /* MapFootprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917742191BDE5002E5240 /* MapFootprintViewController.swift */; };
 		22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917752191BDE5002E5240 /* MapFootprintViewController.xib */; };
@@ -1205,6 +1207,10 @@
 		22A2EBA021BFAE0A00737265 /* SCDynamicLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCDynamicLoginViewController.h; sourceTree = "<group>"; };
 		22A2EBA121BFAE0A00737265 /* SCDynamicLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCDynamicLoginViewController.m; sourceTree = "<group>"; };
 		22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCDynamicLoginViewController.xib; sourceTree = "<group>"; };
+		22A2EBA521C09A5800737265 /* VerifyCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyCodeModel.h; sourceTree = "<group>"; };
+		22A2EBA621C09A5800737265 /* VerifyCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerifyCodeModel.m; sourceTree = "<group>"; };
+		22A2EBA921C0A43300737265 /* SCLoginDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCLoginDataController.h; sourceTree = "<group>"; };
+		22A2EBAA21C0A43300737265 /* SCLoginDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCLoginDataController.m; sourceTree = "<group>"; };
 		22C9176E21918710002E5240 /* HHChatRoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHChatRoomViewController.xib; sourceTree = "<group>"; };
 		22C917742191BDE5002E5240 /* MapFootprintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFootprintViewController.swift; sourceTree = "<group>"; };
 		22C917752191BDE5002E5240 /* MapFootprintViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFootprintViewController.xib; sourceTree = "<group>"; };
@@ -2153,6 +2159,8 @@
 			children = (
 				221BBD332195889C0004EE03 /* SCCharacterModel.h */,
 				221BBD342195889C0004EE03 /* SCCharacterModel.m */,
+				22A2EBA521C09A5800737265 /* VerifyCodeModel.h */,
+				22A2EBA621C09A5800737265 /* VerifyCodeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3020,6 +3028,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		22A2EBA821C0A41A00737265 /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				22A2EBA921C0A43300737265 /* SCLoginDataController.h */,
+				22A2EBAA21C0A43300737265 /* SCLoginDataController.m */,
+			);
+			path = DataController;
+			sourceTree = "<group>";
+		};
 		22C917782191C04B002E5240 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3841,6 +3858,8 @@
 		4852A09A1FCE9F0300CDD7BE /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				22A2EBA821C0A41A00737265 /* DataController */,
+				221BBD32219588360004EE03 /* Model */,
 				4852A09B1FCE9F0300CDD7BE /* Controller */,
 			);
 			path = Login;
@@ -3849,7 +3868,6 @@
 		4852A09B1FCE9F0300CDD7BE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				221BBD32219588360004EE03 /* Model */,
 				4852A09C1FCE9F0300CDD7BE /* SCInitPasswordController.h */,
 				4852A09D1FCE9F0300CDD7BE /* SCInitPasswordController.m */,
 				4852A09E1FCE9F0300CDD7BE /* SCLoginController.h */,
@@ -5299,6 +5317,7 @@
 				48718D9F1F42277400010AA0 /* UIView+WebCache.m in Sources */,
 				4852A1751FCE9F7200CDD7BE /* JsonTool.m in Sources */,
 				2226DB7C21ACD18C002F6195 /* AppDelegate+JMessage.swift in Sources */,
+				22A2EBA721C09A5800737265 /* VerifyCodeModel.m in Sources */,
 				4852A0DF1FCE9F0300CDD7BE /* SYScanView.m in Sources */,
 				48718D9C1F42277400010AA0 /* UIImage+WebP.m in Sources */,
 				223F998C217F12040031DB95 /* JCBusinessCardContentView.swift in Sources */,
@@ -5458,6 +5477,7 @@
 				223F99BE217F12040031DB95 /* JCAddMapViewController.mm in Sources */,
 				4852A13C1FCE9F0400CDD7BE /* SCTabbarController.m in Sources */,
 				48718D901F42277400010AA0 /* NSImage+WebCache.m in Sources */,
+				22A2EBAB21C0A43300737265 /* SCLoginDataController.m in Sources */,
 				223F997E217F12040031DB95 /* JCMessageImageContent.swift in Sources */,
 				332AB5F41F4ED69F00888313 /* TYTextStorage.m in Sources */,
 				4852A16C1FCE9F7200CDD7BE /* FMDatabase.m in Sources */,

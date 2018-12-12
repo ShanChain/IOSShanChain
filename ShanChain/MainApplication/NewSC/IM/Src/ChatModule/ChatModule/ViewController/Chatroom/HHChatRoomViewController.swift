@@ -433,10 +433,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         //        attrs[NSForegroundColorAttributeName] = UIColor.black
         //        navigationController?.navigationBar.titleTextAttributes = attrs
         // titleView
-        navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 44))
+        navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 46))
         navTitleView.positionBtn .setTitle(self.navTitle, for: .normal)
         if let chatRoom = conversation.target as? JMSGChatRoom{
-             navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)", for: .normal)
+             navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)人", for: .normal)
         }
         
         // 查看聊天室成员
@@ -462,7 +462,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         navTitleView.snp.makeConstraints { (mark) in
             mark.centerX.centerY.equalTo( (navigationController?.navigationBar)!)
             mark.width.equalTo(200)
-            mark.height.equalTo(44)
+            mark.height.equalTo(50)
         }
         //        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         //        navigationController?.interactivePopGestureRecognizer?.delegate = self
