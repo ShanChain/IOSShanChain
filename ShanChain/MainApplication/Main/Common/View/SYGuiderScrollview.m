@@ -48,8 +48,14 @@
     // 第一栏
     UIView *view1 = [[UIView alloc] init];
     [self addSubview:view1];
+    NSString  *imageNamed;
+    if (IS_IPHONE_X) {
+        imageNamed = @"iPhone X_2";
+    }else{
+        imageNamed = @"guide_icon_1";
+    }
     view1.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    UIImageView *one = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_icon_1"]];
+    UIImageView *one = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageNamed]];
     one.frame = CGRectMake(0, 0, view1.width, view1.height);
     one.contentMode = UIViewContentModeScaleToFill;
     [view1 addSubview:one];
@@ -85,6 +91,13 @@
     // 第二栏
     UIView *view2 = [[UIView alloc] init];
     [self addSubview:view2];
+    
+    NSString  *imageNamed1;
+    if (IS_IPHONE_X) {
+        imageNamed1 = @"iPhone X_3";
+    }else{
+        imageNamed1 = @"guide_icon_2";
+    }
     view2.frame = CGRectMake(self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
     UIImageView *two = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_icon_2"]];
     two.frame  = CGRectMake(0, 0, view2.width, view2.height);
@@ -118,6 +131,14 @@
     // 第三栏
     UIView *view3 = [[UIView alloc] init];
     [self addSubview:view3];
+    
+    NSString  *imageNamed2;
+    if (IS_IPHONE_X) {
+        imageNamed2 = @"iPhone X_4";
+    }else{
+        imageNamed2 = @"guide_icon_3";
+    }
+    
     view3.frame = CGRectMake(2 * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
     UIImageView *three = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_icon_3"]];
     three.contentMode = UIViewContentModeScaleToFill;

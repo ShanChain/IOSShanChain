@@ -29,7 +29,13 @@
                 SCCharacterModel_characterInfo *info = [SCCharacterModel_characterInfo mj_objectWithKeyValues:baseModel.data[@"characterInfo"]];
                 [SCCacheTool shareInstance].characterModel.characterInfo = info;
                  [[SCCacheTool shareInstance] cacheCharacterInfo:baseModel.data[@"characterInfo"] withUserId:[SCCacheTool shareInstance].getCurrentUser];
-                [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateAvatarSuccess object:nil];
+                [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateUserInfo object:nil];
+                 [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateAvatarSuccess object:nil];
+                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:params[@"headImg"]]];
+                NSData  *data = [NSKeyedArchiver archivedDataWithRootObject:imageData];
+                [[NSUserDefaults standardUserDefaults]setObject:data forKey:kLastUserAvator];
+                [[NSUserDefaults standardUserDefaults]synchronize];
+   
             }
             BLOCK_EXEC(callBlock,YES);
         }else{

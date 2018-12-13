@@ -14,7 +14,9 @@ class JCRemindListViewController: UIViewController {
     
     var finish: handleFinish!
     
-    var group: JMSGGroup!
+    var group: JMSGGroup?
+    
+    var chatRoom: JMSGChatRoom?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +56,7 @@ class JCRemindListViewController: UIViewController {
         view.backgroundColor = .white
         _setupNavigation()
         tableView.tableHeaderView = searchView
-        users = group.memberArray()
+        users = (group?.memberArray())!
         _classify(users)
         view.addSubview(tableView)
     }

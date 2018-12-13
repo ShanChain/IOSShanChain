@@ -304,8 +304,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             SAIToolboxItem("page:pic", "照片", UIImage.loadImage("chat_tool_pic")),
             SAIToolboxItem("page:camera", "拍照", UIImage.loadImage("chat_tool_camera")),
             SAIToolboxItem("page:video_s", "小视频", UIImage.loadImage("chat_tool_video_short")),
-            SAIToolboxItem("page:location", "位置", UIImage.loadImage("chat_tool_location")),
-            SAIToolboxItem("page:businessCard", "名片", UIImage.loadImage("chat_tool_businessCard")),
+//            SAIToolboxItem("page:location", "位置", UIImage.loadImage("chat_tool_location")),
+//            SAIToolboxItem("page:businessCard", "名片", UIImage.loadImage("chat_tool_businessCard")),
             ]
     }()
     
@@ -639,6 +639,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             imageContent.upload?(percent)
         }
         let msg = JCMessage(content: imageContent)
+        msg.contentType = .image
         send(msg, message)
     }
     // 发送音频
@@ -651,6 +652,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         let message = JMSGMessage.ex.createMessage(conversation, content, nil)
         
         let msg = JCMessage(content: voiceContent)
+        msg.contentType = .voice
         send(msg, message)
     }
     // 发送文件
@@ -677,6 +679,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         let message = JMSGMessage.ex.createMessage(conversation, content, nil)
         message.ex.isShortVideo = true
         let msg = JCMessage(content: videoContent)
+        msg.contentType = .video
         send(msg, message)
         
     }
@@ -1391,23 +1394,21 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
     
     func inputBar(_ inputBar: SAIInputBar, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let currentIndex = range.location
-        //        if !isGroup {
-        //            return true
-        //        }
-        if string == "@" {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
-                let vc = JCRemindListViewController()
-                vc.finish = { (user, isAtAll, length) in
-                    self.handleAt(inputBar, range, user, isAtAll, length)
-                }
-                vc.group = self.conversation.target as! JMSGGroup
-                let nav = JCNavigationController(rootViewController: vc)
-                self.present(nav, animated: true, completion: {})
-            }
-        } else {
-            return updateRemids(inputBar, string, range, currentIndex)
-        }
-        return true
+       return updateRemids(inputBar, string, range, currentIndex)
+//        if string == "@" {
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+//                let vc = JCRemindListViewController()
+//                vc.finish = { (user, isAtAll, length) in
+//                    self.handleAt(inputBar, range, user, isAtAll, length)
+//                }
+//                vc.chatRoom = self.conversation.target as? JMSGChatRoom
+//                let nav = JCNavigationController(rootViewController: vc)
+//                self.present(nav, animated: true, completion: {})
+//            }
+//        } else {
+//            return updateRemids(inputBar, string, range, currentIndex)
+//        }
+//        return true
     }
     
     func handleAt(_ inputBar: SAIInputBar, _ range: NSRange, _ user: JMSGUser?, _ isAtAll: Bool, _ length: Int) {

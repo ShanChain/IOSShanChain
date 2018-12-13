@@ -15,6 +15,7 @@
 #import "SCAliyunUploadMananger.h"
 #import "MyWalletViewController.h"
 #import "NotificationHandler.h"
+#import "OpinionFeedbackViewController.h"
 
 #define HeaderViewHeight 200
 
@@ -60,6 +61,7 @@
         UIImage *headImage = [UIImage imageFromURLString:headImg];
         headImage = [headImage mc_resetToSize:CGSizeMake(64, 64)];
         headImage = [headImage cutCircleImage];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (headImg) {
                 self.icon.image = headImage;
@@ -213,9 +215,12 @@
         [nav.topViewController.navigationController pushViewController:walletVC animated:YES];
     }else if ([title isEqualToString:NSLocalizedString(@"sc_SignOut", nil)]){
         [[SCAppManager shareInstance]selectLogout];
-//        [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
+       // [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
+    }else if ([title isEqualToString:@"意见反馈"]){
+        OpinionFeedbackViewController  *feedbackVC = [[OpinionFeedbackViewController alloc]init];
+        [nav.topViewController.navigationController pushViewController:feedbackVC animated:YES];
     }else{
-                                                                 
+        
     }
 //    switch (indexPath.row) {
 //        case 0:
@@ -284,11 +289,13 @@
         if ([SCCacheTool shareInstance].status.integerValue == 0) {
             _titleArray = @[
                             NSLocalizedString(@"sc_MyMessage", nil),
+                            @"意见反馈",
                             NSLocalizedString(@"sc_SignOut", nil)];
         }else{
             _titleArray = @[NSLocalizedString(@"sc_MyWallet", nil),
                             NSLocalizedString(@"sc_MyTask", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
+                            @"意见反馈",
                             NSLocalizedString(@"sc_SignOut", nil)];
         }
         
@@ -309,6 +316,7 @@
     image = [image cutCircleImage];
     weakify(self);
     [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
+        
         if (!NULLString(url)) {
             [EditInfoService sc_editPersonalInfo:@{@"headImg":url} callBlock:^(BOOL isSuccess) {
                 if (isSuccess) {

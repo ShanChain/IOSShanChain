@@ -300,7 +300,6 @@
 		22680AB6219E779000F2FA5B /* XMWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AB4219E779000F2FA5B /* XMWebView.m */; };
 		22680ABA219E786400F2FA5B /* MyWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AB8219E786400F2FA5B /* MyWalletViewController.m */; };
 		22680ABB219E786400F2FA5B /* MyWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22680AB9219E786400F2FA5B /* MyWalletViewController.xib */; };
-		22680ABD21A4218900F2FA5B /* LaunchScreenImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon.png */; };
 		22680AC221A445FA00F2FA5B /* EditInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22680AC121A445FA00F2FA5B /* EditInfoService.m */; };
 		2271056F21B4DA86009FC34D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2271057121B4DA86009FC34D /* InfoPlist.strings */; };
 		2271057321B4DA9B009FC34D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2271057521B4DA9B009FC34D /* Localizable.strings */; };
@@ -331,6 +330,9 @@
 		22A2EBA421BFAE0A00737265 /* SCDynamicLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */; };
 		22A2EBA721C09A5800737265 /* VerifyCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBA621C09A5800737265 /* VerifyCodeModel.m */; };
 		22A2EBAB21C0A43300737265 /* SCLoginDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBAA21C0A43300737265 /* SCLoginDataController.m */; };
+		22A2EBB621C23CC000737265 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBB521C23CBF00737265 /* Images.xcassets */; };
+		22A2EBBE21C2558B00737265 /* OpinionFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */; };
+		22A2EBBF21C2558B00737265 /* OpinionFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */; };
 		22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9176E21918710002E5240 /* HHChatRoomViewController.xib */; };
 		22C917762191BDE5002E5240 /* MapFootprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917742191BDE5002E5240 /* MapFootprintViewController.swift */; };
 		22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917752191BDE5002E5240 /* MapFootprintViewController.xib */; };
@@ -419,7 +421,6 @@
 		33B7CCEE1EC5865700FB6378 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B7CCED1EC5865700FB6378 /* main.m */; };
 		33B7CCF71EC5865700FB6378 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B7CCF51EC5865700FB6378 /* Main.storyboard */; };
 		33B7CCF91EC5865700FB6378 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B7CCF81EC5865700FB6378 /* Assets.xcassets */; };
-		33B7CCFC1EC5865700FB6378 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B7CCFA1EC5865700FB6378 /* LaunchScreen.storyboard */; };
 		33B7CD071EC5865700FB6378 /* ShanChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B7CD061EC5865700FB6378 /* ShanChainTests.m */; };
 		33B7CD121EC5865700FB6378 /* ShanChainUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B7CD111EC5865700FB6378 /* ShanChainUITests.m */; };
 		33C1A17A1F4C50FB003E22CA /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C1A1611F4C50FB003E22CA /* MASCompositeConstraint.m */; };
@@ -867,7 +868,6 @@
 		2228491C2176DD0F00CDC86C /* BaiduMapAPI_Utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Utils.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Utils.framework; sourceTree = "<group>"; };
 		222849222176E07500CDC86C /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		22284A7A2179819700CDC86C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
-		22284A7B2179819800CDC86C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2229ECFD21B908D200E33A8D /* NewYearActivitiesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewYearActivitiesView.h; sourceTree = "<group>"; };
 		2229ECFE21B908D200E33A8D /* NewYearActivitiesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewYearActivitiesView.m; sourceTree = "<group>"; };
 		2229ED0021B9091B00E33A8D /* NewYearActivitiesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewYearActivitiesView.xib; sourceTree = "<group>"; };
@@ -1163,7 +1163,6 @@
 		22680AB7219E786400F2FA5B /* MyWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWalletViewController.h; sourceTree = "<group>"; };
 		22680AB8219E786400F2FA5B /* MyWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWalletViewController.m; sourceTree = "<group>"; };
 		22680AB9219E786400F2FA5B /* MyWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletViewController.xib; sourceTree = "<group>"; };
-		22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenImageIcon.png; sourceTree = "<group>"; };
 		22680AC021A445FA00F2FA5B /* EditInfoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditInfoService.h; sourceTree = "<group>"; };
 		22680AC121A445FA00F2FA5B /* EditInfoService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditInfoService.m; sourceTree = "<group>"; };
 		2271057021B4DA86009FC34D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1171,7 +1170,6 @@
 		2271057421B4DA9B009FC34D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2271057621B4DA9E009FC34D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2271057721B4DDE5009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		2271057821B4DDE5009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2271057921B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2271057A21B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2271057B21B62CCA009FC34D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -1211,6 +1209,10 @@
 		22A2EBA621C09A5800737265 /* VerifyCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerifyCodeModel.m; sourceTree = "<group>"; };
 		22A2EBA921C0A43300737265 /* SCLoginDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCLoginDataController.h; sourceTree = "<group>"; };
 		22A2EBAA21C0A43300737265 /* SCLoginDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCLoginDataController.m; sourceTree = "<group>"; };
+		22A2EBB521C23CBF00737265 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		22A2EBBB21C2558B00737265 /* OpinionFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpinionFeedbackViewController.h; sourceTree = "<group>"; };
+		22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpinionFeedbackViewController.m; sourceTree = "<group>"; };
+		22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpinionFeedbackViewController.xib; sourceTree = "<group>"; };
 		22C9176E21918710002E5240 /* HHChatRoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHChatRoomViewController.xib; sourceTree = "<group>"; };
 		22C917742191BDE5002E5240 /* MapFootprintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFootprintViewController.swift; sourceTree = "<group>"; };
 		22C917752191BDE5002E5240 /* MapFootprintViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFootprintViewController.xib; sourceTree = "<group>"; };
@@ -1356,7 +1358,6 @@
 		33B7CCED1EC5865700FB6378 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33B7CCF61EC5865700FB6378 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33B7CCF81EC5865700FB6378 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		33B7CCFB1EC5865700FB6378 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		33B7CCFD1EC5865700FB6378 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33B7CD021EC5865700FB6378 /* ShanChainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShanChainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33B7CD061EC5865700FB6378 /* ShanChainTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShanChainTests.m; sourceTree = "<group>"; };
@@ -3105,6 +3106,7 @@
 		22C917902192E4D1002E5240 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				22C917972192E4D1002E5240 /* View */,
 				22680ABF21A445D900F2FA5B /* Service */,
 				2207069E219BC6B600404459 /* EditPersonalInfoViewController.h */,
 				2207069F219BC6B600404459 /* EditPersonalInfoViewController.m */,
@@ -3115,10 +3117,12 @@
 				22C917932192E4D1002E5240 /* CWTableViewCellInfo.m */,
 				22C917942192E4D1002E5240 /* CWTableViewCellInfo.h */,
 				22C917952192E4D1002E5240 /* CWTableViewInfo.m */,
-				22C917972192E4D1002E5240 /* View */,
 				22680AB7219E786400F2FA5B /* MyWalletViewController.h */,
 				22680AB8219E786400F2FA5B /* MyWalletViewController.m */,
 				22680AB9219E786400F2FA5B /* MyWalletViewController.xib */,
+				22A2EBBB21C2558B00737265 /* OpinionFeedbackViewController.h */,
+				22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */,
+				22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */,
 			);
 			path = PersonalCenter;
 			sourceTree = "<group>";
@@ -3421,6 +3425,7 @@
 				3352F12C1F386F7100233A3C /* ShanChain.entitlements */,
 				996048EF1ED7C21E007634EE /* Catagory */,
 				9960490C1ED7C44F007634EE /* Application */,
+				22A2EBB521C23CBF00737265 /* Images.xcassets */,
 				33B7CCEC1EC5865700FB6378 /* Supporting Files */,
 			);
 			path = ShanChain;
@@ -3432,8 +3437,6 @@
 				3356B16B1F32F50700027E23 /* api.shanchain.com.cer */,
 				33B7CCF51EC5865700FB6378 /* Main.storyboard */,
 				33B7CCF81EC5865700FB6378 /* Assets.xcassets */,
-				33B7CCFA1EC5865700FB6378 /* LaunchScreen.storyboard */,
-				22680ABC21A4218900F2FA5B /* LaunchScreenImageIcon.png */,
 				33B7CCFD1EC5865700FB6378 /* Info.plist */,
 				33B7CCED1EC5865700FB6378 /* main.m */,
 				2271057121B4DA86009FC34D /* InfoPlist.strings */,
@@ -4979,7 +4982,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33B7CCFC1EC5865700FB6378 /* LaunchScreen.storyboard in Resources */,
 				223F9A732182AEC10031DB95 /* 1.jpg in Resources */,
 				223F9A04217F12040031DB95 /* area.plist in Resources */,
 				2281A21A216B6351009E95EE /* index.ios.js in Resources */,
@@ -5031,6 +5033,7 @@
 				223F99BD217F12040031DB95 /* icon_baidu_marker.png in Resources */,
 				4852A1361FCE9F0300CDD7BE /* SYStoryRoleSelectCell.xib in Resources */,
 				4852A12C1FCE9F0300CDD7BE /* SYMarkCollection1Cell.xib in Resources */,
+				22A2EBBF21C2558B00737265 /* OpinionFeedbackViewController.xib in Resources */,
 				22563F61219C3929004E34BB /* TaskListPersonalCell.xib in Resources */,
 				223F99BF217F12040031DB95 /* AddMapTableViewCell.xib in Resources */,
 				4852A0CF1FCE9F0300CDD7BE /* SCContactFriendCell.xib in Resources */,
@@ -5042,7 +5045,6 @@
 				22A2EB9F21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard in Resources */,
 				2293A741218C3B5A00FB977C /* RoomNavTitleView.xib in Resources */,
 				22A2EB9521BE67D800737265 /* AppointmentMyReceiveView.xib in Resources */,
-				22680ABD21A4218900F2FA5B /* LaunchScreenImageIcon.png in Resources */,
 				223F9A06217F12040031DB95 /* addressCode in Resources */,
 				223F9A722182AEC10031DB95 /* 2.jpg in Resources */,
 				4852A1321FCE9F0300CDD7BE /* SYStoryRoleCollectionCell.xib in Resources */,
@@ -5060,6 +5062,7 @@
 				223F9967217F12040031DB95 /* yh_image_no_picked@2x.png in Resources */,
 				4852A0E61FCE9F0300CDD7BE /* SYScreenMessageCell.xib in Resources */,
 				223F99BA217F12040031DB95 /* 定位1.png in Resources */,
+				22A2EBB621C23CC000737265 /* Images.xcassets in Resources */,
 				33B7CCF71EC5865700FB6378 /* Main.storyboard in Resources */,
 				222EF6142186A417005B89EF /* PublishTaskView.xib in Resources */,
 				22A2EBA421BFAE0A00737265 /* SCDynamicLoginViewController.xib in Resources */,
@@ -5289,6 +5292,7 @@
 				485E66571F42873F00B158BF /* MJRefreshComponent.m in Sources */,
 				22D2478121893C6E009C1E6A /* HHPublishTaskContentView.swift in Sources */,
 				48718DA01F42277400010AA0 /* UIView+WebCacheOperation.m in Sources */,
+				22A2EBBE21C2558B00737265 /* OpinionFeedbackViewController.m in Sources */,
 				332AB6491F4ED8C900888313 /* Constants.m in Sources */,
 				332AB5F21F4ED69F00888313 /* TYTextContainer+Extended.m in Sources */,
 				4852A0CA1FCE9F0300CDD7BE /* SYContactsModel.m in Sources */,
@@ -5907,16 +5911,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		33B7CCFA1EC5865700FB6378 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				33B7CCFB1EC5865700FB6378 /* Base */,
-				22284A7B2179819800CDC86C /* zh-Hant */,
-				2271057821B4DDE5009FC34D /* zh-Hans */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -6031,6 +6025,7 @@
 			baseConfigurationReference = 287B6C88B89479077A2AC137 /* Pods-ShanChain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -6099,6 +6094,7 @@
 			baseConfigurationReference = C3FED225AE99F4F57C6DB05E /* Pods-ShanChain.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;

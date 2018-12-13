@@ -265,6 +265,7 @@ extension JCMyInfoViewController: UINavigationControllerDelegate, UIImagePickerC
             MBProgressHUD_JChat.showMessage(message: "正在上传", toView: view)
             
             EditInfoService.sc_uploadImage(image, withCompressionQuality: 1.0) { (isSuccess) in
+                MBProgressHUD_JChat.hide(forView: self.view, animated: true)
                 if isSuccess == true {
                     MBProgressHUD_JChat.show(text: "上传成功", view: self.view)
                     NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)

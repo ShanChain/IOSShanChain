@@ -84,7 +84,9 @@
 #define  RECOMMEND_STORY_LIST @"/v1/recommend/rate"
 #define  STORY_LIST_BY_CHARACTER @"/v1/dynamic/character"
 #define  SET_DEVICE_TOKEN @"/v1/user/deviceToken"
-#define BIND_OTHER_ACCOUNT @"/v1/user/bind_other_account"
+#define  BIND_OTHER_ACCOUNT @"/v1/user/bind_other_account"
+#define  Feedback_URL @"/v1/feedback/user"  //意见反馈
+
 
 #define  GETCOORDINATE  @"/v1/lbs/coordinate/infos" // 获取当前位置及周边聊天室信息
 #define  COORDINATEINFO  @"/v1/lbs/coordinate/info" // 获获取当前位置聊天室信息
