@@ -10,4 +10,7 @@
 
 @interface MyWalletViewController : SCBaseVC
 
+@property (nonatomic, copy) NSString *urlStr;
+
+
 @end

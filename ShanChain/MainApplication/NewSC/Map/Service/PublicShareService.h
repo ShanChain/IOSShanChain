@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "JPUSHService.h"
+#import "JSHAREService.h"
+
+typedef NS_ENUM(NSInteger,HHShareType) {
+    HHShareType_IMAGE = 2,
+    HHShareType_WEBPAGE
+    
+};
+
 @class ShareContentModel;
 
 @interface PublicShareService : NSObject
@@ -16,6 +25,8 @@ typedef void(^JSHARECallHandler)(NSInteger state,NSError *error);
 
 +(void)share:(ShareContentModel *)shareContentModel platform:(NSInteger)platform mediaType:(NSInteger)mediaType handler:(JSHARECallHandler)handler;
 
+// 通用分享
++ (void)commonShareWith:(HHShareType)type callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock;
 
 @end
 

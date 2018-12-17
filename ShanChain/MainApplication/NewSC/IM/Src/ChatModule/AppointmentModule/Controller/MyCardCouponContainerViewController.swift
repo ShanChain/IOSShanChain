@@ -39,9 +39,13 @@ class MyCardCouponContainerViewController: SCBaseVC {
         pageView.didSelectIndexBlock = {(_, index) in
             print("pageView.didSelectIndexBlock", index)
         }
+        self.addNavigationRight(withImageName: "sc_com_icon_ScanCode", withTarget: self, withAction: #selector(_scanCode))
         // Do any additional setup after loading the view.
     }
 
+    func _scanCode(){
+       
+    }
     
     private lazy var titles:[String] = {
         return ["我领取的","我创建的"]

@@ -60,12 +60,13 @@ class HHShareView: UIView {
     private  var shareType:JSHAREMediaType = .JSHAREText
     
     var closure:HHShareViewClosure?
+    var shareModel:CommonShareModel?
     
-    convenience init(uid:String,frame:CGRect,shareImage:UIImage?,type:Int){
+    convenience init(frame:CGRect,shareImage:UIImage?,type:Int,shareModel:CommonShareModel?){
         self.init(frame: frame)
         self.shareImage = shareImage;
         self.shareType = JSHAREMediaType.init(rawValue: type)!
-        
+        self.shareModel = shareModel;
         if self.shareType == .JSHAREImage{
             if let image = self.shareImage{
                 let imageV = UIImageView.init(image: image)
@@ -78,16 +79,32 @@ class HHShareView: UIView {
                 }
             }
         }
-        if self.shareType == .JSHARERedenvelope{
+        if self.shareType == .JSHARELink{
             self.showView.isHidden = true
-            self.redenvelopeImageView.isHidden = false
             self.scaleLb.isHidden = false
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(closeContentViewAction))
              self.redenvelopeImageView.addGestureRecognizer(tap)
+        }else if self.shareType == .JSHARERedenvelope{
+           self.redenvelopeImageView.image = UIImage.loadImage("sc_com_icon_share_ clearance")
+               self.showView.isHidden = true
+            self.redenvelopeImageView.isHidden = true;
+            let imageV:UIImageView = UIImageView.init(image: UIImage.loadImage("sc_com_icon_share_ clearance"))
+            contentView.addSubview(imageV)
+            imageV.snp.makeConstraints { (make) in
+                make.centerX.equalTo(contentView)
+                make.centerY.equalTo(contentView).offset(-30)
+                make.width.equalTo(280)
+                make.height.equalTo(427)
+            }
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(closeContentViewAction))
+            contentView.addGestureRecognizer(tap)
         }else{
             self.showView.isHidden = false
             self.redenvelopeImageView.isHidden = true
         }
+        
+//        let randomNumber:Int = Int(arc4random() % 20) + 75
+        self.scaleLb.text = shareModel?.percentage
       
     }
     
@@ -97,7 +114,6 @@ class HHShareView: UIView {
         self.alphaComponentMake()
         contentView = loadViewFromNib()
         addSubview(contentView)
-        
         for (_,v) in subviews.enumerated(){
             if let btn = v as? UIButton{
                  btn.setEnlargeEdgeWithTop(10, right: 10, bottom: 20, left: 10)
@@ -105,6 +121,8 @@ class HHShareView: UIView {
         }
         
     }
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -114,42 +132,47 @@ class HHShareView: UIView {
         closure?()
     }
     
-    @IBAction func shareWeChatAction(_ sender: UIButton) {
-     
+    func _share(PlatforType:Int){
         let shareEntity = ShareContentModel.init()
-        shareEntity.text = "欢迎使用极光社会化组件 JShare，SDK 包体积小，集成简单，支持主流社交平台、帮助开发者轻松实现社会化功能！";
-        PublicShareService.share(shareEntity, platform: JSHAREPlatform.JSHAREPlatformWechatSession.rawValue, mediaType: JSHAREMediaType.JSHAREText.rawValue) { (state, error) in
+        shareEntity.title = shareModel?.title;
+        shareEntity.thumbnail = shareModel?.thumbnail
+        if self.shareType == .JSHARELink {
+              shareEntity.url = shareModel?.url
+             _shareMediaType(shareEntity: shareEntity, PlatforType: PlatforType, mediaType: JSHAREMediaType.JSHARELink.rawValue)
+        }else  if self.shareType == .JSHARERedenvelope{
+            shareEntity.image = shareModel?.urlImageData
+            _shareMediaType(shareEntity: shareEntity, PlatforType: PlatforType, mediaType: JSHAREMediaType.JSHAREImage.rawValue)
+            
+        }else{
+            shareEntity.text = "欢迎使用极光社会化组件 JShare，SDK 包体积小，集成简单，支持主流社交平台、帮助开发者轻松实现社会化功能！";
+            _shareMediaType(shareEntity: shareEntity, PlatforType: PlatforType, mediaType: JSHAREMediaType.JSHAREText.rawValue)
+        }
+       
+    }
+    
+    func _shareMediaType(shareEntity:ShareContentModel,PlatforType:Int,mediaType:Int){
+        PublicShareService.share(shareEntity, platform:PlatforType, mediaType: mediaType) { (state, error) in
             
         }
-     
-        
+    }
+    
+    
+    @IBAction func shareWeChatAction(_ sender: UIButton) {
+        _share(PlatforType: JSHAREPlatform.JSHAREPlatformWechatSession.rawValue)
     }
     
     @IBAction func shareCircleFriendsAction(_ sender: UIButton) {
-        let shareEntity = ShareContentModel.init()
-        shareEntity.text = "欢迎使用极光社会化组件 JShare，SDK 包体积小，集成简单，支持主流社交平台、帮助开发者轻松实现社会化功能！";
-        PublicShareService.share(shareEntity, platform: JSHAREPlatform.JSHAREPlatformWechatFavourite.rawValue, mediaType: JSHAREMediaType.JSHAREText.rawValue) { (state, error) in
-            
-        }
+        _share(PlatforType: JSHAREPlatform.JSHAREPlatformWechatFavourite.rawValue)
     }
     
     
     @IBAction func shareQQAction(_ sender: UIButton) {
-        let shareEntity = ShareContentModel.init()
-        shareEntity.text = "欢迎使用极光社会化组件 JShare，SDK 包体积小，集成简单，支持主流社交平台、帮助开发者轻松实现社会化功能！";
-        PublicShareService.share(shareEntity, platform: JSHAREPlatform.JSHAREPlatformQQ.rawValue, mediaType: JSHAREMediaType.JSHAREText.rawValue) { (state, error) in
-            
-        }
+         _share(PlatforType: JSHAREPlatform.JSHAREPlatformQQ.rawValue)
     }
     
     
     @IBAction func shareSinaWeiboAction(_ sender: UIButton) {
-        let shareEntity = ShareContentModel.init()
-        shareEntity.text = "欢迎使用极光社会化组件 JShare，SDK 包体积小，集成简单，支持主流社交平台、帮助开发者轻松实现社会化功能！";
-        PublicShareService.share(shareEntity, platform: JSHAREPlatform.JSHAREPlatformSinaWeibo.rawValue, mediaType: JSHAREMediaType.JSHAREText.rawValue) { (state, error) in
-            
-        }
-    
+        _share(PlatforType: JSHAREPlatform.JSHAREPlatformSinaWeibo.rawValue)
     }
     
 }

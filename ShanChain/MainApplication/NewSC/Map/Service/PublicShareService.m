@@ -7,24 +7,32 @@
 //
 
 #import "PublicShareService.h"
-#import "JPUSHService.h"
-#import "JSHAREService.h"
+
 #import "CoordnateInfosModel.h"
 
 @class ShareContentModel;
 
 @implementation PublicShareService
 
+// 通用分享接口
++(void)commonShareWith:(HHShareType)type callBlock:(void (^)(HHBaseModel *, NSError *))callBlock{
+    NSMutableDictionary  *mdic = [NSMutableDictionary dictionaryWithCapacity:0];
+    [mdic setObject:[SCCacheTool shareInstance].getCurrentCharacterId forKey:@"characterId"];
+    NSString *shareContentType;
+    if (type == HHShareType_IMAGE) {
+        shareContentType = @"SHARE_IMAGE";
+    }else{
+        shareContentType = @"SHARE_WEBPAGE";
+    }
+    [mdic setObject:shareContentType forKey:@"type"];
+    [[SCNetwork shareInstance]v1_postWithUrl:CommonShare_URL params:mdic.copy showLoading:YES callBlock:callBlock];
+}
+
 
 +(void)share:(ShareContentModel *)shareContentModel platform:(NSInteger)platform mediaType:(NSInteger)mediaType handler:(JSHARECallHandler)handler{
     JSHAREMessage *msg = [JSHAREMessage message];
-    
-    if (mediaType == JSHAREText) {
-        msg.text = shareContentModel.text;
-    }else{
-        msg.url = @"https://docs.jiguang.cn/jshare/client/iOS/ios_api/";
-    }
-    
+    msg.title = shareContentModel.title;
+    msg.thumbnail = shareContentModel.thumbnail;
     switch (mediaType) {
         case JSHAREText:
              msg.text = shareContentModel.text;

@@ -99,7 +99,7 @@
         imageNamed1 = @"guide_icon_2";
     }
     view2.frame = CGRectMake(self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
-    UIImageView *two = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_icon_2"]];
+    UIImageView *two = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageNamed1]];
     two.frame  = CGRectMake(0, 0, view2.width, view2.height);
     two.contentMode = UIViewContentModeScaleToFill;
     [view2 addSubview:two];
@@ -140,7 +140,7 @@
     }
     
     view3.frame = CGRectMake(2 * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
-    UIImageView *three = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_icon_3"]];
+    UIImageView *three = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageNamed2]];
     three.contentMode = UIViewContentModeScaleToFill;
     three.frame  = CGRectMake(0, 0, view3.width, view3.height);
     [view3 addSubview:three];

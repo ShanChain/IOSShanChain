@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 private let H_cell = "AppointmentListCell"
 
 class MyCardCouponListViewController: SCBaseVC {
@@ -38,8 +39,10 @@ class MyCardCouponListViewController: SCBaseVC {
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
+
         
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

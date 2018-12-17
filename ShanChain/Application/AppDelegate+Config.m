@@ -18,7 +18,9 @@
 #import "UMessage.h"
 #import "JPUSHService.h"
 #import "JSHAREService.h"
-
+#import "ShanChain-Swift.h"
+#import "JPushUserInfo.h"
+#import "MyWalletViewController.h"
 
 @implementation AppDelegate (Config)
 
@@ -205,16 +207,47 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
     }
 #endif
-    
     //添加监听在线推送消息
     //  [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 
 
 - (void)showAlerWithUserInfo:(NSDictionary*)userInfo andSEL:(SEL)sel{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:userInfo.mj_JSONString message:NSStringFromSelector(sel) delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:userInfo.mj_JSONString message:NSStringFromSelector(sel) delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+//    [alert show];
     
+    // receiveTaskList 我的任务列表
+    // publishTaskList 我发布的
+    // webView
+    if (![[SCAppManager shareInstance] isLogin]) {
+        [[SCAppManager shareInstance]logout];
+    }else{
+        JPushUserInfo *j_userInfo = [JPushUserInfo yy_modelWithDictionary:userInfo];
+        UINavigationController *nav  = (UINavigationController*)self.window.rootViewController;
+        if (nav.visibleViewController.navigationController.navigationBarHidden) {
+            nav.visibleViewController.navigationController.navigationBarHidden = NO;
+        }
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([j_userInfo.sysPage isEqualToString:@"webView"]) {
+                if (!NULLString(j_userInfo.url)) {
+                    MyWalletViewController *urlVC = [[MyWalletViewController alloc]init];
+                    urlVC.urlStr = j_userInfo.url;
+                    [nav.visibleViewController.navigationController pushViewController:urlVC animated:YES];
+                }
+            }else{
+                TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
+                taskVC._oc_scrollToIndex = 1;
+//                if ([j_userInfo.sysPage isEqualToString:@"publishTaskList"]) {
+//                    taskVC._oc_statusCode = 3;
+//                }
+             
+                [nav.visibleViewController.navigationController pushViewController:taskVC animated:YES];
+            }
+           
+        });
+    }
+
 }
 
 @end

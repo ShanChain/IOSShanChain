@@ -28,6 +28,7 @@ class AppointmentCreateCardViewController: UITableViewController {
     
     
     private var timestamp = Date().timeStamp
+    fileprivate var photoUrl:String? //     logohash
     
     // 点击示例
     @IBAction func exampleAction(_ sender: UIButton) {
@@ -40,10 +41,15 @@ class AppointmentCreateCardViewController: UITableViewController {
     }
     
     
+    func getParameter() -> Dictionary<String, Any>{
+        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":descriptionTextView.text!,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":cardFid.text!,"roomId":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser()]
+    }
+    
     @IBAction func createAction(_ sender: UIButton) {
         if _verification() {
-            
-            
+            SCNetwork.shareInstance().v1_post(withUrl: CreateCoupons_URL, params:self.getParameter(), showLoading: true) { (baseModel, error) in
+                
+            }
         }
     }
     
@@ -57,12 +63,16 @@ class AppointmentCreateCardViewController: UITableViewController {
         let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddDays(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMDHm) { [weak self] (date) in
             self?.failureTimeFid.text = date.getString(format: "YYYY-MM-dd HH:mm")
             self?.view.endEditing(true)
-            self?.timestamp = String(Int(date.timeIntervalSince1970*1000))
+            self?.timestamp = String(Int(date.timeIntervalSince1970))
         }
         datePicker.show()
     }
     
     func _verification() -> Bool {
+        if (self.photoUrl?.isEmpty)!{
+            HHTool.showError("logo不能为空")
+            return false
+        }
         if (self.nameFid.text?.isEmpty)!{
             HHTool.showError("请输入名称")
             return false
@@ -118,73 +128,6 @@ class AppointmentCreateCardViewController: UITableViewController {
         }
         return  isClose
     }
-
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
 }
 
@@ -192,7 +135,17 @@ class AppointmentCreateCardViewController: UITableViewController {
 extension AppointmentCreateCardViewController:DUX_UploadUserIconDelegate{
     
     func uploadImageToServer(with image: UIImage!, tag: Int) {
-        icon.image = image
+        if let image = image{
+            image.mc_reset(to: CGSize(width: 80, height: 80))
+            image.cutCircle()
+            SCAliyunUploadMananger.uploadImage(image, withCompressionQuality: 0.5, withCallBack: { url in
+                self.photoUrl = url
+                self.icon.image = image
+            }, withErrorCallBack: { error in
+                HHTool.showError(error?.localizedDescription)
+            })
+        }
+        
     }
     
 }

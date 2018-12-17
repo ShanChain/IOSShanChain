@@ -30,7 +30,7 @@ class AppointmentListViewController: SCBaseVC {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
-        self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title: "我的", tintColor: .black)
+        self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title: "  我的", tintColor: .black)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         headView.backgroundColor = SC_ThemeBackgroundViewColor
         navigationController?.navigationBar.barTintColor = kNavBlueColor

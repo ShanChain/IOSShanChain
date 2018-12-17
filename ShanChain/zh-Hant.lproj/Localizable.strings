@@ -26,12 +26,11 @@
 
 "sc_MyWallet" = "我的钱包";
 "sc_MyMessage" = "我的消息";
-"sc_MyTask" = "我的任务";
+"sc_MyTask" = "我的社区帮";
 "sc_SignOut" = "退出登录";
 
-"sc_RewardTask" = "悬赏任务";
-"sc_MyTask" = "我的任务";
-"sc_Tasklist" = "任务列表";
+"sc_RewardTask" = "社区帮";
+"sc_Tasklist" = "帮助列表";
 
 "sc_Alltask" = "全部任务";
 "sc_MyPost" = "我发布的";

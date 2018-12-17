@@ -38,7 +38,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             // 不为空时执行
             self.draft = draft // 获取编辑未发出的草稿
         }
-       
+        
         SCCacheTool.shareInstance().chatRoomId = self.currentChatRoomID
     }
     
@@ -50,7 +50,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         super.viewDidLoad()
         _init()
         maskView = UIView.init(frame:chatView.frame)
-//        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
+        //        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
         let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 60, y: 64, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: ["sc_com_icon_item.1","sc_com_icon_item.2"])
         suspendBallBtn = suspendBall
         suspendBallBtn?.isHidden = true
@@ -61,7 +61,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         view.bringSubview(toFront: maskView)
         view.bringSubview(toFront: taskButton)
         view.bringSubview(toFront: joinCahtView)
-
+        
         view.addSubview(suspendBallBtn!)// 添加悬浮按钮
         view.bringSubview(toFront: suspendBallBtn!)
         
@@ -73,16 +73,16 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         _configureDraggebleCircularMenuButton()
     }
     
-//    func hiddenMaskView(){
-//        maskView.isHidden = true
-//    }
+    //    func hiddenMaskView(){
+    //        maskView.isHidden = true
+    //    }
     
     let colourArray: [UIColor] = [.red , .blue , .green]
-     func _configureDraggebleCircularMenuButton(){
+    func _configureDraggebleCircularMenuButton(){
         
         configureDraggebleCircularMenuButton(button: taskButton, numberOfMenuItems: 3, menuRedius: 300, postion: .centerTop)
         taskButton.menuButtonSize = .medium
-       // taskButton.sholudMenuButtonAnimate = false
+        // taskButton.sholudMenuButtonAnimate = false
         taskButton.bottomLayouSafeBorder = toolbar.intrinsicContentSize.height
     }
     
@@ -110,43 +110,68 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         toolbar.delegate = self
         toolbar.text = draft
     }
-    fileprivate let buttonTitles = ["查看任务","发布任务"]
-
+        
     func willShowForMenuButton(){
         maskView.isHidden = false
     }
     
     func didDisappearForMenuButton(){
-         maskView.isHidden = true
+        maskView.isHidden = true
+    }
+    
+    
+    // 是否是超级用户
+    func _isSuper(_ complete: @escaping (_ isSuper:Bool) -> ()) {
+        SCNetwork.shareInstance().getWithUrl(IsSuper_URL, parameters:[:], success: { (result) in
+            if let  result = result as? Dictionary<String, Any>{
+                if (result["data"] as? Bool) == true{
+                    complete (true)
+                }else{
+                    complete (false)
+                }
+            }else{
+                complete (false)
+            }
+            
+        }) { (error) in
+            complete (false)
+        }
     }
     
     @IBAction func joinAction(_ sender: Any) {
         
-        self.isJoinChatRoom = true
+        HHTool.showChrysanthemum()
+        _isSuper { (isSuper) in
+            if isSuper == true{
+                self.isJoinChatRoom = true
+                HHTool.dismiss()
+            }else{
+                SCNetwork.shareInstance().getWithUrl(COORDINATE_URL, parameters:["latitude":String(SCCacheTool.shareInstance().pt.latitude),"longitude":String(SCCacheTool.shareInstance().pt.longitude)], success: { (result) in
+                    HHTool.dismiss()
+                    let dic = result as! Dictionary<String, Any>
+                    let data = dic["data"] as? Dictionary<String, Any>
+                    if data != nil && (data?.values.count)! > 0{
+                        let roomId:String = data!["roomId"] as! String
+                        if roomId == self.currentChatRoomID{
+                            self.isJoinChatRoom = true
+                            if SCCacheTool.shareInstance().status ==  "1" {
+                                self.taskButton.isHidden = false
+                            }
+                        }else{
+                            self.hrShowAlert(withTitle: "温馨提示", message: "您未处于该元社区的地理位置，还不能加入聊天喔~")
+                        }
+                    }
+                    
+                }) { (error) in
+                    HHTool.dismiss()
+                    HHTool.showError(error?.localizedDescription)
+                }
+            }
+        }
+        
         if SCCacheTool.shareInstance().status ==  "1" {
             self.taskButton.isHidden = false
         }
-//        HHTool.showChrysanthemum()
-//        SCNetwork.shareInstance().getWithUrl(COORDINATE_URL, parameters:["latitude":String(SCCacheTool.shareInstance().pt.latitude),"longitude":String(SCCacheTool.shareInstance().pt.longitude)], success: { (result) in
-//            HHTool.dismiss()
-//            let dic = result as! Dictionary<String, Any>
-//            let data = dic["data"] as? Dictionary<String, Any>
-//            if data != nil && (data?.values.count)! > 0{
-//                let roomId:String = data!["roomId"] as! String
-//                if roomId == self.currentChatRoomID{
-//                    self.isJoinChatRoom = true
-//                    if SCCacheTool.shareInstance().status ==  "1" {
-//                       self.taskButton.isHidden = false
-//                    }
-//                }else{
-//                    self.hrShowAlert(withTitle: "温馨提示", message: "您未处于该元社区的地理位置，还不能加入聊天喔~")
-//                }
-//            }
-//
-//        }) { (error) in
-//            HHTool.dismiss()
-//            HHTool.showError(error?.localizedDescription)
-//        }
         
     }
     
@@ -198,17 +223,17 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         // 更新草稿内容
         JCDraft.update(text: toolbar.text, conversation: conversation)
         JMessage.remove(self, with: conversation)// 移除监听(delegate)
-//        if conversation.conversationType == .chatRoom{
-//            let chatRoom = conversation.target as? JMSGChatRoom
-//            JMSGChatRoom.leaveChatRoom(withRoomId: (chatRoom?.roomID)!, completionHandler: nil)
-//        }
+        //        if conversation.conversationType == .chatRoom{
+        //            let chatRoom = conversation.target as? JMSGChatRoom
+        //            JMSGChatRoom.leaveChatRoom(withRoomId: (chatRoom?.roomID)!, completionHandler: nil)
+        //        }
     }
     
     deinit {
         //析构函数 类似OC的delloc
         NotificationCenter.default.removeObserver(self)
         navTitleView.removeFromSuperview()
-       
+        
     }
     
     private var draft: String?
@@ -304,9 +329,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             SAIToolboxItem("page:pic", "照片", UIImage.loadImage("chat_tool_pic")),
             SAIToolboxItem("page:camera", "拍照", UIImage.loadImage("chat_tool_camera")),
             SAIToolboxItem("page:video_s", "小视频", UIImage.loadImage("chat_tool_video_short")),
-//            SAIToolboxItem("page:location", "位置", UIImage.loadImage("chat_tool_location")),
-//            SAIToolboxItem("page:businessCard", "名片", UIImage.loadImage("chat_tool_businessCard")),
-            ]
+            //            SAIToolboxItem("page:location", "位置", UIImage.loadImage("chat_tool_location")),
+            //            SAIToolboxItem("page:businessCard", "名片", UIImage.loadImage("chat_tool_businessCard")),
+        ]
     }()
     
     fileprivate var myAvator: UIImage?
@@ -328,7 +353,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }()
     
     private func _init() {
-      
+        
         myAvator = UIImage.getMyAvator()
         //  _updateTitle()
         view.backgroundColor = .white
@@ -348,7 +373,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_closeChatRoom), name: NSNotification.Name.jmsgNetworkDidClose, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
-         enterChatBtn.setTitle(NSLocalizedString("sc_Join", comment: "字符串"), for: .normal)
+        enterChatBtn.setTitle(NSLocalizedString("sc_Join", comment: "字符串"), for: .normal)
         // 抽屉
         self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
             if direction == CWDrawerTransitionDirection.fromLeft{
@@ -366,16 +391,16 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                 self.conversation = conversation
             }
         })
-//        self.hrShowAlert(withTitle: nil, message: "当前广场连接已被断开", buttonsTitles: ["确认"]) { (action, index) in
-//            if index == 0{
-//
-////                self.navigationController?.popViewController(animated: true)
-////                if let chatRoom = self.conversation.target as? JMSGChatRoom{
-////                    JMSGChatRoom.leaveChatRoom(withRoomId: chatRoom.roomID, completionHandler: nil)
-////                }
-//
-//            }
-//        }
+        //        self.hrShowAlert(withTitle: nil, message: "当前广场连接已被断开", buttonsTitles: ["确认"]) { (action, index) in
+        //            if index == 0{
+        //
+        ////                self.navigationController?.popViewController(animated: true)
+        ////                if let chatRoom = self.conversation.target as? JMSGChatRoom{
+        ////                    JMSGChatRoom.leaveChatRoom(withRoomId: chatRoom.roomID, completionHandler: nil)
+        ////                }
+        //
+        //            }
+        //        }
     }
     
     func _updateFileMessage(_ notification: Notification) {
@@ -436,7 +461,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 46))
         navTitleView.positionBtn .setTitle(self.navTitle, for: .normal)
         if let chatRoom = conversation.target as? JMSGChatRoom{
-             navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)人", for: .normal)
+            navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)人", for: .normal)
         }
         
         // 查看聊天室成员
@@ -445,11 +470,11 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                 let vc = HHNumberForPeopleViewController.init(count: chatRoom.totalMemberCount, roomId: (self?.currentChatRoomID!)!)
                 self?.navigationController?.pushViewController(vc, animated: true)
             }
-           
+            
         }
         navTitleView.shareRoomClosure = { [weak self] () in
             self?.toolbar.isHidden = true
-            let shareView:HHShareView = HHShareView.init(uid: "11", frame: (self?.view.frame)!, shareImage:SCCacheTool.shareInstance().takeImage, type: 2)
+            let shareView:HHShareView = HHShareView.init(frame: (self?.view.frame)!, shareImage: SCCacheTool.shareInstance().takeImage, type: 2, shareModel: nil)
             self?.view.addSubview(shareView)
             
             shareView.closure = {[weak self] () in
@@ -487,7 +512,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
     }
     
-  
+    
     
     fileprivate func _loadMessage(_ page: Int) {
         // 分页获取消息
@@ -667,7 +692,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         let msg = JCMessage(content: videoContent)
         send(msg, message)
     }
- 
+    
     // 发送视频
     func send(videoData: Data,videoUrl :URL) {
         let videoContent = JCMessageVideoContent()
@@ -796,25 +821,25 @@ extension HHChatRoomViewController: JMessageDelegate {
     func _handleMessage(message:JMSGMessage){
         let message =  _parseMessage(message)
         // TODO: 这个判断是sdk bug导致的，暂时只能这么改
-//        if self.messages.contains(where: { (m) -> Bool in
-//            return m.msgId == message.msgId
-//        }) {
-//            // 聊天室消息本地不会存储
-//            let indexs = chatView.indexPathsForVisibleItems
-//            for index in indexs {
-//                var m = self.messages[index.row]
-//                if !m.msgId.isEmpty {
-//                    do{
-//                        m =   self._parseMessage((conversation.message(withMessageId: m.msgId))!, false)
-//                        chatView.update(m, at: index.row)
-//                    }catch{
-//                        printLog(error)
-//                    }
-//
-//                }
-//            }
-//            return
-//        }
+        //        if self.messages.contains(where: { (m) -> Bool in
+        //            return m.msgId == message.msgId
+        //        }) {
+        //            // 聊天室消息本地不会存储
+        //            let indexs = chatView.indexPathsForVisibleItems
+        //            for index in indexs {
+        //                var m = self.messages[index.row]
+        //                if !m.msgId.isEmpty {
+        //                    do{
+        //                        m =   self._parseMessage((conversation.message(withMessageId: m.msgId))!, false)
+        //                        chatView.update(m, at: index.row)
+        //                    }catch{
+        //                        printLog(error)
+        //                    }
+        //
+        //                }
+        //            }
+        //            return
+        //        }
         
         self.messages.append(message)
         chatView.append(message)
@@ -1056,17 +1081,17 @@ extension HHChatRoomViewController: YHPhotoPickerViewControllerDelegate, UINavig
 extension HHChatRoomViewController: JCMessageDelegate {
     
     // 领取任务
-//    func message(message: JCMessageType, receiveTask taskID: String) {
-//        let rect = CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight))
-//        let recieveView:RecieveTaskView = RecieveTaskView(frame: rect)
-//        recieveView.closure = {[weak self] (conversation) in
-//            self?.toolbar.isHidden = false
-//        }
-//        self.toolbar.isHidden = true
-//        self.view.addSubview(recieveView)
-//    }
+    //    func message(message: JCMessageType, receiveTask taskID: String) {
+    //        let rect = CGRect(x: 0, y: UIDevice.current.navBarHeight, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT) - Int(UIDevice.current.navBarHeight))
+    //        let recieveView:RecieveTaskView = RecieveTaskView(frame: rect)
+    //        recieveView.closure = {[weak self] (conversation) in
+    //            self?.toolbar.isHidden = false
+    //        }
+    //        self.toolbar.isHidden = true
+    //        self.view.addSubview(recieveView)
+    //    }
     
-   
+    
     
     func clickTaskMessage(message: JCMessageType, tuple: [String : AnyObject]?) {
         let detailsVC = TaskDetailsViewController(taskID: tuple![CUSTOM_TASKID] as! String, content: tuple![CUSTOM_CONTENT] as! String, reward: tuple![CUSTOM_REWARD] as! String, time: tuple![CUSTOM_COMPLETETIME] as! String)
@@ -1096,7 +1121,7 @@ extension HHChatRoomViewController: JCMessageDelegate {
         }
     }
     
-     // 点击文件
+    // 点击文件
     func message(message: JCMessageType, fileData data: Data?, fileName: String?, fileType: String?) {
         if data == nil {
             let vc = JCFileDownloadViewController()
@@ -1290,7 +1315,7 @@ extension HHChatRoomViewController: UIAlertViewDelegate {
                 }
                 messages.append(currentMessage as! JCMessage)
                 chatView.append(currentMessage)
-                conversation.send(msg!, optionalContent: JMSGOptionalContent.ex.default)
+                //                conversation.send(msg!, optionalContent: JMSGOptionalContent.ex.default)
                 chatView.scrollToLast(animated: true)
             }
         default:
@@ -1394,21 +1419,21 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
     
     func inputBar(_ inputBar: SAIInputBar, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let currentIndex = range.location
-       return updateRemids(inputBar, string, range, currentIndex)
-//        if string == "@" {
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
-//                let vc = JCRemindListViewController()
-//                vc.finish = { (user, isAtAll, length) in
-//                    self.handleAt(inputBar, range, user, isAtAll, length)
-//                }
-//                vc.chatRoom = self.conversation.target as? JMSGChatRoom
-//                let nav = JCNavigationController(rootViewController: vc)
-//                self.present(nav, animated: true, completion: {})
-//            }
-//        } else {
-//            return updateRemids(inputBar, string, range, currentIndex)
-//        }
-//        return true
+        return updateRemids(inputBar, string, range, currentIndex)
+        //        if string == "@" {
+        //            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+        //                let vc = JCRemindListViewController()
+        //                vc.finish = { (user, isAtAll, length) in
+        //                    self.handleAt(inputBar, range, user, isAtAll, length)
+        //                }
+        //                vc.chatRoom = self.conversation.target as? JMSGChatRoom
+        //                let nav = JCNavigationController(rootViewController: vc)
+        //                self.present(nav, animated: true, completion: {})
+        //            }
+        //        } else {
+        //            return updateRemids(inputBar, string, range, currentIndex)
+        //        }
+        //        return true
     }
     
     func handleAt(_ inputBar: SAIInputBar, _ range: NSRange, _ user: JMSGUser?, _ isAtAll: Bool, _ length: Int) {

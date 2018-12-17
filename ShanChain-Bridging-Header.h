@@ -60,5 +60,9 @@
 #import "DUX_UploadUserIcon.h"
 #import "SCReportController.h"  //举报
 #import "MyWalletViewController.h" //钱包
+#import "CommonShareModel.h"
+#import "SCAliyunUploadMananger.h"
+//#import "QQLBXScanViewController.h"
+
 
 #endif /* ShanChain_Bridging_Header_h */

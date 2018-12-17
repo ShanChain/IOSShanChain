@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) XMWebView *webView;
 
-@property (nonatomic, copy) NSString *urlStr;
+
 
 @end
 
@@ -42,7 +42,9 @@
         make.edges.equalTo(self.view);
     }];
     //此处链接要写全
-    self.urlStr = WalletURL;
+    if (NULLString(self.urlStr)) {
+        self.urlStr = WalletURL;
+    }
     NSURL *url = [NSURL URLWithString:self.urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];

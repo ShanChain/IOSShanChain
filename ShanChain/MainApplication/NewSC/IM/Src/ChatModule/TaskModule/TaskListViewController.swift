@@ -49,7 +49,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
     fileprivate var type:TaskListType?
     fileprivate var dataList:[TaskListModel] = []
     let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
-    let chatRoomId:String = SCCacheTool.shareInstance().chatRoomId
+    let chatRoomId:String? = SCCacheTool.shareInstance().chatRoomId
     let titles:Dictionary<String,String>
     var statusCode:StatusCode = StatusCode.squareAll
     
@@ -177,7 +177,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
    fileprivate func _requstPrameter(_ isLoad:Bool) -> Dictionary<String, Any> {
         let pageStr = isLoad ? "\(page+1)":"\(page)"
     if statusCode == .squareAll || statusCode == .squareUnaccalimed{
-        return ["characterId":characterId,"page":pageStr,"size":size,"roomId":chatRoomId]
+        return ["characterId":characterId,"page":pageStr,"size":size,"roomId":chatRoomId ?? ""]
     }
     return  ["characterId":characterId,"page":pageStr,"size":size]
  }

@@ -8,6 +8,17 @@
 
 import Foundation
 
+
+/*
+  卡劵相关
+ */
+
+public let  CreateCoupons_URL = "/wallet/api/coupons/vendor/create" // 创建卡劵
+
+
+
+
+public let IsSuper_URL  = "/web/api/sys/isSuper" //是否是超级用户
 public let TASK_ADD_URL = "/v1/task/add" //添加任务
 public let TASKCOMMENT_URL  = "/v1/taskComment/query" //查询任务评论列表
 public let TASKCOMMENT_ADD_URL  = "/v1/taskComment/add" //添加任务评论

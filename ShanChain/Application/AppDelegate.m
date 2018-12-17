@@ -184,7 +184,7 @@
     [param setObject:XcodeAppVersion forKey:@"version"];
     [SCNetwork.shareInstance postWithUrl:COMMONCHECKVERSION parameters:param success:^(id responseObject) {
         NSDictionary *dictionary = responseObject[@"data"];
-        if (dictionary != [NSNull null]) {
+        if (dictionary) {
             NSString *version = dictionary[@"version"];
             [SCCacheTool shareInstance].status = dictionary[@"status"];
             if (version && [VersionUtils compareVersion:XcodeAppVersion withServerVersion:version]) {
@@ -206,14 +206,14 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (alertView.firstOtherButtonIndex != 0) {
-        [alertView dismissWithClickedButtonIndex:buttonIndex animated:true];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新版本有较大改进，请更新" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-        [alert show];
-    }
-}
+//- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+//    if (alertView.firstOtherButtonIndex != 0) {
+//        [alertView dismissWithClickedButtonIndex:buttonIndex animated:true];
+//    } else {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新版本有较大改进，请更新" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+//        [alert show];
+//    }
+//}
 
 
 
@@ -382,7 +382,7 @@
         [JPUSHService handleRemoteNotification:userInfo];
     }
     
-     [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+    // [self showAlerWithUserInfo:userInfo andSEL:_cmd];
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
 }
 

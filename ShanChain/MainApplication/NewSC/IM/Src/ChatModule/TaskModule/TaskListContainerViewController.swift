@@ -29,10 +29,21 @@ class TaskListContainerViewController: SCBaseVC {
             }
         }
     }
+    
+    
+    public var _oc_statusCode = 0{
+        willSet{
+            statusCode = StatusCode(rawValue: newValue)!
+        }
+    }
+    
+    var statusCode:StatusCode = StatusCode.squareAll
+    
     public var _scrollToIndex:TaskListType = .my
     private lazy var viewControllers: [UIViewController] = {
         let listVc = TaskListViewController(type: TaskListType.all)
         let myVc = TaskListViewController(type: TaskListType.my)
+        myVc.statusCode = self.statusCode
         return [listVc, myVc]
     }()
    

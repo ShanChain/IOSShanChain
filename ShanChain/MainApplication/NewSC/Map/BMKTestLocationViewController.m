@@ -15,6 +15,7 @@
 #import "SCLoginController.h"
 #import "SCBaseNavigationController.h"
 #import "NewYearActivitiesView.h"
+#import "CommonShareModel.h"
 
 
 @interface BMKTestLocationViewController ()< UITableViewDelegate,CLLocationManagerDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,BMKMapViewDelegate>
@@ -272,9 +273,14 @@
 // 足迹
 - (IBAction)footprintPressed:(id)sender {
     
-    // 活动分享
-        HHShareView  *shareView = [[HHShareView alloc]initWithUid:@"11" frame:self.view.frame shareImage:nil type:4];
+    
+    [PublicShareService commonShareWith:HHShareType_IMAGE callBlock:^(HHBaseModel *baseModel, NSError *error) {
+        CommonShareModel  *shareModel = [CommonShareModel yy_modelWithDictionary:baseModel.data];
+        // 活动分享
+        HHShareView  *shareView = [[HHShareView alloc]initWithFrame:self.view.frame shareImage:nil type:4 shareModel:shareModel];
         [self.view addSubview:shareView];
+    }];
+   
 //    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:0];
 //    [self pushPage:footprintVC
 //          Animated:YES];

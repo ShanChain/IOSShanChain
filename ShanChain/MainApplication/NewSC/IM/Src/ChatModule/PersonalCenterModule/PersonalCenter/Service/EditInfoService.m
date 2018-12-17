@@ -31,10 +31,10 @@
                  [[SCCacheTool shareInstance] cacheCharacterInfo:baseModel.data[@"characterInfo"] withUserId:[SCCacheTool shareInstance].getCurrentUser];
                 [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateUserInfo object:nil];
                  [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateAvatarSuccess object:nil];
-                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:params[@"headImg"]]];
-                NSData  *data = [NSKeyedArchiver archivedDataWithRootObject:imageData];
-                [[NSUserDefaults standardUserDefaults]setObject:data forKey:kLastUserAvator];
-                [[NSUserDefaults standardUserDefaults]synchronize];
+//                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:params[@"headImg"]]];
+//                NSData  *data = [NSKeyedArchiver archivedDataWithRootObject:imageData];
+//                [[NSUserDefaults standardUserDefaults]setObject:data forKey:kLastUserAvator];
+//                [[NSUserDefaults standardUserDefaults]synchronize];
    
             }
             BLOCK_EXEC(callBlock,YES);

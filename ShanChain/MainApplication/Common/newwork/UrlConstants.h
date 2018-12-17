@@ -88,10 +88,10 @@
 #define  Feedback_URL @"/v1/feedback/user"  //意见反馈
 
 
-#define  GETCOORDINATE  @"/v1/lbs/coordinate/infos" // 获取当前位置及周边聊天室信息
+#define  GETCOORDINATE   @"/v1/lbs/coordinate/infos" // 获取当前位置及周边聊天室信息
 #define  COORDINATEINFO  @"/v1/lbs/coordinate/info" // 获获取当前位置聊天室信息
 
-
+#define  CommonShare_URL @"/v1/2.0/share/commonShare" //通用分享
 
 #pragma mark - 登录注册
 //创建用户
