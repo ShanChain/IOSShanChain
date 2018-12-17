@@ -13,7 +13,7 @@
 #define Prtocol @"http://"
 
 
-#define PN_ENVIRONMENT 2   // 3 生产  2 测试
+#define PN_ENVIRONMENT 0   // 3 生产  2 测试
 
 
 #if PN_ENVIRONMENT == 0

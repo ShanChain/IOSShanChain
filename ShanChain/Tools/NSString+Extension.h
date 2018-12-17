@@ -20,6 +20,11 @@
 + (BOOL)isBlankString:(NSString *)str;
 
 
++ (BOOL)isInputRuleNotBlank:(NSString *)str;
++ (BOOL)isInputRuleAndBlank:(NSString *)str;
+// 只能是大写
+- (BOOL)onlyInputACapital;
+
 #pragma mark - 是否是有效邮箱
 - (BOOL)isValidEmail;
 

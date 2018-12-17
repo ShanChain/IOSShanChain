@@ -360,5 +360,12 @@ static NSDateFormatter* DateFormat(){
 //    return _status;
 }
 
+-(NSString *)chatRoomId{
+    if (!_chatRoomId) {
+        return @"15237570";
+    }
+    return _chatRoomId;
+}
+
 @end
     

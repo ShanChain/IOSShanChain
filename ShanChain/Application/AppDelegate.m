@@ -66,7 +66,8 @@
     if ([[SCAppManager shareInstance] isLogin]) {
 //        rootVc = [[SCTabbarController alloc]init];
         if ([[NSUserDefaults standardUserDefaults]objectForKey:kJCCurrentUserName]) {
-            BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+//            BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+            AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
             rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
         }
     

@@ -39,12 +39,14 @@ class MyCardCouponContainerViewController: SCBaseVC {
         pageView.didSelectIndexBlock = {(_, index) in
             print("pageView.didSelectIndexBlock", index)
         }
-        self.addNavigationRight(withImageName: "sc_com_icon_ScanCode", withTarget: self, withAction: #selector(_scanCode))
+//        self.addNavigationRight(withImageName: "sc_com_icon_ScanCode", withTarget: self, withAction: #selector(_scanCode))
+        self.addRightBarButtonItem(withTarget: self, sel: #selector(_scanCode), image: UIImage.loadDefaultImage("sc_com_icon_ScanCode"), selectedImage: UIImage.loadDefaultImage("sc_com_icon_ScanCode"))
         // Do any additional setup after loading the view.
     }
-
+    
+    // 扫码二维码
     func _scanCode(){
-       
+       ScanCodeService.newInstancetype(withPush: self)
     }
     
     private lazy var titles:[String] = {

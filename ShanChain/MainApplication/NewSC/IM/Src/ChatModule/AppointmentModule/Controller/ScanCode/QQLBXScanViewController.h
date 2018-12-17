@@ -33,7 +33,4 @@
 @property (nonatomic, strong) UIButton *btnMyQR;
 
 
-+(void)newInstancetypeWithPushVC:(SCBaseVC*)pushVC;
-
-
 @end

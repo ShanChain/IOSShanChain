@@ -27,11 +27,14 @@ class AppointmentCreateCardViewController: UITableViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     
+    @IBOutlet weak var createBtn: UIButton!
+    
     private var timestamp = Date().timeStamp
-    fileprivate var photoUrl:String? //     logohash
+    open var photoUrl:String? //     logohash
     
     // 点击示例
     @IBAction func exampleAction(_ sender: UIButton) {
+        
     }
     
     // 充值
@@ -47,9 +50,13 @@ class AppointmentCreateCardViewController: UITableViewController {
     
     @IBAction func createAction(_ sender: UIButton) {
         if _verification() {
-            SCNetwork.shareInstance().v1_post(withUrl: CreateCoupons_URL, params:self.getParameter(), showLoading: true) { (baseModel, error) in
-                
+            SCNetwork.shareInstance().v1_post(withUrl: CreateCoupons_URL, params:getParameter(), showLoading: true) { (baseModel, error) in
+                if error == nil{
+                   HHTool.showSucess("创建成功")
+                  self.navigationController?.popViewController(animated: true)
+                }
             }
+        
         }
     }
     
@@ -69,7 +76,7 @@ class AppointmentCreateCardViewController: UITableViewController {
     }
     
     func _verification() -> Bool {
-        if (self.photoUrl?.isEmpty)!{
+        if (self.photoUrl == nil){
             HHTool.showError("logo不能为空")
             return false
         }
@@ -108,16 +115,22 @@ class AppointmentCreateCardViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "创建马甲劵"
+        CouponVerificationService.verificationCouponNameFid(nameFid)
+        CouponVerificationService.verificationCardFid(cardFid)
+       // CouponVerificationService.verificationIsCanCreate(self)
+        let headImg = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
+        icon._sd_setImage(withURLString: headImg)
+        self.photoUrl = headImg
         descriptionTextView.placeholder = "请具体描述该劵的使用说明，如联系电话、地址、金额限制等"
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        button.setImage(UIImage(named: "sc_com_icon_back"), for: .normal)
+        button.addTarget(self, action: #selector(_back), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
     }
-
+    func _back(){
+        navigationController?.popViewController(animated: true)
+    }
+    
     override func navigationShouldPopOnBackButton() -> Bool {
         var  isClose:Bool = false
         self.hrShowAlert(withTitle: nil, message: "放弃创建马甲吗？", buttonsTitles: ["返回","确认"]) { (_, index) in

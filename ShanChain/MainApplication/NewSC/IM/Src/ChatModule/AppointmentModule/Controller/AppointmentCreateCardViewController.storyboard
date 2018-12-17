@@ -126,10 +126,17 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代号为三个大写英文字母" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrb-Yd-Ufi">
+                                                    <rect key="frame" x="100" y="39" width="124" height="13.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="t6b-F1-6FZ" firstAttribute="bottom" secondItem="YSV-z3-rq1" secondAttribute="bottom" id="46Y-Gr-LsJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="YSV-z3-rq1" secondAttribute="trailing" constant="150" id="AQ8-R4-Q71"/>
+                                                <constraint firstItem="lrb-Yd-Ufi" firstAttribute="top" secondItem="d8I-F8-mif" secondAttribute="bottom" constant="4" id="BUQ-Lb-Wee"/>
                                                 <constraint firstItem="17d-Ps-QvF" firstAttribute="centerY" secondItem="hhG-Gx-4Yf" secondAttribute="centerY" id="CrN-M8-yMm"/>
                                                 <constraint firstItem="d8I-F8-mif" firstAttribute="centerY" secondItem="YSV-z3-rq1" secondAttribute="centerY" id="SMV-f6-0T5"/>
                                                 <constraint firstItem="17d-Ps-QvF" firstAttribute="leading" secondItem="hhG-Gx-4Yf" secondAttribute="leading" constant="50" id="Ujh-IJ-Hm9"/>
@@ -138,6 +145,7 @@
                                                 <constraint firstItem="t6b-F1-6FZ" firstAttribute="leading" secondItem="YSV-z3-rq1" secondAttribute="leading" id="aqh-uO-2id"/>
                                                 <constraint firstItem="YSV-z3-rq1" firstAttribute="bottom" secondItem="17d-Ps-QvF" secondAttribute="bottom" id="dtb-3e-ogI"/>
                                                 <constraint firstItem="d8I-F8-mif" firstAttribute="leading" secondItem="YSV-z3-rq1" secondAttribute="trailing" constant="5" id="hAg-xF-kWe"/>
+                                                <constraint firstItem="lrb-Yd-Ufi" firstAttribute="leading" secondItem="YSV-z3-rq1" secondAttribute="leading" id="tvN-TJ-1zz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -397,7 +405,7 @@
                                         <rect key="frame" x="0.0" y="724" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xpk-2P-wEc" id="8vT-30-BYJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ang-cF-WC9">
@@ -436,7 +444,7 @@
                                         <rect key="frame" x="0.0" y="814" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b0R-Dq-FwD" id="vFY-Gm-Vys">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -450,6 +458,7 @@
                     </tableView>
                     <connections>
                         <outlet property="cardFid" destination="YSV-z3-rq1" id="LZH-NF-alQ"/>
+                        <outlet property="createBtn" destination="Ang-cF-WC9" id="qgU-u1-uRR"/>
                         <outlet property="descriptionTextView" destination="USW-eK-gat" id="ZKN-gl-uls"/>
                         <outlet property="failureTimeFid" destination="gtr-DD-u3z" id="hx7-RK-wNP"/>
                         <outlet property="icon" destination="tZ7-HO-4gO" id="Wy2-q2-a7F"/>

@@ -20,11 +20,24 @@ class AppointmentListViewController: SCBaseVC {
     
     @IBOutlet weak var createBtn: UIButton!
     
+    var page:Int = 0
+    let size:String = "10"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "马甲劵"
-        tableView.tableHeaderView = headView
-         tableView.tableHeaderView?.backgroundColor = SC_ThemeBackgroundViewColor
+//        tableView.tableHeaderView = headView
+//        tableView.tableHeaderView?.backgroundColor = SC_ThemeBackgroundViewColor
+        view.addSubview(headView)
+        
+
+        headView.snp.makeConstraints { (mk) in
+            mk.left.right.equalTo(0)
+            mk.top.equalTo(UIDevice().navBarHeight)
+            mk.height.equalTo(50)
+        }
+        
+        
         tableView.estimatedRowHeight = 163
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -33,20 +46,72 @@ class AppointmentListViewController: SCBaseVC {
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title: "  我的", tintColor: .black)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         headView.backgroundColor = SC_ThemeBackgroundViewColor
-        navigationController?.navigationBar.barTintColor = kNavBlueColor
+        navigationController?.navigationBar.barTintColor = SC_ThemeMainColor
+        
+        reftreshData()
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
     }
     
     func _clickMy(){
         let vc = MyCardCouponContainerViewController()
         navigationController?.pushViewController(vc, animated: true)
+   
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.mj_header.beginRefreshing()
+    }
     
     @IBAction func createAction(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "AppointmentCreateCardViewController", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CreateCardID") as? AppointmentCreateCardViewController
         pushPage(vc, animated: true)
     }
+    
+}
+
+extension AppointmentListViewController{
+    
+    fileprivate func reftreshData()  {
+        tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("上拉加载更多数据")
+                self?._requstData(true, { [weak self] in
+                    self?.tableView.mj_footer.endRefreshing()
+                })
+                
+            })
+        }
+        tableView.mj_header = MJRefreshNormalHeader {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("下拉刷新 --- 1")
+                self?.page = 0
+                self?._requstData(false, { [weak self] in
+                    self?.tableView.mj_header.endRefreshing()
+                });
+            })
+        }
+        
+    }
+    
+    fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()){
+        SCNetwork.shareInstance().v1_post(withUrl: CouponsVendorList_URL, params: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
+            complete()
+        }
+        
+    }
+    
+    
+    fileprivate func _requstPrameter(_ isLoad:Bool) -> Dictionary<String, Any> {
+        let pageStr = isLoad ? page+1:page
+        return  ["roomid":SCCacheTool.shareInstance().chatRoomId,"pageSize":10,"pageNo":pageStr]
+    }
+   
     
 }
 
@@ -89,6 +154,14 @@ extension AppointmentListViewController:UITableViewDataSource,UITableViewDelegat
             cell.priceLb.textColor = .white
             cell.statusLb.textColor = SC_ThemeMainColor
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        view.backgroundColor = SC_ThemeBackgroundViewColor
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.backgroundColor = SC_ThemeBackgroundViewColor
     }
     
 }

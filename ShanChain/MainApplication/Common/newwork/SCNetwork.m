@@ -107,17 +107,27 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         kparameters = params;
     }
     [_afManager POST:url parameters:kparameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] isEqualToString:SC_COMMON_SUC_CODE] || [responseObject[@"code"] isEqualToString:SC_PHONENUMBER_NOBIND]) {
+        
+        NSString  *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
+        if ([code isEqualToString:SC_COMMON_SUC_CODE] || [code isEqualToString:SC_PHONENUMBER_NOBIND]) {
             success(responseObject);
         } else {
-            NSString *msg = responseObject[@"message"];
+            NSString *msg;
+            if (!NULLString(responseObject[@"message"])) {
+                msg = responseObject[@"message"];
+            }
+            
+            if (!NULLString(responseObject[@"msg"])) {
+                msg = responseObject[@"msg"];
+            }
+            
             if (!msg) {
                 msg = @"操作失败";
             }
 //            SCLog(@"Request error%@", responseObject);
-            if([responseObject[@"code"] isEqualToString:SC_REQUEST_TOKEN_EXPIRE]){
+            if([code isEqualToString:SC_REQUEST_TOKEN_EXPIRE]){
                 [[SCAppManager shareInstance] logout];
-            } else if ([responseObject[@"code"] isEqualToString:SC_SHARE_NOOPEN]){
+            } else if ([code isEqualToString:SC_SHARE_NOOPEN]){
                 [SYProgressHUD showError:msg];
             }else {
                 [YYHud showError:msg];
@@ -204,7 +214,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         }
         if (!error) {
             HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
-            if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE]) {
+            if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE] || [baseModel.code isEqualToString:SC_WALLET_COMMON_SUC_CODE]) {
                 callBlock(baseModel,nil);
             }else{
                 if (!NULLString(baseModel.message)) {
@@ -220,6 +230,14 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 
 
 -(void)v1_postWithUrl:(NSString *)url params:(id)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock{
+    
+    // 因业务需求需要
+    if ([url hasPrefix:@"/wallet"]) {
+        [self HH_postWithUrl:url params:parameters showLoading:show callBlock:callBlock];
+        return;
+    }
+    
+    
 #if TARGET_OS_IPHONE
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {
@@ -232,6 +250,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     if (show) {
         [HHTool showChrysanthemum];
     }
+    
     [self postWithUrl:url parameters:parameters success:^(id responseObject) {
         if (show) {
             [HHTool dismiss];

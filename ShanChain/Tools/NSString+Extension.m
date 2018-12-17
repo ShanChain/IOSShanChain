@@ -121,6 +121,8 @@
     
 }
 
+
+
 //判断是否是电话号码
 - (BOOL)isValidPhoneNumberOrFixedTelephone
 {
@@ -151,20 +153,59 @@
 }
 
 
+/**
+ * 字母、数字、中文正则判断（不包括空格）
+ */
++ (BOOL)isInputRuleNotBlank:(NSString *)str {
+    NSString *pattern = @"^[➋➌➍➎➏➐➑➒\a-zA-Z\u4E00-\u9FA5\\d]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [pred evaluateWithObject:str];
+    return isMatch;
+}
+
+/**
+ * 字母、数字、中文正则判断（包括空格）【注意3】
+ */
++ (BOOL)isInputRuleAndBlank:(NSString *)str{
+    
+    //九宫格无法输入解决需要加上正则 \➋➌➍➎➏➐➑➒
+    NSString *pattern = @"^[➋➌➍➎➏➐➑➒\a-zA-Z\u4E00-\u9FA5\\d\\s]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [pred evaluateWithObject:str];
+    return isMatch;
+}
+
+#pragma  - mark 只能为大写
+- (BOOL)onlyInputACapital{
+    
+       NSString *regex =@"[A-Z]*";
+    
+       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    
+       BOOL inputString = [predicate evaluateWithObject:self];
+       return inputString;
+    
+}
+
+#pragma  - mark 允许大小写
+
+- (BOOL)InputCapitalAndLowercaseLetter:(NSString*)string{
+    
+       NSString *regex =@"[a-zA-Z]*";
+    
+       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    
+       BOOL  inputString = [predicate evaluateWithObject:string];
+    
+       return inputString;
+    
+}
+
+
 #pragma mark - 是否是有效的身份证件
 
 - (BOOL)isValidIdentifiedCard {
     return [NSString CheckIsIdentityCard:self];
-    //    return [[ApplicationManager sharedInstance] isValidIDCard:self];
-    
-    //    NSString *regularInfo = @"^[1-9]\\d{7}((0[1-9])|(1[0-2]))((0[1-9])|([1-2][0-9])|(3[0-1]))\\d{3}$|^[1-9]\\d{5}[1-9]\\d{3}((0[1-9])|(1[0-2]))((0[1-9])|([1-2][0-9])|(3[0-1]))\\d{3}(\\d|x|X)$";
-    //
-    //    return [self isValidStringWithPredicate:regularInfo];
-    
-    //    NSString *regularInfo = @"^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$|^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X)$";
-    //
-    //    return [self isValidStringWithPredicate:regularInfo];
-    
 }
 
 #pragma mark - 是否是有效的西部航空票号

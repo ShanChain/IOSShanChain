@@ -62,7 +62,8 @@
 #import "MyWalletViewController.h" //钱包
 #import "CommonShareModel.h"
 #import "SCAliyunUploadMananger.h"
-//#import "QQLBXScanViewController.h"
+#import "ScanCodeService.h"
+#import "CouponVerificationService.h"
 
 
 #endif /* ShanChain_Bridging_Header_h */

@@ -7,18 +7,9 @@
 //
 
 import UIKit
-import ASExtendedCircularMenu
 
-class RealNameVeifiedViewController: SCBaseVC,ASCircularButtonDelegate {
-    func willShowForMenuButton() {
-        
-    }
-    
-    func didDisappearForMenuButton() {
-        
-    }
-    
-
+class RealNameVeifiedViewController: SCBaseVC {
+ 
     
     @IBOutlet weak var nameFid: UITextField!
     
@@ -28,39 +19,22 @@ class RealNameVeifiedViewController: SCBaseVC,ASCircularButtonDelegate {
     @IBOutlet weak var certificationBtn: UIButton!
     
     
-    @IBOutlet weak var colourPickerButton: ASCircularMenuButton!
-    
-    
     @IBAction func certificationAction(_ sender: Any) {
         if self._isValid() {
-            
+            SCNetwork.shareInstance().getWithUrl(RealNameVerified_URL, parameters: ["cardno":cardIDFid.text!,"name":nameFid.text,"userId":SCCacheTool.shareInstance().getCurrentUser()], success: { (result) in
+                HHTool.showSucess("认证成功")
+                self.navigationController?.popViewController(animated: true)
+            }) { (error) in
+                
+            }
         }
     }
     
-    let colourArray: [UIColor] = [.red , .blue , .green , .yellow , .purple , .gray ,.black , .brown]
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "实名认证"
-        certificationBtn.cornerRadius = certificationBtn.height/2.0
-        configureDraggebleCircularMenuButton(button: colourPickerButton, numberOfMenuItems: 8, menuRedius: 70, postion: .center)
-        colourPickerButton.menuButtonSize = .medium
-        colourPickerButton.sholudMenuButtonAnimate = false
-    }
-
-    
-    func buttonForIndexAt(_ menuButton: ASCircularMenuButton, indexForButton: Int) -> UIButton {
-        let button: UIButton = UIButton()
-        if menuButton == colourPickerButton{
-            button.backgroundColor = colourArray[indexForButton]
-        }
-        return button
-    }
-    
-    func didClickOnCircularMenuButton(_ menuButton: ASCircularMenuButton, indexForButton: Int, button: UIButton) {
-       
         
     }
-    
     
     func _isValid() -> Bool {
       

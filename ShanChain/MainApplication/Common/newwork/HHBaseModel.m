@@ -10,4 +10,11 @@
 
 @implementation HHBaseModel
 
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"code" : @"code",
+             @"data" : @"data",
+             @"message" : @[@"message",@"msg"]};
+}
+
+
 @end

@@ -42,6 +42,10 @@
 		221B3BFC21C74F3F0061BB3E /* LBXPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BED21C74F3F0061BB3E /* LBXPermission.m */; };
 		221B3BFF21C7752A0061BB3E /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BFD21C775290061BB3E /* Global.m */; };
 		221B3C0221C7758B0061BB3E /* StyleDIY.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3C0121C7758B0061BB3E /* StyleDIY.m */; };
+		221B3C0521C77B3E0061BB3E /* ScanCodeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3C0421C77B3E0061BB3E /* ScanCodeService.m */; };
+		221B3C0821C782C00061BB3E /* MyCardScanCodeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B3C0621C782C00061BB3E /* MyCardScanCodeDetailsViewController.swift */; };
+		221B3C0921C782C00061BB3E /* MyCardScanCodeDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221B3C0721C782C00061BB3E /* MyCardScanCodeDetailsViewController.xib */; };
+		221B3C0D21C79B440061BB3E /* CouponVerificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3C0C21C79B440061BB3E /* CouponVerificationService.m */; };
 		221BBD3121955E6D0004EE03 /* SC_URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD3021955E6C0004EE03 /* SC_URL.swift */; };
 		221BBD352195889C0004EE03 /* SCCharacterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD342195889C0004EE03 /* SCCharacterModel.m */; };
 		221BBD372195A5300004EE03 /* JGUserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD362195A5300004EE03 /* JGUserLoginService.swift */; };
@@ -901,6 +905,12 @@
 		221B3BFE21C7752A0061BB3E /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		221B3C0021C7758B0061BB3E /* StyleDIY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleDIY.h; sourceTree = "<group>"; };
 		221B3C0121C7758B0061BB3E /* StyleDIY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleDIY.m; sourceTree = "<group>"; };
+		221B3C0321C77B3E0061BB3E /* ScanCodeService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanCodeService.h; sourceTree = "<group>"; };
+		221B3C0421C77B3E0061BB3E /* ScanCodeService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanCodeService.m; sourceTree = "<group>"; };
+		221B3C0621C782C00061BB3E /* MyCardScanCodeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardScanCodeDetailsViewController.swift; sourceTree = "<group>"; };
+		221B3C0721C782C00061BB3E /* MyCardScanCodeDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCardScanCodeDetailsViewController.xib; sourceTree = "<group>"; };
+		221B3C0B21C79B440061BB3E /* CouponVerificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CouponVerificationService.h; sourceTree = "<group>"; };
+		221B3C0C21C79B440061BB3E /* CouponVerificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CouponVerificationService.m; sourceTree = "<group>"; };
 		221BBD3021955E6C0004EE03 /* SC_URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SC_URL.swift; sourceTree = "<group>"; };
 		221BBD332195889C0004EE03 /* SCCharacterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCharacterModel.h; sourceTree = "<group>"; };
 		221BBD342195889C0004EE03 /* SCCharacterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCharacterModel.m; sourceTree = "<group>"; };
@@ -2229,6 +2239,8 @@
 				221B3BCA21C74DE60061BB3E /* LBXAlertAction */,
 				221B3BC421C74D880061BB3E /* QQLBXScanViewController.h */,
 				221B3BC621C74D880061BB3E /* QQLBXScanViewController.m */,
+				221B3C0321C77B3E0061BB3E /* ScanCodeService.h */,
+				221B3C0421C77B3E0061BB3E /* ScanCodeService.m */,
 			);
 			path = ScanCode;
 			sourceTree = "<group>";
@@ -2287,6 +2299,15 @@
 			path = LBXPermissions;
 			sourceTree = "<group>";
 		};
+		221B3C0A21C79AFD0061BB3E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				221B3C0B21C79B440061BB3E /* CouponVerificationService.h */,
+				221B3C0C21C79B440061BB3E /* CouponVerificationService.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		221BBD32219588360004EE03 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2319,6 +2340,7 @@
 		2229ED0221B9175300E33A8D /* AppointmentModule */ = {
 			isa = PBXGroup;
 			children = (
+				221B3C0A21C79AFD0061BB3E /* Service */,
 				2229ED0321B9175300E33A8D /* Controller */,
 				2229ED0421B9175300E33A8D /* Model */,
 				2229ED0521B9175300E33A8D /* View */,
@@ -2341,6 +2363,8 @@
 				22A2EB8B21BE165C00737265 /* MyCardDetailsViewController.xib */,
 				22A2EB9A21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift */,
 				22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */,
+				221B3C0621C782C00061BB3E /* MyCardScanCodeDetailsViewController.swift */,
+				221B3C0721C782C00061BB3E /* MyCardScanCodeDetailsViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5212,6 +5236,7 @@
 				222EF6142186A417005B89EF /* PublishTaskView.xib in Resources */,
 				22A2EBA421BFAE0A00737265 /* SCDynamicLoginViewController.xib in Resources */,
 				22C917AF21943014002E5240 /* TaskDetailsViewController.xib in Resources */,
+				221B3C0921C782C00061BB3E /* MyCardScanCodeDetailsViewController.xib in Resources */,
 				2271058021B76273009FC34D /* HHShareView.xib in Resources */,
 				892B39E91FE8EC0300292A75 /* AliyunImageSource.bundle in Resources */,
 			);
@@ -5627,6 +5652,7 @@
 				22C917A9219424B5002E5240 /* TaskListBackView.swift in Sources */,
 				223F9A3E217F12B80031DB95 /* JCMoreResultViewController.swift in Sources */,
 				4852A1261FCE9F0300CDD7BE /* SCSeFriendCell.m in Sources */,
+				221B3C0821C782C00061BB3E /* MyCardScanCodeDetailsViewController.swift in Sources */,
 				485E66201F42862900B158BF /* EaseFaceView.m in Sources */,
 				485E66561F42873F00B158BF /* MJRefreshBackFooter.m in Sources */,
 				223F99BE217F12040031DB95 /* JCAddMapViewController.mm in Sources */,
@@ -5721,6 +5747,7 @@
 				223F9A14217F12040031DB95 /* JCConstants.swift in Sources */,
 				223F99A6217F12040031DB95 /* JCGroupMembersViewController.swift in Sources */,
 				221B3BFC21C74F3F0061BB3E /* LBXPermission.m in Sources */,
+				221B3C0D21C79B440061BB3E /* CouponVerificationService.m in Sources */,
 				4852A11D1FCE9F0300CDD7BE /* DSStatusPhotosView.m in Sources */,
 				223F9A0D217F12040031DB95 /* DLCustomSlideView.m in Sources */,
 				485E66551F42873F00B158BF /* MJRefreshAutoFooter.m in Sources */,
@@ -5804,6 +5831,7 @@
 				48718D991F42277400010AA0 /* UIButton+WebCache.m in Sources */,
 				4852A0D21FCE9F0300CDD7BE /* SCMessageSettingCell.m in Sources */,
 				4852A1051FCE9F0300CDD7BE /* SYStoryRoleController.m in Sources */,
+				221B3C0521C77B3E0061BB3E /* ScanCodeService.m in Sources */,
 				22A2EB9B21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift in Sources */,
 				223F99E3217F12040031DB95 /* ExJMessage.swift in Sources */,
 				223F9A11217F12040031DB95 /* Log.swift in Sources */,

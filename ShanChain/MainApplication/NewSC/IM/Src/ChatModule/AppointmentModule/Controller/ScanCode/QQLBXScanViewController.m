@@ -19,17 +19,6 @@
 
 @implementation QQLBXScanViewController
 
-+(void)newInstancetypeWithPushVC:(SCBaseVC*)pushVC{
-    //添加一些扫码或相册结果处理
-    QQLBXScanViewController *vc = [QQLBXScanViewController new];
-    vc.libraryType = [Global sharedManager].libraryType;
-    vc.scanCodeType = [Global sharedManager].scanCodeType;
-    vc.style = [StyleDIY qqStyle];
-    //镜头拉远拉近功能
-    vc.isVideoZoom = YES;
-    [pushVC pushPage:vc Animated:YES];
-}
-
 
 - (void)viewDidLoad
 {

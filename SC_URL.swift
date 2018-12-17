@@ -10,15 +10,23 @@ import Foundation
 
 
 /*
+ 公共接口
+ */
+public let  RealNameVerified_URL = "/v1/2.0/Verified" // 实名认证
+public let  IsSuper_URL  = "/web/api/sys/isSuper" //是否是超级用户
+public let  WALLET_CURRENCY_URL  = "/web/api/wallet/seat/currency" // 获取当前汇率
+
+/*
   卡劵相关
  */
 
+public let  VendorGet_URL = "/wallet/api/coupons/vendor/get" // 创建方获取卡券详情
 public let  CreateCoupons_URL = "/wallet/api/coupons/vendor/create" // 创建卡劵
+public let  CouponsVendorList_URL = "/wallet/api/coupons/vendor/list" // 获取当前用户可领取卡券列表
 
 
 
 
-public let IsSuper_URL  = "/web/api/sys/isSuper" //是否是超级用户
 public let TASK_ADD_URL = "/v1/task/add" //添加任务
 public let TASKCOMMENT_URL  = "/v1/taskComment/query" //查询任务评论列表
 public let TASKCOMMENT_ADD_URL  = "/v1/taskComment/add" //添加任务评论
@@ -44,7 +52,7 @@ public let TASK_CONRIRM_COMPLETE_URL  = "/v1/task/confirm/complete" //发布者�
 public let TASK_URGE_URL  = "/v1/task/urge" //催促确认/完成任务
 
 public let COORDINATE_URL  = "/v1/lbs/coordinate/info" // 获取当前位置聊天室信息
-public let WALLET_CURRENCY_URL  = "/web/api/wallet/seat/currency" // 获取当前汇率
+
 
 public let JM_RoomMembers_URL  = "/jm/room/RoomMembers" //获取极光聊天室成员信息
 
