@@ -362,7 +362,7 @@ static NSDateFormatter* DateFormat(){
 
 -(NSString *)chatRoomId{
     if (!_chatRoomId) {
-        return @"15237570";
+        return @"111";  // 卡劵调试用的ID
     }
     return _chatRoomId;
 }

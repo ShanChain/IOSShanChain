@@ -72,7 +72,7 @@ class TaskListModel: HandyJSON {
     var backViewLeftBtnTuple:(title:String,isShow:Bool,color:UIColor,isClick:Bool,width:Int){
         if Int(status!)! == 10 {
             if isMyBublish == false{
-                return ("取消任务",true,SC_ThemeMainColor,true,120)
+                return ("帮不了",true,SC_ThemeMainColor,true,120)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
@@ -112,19 +112,19 @@ class TaskListModel: HandyJSON {
         }
         
         if Int(status!)! == 22 {
-            return ("任务超时",true,.gray,false,120)
+            return ("没人帮",true,.gray,false,120)
         }
         
         if Int(status!)! == 25 {
-            return ("任务取消",true,.gray,false,120)
+            return ("帮不了",true,.gray,false,120)
         }
-        return ("任务取消",true,.gray,false,120)
+        return ("帮不了",true,.gray,false,120)
     }
     
     var backViewRightBtnTuple:(title:String,isShow:Bool,color:UIColor,isClick:Bool,width:Int){
         if Int(status!)! == 10 {
             if isMyBublish == false{
-                return ("已完成",true,SC_ThemeMainColor,true,100)
+                return ("帮完了",true,SC_ThemeMainColor,true,100)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
@@ -152,23 +152,23 @@ class TaskListModel: HandyJSON {
             if isMyBublish == true{
                 return ("去确认",true,100)
             }
-            return ("待赏主确认",false,120)
+            return ("等对方答谢",false,120)
         }
         
         if Int(status!)! == 20 {
-            return ("任务完成",false,100)
+            return ("帮完了",false,100)
         }
         
         if Int(status!)! == 21 {
-            return ("任务失败",false,80)
+            return ("没帮成任务取消",false,80)
         }
         
         if Int(status!)! == 22 {
-            return ("任务超时",false,80)
+            return ("没人帮",false,80)
         }
         
         if Int(status!)! == 25 {
-            return ("任务取消",false,80)
+            return ("帮不了",false,80)
         }
         
         return ("",false,80)

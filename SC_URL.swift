@@ -23,8 +23,11 @@ public let  WALLET_CURRENCY_URL  = "/web/api/wallet/seat/currency" // 获取当�
 public let  VendorGet_URL = "/wallet/api/coupons/vendor/get" // 创建方获取卡券详情
 public let  CreateCoupons_URL = "/wallet/api/coupons/vendor/create" // 创建卡劵
 public let  CouponsVendorList_URL = "/wallet/api/coupons/vendor/list" // 获取当前用户可领取卡券列表
+public let  CouponsVendorDetails_URL = "/wallet/api/coupons/vendor/Get" // 获取当前卡劵详情
 
+public let  User_Create_List_URL = "/wallet/api/coupons/vendor/createList" // 获取用户已发布的卡券列表
 
+public let  User_Receive_List_URL = "/wallet/api/coupons/client/getList" // 获取用户已领取的子卡券列表
 
 
 public let TASK_ADD_URL = "/v1/task/add" //添加任务

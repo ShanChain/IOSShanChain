@@ -26,8 +26,9 @@ class MyCardCouponListViewController: SCBaseVC {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var page:Int = 0
+    var page:Int = 1
     let size:String = "10"
+    var dataList:[MyCouponsModel] = []
     fileprivate var type:MyCardCouponType?
     
     override func viewDidLoad() {
@@ -39,34 +40,118 @@ class MyCardCouponListViewController: SCBaseVC {
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
-
-        
+        reftreshData()
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if dataList.count == 0{
+            tableView.mj_header.beginRefreshing()
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 
+extension MyCardCouponListViewController{
+    
+    fileprivate func reftreshData()  {
+        tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() , execute: {
+                print("上拉加载更多数据")
+                self?._requstData(true, { [weak self] in
+                    self?.tableView.mj_footer.endRefreshing()
+                })
+                
+            })
+        }
+        tableView.mj_header = MJRefreshNormalHeader {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                print("下拉刷新 --- 1")
+                self?.page = 1
+                self?._requstData(false, { [weak self] in
+                    self?.tableView.mj_header.endRefreshing()
+                });
+            })
+        }
+        
+    }
+    
+    
+    func _getRequstUrl() ->String{
+        if type == .receive {
+            return User_Receive_List_URL
+        }
+        return User_Create_List_URL
+    }
+    
+    func _getPrameter() -> Dictionary<String,Any> {
+        return ["subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"pageNo":page,"pageSize":10]
+    }
+    
+    fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()){
+       
+        SCNetwork.shareInstance().hh_Get(withUrl: _getRequstUrl(), parameters: _getPrameter(), showLoading: false) { (baseModel, error) in
+            
+            if error != nil{
+                complete()
+                return
+            }
+            if let data = baseModel?.data as? Dictionary<String,Any>{
+                if let arr = data["list"] as? NSArray{
+                    if let datas:[MyCouponsModel] = [MyCouponsModel].deserialize(from: arr) as? [MyCouponsModel]{
+                        if (datas.count > 0){
+                            if(isLoad){
+                                for content in datas{
+                                    self.dataList.append(content)
+                                }
+                                self.page += 1
+                            }else{
+                                self.dataList = datas
+                            }
+                            self.tableView.reloadData()
+                        }else{
+                            if isLoad == false{
+                                self.dataList.removeAll()
+                            }
+                        self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                        }
+                        
+                    }
+                }
+            }
+            
+            if self.dataList.count == 0{
+                self.noDataTipShow(self.tableView, content: "暂无数据", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
+                self.tableView.isScrollEnabled = false
+            }else{
+                self.tableView.isScrollEnabled = true
+                self.noDataTipDismiss()
+            }
+            
+            complete()
+        }
+    }
+    
+}
+
 extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        if dataList.count > 0 {
+            return  dataList.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,8 +162,13 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
         return 10
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: H_cell, for: indexPath) as! AppointmentListCell
+         cell.selectionStyle = .none
         return cell
     }
     
@@ -86,6 +176,17 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
             guard let cell = cell as? AppointmentListCell else {
                 return
             }
+            
+            let entity = dataList[indexPath.section]
+            cell.iconImg._sd_setImage(withURLString: entity.photoUrl, placeholderImage: SC_defaultImage)
+            cell.nikeNameLb.text = entity.name
+            cell.nameLb.text = entity.nikeName
+            let mcDate:MCDate = MCDate.init(interval: entity.deadline!)
+            let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd")
+            cell.deadlineLb.text = "有效期至:\(dateStr!)"
+            cell.priceLb.text = "￥\(entity.price!)"
+//            cell.priceLb.attributedText = NSString.setAttrFirst("￥", color: <#T##UIColor!#>, font: <#T##UIFont!#>, secendString: <#T##String!#>, color: <#T##UIColor!#>, font: <#T##UIFont!#>)
+            
             
             let section:Int = indexPath.section
             if section % 2 == 0 {

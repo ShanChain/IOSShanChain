@@ -38,3 +38,5 @@
 "sc_Availabletasks" = "Available tasks";
 "sc_Waiting" = "Waiting...";
 "sc_Doing" = "Doing";
+
+"sc_PostTask" = "Post a task";

@@ -47,7 +47,7 @@ class PublishTaskView: UIView {
         makeView.frame = frame
         contentView = loadViewFromNib()
         publishBtn.addTarget(self, action: #selector(_publishPressed), for: .touchUpInside)
-        taskDesTextFid.placeholder = "请输入任务内容"
+        taskDesTextFid.placeholder = "请输入内容"
         //添加蒙版
        
         makeView.backgroundColor = .black

@@ -74,7 +74,7 @@
     config.appKey = JMSSAGE_APPKEY;
     config.SinaWeiboAppKey = SinaWeibo_AppKey;
     config.SinaWeiboAppSecret = SinaWeibo_appSecret;
-    config.SinaRedirectUri = @"https://docs.jiguang.cn/jshare/client/iOS/ios_sdk/";
+    config.SinaRedirectUri = @"https://api.weibo.com/oauth2/default.html";
     config.isSupportWebSina = YES;
     config.QQAppId = QQ_AppId;
     config.QQAppKey = QQ_Appkey;

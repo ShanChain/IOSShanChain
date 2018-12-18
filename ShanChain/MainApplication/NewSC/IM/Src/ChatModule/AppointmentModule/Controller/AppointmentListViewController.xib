@@ -46,7 +46,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="907-m3-WWd">
-                    <rect key="frame" x="120.5" y="9" width="134" height="34"/>
+                    <rect key="frame" x="120.5" y="0.0" width="134" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="titleEdgeInsets" minX="15" minY="-4" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="创建马甲劵" backgroundImage="sc_com_icon_creteCard">
@@ -58,7 +58,7 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="907-m3-WWd" firstAttribute="centerY" secondItem="GoV-8z-thl" secondAttribute="centerY" id="AmG-oI-gAQ"/>
+                <constraint firstItem="907-m3-WWd" firstAttribute="top" secondItem="eLr-HX-Y6i" secondAttribute="top" id="GAB-AA-xG1"/>
                 <constraint firstItem="907-m3-WWd" firstAttribute="centerX" secondItem="GoV-8z-thl" secondAttribute="centerX" id="df9-Pz-XUu"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

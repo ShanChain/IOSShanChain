@@ -270,16 +270,19 @@
     BLOCK_EXEC(callback);
 }
 
-// 足迹
+#pragma 热门元社区
 - (IBAction)footprintPressed:(id)sender {
     
+    PopularCommunityViewController *popularVC = [[PopularCommunityViewController alloc]init];
+    [self pushPage:popularVC Animated:YES];
     
-    [PublicShareService commonShareWith:HHShareType_IMAGE callBlock:^(HHBaseModel *baseModel, NSError *error) {
-        CommonShareModel  *shareModel = [CommonShareModel yy_modelWithDictionary:baseModel.data];
-        // 活动分享
-        HHShareView  *shareView = [[HHShareView alloc]initWithFrame:self.view.frame shareImage:nil type:4 shareModel:shareModel];
-        [self.view addSubview:shareView];
-    }];
+    
+//    [PublicShareService commonShareWith:HHShareType_IMAGE callBlock:^(HHBaseModel *baseModel, NSError *error) {
+//        CommonShareModel  *shareModel = [CommonShareModel yy_modelWithDictionary:baseModel.data];
+//        // 活动分享
+//        HHShareView  *shareView = [[HHShareView alloc]initWithFrame:self.view.frame shareImage:nil type:4 shareModel:shareModel];
+//        [self.view addSubview:shareView];
+//    }];
    
 //    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:0];
 //    [self pushPage:footprintVC

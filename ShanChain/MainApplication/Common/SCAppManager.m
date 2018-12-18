@@ -18,6 +18,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import "ShanChain-Swift.h"
 
+
 //#import "JsonTool.h"
 //开发时改成自己的IP
 #define RN_RES_PATH @"http://192.168.137.217:8081/index.ios.bundle?platform=ios&dev=true"
@@ -332,7 +333,14 @@ static SCAppManager *instance = nil;
     [[SCCacheTool shareInstance] setCacheValue:@"" withUserID:@"0" andKey:CACHE_CUR_USER];
     SCLoginController *loginVC=[[SCLoginController alloc]init];
     keyWindow.rootViewController = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
-    
 }
+
+// 实名认证
+- (void)realNameAuthenticate{
+    RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
+    JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:realNameVC];
+    [[HHTool getCurrentVC]presentViewController:nav animated:YES completion:nil];
+}
+
 
 @end

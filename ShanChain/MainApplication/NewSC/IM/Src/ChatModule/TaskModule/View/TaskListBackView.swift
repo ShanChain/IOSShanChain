@@ -133,7 +133,7 @@ class TaskListBackView: UIView {
         guard delegate != nil else {
             return
         }
-        if self.listModel.backViewRightBtnTuple.title == "已完成" {
+        if self.listModel.backViewRightBtnTuple.title == "帮完了" {
             delegate?.receiveCompleted(listModel: listModel, view: self)
         }
         
@@ -147,7 +147,7 @@ class TaskListBackView: UIView {
         guard delegate != nil else {
             return
         }
-        if self.listModel.backViewLeftBtnTuple.title == "取消任务" {
+        if self.listModel.backViewLeftBtnTuple.title == "帮不了" {
             delegate?.receiveCancel(listModel: listModel, view: self)
         }
         

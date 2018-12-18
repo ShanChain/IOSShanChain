@@ -46,7 +46,7 @@ class TaskDetailsModel: HandyJSON {
         if isReceive() {
            return "已被领取"
         }
-        return "领取任务"
+        return "帮Ta一下"
     }
     
     required init() {}

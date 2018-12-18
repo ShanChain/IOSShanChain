@@ -8,6 +8,18 @@
 
 import UIKit
 
+enum CouponsStatus:Int{
+    
+    case create_Wait = 0 // 创建方待核销
+    case create_Complete  // 创建方已核销
+    case create_Invalid // 创建方已失效
+    
+    case receive_Un = 10    //领取方未领取
+    case receive_Wait       // 领取方待使用
+    case receive_Complete   // 领取方已使用
+    case receive_Invalid // 创建方已失效
+}
+
 class MyCardReceiveDetailsViewController: UITableViewController {
 
     @IBOutlet weak var icon: UIImageView!
@@ -30,7 +42,12 @@ class MyCardReceiveDetailsViewController: UITableViewController {
     
     @IBOutlet weak var dealTimeLb: UILabel!
     
+    let status:CouponsStatus = .receive_Wait
+    
+    var couponsId:String = ""
+    
     @IBAction func applyAction(_ sender: UIButton) {
+        
     }
     
     override func viewDidLoad() {

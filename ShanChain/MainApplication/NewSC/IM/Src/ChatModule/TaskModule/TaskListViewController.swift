@@ -136,7 +136,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
         SCNetwork.shareInstance().v1_post(withUrl: _getUrl(), params: _requstPrameter(isLoad), showLoading: true) { (baseModel, error) in
             
-            if (error != nil){
+            if error != nil{
                 return
             }
             
@@ -162,7 +162,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
                 
             }
             
-            if(self.dataList.count == 0){
+            if self.dataList.count == 0 {
                 self.noDataTipShow(self.tableView, content: "您还没有任务记录喔，到广场中去发布你的第一个任务，或者领取任务吧~", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
                 self.tableView.isScrollEnabled = false
             }else{

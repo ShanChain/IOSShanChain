@@ -23,7 +23,7 @@ class RealNameVeifiedViewController: SCBaseVC {
         if self._isValid() {
             SCNetwork.shareInstance().getWithUrl(RealNameVerified_URL, parameters: ["cardno":cardIDFid.text!,"name":nameFid.text,"userId":SCCacheTool.shareInstance().getCurrentUser()], success: { (result) in
                 HHTool.showSucess("认证成功")
-                self.navigationController?.popViewController(animated: true)
+                self.backViewController()
             }) { (error) in
                 
             }
@@ -33,7 +33,12 @@ class RealNameVeifiedViewController: SCBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "实名认证"
+        self.addRightBarButtonItem(withTarget: self, sel: #selector(_back), title: "取消", tintColor: .white)
         
+    }
+    
+    func _back(){
+        backViewController()
     }
     
     func _isValid() -> Bool {

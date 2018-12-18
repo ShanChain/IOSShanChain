@@ -127,6 +127,8 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 //            SCLog(@"Request error%@", responseObject);
             if([code isEqualToString:SC_REQUEST_TOKEN_EXPIRE]){
                 [[SCAppManager shareInstance] logout];
+            } else if ([code isEqualToString:SC_REALNAME_AUTHENTICATE]){
+                [[SCAppManager shareInstance] realNameAuthenticate];
             } else if ([code isEqualToString:SC_SHARE_NOOPEN]){
                 [SYProgressHUD showError:msg];
             }else {
@@ -242,6 +244,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {
             [HHTool showError:@"请检查网络设置"];
+            callBlock(nil,[NSError errorWithDomain:NSURLErrorDomain code:-1001 userInfo:nil]);
             return ;
             
         }
@@ -259,9 +262,45 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         callBlock(baseModel,nil);
         
     } failure:^(NSError *error) {
+        if (show) {
+            [HHTool dismiss];
+        }
         callBlock(nil,error);
         [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
     }];
+}
+
+
+- (void)HH_GetWithUrl:(NSString *)url parameters:(id)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock{
+    
+#if TARGET_OS_IPHONE
+    [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
+        if (status < 1) {
+            [HHTool showError:@"请检查网络设置"];
+            callBlock(nil,[NSError errorWithDomain:NSURLErrorDomain code:-1001 userInfo:nil]);
+            return ;
+        }
+    }];
+#endif
+    if (show) {
+        [HHTool showChrysanthemum];
+    }
+    
+    [self getWithUrl:url parameters:parameters success:^(id responseObject) {
+        if (show) {
+            [HHTool dismiss];
+        }
+        HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
+        callBlock(baseModel,nil);
+        
+    } failure:^(NSError *error) {
+        if (show) {
+            [HHTool dismiss];
+        }
+        callBlock(nil,error);
+        [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
+    }];
+    
 }
 
 - (void)getWithUrl:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
@@ -287,9 +326,12 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     }
     [self apendTOBaseParams:params];
     [_afManager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] isEqualToString:SC_COMMON_SUC_CODE]) {
+         NSString  *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
+        if ([code isEqualToString:SC_COMMON_SUC_CODE] || [code isEqualToString:SC_WALLET_COMMON_SUC_CODE]) {
             SCLog(@"success");
             success(responseObject);
+        }else if ([code isEqualToString:SC_REALNAME_AUTHENTICATE]){
+            [[SCAppManager shareInstance] realNameAuthenticate];
         } else {
             SCLog(@"Request error%@", responseObject);
             failure([SCNetworkError errorWithCode:(NSInteger)responseObject[@"code"] msg:@"Request data error"]);

@@ -58,6 +58,12 @@
 		2226DB7A21ABA553002F6195 /* NSObject+customProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226DB7921ABA553002F6195 /* NSObject+customProperty.m */; };
 		2226DB7C21ACD18C002F6195 /* AppDelegate+JMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2226DB7B21ACD18C002F6195 /* AppDelegate+JMessage.swift */; };
 		2226DB7E21AE2CEA002F6195 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2226DB7D21AE2CE9002F6195 /* CoreFoundation.framework */; };
+		2227011821C883BD00FCD269 /* CouponsEntityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2227011721C883BD00FCD269 /* CouponsEntityModel.swift */; };
+		2227011C21C8E97400FCD269 /* MyCouponsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2227011B21C8E97400FCD269 /* MyCouponsModel.swift */; };
+		2227012121C8F58600FCD269 /* HotCommunityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2227011F21C8F58600FCD269 /* HotCommunityCell.swift */; };
+		2227012221C8F58600FCD269 /* HotCommunityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2227012021C8F58600FCD269 /* HotCommunityCell.xib */; };
+		2227012521C8F8B500FCD269 /* PopularCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2227012321C8F8B500FCD269 /* PopularCommunityViewController.swift */; };
+		2227012621C8F8B500FCD269 /* PopularCommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2227012421C8F8B500FCD269 /* PopularCommunityViewController.xib */; };
 		2228491D2176DD0F00CDC86C /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222849182176DD0E00CDC86C /* BaiduMapAPI_Cloud.framework */; };
 		2228491E2176DD0F00CDC86C /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222849192176DD0E00CDC86C /* BaiduMapAPI_Map.framework */; };
 		2228491F2176DD0F00CDC86C /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228491A2176DD0E00CDC86C /* BaiduMapAPI_Search.framework */; };
@@ -930,6 +936,12 @@
 		2226DB7921ABA553002F6195 /* NSObject+customProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+customProperty.m"; sourceTree = "<group>"; };
 		2226DB7B21ACD18C002F6195 /* AppDelegate+JMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+JMessage.swift"; sourceTree = "<group>"; };
 		2226DB7D21AE2CE9002F6195 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		2227011721C883BD00FCD269 /* CouponsEntityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsEntityModel.swift; sourceTree = "<group>"; };
+		2227011B21C8E97400FCD269 /* MyCouponsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponsModel.swift; sourceTree = "<group>"; };
+		2227011F21C8F58600FCD269 /* HotCommunityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCommunityCell.swift; sourceTree = "<group>"; };
+		2227012021C8F58600FCD269 /* HotCommunityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotCommunityCell.xib; sourceTree = "<group>"; };
+		2227012321C8F8B500FCD269 /* PopularCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCommunityViewController.swift; sourceTree = "<group>"; };
+		2227012421C8F8B500FCD269 /* PopularCommunityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularCommunityViewController.xib; sourceTree = "<group>"; };
 		222849182176DD0E00CDC86C /* BaiduMapAPI_Cloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Cloud.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Cloud.framework; sourceTree = "<group>"; };
 		222849192176DD0E00CDC86C /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
 		2228491A2176DD0E00CDC86C /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Search.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
@@ -1238,10 +1250,8 @@
 		22680AB9219E786400F2FA5B /* MyWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletViewController.xib; sourceTree = "<group>"; };
 		22680AC021A445FA00F2FA5B /* EditInfoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditInfoService.h; sourceTree = "<group>"; };
 		22680AC121A445FA00F2FA5B /* EditInfoService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditInfoService.m; sourceTree = "<group>"; };
-		2271057021B4DA86009FC34D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2271057221B4DA8B009FC34D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2271057421B4DA9B009FC34D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2271057621B4DA9E009FC34D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2271057721B4DDE5009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		2271057921B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2271057A21B4DDE6009FC34D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -2372,6 +2382,8 @@
 		2229ED0421B9175300E33A8D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2227011721C883BD00FCD269 /* CouponsEntityModel.swift */,
+				2227011B21C8E97400FCD269 /* MyCouponsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2405,6 +2417,8 @@
 				22C9177D219274A8002E5240 /* BMKTestLocationViewController.h */,
 				22C9177F219274A8002E5240 /* BMKTestLocationViewController.m */,
 				22C91780219274A8002E5240 /* BMKTestLocationViewController.xib */,
+				2227012321C8F8B500FCD269 /* PopularCommunityViewController.swift */,
+				2227012421C8F8B500FCD269 /* PopularCommunityViewController.xib */,
 				22C917742191BDE5002E5240 /* MapFootprintViewController.swift */,
 				22C917752191BDE5002E5240 /* MapFootprintViewController.xib */,
 			);
@@ -3219,6 +3233,8 @@
 				22A2EB9421BE67D800737265 /* AppointmentMyReceiveView.xib */,
 				22A2EB9621BE805500737265 /* NewYearActivityRuleView.swift */,
 				22A2EB9821BE806300737265 /* NewYearActivityRuleView.xib */,
+				2227011F21C8F58600FCD269 /* HotCommunityCell.swift */,
+				2227012021C8F58600FCD269 /* HotCommunityCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5164,6 +5180,7 @@
 				2229ED0D21B9265700E33A8D /* AppointmentListCell.xib in Resources */,
 				2271057321B4DA9B009FC34D /* Localizable.strings in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
+				2227012221C8F58600FCD269 /* HotCommunityCell.xib in Resources */,
 				2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */,
 				4852A0D11FCE9F0300CDD7BE /* SCMessageCell.xib in Resources */,
 				4852A0E41FCE9F0300CDD7BE /* SYScreenInsideCell.xib in Resources */,
@@ -5180,6 +5197,7 @@
 				223F99EC217F12040031DB95 /* blackTheme.bundle in Resources */,
 				222849232176E07500CDC86C /* mapapi.bundle in Resources */,
 				225F83F621AE931D0082C0E1 /* HHNumberForPeopleViewController.xib in Resources */,
+				2227012621C8F8B500FCD269 /* PopularCommunityViewController.xib in Resources */,
 				22A2EB8D21BE165C00737265 /* MyCardDetailsViewController.xib in Resources */,
 				485E65AF1F42862900B158BF /* EaseUI.podspec in Resources */,
 				223F99E8217F12040031DB95 /* defaultTheme.bundle in Resources */,
@@ -5456,6 +5474,7 @@
 				223F99AB217F12040031DB95 /* JCDocumentViewController.swift in Sources */,
 				48718D8E1F42277400010AA0 /* MKAnnotationView+WebCache.m in Sources */,
 				223F99DA217F12040031DB95 /* NSLayoutConstraint+JChat.swift in Sources */,
+				2227012121C8F58600FCD269 /* HotCommunityCell.swift in Sources */,
 				33C1A1831F4C50FB003E22CA /* ViewController+MASAdditions.m in Sources */,
 				332D3E451F500331001ADDB3 /* NSObject+MJCoding.m in Sources */,
 				33403F6C1F15BEE400666634 /* SCBase64.m in Sources */,
@@ -5464,6 +5483,7 @@
 				485E66571F42873F00B158BF /* MJRefreshComponent.m in Sources */,
 				22D2478121893C6E009C1E6A /* HHPublishTaskContentView.swift in Sources */,
 				48718DA01F42277400010AA0 /* UIView+WebCacheOperation.m in Sources */,
+				2227012521C8F8B500FCD269 /* PopularCommunityViewController.swift in Sources */,
 				22A2EBBE21C2558B00737265 /* OpinionFeedbackViewController.m in Sources */,
 				332AB6491F4ED8C900888313 /* Constants.m in Sources */,
 				332AB5F21F4ED69F00888313 /* TYTextContainer+Extended.m in Sources */,
@@ -5974,6 +5994,7 @@
 				4852A0DA1FCE9F0300CDD7BE /* SYCommonRoleView.m in Sources */,
 				223F998A217F12040031DB95 /* JCMessageTimeLineContent.swift in Sources */,
 				223F99F4217F12040031DB95 /* SAIInputAccessoryView.swift in Sources */,
+				2227011C21C8E97400FCD269 /* MyCouponsModel.swift in Sources */,
 				48718D941F42277400010AA0 /* SDWebImageDecoder.m in Sources */,
 				223F9A6021829BA80031DB95 /* CWLateralSlideConfiguration.m in Sources */,
 				223F999E217F12040031DB95 /* FileViewController.swift in Sources */,
@@ -6009,6 +6030,7 @@
 				225052BE218BF67E001FBD65 /* TaskListViewController.swift in Sources */,
 				485E65B11F42862900B158BF /* EMAudioRecorderUtil.m in Sources */,
 				223F998D217F12040031DB95 /* JCMessageVoiceContent.swift in Sources */,
+				2227011821C883BD00FCD269 /* CouponsEntityModel.swift in Sources */,
 				485E66051F42862900B158BF /* EaseEmojiEmoticons.m in Sources */,
 				332AB5F01F4ED69F00888313 /* TYImageStorage.m in Sources */,
 				485E665C1F42873F00B158BF /* MJRefreshAutoStateFooter.m in Sources */,
@@ -6078,7 +6100,6 @@
 		2271057121B4DA86009FC34D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2271057021B4DA86009FC34D /* zh-Hant */,
 				2271057221B4DA8B009FC34D /* en */,
 				2271057921B4DDE6009FC34D /* zh-Hans */,
 			);
@@ -6089,7 +6110,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2271057421B4DA9B009FC34D /* en */,
-				2271057621B4DA9E009FC34D /* zh-Hant */,
 				2271057A21B4DDE6009FC34D /* zh-Hans */,
 			);
 			name = Localizable.strings;

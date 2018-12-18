@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.view.backgroundColor = RGB(224, 224, 224);
+    self.view.backgroundColor = Theme_ViewBackgroundColor;
 }
 
 
@@ -38,12 +38,13 @@
 -(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake) {
         NSLog(@"motionEnded");
-        NSArray  *hostArr = @[@"95.169.24.11",@"test.qianqianshijie.com"];
+        NSArray  *hostArr = @[@"test.qianqianshijie.com",@"api.qianqianshijie.com"];
         [self hrShowActionSheetWithTitles:hostArr actionHandler:^(NSInteger indexOfAction, NSString * _Nonnull title) {
+            
             if (indexOfAction == 0) {
-               
+                
             }else{
-             
+           
             }
         }];
         

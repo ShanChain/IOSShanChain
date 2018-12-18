@@ -27,6 +27,8 @@
 // 获取视频第一帧
 + (UIImage*) getVideoPreViewImage:(NSURL *)path;
 
+// 获取当前屏幕显示的viewcontroller
++ (UIViewController *)getCurrentVC;
 /**
  * @method
  *

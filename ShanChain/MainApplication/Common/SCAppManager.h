@@ -45,6 +45,7 @@
 
 - (void)logout;
 - (void)selectLogout;
+- (void)realNameAuthenticate;
 
 
 

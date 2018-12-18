@@ -296,6 +296,7 @@
                             NSLocalizedString(@"sc_MyTask", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
                             @"意见反馈",
+                            @"实名认证",
                             NSLocalizedString(@"sc_SignOut", nil)];
         }
         

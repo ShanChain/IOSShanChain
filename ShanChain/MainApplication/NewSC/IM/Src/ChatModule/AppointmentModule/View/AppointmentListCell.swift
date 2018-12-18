@@ -31,6 +31,7 @@ class AppointmentListCell: UITableViewCell {
         super.awakeFromNib()
         self.backgroundColor = SC_ThemeBackgroundViewColor
         contentView.backgroundColor = SC_ThemeBackgroundViewColor
+        self.iconImg.preventImageViewExtrudeDeformation()
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
