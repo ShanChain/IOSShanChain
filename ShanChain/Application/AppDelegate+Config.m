@@ -150,7 +150,7 @@
         }
     }];
     
-    [self setupShareConfig];
+  //  [self setupShareConfig];
 }
 
 

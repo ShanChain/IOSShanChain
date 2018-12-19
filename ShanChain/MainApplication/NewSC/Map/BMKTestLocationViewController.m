@@ -235,7 +235,6 @@
             [view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([obj isKindOfClass:[UIImageView class]]) {
                     obj.hidden = YES;
-                    
                 }
             }];
         }
@@ -259,7 +258,23 @@
 
 // 复位
 - (IBAction)notePressed:(id)sender {
-    [self sc_mapViewRestoration:nil];
+    
+    NSString  *latitude = [NSString stringWithFormat:@"%f",self.pt.latitude];
+    NSString  *longitude = [NSString stringWithFormat:@"%f",self.pt.longitude];
+    weakify(self);
+    [HHTool showChrysanthemum];
+    [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
+        [HHTool dismiss];
+        NSDictionary  *dic = responseObject[@"data"];
+        if (dic.allValues > 0) {
+            CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
+            weak_self.myLocationCoordModel = model;
+            [weak_self sc_mapViewRestoration:nil];
+        }
+    } failure:^(NSError *error) {
+        [HHTool showError:error.localizedDescription];
+    }];
+    
 }
 
 - (void)sc_mapViewRestoration:(dispatch_block_t)callback{
@@ -474,7 +489,7 @@
         NSDictionary  *dic = responseObject[@"data"];
         if (dic.allValues > 0) {
             CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
-            self.myLocationCoordModel = model;
+            //self.myLocationCoordModel = model;
             [weak_self sc_configurationMapViewCenterLocationWithModel:model];
             __block  BOOL isContainRoom = NO;
             [self.mapView.overlays enumerateObjectsUsingBlock:^(BMKPolygon *  _Nonnull polygon, NSUInteger idx, BOOL * _Nonnull stop) {

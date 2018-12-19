@@ -30,10 +30,21 @@ class MapFootprintCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+      
+        let stringArray = ["object-C","swift","html5","css"]
+        stringArray.map{
+            return $0.length
+        }
+     
+        
+        
         // Configure the view for the selected state
     }
     
+    
+    func stringCount(_ string:String) -> Int{
+         return string.length
+    }
     
     @IBAction func enterAction(_ sender: Any){
         

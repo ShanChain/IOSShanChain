@@ -21,6 +21,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.shanchain.shandata</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ShanChain</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
@@ -37,7 +45,7 @@
 			<string>weibo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb2916880440</string>
+				<string>wb1619531897</string>
 			</array>
 		</dict>
 		<dict>
@@ -206,6 +214,8 @@
 	<string>App需要您的同意才能使用麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App需要您的同意才能读取媒体资料库</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App需要您的同意,才能添加图片</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

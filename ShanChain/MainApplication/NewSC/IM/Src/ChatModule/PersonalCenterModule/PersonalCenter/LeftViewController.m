@@ -212,10 +212,14 @@
     }else if ([title isEqualToString:NSLocalizedString(@"sc_MyWallet", nil)]){
         //
         MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
+//        walletVC.urlStr = @"http://m.qianqianshijie.com/orderDetails?id=15450393575245641";
         [nav.topViewController.navigationController pushViewController:walletVC animated:YES];
     }else if ([title isEqualToString:NSLocalizedString(@"sc_SignOut", nil)]){
         [[SCAppManager shareInstance]selectLogout];
        // [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
+    }else if ([title isEqualToString:@"实名认证"]){
+        RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
+        [nav.topViewController.navigationController pushViewController:realNameVC animated:YES];
     }else if ([title isEqualToString:@"意见反馈"]){
         OpinionFeedbackViewController  *feedbackVC = [[OpinionFeedbackViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:feedbackVC animated:YES];
@@ -279,6 +283,7 @@
                         @"personal_myservice_icons",
                         @"personal_news_icons",
                         @"personal_order_icons",
+                        @"personal_service_icons",
                         @"personal_service_icons"];
     }
     return _imageArray;
