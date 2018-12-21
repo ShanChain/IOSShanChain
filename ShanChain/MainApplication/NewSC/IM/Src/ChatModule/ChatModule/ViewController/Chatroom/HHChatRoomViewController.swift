@@ -40,6 +40,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
         
         SCCacheTool.shareInstance().chatRoomId = self.currentChatRoomID
+//        SCNetwork.shareInstance().v1_post(withUrl: "/jm/room/message", params: ["roomId":self.currentChatRoomID!,"timeStamp":Int(NSDate().timeIntervalSince1970 * 1000)], showLoading: false) { (baseModel, error) in
+//
+//        }
     }
     
     required init?(coder aDecoder: NSCoder) {

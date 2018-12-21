@@ -40,3 +40,17 @@
 "sc_Availabletasks" = "未领取任务";
 "sc_Waiting" = "对方正在帮忙";
 "sc_Doing" = "帮忙ing";
+
+
+
+/*
+ 设置
+ */
+
+"sc_Personal" = "更改资料";
+"sc_Notification" = "消息设置";
+"sc_AccountAndSecurity" = "账号与安全";
+"sc_ClearCache" = "缓存清理";
+"sc_Feedback" = "意见反馈";
+"sc_Hide" = "屏蔽此人";
+

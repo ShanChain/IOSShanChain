@@ -46,6 +46,10 @@ class MyCardCouponListViewController: SCBaseVC {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
+        
+
+    
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {

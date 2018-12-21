@@ -212,10 +212,10 @@
 	<string>App需要您的同意,才能访问位置</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>App需要您的同意才能使用麦克风</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App需要您的同意才能读取媒体资料库</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>App需要您的同意,才能添加图片</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App需要您的同意才能读取媒体资料库</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

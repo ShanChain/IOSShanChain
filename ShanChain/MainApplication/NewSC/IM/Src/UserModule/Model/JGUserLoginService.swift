@@ -124,9 +124,64 @@ class JGUserLoginService: NSObject {
         }
         
     }
+    
+   // 加入聊天室
+    open static func jg_enterchatRoom(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
+        
+        // 先异步获取聊天室的Conversation列表
+        JMSGConversation.allChatRoomConversation { (result, error) in
+            if error != nil {
+                if (error as NSError?)?.code == 863004 {
+                    // 未登录
+                    self.jg_automaticLogin(loginComplete: { (loginResult, loginError) in
+                        if loginError == nil{
+                            // 获取聊天室会话并根据会话加入聊天室
+                           self.jg_getConversationEnterChatRoom(roomId: roomId, callBlock: callBlock)
+                        }else{
+                            HHTool.showError(loginError?.localizedDescription)
+                        }
+                    })
+                } else {
+                    self.jg_getConversationEnterChatRoom(roomId: roomId, callBlock: callBlock)
+                }
+                return
+            }
+            
+            if let conversations = result as? [JMSGConversation]{
+                var isEnter = false
+                if conversations.count > 0 {
+                    for (_,chatRoomConversation) in  conversations.enumerated(){
+                        if chatRoomConversation.target is JMSGChatRoom{
+                            if (chatRoomConversation.target as? JMSGChatRoom)?.roomID == roomId{
+                              isEnter = true
+                              EditInfoService.enterChatRoom(withId: roomId, call: callBlock as! (JMSGConversation?, Error?) -> Void as! (Any?, Error?) -> Void)
+                            }
+                        }
+                    }
+                    
+                }
+                if !isEnter {
+                    self.jg_getConversationEnterChatRoom(roomId: roomId, callBlock: callBlock)
+                }
+            }
+            
+        }
+    }
+    
+    // 获取聊天室会话并根据会话加入聊天室
+    open static func jg_getConversationEnterChatRoom(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
+        self.jg_createChatRoomConversation(roomId: roomId, callBlock: { (conversation, createConversationError) in
+            if createConversationError == nil{
+                // 创建会话成功 加入聊天室
+                EditInfoService.enterChatRoom(withId: roomId, call: callBlock as! (JMSGConversation?, Error?) -> Void as! (Any?, Error?) -> Void)
+                return
+            }
+            HHTool.showError(createConversationError?.localizedDescription)
+        })
+        
+    }
 
 }
-
 
 
 

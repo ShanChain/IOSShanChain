@@ -38,6 +38,9 @@ extension UIColor {
     
 }
 
+
+
+
 extension UIDevice{
     
     var navBarHeight:Int{return UIApplication.shared.statusBarFrame.height > 20 ? 88:64}

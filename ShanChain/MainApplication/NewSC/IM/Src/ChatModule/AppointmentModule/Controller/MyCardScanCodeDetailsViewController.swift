@@ -26,6 +26,7 @@ class MyCardScanCodeDetailsViewController: SCBaseVC {
         super.viewDidLoad()
         title = "马甲劵详情"
         codeImageView.image = ScanCodeService.createQR(with: "123232434", size: codeImageView.size)
+        
        
     }
 

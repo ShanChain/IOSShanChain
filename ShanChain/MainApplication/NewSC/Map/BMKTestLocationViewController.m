@@ -577,10 +577,6 @@
 }
 
 
-
-
-
-
 - (void)jg_automaticLoginComplete:(dispatch_block_t)complete{
     [JGUserLoginService jg_automaticLoginWithLoginComplete:^(id _Nullable result, NSError * _Nullable error) {
         if (!error) {
@@ -613,7 +609,6 @@
 
 - (void)getAllChatRoomConversation{
     weakify(self);
-  
     [JMSGConversation allChatRoomConversation:^(id resultObject, NSError *error) {
          strongify(self);
         if (error) {

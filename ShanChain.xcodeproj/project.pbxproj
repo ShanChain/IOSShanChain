@@ -6362,8 +6362,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "defebafb-82fe-4a17-aa94-9a014af9f4d6";
-				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
+				PROVISIONING_PROFILE = "00a79065-97be-43ac-8860-65ff90b8aa41";
+				PROVISIONING_PROFILE_SPECIFIER = adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
