@@ -32,7 +32,7 @@ class RealNameVeifiedViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "实名认证"
+        title = NSLocalizedString("sc_Real_name_authentication", comment: "字符串")
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_back), title: "取消", tintColor: .white)
         
     }

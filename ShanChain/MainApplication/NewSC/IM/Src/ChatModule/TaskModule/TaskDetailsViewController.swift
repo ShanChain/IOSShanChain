@@ -86,11 +86,13 @@ class TaskDetailsViewController: SCBaseVC {
         
         headerDeadlineLb.text = NSDate.chatingTime(self.time)
         headerContentLb.text = self.taskContent
-        headerRewardLb.attributedText = NSString.setAttrFirst("赏金 ", color: SC_EmphasisColor, font: Font(13), secendString: self.reward , color: SC_ThemeMainColor, font: Font(16), threeString: " ￥", color: SC_EmphasisColor, font: Font(13))
+        let sc_Reward = NSLocalizedString("sc_Reward", comment: "字符串")
+        headerRewardLb.attributedText = NSString.setAttrFirst("\(sc_Reward) ", color: SC_EmphasisColor, font: Font(13), secendString: self.reward , color: SC_ThemeMainColor, font: Font(16), threeString: " ￥", color: SC_EmphasisColor, font: Font(13))
         sendTextView.delegate = self
         
         let iconTap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(_tapGestureAvatar))
         headerIcon.addGestureRecognizer(iconTap)
+        self.taskTriggerBtn.setTitle(NSLocalizedString("sc_giveHand", comment: "字符串"), for: .normal)
         
     }
     
@@ -178,9 +180,11 @@ class TaskDetailsViewController: SCBaseVC {
     
     
     func _configurationDetailsUI(){
-        headerDeadlineLb.text = "完成时限: \(NSDate.chatingTime(taskDetailsModel!.expiryTime) ?? "")"
+        let sc_TimeLimit = NSLocalizedString("sc_TimeLimit", comment: "字符串")
+        let sc_Reward = NSLocalizedString("sc_Reward", comment: "字符串")
+        headerDeadlineLb.text = "\(sc_TimeLimit): \(NSDate.chatingTime(taskDetailsModel!.expiryTime) ?? "")"
         headerContentLb.text =  taskDetailsModel!.intro
-        headerRewardLb.text = "赏金 \(taskDetailsModel!.price ?? "") ￥"
+        headerRewardLb.text = "\(sc_Reward) \(taskDetailsModel!.price ?? "") ￥"
         headerIcon._sd_setImage(withURLString: taskDetailsModel?.headImg)
         headerNameLb.text = taskDetailsModel!.name
         headerLikeBtn.setTitle(taskDetailsModel!.supportCount, for: .normal)

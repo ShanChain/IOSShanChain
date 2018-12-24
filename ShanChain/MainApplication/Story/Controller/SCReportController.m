@@ -31,7 +31,7 @@
 
 - (NSArray *)titles {
     if (!_titles) {
-        _titles = @[@"淫秽色情",@"有害信息",@"虚假内容",@"人身攻击",@"违法信息",@"其它"];
+        _titles = @[NSLocalizedString(@"sc_SexualViolence", nil),NSLocalizedString(@"sc_Illegal", nil),NSLocalizedString(@"sc_CopyrightInfringement", nil),NSLocalizedString(@"sc_PersonalAttacks", nil),NSLocalizedString(@"sc_Spam", nil),NSLocalizedString(@"sc_Other", nil)];
     }
     return _titles;
 }
@@ -112,7 +112,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"举报";
+    self.title = NSLocalizedString(@"sc_Report", nil);
     
     self.scrollViewContentHeight = SCREEN_HEIGHT;
     
@@ -132,9 +132,9 @@
     
     [self.scrollView addSubview:self.textView];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(send)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"sc_Submit", nil) style:UIBarButtonItemStylePlain target:self action:@selector(send)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"sc_cancel", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
     
     [self.navigationItem.rightBarButtonItem setTintColor:Theme_MainTextColor];
     [self.navigationItem.leftBarButtonItem setTintColor:Theme_MainTextColor];

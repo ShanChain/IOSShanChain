@@ -42,7 +42,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>weibo</string>
+			<string>com.sina</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wb1619531897</string>

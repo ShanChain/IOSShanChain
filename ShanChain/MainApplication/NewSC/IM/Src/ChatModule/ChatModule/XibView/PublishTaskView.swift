@@ -25,6 +25,14 @@ class PublishTaskView: UIView {
     
     @IBOutlet weak var selectTimeTextFid: UITextField!
     
+    @IBOutlet weak var needHelpLb: UILabel!
+    
+    @IBOutlet weak var timeLimitLb: UILabel!
+    
+    
+    @IBOutlet weak var desLb: UILabel!
+    
+    @IBOutlet weak var rewardLb: UILabel!
     
     @IBOutlet weak var exchangeRateLabel: UILabel!
     var pbCallClosure:PublishClosure?
@@ -47,7 +55,12 @@ class PublishTaskView: UIView {
         makeView.frame = frame
         contentView = loadViewFromNib()
         publishBtn.addTarget(self, action: #selector(_publishPressed), for: .touchUpInside)
-        taskDesTextFid.placeholder = "请输入内容"
+        taskDesTextFid.placeholder = NSLocalizedString("sc_Enter_", comment: "字符串")
+        timeLimitLb.text = NSLocalizedString("sc_TimeLimit", comment: "字符串")
+        needHelpLb.text = NSLocalizedString("sc_PostTask", comment: "字符串")
+        desLb.text = NSLocalizedString("sc_Describe", comment: "字符串")
+        rewardLb.text = NSLocalizedString("sc_Reward", comment: "字符串")
+        publishBtn.setTitle(NSLocalizedString("sc_post", comment: "字符串"), for: .normal)
         //添加蒙版
        
         makeView.backgroundColor = .black
@@ -118,7 +131,7 @@ class PublishTaskView: UIView {
             return false
         }
         if (self.rewardTextFid.text?.isEmpty)!{
-            HHTool.showError("请输入赏金")
+            HHTool.showError("请输入答谢金")
             return false
         }
         

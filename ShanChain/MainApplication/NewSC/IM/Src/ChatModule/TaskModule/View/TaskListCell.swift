@@ -50,7 +50,7 @@ class TaskListCell: UITableViewCell{
             self.locactionLabel.text = "来自:\(_listModel?.roomName ?? "")"
             self.cornerRadius = 10.0
             if (_listModel?.isReceived)! {
-                self.centerStatusBtn.setTitle("已被领取", for: .normal)
+                self.centerStatusBtn.setTitle(NSLocalizedString("sc_helped", comment: "字符串"), for: .normal)
                 self.centerStatusBtn.setTitleColor(UIColor.gray, for: .normal)
                 self.centerStatusBtn.borderColor = UIColor.gray
             }else{

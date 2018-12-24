@@ -144,7 +144,7 @@ NSString * const SYImageAttachmentName = @"SYImageAttachmentName";
 #pragma mark ----------------------------- textView delegate ------------------------
 - (void)textViewDidChange:(UITextView *)textView {
     self.placeholderLabel.hidden = self.text.length > 0;
-    self.placeholderLabel.text = self.text.length == 0 ? @"请输入内容...":@"";
+    self.placeholderLabel.text = self.text.length == 0 ? NSLocalizedString(@"sc_Enter_", nil):@"";
 }
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {

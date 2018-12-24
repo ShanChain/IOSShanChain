@@ -44,9 +44,9 @@ class TaskDetailsModel: HandyJSON {
     
     func receiveBtnTitle() -> String {
         if isReceive() {
-           return "已被领取"
+           return NSLocalizedString("sc_helped", comment: "字符串")
         }
-        return "帮Ta一下"
+        return NSLocalizedString("sc_giveHand", comment: "字符串")
     }
     
     required init() {}

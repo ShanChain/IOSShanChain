@@ -24,6 +24,7 @@ class TaskListContainerViewController: SCBaseVC {
         willSet{
             if newValue ==  1{
                 _scrollToIndex = .my
+                statusCode = StatusCode.myAll
             }else{
                 _scrollToIndex = .all
             }
@@ -37,7 +38,7 @@ class TaskListContainerViewController: SCBaseVC {
         }
     }
     
-    var statusCode:StatusCode = StatusCode.squareAll
+    var statusCode:StatusCode = StatusCode.myAll
     
     public var _scrollToIndex:TaskListType = .my
     private lazy var viewControllers: [UIViewController] = {

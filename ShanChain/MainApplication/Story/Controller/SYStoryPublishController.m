@@ -69,7 +69,7 @@ static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
         _wordEditView.frame = CGRectMake(0, 15, SCREEN_WIDTH, SCREEN_HEIGHT - kNavStatusBarHeight - 44);
         _wordEditView.hidden = YES;
         _wordEditView.maxWordNum = 10000;
-        [_wordEditView setPlaceholder:@"请输入内容..."];
+        [_wordEditView setPlaceholder:NSLocalizedString(@"sc_Enter_", nil)];
         [self.view addSubview:_wordEditView];
     }
     

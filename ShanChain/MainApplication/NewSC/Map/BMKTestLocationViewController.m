@@ -122,9 +122,10 @@
         self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld",days] color:[UIColor redColor] font:Font(18) secendString:@"天" color:Theme_MainTextColor font:Font(14)];
     }else{
         self.topView.hidden = YES;
-        NewYearActivitiesView *activeView = [[NewYearActivitiesView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
-        [self.mapView addSubview:activeView];
-        [self.mapView bringSubviewToFront:activeView];
+        NewYearActivitiesView *activeView = [[NewYearActivitiesView alloc]initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH - 80, 70)];
+        
+         [self.mapView addSubview:activeView];
+         [self.mapView bringSubviewToFront:activeView];
     }
 }
 

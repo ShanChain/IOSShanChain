@@ -19,24 +19,86 @@
 "sc_LeaveCommunity" = "Are you sure to leave this community?";
 "sc_confirm" = "confirm";
 "sc_cancel" = "cancel";
+"sc_back" = "back";
 
 
 "sc_MyWallet" = "My Wallet";
 "sc_MyMessage" = "My Message";
-"sc_MyTask" = "My Task";
 "sc_SignOut" = "sign out";
 
 
+/*
+ 任务
+ */
+
 "sc_RewardTask" = "Reward Task";
-"sc_MyTask" = "My Task";
+"sc_MyTask" = "My help";
 "sc_Tasklist" = "Task list";
 
 "sc_Alltask" = "All task";
 "sc_MyPost" = "My Post";
+"sc_MyHelped" = "My helped";
 "sc_Myaccept" = "My accept";
 "sc_Ended" = "Ended";
 "sc_Availabletasks" = "Available tasks";
 "sc_Waiting" = "Waiting...";
-"sc_Doing" = "Doing";
+"sc_GoToComfirm" = "go to comfirm";
+"sc_Doing" = "Helping";
+"sc_accepted" = "accepted !";
+"sc_Contact" = "Contact";
+"sc_helped" = "helped";
+"sc_giveHand" = "give a hand";
+"sc_TimeLimit" = "Time limit";
+"sc_Describe" = "Describe";
+"sc_Reward" = "Reward";
+"sc_post" = "post";
+"sc_undone" = "undone";
+"sc_comfirm" = "comfirm";
+"sc_Accomplished" = "Accomplished";
+"sc_Failed" = "Failed";
+"sc_Canceled" = "Canceled";
+"sc_Expired" = "Expired";
+"sc_waiting" = "waiting";
 
-"sc_PostTask" = "Post a task";
+
+
+"sc_PostTime" = "post time";
+"sc_AcceptedTime" = "accepted time";
+"sc_FinishTime" = "finish time";
+"sc_ComfirmTime" = "comfirm time";
+"sc_CancleTime" = "cancle time";
+
+"sc_Enter_" = "enter...";
+
+
+"sc_PostTask" = "I need help";
+
+
+
+/*
+ 设置
+ */
+
+"sc_Personal" = "Personal";
+"sc_Notification" = "Notification";
+"sc_AccountAndSecurity" = "Account and Security";
+"sc_ClearCache" = "Clear cache";
+"sc_Feedback" = "Help & Feedback";
+"sc_Real_name_authentication" = "Real-name authentication";
+"sc_Hide" = "Hide";
+
+/*
+ 举报
+ */
+"sc_SexualViolence" = "Sexual violence";
+"sc_MaliceAbusive" = "Malice abusive";
+"sc_PersonalAttacks" = "Personal attacks";
+"sc_Illegal" = "Illegal";
+"sc_CopyrightInfringement" = "Copyright infringement";
+"sc_Spam" = "Spam";
+"sc_Report" = "Report";
+"sc_Other" = "Other";
+"sc_Submit" = "Submit";
+
+
+

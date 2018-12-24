@@ -23,7 +23,21 @@ class PopularCommunityViewController: SCBaseVC {
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
         tableView.showsVerticalScrollIndicator = false
         tableView.register(UINib.init(nibName: k_cellID, bundle: nil), forCellReuseIdentifier: k_cellID)
+        
+        let fib = generateFibonaccis(10)
+        print(fib.map({"\($0)"}).joined(separator: " "))
     }
+    
+    
+    func generateFibonaccis(_ n: Int) -> [Int] {
+        var fib = Array(repeating: 1, count: n)
+        for i in 2..<n {
+            fib[i] = fib[i - 2] + fib[i - 1]
+        }
+        return fib
+    }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

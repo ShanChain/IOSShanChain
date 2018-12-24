@@ -24,11 +24,15 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="contentView" destination="uNg-Bb-bhT" id="JeQ-8v-cWG"/>
+                <outlet property="desLb" destination="CI4-lA-C8N" id="1Bg-87-AKS"/>
                 <outlet property="exchangeRateLabel" destination="52G-Za-6wt" id="ioZ-QG-H6n"/>
+                <outlet property="needHelpLb" destination="pOz-wM-x8M" id="88e-6y-bAI"/>
                 <outlet property="publishBtn" destination="rlG-pe-nwl" id="OYY-YX-wlv"/>
+                <outlet property="rewardLb" destination="L2S-bD-8NV" id="c1R-HM-hi8"/>
                 <outlet property="rewardTextFid" destination="gpO-FP-jmb" id="EwF-mQ-mSa"/>
                 <outlet property="selectTimeTextFid" destination="NmS-Y0-c50" id="Wca-d8-w4R"/>
                 <outlet property="taskDesTextFid" destination="yeA-RQ-LFb" id="hAg-Qo-kgo"/>
+                <outlet property="timeLimitLb" destination="NfS-aa-fAb" id="Ows-E2-bzt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

@@ -362,56 +362,56 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-//- (void)thirdLoginClickWithPlatformType:(SSDKPlatformType)type {
-//    [SYProgressHUD showMessage:@"登录中……"];
-//    [ShareSDK getUserInfo:type onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error){
-//        if (state == SSDKResponseStateSuccess) {
-//            NSString *pwd = [user.credential.token substringToIndex:16];
-//            NSString *pwdMD5 = [SCMD5Tool MD5ForLower32Bate:pwd];
-//            NSString *loginTypeStr = @"USER_TYPE_QQ";
-//            switch (type) {
-//                case SSDKPlatformTypeQQ:
-//                    loginTypeStr = @"USER_TYPE_QQ";
-//                    break;
-//                case SSDKPlatformTypeWechat:
-//                    loginTypeStr = @"USER_TYPE_WEIXIN";
-//                    break;
-//                case SSDKPlatformTypeSinaWeibo:
-//                    loginTypeStr = @"USER_TYPE_WEIBO";
-//                    break;
-//                default: ;
-//            }
-//
-//            NSTimeInterval time =(long long) [[NSDate date] timeIntervalSince1970];
-//            NSString *typeAppend = [loginTypeStr stringByAppendingString:[NSString stringWithFormat:@"%.0f",time]];
-//            NSString *encryptAccount = [SCAES encryptShanChainWithPaddingString:typeAppend withContent:user.uid];
-//
-//            NSString *encryptPassword = [SCAES encryptShanChainWithPaddingString:[typeAppend stringByAppendingString:user.uid] withContent:pwdMD5];
-//
-//            NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//            [params setObject:user.nickname forKey:@"nickName"];
-//            [params setObject:loginTypeStr forKey:@"userType"];
-//            [params setObject:user.icon forKey:@"headIcon"];
-//
-//            [params setObject:[NSString stringWithFormat:@"%ld",(long)user.gender] forKey:@"sex"];
-//            [params setObject:[NSString stringWithFormat:@"%0.f",time] forKey:@"Timestamp"];
-//
-//            [params setObject:encryptAccount forKey:@"encryptOpenId"];
-//            [params setObject:encryptPassword forKey:@"encryptToken16"];
-//            [SYProgressHUD hideHUD];
-//            [[SCNetwork shareInstance]postWithUrl:COMMONUSERLOGINTHIRD parameters:params success:^(id responseObject) {
-//                [SYProgressHUD showSuccess:@"正在获取数据"];
-//                NSDictionary *data = responseObject[@"data"];
-//                NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] initWithDictionary:data[@"userInfo"]];
-//                [userInfo setObject:data[@"token"] forKey:@"token"];
-//                [SCLoginDataController successLoginedWithContent:userInfo];
-//            } failure:nil];
-//        } else {
-//            SCLog(@"%@",error);
-//            [SYProgressHUD showError:@"三方登陆失败"];
-//            [SYProgressHUD hideHUD];
-//        }
-//    }];
-//}
+- (void)thirdLoginClickWithPlatformType:(SSDKPlatformType)type {
+    [SYProgressHUD showMessage:@"登录中……"];
+    [ShareSDK getUserInfo:type onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error){
+        if (state == SSDKResponseStateSuccess) {
+            NSString *pwd = [user.credential.token substringToIndex:16];
+            NSString *pwdMD5 = [SCMD5Tool MD5ForLower32Bate:pwd];
+            NSString *loginTypeStr = @"USER_TYPE_QQ";
+            switch (type) {
+                case SSDKPlatformTypeQQ:
+                    loginTypeStr = @"USER_TYPE_QQ";
+                    break;
+                case SSDKPlatformTypeWechat:
+                    loginTypeStr = @"USER_TYPE_WEIXIN";
+                    break;
+                case SSDKPlatformTypeSinaWeibo:
+                    loginTypeStr = @"USER_TYPE_WEIBO";
+                    break;
+                default: ;
+            }
+
+            NSTimeInterval time =(long long) [[NSDate date] timeIntervalSince1970];
+            NSString *typeAppend = [loginTypeStr stringByAppendingString:[NSString stringWithFormat:@"%.0f",time]];
+            NSString *encryptAccount = [SCAES encryptShanChainWithPaddingString:typeAppend withContent:user.uid];
+
+            NSString *encryptPassword = [SCAES encryptShanChainWithPaddingString:[typeAppend stringByAppendingString:user.uid] withContent:pwdMD5];
+
+            NSMutableDictionary *params = [NSMutableDictionary dictionary];
+            [params setObject:user.nickname forKey:@"nickName"];
+            [params setObject:loginTypeStr forKey:@"userType"];
+            [params setObject:user.icon forKey:@"headIcon"];
+
+            [params setObject:[NSString stringWithFormat:@"%ld",(long)user.gender] forKey:@"sex"];
+            [params setObject:[NSString stringWithFormat:@"%0.f",time] forKey:@"Timestamp"];
+
+            [params setObject:encryptAccount forKey:@"encryptOpenId"];
+            [params setObject:encryptPassword forKey:@"encryptToken16"];
+            [SYProgressHUD hideHUD];
+            [[SCNetwork shareInstance]postWithUrl:COMMONUSERLOGINTHIRD parameters:params success:^(id responseObject) {
+                [SYProgressHUD showSuccess:@"正在获取数据"];
+                NSDictionary *data = responseObject[@"data"];
+                NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] initWithDictionary:data[@"userInfo"]];
+                [userInfo setObject:data[@"token"] forKey:@"token"];
+                [SCLoginDataController successLoginedWithContent:userInfo];
+            } failure:nil];
+        } else {
+            SCLog(@"%@",error);
+            [SYProgressHUD showError:@"三方登陆失败"];
+            [SYProgressHUD hideHUD];
+        }
+    }];
+}
 
 @end

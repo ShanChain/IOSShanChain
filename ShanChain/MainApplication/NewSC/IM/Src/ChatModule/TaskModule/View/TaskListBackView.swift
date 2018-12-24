@@ -62,24 +62,28 @@ class TaskListBackView: UIView {
                 self.rightBtnWidth.constant = CGFloat(_listEntity!.backViewRightBtnTuple.width)
                 self.rightBtn.isUserInteractionEnabled = _listEntity!.backViewRightBtnTuple.isClick
                 
-                self.timeLabel0.text = "发布时间 \(NSDate.chatingTime(_listEntity!.createTime) ?? "")"
+                let postTimeStr = NSLocalizedString("sc_PostTime", comment: "字符串")
+                let acceptedTimeStr = NSLocalizedString("sc_AcceptedTime", comment: "字符串")
+                let finishTimeStr = NSLocalizedString("sc_FinishTime", comment: "字符串")
+                let comfirmTimeStr = NSLocalizedString("sc_ComfirmTime", comment: "字符串")
+                self.timeLabel0.text = "\(postTimeStr) \(NSDate.chatingTime(_listEntity!.createTime) ?? "")"
                 if let receiveTime = _listEntity!.receiveTime{
                     self.timeLabel1.isHidden = false
-                    self.timeLabel1.text = "领取时间 \(NSDate.chatingTime(receiveTime)!)"
+                    self.timeLabel1.text = "\(acceptedTimeStr) \(NSDate.chatingTime(receiveTime)!)"
                 }else{
                     self.timeLabel1.isHidden = true
                 }
                 
                 if let expiryTime = _listEntity!.expiryTime{
                     self.timeLabel2.isHidden = false
-                    self.timeLabel2.text = "完成时间 \(NSDate.chatingTime(expiryTime)!)"
+                    self.timeLabel2.text = "\(finishTimeStr) \(NSDate.chatingTime(expiryTime)!)"
                 }else{
                     self.timeLabel2.isHidden = true
                 }
                 
                 if let verifyTime = _listEntity!.verifyTime{
                     self.timeLabel3.isHidden = false
-                    self.timeLabel3.text = "确认时间 \(NSDate.chatingTime(verifyTime)!)"
+                    self.timeLabel3.text = "\(comfirmTimeStr) \(NSDate.chatingTime(verifyTime)!)"
                 }else{
                     self.timeLabel3.isHidden = true
                 }
@@ -133,11 +137,11 @@ class TaskListBackView: UIView {
         guard delegate != nil else {
             return
         }
-        if self.listModel.backViewRightBtnTuple.title == "帮完了" {
+        if self.listModel.backViewRightBtnTuple.title == NSLocalizedString("sc_Accomplished", comment: "字符串") {
             delegate?.receiveCompleted(listModel: listModel, view: self)
         }
         
-        if self.listModel.backViewRightBtnTuple.title == "确认完成" {
+        if self.listModel.backViewRightBtnTuple.title == NSLocalizedString("sc_comfirm", comment: "字符串") {
             delegate?.publishConfirmComplete(listModel: listModel, view: self)
         }
     }
@@ -147,11 +151,11 @@ class TaskListBackView: UIView {
         guard delegate != nil else {
             return
         }
-        if self.listModel.backViewLeftBtnTuple.title == "帮不了" {
+        if self.listModel.backViewLeftBtnTuple.title == NSLocalizedString("sc_Canceled", comment: "字符串") {
             delegate?.receiveCancel(listModel: listModel, view: self)
         }
         
-        if self.listModel.backViewLeftBtnTuple.title == "未完成" {
+        if self.listModel.backViewLeftBtnTuple.title == NSLocalizedString("sc_undone", comment: "字符串") {
             delegate?.publishConfirmUndone(listModel: listModel, view: self)        }
         
     }

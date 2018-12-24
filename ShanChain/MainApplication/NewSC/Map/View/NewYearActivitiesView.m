@@ -18,8 +18,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.frame = frame;
         self = [NewYearActivitiesView instanceWithView];
+        self.frame = frame;
         [self setUp];
     }
     return self;
@@ -52,7 +52,8 @@
                         if (days == 0) {
                             weakSelf.countdownLb.text = strTime;
                         } else {
-                            weakSelf.countdownLb.text = [NSString stringWithFormat:@"%ld天 %02ld : %02ld : %02ld", days, hours, minute, second];
+                             weakSelf.countdownLb.text = [NSString stringWithFormat:@"%02ld : %02ld : %02ld", hours + days * 24, minute, second];
+//                            weakSelf.countdownLb.text = [NSString stringWithFormat:@"%ld天 %02ld : %02ld : %02ld", days, hours, minute, second];
                         }
                         
                     });

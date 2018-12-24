@@ -20,7 +20,7 @@
 "sc_LeaveCommunity" = "确定要离开广场吗？";
 "sc_confirm" = "确认";
 "sc_cancel" = "取消";
-
+"sc_back" = "返回";
 
 
 
@@ -28,20 +28,48 @@
 "sc_MyMessage" = "我的消息";
 "sc_SignOut" = "退出登录";
 
+/*
+ 任务
+ */
+
 "sc_RewardTask" = "社区帮";
 "sc_MyTask" = "我的社区帮";
 "sc_Tasklist" = "帮助列表";
 
 "sc_Alltask" = "全部任务";
 "sc_MyPost" = "帮过我的";
+"sc_MyHelped" = "我帮过的";
 "sc_PostTask" = "寻求帮助";
-"sc_Myaccept" = "我领取的";
+"sc_Myaccept" = "我帮过的";
 "sc_Ended" = "已结束";
 "sc_Availabletasks" = "未领取任务";
 "sc_Waiting" = "对方正在帮忙";
+"sc_GoToComfirm" = "去确认";
 "sc_Doing" = "帮忙ing";
+"sc_accepted" = "领取成功 !";
+"sc_Contact" = "联系Ta";
+"sc_helped" = "已被领取";
+"sc_giveHand" = "帮Ta一下";
+"sc_TimeLimit" = "时限";
+"sc_Describe" = "描述";
+"sc_Reward" = "答谢";
+"sc_post" = "立即发布";
+"sc_undone" = "未完成";
+"sc_comfirm" = "确认完成";
+"sc_Accomplished" = "帮完了";
+"sc_Failed" = "没帮成";
+"sc_Canceled" = "帮不了";
+"sc_Expired" = "没人帮";
+"sc_waiting" = "等对方答谢";
 
 
+"sc_PostTime" = "发布时间";
+"sc_AcceptedTime" = "领取时间";
+"sc_FinishTime" = "完成时间";
+"sc_ComfirmTime" = "确认时间";
+"sc_CancleTime" = "取消时间";
+
+"sc_Enter_" = "请输入内容...";
 
 /*
  设置
@@ -52,5 +80,19 @@
 "sc_AccountAndSecurity" = "账号与安全";
 "sc_ClearCache" = "缓存清理";
 "sc_Feedback" = "意见反馈";
+"sc_Real_name_authentication" = "实名认证";
 "sc_Hide" = "屏蔽此人";
+
+/*
+ 举报
+ */
+"sc_SexualViolence" = "淫秽色情";
+"sc_MaliceAbusive" = "恶意辱骂";
+"sc_PersonalAttacks" = "人身攻击";
+"sc_Illegal" = "违法违规";
+"sc_CopyrightInfringement" = "侵犯版权";
+"sc_Spam" = "垃圾广告";
+"sc_Report" = "举报";
+"sc_Other" = "其他";
+"sc_Submit" = "提交";
 

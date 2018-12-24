@@ -50,7 +50,7 @@ class MyCardCouponContainerViewController: SCBaseVC {
     }
     
     private lazy var titles:[String] = {
-        return ["我领取的","我创建的"]
+        return [NSLocalizedString("sc_MyHelped", comment: "字符串"),"我创建的"]
     }()
     
     private lazy var layout: LTLayout = {

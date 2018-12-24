@@ -17,6 +17,9 @@ class RecieveTaskView: UIView {
     @IBOutlet weak var rewardLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var completeTimeLabel: UILabel!
+    
+    @IBOutlet weak var acceptedLb: UILabel!
+    
     @IBOutlet weak var contactBtn: UIButton!
     
     @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
@@ -30,10 +33,15 @@ class RecieveTaskView: UIView {
         self.init(frame: frame)
         self.recieTaskModel = recieTaskModel
         contentLabel.text = self.recieTaskModel?.intro
-        rewardLabel.text = "赏金\(self.recieTaskModel?.bounty ?? "") SEAT"
-        completeTimeLabel.text = "完成期限:\(self.recieTaskModel?.TaskReceive?.completeTime ?? "")"
+        
+        let sc_Reward = NSLocalizedString("sc_Reward", comment: "字符串")
+        rewardLabel.text = "\(sc_Reward)\(self.recieTaskModel?.bounty ?? "") SEAT"
+       let  sc_TimeLimit = NSLocalizedString("sc_TimeLimit", comment: "字符串")
+        completeTimeLabel.text = "\(sc_TimeLimit):\(self.recieTaskModel?.TaskReceive?.completeTime ?? "")"
         let  height = (self.recieTaskModel?.intro?.heightForAdaptive(Font: Font(14), CGFloat(SCREEN_WIDTH - 100)))! + 330.0
         contentViewHeight.constant = height
+        acceptedLb.text = NSLocalizedString("sc_accepted", comment: "字符串")
+        contactBtn.setTitle(NSLocalizedString("sc_Contact", comment: "字符串"), for: .normal)
     }
     
     override init(frame: CGRect) {

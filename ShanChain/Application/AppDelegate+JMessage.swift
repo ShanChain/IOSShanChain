@@ -68,9 +68,13 @@ extension AppDelegate: JMessageDelegate {
         let alertView = UIAlertView(title: "您的账号在其它设备上登录", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "重新登录")
         alertView.show()  
     }
+    
+
 }
 
 extension AppDelegate: UIAlertViewDelegate {
+    
+    
     
     private func pushToLoginView() {
         UserDefaults.standard.removeObject(forKey: kCurrentUserPassword)

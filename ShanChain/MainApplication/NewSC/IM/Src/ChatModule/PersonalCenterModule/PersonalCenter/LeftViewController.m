@@ -217,10 +217,10 @@
     }else if ([title isEqualToString:NSLocalizedString(@"sc_SignOut", nil)]){
         [[SCAppManager shareInstance]selectLogout];
        // [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
-    }else if ([title isEqualToString:@"实名认证"]){
+    }else if ([title isEqualToString:NSLocalizedString(@"sc_Real_name_authentication", nil)]){
         RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:realNameVC animated:YES];
-    }else if ([title isEqualToString:@"意见反馈"]){
+    }else if ([title isEqualToString:NSLocalizedString(@"sc_Feedback", nil)]){
         OpinionFeedbackViewController  *feedbackVC = [[OpinionFeedbackViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:feedbackVC animated:YES];
     }else{
@@ -294,14 +294,14 @@
         if ([SCCacheTool shareInstance].status.integerValue == 0) {
             _titleArray = @[
                             NSLocalizedString(@"sc_MyMessage", nil),
-                            @"意见反馈",
+                            NSLocalizedString(@"sc_Feedback", nil),
                             NSLocalizedString(@"sc_SignOut", nil)];
         }else{
             _titleArray = @[NSLocalizedString(@"sc_MyWallet", nil),
                             NSLocalizedString(@"sc_MyTask", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
-                            @"意见反馈",
-                            @"实名认证",
+                            NSLocalizedString(@"sc_Feedback", nil),
+                            NSLocalizedString(@"sc_Real_name_authentication", nil),
                             NSLocalizedString(@"sc_SignOut", nil)];
         }
         

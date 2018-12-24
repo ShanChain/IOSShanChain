@@ -83,6 +83,11 @@
     config.JChatProAuth = JMSSAGE_APPKEY;
     [JSHAREService setupWithConfig:config];
     [JSHAREService setDebug:YES];
+    
+    
+    
+    
+   //[self setupShareConfig];
 }
 
 - (void)setupShareConfig{
@@ -108,8 +113,8 @@
                                             switch (platformType) {
                                                 case SSDKPlatformTypeSinaWeibo:
                                                     //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
-                                                    [appInfo SSDKSetupSinaWeiboByAppKey:@"1752792699"
-                                                                              appSecret:@"5e5e8068d9d59243eea2b66c413be68e"
+                                                    [appInfo SSDKSetupSinaWeiboByAppKey:SinaWeibo_AppKey
+                                                                              appSecret:SinaWeibo_appSecret
                                                                             redirectUri:@"https://api.weibo.com/oauth2/default.html"
                                                                                authType:SSDKAuthTypeBoth];
                                                     break;

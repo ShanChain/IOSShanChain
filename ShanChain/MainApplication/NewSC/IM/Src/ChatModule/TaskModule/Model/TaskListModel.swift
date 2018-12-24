@@ -72,14 +72,15 @@ class TaskListModel: HandyJSON {
     var backViewLeftBtnTuple:(title:String,isShow:Bool,color:UIColor,isClick:Bool,width:Int){
         if Int(status!)! == 10 {
             if isMyBublish == false{
-                return ("帮不了",true,SC_ThemeMainColor,true,120)
+                return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,SC_ThemeMainColor,true,120)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
         
         if Int(status!)! == 15 {
             if isMyBublish == true{
-                return ("未完成",true,SC_ThemeMainColor,true,100)
+                
+                return (NSLocalizedString("sc_undone", comment: "字符串"),true,SC_ThemeMainColor,true,100)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
@@ -98,7 +99,7 @@ class TaskListModel: HandyJSON {
         
         if Int(status!)! == 15 {
             if isMyBublish == false{
-                return ("请等待赏主确认完成情况!",true,.gray,false,220)
+                return (NSLocalizedString("sc_waiting", comment: "字符串"),true,.gray,false,220)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
@@ -108,30 +109,30 @@ class TaskListModel: HandyJSON {
         }
         
         if Int(status!)! == 21 {
-            return ("确认任务未完成",true,.gray,false,180)
+            return (NSLocalizedString("sc_Failed", comment: "字符串"),true,.gray,false,180)
         }
         
         if Int(status!)! == 22 {
-            return ("没人帮",true,.gray,false,120)
+            return (NSLocalizedString("sc_Expired", comment: "字符串"),true,.gray,false,120)
         }
         
         if Int(status!)! == 25 {
-            return ("帮不了",true,.gray,false,120)
+            return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,.gray,false,120)
         }
-        return ("帮不了",true,.gray,false,120)
+        return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,.gray,false,120)
     }
     
     var backViewRightBtnTuple:(title:String,isShow:Bool,color:UIColor,isClick:Bool,width:Int){
         if Int(status!)! == 10 {
             if isMyBublish == false{
-                return ("帮完了",true,SC_ThemeMainColor,true,100)
+                return (NSLocalizedString("sc_Accomplished", comment: "字符串"),true,SC_ThemeMainColor,true,100)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
         
         if Int(status!)! == 15 {
             if isMyBublish == true{
-                return ("确认完成",true,SC_ThemeMainColor,true,120)
+                return (NSLocalizedString("sc_comfirm", comment: "字符串"),true,SC_ThemeMainColor,true,120)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
@@ -150,25 +151,25 @@ class TaskListModel: HandyJSON {
         
         if Int(status!)! == 15 {
             if isMyBublish == true{
-                return ("去确认",true,100)
+                return (NSLocalizedString("sc_GoToComfirm", comment: "字符串"),true,100)
             }
-            return ("等对方答谢",false,120)
+            return (NSLocalizedString("sc_waiting", comment: "字符串"),false,120)
         }
         
         if Int(status!)! == 20 {
-            return ("帮完了",false,100)
+            return (NSLocalizedString("sc_Accomplished", comment: "字符串"),false,100)
         }
         
         if Int(status!)! == 21 {
-            return ("没帮成任务取消",false,80)
+            return (NSLocalizedString("sc_Failed", comment: "字符串"),false,80)
         }
         
         if Int(status!)! == 22 {
-            return ("没人帮",false,80)
+            return (NSLocalizedString("sc_Expired", comment: "字符串"),false,80)
         }
         
         if Int(status!)! == 25 {
-            return ("帮不了",false,80)
+            return (NSLocalizedString("sc_Canceled", comment: "字符串"),false,80)
         }
         
         return ("",false,80)
