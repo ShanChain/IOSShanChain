@@ -8,6 +8,11 @@
 
 import Foundation
 
+/*
+ 公共接口
+ */
+
+public let  HotChatRoom_URL = "/web/api/sys/hotChatRoom" // 实名认证
 
 /*
  公共接口

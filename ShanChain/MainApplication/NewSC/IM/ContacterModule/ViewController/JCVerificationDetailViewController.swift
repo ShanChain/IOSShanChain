@@ -145,18 +145,18 @@ extension JCVerificationDetailViewController: UITableViewDataSource, UITableView
                 cell.detail = user?.username
                 cell.icon = UIImage.loadImage("com_icon_username")
             case 3:
-                cell.title = "性别"
+                cell.title = NSLocalizedString("sc_Gender", comment: "字符串")
                 cell.icon = UIImage.loadImage("com_icon_gender")
                 if user?.gender == .male {
-                    cell.detail = "男"
+                    cell.detail = NSLocalizedString("sc_male", comment: "字符串")
                 } else if user?.gender == .female {
-                    cell.detail = "女"
+                    cell.detail = NSLocalizedString("sc_female", comment: "字符串")
                 } else {
                     cell.detail = "保密"
                 }
                 
             case 4:
-                cell.title = "生日"
+                cell.title = NSLocalizedString("sc_Birthday", comment: "字符串")
                 cell.icon = UIImage.loadImage("com_icon_birthday")
                 cell.detail = user?.birthday
             case 5:

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewYearActiveRushModel.h"
 
 @interface NewYearActivitiesView : UIView
 
@@ -21,5 +22,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *levelNumberLb;
 
+- (instancetype)initWithFrame:(CGRect)frame activeEndInterval:(NSTimeInterval)endInterval;
+
+- (void)setActiveRushModel:(NewYearActiveRushModel *)rushModel;
+
+@property  (nonatomic,copy)  void (^activeEndBlock)(void);
 
 @end

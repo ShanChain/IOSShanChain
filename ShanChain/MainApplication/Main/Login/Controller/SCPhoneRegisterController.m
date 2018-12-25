@@ -199,7 +199,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor=RGB(255, 255, 255);
-    self.title=@"注册";
+    self.title=NSLocalizedString(@"sc_login_SignUp", nil);
     [self makeSubViews];
     [self setKeyBoardAutoHidden];
 }

@@ -102,7 +102,7 @@
 -(UIButton *)loginBtn{
     if (!_loginBtn) {
         _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+        [_loginBtn setTitle:NSLocalizedString(@"sc_login_Login", nil) forState:UIControlStateNormal];
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _loginBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_loginBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -128,7 +128,7 @@
 -(UIButton *)registerBtn{
     if (!_registerBtn) {
         _registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_registerBtn setTitle:@"注册" forState:UIControlStateNormal];
+        [_registerBtn setTitle:NSLocalizedString(@"sc_login_SignUp", nil) forState:UIControlStateNormal];
         [_registerBtn setTitleColor:Theme_MainThemeColor forState:UIControlStateNormal];
         [_registerBtn makeLayerWithRadius:8.0f withBorderColor:Theme_MainThemeColor withBorderWidth:1.0f];
         _registerBtn.titleLabel.font = [UIFont systemFontOfSize:14];

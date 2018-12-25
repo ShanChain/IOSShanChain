@@ -54,7 +54,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         _init()
         maskView = UIView.init(frame:chatView.frame)
         //        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
-        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 60, y: 64, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: ["sc_com_icon_item.1","sc_com_icon_item.2"])
+        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 60, y: 64, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: ["帮","玩"])
         suspendBallBtn = suspendBall
         suspendBallBtn?.isHidden = true
         suspendBallBtn?.bottomLayGuide = toolbar.contentSize.height
@@ -304,7 +304,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         var button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.contentEdgeInsets = UIEdgeInsetsMake(0, 10 + 8, 0, 8)
-        button.setTitle("发送", for: .normal)
+        button.setTitle(NSLocalizedString("sc_send", comment: "字符串"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundImage(UIImage.loadImage("chat_emoticon_btn_send_blue"), for: .normal)
         button.setBackgroundImage(UIImage.loadImage("chat_emoticon_btn_send_gray"), for: .disabled)
@@ -1651,6 +1651,7 @@ extension HHChatRoomViewController: SuspendBallDelegte{
         }else if tag == 0{
             // 查看任务
             let vc = TaskListContainerViewController()
+            vc.currentChatRoomID = self.currentChatRoomID
             vc._scrollToIndex = .my
             self.navigationController?.pushViewController(vc, animated: true)
         }

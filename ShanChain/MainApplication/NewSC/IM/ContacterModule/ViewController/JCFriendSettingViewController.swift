@@ -134,7 +134,7 @@ extension JCFriendSettingViewController: UITableViewDataSource, UITableViewDeleg
                     cell.isShowSwitch = true
                     cell.title = "加入黑名单"
                 case 2:
-                    cell.title = "举报"
+                    cell.title = NSLocalizedString("sc_Report", comment: "字符串")
                     cell.accessoryType = .disclosureIndicator
                 default:
                     break

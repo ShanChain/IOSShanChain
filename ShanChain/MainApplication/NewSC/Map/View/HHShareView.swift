@@ -136,6 +136,7 @@ class HHShareView: UIView {
         let shareEntity = ShareContentModel.init()
         shareEntity.title = shareModel?.title;
         shareEntity.thumbnail = shareModel?.thumbnail
+        shareEntity.text = shareModel?.intro;
         if self.shareType == .JSHARELink {
               shareEntity.url = shareModel?.url
              _shareMediaType(shareEntity: shareEntity, PlatforType: PlatforType, mediaType: JSHAREMediaType.JSHARELink.rawValue)

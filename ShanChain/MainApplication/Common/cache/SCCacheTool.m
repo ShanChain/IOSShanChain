@@ -367,5 +367,12 @@ static NSDateFormatter* DateFormat(){
     return _chatRoomId;
 }
 
+-(WalletCurrencyModel *)currencyModel{
+    if (!_currencyModel) {
+        return [[WalletCurrencyModel alloc]init];
+    }
+    return _currencyModel;
+}
+
 @end
     

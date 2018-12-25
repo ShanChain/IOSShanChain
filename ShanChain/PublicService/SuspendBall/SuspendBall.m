@@ -346,8 +346,9 @@ static CGFloat btnSmallImageWidth = 22;
 
         for (int i = 0; i < self.imageNameGroup.count; i++) {
             UIButton *functionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [functionBtn setImage:[self resizeImage:[UIImage imageNamed:self.imageNameGroup[i]] wantSize:CGSizeMake(btnSmallImageWidth, btnSmallImageWidth)] forState:UIControlStateNormal];
-            
+//            [functionBtn setImage:[self resizeImage:[UIImage imageNamed:self.imageNameGroup[i]] wantSize:CGSizeMake(btnSmallImageWidth, btnSmallImageWidth)] forState:UIControlStateNormal];
+            functionBtn.backgroundColor = Theme_MainThemeColor;
+            [functionBtn setTitle:self.imageNameGroup[i] forState:0];
             functionBtn.lhz_width = fullButtonWidth;
             functionBtn.lhz_height = fullButtonWidth;
             functionBtn.lhz_y = 0;
@@ -355,7 +356,7 @@ static CGFloat btnSmallImageWidth = 22;
             
             
             functionBtn.layer.cornerRadius = fullButtonWidth / 2;
-            functionBtn.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.6];
+//            functionBtn.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.6];
             functionBtn.tag = i;
             [functionBtn addTarget:self action:@selector(menuBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             [_functionMenu addSubview:functionBtn];

@@ -110,7 +110,7 @@
     UILabel  *nikeNameLb = [[UILabel alloc]init];
     nikeNameLb.textColor = [UIColor whiteColor];
     nikeNameLb.font = Font(17);
-    NSString  *name = [SCCacheTool shareInstance].characterModel.characterInfo.name ? :@"暂无昵称";
+    NSString  *name = [SCCacheTool shareInstance].characterModel.characterInfo.name ? :NSLocalizedString(@"sc_whatsYourName", nil);
     nikeNameLb.text = name;
     [self.view addSubview:nikeNameLb];
     [nikeNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -124,7 +124,7 @@
     signatureLb.textColor = [UIColor whiteColor];
     signatureLb.font = Font(13);
     signatureLb.numberOfLines = 0;
-    signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.signature ? :@"暂无签名";
+    signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.signature ? :NSLocalizedString(@"sc_whatsUp", nil);
     [self.view addSubview:signatureLb];
     [signatureLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(nikeNameLb.mas_bottom).offset(20);

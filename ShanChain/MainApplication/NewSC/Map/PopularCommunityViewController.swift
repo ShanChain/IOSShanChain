@@ -16,6 +16,8 @@ class PopularCommunityViewController: SCBaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var dataList:[HotCommunityModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "热门元社区"
@@ -23,21 +25,37 @@ class PopularCommunityViewController: SCBaseVC {
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
         tableView.showsVerticalScrollIndicator = false
         tableView.register(UINib.init(nibName: k_cellID, bundle: nil), forCellReuseIdentifier: k_cellID)
-        
-        let fib = generateFibonaccis(10)
-        print(fib.map({"\($0)"}).joined(separator: " "))
-    }
-    
-    
-    func generateFibonaccis(_ n: Int) -> [Int] {
-        var fib = Array(repeating: 1, count: n)
-        for i in 2..<n {
-            fib[i] = fib[i - 2] + fib[i - 1]
-        }
-        return fib
-    }
-    
 
+        _requstData(false) {}
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.showNavigationBarWithNormalColor()
+    }
+    
+    @objc fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
+        
+        SCNetwork.shareInstance().hh_Get(withUrl: HotChatRoom_URL, parameters: [:], showLoading: true) { (baseModel, error) in
+            if error != nil{
+                return
+            }
+            
+            let data = baseModel?.data as! [Any]
+            if data.count  == 0{
+                 self.noDataTipShow(self.tableView, content:"暂无数据", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
+                self.dataList = []
+                self.tableView.reloadData()
+                return;
+            }
+            if let datas:[HotCommunityModel] = [HotCommunityModel].deserialize(from: data) as? [HotCommunityModel]{
+                self.dataList = datas
+                self.tableView.reloadData()
+            }
+            
+        }
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -50,7 +68,10 @@ class PopularCommunityViewController: SCBaseVC {
 extension PopularCommunityViewController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        if dataList.count > 0 {
+            return dataList.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,6 +79,8 @@ extension PopularCommunityViewController:UITableViewDelegate,UITableViewDataSour
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: k_cellID, for: indexPath) as! HotCommunityCell
+        cell.joinBtn.tag = indexPath.section
+        cell.delegate = self
         return cell
     }
     
@@ -82,6 +105,23 @@ extension PopularCommunityViewController:UITableViewDelegate,UITableViewDataSour
             return
         }
         cell.selectionStyle = .none
+        let hotModel = self.dataList[indexPath.section]
+        cell.coverIcon._sd_setImage(withURLString: hotModel.background)
+        cell.mapIcon._sd_setImage(withURLString: hotModel.thumbnails)
+        cell.nameLb.text = hotModel.roomName
     }
     
 }
+
+extension PopularCommunityViewController:HotCommunityCellProtocol{
+    func joinChatRoomFor(index: Int) {
+        let hotModel = self.dataList[index]
+        JGUserLoginService.jg_enterchatRoom(roomId: hotModel.roomId!) { (conversation , error) in
+            if error == nil && conversation != nil{
+                let chatRoomVC:HHChatRoomViewController = HHChatRoomViewController.init(conversation: conversation!, isJoinChat: false, navTitle: hotModel.roomName!)
+                self.pushPage(chatRoomVC, animated: true)
+            }
+        }
+    }
+}
+

@@ -160,18 +160,18 @@ extension JCUserInfoViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.detail = user.username
                 cell.icon = UIImage.loadImage("com_icon_username")
             case 3:
-                cell.title = "性别"
+                cell.title = NSLocalizedString("sc_Gender", comment: "字符串")
                 cell.icon = UIImage.loadImage("com_icon_gender")
                 switch user.gender {
                 case .male:
-                    cell.detail = "男"
+                    cell.detail = NSLocalizedString("sc_male", comment: "字符串")
                 case .female:
-                    cell.detail = "女"
+                    cell.detail = NSLocalizedString("sc_female", comment: "字符串")
                 case .unknown:
                     cell.detail = "保密"
                 }
             case 4:
-                cell.title = "生日"
+                cell.title = NSLocalizedString("sc_Birthday", comment: "字符串")
                 cell.icon = UIImage.loadImage("com_icon_birthday")
                 cell.detail = user.birthday
             case 5:

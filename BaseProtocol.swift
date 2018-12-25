@@ -22,3 +22,9 @@ protocol TaskListCellProtocol: NSObjectProtocol {
 protocol HHNumberPeopleListCellProtocol:NSObjectProtocol {
     func clickDialogueForChat(index:Int) // 点击会话
 }
+
+protocol HotCommunityCellProtocol:NSObjectProtocol {
+    func joinChatRoomFor(index:Int) // 进入聊天室
+}
+
+

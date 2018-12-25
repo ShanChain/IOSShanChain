@@ -325,8 +325,8 @@ internal class SAIInputAccessoryView: UIView {
         _recordButton.setTitleColor(UIColor(netHex: 0x5A5A5A), for: .normal)
         _recordButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         _recordButton.translatesAutoresizingMaskIntoConstraints = false
-        _recordButton.setTitle("按住 说话", for: .normal)
-        _recordButton.setTitle("松开 发送", for: .highlighted)
+        _recordButton.setTitle(NSLocalizedString("sc_HoldToTalk", comment: "字符串"), for: .normal)
+        _recordButton.setTitle(NSLocalizedString("sc_ReleaseSend", comment: "字符串"), for: .highlighted)
         _recordButton.setTitleColor(.black, for: .normal)
         
         _recordButton.addTarget(self, action: #selector(_touchDown), for: .touchDown)

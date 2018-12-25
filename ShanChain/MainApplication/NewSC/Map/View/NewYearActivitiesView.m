@@ -14,19 +14,28 @@
      dispatch_source_t _timer;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame activeEndInterval:(NSTimeInterval)endInterval
 {
     self = [super initWithFrame:frame];
     if (self) {
         self = [NewYearActivitiesView instanceWithView];
         self.frame = frame;
-        [self setUp];
+        [self setUp:endInterval];
     }
     return self;
 }
 
-- (void)setUp{
-    MCDate  *deadlineDate = [MCDate dateWithInterval:1546099200];
+
+-(void)setActiveRushModel:(NewYearActiveRushModel *)rushModel{
+    
+    self.levelNumberLb.text = [NSString stringWithFormat:@"第%@关",rushModel.rushActivityVo.level];
+    self.laveNumberLb.text = rushModel.rushActivityVo.surplusCount;
+    self.allMoneyLb.text = [NSString stringWithFormat:@"￥ %.2f",(rushModel.rushActivityVo.totalAmount).doubleValue];
+    self.addMoneyLb.text = [NSString stringWithFormat:@"+ %.2f",(rushModel.rushActivityVo.reward).doubleValue];
+}
+
+- (void)setUp:(NSTimeInterval)endInterval{
+    MCDate  *deadlineDate = [MCDate dateWithInterval:endInterval];
     NSInteger secondsCountDown = deadlineDate.date.timeIntervalSince1970 - [NSDate date].timeIntervalSince1970;
     __weak __typeof(self) weakSelf = self;
     if (_timer == nil) {
@@ -40,14 +49,14 @@
                     dispatch_source_cancel(_timer);
                     _timer = nil;
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf removeFromSuperview];
+                        weakSelf.activeEndBlock();
                     });
                 } else { // 倒计时重新计算 时/分/秒
                     NSInteger days = (int)(timeout/(3600*24));
                     NSInteger hours = (int)((timeout-days*24*3600)/3600);
                     NSInteger minute = (int)(timeout-days*24*3600-hours*3600)/60;
                     NSInteger second = timeout - days*24*3600 - hours*3600 - minute*60;
-                    NSString *strTime = [NSString stringWithFormat:@"活动倒计时 %02ld : %02ld : %02ld", hours, minute, second];
+                    NSString *strTime = [NSString stringWithFormat:@"%02ld : %02ld : %02ld", hours, minute, second];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (days == 0) {
                             weakSelf.countdownLb.text = strTime;

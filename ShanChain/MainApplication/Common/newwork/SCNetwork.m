@@ -312,7 +312,6 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     NSString *userId = @"";
     userId = [[SCCacheTool shareInstance] getCurrentUser];
     NSString *token = @"";
-    NSString *userIdString = [userId stringByAppendingString:@"_"];
     if(userId && ![userId isEqualToString:@""] ){
         token = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:userId andKey:@"token"];
     }
@@ -325,17 +324,20 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         url = [SC_BASE_URL stringByAppendingString:url];
     }
     [self apendTOBaseParams:params];
-    [_afManager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [_afManager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
          NSString  *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
         if ([code isEqualToString:SC_COMMON_SUC_CODE] || [code isEqualToString:SC_WALLET_COMMON_SUC_CODE]) {
             SCLog(@"success");
             success(responseObject);
         }else if ([code isEqualToString:SC_REALNAME_AUTHENTICATE]){
             [[SCAppManager shareInstance] realNameAuthenticate];
-        } else {
+        } else if([code isEqualToString:SC_REQUEST_TOKEN_EXPIRE]){
+            [[SCAppManager shareInstance] logout];
+        }else{
             SCLog(@"Request error%@", responseObject);
             failure([SCNetworkError errorWithCode:(NSInteger)responseObject[@"code"] msg:@"Request data error"]);
         }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
     }];

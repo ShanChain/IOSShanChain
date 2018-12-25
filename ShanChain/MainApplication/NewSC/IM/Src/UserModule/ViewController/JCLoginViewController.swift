@@ -100,7 +100,7 @@ class JCLoginViewController: UIViewController {
         button.frame = CGRect(x: 38, y: 108 + 185 + 80, width: self.view.width - 76, height: 40)
         button.layer.cornerRadius = 3.0
         button.layer.masksToBounds = true
-        button.setTitle("登录", for: .normal)
+        button.setTitle(NSLocalizedString("sc_login_Login", comment: "字符串"), for: .normal)
         button.addTarget(self, action: #selector(_userLogin), for: .touchUpInside)
         return button
     }()

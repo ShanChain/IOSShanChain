@@ -16,9 +16,13 @@
 #import "SCBaseNavigationController.h"
 #import "NewYearActivitiesView.h"
 #import "CommonShareModel.h"
+#import "NewYearActiveInfoModel.h"
+#import "NewYearActiveRushModel.h"
 
-
-@interface BMKTestLocationViewController ()< UITableViewDelegate,CLLocationManagerDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,BMKMapViewDelegate>
+@interface BMKTestLocationViewController ()< UITableViewDelegate,CLLocationManagerDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,BMKMapViewDelegate>{
+     NSTimer  * _timer;
+     NSTimer  * _timer1;
+}
 @property (nonatomic, strong)BMKLocationService *locService;
 @property (nonatomic, strong)BMKGeoCodeSearch *searcher;
 @property BOOL isGeoSearch;
@@ -58,6 +62,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLb;
 
 @property (nonatomic,strong)  UIImage  *takeImage;
+
+@property (nonatomic,strong)  NewYearActiveInfoModel  *activeInfo;
+@property (nonatomic,strong)  NewYearActiveRushModel  *activeInRush;
+
+@property (nonatomic,assign)    BOOL    isActiveStar; //活动是否开始
+@property (nonatomic,strong)    NewYearActivitiesView    *activeView;
+
 
 @end
 
@@ -113,20 +124,90 @@
 }
 
 
+-(void)sc_newYearActiveInfo{
+    
+    self.isActiveStar = NO;
+    
+    // 活动开始时间
+    MCDate *activeStartDate = [MCDate dateWithInterval:self.activeInfo.startTimeInterval];
+    // 活动结束时间
+    MCDate *activeEndDate = [MCDate dateWithInterval:self.activeInfo.endTimeInterval];
+    
+    // 活动已结束
+    if ([activeEndDate isEarlierThanOrEqualTo:[MCDate date]]) {
+        return;
+    }
+    
+//    // 活动未开始倒计时
+//    if ([[MCDate date] isEarlierThanOrEqualTo:activeStartDate]) {
+//        _timer1 = [NSTimer scheduledTimerWithTimeInterval:1
+//                                                  target:self
+//                                                selector:@selector(_startTiveCountdown)
+//                                                userInfo:nil
+//                                                 repeats:YES];
+//    }
+    
+    // 出现活动倒计时
+    NSInteger  days = [activeStartDate daysFrom:[MCDate date]];
+    if (days == 0) {
+        NSInteger  second = [activeStartDate secondsFrom:[MCDate date]];
+        if (second > 0) {
+            days = 1;
+        }
+    }
+    
+    if (days > 0 && days < 3) {
+        self.topView.hidden = NO;
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                  target:self
+                                                selector:@selector(activeCountdown)
+                                                userInfo:nil
+                                                 repeats:YES];
+        self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld",days] color:[UIColor redColor] font:Font(18) secendString:NSLocalizedString(@"sc_NewYear_day", nil) color:Theme_MainTextColor font:Font(14)];
+    }
+    
+    // 活动开始
+    if ([activeStartDate isEarlierThanOrEqualTo:[MCDate date]]) {
+        self.topView.hidden = YES;
+        self.isActiveStar = YES;
+        [self rushActiveStar];
+    }
+}
+
+// 活动开始倒计时倒计时
+- (void)_startTiveCountdown{
+    
+}
+
+// 活动开始倒计时
+- (void)activeCountdown{
+    
+    NSInteger  second = self.activeInfo.startTimeInterval - [NSDate date].timeIntervalSince1970;
+    if (second == 0) {
+        // 活动开始
+        self.topView.hidden = YES;
+        self.isActiveStar = YES;
+        [self rushActiveStar];
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
+
 
 -(void)sc_newYearActive{
     
-    MCDate *activeDate = [MCDate dateWithInterval:Test_ActiveTimestamp];
-    NSInteger  days = [activeDate daysFrom:[MCDate date]];
-    if (days > 0) {
-        self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld",days] color:[UIColor redColor] font:Font(18) secendString:@"天" color:Theme_MainTextColor font:Font(14)];
-    }else{
-        self.topView.hidden = YES;
-        NewYearActivitiesView *activeView = [[NewYearActivitiesView alloc]initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH - 80, 70)];
+    [[SCNetwork shareInstance]HH_GetWithUrl:NewYearActiveInfo_URL parameters:@{} showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error){
+        if (error) {
+            [HHTool showError:error.localizedDescription];
+            return;
+        }
         
-         [self.mapView addSubview:activeView];
-         [self.mapView bringSubviewToFront:activeView];
-    }
+        self.activeInfo = [NewYearActiveInfoModel yy_modelWithDictionary:baseModel.data];
+        if (self.activeInfo.startTime && self.activeInfo.endTime) {
+            [self sc_newYearActiveInfo];
+            
+        }
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -251,7 +332,7 @@
 //    [self.view addSubview:receiveView];
     
     // 我的规则
-    NewYearActivityRuleView *ruleView = [[NewYearActivityRuleView alloc]initWithFrame:self.view.frame];
+    NewYearActivityRuleView *ruleView =  [[NewYearActivityRuleView alloc]initWithRuleDes:self.activeInfo.ruleDescribe frame:self.view.frame];
     [self.view addSubview:ruleView];
     
 }
@@ -291,14 +372,6 @@
     
     PopularCommunityViewController *popularVC = [[PopularCommunityViewController alloc]init];
     [self pushPage:popularVC Animated:YES];
-    
-    
-//    [PublicShareService commonShareWith:HHShareType_IMAGE callBlock:^(HHBaseModel *baseModel, NSError *error) {
-//        CommonShareModel  *shareModel = [CommonShareModel yy_modelWithDictionary:baseModel.data];
-//        // 活动分享
-//        HHShareView  *shareView = [[HHShareView alloc]initWithFrame:self.view.frame shareImage:nil type:4 shareModel:shareModel];
-//        [self.view addSubview:shareView];
-//    }];
    
 //    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:0];
 //    [self pushPage:footprintVC
@@ -334,6 +407,7 @@
         NSLog(@"逆geo检索发送失败");
     }
     
+    
 
     
 }
@@ -351,7 +425,7 @@
         if(self.mapView.annotations.count == 0){
             BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
             annotation.coordinate = coordinate;
-            annotation.title = @"您当前位置";
+            annotation.title = NSLocalizedString(@"sc_map_Imhere", nil);
             [self.mapView addAnnotation:annotation];
         }
     }
@@ -484,7 +558,7 @@
     NSString  *latitude = [NSString stringWithFormat:@"%f",coordinate.latitude];
     NSString  *longitude = [NSString stringWithFormat:@"%f",coordinate.longitude];
     weakify(self);
-    [HHTool show:@"正在为您查找当前地址匹配的广场..."];
+    [HHTool show:NSLocalizedString(@"sc_map_Locating", nil)];
     [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
         [HHTool dismiss];
         NSDictionary  *dic = responseObject[@"data"];
@@ -505,7 +579,66 @@
     } failure:^(NSError *error) {
         [HHTool showError:error.localizedDescription];
     }];
+    
+    
+    if (self.isActiveStar) {
+        [self rushActiveStar];
+    }
 }
+
+// 活动结束
+- (void)activeEnd{
+    self.isActiveStar = NO;
+    self.activeRuleBtn.hidden = YES;
+    self.activeView.hidden = YES;
+    self.topView.hidden = YES;
+}
+
+
+// 活动闯关
+- (void)rushActiveStar{
+    
+    [[SCNetwork shareInstance]HH_GetWithUrl:NewYearActiveRush_URL parameters:@{@"currentUserId":SCCacheTool.shareInstance.getCurrentUser,@"currentCharaterId":SCCacheTool.shareInstance.getCurrentCharacterId} showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+        if (error) {
+            return ;
+        }
+        
+        NewYearActiveRushModel  *rushModel = [NewYearActiveRushModel yy_modelWithDictionary:baseModel.data];
+        if (rushModel.rushActivityVo.clearance) {
+            [self activeEnd];
+            return;
+        }
+        
+        self.activeView = [[NewYearActivitiesView alloc]initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH - 80, 70) activeEndInterval:self.activeInfo.endTimeInterval];
+        [self.mapView addSubview:self.activeView];
+        [self.mapView bringSubviewToFront:self.activeView ];
+        [self.activeView setActiveRushModel:rushModel];
+        weakify(self)
+        self.activeView.activeEndBlock = ^{
+            [weak_self activeEnd];
+        };
+        // 分享
+        if (rushModel.rushActivityVo.surplusCount.integerValue == 0) {
+            [self shareActiveRewardWithLevel:rushModel.rushActivityVo.level.integerValue];
+        }
+        
+    }];
+}
+
+- (void)shareActiveRewardWithLevel:(NSInteger)level{
+    weakify(self);
+    [PublicShareService commonShareWith:level == 4 ? HHShareType_IMAGE:HHShareType_WEBPAGE callBlock:^(HHBaseModel *baseModel, NSError *error) {
+        CommonShareModel  *shareModel = [CommonShareModel yy_modelWithDictionary:baseModel.data];
+            // 活动分享
+        HHShareView  *shareView = [[HHShareView alloc]initWithFrame:self.view.frame shareImage:nil type:level == 4? level:3 shareModel:shareModel];
+            [self.view addSubview:shareView];
+        shareView.closure = ^{
+            [weak_self rushActiveStar];
+        };
+    }];
+    
+}
+
 
 #pragma mark -- 添加地址围栏
 - (void)sc_addOverlayWithModel:(CoordnateInfosModel*)model{
@@ -564,7 +697,7 @@
             [HHTool showChrysanthemum];
             [self getAllChatRoomConversation];
         }else{
-            [HHTool show:@"正在获取该元社区信息，请稍等"];
+            [HHTool show:NSLocalizedString(@"sc_map_Loading", nil)];
             self.isClickJoin = YES;
         }
         

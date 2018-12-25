@@ -56,16 +56,18 @@
 
 - (void)setUI{
     
+    self.phoneNumberFid.placeholder = NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil);
+    
     if (self.loginType == LoginType_bindPhoneNumber) {
         self.stackView.hidden = YES;
         self.titleLb.hidden = YES;
         self.line1.hidden = YES;
         self.line2.hidden = YES;
-        self.title = @"关联手机号";
+        self.title = NSLocalizedString(@"sc_login_Bind", nil);
     }else{
-        self.title = @"动态验证码登录";
+        self.title = NSLocalizedString(@"sc_login_useSMS", nil);
     }
-    [self.loginBtn setTitle:self.loginType == LoginType_bindPhoneNumber? @"确定":@"登录" forState:0];
+    [self.loginBtn setTitle:self.loginType == LoginType_bindPhoneNumber? @"确定":NSLocalizedString(@"sc_login_Login", nil) forState:0];
     [self.QQBtn setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
     [self.weiboBtn setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
     [self.wechatBtn setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
@@ -73,11 +75,11 @@
     WEAKSELF
     [[self.getVerifyCodeBtn rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(__kindof UIControl * _Nullable x) {
         if (weakSelf.phoneNumberFid.text.length == 0) {
-            [HHTool showError:@"手机号不能为空"];
+            [HHTool showError:NSLocalizedString(@"sc_login_phoneNumberCannotEmpty", nil)];
             return ;
         }
         if (![weakSelf.phoneNumberFid.text isValidPhoneNumber]) {
-            [HHTool showError:@"请输入的手机号有误"];
+            [HHTool showError:@"输入的手机号有误"];
             return ;
         }
         [[SCNetwork shareInstance] v1_postWithUrl:Verifycode_URL params:@{@"mobile":weakSelf.phoneNumberFid.text} showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
@@ -86,7 +88,7 @@
             }
             
             weakSelf.verifyCodeModel = [VerifyCodeModel yy_modelWithDictionary:baseModel.data];
-            [weakSelf.getVerifyCodeBtn startWithTime:59 title:@"重新获取" countDownTitle:@"s" mainColor:Theme_MainTextColor countColor:Theme_MainThemeColor];
+            [weakSelf.getVerifyCodeBtn startWithTime:59 title:NSLocalizedString(@"sc_login_Resend", nil) countDownTitle:@"s" mainColor:Theme_MainTextColor countColor:Theme_MainThemeColor];
             
         }];
     }];

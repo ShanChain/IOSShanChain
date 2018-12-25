@@ -82,7 +82,7 @@
                     }
                 }];
             }else if (error.code == 6002){
-                [HHTool showError:@"连接超时，请稍后再试~"];
+                [HHTool showError:NSLocalizedString(@"sc_NetworkIsNot", nil)];
             }else if (error.code == 800016){
                 // 设备不匹配，重新登录
                 [HHTool dismiss];
@@ -101,6 +101,12 @@
 
 @implementation WalletCurrencyModel
 
+-(NSNumber *)rate{
+    if (!_rate) {
+        return @(10);
+    }
+    return _rate;
+}
 
 
 @end

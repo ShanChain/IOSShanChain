@@ -119,8 +119,8 @@
         
         NSTimeInterval time =(long long) [[NSDate date] timeIntervalSince1970];
         NSString *typeAppend = [loginTypeStr stringByAppendingString:[NSString stringWithFormat:@"%.0f",time]];
-        NSString *encryptAccount = [SCAES encryptShanChainWithPaddingString:typeAppend withContent:userInfo.openid];
-        NSString *encryptPassword = [SCAES encryptShanChainWithPaddingString:[typeAppend stringByAppendingString:userInfo.openid] withContent:pwdMD5];
+        NSString *encryptAccount = [SCAES encryptShanChainWithPaddingString:typeAppend withContent:userInfo.openid ?:userInfo.uid];
+        NSString *encryptPassword = [SCAES encryptShanChainWithPaddingString:[typeAppend stringByAppendingString:userInfo.openid ?:userInfo.uid] withContent:pwdMD5];
         
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         [params setObject:userInfo.name forKey:@"nickName"];

@@ -111,8 +111,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
             automaticallyAdjustsScrollViewInsets = false
         }
         _requstData(false) {}
-        
-       
+        NotificationCenter.default.addObserver(self, selector: #selector(_requstData(_:_:)), name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
     }
    
     func _getUrl() -> String {
@@ -133,7 +132,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
        
     }
     
-    fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
+    @objc fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
         SCNetwork.shareInstance().v1_post(withUrl: _getUrl(), params: _requstPrameter(isLoad), showLoading: true) { (baseModel, error) in
             
             if error != nil{
@@ -163,7 +162,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
             }
             
             if self.dataList.count == 0 {
-                self.noDataTipShow(self.tableView, content: "您还没有任务记录喔，到广场中去发布你的第一个任务，或者领取任务吧~", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
+                self.noDataTipShow(self.tableView, content:NSLocalizedString("sc_taskEmpty", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
                 self.tableView.isScrollEnabled = false
             }else{
                 self.tableView.isScrollEnabled = true

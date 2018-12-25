@@ -27,6 +27,9 @@ class HotCommunityCell: UITableViewCell {
     
     @IBOutlet weak var joinBtn: UIButton!
     
+    weak var delegate: HotCommunityCellProtocol?
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,6 +39,14 @@ class HotCommunityCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    
+    @IBAction func joinAction(_ sender: UIButton) {
+        if let delegate = delegate {
+            delegate.joinChatRoomFor(index: sender.tag)
+        }
+        
     }
     
 }

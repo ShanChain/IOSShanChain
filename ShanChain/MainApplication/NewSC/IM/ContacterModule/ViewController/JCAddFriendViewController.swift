@@ -18,7 +18,7 @@ class JCAddFriendViewController: UIViewController {
         _init()
     }
 
-    private lazy var navRightButton: UIBarButtonItem = UIBarButtonItem(title: "发送", style: .plain, target: self, action: #selector(_addFriend))
+    private lazy var navRightButton: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("sc_send", comment: "字符串"), style: .plain, target: self, action: #selector(_addFriend))
     fileprivate lazy var textField: UITextField = UITextField(frame: CGRect(x: 0, y: 64, width: self.view.width, height: 45))
 
     //MARK: - private func

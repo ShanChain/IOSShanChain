@@ -20,6 +20,13 @@ class NewYearActivityRuleView: UIView {
         self.removeFromSuperview()
     }
     
+    
+    
+    convenience init(ruleDes:String?, frame: CGRect) {
+        self.init(frame: frame)
+        textView.text = ruleDes ?? ""
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = frame

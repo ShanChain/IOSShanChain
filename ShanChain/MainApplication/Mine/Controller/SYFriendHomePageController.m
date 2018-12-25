@@ -408,7 +408,7 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    NSArray *titles = @[@"举报"];
+    NSArray *titles = @[NSLocalizedString(@"sc_Report", comment: "字符串")];
     [self addActionTarget:alert titles:titles];
     [self addCancelActionTarget:alert title:@"取消"];
     [self presentViewController:alert animated:YES completion:nil];

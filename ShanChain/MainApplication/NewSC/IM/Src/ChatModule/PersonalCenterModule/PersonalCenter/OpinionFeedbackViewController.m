@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = NSLocalizedString(@"sc_Feedback", nil),
-    self.textView.placeholder = @"请输入您要反馈的建议...";
+    self.textView.placeholder = NSLocalizedString(@"sc_TellUsProblem", nil);
     
 }
 

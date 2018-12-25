@@ -8,7 +8,7 @@
 
 
 
-"sc_enter" = "Enter";
+"sc_enter" = "Go";
 "sc_E" = "E";
 "sc_W" = "W";
 "sc_N" = "N";
@@ -28,10 +28,24 @@
 
 
 /*
+ 聊天
+ */
+
+"sc_HoldToTalk" = "Hold to talk";
+"sc_ReleaseSend" = "send";
+"sc_send" = "send";
+"sc_Gender" = "Gender";
+"sc_female" = "female";
+"sc_male" = "male";
+"sc_Birthday" = "Birthday";
+"sc_Report" = "Report";
+
+
+/*
  任务
  */
 
-"sc_RewardTask" = "Reward Task";
+"sc_RewardTask" = "Help Center";
 "sc_MyTask" = "My help";
 "sc_Tasklist" = "Task list";
 
@@ -51,7 +65,7 @@
 "sc_TimeLimit" = "Time limit";
 "sc_Describe" = "Describe";
 "sc_Reward" = "Reward";
-"sc_post" = "post";
+"sc_post" = "Publish";
 "sc_undone" = "undone";
 "sc_comfirm" = "comfirm";
 "sc_Accomplished" = "Accomplished";
@@ -59,7 +73,9 @@
 "sc_Canceled" = "Canceled";
 "sc_Expired" = "Expired";
 "sc_waiting" = "waiting";
-
+"sc_taskEmpty" = "It's empty here!Go to post your first task!";
+"sc_helpFailed" = "help failed";
+"sc_helpAccomplished" = "help accomplished";
 
 
 "sc_PostTime" = "post time";
@@ -69,6 +85,13 @@
 "sc_CancleTime" = "cancle time";
 
 "sc_Enter_" = "enter...";
+"sc_rewardFid" = "￥";
+"sc_choose" = "choose";
+
+// 提示语
+"sc_IncorrectFormat" = "Incorrect format";
+"sc_LetsStayTuned" = "Let's stay tuned!";
+
 
 
 "sc_PostTask" = "I need help";
@@ -84,8 +107,10 @@
 "sc_AccountAndSecurity" = "Account and Security";
 "sc_ClearCache" = "Clear cache";
 "sc_Feedback" = "Help & Feedback";
-"sc_Real_name_authentication" = "Real-name authentication";
+"sc_Real_name_authentication" = "ID verification";
 "sc_Hide" = "Hide";
+"sc_whatsYourName" = "what' s your name？";
+"sc_whatsUp" = "What's up？";
 
 /*
  举报
@@ -100,5 +125,43 @@
 "sc_Other" = "Other";
 "sc_Submit" = "Submit";
 
+/*
+ 跨年活动
+ */
+
+"sc_NewYear_day" = "day";
+
+
+
+/*
+ 提示语
+ */
+
+"sc_map_Locating" = "Locating...";
+"sc_map_Loading" = "Loading...";
+"sc_map_Imhere" = "I'm here";
+"sc_NetworkIsNot" = "Network is not available,please try again later";
+"sc_TellUsProblem" = "Tell us what's problem you meet";
+
+
+/*
+ 登录
+ */
+"sc_login_Bind" = "Bind";
+"sc_login_useSMS " = "use SMS to log in";
+"sc_login_Login" = "Log in";
+"sc_login_SignUp" = "Sign up";
+"sc_login_phoneNumberCannotEmpty" = "phone number cannot be empty";
+"sc_login_pleaseEnterPhoneNumber" = "please enter phone number";
+"sc_login_Resend" = "Resend";
+"sc_login_Confirm" = "Confirm";
+
+"sc_login_others" = "others";
+"sc_login_SMSLogIn" = "SMS log in";
+"sc_login_forgetPassword" = "forget password";
+"sc_login_pleaseEnterPassword" = "please enter password";
+"sc_login_pleaseEnterPhoneNumber" = "please enter phone number";
+"sc_login_LogInMJ" = "Log in";
+"sc_login_loggingIn" = "logging in";
 
 

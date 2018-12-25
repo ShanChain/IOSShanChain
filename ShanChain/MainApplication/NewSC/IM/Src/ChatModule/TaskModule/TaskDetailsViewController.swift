@@ -93,6 +93,7 @@ class TaskDetailsViewController: SCBaseVC {
         let iconTap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(_tapGestureAvatar))
         headerIcon.addGestureRecognizer(iconTap)
         self.taskTriggerBtn.setTitle(NSLocalizedString("sc_giveHand", comment: "字符串"), for: .normal)
+        self.sendBtn.setTitle(NSLocalizedString("sc_send", comment: "字符串"), for: .normal)
         
     }
     

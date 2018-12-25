@@ -56,6 +56,8 @@ class PublishTaskView: UIView {
         contentView = loadViewFromNib()
         publishBtn.addTarget(self, action: #selector(_publishPressed), for: .touchUpInside)
         taskDesTextFid.placeholder = NSLocalizedString("sc_Enter_", comment: "字符串")
+        rewardTextFid.placeholder = NSLocalizedString("sc_rewardFid", comment: "字符串")
+        selectTimeTextFid.placeholder = NSLocalizedString("sc_choose", comment: "字符串")
         timeLimitLb.text = NSLocalizedString("sc_TimeLimit", comment: "字符串")
         needHelpLb.text = NSLocalizedString("sc_PostTask", comment: "字符串")
         desLb.text = NSLocalizedString("sc_Describe", comment: "字符串")
@@ -207,7 +209,7 @@ extension PublishTaskView:UITextFieldDelegate{
     
     func calculatingExchangeRate(rmb:String){
         if Float(rmb) == nil {
-            HHTool.showError("金额格式不正确")
+            HHTool.showError(NSLocalizedString("sc_IncorrectFormat", comment: "字符串"))
             return
         }
         let rete:Float = Float(SCCacheTool.shareInstance().currencyModel.rate!)

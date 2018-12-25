@@ -24,3 +24,4 @@ let kUnreadInvitationCount = "kUnreadInvitationCount"
 let kUpdateFileMessage = "kUpdateFileMessage"
 let kJMSGNetworkDidCloseNotification =  "kJMSGNetworkDidCloseNotification"
 let kUpdateAvatarSuccess = "kUpdateAvatarSuccess" // 修改头像成功
+let kPublishTaskSuccess = "kPublishTaskSuccess" // 发布任务成功

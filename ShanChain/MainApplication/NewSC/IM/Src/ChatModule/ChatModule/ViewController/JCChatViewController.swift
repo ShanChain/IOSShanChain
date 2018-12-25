@@ -129,7 +129,7 @@ class JCChatViewController: SCBaseVC {
         var button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.contentEdgeInsets = UIEdgeInsetsMake(0, 10 + 8, 0, 8)
-        button.setTitle("发送", for: .normal)
+        button.setTitle(NSLocalizedString("sc_send", comment: "字符串"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundImage(UIImage.loadImage("chat_emoticon_btn_send_blue"), for: .normal)
         button.setBackgroundImage(UIImage.loadImage("chat_emoticon_btn_send_gray"), for: .disabled)

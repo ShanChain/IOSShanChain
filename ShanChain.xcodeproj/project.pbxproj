@@ -64,6 +64,8 @@
 		2227012221C8F58600FCD269 /* HotCommunityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2227012021C8F58600FCD269 /* HotCommunityCell.xib */; };
 		2227012521C8F8B500FCD269 /* PopularCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2227012321C8F8B500FCD269 /* PopularCommunityViewController.swift */; };
 		2227012621C8F8B500FCD269 /* PopularCommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2227012421C8F8B500FCD269 /* PopularCommunityViewController.xib */; };
+		2227012C21D21BAC00FCD269 /* NewYearActiveInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2227012B21D21BAC00FCD269 /* NewYearActiveInfoModel.m */; };
+		2227012F21D21BCA00FCD269 /* NewYearActiveRushModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2227012E21D21BCA00FCD269 /* NewYearActiveRushModel.m */; };
 		2228491D2176DD0F00CDC86C /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222849182176DD0E00CDC86C /* BaiduMapAPI_Cloud.framework */; };
 		2228491E2176DD0F00CDC86C /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222849192176DD0E00CDC86C /* BaiduMapAPI_Map.framework */; };
 		2228491F2176DD0F00CDC86C /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2228491A2176DD0E00CDC86C /* BaiduMapAPI_Search.framework */; };
@@ -364,6 +366,7 @@
 		22A2EBB621C23CC000737265 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBB521C23CBF00737265 /* Images.xcassets */; };
 		22A2EBBE21C2558B00737265 /* OpinionFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */; };
 		22A2EBBF21C2558B00737265 /* OpinionFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */; };
+		22BA100B21D25FF30044D38B /* HotCommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA100A21D25FF30044D38B /* HotCommunityModel.swift */; };
 		22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9176E21918710002E5240 /* HHChatRoomViewController.xib */; };
 		22C917762191BDE5002E5240 /* MapFootprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917742191BDE5002E5240 /* MapFootprintViewController.swift */; };
 		22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917752191BDE5002E5240 /* MapFootprintViewController.xib */; };
@@ -942,6 +945,10 @@
 		2227012021C8F58600FCD269 /* HotCommunityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotCommunityCell.xib; sourceTree = "<group>"; };
 		2227012321C8F8B500FCD269 /* PopularCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCommunityViewController.swift; sourceTree = "<group>"; };
 		2227012421C8F8B500FCD269 /* PopularCommunityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularCommunityViewController.xib; sourceTree = "<group>"; };
+		2227012A21D21BAC00FCD269 /* NewYearActiveInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewYearActiveInfoModel.h; sourceTree = "<group>"; };
+		2227012B21D21BAC00FCD269 /* NewYearActiveInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewYearActiveInfoModel.m; sourceTree = "<group>"; };
+		2227012D21D21BC900FCD269 /* NewYearActiveRushModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewYearActiveRushModel.h; sourceTree = "<group>"; };
+		2227012E21D21BCA00FCD269 /* NewYearActiveRushModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewYearActiveRushModel.m; sourceTree = "<group>"; };
 		222849182176DD0E00CDC86C /* BaiduMapAPI_Cloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Cloud.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Cloud.framework; sourceTree = "<group>"; };
 		222849192176DD0E00CDC86C /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
 		2228491A2176DD0E00CDC86C /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Search.framework; path = Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
@@ -1296,6 +1303,7 @@
 		22A2EBBB21C2558B00737265 /* OpinionFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpinionFeedbackViewController.h; sourceTree = "<group>"; };
 		22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpinionFeedbackViewController.m; sourceTree = "<group>"; };
 		22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpinionFeedbackViewController.xib; sourceTree = "<group>"; };
+		22BA100A21D25FF30044D38B /* HotCommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCommunityModel.swift; sourceTree = "<group>"; };
 		22C9176E21918710002E5240 /* HHChatRoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHChatRoomViewController.xib; sourceTree = "<group>"; };
 		22C917742191BDE5002E5240 /* MapFootprintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFootprintViewController.swift; sourceTree = "<group>"; };
 		22C917752191BDE5002E5240 /* MapFootprintViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFootprintViewController.xib; sourceTree = "<group>"; };
@@ -2347,6 +2355,17 @@
 			path = Aspects;
 			sourceTree = "<group>";
 		};
+		2227012721D21B7200FCD269 /* ActiveModel */ = {
+			isa = PBXGroup;
+			children = (
+				2227012A21D21BAC00FCD269 /* NewYearActiveInfoModel.h */,
+				2227012B21D21BAC00FCD269 /* NewYearActiveInfoModel.m */,
+				2227012D21D21BC900FCD269 /* NewYearActiveRushModel.h */,
+				2227012E21D21BCA00FCD269 /* NewYearActiveRushModel.m */,
+			);
+			path = ActiveModel;
+			sourceTree = "<group>";
+		};
 		2229ED0221B9175300E33A8D /* AppointmentModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -3242,10 +3261,12 @@
 		22C9177E219274A8002E5240 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2227012721D21B7200FCD269 /* ActiveModel */,
 				221BBD382196B76B0004EE03 /* CoordnateInfosModel.h */,
 				221BBD392196B76B0004EE03 /* CoordnateInfosModel.m */,
 				2254A11421C35BF700C6FCD1 /* CommonShareModel.h */,
 				2254A11521C35BF700C6FCD1 /* CommonShareModel.m */,
+				22BA100A21D25FF30044D38B /* HotCommunityModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5747,6 +5768,7 @@
 				22D2477D21883596009C1E6A /* AppDelegate+Config.m in Sources */,
 				221B3BDA21C74DE60061BB3E /* UIAlertController+supportedInterfaceOrientations.m in Sources */,
 				4852A1041FCE9F0300CDD7BE /* SYStoryRecommendController.m in Sources */,
+				2227012F21D21BCA00FCD269 /* NewYearActiveRushModel.m in Sources */,
 				223F99B6217F12040031DB95 /* JCEmoticonPageView.swift in Sources */,
 				223F9999217F12040031DB95 /* JCUpdateMemberCell.swift in Sources */,
 				223F99A0217F12040031DB95 /* GroupAvatorViewController.swift in Sources */,
@@ -5925,6 +5947,7 @@
 				223F99AA217F12040031DB95 /* JCRemindListViewController.swift in Sources */,
 				22631C4C216DDA3200D5AB0B /* SavePublishContentModel.m in Sources */,
 				485E65AE1F42862900B158BF /* EaseUI.m in Sources */,
+				22BA100B21D25FF30044D38B /* HotCommunityModel.swift in Sources */,
 				4852A1411FCE9F0400CDD7BE /* SCLoginController.m in Sources */,
 				485E65FA1F42862900B158BF /* EaseMessageModel.m in Sources */,
 				223F9A46217F12B80031DB95 /* JCIdentityVerificationViewController.swift in Sources */,
@@ -6010,6 +6033,7 @@
 				22A2EB9021BE1BB100737265 /* AppointmentCardDetialsCell.swift in Sources */,
 				223F9991217F12040031DB95 /* JCChatViewLayoutAttributes.swift in Sources */,
 				223F9A5F21829BA80031DB95 /* CWDrawerTransition.m in Sources */,
+				2227012C21D21BAC00FCD269 /* NewYearActiveInfoModel.m in Sources */,
 				223F9A07217F12040031DB95 /* JCLocation.swift in Sources */,
 				223F9A4E218067650031DB95 /* UIView+LSCore.m in Sources */,
 				48718D701F42277400010AA0 /* MJPhoto.m in Sources */,

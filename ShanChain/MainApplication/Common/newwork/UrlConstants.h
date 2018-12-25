@@ -90,6 +90,11 @@
 
 #define  GETCOORDINATE   @"/v1/lbs/coordinate/infos" // 获取当前位置及周边聊天室信息
 #define  COORDINATEINFO  @"/v1/lbs/coordinate/info" // 获获取当前位置聊天室信息
+#define  NewYearActiveInfo_URL  @"/v1/2.0/light/active" //  获取跨年活动信息
+#define  NewYearActiveRush_URL  @"/v1/2.0/light/rush" // 活动闯关
+#define  HotChatRoom_URL  @"/web/api/sys/hotChatRoom" // 热门元社区
+
+
 
 #define  CommonShare_URL @"/v1/2.0/share/commonShare" //通用分享
 
