@@ -72,7 +72,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
 -(UITextField *)phoneValueFiled{
     if (!_phoneValueFiled) {
         _phoneValueFiled=[UITextField new];
-        _phoneValueFiled.placeholder=@"请输入手机号码";
+        _phoneValueFiled.placeholder=NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil);
         _phoneValueFiled.font=[UIFont systemFontOfSize:14];
         _phoneValueFiled.textAlignment=NSTextAlignmentLeft;
         _phoneValueFiled.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -257,7 +257,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
             dispatch_resume(_timer);
         }
     }else{
-        [SYProgressHUD showError:@"请输入手机号/邮箱号"];
+        [SYProgressHUD showError:NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil)];
         return;
     }
     
@@ -276,7 +276,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
         [self.pwdNewValueFiled resignFirstResponder];
         [self.phoneValueFiled resignFirstResponder];
         if (![self.phoneValueFiled.text isNotBlank]) {
-            [SYProgressHUD showError:@"请输入手机号码"];
+            [SYProgressHUD showError:NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil)];
             return;
         }
         
@@ -342,7 +342,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
     } else if ([_type isEqualToString:TYPE_BIND_MOBILE]) {
         [self.phoneValueFiled resignFirstResponder];
         if ([self.phoneValueFiled.text length]==0) {
-            [SYProgressHUD showError:@"请输入手机号码"];
+            [SYProgressHUD showError:NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil)];
             return;
         }
         

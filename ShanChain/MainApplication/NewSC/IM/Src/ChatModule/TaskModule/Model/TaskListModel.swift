@@ -69,10 +69,19 @@ class TaskListModel: HandyJSON {
         return 200
     }
     
+    
+    // 是否隐藏完成时间
+    var isHideCompleteTime:Bool{
+        if isMyBublish && (status == "5" || status == "10") {
+            return true
+        }
+        return false
+    }
+    
     var backViewLeftBtnTuple:(title:String,isShow:Bool,color:UIColor,isClick:Bool,width:Int){
         if Int(status!)! == 10 {
             if isMyBublish == false{
-                return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,SC_ThemeMainColor,true,120)
+                return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,SC_ThemeMainColor,true,100)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
@@ -92,14 +101,14 @@ class TaskListModel: HandyJSON {
         if Int(status!)! == 10 {
             if isMyBublish == true{
                // return ("催他完成",true,SC_ThemeMainColor,true,120)
-                return (NSLocalizedString("sc_Doing", comment: "字符串"),true,.gray,true,120)
+                return (NSLocalizedString("sc_Waiting", comment: "字符串"),true,.gray,true,120)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
         
         if Int(status!)! == 15 {
             if isMyBublish == false{
-                return (NSLocalizedString("sc_waiting", comment: "字符串"),true,.gray,false,220)
+                return (NSLocalizedString("sc_waitingThankyou", comment: "字符串"),true,.gray,false,220)
             }
             return ("",false,SC_ThemeBackgroundViewColor,false,0)
         }
@@ -109,7 +118,7 @@ class TaskListModel: HandyJSON {
         }
         
         if Int(status!)! == 21 {
-            return (NSLocalizedString("sc_Failed", comment: "字符串"),true,.gray,false,180)
+            return (NSLocalizedString("sc_Failed", comment: "字符串"),true,.gray,false,100)
         }
         
         if Int(status!)! == 22 {
@@ -117,9 +126,13 @@ class TaskListModel: HandyJSON {
         }
         
         if Int(status!)! == 25 {
-            return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,.gray,false,120)
+            return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,.gray,false,100)
         }
-        return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,.gray,false,120)
+        
+        if isMyBublish == true {
+            return ("",false,SC_ThemeBackgroundViewColor,false,0)
+        }
+        return (NSLocalizedString("sc_Canceled", comment: "字符串"),true,.gray,false,100)
     }
     
     var backViewRightBtnTuple:(title:String,isShow:Bool,color:UIColor,isClick:Bool,width:Int){
@@ -153,7 +166,7 @@ class TaskListModel: HandyJSON {
             if isMyBublish == true{
                 return (NSLocalizedString("sc_GoToComfirm", comment: "字符串"),true,100)
             }
-            return (NSLocalizedString("sc_waiting", comment: "字符串"),false,120)
+            return (NSLocalizedString("sc_waitingThankyou", comment: "字符串"),false,120)
         }
         
         if Int(status!)! == 20 {
@@ -161,7 +174,7 @@ class TaskListModel: HandyJSON {
         }
         
         if Int(status!)! == 21 {
-            return (NSLocalizedString("sc_Failed", comment: "字符串"),false,80)
+            return (NSLocalizedString("sc_Failed", comment: "字符串"),false,100)
         }
         
         if Int(status!)! == 22 {
@@ -169,7 +182,7 @@ class TaskListModel: HandyJSON {
         }
         
         if Int(status!)! == 25 {
-            return (NSLocalizedString("sc_Canceled", comment: "字符串"),false,80)
+            return (NSLocalizedString("sc_Canceled", comment: "字符串"),false,100)
         }
         
         return ("",false,80)

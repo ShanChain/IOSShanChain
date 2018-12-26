@@ -14,6 +14,8 @@ static NSString * const SC_COMMON_SUC_CODE = @"000000";
 static NSString * const SC_WALLET_COMMON_SUC_CODE = @"200";
 static NSString * const SC_REQUEST_TOKEN_EXPIRE = @"999991";
 static NSString * const SC_REALNAME_AUTHENTICATE = @"999970"; // 需要实名认证
+static NSString * const SC_REALNAME_NOMATCH = @"999984"; // 身份证号码与姓名不匹配
+
 static NSString * const SC_PHONENUMBER_NOBIND = @"999993"; // 手机号未绑定
 static NSString * const SC_LOGIN_ERR_CODE = @"999996";
 static NSString * const SC_USER_REPEAT_ERR_CODE = @"999997";

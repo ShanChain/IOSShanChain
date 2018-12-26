@@ -26,6 +26,6 @@
 
 - (void)setActiveRushModel:(NewYearActiveRushModel *)rushModel;
 
-@property  (nonatomic,copy)  void (^activeEndBlock)(void);
+@property  (nonatomic,copy)  void (^activeEndBlock)();
 
 @end

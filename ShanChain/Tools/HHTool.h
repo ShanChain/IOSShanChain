@@ -29,6 +29,9 @@
 
 // 获取当前屏幕显示的viewcontroller
 + (UIViewController *)getCurrentVC;
+
+#pragma mark -- 获取当前语言
++ (NSString*)getPreferredLanguage;
 /**
  * @method
  *

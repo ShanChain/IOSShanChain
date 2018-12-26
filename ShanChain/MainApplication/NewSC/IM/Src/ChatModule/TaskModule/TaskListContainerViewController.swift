@@ -95,16 +95,25 @@ class TaskListContainerViewController: SCBaseVC {
         }
         
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_publish), title: NSLocalizedString("sc_post", comment: "字符串"), tintColor: .white)
-        
     }
     
     func _publish() {
+        
+        for view in self.view.subviews{
+            if view.tag == 6666{
+                return
+            }
+        }
+        
+        
         // 发布任务
         UIView .animate(withDuration: 0.2) {
+            
             let pubTaskView:PublishTaskView? =
                 PublishTaskView(taskModel: nil, frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
             pubTaskView?.cornerRadius = 0.01
             pubTaskView?.borderColor = .clear
+            pubTaskView?.tag = 6666
             // 点击发布任务回调
             pubTaskView?.pbCallClosure = { [weak self] (dataString,reward,time,timestamp,isPut)  in
                 pubTaskView?.dismiss()
@@ -112,7 +121,7 @@ class TaskListContainerViewController: SCBaseVC {
                     return
                 }
                 let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
-                let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self?.currentChatRoomID ?? "","time":timestamp,"characterId":characterId]
+                let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self?.currentChatRoomID ?? SCCacheTool.shareInstance().chatRoomId!,"time":timestamp,"characterId":characterId] as [String : Any]
                 // 添加任务
                 HHTool.showChrysanthemum()
                 SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: params, showLoading: true, call: { (baseModel, error) in
@@ -121,7 +130,7 @@ class TaskListContainerViewController: SCBaseVC {
                         HHTool .showError(NSLocalizedString("sc_helpFailed", comment: "字符串"))
                         return
                     }
-                     HHTool .showError(NSLocalizedString("sc_helpAccomplished", comment: "字符串"))
+                     HHTool .showSucess(NSLocalizedString("sc_helpAccomplished", comment: "字符串"))
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
                 })
             }

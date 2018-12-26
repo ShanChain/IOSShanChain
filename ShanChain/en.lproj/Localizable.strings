@@ -39,6 +39,9 @@
 "sc_male" = "male";
 "sc_Birthday" = "Birthday";
 "sc_Report" = "Report";
+"sc_H" = "H";
+"sc_L" = "I";
+"sc_P" = "P";
 
 
 /*
@@ -72,7 +75,7 @@
 "sc_Failed" = "Failed";
 "sc_Canceled" = "Canceled";
 "sc_Expired" = "Expired";
-"sc_waiting" = "waiting";
+"sc_waitingThankyou" = "waiting";
 "sc_taskEmpty" = "It's empty here!Go to post your first task!";
 "sc_helpFailed" = "help failed";
 "sc_helpAccomplished" = "help accomplished";
@@ -142,10 +145,11 @@
 "sc_map_Imhere" = "I'm here";
 "sc_NetworkIsNot" = "Network is not available,please try again later";
 "sc_TellUsProblem" = "Tell us what's problem you meet";
+"sc_Please_check_the_networksettings" = "Please check the network settings";
 
 
 /*
- 登录
+ 登录注册
  */
 "sc_login_Bind" = "Bind";
 "sc_login_useSMS " = "use SMS to log in";

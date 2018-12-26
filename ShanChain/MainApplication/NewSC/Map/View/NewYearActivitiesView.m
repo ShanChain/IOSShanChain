@@ -35,6 +35,11 @@
 }
 
 - (void)setUp:(NSTimeInterval)endInterval{
+    
+    if (endInterval <= NSDate.date.timeIntervalSince1970) {
+        return;
+    }
+    
     MCDate  *deadlineDate = [MCDate dateWithInterval:endInterval];
     NSInteger secondsCountDown = deadlineDate.date.timeIntervalSince1970 - [NSDate date].timeIntervalSince1970;
     __weak __typeof(self) weakSelf = self;
@@ -56,12 +61,12 @@
                     NSInteger hours = (int)((timeout-days*24*3600)/3600);
                     NSInteger minute = (int)(timeout-days*24*3600-hours*3600)/60;
                     NSInteger second = timeout - days*24*3600 - hours*3600 - minute*60;
-                    NSString *strTime = [NSString stringWithFormat:@"%02ld : %02ld : %02ld", hours, minute, second];
+                    NSString *strTime = [NSString stringWithFormat:@"%02ld : %02ld : %02ld", (long)hours, minute, second];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (days == 0) {
                             weakSelf.countdownLb.text = strTime;
                         } else {
-                             weakSelf.countdownLb.text = [NSString stringWithFormat:@"%02ld : %02ld : %02ld", hours + days * 24, minute, second];
+                            weakSelf.countdownLb.text = [NSString stringWithFormat:@"%02ld : %02ld : %02ld", hours + days * 24, (long)minute, second];
 //                            weakSelf.countdownLb.text = [NSString stringWithFormat:@"%ld天 %02ld : %02ld : %02ld", days, hours, minute, second];
                         }
                         

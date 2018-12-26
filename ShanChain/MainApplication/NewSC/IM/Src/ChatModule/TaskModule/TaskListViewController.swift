@@ -110,10 +110,14 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
-        _requstData(false) {}
-        NotificationCenter.default.addObserver(self, selector: #selector(_requstData(_:_:)), name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
+        tableView.mj_header.beginRefreshing()
+        NotificationCenter.default.addObserver(self, selector: #selector(_notificationUpdateData), name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
     }
-   
+    
+    func _notificationUpdateData(){
+        tableView.mj_header.beginRefreshing()
+    }
+    
     func _getUrl() -> String {
         switch self.statusCode {
         case .squareAll:
@@ -133,7 +137,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
     }
     
     @objc fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
-        SCNetwork.shareInstance().v1_post(withUrl: _getUrl(), params: _requstPrameter(isLoad), showLoading: true) { (baseModel, error) in
+        SCNetwork.shareInstance().v1_post(withUrl: _getUrl(), params: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
             
             if error != nil{
                 return
@@ -319,10 +323,9 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
                 let backView = TaskListBackView(listModel: content, frame: cell.frame)
                 backView.tag = indexPath.section;
                 backView.delegate = self
-                cell.flipRevealedCard(toView: backView) {
-                   
-                }
+                cell.flipRevealedCard(toView: backView) {}
             }
+            
         }
   
         
@@ -389,11 +392,16 @@ extension TaskListViewController:TaskListCellProtocol{
             }
             self._requstData(false, {
                 view.listModel = self.dataList[view.tag]
-                self.tableView.reloadData()
+                
+                for (_,cell) in self.tableView.visibleCells.enumerated(){
+                    if let cell = cell as? TaskListPersonalCell{
+                        cell.flipRevealedCardBack()
+                    }
+                }
+                self.tableView.scrollToNearestSelectedRow(at: .top, animated: true)
             })
             
         }
     }
-    
     
 }

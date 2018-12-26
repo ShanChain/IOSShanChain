@@ -9,10 +9,12 @@
 import Foundation
 
 /*
- 公共接口
+ 元社区相关
  */
 
-public let  HotChatRoom_URL = "/web/api/sys/hotChatRoom" // 实名认证
+public let  HotChatRoom_URL = "/web/api/sys/hotChatRoom" // 热门元社区
+public let  ShareRoom_URL = "/v1/2.0/share/shareRoom" // 分享聊天室
+
 
 /*
  公共接口

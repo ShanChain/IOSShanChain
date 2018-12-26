@@ -135,19 +135,10 @@
     
     // 活动已结束
     if ([activeEndDate isEarlierThanOrEqualTo:[MCDate date]]) {
+        [self activeEnd];
         return;
     }
     
-//    // 活动未开始倒计时
-//    if ([[MCDate date] isEarlierThanOrEqualTo:activeStartDate]) {
-//        _timer1 = [NSTimer scheduledTimerWithTimeInterval:1
-//                                                  target:self
-//                                                selector:@selector(_startTiveCountdown)
-//                                                userInfo:nil
-//                                                 repeats:YES];
-//    }
-    
-    // 出现活动倒计时
     NSInteger  days = [activeStartDate daysFrom:[MCDate date]];
     if (days == 0) {
         NSInteger  second = [activeStartDate secondsFrom:[MCDate date]];
@@ -155,14 +146,23 @@
             days = 1;
         }
     }
+
+    if (days >= 3) {
+        self.activeRuleBtn.hidden = NO;
+            // 活动倒计时未开始倒计时
+        if ([[MCDate date] isEarlierThanOrEqualTo:activeStartDate]) {
+            _timer1 = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(_startTiveCountdown) userInfo:nil repeats:YES];
+            [[NSRunLoop mainRunLoop] addTimer:_timer1 forMode:NSRunLoopCommonModes];
+
+        }
+    }
     
+    // 活动倒计时开始
     if (days > 0 && days < 3) {
         self.topView.hidden = NO;
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1
-                                                  target:self
-                                                selector:@selector(activeCountdown)
-                                                userInfo:nil
-                                                 repeats:YES];
+        self.activeRuleBtn.hidden = NO;
+        _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(activeCountdown) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
         self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld",days] color:[UIColor redColor] font:Font(18) secendString:NSLocalizedString(@"sc_NewYear_day", nil) color:Theme_MainTextColor font:Font(14)];
     }
     
@@ -170,13 +170,20 @@
     if ([activeStartDate isEarlierThanOrEqualTo:[MCDate date]]) {
         self.topView.hidden = YES;
         self.isActiveStar = YES;
-        [self rushActiveStar];
+        self.activeRuleBtn.hidden = NO;
+        [self rushActiveStar:YES];
     }
 }
 
 // 活动开始倒计时倒计时
 - (void)_startTiveCountdown{
-    
+     MCDate *activeStartDate = [MCDate dateWithInterval:self.activeInfo.startTimeInterval];
+    NSInteger  count = activeStartDate.date.timeIntervalSince1970 - NSDate.date.timeIntervalSince1970;
+    if (count <= 3 * 24 * 60 * 60) {
+        [_timer1 invalidate];
+        _timer1 = nil;
+        [self sc_newYearActiveInfo];
+    }
 }
 
 // 活动开始倒计时
@@ -187,13 +194,13 @@
         // 活动开始
         self.topView.hidden = YES;
         self.isActiveStar = YES;
-        [self rushActiveStar];
+        [self rushActiveStar:YES];
         [_timer invalidate];
         _timer = nil;
     }
 }
 
-
+#pragma mark -- 新年活动
 -(void)sc_newYearActive{
     
     [[SCNetwork shareInstance]HH_GetWithUrl:NewYearActiveInfo_URL parameters:@{} showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error){
@@ -205,6 +212,19 @@
         self.activeInfo = [NewYearActiveInfoModel yy_modelWithDictionary:baseModel.data];
         if (self.activeInfo.startTime && self.activeInfo.endTime) {
             [self sc_newYearActiveInfo];
+        }else{
+            [self activeEnd];
+        }
+    }];
+    
+    
+    [[SCNetwork shareInstance]HH_GetWithUrl:RedPaperObtainList_URL parameters:@{@"characterId":[SCCacheTool shareInstance].getCurrentCharacterId,@"userId":[SCCacheTool shareInstance].getCurrentUser,@"size":@(2),@"page":@(0)} showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+         NSArray  *datas = baseModel.data[@"content"];
+        if (datas.count > 0) {
+           //  福包领取
+            AppointmentMyReceiveView *receiveView = [[AppointmentMyReceiveView alloc]initWithFrame:self.view.frame];
+            [self.view addSubview:receiveView];
+           
             
         }
     }];
@@ -254,6 +274,7 @@
     if (!self.latitude || !self.longitude || self.isLBS) {
         return;
     }
+    self.isLBS = YES;
     weakify(self);
     [[SCNetwork shareInstance]getWithUrl:GETCOORDINATE parameters:[self getParameter] success:^(id responseObject) {
         NSArray  *arr = responseObject[@"data"][@"room"];
@@ -275,9 +296,9 @@
             [weak_self sc_addOverlayWithCoordnates];
             [weak_self setChatRoomCenterPoint];
         }
-         weak_self.isLBS = YES;
+        
     } failure:^(NSError *error) {
-         weak_self.isLBS = YES;
+         weak_self.isLBS = NO;
     }];
 }
 
@@ -326,12 +347,7 @@
 
 - (IBAction)activeRuleAction:(UIButton *)sender {
     
-    
-    // 福包领取
-//    AppointmentMyReceiveView *receiveView = [[AppointmentMyReceiveView alloc]initWithFrame:self.view.frame];
-//    [self.view addSubview:receiveView];
-    
-    // 我的规则
+    // 活动规则
     NewYearActivityRuleView *ruleView =  [[NewYearActivityRuleView alloc]initWithRuleDes:self.activeInfo.ruleDescribe frame:self.view.frame];
     [self.view addSubview:ruleView];
     
@@ -372,10 +388,6 @@
     
     PopularCommunityViewController *popularVC = [[PopularCommunityViewController alloc]init];
     [self pushPage:popularVC Animated:YES];
-   
-//    MapFootprintViewController  *footprintVC = [[MapFootprintViewController alloc]initWithType:0];
-//    [self pushPage:footprintVC
-//          Animated:YES];
 }
 
 
@@ -406,10 +418,6 @@
     {
         NSLog(@"逆geo检索发送失败");
     }
-    
-    
-
-    
 }
 
 
@@ -461,10 +469,20 @@
     NSString  *sc_N = NSLocalizedString(@"sc_N", nil);
     NSString  *sc_S = NSLocalizedString(@"sc_S", nil);
     
+    NSString  *roomName;
     
     NSString *long_title = coordinate.longitude > 0 ?sc_E:sc_W;
     NSString *lat_title = coordinate.latitude > 0 ?sc_N:sc_S;
-    NSString  *roomName = [NSString stringWithFormat:@"%@%.2f°%@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude];
+    
+    NSString  *language = [HHTool getPreferredLanguage];
+    
+    if ([language isEqualToString:@"zh-Hans-CN"]) {
+          roomName = [NSString stringWithFormat:@"%@%.2f° %@%.2f°",long_title,coordinate.longitude,lat_title,coordinate.latitude];
+    }else{
+          roomName = [NSString stringWithFormat:@"%.2f°%@ %.2f°%@",coordinate.longitude,long_title,coordinate.latitude,lat_title];
+    }
+    
+  
     self.locationLb.text = roomName;
     self.currentRoomName = roomName;
 }
@@ -516,7 +534,7 @@
    fromOldState:(BMKAnnotationViewDragState)oldState{
     if (newState == BMKAnnotationViewDragStateEnding) {
         [mapView.annotations enumerateObjectsUsingBlock:^(BMKPointAnnotation *  _Nonnull pointAnnotation, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([pointAnnotation.title isEqualToString:@"您当前位置"]) {
+            if ([pointAnnotation.title isEqualToString:NSLocalizedString(@"sc_map_Imhere", nil)]) {
                // CLLocationCoordinate2D  coods = pointAnnotation.coordinate;
                 
             }
@@ -556,7 +574,9 @@
 
 - (void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate{
     NSString  *latitude = [NSString stringWithFormat:@"%f",coordinate.latitude];
+    self.latitude = latitude;
     NSString  *longitude = [NSString stringWithFormat:@"%f",coordinate.longitude];
+    self.longitude = longitude;
     weakify(self);
     [HHTool show:NSLocalizedString(@"sc_map_Locating", nil)];
     [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
@@ -582,7 +602,7 @@
     
     
     if (self.isActiveStar) {
-        [self rushActiveStar];
+        [self rushActiveStar:NO];
     }
 }
 
@@ -594,28 +614,40 @@
     self.topView.hidden = YES;
 }
 
+-(NewYearActivitiesView *)activeView{
+    if (!_activeView) {
+        _activeView = [[NewYearActivitiesView alloc]initWithFrame:CGRectMake(40, IPHONE_TOPSENSOR_HEIGHT, SCREEN_WIDTH - 80, 70) activeEndInterval:self.activeInfo.endTimeInterval];
+    }
+    return _activeView;
+}
 
-// 活动闯关
-- (void)rushActiveStar{
+// 活动闯关  isQuery:是否只做查询
+- (void)rushActiveStar:(BOOL)isQuery {
     
-    [[SCNetwork shareInstance]HH_GetWithUrl:NewYearActiveRush_URL parameters:@{@"currentUserId":SCCacheTool.shareInstance.getCurrentUser,@"currentCharaterId":SCCacheTool.shareInstance.getCurrentCharacterId} showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+    [[SCNetwork shareInstance]HH_GetWithUrl:NewYearActiveRush_URL parameters:@{@"currentUserId":SCCacheTool.shareInstance.getCurrentUser,@"currentCharaterId":SCCacheTool.shareInstance.getCurrentCharacterId,@"action": isQuery? @"query ":@"",@"latitude":self.latitude ?:@"",@"longitude":self.longitude ?:@""} showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
         if (error) {
             return ;
         }
         
         NewYearActiveRushModel  *rushModel = [NewYearActiveRushModel yy_modelWithDictionary:baseModel.data];
-        if (rushModel.rushActivityVo.clearance) {
+        if (rushModel.rushActivityVo.clearance ||  self.activeInfo.endTimeInterval <= NSDate.date.timeIntervalSince1970) {
             [self activeEnd];
             return;
         }
         
-        self.activeView = [[NewYearActivitiesView alloc]initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH - 80, 70) activeEndInterval:self.activeInfo.endTimeInterval];
-        [self.mapView addSubview:self.activeView];
-        [self.mapView bringSubviewToFront:self.activeView ];
+        if (!self.activeView.superview) {
+            [self.mapView addSubview:self.activeView];
+            [self.mapView bringSubviewToFront:self.activeView];
+        }
+        
         [self.activeView setActiveRushModel:rushModel];
         weakify(self)
         self.activeView.activeEndBlock = ^{
             [weak_self activeEnd];
+            [weak_self hrShowAlertWithTitle:@"点亮元社区活动已结束" message:@"快去【我的钱包】中看看你赢得了多少奖励吧！" buttonsTitles:@[@"确定"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+                
+            }];
+            
         };
         // 分享
         if (rushModel.rushActivityVo.surplusCount.integerValue == 0) {
@@ -633,7 +665,7 @@
         HHShareView  *shareView = [[HHShareView alloc]initWithFrame:self.view.frame shareImage:nil type:level == 4? level:3 shareModel:shareModel];
             [self.view addSubview:shareView];
         shareView.closure = ^{
-            [weak_self rushActiveStar];
+            [weak_self rushActiveStar:YES];
         };
     }];
     
@@ -792,7 +824,6 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
        [self.view endEditing:YES];
-  
 }
 
 

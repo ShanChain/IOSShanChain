@@ -107,7 +107,9 @@ extension PopularCommunityViewController:UITableViewDelegate,UITableViewDataSour
         cell.selectionStyle = .none
         let hotModel = self.dataList[indexPath.section]
         cell.coverIcon._sd_setImage(withURLString: hotModel.background)
+        cell.coverIcon.preventImageViewExtrudeDeformation()
         cell.mapIcon._sd_setImage(withURLString: hotModel.thumbnails)
+        cell.peopleNumberLb.text = hotModel.userNum
         cell.nameLb.text = hotModel.roomName
     }
     
@@ -119,6 +121,8 @@ extension PopularCommunityViewController:HotCommunityCellProtocol{
         JGUserLoginService.jg_enterchatRoom(roomId: hotModel.roomId!) { (conversation , error) in
             if error == nil && conversation != nil{
                 let chatRoomVC:HHChatRoomViewController = HHChatRoomViewController.init(conversation: conversation!, isJoinChat: false, navTitle: hotModel.roomName!)
+                chatRoomVC.takeImage = UIImage.init(fromURLString: hotModel.thumbnails)
+                chatRoomVC.shareTakeUrl = hotModel.thumbnails
                 self.pushPage(chatRoomVC, animated: true)
             }
         }

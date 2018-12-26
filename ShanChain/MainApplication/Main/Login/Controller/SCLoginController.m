@@ -60,7 +60,7 @@
 
 -(UITextField *)nameField{
     if (!_nameField) {
-        _nameField = [SYUIFactory textFieldWithPlacehold:@"请输入账号" withFont:[UIFont systemFontOfSize:14] withColor:[UIColor blackColor]];
+        _nameField = [SYUIFactory textFieldWithPlacehold:NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil) withFont:[UIFont systemFontOfSize:14] withColor:[UIColor blackColor]];
         [_nameField makeLayerWithRadius:8.0f withBorderColor:RGB(221, 221, 221) withBorderWidth:1.0f];
         UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 44)];
         leftView.backgroundColor = [UIColor clearColor];
@@ -75,7 +75,7 @@
 
 -(UITextField *)pwdField{
     if (!_pwdField) {
-        _pwdField = [SYUIFactory textFieldWithPlacehold:@"请输入密码" withFont:[UIFont systemFontOfSize:14] withColor:[UIColor blackColor]];
+        _pwdField = [SYUIFactory textFieldWithPlacehold:NSLocalizedString(@"sc_login_pleaseEnterPassword", nil) withFont:[UIFont systemFontOfSize:14] withColor:[UIColor blackColor]];
         [_pwdField makeLayerWithRadius:8.0f withBorderColor:RGB(221, 221, 221) withBorderWidth:1.0f];
         UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 44)];
         leftView.backgroundColor = [UIColor clearColor];
@@ -90,7 +90,7 @@
 -(UIButton *)forgetPwdBtn{
     if (!_forgetPwdBtn) {
         _forgetPwdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_forgetPwdBtn setTitle:@"忘记密码?" forState:UIControlStateNormal];
+        [_forgetPwdBtn setTitle:NSLocalizedString(@"sc_login_forgetPassword", nil) forState:UIControlStateNormal];
         [_forgetPwdBtn setTitleColor:RGB(221, 221, 221) forState:UIControlStateNormal];
         _forgetPwdBtn.titleLabel.font = [UIFont systemFontOfSize:11];
         _forgetPwdBtn.titleLabel.textAlignment = NSTextAlignmentRight;
@@ -116,7 +116,7 @@
 - (UIButton *)dynamicLoginBtn{
     if (!_dynamicLoginBtn) {
         _dynamicLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_dynamicLoginBtn setTitle:@"动态密码登录" forState:UIControlStateNormal];
+        [_dynamicLoginBtn setTitle:NSLocalizedString(@"sc_login_SMSLogIn", nil) forState:UIControlStateNormal];
         [_dynamicLoginBtn setTitleColor:Theme_MainThemeColor forState:UIControlStateNormal];
         _dynamicLoginBtn.titleLabel.textAlignment = 0;
         _dynamicLoginBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -140,7 +140,7 @@
 -(UIButton *)socialBtn{
     if (!_socialBtn) {
         _socialBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_socialBtn setTitle:@"第三方登录" forState:UIControlStateNormal];
+        [_socialBtn setTitle:NSLocalizedString(@"sc_login_others", nil) forState:UIControlStateNormal];
         [_socialBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
         _socialBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _socialBtn.userInteractionEnabled = NO;
@@ -194,7 +194,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=RGB(255, 255, 255);
     
-    self.title=@"登录马甲";
+    self.title = NSLocalizedString(@"sc_login_LogInMJ", nil);
     [self makeSubViews];
     [self setKeyBoardAutoHidden];
 }
@@ -252,7 +252,7 @@
     
     self.nameField.frame=CGRectMake(40, 60.0/667*SCREEN_HEIGHT , SCREEN_WIDTH-40*2, 44);
     self.pwdField.frame=CGRectMake(40, CGRectGetMaxY(self.nameField.frame) + KSCMargin, SCREEN_WIDTH-40 * 2, 44);
-    self.forgetPwdBtn.frame=CGRectMake(SCREEN_WIDTH-40-60, CGRectGetMaxY(self.pwdField.frame) + 5, 60, 16);
+    self.forgetPwdBtn.frame=CGRectMake(SCREEN_WIDTH-40-60, CGRectGetMaxY(self.pwdField.frame) + 5, 100, 16);
     self.dynamicLoginBtn.frame = CGRectMake(40, CGRectGetMaxY(self.pwdField.frame) + 50, 100, 25);
     self.loginBtn.frame=CGRectMake(40, CGRectGetMaxY(self.pwdField.frame) + 80, SCREEN_WIDTH - 40 * 2, 44);
     self.registerBtn.frame=CGRectMake(40, CGRectGetMaxY(self.loginBtn.frame) + KSCMargin, SCREEN_WIDTH- 40 * 2, 44);
@@ -289,7 +289,7 @@
         [params setObject:[NSString stringWithFormat:@"%0.f",time] forKey:@"Timestamp"];
         [params setObject:encryptAccount forKey:@"encryptAccount"];
         [params setObject:encryptPassword forKey:@"encryptPassword"];
-        [SYProgressHUD showMessage:@"登录中……"];
+        [SYProgressHUD showMessage:NSLocalizedString(@"sc_login_loggingIn", nil)];
         [SCNetwork.shareInstance postWithUrl:COMMONUSERLOGIN parameters:params success:^(id responseObject) {
             NSDictionary *data = responseObject[@"data"];
             if (data[@"userInfo"] != [NSNull null]) {
@@ -363,7 +363,7 @@
 }
 
 - (void)thirdLoginClickWithPlatformType:(SSDKPlatformType)type {
-    [SYProgressHUD showMessage:@"登录中……"];
+    [SYProgressHUD showMessage:NSLocalizedString(@"sc_login_loggingIn", nil)];
     [ShareSDK getUserInfo:type onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error){
         if (state == SSDKResponseStateSuccess) {
             NSString *pwd = [user.credential.token substringToIndex:16];

@@ -40,7 +40,7 @@
 @interface AppDelegate ()<UNUserNotificationCenterDelegate, UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate,JPUSHRegisterDelegate>
 
 @property (nonatomic, strong) BMKMapManager *mapManager;
-
+@property (nonatomic, copy)   NSString   *versionUpdateUrl;
 
 @end
 
@@ -189,6 +189,7 @@
             NSString *version = dictionary[@"version"];
             [SCCacheTool shareInstance].status = dictionary[@"status"];
             if (version && [VersionUtils compareVersion:XcodeAppVersion withServerVersion:version]) {
+                self.versionUpdateUrl = [dictionary objectForKey:@"url"];
                 if ([dictionary[@"forceUpdate"] isEqualToString:@"true"]) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新版本有较大改进，请更新" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
                     [alert show];
@@ -203,7 +204,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == alertView.firstOtherButtonIndex) {
-        [HHTool openAppStore];
+       // [HHTool openAppStore];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.versionUpdateUrl]];
     }
 }
 

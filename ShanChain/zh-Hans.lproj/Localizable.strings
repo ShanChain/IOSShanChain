@@ -40,6 +40,9 @@
 "sc_male" = "男";
 "sc_Birthday" = "生日";
 "sc_Report" = "举报";
+"sc_H" = "帮";
+"sc_L" = "邀";
+"sc_P" = "玩";
 
 
 /*
@@ -50,13 +53,13 @@
 "sc_MyTask" = "我的社区帮";
 "sc_Tasklist" = "帮助列表";
 
-"sc_Alltask" = "全部任务";
+"sc_Alltask" = "全部";
 "sc_MyPost" = "帮过我的";
 "sc_MyHelped" = "我帮过的";
 "sc_PostTask" = "寻求帮助";
 "sc_Myaccept" = "我帮过的";
 "sc_Ended" = "已结束";
-"sc_Availabletasks" = "未领取任务";
+"sc_Availabletasks" = "未领取";
 "sc_Waiting" = "对方正在帮忙";
 "sc_GoToComfirm" = "去确认";
 "sc_Doing" = "帮忙ing";
@@ -74,10 +77,10 @@
 "sc_Failed" = "没帮成";
 "sc_Canceled" = "帮不了";
 "sc_Expired" = "没人帮";
-"sc_waiting" = "等对方答谢";
-"sc_taskEmpty" = "您还没有任务记录喔，到广场中去发布你的第一个任务，或者领取任务吧~";
-"sc_helpFailed" = "求助失败";
-"sc_helpAccomplished" = "求助完成";
+"sc_waitingThankyou" = "等对方答谢";
+"sc_taskEmpty" = "该广场暂时无人寻求帮助，你需要帮助吗？";
+"sc_helpFailed" = "发布失败";
+"sc_helpAccomplished" = "发布成功";
 
 "sc_PostTime" = "发布时间";
 "sc_AcceptedTime" = "领取时间";
@@ -137,6 +140,7 @@
 "sc_map_Imhere" = "您当前位置";
 "sc_NetworkIsNot" = "连接超时，请稍后再试~";
 "sc_TellUsProblem" = "请输入您要反馈的建议...";
+"sc_Please_check_the_networksettings" = "请检查网络设置";
 
 
 /*
@@ -147,7 +151,7 @@
 "sc_login_Login" = "登录";
 "sc_login_SignUp" = "注册";
 "sc_login_phoneNumberCannotEmpty" = "手机号不能为空";
-"sc_login_pleaseEnterPhoneNumber" = "请输入的手机号";
+"sc_login_pleaseEnterPhoneNumber" = "请输入手机号";
 "sc_login_Resend" = "重新获取";
 "sc_login_Confirm" = "确定";
 

@@ -37,7 +37,7 @@ class RecieveTaskView: UIView {
         let sc_Reward = NSLocalizedString("sc_Reward", comment: "字符串")
         rewardLabel.text = "\(sc_Reward)\(self.recieTaskModel?.bounty ?? "") SEAT"
        let  sc_TimeLimit = NSLocalizedString("sc_TimeLimit", comment: "字符串")
-        completeTimeLabel.text = "\(sc_TimeLimit):\(self.recieTaskModel?.TaskReceive?.completeTime ?? "")"
+        completeTimeLabel.text = "\(sc_TimeLimit):\(NSDate.chatingTime(self.recieTaskModel?.TaskReceive?.createTime) ?? "")"
         let  height = (self.recieTaskModel?.intro?.heightForAdaptive(Font: Font(14), CGFloat(SCREEN_WIDTH - 100)))! + 330.0
         contentViewHeight.constant = height
         acceptedLb.text = NSLocalizedString("sc_accepted", comment: "字符串")
@@ -49,6 +49,7 @@ class RecieveTaskView: UIView {
         super.init(frame: frame)
         makeView.frame = frame
         spView = loadViewFromNib()
+        spView.frame = frame
         
         //添加蒙版
         makeView.backgroundColor = .black

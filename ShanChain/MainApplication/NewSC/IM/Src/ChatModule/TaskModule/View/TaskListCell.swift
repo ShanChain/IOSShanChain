@@ -54,7 +54,7 @@ class TaskListCell: UITableViewCell{
                 self.centerStatusBtn.setTitleColor(UIColor.gray, for: .normal)
                 self.centerStatusBtn.borderColor = UIColor.gray
             }else{
-                self.centerStatusBtn.setTitle("查看任务", for: .normal)
+                self.centerStatusBtn.setTitle("查看", for: .normal)
                 self.centerStatusBtn.setTitleColor(SC_ThemeMainColor, for: .normal)
                 self.centerStatusBtn.borderColor = SC_ThemeMainColor
             }

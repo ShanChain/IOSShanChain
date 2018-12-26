@@ -43,7 +43,7 @@
 -(UITextField *)phoneValueFiled{
     if (!_phoneValueFiled) {
         _phoneValueFiled=[UITextField new];
-        _phoneValueFiled.placeholder=@"请输入手机号码";
+        _phoneValueFiled.placeholder = NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil);
         _phoneValueFiled.font=[UIFont systemFontOfSize:14];
         _phoneValueFiled.clearButtonMode=UITextFieldViewModeWhileEditing;
         _phoneValueFiled.textAlignment=NSTextAlignmentLeft;
@@ -274,7 +274,7 @@
             dispatch_resume(_timer);  
         }
     }else{
-        [SYProgressHUD showError:@"请输入手机号码"];
+        [SYProgressHUD showError:NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil)];
         return;
     }
     
@@ -301,7 +301,7 @@
         return YES;
         
     }else{
-        [SYProgressHUD showError:@"抱歉！请重新输入手机号码"];
+        [SYProgressHUD showError:@"输入的手机号有误"];
         return NO;
     }
     
@@ -313,7 +313,7 @@
 
 -(void)sureAction{
     if ([self.phoneValueFiled.text length]==0) {
-        [SYProgressHUD showError:@"请输入手机号/邮箱号"];
+        [SYProgressHUD showError:NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil)];
         return;
     }
     if ([self.verCodeValueFiled.text length]!=0) {

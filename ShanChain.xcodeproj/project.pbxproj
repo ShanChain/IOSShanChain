@@ -367,6 +367,7 @@
 		22A2EBBE21C2558B00737265 /* OpinionFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */; };
 		22A2EBBF21C2558B00737265 /* OpinionFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */; };
 		22BA100B21D25FF30044D38B /* HotCommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA100A21D25FF30044D38B /* HotCommunityModel.swift */; };
+		22BA100D21D31A8D0044D38B /* RedPaperModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA100C21D31A8C0044D38B /* RedPaperModel.swift */; };
 		22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9176E21918710002E5240 /* HHChatRoomViewController.xib */; };
 		22C917762191BDE5002E5240 /* MapFootprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C917742191BDE5002E5240 /* MapFootprintViewController.swift */; };
 		22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C917752191BDE5002E5240 /* MapFootprintViewController.xib */; };
@@ -1304,6 +1305,7 @@
 		22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpinionFeedbackViewController.m; sourceTree = "<group>"; };
 		22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpinionFeedbackViewController.xib; sourceTree = "<group>"; };
 		22BA100A21D25FF30044D38B /* HotCommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCommunityModel.swift; sourceTree = "<group>"; };
+		22BA100C21D31A8C0044D38B /* RedPaperModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPaperModel.swift; sourceTree = "<group>"; };
 		22C9176E21918710002E5240 /* HHChatRoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHChatRoomViewController.xib; sourceTree = "<group>"; };
 		22C917742191BDE5002E5240 /* MapFootprintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFootprintViewController.swift; sourceTree = "<group>"; };
 		22C917752191BDE5002E5240 /* MapFootprintViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapFootprintViewController.xib; sourceTree = "<group>"; };
@@ -1996,7 +1998,6 @@
 		48718C361F42277400010AA0 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		48718C371F42277400010AA0 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		48718C381F42277400010AA0 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		48718C9E1F42277400010AA0 /* HyphenateLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HyphenateLite.framework; sourceTree = "<group>"; };
 		48718CBE1F42277400010AA0 /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhoto.h; sourceTree = "<group>"; };
 		48718CBF1F42277400010AA0 /* MJPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhoto.m; sourceTree = "<group>"; };
 		48718CC01F42277400010AA0 /* MJPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJPhotoBrowser.bundle; sourceTree = "<group>"; };
@@ -3267,6 +3268,7 @@
 				2254A11421C35BF700C6FCD1 /* CommonShareModel.h */,
 				2254A11521C35BF700C6FCD1 /* CommonShareModel.m */,
 				22BA100A21D25FF30044D38B /* HotCommunityModel.swift */,
+				22BA100C21D31A8C0044D38B /* RedPaperModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4823,14 +4825,6 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
-		48718C9D1F42277400010AA0 /* HyphenateSDK */ = {
-			isa = PBXGroup;
-			children = (
-				48718C9E1F42277400010AA0 /* HyphenateLite.framework */,
-			);
-			path = HyphenateSDK;
-			sourceTree = "<group>";
-		};
 		48718CBD1F42277400010AA0 /* MJPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -5015,7 +5009,6 @@
 				485E66261F42873F00B158BF /* MJRefresh */,
 				485E64861F42862800B158BF /* EaseUI */,
 				48718C2B1F42277400010AA0 /* AFNetworking */,
-				48718C9D1F42277400010AA0 /* HyphenateSDK */,
 				48718CBD1F42277400010AA0 /* MJPhotoBrowser */,
 				48718D001F42277400010AA0 /* SDWebImage */,
 				3352F1241F386E9300233A3C /* UMessage_Sdk_1.5.0a */,
@@ -5829,6 +5822,7 @@
 				485E66671F42873F00B158BF /* UIScrollView+MJRefresh.m in Sources */,
 				485E65FB1F42862900B158BF /* EaseUserModel.m in Sources */,
 				223F99D0217F12040031DB95 /* JCMyInfoViewController.swift in Sources */,
+				22BA100D21D31A8D0044D38B /* RedPaperModel.swift in Sources */,
 				223F99E4217F12040031DB95 /* JMSGOptionalContent+.swift in Sources */,
 				2207068A219A66A600404459 /* TaskDetailsModel.swift in Sources */,
 				223F9974217F12040031DB95 /* GroupAvatorCell.swift in Sources */,
@@ -6268,7 +6262,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
@@ -6337,7 +6331,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;

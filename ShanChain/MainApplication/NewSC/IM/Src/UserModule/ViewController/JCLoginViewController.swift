@@ -58,7 +58,7 @@ class JCLoginViewController: UIViewController {
         textField.clearButtonMode = .whileEditing
         textField.tag = 1002
         textField.delegate = self
-        textField.placeholder = "请输入密码"
+        textField.placeholder = NSLocalizedString("sc_login_pleaseEnterPassword", comment: "字符串")
         textField.isSecureTextEntry = true
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.frame = CGRect(x: 38 + 18 + 15, y: 108 + 80 + 60 + 27 + 30, width: self.view.width - 76 - 33, height: 40)

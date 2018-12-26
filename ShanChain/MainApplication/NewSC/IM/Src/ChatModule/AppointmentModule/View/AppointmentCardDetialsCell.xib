@@ -12,39 +12,39 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AppointmentCardDetialsCell" customModule="ShanChain" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="AppointmentCardDetialsCell" customModule="ShanChain" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Qp-pi-kj2">
-                        <rect key="frame" x="40" y="7" width="30" height="30"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Qp-pi-kj2">
+                        <rect key="frame" x="20" y="5" width="50" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="T82-O2-Osq"/>
-                            <constraint firstAttribute="width" constant="30" id="fVH-72-p2E"/>
+                            <constraint firstAttribute="height" constant="50" id="T82-O2-Osq"/>
+                            <constraint firstAttribute="width" constant="50" id="fVH-72-p2E"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="15"/>
+                                <real key="value" value="25"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjd-SH-EC5">
-                        <rect key="frame" x="75" y="7" width="37" height="14.5"/>
+                        <rect key="frame" x="75" y="5" width="37" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019——09——20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3Y-Eb-iQ0">
-                        <rect key="frame" x="75" y="23" width="98" height="13.5"/>
+                        <rect key="frame" x="75" y="41" width="98" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已领取" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0o-bA-XBS">
-                        <rect key="frame" x="263" y="15" width="37" height="14.5"/>
+                        <rect key="frame" x="263" y="22.5" width="37" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                     <constraint firstItem="i3Y-Eb-iQ0" firstAttribute="leading" secondItem="jjd-SH-EC5" secondAttribute="leading" id="3sf-uO-CUZ"/>
                     <constraint firstItem="jjd-SH-EC5" firstAttribute="top" secondItem="4Qp-pi-kj2" secondAttribute="top" id="4Up-PE-hcb"/>
                     <constraint firstItem="i3Y-Eb-iQ0" firstAttribute="bottom" secondItem="4Qp-pi-kj2" secondAttribute="bottom" id="AAa-Qp-MTp"/>
-                    <constraint firstItem="4Qp-pi-kj2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="Can-u7-GGw"/>
+                    <constraint firstItem="4Qp-pi-kj2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Can-u7-GGw"/>
                     <constraint firstItem="G0o-bA-XBS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OkB-Fi-9qO"/>
                     <constraint firstItem="4Qp-pi-kj2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZIN-uX-NUO"/>
                     <constraint firstAttribute="trailing" secondItem="G0o-bA-XBS" secondAttribute="trailing" constant="20" id="ZUe-JK-saO"/>
@@ -69,6 +69,7 @@
                 <outlet property="statusLb" destination="G0o-bA-XBS" id="oY6-AY-NcG"/>
                 <outlet property="timeLb" destination="i3Y-Eb-iQ0" id="Qra-My-yi9"/>
             </connections>
+            <point key="canvasLocation" x="34" y="62"/>
         </tableViewCell>
     </objects>
 </document>

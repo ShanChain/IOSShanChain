@@ -40,12 +40,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bjV-gV-gBg">
-                    <rect key="frame" x="29" y="139" width="315" height="389"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjV-gV-gBg">
+                    <rect key="frame" x="29" y="139" width="317" height="389"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="寻求帮助" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOz-wM-x8M">
-                            <rect key="frame" x="57" y="10" width="200" height="21"/>
+                            <rect key="frame" x="58" y="10" width="200" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <nil key="textColor"/>
@@ -71,7 +70,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yeA-RQ-LFb">
-                                    <rect key="frame" x="80.000000000000057" y="10.386475271930067" width="195" height="40"/>
+                                    <rect key="frame" x="80" y="10" width="195" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -96,7 +95,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="￥请输入答谢金" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gpO-FP-jmb">
-                                    <rect key="frame" x="80.000000000000057" y="10.338118201748443" width="195" height="40.000000000000043"/>
+                                    <rect key="frame" x="80" y="10" width="195" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -117,7 +116,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="选择时间" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NmS-Y0-c50">
-                                    <rect key="frame" x="80.000000000000057" y="10.289761131566934" width="195" height="39.999999999999972"/>
+                                    <rect key="frame" x="80" y="10" width="195" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -153,8 +152,16 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="389" id="S0x-dl-nyB"/>
+                        <constraint firstAttribute="width" constant="317" id="atD-PN-tDY"/>
+                    </constraints>
                 </view>
             </subviews>
+            <constraints>
+                <constraint firstItem="bjV-gV-gBg" firstAttribute="centerY" secondItem="uNg-Bb-bhT" secondAttribute="centerY" id="adI-d7-sKB"/>
+                <constraint firstItem="bjV-gV-gBg" firstAttribute="centerX" secondItem="uNg-Bb-bhT" secondAttribute="centerX" id="ojk-dd-r78"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="nfL-3h-yz8"/>
             <point key="canvasLocation" x="33.5" y="65.5"/>
         </view>

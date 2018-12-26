@@ -106,6 +106,23 @@
     return result;
 }
 
+#pragma mark -- 获取当前语言
++ (NSString*)getPreferredLanguage
+
+{
+    
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSArray * allLanguages = [defaults objectForKey:@"AppleLanguages"];
+    
+    NSString * preferredLang = [allLanguages objectAtIndex:0];
+    
+    NSLog(@"当前语言:%@", preferredLang);
+    
+    return preferredLang;
+    
+}
+
 +(UIImage*)getHeadImageWithSize:(CGSize)size{
     
     if ([SCCacheTool shareInstance].headImage) {

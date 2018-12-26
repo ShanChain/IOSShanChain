@@ -62,6 +62,8 @@ class HHShareView: UIView {
     var closure:HHShareViewClosure?
     var shareModel:CommonShareModel?
     
+    
+    @IBOutlet weak var scaleLbTop: NSLayoutConstraint!
     convenience init(frame:CGRect,shareImage:UIImage?,type:Int,shareModel:CommonShareModel?){
         self.init(frame: frame)
         self.shareImage = shareImage;
@@ -73,7 +75,7 @@ class HHShareView: UIView {
                 imageV.image = image
                 contentView.addSubview(imageV)
                 imageV.snp.makeConstraints { (make) in
-                    make.centerY.centerX.equalTo(contentView)
+                    make.centerY.centerX.equalTo(showView)
                     make.width.equalTo(image.size.width)
                     make.height.equalTo(image.size.height)
                 }
@@ -82,6 +84,7 @@ class HHShareView: UIView {
         if self.shareType == .JSHARELink{
             self.showView.isHidden = true
             self.scaleLb.isHidden = false
+            self.scaleLbTop.constant = IS_IPHONE_X() == true ? 175:197
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(closeContentViewAction))
              self.redenvelopeImageView.addGestureRecognizer(tap)
         }else if self.shareType == .JSHARERedenvelope{
@@ -113,6 +116,7 @@ class HHShareView: UIView {
         self.frame = frame
         self.alphaComponentMake()
         contentView = loadViewFromNib()
+        contentView.frame = frame
         addSubview(contentView)
         for (_,v) in subviews.enumerated(){
             if let btn = v as? UIButton{
@@ -137,7 +141,7 @@ class HHShareView: UIView {
         shareEntity.title = shareModel?.title;
         shareEntity.thumbnail = shareModel?.thumbnail
         shareEntity.text = shareModel?.intro;
-        if self.shareType == .JSHARELink {
+        if self.shareType == .JSHARELink || self.shareType == .JSHAREImage{
               shareEntity.url = shareModel?.url
              _shareMediaType(shareEntity: shareEntity, PlatforType: PlatforType, mediaType: JSHAREMediaType.JSHARELink.rawValue)
         }else  if self.shareType == .JSHARERedenvelope{

@@ -46,7 +46,7 @@ class TaskDetailsViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "任务详情"
+        title = "求助详情"
         layoutUI()
         reftreshData()
         if #available(iOS 11.0, *) {
@@ -199,6 +199,11 @@ class TaskDetailsViewController: SCBaseVC {
             taskTriggerBtn.borderWidth = 1
             taskTriggerBtn.setTitleColor(SC_ThemeMainColor, for: .normal)
         }
+        
+        if taskDetailsModel?.isMyBublish == true{
+            taskTriggerBtn.isHidden = true
+        }
+        
         headerDateLb.text = NSDate.chatingTime(taskDetailsModel!.publishTime) ?? ""
     }
     

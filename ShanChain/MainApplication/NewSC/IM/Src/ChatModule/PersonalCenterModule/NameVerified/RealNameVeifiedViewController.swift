@@ -21,12 +21,15 @@ class RealNameVeifiedViewController: SCBaseVC {
     
     @IBAction func certificationAction(_ sender: Any) {
         if self._isValid() {
-            SCNetwork.shareInstance().getWithUrl(RealNameVerified_URL, parameters: ["cardno":cardIDFid.text!,"name":nameFid.text,"userId":SCCacheTool.shareInstance().getCurrentUser()], success: { (result) in
-                HHTool.showSucess("认证成功")
-                self.backViewController()
-            }) { (error) in
-                
+           
+            
+            SCNetwork.shareInstance().hh_Get(withUrl: RealNameVerified_URL, parameters: ["cardno":cardIDFid.text!,"name":nameFid.text!,"userId":SCCacheTool.shareInstance().getCurrentUser()], showLoading: true) { (baseModel, error) in
+                HHTool.showSucess(baseModel?.message)
+                if (baseModel?.data) != nil{
+                    self.backViewController()
+                }
             }
+            
         }
     }
     

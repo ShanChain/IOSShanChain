@@ -25,35 +25,34 @@
                     <rect key="frame" x="20" y="145" width="335" height="397"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的福包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJT-64-dmx">
-                            <rect key="frame" x="132.5" y="5" width="69.5" height="30"/>
+                            <rect key="frame" x="132.5" y="5" width="69.5" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="tpn-lL-smO"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="U6v-ZC-m5I"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyW-fc-WbL">
-                            <rect key="frame" x="0.0" y="35" width="335" height="1"/>
+                        <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyW-fc-WbL">
+                            <rect key="frame" x="0.0" y="45" width="335" height="1"/>
                             <color key="backgroundColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="8Bc-HJ-8bK"/>
+                                <constraint firstAttribute="height" constant="0.5" id="8Bc-HJ-8bK"/>
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tE2-3s-EG2">
-                            <rect key="frame" x="0.0" y="36" width="335" height="303"/>
+                            <rect key="frame" x="0.0" y="46" width="335" height="293"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="AoW-RX-hUl"/>
                                 <outlet property="delegate" destination="-1" id="AOa-x5-nXv"/>
                             </connections>
                         </tableView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VB-p6-5oe">
+                        <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VB-p6-5oe">
                             <rect key="frame" x="0.0" y="339" width="335" height="1"/>
                             <color key="backgroundColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="PeJ-SP-dqN"/>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="sEH-KM-Svx"/>
+                                <constraint firstAttribute="height" constant="0.5" id="PeJ-SP-dqN"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhs-gz-O1R">

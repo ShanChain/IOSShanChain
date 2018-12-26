@@ -93,6 +93,8 @@
 #define  NewYearActiveInfo_URL  @"/v1/2.0/light/active" //  获取跨年活动信息
 #define  NewYearActiveRush_URL  @"/v1/2.0/light/rush" // 活动闯关
 #define  HotChatRoom_URL  @"/web/api/sys/hotChatRoom" // 热门元社区
+#define  AppReceive_URL  @"/v1/2.0/redPaper/appReceive" // 领取福包
+#define  RedPaperObtainList_URL  @"/v1/2.0/redPaper/obtainList" // 我的福包列表
 
 
 

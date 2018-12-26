@@ -54,6 +54,7 @@ class PublishTaskView: UIView {
         self.frame = frame;
         makeView.frame = frame
         contentView = loadViewFromNib()
+        contentView.frame = frame
         publishBtn.addTarget(self, action: #selector(_publishPressed), for: .touchUpInside)
         taskDesTextFid.placeholder = NSLocalizedString("sc_Enter_", comment: "字符串")
         rewardTextFid.placeholder = NSLocalizedString("sc_rewardFid", comment: "字符串")

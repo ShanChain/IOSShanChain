@@ -25,6 +25,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     @IBOutlet weak var enterChatBtn: UIButton!
     open var conversation: JMSGConversation
     var maskView:UIView! // 蒙版
+    var takeImage:UIImage? // 分享的区域截图
+    var shareTakeUrl:String? // 分享的区域截图的URL
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
     public required init(conversation: JMSGConversation, isJoinChat:Bool, navTitle:String) {
@@ -54,7 +56,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         _init()
         maskView = UIView.init(frame:chatView.frame)
         //        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
-        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 60, y: 64, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: ["帮","玩"])
+        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 60, y: 64, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: [NSLocalizedString("sc_H", comment: "字符串"),NSLocalizedString("sc_P", comment: "字符串")])
         suspendBallBtn = suspendBall
         suspendBallBtn?.isHidden = true
         suspendBallBtn?.bottomLayGuide = toolbar.contentSize.height
@@ -87,6 +89,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         taskButton.menuButtonSize = .medium
         // taskButton.sholudMenuButtonAnimate = false
         taskButton.bottomLayouSafeBorder = toolbar.intrinsicContentSize.height
+        taskButton.isHidden = true
     }
     
     func buttonForIndexAt(_ menuButton: ASCircularMenuButton, indexForButton: Int) -> UIButton {
@@ -157,9 +160,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                         let roomId:String = data!["roomId"] as! String
                         if roomId == self.currentChatRoomID{
                             self.isJoinChatRoom = true
-                            if SCCacheTool.shareInstance().status ==  "1" {
-                                self.taskButton.isHidden = false
-                            }
+//                            if SCCacheTool.shareInstance().status ==  "1" {
+//                                self.taskButton.isHidden = false
+//                            }
                         }else{
                             self.hrShowAlert(withTitle: "温馨提示", message: "您未处于该元社区的地理位置，还不能加入聊天喔~")
                         }
@@ -170,10 +173,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                     HHTool.showError(error?.localizedDescription)
                 }
             }
-        }
-        
-        if SCCacheTool.shareInstance().status ==  "1" {
-            self.taskButton.isHidden = false
         }
         
     }
@@ -475,13 +474,50 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             }
             
         }
+        
+        // 分享接口
+        func _shareTakeImage(_ url:String){
+            SCNetwork.shareInstance().v1_post(withUrl: ShareRoom_URL, params: ["Img":url,"id":currentChatRoomID!,"characterId":SCCacheTool.shareInstance().getCurrentCharacterId()], showLoading: true) { (baseModel, error) in
+                
+                if error != nil{
+                    HHTool.showError(error?.localizedDescription)
+                    return;
+                }
+                
+                if let dic = baseModel?.data as? Dictionary<String,Any>{
+                    let shareModel:CommonShareModel =  CommonShareModel.init()
+                    shareModel.url = dic["url"] as! String
+                    shareModel.title = dic["title"] as! String
+                    shareModel.intro = dic["intro"] as! String
+                    shareModel.background = dic["background"] as! String
+                    let shareView:HHShareView = HHShareView.init(frame: (self.view.frame), shareImage: self.takeImage ?? SCCacheTool.shareInstance().takeImage, type: 2, shareModel: shareModel)
+                    self.view.addSubview(shareView)
+//                    shareView.closure = {[weak self] () in
+//                        self?.toolbar.isHidden = false
+//                    }
+                }
+                
+            }
+          
+        }
+        
+        // 分享区域截图
         navTitleView.shareRoomClosure = { [weak self] () in
             self?.toolbar.isHidden = true
-            let shareView:HHShareView = HHShareView.init(frame: (self?.view.frame)!, shareImage: SCCacheTool.shareInstance().takeImage, type: 2, shareModel: nil)
-            self?.view.addSubview(shareView)
             
-            shareView.closure = {[weak self] () in
-                self?.toolbar.isHidden = false
+            if self!.shareTakeUrl == nil {
+                SCAliyunUploadMananger.uploadImage(SCCacheTool.shareInstance().takeImage, withCompressionQuality: 1.0, withCallBack: { (url) in
+                    
+                    if url != nil{
+                        _shareTakeImage(url!)
+                    }
+                    
+                    
+                }, withErrorCallBack: { (error) in
+                    HHTool.showError(error?.localizedDescription)
+                })
+            }else{
+                _shareTakeImage(self!.shareTakeUrl!)
             }
         }
         
@@ -1615,41 +1651,42 @@ extension HHChatRoomViewController: SuspendBallDelegte{
     func suspendBall(_ subBall: UIButton!, didSelectTag tag: Int) {
         self.suspendBallBtn?.showFunction =  !(self.suspendBallBtn?.showFunction)!
         if tag == 1 {
+            self.navigationController?.popViewController(animated: true)
             // 发布任务
-            UIView .animate(withDuration: 0.2) {
-                let pubTaskView:PublishTaskView? =
-                    PublishTaskView(taskModel: self._taskModel, frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
-                pubTaskView?.cornerRadius = 0.01
-                pubTaskView?.borderColor = .clear
-                // 点击发布任务回调
-                pubTaskView?.pbCallClosure = { [weak self] (dataString,reward,time,timestamp,isPut)  in
-                    pubTaskView?.dismiss()
-                    self?.toolbar.isHidden = false
-                    if isPut == false{
-                        return
-                    }
-                    let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
-                    let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self?.currentChatRoomID ?? "","time":timestamp,"characterId":characterId]
-                    // 添加任务
-                    HHTool.showChrysanthemum()
-                    SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: params, showLoading: true, call: { (baseModel, error) in
-                        HHTool.dismiss()
-                        if((error) != nil){
-                            HHTool .showError("发布失败")
-                            return
-                        }
-                        let dict = baseModel?.data as!Dictionary<String, Any>
-                        if let model = TaskAddModel.deserialize(from: dict) {
-                            self?._taskModel = model
-                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:model.Task?.price ?? "",CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
-                        }
-                    })
-                }
-                self.view.addSubview(pubTaskView!)
-                self.toolbar.isHidden = true
-            }
+//            UIView .animate(withDuration: 0.2) {
+//                let pubTaskView:PublishTaskView? =
+//                    PublishTaskView(taskModel: self._taskModel, frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
+//                pubTaskView?.cornerRadius = 0.01
+//                pubTaskView?.borderColor = .clear
+//                // 点击发布任务回调
+//                pubTaskView?.pbCallClosure = { [weak self] (dataString,reward,time,timestamp,isPut)  in
+//                    pubTaskView?.dismiss()
+//                    self?.toolbar.isHidden = false
+//                    if isPut == false{
+//                        return
+//                    }
+//                    let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
+//                    let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self?.currentChatRoomID ?? "","time":timestamp,"characterId":characterId]
+//                    // 添加任务
+//                    HHTool.showChrysanthemum()
+//                    SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: params, showLoading: true, call: { (baseModel, error) in
+//                        HHTool.dismiss()
+//                        if((error) != nil){
+//                            HHTool .showError("发布失败")
+//                            return
+//                        }
+//                        let dict = baseModel?.data as!Dictionary<String, Any>
+//                        if let model = TaskAddModel.deserialize(from: dict) {
+//                            self?._taskModel = model
+//                            self?.send(forCustom: [CUSTOM_CONTENT:model.Task?.intro ?? "",CUSTOM_REWARD:model.Task?.price ?? "",CUSTOM_COMPLETETIME:timestamp,CUSTOM_TASKID:model.Task?.taskId ?? ""])
+//                        }
+//                    })
+//                }
+//                self.view.addSubview(pubTaskView!)
+//                self.toolbar.isHidden = true
+//            }
         }else if tag == 0{
-            // 查看任务
+       
             let vc = TaskListContainerViewController()
             vc.currentChatRoomID = self.currentChatRoomID
             vc._scrollToIndex = .my

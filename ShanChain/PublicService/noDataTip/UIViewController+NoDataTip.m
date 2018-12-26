@@ -46,7 +46,7 @@
   
     CGSize size = [_tipLabel sizeThatFits:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX)];
     _tipLabel.center = self.center;
-    _tipLabel.bounds = CGRectMake(0, 0,SCREEN_WIDTH, size.height);
+    _tipLabel.bounds = CGRectMake(10, 0,SCREEN_WIDTH - 20, size.height);
     
     if (!self.tipLabel.superview) {
         _tipImage.center = CGPointMake(self.centerX, self.centerY);

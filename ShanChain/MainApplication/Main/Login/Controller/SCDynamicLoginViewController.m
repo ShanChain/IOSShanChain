@@ -57,6 +57,7 @@
 - (void)setUI{
     
     self.phoneNumberFid.placeholder = NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil);
+    self.titleLb.text = NSLocalizedString(@"sc_login_others", nil);
     
     if (self.loginType == LoginType_bindPhoneNumber) {
         self.stackView.hidden = YES;

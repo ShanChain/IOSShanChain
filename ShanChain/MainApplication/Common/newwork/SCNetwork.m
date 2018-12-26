@@ -173,7 +173,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 #if TARGET_OS_IPHONE
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {
-            [HHTool showError:@"请检查网络设置"];
+            [HHTool showError:NSLocalizedString(@"sc_Please_check_the_networksettings", nil)];
             return ;
             
         }
@@ -243,7 +243,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 #if TARGET_OS_IPHONE
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {
-            [HHTool showError:@"请检查网络设置"];
+            [HHTool showError:NSLocalizedString(@"sc_Please_check_the_networksettings", nil)];
             callBlock(nil,[NSError errorWithDomain:NSURLErrorDomain code:-1001 userInfo:nil]);
             return ;
             
@@ -276,7 +276,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 #if TARGET_OS_IPHONE
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {
-            [HHTool showError:@"请检查网络设置"];
+            [HHTool showError:NSLocalizedString(@"sc_Please_check_the_networksettings", nil)];
             callBlock(nil,[NSError errorWithDomain:NSURLErrorDomain code:-1001 userInfo:nil]);
             return ;
         }
@@ -326,7 +326,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     [self apendTOBaseParams:params];
     [_afManager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
          NSString  *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
-        if ([code isEqualToString:SC_COMMON_SUC_CODE] || [code isEqualToString:SC_WALLET_COMMON_SUC_CODE]) {
+        if ([code isEqualToString:SC_COMMON_SUC_CODE] || [code isEqualToString:SC_WALLET_COMMON_SUC_CODE] || [code isEqualToString:SC_REALNAME_NOMATCH]) {
             SCLog(@"success");
             success(responseObject);
         }else if ([code isEqualToString:SC_REALNAME_AUTHENTICATE]){
@@ -335,7 +335,17 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             [[SCAppManager shareInstance] logout];
         }else{
             SCLog(@"Request error%@", responseObject);
-            failure([SCNetworkError errorWithCode:(NSInteger)responseObject[@"code"] msg:@"Request data error"]);
+            
+            NSString *msg = @"Request data error";
+            if (!NULLString(responseObject[@"message"])) {
+                msg = responseObject[@"message"];
+            }
+            
+            if (!NULLString(responseObject[@"msg"])) {
+                msg = responseObject[@"msg"];
+            }
+            
+            failure([SCNetworkError errorWithCode:(NSInteger)responseObject[@"code"] msg:msg]);
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
