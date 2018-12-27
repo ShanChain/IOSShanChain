@@ -114,6 +114,8 @@
 "sc_Hide" = "Hide";
 "sc_whatsYourName" = "what' s your name？";
 "sc_whatsUp" = "What's up？";
+"sc_takePhoto" = "take photo";
+"sc_Album" = "Album";
 
 /*
  举报

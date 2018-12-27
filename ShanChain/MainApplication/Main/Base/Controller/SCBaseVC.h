@@ -28,6 +28,7 @@
 - (void)pushPage:(UIViewController *)viewController Animated:(BOOL)animated;
 
 - (void)showNavigationBarWithNormalColor;
+- (void)showNavigationBarWhiteColor;
 
 //返回到上一层，直到dismiss
 - (UIViewController *)backViewController;

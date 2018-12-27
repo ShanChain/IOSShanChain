@@ -84,6 +84,11 @@ class HHShareView: UIView {
         if self.shareType == .JSHARELink{
             self.showView.isHidden = true
             self.scaleLb.isHidden = false
+            
+//            var height:Int = 175
+            
+            
+            
             self.scaleLbTop.constant = IS_IPHONE_X() == true ? 175:197
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(closeContentViewAction))
              self.redenvelopeImageView.addGestureRecognizer(tap)

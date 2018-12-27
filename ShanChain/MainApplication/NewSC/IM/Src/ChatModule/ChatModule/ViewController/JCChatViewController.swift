@@ -155,7 +155,7 @@ class JCChatViewController: SCBaseVC {
     fileprivate lazy var _toolboxItems: [SAIToolboxItem] = {
         return [
             SAIToolboxItem("page:pic", "照片", UIImage.loadImage("chat_tool_pic")),
-            SAIToolboxItem("page:camera", "拍照", UIImage.loadImage("chat_tool_camera")),
+            SAIToolboxItem("page:camera", NSLocalizedString("sc_takePhoto", comment: "字符串"), UIImage.loadImage("chat_tool_camera")),
             SAIToolboxItem("page:video_s", "小视频", UIImage.loadImage("chat_tool_video_short")),
             SAIToolboxItem("page:location", "位置", UIImage.loadImage("chat_tool_location")),
             SAIToolboxItem("page:businessCard", "名片", UIImage.loadImage("chat_tool_businessCard")),

@@ -19,6 +19,13 @@ protocol TaskListCellProtocol: NSObjectProtocol {
     
 }
 
+protocol HelpCenterCellProtocol:NSObjectProtocol {
+     func _clickAvatar(listModel: TaskListModel) // 点击头像
+     func _helpHereWith(listModel: TaskListModel) // 帮他一下
+}
+
+
+
 protocol HHNumberPeopleListCellProtocol:NSObjectProtocol {
     func clickDialogueForChat(index:Int) // 点击会话
 }

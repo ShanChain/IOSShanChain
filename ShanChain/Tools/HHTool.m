@@ -182,6 +182,24 @@
     NSLog(@"deviceIP========%@",deviceIP);    return deviceIP;    }
 
 
++ (BOOL)_IS_IPHONE_5{
+    return IS_IPHONE_5;
+}
+
++ (BOOL)_IS_IPHONE_6{
+    return IS_IPHONE_6;
+}
+
++ (BOOL)_IS_IPHONE_6P{
+    return IS_IPHONE_6P;
+}
+
++ (BOOL)_IS_IPHONE_X{
+    return IS_IPHONE_X;
+}
+
+
+
 //获取所有相关IP信息
 + (NSDictionary *)getIPAddresses
 {

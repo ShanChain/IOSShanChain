@@ -11,6 +11,11 @@
 
 @interface HHTool : NSObject
 
++ (BOOL)_IS_IPHONE_5;
++ (BOOL)_IS_IPHONE_6;
++ (BOOL)_IS_IPHONE_6P;
++ (BOOL)_IS_IPHONE_X;
+
 + (YYHud *)showSucess:(NSString *)msg;
 + (YYHud *)showError:(NSString *)msg;
 + (void)dismiss;

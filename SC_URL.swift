@@ -14,6 +14,7 @@ import Foundation
 
 public let  HotChatRoom_URL = "/web/api/sys/hotChatRoom" // 热门元社区
 public let  ShareRoom_URL = "/v1/2.0/share/shareRoom" // 分享聊天室
+public let  AddFocus_URL = "/v1/focus/focus" // 添加关注
 
 
 /*

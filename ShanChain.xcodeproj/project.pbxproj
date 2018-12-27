@@ -51,6 +51,11 @@
 		221BBD372195A5300004EE03 /* JGUserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD362195A5300004EE03 /* JGUserLoginService.swift */; };
 		221BBD3A2196B76B0004EE03 /* CoordnateInfosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD392196B76B0004EE03 /* CoordnateInfosModel.m */; };
 		221BBD3C21982D1E0004EE03 /* TaskAddModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BBD3B21982D1E0004EE03 /* TaskAddModel.swift */; };
+		221BEF0421D4A522007C76BF /* CommunityHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BEF0221D4A522007C76BF /* CommunityHelpViewController.swift */; };
+		221BEF0521D4A522007C76BF /* CommunityHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221BEF0321D4A522007C76BF /* CommunityHelpViewController.xib */; };
+		221BEF0821D4A8A9007C76BF /* HelpCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BEF0621D4A8A9007C76BF /* HelpCenterCell.swift */; };
+		221BEF0921D4A8A9007C76BF /* HelpCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221BEF0721D4A8A9007C76BF /* HelpCenterCell.xib */; };
+		221BEF0B21D4B883007C76BF /* ChatPublicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221BEF0A21D4B883007C76BF /* ChatPublicService.swift */; };
 		221E355B215C6100003FAA73 /* UIImageView+sd.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355A215C6100003FAA73 /* UIImageView+sd.m */; };
 		221E355E215C6C83003FAA73 /* UIViewController+HRAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355D215C6C83003FAA73 /* UIViewController+HRAlertViewController.m */; };
 		2226DB7621A7ACD9002F6195 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226DB7221A7ACD9002F6195 /* UncaughtExceptionHandler.m */; };
@@ -928,6 +933,11 @@
 		221BBD382196B76B0004EE03 /* CoordnateInfosModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordnateInfosModel.h; sourceTree = "<group>"; };
 		221BBD392196B76B0004EE03 /* CoordnateInfosModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordnateInfosModel.m; sourceTree = "<group>"; };
 		221BBD3B21982D1E0004EE03 /* TaskAddModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddModel.swift; sourceTree = "<group>"; };
+		221BEF0221D4A522007C76BF /* CommunityHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityHelpViewController.swift; sourceTree = "<group>"; };
+		221BEF0321D4A522007C76BF /* CommunityHelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityHelpViewController.xib; sourceTree = "<group>"; };
+		221BEF0621D4A8A9007C76BF /* HelpCenterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCenterCell.swift; sourceTree = "<group>"; };
+		221BEF0721D4A8A9007C76BF /* HelpCenterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpCenterCell.xib; sourceTree = "<group>"; };
+		221BEF0A21D4B883007C76BF /* ChatPublicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPublicService.swift; sourceTree = "<group>"; };
 		221E3559215C6100003FAA73 /* UIImageView+sd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+sd.h"; sourceTree = "<group>"; };
 		221E355A215C6100003FAA73 /* UIImageView+sd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+sd.m"; sourceTree = "<group>"; };
 		221E355C215C6C83003FAA73 /* UIViewController+HRAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HRAlertViewController.h"; sourceTree = "<group>"; };
@@ -3142,6 +3152,8 @@
 				225052BD218BF67E001FBD65 /* TaskListViewController.swift */,
 				22C917AC21943014002E5240 /* TaskDetailsViewController.swift */,
 				22C917AD21943014002E5240 /* TaskDetailsViewController.xib */,
+				221BEF0221D4A522007C76BF /* CommunityHelpViewController.swift */,
+				221BEF0321D4A522007C76BF /* CommunityHelpViewController.xib */,
 			);
 			path = TaskModule;
 			sourceTree = "<group>";
@@ -3189,6 +3201,7 @@
 		225F83FD21AE96400082C0E1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				221BEF0A21D4B883007C76BF /* ChatPublicService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -3284,6 +3297,8 @@
 				22C917B12194402D002E5240 /* TaskContentDetailsCell.xib */,
 				22563F5E219C3929004E34BB /* TaskListPersonalCell.swift */,
 				22563F5F219C3929004E34BB /* TaskListPersonalCell.xib */,
+				221BEF0621D4A8A9007C76BF /* HelpCenterCell.swift */,
+				221BEF0721D4A8A9007C76BF /* HelpCenterCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5216,6 +5231,7 @@
 				485E65AF1F42862900B158BF /* EaseUI.podspec in Resources */,
 				223F99E8217F12040031DB95 /* defaultTheme.bundle in Resources */,
 				3356B16C1F32F50700027E23 /* api.shanchain.com.cer in Resources */,
+				221BEF0521D4A522007C76BF /* CommunityHelpViewController.xib in Resources */,
 				22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */,
 				2229ED1721B942A500E33A8D /* AppointmentCreateCardViewController.storyboard in Resources */,
 				485E66631F42873F00B158BF /* MJRefresh.bundle in Resources */,
@@ -5253,6 +5269,7 @@
 				4852A12E1FCE9F0300CDD7BE /* SYMarkCollection2Cell.xib in Resources */,
 				22A2EB9121BE1BB100737265 /* AppointmentCardDetialsCell.xib in Resources */,
 				22680ABB219E786400F2FA5B /* MyWalletViewController.xib in Resources */,
+				221BEF0921D4A8A9007C76BF /* HelpCenterCell.xib in Resources */,
 				223F9969217F12040031DB95 /* yh_image_picked@2x.png in Resources */,
 				22C917A72192E5AA002E5240 /* RealNameVeifiedViewController.xib in Resources */,
 				89E031531FCECBA70089240B /* GWLPhotoSelector.bundle in Resources */,
@@ -5914,8 +5931,10 @@
 				221B3BD921C74DE60061BB3E /* UIAlertView+LBXAlertAction.m in Sources */,
 				4852A1351FCE9F0300CDD7BE /* SYStoryRoleSelectCell.m in Sources */,
 				223F9992217F12040031DB95 /* JCMessageCardView.swift in Sources */,
+				221BEF0821D4A8A9007C76BF /* HelpCenterCell.swift in Sources */,
 				223F999D217F12040031DB95 /* JCConversationListViewController.swift in Sources */,
 				22C917B22194402D002E5240 /* TaskContentDetailsCell.swift in Sources */,
+				221BEF0421D4A522007C76BF /* CommunityHelpViewController.swift in Sources */,
 				890AF0C51FECEE2600396169 /* SCDynamicDetailView.m in Sources */,
 				485E661B1F42862900B158BF /* EaseBubbleView.m in Sources */,
 				485E65FE1F42862900B158BF /* NSString+Valid.m in Sources */,
@@ -5935,6 +5954,7 @@
 				485E665A1F42873F00B158BF /* MJRefreshAutoGifFooter.m in Sources */,
 				223F9A09217F12040031DB95 /* DLTabedSlideView.m in Sources */,
 				4852A0C41FCE9F0300CDD7BE /* SYScanController.m in Sources */,
+				221BEF0B21D4B883007C76BF /* ChatPublicService.swift in Sources */,
 				223F99EF217F12040031DB95 /* JCMessageImageCollectionViewCell.swift in Sources */,
 				48718D9B1F42277400010AA0 /* UIImage+MultiFormat.m in Sources */,
 				89E031521FCECBA70089240B /* GWLPhotoLibrayController.m in Sources */,

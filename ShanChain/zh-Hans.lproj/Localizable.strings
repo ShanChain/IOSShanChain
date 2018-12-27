@@ -110,6 +110,9 @@
 "sc_Hide" = "屏蔽此人";
 "sc_whatsYourName" = "暂无昵称";
 "sc_whatsUp" = "暂无签名";
+"sc_takePhoto" = "拍照";
+"sc_Album" = "相册";
+
 
 /*
  举报

@@ -34,7 +34,7 @@ class AppointmentListViewController: SCBaseVC {
 
         headView.snp.makeConstraints { (mk) in
             mk.left.right.equalTo(0)
-            mk.top.equalTo(UIDevice().navBarHeight)
+            mk.top.equalTo(self.topLayoutGuide.snp.bottom)
             mk.height.equalTo(50)
         }
         
@@ -103,9 +103,6 @@ extension AppointmentListViewController{
     }
     
     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()){
-//        SCNetwork.shareInstance().v1_post(withUrl: CouponsVendorList_URL, params: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
-//            complete()
-//        }
         
         SCNetwork.shareInstance().hh_Get(withUrl: CouponsVendorList_URL, parameters: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
             if error != nil{

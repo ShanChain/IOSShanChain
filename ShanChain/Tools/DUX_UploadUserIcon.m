@@ -36,7 +36,7 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"sc_cancel", nil)
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"相册", @"拍照", nil];
+                                              otherButtonTitles:NSLocalizedString(@"sc_Album", nil), NSLocalizedString(@"sc_takePhoto", nil), nil];
     [sheet showInView:fatherVC.view];
     
     

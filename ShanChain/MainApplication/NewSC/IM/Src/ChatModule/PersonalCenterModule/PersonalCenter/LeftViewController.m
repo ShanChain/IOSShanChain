@@ -127,7 +127,7 @@
     signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.signature ? :NSLocalizedString(@"sc_whatsUp", nil);
     [self.view addSubview:signatureLb];
     [signatureLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(nikeNameLb.mas_bottom).offset(10);
+        make.top.equalTo(nikeNameLb.mas_bottom).offset(-10);
         make.left.equalTo(layerView.mas_right).offset(10);
         make.width.right.equalTo(@-40);
         make.height.equalTo(@80);

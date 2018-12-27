@@ -56,7 +56,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         _init()
         maskView = UIView.init(frame:chatView.frame)
         //        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
-        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 60, y: 64, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: [NSLocalizedString("sc_H", comment: "字符串"),NSLocalizedString("sc_P", comment: "字符串")])
+        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 50, y: UIDevice().navBarHeight + 10, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: [NSLocalizedString("sc_H", comment: "字符串"),NSLocalizedString("sc_P", comment: "字符串")])
         suspendBallBtn = suspendBall
         suspendBallBtn?.isHidden = true
         suspendBallBtn?.bottomLayGuide = toolbar.contentSize.height
@@ -329,7 +329,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     fileprivate lazy var _toolboxItems: [SAIToolboxItem] = {
         return [
             SAIToolboxItem("page:pic", "照片", UIImage.loadImage("chat_tool_pic")),
-            SAIToolboxItem("page:camera", "拍照", UIImage.loadImage("chat_tool_camera")),
+            SAIToolboxItem("page:camera", NSLocalizedString("sc_takePhoto", comment: "字符串"), UIImage.loadImage("chat_tool_camera")),
             SAIToolboxItem("page:video_s", "小视频", UIImage.loadImage("chat_tool_video_short")),
             //            SAIToolboxItem("page:location", "位置", UIImage.loadImage("chat_tool_location")),
             //            SAIToolboxItem("page:businessCard", "名片", UIImage.loadImage("chat_tool_businessCard")),
@@ -1687,9 +1687,10 @@ extension HHChatRoomViewController: SuspendBallDelegte{
 //            }
         }else if tag == 0{
        
-            let vc = TaskListContainerViewController()
-            vc.currentChatRoomID = self.currentChatRoomID
-            vc._scrollToIndex = .my
+//            let vc = TaskListContainerViewController()
+//            vc.currentChatRoomID = self.currentChatRoomID
+//            vc._scrollToIndex = .my
+            let vc = CommunityHelpViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

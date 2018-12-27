@@ -238,8 +238,9 @@ static CGFloat btnSmallImageWidth = 22;
     
     __weak typeof(self) weakSelf = self;
     if (_showFunction == NO) {
-        self.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.6];
-        [self setImage:[self resizeImage:[UIImage imageNamed:@"cross"] wantSize:CGSizeMake(btnSmallImageWidth, btnSmallImageWidth)] forState:0];
+//        self.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.6];
+        [self setImage:[self resizeImage:[UIImage imageNamed:@"cross"] wantSize:CGSizeMake(fullButtonWidth, fullButtonWidth)] forState:0];
+
         _showFunction = YES;
         
         [self functionMenuShow];
@@ -250,8 +251,9 @@ static CGFloat btnSmallImageWidth = 22;
         return;
         
     } else if (_showFunction == YES) { //full state
-        self.backgroundColor = _superBallBackColor;
-        [self setImage:[self resizeImage:[UIImage imageNamed:@"circle"] wantSize:CGSizeMake(btnBigImageWidth, btnBigImageWidth)] forState:0];
+//        self.backgroundColor = _superBallBackColor;
+        [self setImage:[self resizeImage:[UIImage imageNamed:@"circle"] wantSize:CGSizeMake(fullButtonWidth, fullButtonWidth)] forState:0];
+   
         _showFunction = NO;
         
         [self.functionMenu removeFromSuperview];

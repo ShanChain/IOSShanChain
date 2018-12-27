@@ -154,6 +154,7 @@ class TaskDetailsViewController: SCBaseVC {
                 successView.closure = { (HxUserName) in
                     JMSGConversation.createSingleConversation(withUsername: HxUserName, completionHandler: { (result, error) in
                         if error == nil {
+                            ChatPublicService.jg_addFriendFeFocus(funsJmUserName: HxUserName)
                             let conv = result as! JMSGConversation
                             let vc = JCChatViewController(conversation: conv)
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)

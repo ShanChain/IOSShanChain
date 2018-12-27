@@ -204,6 +204,7 @@ extension JCUserInfoViewController: JCButtonCellDelegate {
         }
         JMSGConversation.createSingleConversation(withUsername: (user?.username)!, appKey: (user?.appKey)!) { (result, error) in
             if error == nil {
+                ChatPublicService.jg_addFriendFeFocus(funsJmUserName: (self.user?.username)!)
                 let conv = result as! JMSGConversation
                 let vc = JCChatViewController(conversation: conv)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)
@@ -222,6 +223,7 @@ extension JCUserInfoViewController: JCDoubleButtonCellDelegate {
     func doubleButtonCell(clickRightButton button: UIButton) {
         JMSGConversation.createSingleConversation(withUsername: (user?.username)!, appKey: (user?.appKey)!) { (result, error) in
             if error == nil {
+                ChatPublicService.jg_addFriendFeFocus(funsJmUserName: (self.user?.username)!)
                 let conv = result as! JMSGConversation
                 let vc = JCChatViewController(conversation: conv)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)

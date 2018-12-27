@@ -60,6 +60,7 @@ static NSString * const MSG_WHERE_SPACE_MENU = @"space_menu";
                     // 单聊
                     [JMSGConversation createSingleConversationWithUsername:userName appKey:appkey completionHandler:^(JMSGConversation * conversation, NSError *error) {
                         if (!error) {
+                            [ChatPublicService jg_addFriendFeFocusWithFunsJmUserName:userName];
                             JCChatViewController *chatVC = [[JCChatViewController alloc]initWithConversation:conversation];
                             [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateConversation object:nil];
                             JCNavigationController *nav = [NotificationHandler mainNav];

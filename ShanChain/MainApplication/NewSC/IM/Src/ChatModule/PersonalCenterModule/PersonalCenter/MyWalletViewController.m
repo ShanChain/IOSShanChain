@@ -48,6 +48,7 @@
     NSURL *url = [NSURL URLWithString:self.urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -57,6 +58,19 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
+    
+    // 清除Cookie 和缓存
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]){
+        [storage deleteCookie:cookie];
+    }
+    
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+     NSURLCache * cache = [NSURLCache sharedURLCache];
+     [cache removeAllCachedResponses];
+     [cache setDiskCapacity:0];
+     [cache setMemoryCapacity:0];
 }
 
 #pragma maek - 子类重写
