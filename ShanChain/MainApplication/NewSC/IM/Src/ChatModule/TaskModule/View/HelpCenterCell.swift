@@ -52,6 +52,7 @@ class HelpCenterCell: UITableViewCell {
                self.statusBtn.setTitleColor(.black, for: .normal)
             self.statusBtn.setBackgroundImage(UIImage.loadImage("sc_com_icon_hot_gray"), for: .normal)
             }else{
+                self.statusBtn.isUserInteractionEnabled = true
                 self.statusBtn.setTitle(NSLocalizedString("sc_giveHand", comment: "字符串"), for: .normal)
                 self.statusBtn.setTitleColor(.white, for: .normal)
                 self.statusBtn.setBackgroundImage(UIImage.loadImage("Rectangle11"), for: .normal)
