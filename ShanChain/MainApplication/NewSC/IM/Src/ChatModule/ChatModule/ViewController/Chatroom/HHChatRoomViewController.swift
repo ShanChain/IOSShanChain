@@ -1689,7 +1689,7 @@ extension HHChatRoomViewController: SuspendBallDelegte{
        
             let vc = TaskListContainerViewController()
             vc.currentChatRoomID = self.currentChatRoomID
-            vc._scrollToIndex = .my
+            vc._scrollToIndex = .all
           //  let vc = CommunityHelpViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
