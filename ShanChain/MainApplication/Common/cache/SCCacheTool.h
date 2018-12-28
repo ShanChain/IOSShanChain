@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SavePublishContentModel.h"
 #import "SCCharacterModel.h"
 #import "EditInfoService.h"
 
@@ -88,7 +87,6 @@
 - (NSMutableDictionary *)getCharacterInfo;
 
 
-@property   (nonatomic,strong)  SavePublishContentModel  *editContentModel;
 @property   (nonatomic,strong)  SCCharacterModel         *characterModel;
 @property   (nonatomic,strong)  WalletCurrencyModel         *currencyModel;
 

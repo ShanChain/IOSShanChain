@@ -31,14 +31,6 @@
     return textField;
 }
 
-+ (void)popViewWithTitle:(NSString *)title withSecondTitle:(NSString *)secondTitle withPlaceholder:(NSString *)placeholder withCallback:(SYPoppedAuxiliaryCallBack)callback {
-    SYPoppedAuxiliaryView *poppedView = [[SYPoppedAuxiliaryView alloc] initWithFrame:CGRectZero];
-    poppedView.callback = callback;
-    poppedView.title = title;
-    poppedView.secondTitle = secondTitle;
-    poppedView.placeholder = placeholder;
-    [poppedView presentView];
-}
 
 + (UIView *)emptyViewWithTitle:(NSString *)title withColor:(UIColor *)color withBackgroundColor:(UIColor *)bgColor {
     UIView *emptyView = [[UIView alloc] init];

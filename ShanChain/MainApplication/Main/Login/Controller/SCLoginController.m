@@ -11,11 +11,7 @@
 #import "SCPhoneRegisterController.h"
 #import "SCInitPasswordController.h"
 #import <ShareSDK/ShareSDK.h>
-#import <React/RCTBundleURLProvider.h>
-#import <React/RCTRootView.h>
-#import "RNTabbarController.h"
 #import "SCCacheTool.h"
-#import "SYStoryMarkController.h"
 #import "SCBaseNavigationController.h"
 #import "BMKTestLocationViewController.h"
 #import "SCCharacterModel.h"
@@ -315,21 +311,21 @@
     [self.navigationController pushViewController:phoneRegsiterVC animated:YES];
 }
 
--(void)rnBtnClicked{
-    NSURL *jsCodeLocation;
-    
-    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-    
-    RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                        moduleName:@"App"
-                                                 initialProperties:nil
-                                                     launchOptions:nil];
-    rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-    UIViewController *vc = [[UIViewController alloc] init];
-    vc.view = rootView;
-    [self presentViewController:vc animated:YES completion:nil];
-    
-}
+//-(void)rnBtnClicked{
+//    NSURL *jsCodeLocation;
+//    
+//    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+//    
+//    RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+//                                                        moduleName:@"App"
+//                                                 initialProperties:nil
+//                                                     launchOptions:nil];
+//    rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+//    UIViewController *vc = [[UIViewController alloc] init];
+//    vc.view = rootView;
+//    [self presentViewController:vc animated:YES completion:nil];
+//    
+//}
 -(void)forgetPwdBtnClick{
     SCInitPasswordController *forgetPwdVC=[[SCInitPasswordController alloc]init];
     [self.navigationController pushViewController:forgetPwdVC animated:YES];

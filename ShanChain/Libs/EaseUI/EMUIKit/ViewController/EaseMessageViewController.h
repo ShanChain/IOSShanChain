@@ -27,7 +27,7 @@
 #import "EaseSDKHelper.h"
 
 #warning 新增
-#import "SCScreenCell.h"
+
 
 @interface EaseAtTarget : NSObject
 @property (nonatomic, copy) NSString    *userId;

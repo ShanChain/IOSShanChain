@@ -7,16 +7,11 @@
 //
 
 #import "SCTabbarController.h"
-#import "SYChatController.h"
-#import "SYStoryController.h"
 #import "SCBaseNavigationController.h"
 #import "SCTabBar.h"
-#import  <React/RCTRootView.h>
 #import "SCAppManager.h"
-#import "SYStoryMarkController.h"
 #import "SCCacheTool.h"
-#import "RNBaseViewController.h"
-#import "RNConstants.h"
+
 
 @interface SCTabbarController ()
 
@@ -31,52 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    // 1.初始化子控制器
-     _storyVC = [[SYStoryController alloc] init];
-    [self addChildVc:_storyVC title:@"故事" image:@"abs_home_btn_story_default" selectedImage:@"abs_home_btn_story_selected"];
-    
-    _chatVC = [[SYChatController alloc] init];
-    [self addChildVc:_chatVC title:@"对话" image:@"abs_home_btn_news_default" selectedImage:@"abs_home_btn_news_selected"];
-    
-    NSDictionary *paramsDic = nil;
-    NSDictionary *gData = nil;
-    NSString *jsonParam = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:[[SCCacheTool shareInstance] getCurrentUser] andKey:CACHE_GDATA];
-    if(![jsonParam isEqualToString:@""]){
-        gData = @{@"gData":[JsonTool dictionaryFromString:jsonParam]};
-         paramsDic = @{@"screenProps":[JsonTool stringFromDictionary:gData]};
-    }
-//    RNBaseViewController *squareVc = [[RNBaseViewController alloc] initWithScreenName:@"SquarePage" initProperties:paramsDic];
-      _squareVC = [[UIViewController alloc] init];
-    RCTRootView *squareRootView = [[RCTRootView alloc] initWithBundleURL:[SCAppManager shareInstance].jsCodeLocation
-                                                              moduleName:@"SquarePage"
-                                                       initialProperties:paramsDic
-                                                           launchOptions:nil];
-    _squareVC.view = squareRootView;
-    [self addChildVc:_squareVC title:@"广场" image:@"abs_home_btn_square_default" selectedImage:@"abs_home_btn_square_selected"];
-    
-
-//     RNBaseViewController *mineVc = [[RNBaseViewController alloc] initWithScreenName:@"MinePage" initProperties:paramsDic];
-    _mineVC = [[UIViewController alloc] init];
-    RCTRootView *mineRootView = [[RCTRootView alloc] initWithBundleURL:[SCAppManager shareInstance].jsCodeLocation
-                                                            moduleName:@"MinePage"
-                                                     initialProperties:paramsDic
-                                                         launchOptions:nil];
-    _mineVC.view = mineRootView;
-     _mineVC.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(openNotificationPage) image:@"mine_btn_news_default" highImage:@"mine_btn_news_default"];
-    [self addChildVc:_mineVC title:@"我的" image:@"abs_home_btn_mine_default" selectedImage:@"abs_home_btn_mine_selected"];
-    [self.tabBar setBackgroundColor:[UIColor whiteColor]];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *userId = [[SCCacheTool shareInstance] getCurrentUser];
-        NSString *hxUserName = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:userId andKey:CACHE_HX_USER_NAME];
-        NSString *hxPassword = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:userId andKey:CACHE_HX_PWD];
-        if(hxUserName && ![hxUserName isEqualToString:@""] && hxPassword && ![hxPassword isEqualToString:@""] ){
-            EMError *error = [[EMClient sharedClient] loginWithUsername:hxUserName password:hxPassword];
-            if (error) {
-                SCLog(@"%@",error);
-            }
-        }
-    });
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -114,12 +64,12 @@
 
 
 - (void)openNotificationPage{
-    [[SCCacheTool shareInstance] setCacheValue:@"true" withUserID:[[SCCacheTool shareInstance] getCurrentUser] andKey:CACHE_USER_MSG_READ_STATUS];
-    [self setNotificationsShowStatus:NO];
-        _mineVC.tabBarItem.badgeValue = nil;
-    NSString *gData = [[SCCacheTool shareInstance] getGdata];
-    NSDictionary *params =  @{@"gData":[JsonTool dictionaryFromString:gData]};
-    [[SCAppManager shareInstance] pushRNViewController:RN_PAGE_NOTIFICATION animated:YES parameter:[JsonTool stringFromDictionary:params]];
+//    [[SCCacheTool shareInstance] setCacheValue:@"true" withUserID:[[SCCacheTool shareInstance] getCurrentUser] andKey:CACHE_USER_MSG_READ_STATUS];
+//    [self setNotificationsShowStatus:NO];
+//        _mineVC.tabBarItem.badgeValue = nil;
+//    NSString *gData = [[SCCacheTool shareInstance] getGdata];
+//    NSDictionary *params =  @{@"gData":[JsonTool dictionaryFromString:gData]};
+//    [[SCAppManager shareInstance] pushRNViewController:RN_PAGE_NOTIFICATION animated:YES parameter:[JsonTool stringFromDictionary:params]];
 }
 
 /**

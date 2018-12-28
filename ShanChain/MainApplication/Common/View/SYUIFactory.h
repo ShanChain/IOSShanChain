@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SYPoppedAuxiliaryView.h"
+
 
 @interface SYUIFactory : NSObject
 
 + (UITextField *)textFieldWithPlacehold:(NSString *)title withFont:(UIFont *)font withColor:(UIColor *)color;
 
-+ (void)popViewWithTitle:(NSString *)title withSecondTitle:(NSString *)secondTitle withPlaceholder:(NSString *)placeholder withCallback:(SYPoppedAuxiliaryCallBack)callback;
 
 + (UIView *)emptyViewWithTitle:(NSString *)title withColor:(UIColor *)color withBackgroundColor:(UIColor *)bgColor;
 

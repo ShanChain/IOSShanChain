@@ -42,50 +42,6 @@ PODS:
     - mob_sharesdk/ShareSDK
     - MOBFoundation
   - MOBFoundation (3.1.9)
-  - React/ART (0.50.4):
-    - React/Core
-  - React/BatchedBridge (0.50.4):
-    - React/Core
-    - React/cxxreact_legacy
-  - React/Core (0.50.4):
-    - yoga (= 0.50.4.React)
-  - React/cxxreact_legacy (0.50.4):
-    - React/jschelpers_legacy
-  - React/DevSupport (0.50.4):
-    - React/Core
-    - React/RCTWebSocket
-  - React/fishhook (0.50.4)
-  - React/jschelpers_legacy (0.50.4)
-  - React/RCTActionSheet (0.50.4):
-    - React/Core
-  - React/RCTAnimation (0.50.4):
-    - React/Core
-  - React/RCTBlob (0.50.4):
-    - React/Core
-  - React/RCTCameraRoll (0.50.4):
-    - React/Core
-    - React/RCTImage
-  - React/RCTGeolocation (0.50.4):
-    - React/Core
-  - React/RCTImage (0.50.4):
-    - React/Core
-    - React/RCTNetwork
-  - React/RCTLinkingIOS (0.50.4):
-    - React/Core
-  - React/RCTNetwork (0.50.4):
-    - React/Core
-  - React/RCTPushNotification (0.50.4):
-    - React/Core
-  - React/RCTSettings (0.50.4):
-    - React/Core
-  - React/RCTText (0.50.4):
-    - React/Core
-  - React/RCTVibration (0.50.4):
-    - React/Core
-  - React/RCTWebSocket (0.50.4):
-    - React/Core
-    - React/fishhook
-    - React/RCTBlob
   - ReactiveObjC (2.1.2)
   - RedpacketAliAuthLib (1.1.4):
     - RedPacketAlipay
@@ -97,7 +53,6 @@ PODS:
   - UMengAnalytics-NO-IDFA (4.2.5)
   - YHPhotoKit (0.2.1)
   - YHPopupView (0.3.0)
-  - yoga (0.50.4.React)
   - YYModel (1.0.4)
   - ZBarSDK (1.3.1)
 
@@ -122,22 +77,6 @@ DEPENDENCIES:
   - mob_sharesdk/ShareSDKPlatforms/SinaWeibo
   - mob_sharesdk/ShareSDKPlatforms/WeChat
   - mob_sharesdk/ShareSDKUI
-  - React/ART (from `./react-native/node_modules/react-native`)
-  - React/BatchedBridge (from `./react-native/node_modules/react-native`)
-  - React/Core (from `./react-native/node_modules/react-native`)
-  - React/DevSupport (from `./react-native/node_modules/react-native`)
-  - React/RCTActionSheet (from `./react-native/node_modules/react-native`)
-  - React/RCTAnimation (from `./react-native/node_modules/react-native`)
-  - React/RCTCameraRoll (from `./react-native/node_modules/react-native`)
-  - React/RCTGeolocation (from `./react-native/node_modules/react-native`)
-  - React/RCTImage (from `./react-native/node_modules/react-native`)
-  - React/RCTLinkingIOS (from `./react-native/node_modules/react-native`)
-  - React/RCTNetwork (from `./react-native/node_modules/react-native`)
-  - React/RCTPushNotification (from `./react-native/node_modules/react-native`)
-  - React/RCTSettings (from `./react-native/node_modules/react-native`)
-  - React/RCTText (from `./react-native/node_modules/react-native`)
-  - React/RCTVibration (from `./react-native/node_modules/react-native`)
-  - React/RCTWebSocket (from `./react-native/node_modules/react-native`)
   - ReactiveObjC (~> 2.1.0)
   - RedpacketAliAuthLib (~> 1.1.4)
   - RxCocoa (~> 3.6.1)
@@ -146,7 +85,6 @@ DEPENDENCIES:
   - UMengAnalytics-NO-IDFA
   - YHPhotoKit
   - YHPopupView
-  - yoga (from `./react-native/node_modules/react-native/ReactCommon/yoga`)
   - YYModel
 
 SPEC REPOS:
@@ -180,10 +118,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   ASExtendedCircularMenu:
     :git: https://github.com/anshul18895/ASExtendedCircularMenu
-  React:
-    :path: "./react-native/node_modules/react-native"
-  yoga:
-    :path: "./react-native/node_modules/react-native/ReactCommon/yoga"
 
 CHECKOUT OPTIONS:
   ASExtendedCircularMenu:
@@ -206,7 +140,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   mob_sharesdk: fc8a9aab921c08e5e88a5b1f36229c6d406a2ff8
   MOBFoundation: 11500153c10d83e4ac341f6ad6301b3998ce6db2
-  React: 541ba768b9855e10cdc76f55427a5cd0653ca806
   ReactiveObjC: 7b6782ae39f9ac0f57205c3b0c0b69b9dd7048c0
   RedpacketAliAuthLib: 6173b52c25ab728db907da89fbcda3200d1cf98a
   RedPacketAlipay: a5de6db2e2671fc9255d6d396be869e3ba2f0489
@@ -216,10 +149,9 @@ SPEC CHECKSUMS:
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   YHPhotoKit: e88368af1fca0a110d41b88417088f7e49876981
   YHPopupView: 96d9c05c79a2a17cf69c3def09e5305cfae9e8e8
-  yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: 2338f65fbadf9ff21745aca32b44e68598268084
+PODFILE CHECKSUM: 23f20054fd5acefe5c491942332d2336f6ff530a
 
 COCOAPODS: 1.5.3

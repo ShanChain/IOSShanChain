@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-#import <React/RCTConvert.h>
-#import <React/RCTBridgeModule.h>
 
 #import "SCNetwork.h"
 #import "SCNetworkError.h"
@@ -426,38 +424,6 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     return securityPolicy;
 }
 
-- (void)rnRequest:(NSDictionary *)options
-      successCallback:(RCTResponseSenderBlock)successCallback
-        errorCallBack:(RCTResponseErrorBlock)errorCallBack {
-    if (options == nil) {
-        NSError *err = [SCNetworkError errorWithCode:SC_REQUEST_NO_PARAMS msg:@"参数为空"];
-        if (errorCallBack) {
-            errorCallBack(err);
-        }
-        return;
-    }
-    
-    NSString *path = [RCTConvert NSString:options[@"path"]];
-    NSString *method = [RCTConvert NSString:options[@"method"]];
-    NSDictionary *params = [RCTConvert NSDictionary:options[@"params"]];
-    
-    path = (path == nil) ? @"" : path;
-    
-    if ([method isEqualToString:@"post"]) {
-        [self postWithUrl:path parameters:params success:^(id  _Nullable responseObject) {
-            successCallback(@[responseObject]);
-        } failure:^(NSError * _Nonnull error) {
-            errorCallBack(error);
-        }];
-    }
-    if ([method isEqualToString:@"get"]) {
-        [self getWithUrl:path parameters:params success:^(id  _Nullable responseObject) {
-            successCallback(@[responseObject]);
-        } failure:^(NSError * _Nonnull error) {
-            successCallback(error);
-        }];
-    }
-}
 
 - (void)cancelTask{
     [_afManager.operationQueue cancelAllOperations];

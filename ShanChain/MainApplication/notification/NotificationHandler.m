@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "NotificationHandler.h"
 #import "SCTabbarController.h"
-#import "SYContactsController.h"
 #import "SCTabbarController.h"
 #import "ShanChain-Swift.h"
 
@@ -114,27 +113,19 @@ static NSString * const MSG_WHERE_SPACE_MENU = @"space_menu";
                 keyWindow.rootViewController=tabbarVC;
                 return;
             }else if ([actionBody[@"page_name"] isEqualToString:MSG_PAGE_CHARACTER]){
-                SYContactsController *vc = [[SYContactsController alloc]init];
-                [[SCAppManager shareInstance] pushViewController:vc animated:YES];
-                return;
+               
+               
             }else if ([actionBody[@"page_name"] isEqualToString:MSG_PAGE_CONTACT]){
-                SYContactsController *vc = [[SYContactsController alloc]init];
-                [[SCAppManager shareInstance] pushViewController:vc animated:YES];
+              
                 return;
             }else if ([actionBody[@"page_name"] isEqualToString:MSG_PAGE_NOTIFICATION]){
-                NSString *gData = [[SCCacheTool shareInstance] getGdata];
-                NSDictionary *rnParams =  @{@"gData":[JsonTool dictionaryFromString:gData]};
-                [[SCAppManager shareInstance] pushRNViewController:RN_PAGE_NOTIFICATION animated:YES parameter:[JsonTool stringFromDictionary:rnParams]];
+       
                 return;
             }else if ([actionBody[@"page_name"] isEqualToString:MSG_PAGE_ROLE]){
-                NSString *gData = [[SCCacheTool shareInstance] getGdata];
-                NSDictionary *rnParams =  @{@"gData":[JsonTool dictionaryFromString:gData],@"modelId":params[@"modelId"]};
-                [[SCAppManager shareInstance] pushRNViewController:RN_PAGE_MODEL animated:YES parameter:[JsonTool stringFromDictionary:rnParams]];
+            
                 return;
             }else if ([actionBody[@"page_name"] isEqualToString:MSG_PAGE_SETTING]){
-                NSString *gData = [[SCCacheTool shareInstance] getGdata];
-                NSDictionary *rnParams =  @{@"gData":[JsonTool dictionaryFromString:gData]};
-                [[SCAppManager shareInstance] pushRNViewController:RN_PAGE_SETTING animated:YES parameter:[JsonTool stringFromDictionary:rnParams]];
+   
                 return;
             }
             

@@ -10,12 +10,9 @@
 #import "AppDelegate.h"
 #import "SCTabbarController.h"
 #import "SCAppManager.h"
-#import  <React/RCTRootView.h>
-#import "RNBaseViewController.h"
 #import "SCCacheTool.h"
 #import "SCLoginController.h"
 #import "SCBaseNavigationController.h"
-#import <React/RCTBundleURLProvider.h>
 #import "ShanChain-Swift.h"
 
 
@@ -127,31 +124,31 @@ static SCAppManager *instance = nil;
     }
 }
 
-- (void)pushRNViewController:(NSString *)rnPageName animated:(BOOL)animated parameter:(NSString *)jsonParam{
-    NSDictionary *paramsDic = nil;
-    if(![jsonParam isEqualToString:@""]){
-        paramsDic = @{@"screenProps":jsonParam};
-    }
-    RNBaseViewController *rnVc = [[RNBaseViewController alloc] initWithScreenName:rnPageName initProperties:paramsDic];
-    UIViewController* visibleVc = [self visibleViewController];
-    
-    if(visibleVc.navigationController != nil){
-        [visibleVc.navigationController pushViewController:rnVc animated:animated];
-    }else{
-        
-        JCNavigationController *nav;
-        if ([[HHTool mainWindow].rootViewController isKindOfClass:[JCMainTabBarController  class]]) {
-            JCMainTabBarController  *tab = (JCMainTabBarController*)[HHTool mainWindow].rootViewController;
-            JCNavigationController *navController = tab.selectedViewController;
-            nav = navController;
-        }else{
-            nav = (JCNavigationController*)[HHTool mainWindow].rootViewController;
-        }
-        
-        [nav.topViewController.navigationController pushViewController:rnVc animated:animated];
-//        [((UITabBarController*)[self getRootViewController]).selectedViewController.navigationController pushViewController:rnVc animated:animated];
-    }
-}
+//- (void)pushRNViewController:(NSString *)rnPageName animated:(BOOL)animated parameter:(NSString *)jsonParam{
+//    NSDictionary *paramsDic = nil;
+//    if(![jsonParam isEqualToString:@""]){
+//        paramsDic = @{@"screenProps":jsonParam};
+//    }
+//    RNBaseViewController *rnVc = [[RNBaseViewController alloc] initWithScreenName:rnPageName initProperties:paramsDic];
+//    UIViewController* visibleVc = [self visibleViewController];
+//    
+//    if(visibleVc.navigationController != nil){
+//        [visibleVc.navigationController pushViewController:rnVc animated:animated];
+//    }else{
+//        
+//        JCNavigationController *nav;
+//        if ([[HHTool mainWindow].rootViewController isKindOfClass:[JCMainTabBarController  class]]) {
+//            JCMainTabBarController  *tab = (JCMainTabBarController*)[HHTool mainWindow].rootViewController;
+//            JCNavigationController *navController = tab.selectedViewController;
+//            nav = navController;
+//        }else{
+//            nav = (JCNavigationController*)[HHTool mainWindow].rootViewController;
+//        }
+//        
+//        [nav.topViewController.navigationController pushViewController:rnVc animated:animated];
+////        [((UITabBarController*)[self getRootViewController]).selectedViewController.navigationController pushViewController:rnVc animated:animated];
+//    }
+//}
 
 - (void)popToClass:(NSString *)className
                  withNavigationController:(UINavigationController *)navVc

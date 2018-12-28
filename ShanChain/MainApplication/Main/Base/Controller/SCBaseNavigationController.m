@@ -5,7 +5,6 @@
 //
 
 #import "SCBaseNavigationController.h"
-#import "RNBaseViewController.h"
 
 @interface SCBaseNavigationController ()
 

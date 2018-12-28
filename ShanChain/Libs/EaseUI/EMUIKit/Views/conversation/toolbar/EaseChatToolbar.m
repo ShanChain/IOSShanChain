@@ -20,7 +20,7 @@
 
 static const NSString *SYWordStylePointedName = @"SYWordStylePointedName";
 static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity";
-@interface EaseChatToolbar()<UITextViewDelegate, EMFaceDelegate,SYMessageToolBarDelegate>
+@interface EaseChatToolbar()<UITextViewDelegate, EMFaceDelegate>
 
 @property (nonatomic) CGFloat version;
 @property (strong, nonatomic) NSMutableArray *leftItems;
@@ -120,14 +120,14 @@ static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity
     [_toolbarView addSubview:lineView];
     
     
-    SYMessageToolBar *toolbar = [[SYMessageToolBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-    toolbar.width = self.width;
-    toolbar.delegate = self;
-    toolbar.height = 44;
-    // 2.显示
-    toolbar.y = self.height - toolbar.height -kNavStatusBarHeight +22;
-    [_toolbarView addSubview:toolbar];
-    self.toolBar = toolbar;
+//    SYMessageToolBar *toolbar = [[SYMessageToolBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+//    toolbar.width = self.width;
+//    toolbar.delegate = self;
+//    toolbar.height = 44;
+//    // 2.显示
+//    toolbar.y = self.height - toolbar.height -kNavStatusBarHeight +22;
+//    [_toolbarView addSubview:toolbar];
+//    self.toolBar = toolbar;
     
     _inputTextView = [[EaseTextView alloc] initWithFrame:CGRectMake(KSCMargin, 49, self.frame.size.width - KSCMargin * 2, 36)];
     _inputTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -928,29 +928,29 @@ static const NSString *SYWordStylePointedIdentity = @"SYWordStylePointedIdentity
 }
 
 
-- (void)messageCenter:(SYMessageToolBar *)toolbar didClickedButton:(SYMessageToolBarButtonType)buttonType{
-    switch (buttonType) {
-        case SYMessageToolBarButtonTypeDrama: // 大戏
-            [self startDrama];
-            break;
-            
-        case SYMessageToolBarButtonTypeScreen: // 场景
-            [self startScreen];
-            break;
-            
-        case SYMessageToolBarButtonTypeMention: // 艾特
-            [self startMention];
-            break;
-            
-        case SYMessageToolBarButtonTypeAlert: // 弹框
-            [self startAlert];
-            break;
-            
-        default:
-            break;
-    }
-
-}
+//- (void)messageCenter:(SYMessageToolBar *)toolbar didClickedButton:(SYMessageToolBarButtonType)buttonType{
+//    switch (buttonType) {
+//        case SYMessageToolBarButtonTypeDrama: // 大戏
+//            [self startDrama];
+//            break;
+//            
+//        case SYMessageToolBarButtonTypeScreen: // 场景
+//            [self startScreen];
+//            break;
+//            
+//        case SYMessageToolBarButtonTypeMention: // 艾特
+//            [self startMention];
+//            break;
+//            
+//        case SYMessageToolBarButtonTypeAlert: // 弹框
+//            [self startAlert];
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//
+//}
 
 - (void)composeToolSwitchBtn:(BOOL)isButtonOn{
     if (!isButtonOn) {

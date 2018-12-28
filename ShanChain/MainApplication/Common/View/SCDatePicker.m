@@ -7,7 +7,6 @@
 //
 
 #import "SCDatePicker.h"
-#import <React/RCTBridgeModule.h>
 #import <Foundation/Foundation.h>
 #import "SCAppManager.h"
 

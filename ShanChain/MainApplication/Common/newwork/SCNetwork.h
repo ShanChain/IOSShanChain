@@ -10,7 +10,6 @@
 #define SCNetwork_h
 
 #import <Foundation/Foundation.h>
-#import <React/RCTBridgeModule.h>
 #import "HHBaseModel.h"
 
 //static NSString * const SC_BASE_URL = @"https://api.shanchain.com";
@@ -42,11 +41,6 @@
 
 - (void)downFileWithUrl:(NSString *)urlString
                   block:(void (^)(id objc,BOOL success))block;
-
-
-- (void)rnRequest:(NSDictionary *)options
-  successCallback:(RCTResponseSenderBlock)successCallback
-    errorCallBack:(RCTResponseErrorBlock)errorCallBack;
 
 
 -(void)v1_postWithUrl:(NSString *)url params:(id)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock;
