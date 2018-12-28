@@ -17,7 +17,7 @@
         imageUrl = urlString;
     }else{
         imageUrl = [NSString stringWithFormat:@"%@%@",Base_url,urlString];
-    }    
+    }
     [self sd_setImageWithURL:[NSURL URLWithString: imageUrl] placeholderImage:placeholder];
 }
     

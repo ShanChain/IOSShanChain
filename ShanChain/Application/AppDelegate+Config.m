@@ -162,25 +162,6 @@
 #pragma mark --------------------------- init handler ---------------------------
 - (void)setupHXConfigWithApplication:(UIApplication *)application{
 #warning SDK注册 APNS文件的名字, 需要与后台上传证书时的名字一一对应
-    NSString *apnsCertName = nil;
-#if DEBUG
-    apnsCertName = @"develop";
-#else
-    apnsCertName = @"Hoc";
-#endif
-    EMOptions *options = [EMOptions optionsWithAppkey:KHXKey];
-    options.apnsCertName = apnsCertName;
-    [[EMClient sharedClient] initializeSDKWithOptions:options];
-    
-    EMPushOptions *pushOptions = [[EMClient sharedClient] pushOptions];
-    pushOptions.displayStyle = EMPushDisplayStyleMessageSummary; // 显示消息内容
-    // options.displayStyle = EMPushDisplayStyleSimpleBanner // 显示“您有一条新消息”
-    EMError *error = [[EMClient sharedClient] updatePushOptionsToServer]; // 更新配置到服务器，该方法为同步方法，如果需要，请放到单独线程
-    if(!error) {
-        // 成功
-    }else {
-        // 失败
-    }
     //iOS10 注册APNs
     if (NSClassFromString(@"UNUserNotificationCenter")) {
         [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert completionHandler:^(BOOL granted, NSError *error) {

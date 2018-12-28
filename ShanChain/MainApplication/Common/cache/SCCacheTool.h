@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SCCharacterModel.h"
 #import "EditInfoService.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface SCCacheTool : NSObject
 

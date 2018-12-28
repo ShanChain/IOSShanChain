@@ -49,7 +49,6 @@
 #import "MJRefresh.h"
 
 //#import "UMMobClick/MobClick.h"
-#import "EaseUI.h"
 #import <AliyunOSSiOS/OSSService.h>
 
 #import "SCNetwork.h"
@@ -84,6 +83,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "NotificationHandler.h"
 #import "EditInfoService.h"
+#import "UIImageView+WebCache.h"
 
 
 

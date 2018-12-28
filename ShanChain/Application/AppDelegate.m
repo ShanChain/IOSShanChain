@@ -157,9 +157,7 @@
     if(string){
         [[SCCacheTool shareInstance] setCacheValue:string withUserID:@"0" andKey:CACHE_DEVICE_TOKEN];
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[EMClient sharedClient] bindDeviceToken:deviceToken];
-    });
+  
     SCLog(@"DeviceToken: %@", string);
     [JMessage registerDeviceToken:deviceToken];
     [JPUSHService registerDeviceToken:deviceToken];
@@ -332,7 +330,6 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[EMClient sharedClient] applicationDidEnterBackground:application];
     [self resetBadge:application];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -341,7 +338,6 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    [[EMClient sharedClient] applicationWillEnterForeground:application];
     [self resetBadge:application];
 }
 

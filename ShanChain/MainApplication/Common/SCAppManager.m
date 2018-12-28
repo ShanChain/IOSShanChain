@@ -264,10 +264,6 @@ static SCAppManager *instance = nil;
                 NSString *hxUserName = hxAccount[@"hxUserName"];
                 NSString *hxPassword = hxAccount[@"hxPassword"];
                 [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:spaceId chatacterId:characterId hxUserName:hxUserName hxPassword:hxPassword];
-                EMError *error = [[EMClient sharedClient] logout:YES];
-                if (!error) {
-                    SCLog(@"退出成功");
-                }
                 NSMutableDictionary *params0 = [NSMutableDictionary dictionary];
                 [params0 setObject:spaceId forKey:@"spaceId"];
                 [params0 setObject:token forKey:@"token"];

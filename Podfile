@@ -20,7 +20,7 @@ target 'ShanChain' do
     
     pod 'UMengAnalytics-NO-IDFA'
     pod 'RedpacketAliAuthLib','~> 1.1.4'
-    pod 'Hyphenate'
+#    pod 'Hyphenate'
     pod 'AliyunOSSiOS'
     pod 'YYModel'
     

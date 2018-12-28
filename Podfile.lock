@@ -3,7 +3,6 @@ PODS:
   - ASExtendedCircularMenu (0.1.1)
   - BaiduMapKit (4.0.0)
   - HandyJSON (4.1.3)
-  - Hyphenate (3.5.1)
   - IQKeyboardManager (6.2.0)
   - JCore (1.2.5)
   - JMessage (3.7.0):
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - ASExtendedCircularMenu (from `https://github.com/anshul18895/ASExtendedCircularMenu`)
   - BaiduMapKit (~> 4.0.0)
   - HandyJSON (~> 4.1.1)
-  - Hyphenate
   - IQKeyboardManager
   - JMessage (~> 3.7.0)
   - JPush
@@ -92,7 +90,6 @@ SPEC REPOS:
     - AliyunOSSiOS
     - BaiduMapKit
     - HandyJSON
-    - Hyphenate
     - IQKeyboardManager
     - JCore
     - JMessage
@@ -129,7 +126,6 @@ SPEC CHECKSUMS:
   ASExtendedCircularMenu: c6012cee87d7686981c2f0d184a461ae41c5dac0
   BaiduMapKit: 8fa2eb2ca81b92b740b19d9ff3b59d751d3e92e1
   HandyJSON: bc81fbeb62d65ae5d5942ed29bc4a8265d18c1e8
-  Hyphenate: 02e3934f1bef0c25e6e5f46bd0940df740922957
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   JCore: 14706de2640b25fb77dbd02332696491407f37c9
   JMessage: 90c194ca878a1724694da320aad4867b489276e9
@@ -152,6 +148,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: 23f20054fd5acefe5c491942332d2336f6ff530a
+PODFILE CHECKSUM: 7a86e2fd10996bd50ccd1d293dbc08555c6b9bc2
 
 COCOAPODS: 1.5.3
