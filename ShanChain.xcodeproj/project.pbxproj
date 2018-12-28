@@ -1758,7 +1758,7 @@
 		223F9871217F0BB70031DB95 /* NewSC */ = {
 			isa = PBXGroup;
 			children = (
-				22538A9F21D5D31200B873F7 /* PersonalCenter */,
+				22538AA321D5D3A900B873F7 /* PersonalCenterModule */,
 				223F9872217F0BB70031DB95 /* Map */,
 				223F9873217F0BB70031DB95 /* IM */,
 			);
@@ -2481,14 +2481,6 @@
 				221BEF0321D4A522007C76BF /* CommunityHelpViewController.xib */,
 			);
 			path = TaskModule;
-			sourceTree = "<group>";
-		};
-		22538A9F21D5D31200B873F7 /* PersonalCenter */ = {
-			isa = PBXGroup;
-			children = (
-				22538AA321D5D3A900B873F7 /* PersonalCenterModule */,
-			);
-			path = PersonalCenter;
 			sourceTree = "<group>";
 		};
 		22538AA321D5D3A900B873F7 /* PersonalCenterModule */ = {
