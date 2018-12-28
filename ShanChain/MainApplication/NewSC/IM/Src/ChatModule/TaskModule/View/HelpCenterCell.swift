@@ -47,6 +47,7 @@ class HelpCenterCell: UITableViewCell {
             self.dealLineLb.text = "完成时限: \(NSDate.chatingTime(_listModel?.expiryTime) ?? "")"
             self.timeLb.text = NSDate.chatingTime(_listModel?.createTime) ?? ""
             if (_listModel?.isReceived)! {
+               self.statusBtn.isUserInteractionEnabled = false
                self.statusBtn.setTitle(NSLocalizedString("sc_helped", comment: "字符串"), for: .normal)
                self.statusBtn.setTitleColor(.black, for: .normal)
             self.statusBtn.setBackgroundImage(UIImage.loadImage("sc_com_icon_hot_gray"), for: .normal)

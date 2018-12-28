@@ -64,6 +64,7 @@
 #import "SCAliyunUploadMananger.h"
 #import "ScanCodeService.h"
 #import "CouponVerificationService.h"
+#import "UIView+LSCore.h"
 
 
 

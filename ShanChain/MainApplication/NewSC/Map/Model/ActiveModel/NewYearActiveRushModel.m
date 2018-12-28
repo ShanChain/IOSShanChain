@@ -22,6 +22,16 @@
     return _reward;
 }
 
+- (NSString *)levelName{
+    if (self.level.integerValue == 1) {
+        return @"一";
+    }else if (self.level.integerValue == 2){
+        return @"二";
+    }else if (self.level.integerValue == 3){
+        return @"三";
+    }
+    return @"四";
+}
 
 @end
 

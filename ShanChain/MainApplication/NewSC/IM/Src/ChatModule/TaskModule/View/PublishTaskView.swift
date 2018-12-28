@@ -77,6 +77,8 @@ class PublishTaskView: UIView {
         taskDesTextFid.delegate = self
         rewardTextFid.delegate = self;
         exchangeRateLabel.text = "1 SEAT = \(SCCacheTool.shareInstance().currencyModel.rate!)￥"
+        publishBtn.addRoundedCorners(.bottomLeft, withRadii:CGSize(width: 10, height: 10))
+        publishBtn.addRoundedCorners(.bottomRight, withRadii:CGSize(width: 10, height: 10))
     }
     
     func _tapSelectTime(){

@@ -69,7 +69,6 @@ class CommunityHelpViewController: SCBaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.mj_header.beginRefreshing()
-        self.navigationController?.navigationBar.barTintColor = .white
     }
     
     func _myHelp(){

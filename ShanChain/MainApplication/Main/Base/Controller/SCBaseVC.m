@@ -47,6 +47,7 @@
     [self registerNotification];
     // 静态布局
     [self layoutUI];
+   // [self showNavigationBarWhiteColor];
     [self showNavigationBarWithNormalColor];
 }
 
@@ -112,7 +113,7 @@
     [self.navigationController.navigationBar setShadowImage:nil];
     // self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor=[UIColor blackColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
 //    if (self.navigationItem.titleView && [self.navigationItem.titleView isKindOfClass:[UILabel class]]) {
 //        UILabel *textLabel = (UILabel *)self.navigationItem.titleView;
 //        textLabel.textColor = [UIColor blackColor];

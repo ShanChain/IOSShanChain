@@ -88,6 +88,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="accessLb" destination="SoO-xc-zGj" id="IYT-TF-Egm"/>
                 <outlet property="coverIcon" destination="MHS-Xs-pv1" id="H68-2Q-L27"/>
@@ -96,7 +101,7 @@
                 <outlet property="nameLb" destination="Kin-pk-0N4" id="xkj-td-oJy"/>
                 <outlet property="peopleNumberLb" destination="xz0-MU-TV9" id="C58-13-d1T"/>
             </connections>
-            <point key="canvasLocation" x="61" y="101"/>
+            <point key="canvasLocation" x="36" y="95"/>
         </tableViewCell>
     </objects>
     <resources>

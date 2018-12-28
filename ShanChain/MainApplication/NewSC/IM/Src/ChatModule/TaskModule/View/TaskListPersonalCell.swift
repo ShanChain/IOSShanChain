@@ -53,7 +53,7 @@ class TaskListPersonalCell: UITableViewCell {
             }
             
             
-            self.issueDateLabel.text = "\(NSDate.chatingTime(_listModel?.expiryTime) ?? "") 前"
+            self.issueDateLabel.text = "\(NSDate.chatingTime(_listModel?.completeTime) ?? "") 前"
             self.locactionLabel.text = "来自:\(_listModel?.roomName ?? "")"
             self.cornerRadius = 10.0
             self.statusBtn.setTitle(_listModel?.personalStatusBtnTuple.title, for: .normal)

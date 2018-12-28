@@ -30,6 +30,6 @@
 @property   (nonatomic,copy) NSString  *reward;
 @property   (nonatomic,strong) NSNumber  *presentTime;
 @property   (nonatomic,assign) BOOL       clearance; // 是否通关
-
+@property   (nonatomic,copy) NSString  *levelName;
 
 @end

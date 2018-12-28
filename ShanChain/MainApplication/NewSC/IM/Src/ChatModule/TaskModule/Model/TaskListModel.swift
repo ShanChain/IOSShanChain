@@ -16,7 +16,8 @@ class TaskListModel: HandyJSON {
     var commentCount:String?
     var createTime:String? //发布时间
     var receiveTime:String? //领取时间
-    var expiryTime:String? //完成时间
+    var expiryTime:String? //截止时间
+    var completeTime:String? //完成时间
     var intro:String?
     var receiveCount:String?
     var status:String?

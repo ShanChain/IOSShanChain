@@ -50,6 +50,11 @@
     msg.platform = platform;
     msg.mediaType = mediaType;
     [JSHAREService share:msg handler:^(JSHAREState state, NSError *error) {
+        
+        if (error.code == 40009) {
+            BLOCK_EXEC(handler,state,[SCNetworkError errorWithCode:error.code msg:@"未安装客户端"])
+            return ;
+        }
           BLOCK_EXEC(handler,state,error)
     }];
 }

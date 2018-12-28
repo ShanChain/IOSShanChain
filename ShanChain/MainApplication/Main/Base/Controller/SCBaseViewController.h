@@ -11,5 +11,6 @@
 @interface SCBaseViewController : UIViewController
 
 @property(nonatomic,copy)NSString *rnParams;
+@property (nonatomic , strong) UIScrollView *refreshView;
 
 @end

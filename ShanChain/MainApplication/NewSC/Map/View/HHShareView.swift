@@ -85,11 +85,18 @@ class HHShareView: UIView {
             self.showView.isHidden = true
             self.scaleLb.isHidden = false
             
-//            var height:Int = 175
+            var scaleHeight:Int = 175
+            if  HHTool._IS_IPHONE_5(){
+                scaleHeight = 148
+            }else if HHTool._IS_IPHONE_6(){
+                scaleHeight = 188
+            }else if HHTool._IS_IPHONE_6P(){
+                scaleHeight = 220
+            }else if HHTool._IS_IPHONE_X(){
+                scaleHeight = 270
+            }
             
-            
-            
-            self.scaleLbTop.constant = IS_IPHONE_X() == true ? 175:197
+            self.scaleLbTop.constant = CGFloat(scaleHeight)
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(closeContentViewAction))
              self.redenvelopeImageView.addGestureRecognizer(tap)
         }else if self.shareType == .JSHARERedenvelope{
@@ -162,7 +169,7 @@ class HHShareView: UIView {
     
     func _shareMediaType(shareEntity:ShareContentModel,PlatforType:Int,mediaType:Int){
         PublicShareService.share(shareEntity, platform:PlatforType, mediaType: mediaType) { (state, error) in
-            
+            HHTool.showError(error?.localizedDescription)
         }
     }
     
@@ -172,7 +179,7 @@ class HHShareView: UIView {
     }
     
     @IBAction func shareCircleFriendsAction(_ sender: UIButton) {
-        _share(PlatforType: JSHAREPlatform.JSHAREPlatformWechatFavourite.rawValue)
+        _share(PlatforType: JSHAREPlatform.JSHAREPlatformWechatTimeLine.rawValue)
     }
     
     

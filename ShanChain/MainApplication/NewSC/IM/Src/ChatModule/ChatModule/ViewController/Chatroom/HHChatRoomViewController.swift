@@ -506,7 +506,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             self?.toolbar.isHidden = true
             
             if self!.shareTakeUrl == nil {
-                SCAliyunUploadMananger.uploadImage(SCCacheTool.shareInstance().takeImage, withCompressionQuality: 1.0, withCallBack: { (url) in
+                HHTool.showChrysanthemum(); SCAliyunUploadMananger.uploadImage(SCCacheTool.shareInstance().takeImage, withCompressionQuality: 1.0, withCallBack: { (url) in
                     
                     if url != nil{
                         _shareTakeImage(url!)
@@ -1687,10 +1687,10 @@ extension HHChatRoomViewController: SuspendBallDelegte{
 //            }
         }else if tag == 0{
        
-//            let vc = TaskListContainerViewController()
-//            vc.currentChatRoomID = self.currentChatRoomID
-//            vc._scrollToIndex = .my
-            let vc = CommunityHelpViewController()
+            let vc = TaskListContainerViewController()
+            vc.currentChatRoomID = self.currentChatRoomID
+            vc._scrollToIndex = .my
+          //  let vc = CommunityHelpViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

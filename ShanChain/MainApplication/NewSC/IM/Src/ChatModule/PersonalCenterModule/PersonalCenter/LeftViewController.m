@@ -290,6 +290,7 @@
 }
 
 - (NSArray *)titleArray{
+    //  NSLocalizedString(@"sc_Real_name_authentication", nil),
     if (_titleArray == nil) {
         if ([SCCacheTool shareInstance].status.integerValue == 0) {
             _titleArray = @[
@@ -301,7 +302,6 @@
                             NSLocalizedString(@"sc_MyTask", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
                             NSLocalizedString(@"sc_Feedback", nil),
-                            NSLocalizedString(@"sc_Real_name_authentication", nil),
                             NSLocalizedString(@"sc_SignOut", nil)];
         }
         

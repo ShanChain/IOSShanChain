@@ -12,7 +12,8 @@
 
 
 -(NSData *)thumbnail{
-    return [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:_background]];
+    
+    return UIImageJPEGRepresentation([UIImage imageFromURLString:_background], 0.1);
 }
 
 -(NSData *)urlImageData{

@@ -22,6 +22,36 @@
     self.view.backgroundColor = Theme_ViewBackgroundColor;
 }
 
+- (void)setRefreshView:(UIScrollView *)refreshView
+{
+    if (_refreshView!=refreshView) {
+        _refreshView = refreshView;
+        weakify(self);
+        refreshView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [weak_self headerRefreshRefreshView:refreshView];
+            
+        }];
+        [refreshView.mj_header beginRefreshing];
+        refreshView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [weak_self footerRefreshRefreshView:refreshView];
+            
+        }];
+    }
+}
+
+
+
+//下拉刷新
+- (void)headerRefreshRefreshView:(UIScrollView *)view{
+    NSLog(@"刷新");
+    
+    //[view.mj_header endRefreshing];
+}
+//上拉加载更多
+- (void)footerRefreshRefreshView:(UIScrollView *)view{
+    NSLog(@"加载更多");
+}
+
 
 #ifdef DEBUG
 //第一响应，默认是NO

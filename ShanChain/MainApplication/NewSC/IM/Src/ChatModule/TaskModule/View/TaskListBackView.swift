@@ -74,7 +74,7 @@ class TaskListBackView: UIView {
                     self.timeLabel1.isHidden = true
                 }
                 
-                if let expiryTime = _listEntity!.expiryTime{
+                if let expiryTime = _listEntity!.completeTime{
                     if _listEntity?.isHideCompleteTime == true{
                            self.timeLabel2.isHidden = true
                     }else{
