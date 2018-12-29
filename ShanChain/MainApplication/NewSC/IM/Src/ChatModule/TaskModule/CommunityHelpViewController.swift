@@ -31,6 +31,8 @@ class CommunityHelpViewController: SCBaseVC {
     fileprivate var dataList:[TaskListModel] = []
     fileprivate let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
     fileprivate let chatRoomId:String? = SCCacheTool.shareInstance().chatRoomId
+    fileprivate var recieveSuccessModel:TaskRecieveSuccessModel?
+    
     
     func _snpLayout(){
         view.addSubview(headerView)
@@ -76,11 +78,70 @@ class CommunityHelpViewController: SCBaseVC {
         tableView.mj_header.beginRefreshing()
     }
     
+    
+    // 寻求帮助
+    @IBAction func seekHelpAction(_ sender: UIButton) {
+//        for view in self.view.subviews{
+//            if view.tag == 6666{
+//                return
+//            }
+//        }
+        
+        // 发布任务
+        UIView .animate(withDuration: 0.2) {
+            
+            let pubTaskView:PublishTaskView? =
+                PublishTaskView(taskModel: nil, frame: CGRect(x: 0, y:0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)))
+            pubTaskView?.cornerRadius = 0.01
+            pubTaskView?.borderColor = .clear
+            pubTaskView?.tag = 6666
+            // 点击发布任务回调
+            pubTaskView?.pbCallClosure = { [weak self] (dataString,reward,time,timestamp,isPut)  in
+                pubTaskView?.dismiss()
+                if isPut == false{
+                    return
+                }
+                let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
+                let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self!.chatRoomId ?? "","time":timestamp,"characterId":characterId] as [String : Any]
+                // 添加任务
+                HHTool.showChrysanthemum()
+                SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: params, showLoading: true, call: { (baseModel, error) in
+                    HHTool.immediatelyDismiss()
+                    if((error) != nil){
+                        HHTool .showError(NSLocalizedString("sc_helpFailed", comment: "字符串"))
+                        return
+                    }
+                    self?.tableView.mj_header.beginRefreshing()
+                    HHTool .showSucess(NSLocalizedString("sc_helpAccomplished", comment: "字符串"))
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
+                })
+            }
+            self.view.addSubview(pubTaskView!)
+        }
+    }
+    
     func _myHelp(){
         
     }
     
-
+    @IBAction func removeFromRecieveSuccessView(_ sender: Any) {
+        self.RsView.removeFromSuperview()
+    }
+    // 联系赏主
+    @IBAction func contactHeAction(_ sender: UIButton) {
+        self.RsView.removeFromSuperview()
+        let HxUserName = recieveSuccessModel?.HxUserName ?? ""
+        JMSGConversation.createSingleConversation(withUsername: HxUserName, completionHandler: { (result, error) in
+            if error == nil {
+                ChatPublicService.jg_addFriendFeFocus(funsJmUserName: HxUserName)
+                let conv = result as! JMSGConversation
+                let vc = JCChatViewController(conversation: conv)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        })
+    }
+    
 }
 
 extension CommunityHelpViewController{
@@ -219,25 +280,13 @@ extension CommunityHelpViewController: HelpCenterCellProtocol{
                 return
             }
             self.tableView.mj_header.beginRefreshing()
+            self.RsView.frame = self.view.frame
+            self.RsView.alphaComponentMake()
+            self.view.addSubview(self.RsView)
             let dict = baseModel?.data as! Dictionary<String,Any>
             if let model = TaskRecieveSuccessModel.deserialize(from: dict){
-                let successView:RecieveTaskView = RecieveTaskView(recieTaskModel: model, frame: self.view.frame)
-                successView.closure = { (HxUserName) in
-                    JMSGConversation.createSingleConversation(withUsername: HxUserName, completionHandler: { (result, error) in
-                        if error == nil {
-                            ChatPublicService.jg_addFriendFeFocus(funsJmUserName: HxUserName)
-                            let conv = result as! JMSGConversation
-                            let vc = JCChatViewController(conversation: conv)
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)
-                            self.navigationController?.pushViewController(vc, animated: true)
-                        }
-                    })
-
-                }
-                self.view.addSubview(successView)
+                self.recieveSuccessModel = model
             }
-
-
         }
     }
 }

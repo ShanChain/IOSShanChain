@@ -154,7 +154,7 @@
  登录注册
  */
 "sc_login_Bind" = "Bind";
-"sc_login_useSMS " = "use SMS to log in";
+"sc_login_useSMS" = "use SMS to log in";
 "sc_login_Login" = "Log in";
 "sc_login_SignUp" = "Sign up";
 "sc_login_phoneNumberCannotEmpty" = "phone number cannot be empty";

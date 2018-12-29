@@ -150,7 +150,7 @@
  登录
  */
 "sc_login_Bind" = "关联手机号";
-"sc_login_useSMS " = "动态验证码登录";
+"sc_login_useSMS" = "动态验证码登录";
 "sc_login_Login" = "登录";
 "sc_login_SignUp" = "注册";
 "sc_login_phoneNumberCannotEmpty" = "手机号不能为空";

@@ -110,7 +110,7 @@
 }
 
 - (void)kJMSGNetworkDidSetupNotification{
-    [HHTool dismiss];
+    [HHTool immediatelyDismiss];
     if (self.isClickJoin) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self getAllChatRoomConversation];
@@ -164,7 +164,7 @@
         self.activeRuleBtn.hidden = NO;
         _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(activeCountdown) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-        self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld",days] color:[UIColor redColor] font:Font(18) secendString:NSLocalizedString(@"sc_NewYear_day", nil) color:Theme_MainTextColor font:Font(14)];
+        self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld",(long)days] color:[UIColor redColor] font:Font(18) secendString:NSLocalizedString(@"sc_NewYear_day", nil) color:Theme_MainTextColor font:Font(14)];
     }
     
     // 活动开始
@@ -265,6 +265,7 @@
             }
         }];
         
+        
         UIImage  *takeImage = [self.mapView takeSnapshot:CGRectMake(point0.x, point2.y, point2.x - point0.x, point0.y - point2.y)];
         self.takeImage = [takeImage mc_resetToSize:CGSizeMake(point2.x - point0.x,  point0.y - point2.y)];
         [SCCacheTool shareInstance].takeImage = self.takeImage;
@@ -363,7 +364,7 @@
     weakify(self);
     [HHTool showChrysanthemum];
     [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
-        [HHTool dismiss];
+        [HHTool immediatelyDismiss];
         NSDictionary  *dic = responseObject[@"data"];
         if (dic.allValues > 0) {
             CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
@@ -581,7 +582,7 @@
     weakify(self);
     [HHTool show:NSLocalizedString(@"sc_map_Locating", nil)];
     [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
-        [HHTool dismiss];
+        [HHTool immediatelyDismiss];
         NSDictionary  *dic = responseObject[@"data"];
         if (dic.allValues > 0) {
             CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];

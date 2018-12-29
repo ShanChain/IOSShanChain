@@ -18,7 +18,7 @@ class JCConversationListViewController: SCBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         _init()
-        showNavigationBarWithNormalColor()
+      //  showNavigationBarWithNormalColor()
         title = "消息"
     }
 
@@ -142,10 +142,10 @@ class JCConversationListViewController: SCBaseVC {
     
     private func _setupNavigation() {
         
-        addButton.addTarget(self, action: #selector(_clickNavRightButton(_:)), for: .touchUpInside)
-        addButton.setImage(UIImage.loadImage("com_icon_add"), for: .normal)
-        let item = UIBarButtonItem(customView: addButton)
-        navigationItem.rightBarButtonItem =  item
+//        addButton.addTarget(self, action: #selector(_clickNavRightButton(_:)), for: .touchUpInside)
+//        addButton.setImage(UIImage.loadImage("sc_com_icon_more"), for: .normal)
+//        let item = UIBarButtonItem(customView: addButton)
+//        navigationItem.rightBarButtonItem =  item
     
     }
     

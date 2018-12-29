@@ -55,6 +55,7 @@ typedef NS_ENUM(NSUInteger, YYHudMaskType) {
 
 + (YYHud *)showInView:(UIView *)superView image:(UIImage *)image str:(NSString *)str duration:(NSTimeInterval)duration maskType:(YYHudMaskType)maskType;
 + (void)dismiss;
+- (void)immediatelyDismiss;
 
 
 #pragma mark - Pulic

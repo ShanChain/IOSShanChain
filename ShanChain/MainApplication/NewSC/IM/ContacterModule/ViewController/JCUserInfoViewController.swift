@@ -50,7 +50,7 @@ class JCUserInfoViewController: SCBaseVC {
     
     private func _setupNavigation() {
         moreButton.addTarget(self, action: #selector(_clickNavRightButton), for: .touchUpInside)
-        moreButton.setImage(UIImage.loadImage("com_icon_more"), for: .normal)
+        moreButton.setImage(UIImage.loadImage("sc_com_icon_more"), for: .normal)
         let item = UIBarButtonItem(customView: moreButton)
         navigationItem.rightBarButtonItem =  item
     }

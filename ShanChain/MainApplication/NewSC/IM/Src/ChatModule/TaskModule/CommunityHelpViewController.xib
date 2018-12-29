@@ -52,6 +52,9 @@
                     <state key="normal" title="寻求帮助" backgroundImage="sc_com_icon_creteCard">
                         <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="seekHelpAction:" destination="-1" eventType="touchUpInside" id="Abd-ra-MKt"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
@@ -90,6 +93,9 @@
                                     <real key="value" value="20"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="contactHeAction:" destination="-1" eventType="touchUpInside" id="D6v-ah-Xph"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请到社区帮进行操作" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25D-Sd-eEx">
                             <rect key="frame" x="70.5" y="111" width="119.5" height="16"/>
@@ -116,12 +122,22 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="6W1-i6-Szh" firstAttribute="centerY" secondItem="49b-db-7nc" secondAttribute="centerY" id="6O6-N0-EM2"/>
                 <constraint firstItem="6W1-i6-Szh" firstAttribute="centerX" secondItem="49b-db-7nc" secondAttribute="centerX" id="sQ4-SK-QO3"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="p0t-Dx-hPC"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="oms-4F-fla" appends="YES" id="Hzy-lL-J5K"/>
+            </connections>
         </view>
+        <tapGestureRecognizer id="oms-4F-fla">
+            <connections>
+                <action selector="removeFromRecieveSuccessView:" destination="-1" id="N4m-jw-Ple"/>
+                <outlet property="delegate" destination="49b-db-7nc" id="BhT-OX-SgT"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="sc_com_icon_creteCard" width="134" height="34"/>

@@ -89,12 +89,11 @@ class TaskListContainerViewController: SCBaseVC {
         view.backgroundColor = UIColor.white
         automaticallyAdjustsScrollViewInsets = false
         view.addSubview(pageView)
-        navigationController?.navigationBar.barTintColor = kNavBlueColor
         pageView.didSelectIndexBlock = {(_, index) in
             print("pageView.didSelectIndexBlock", index)
         }
         
-        self.addRightBarButtonItem(withTarget: self, sel: #selector(_publish), title: NSLocalizedString("sc_post", comment: "字符串"), tintColor: .white)
+        self.addRightBarButtonItem(withTarget: self, sel: #selector(_publish), title: NSLocalizedString("sc_post", comment: "字符串"), tintColor: .black)
     }
     
     func _publish() {
@@ -104,7 +103,6 @@ class TaskListContainerViewController: SCBaseVC {
                 return
             }
         }
-        
         
         // 发布任务
         UIView .animate(withDuration: 0.2) {

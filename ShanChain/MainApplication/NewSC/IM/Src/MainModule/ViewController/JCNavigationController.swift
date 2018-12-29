@@ -18,8 +18,8 @@ extension CustomNavigation {
             return
         }
         let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 65 / 3))
-        leftButton.setImage(UIImage.loadImage("com_icon_back"), for: .normal)
-        leftButton.setImage(UIImage.loadImage("com_icon_back"), for: .highlighted)
+        leftButton.setImage(UIImage.loadImage("nav_btn_back_default"), for: .normal)
+        leftButton.setImage(UIImage.loadImage("nav_btn_back_default"), for: .highlighted)
         leftButton.addTarget(vc, action: #selector(vc.back(_:)), for: .touchUpInside)
         leftButton.setTitle("返回", for: .normal)
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -79,8 +79,8 @@ final class JCNavigationController: UINavigationController {
         attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18)
         attrs[NSForegroundColorAttributeName] = UIColor.white
         navBar.titleTextAttributes = attrs
-        navBar.backIndicatorTransitionMaskImage = UIImage.loadImage("com_icon_back")
-        navBar.backIndicatorImage = UIImage.loadImage("com_icon_back")
+        navBar.backIndicatorTransitionMaskImage = UIImage.loadImage("nav_btn_back_default")
+        navBar.backIndicatorImage = UIImage.loadImage("nav_btn_back_default")
         self.navigationBar.barTintColor = SC_ThemeMainColor
     }
 
