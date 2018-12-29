@@ -63,6 +63,7 @@ class HHShareView: UIView {
     var shareModel:CommonShareModel?
     
     
+    @IBOutlet weak var showViewTop: NSLayoutConstraint!
     @IBOutlet weak var scaleLbTop: NSLayoutConstraint!
     convenience init(frame:CGRect,shareImage:UIImage?,type:Int,shareModel:CommonShareModel?){
         self.init(frame: frame)
@@ -71,13 +72,19 @@ class HHShareView: UIView {
         self.shareModel = shareModel;
         if self.shareType == .JSHAREImage{
             if let image = self.shareImage{
+                
+                showViewTop.constant = CGFloat(UIDevice().navBarHeight)
                 let imageV = UIImageView.init(image: image)
                 imageV.image = image
+                imageV.preventImageViewExtrudeDeformation()
+                showView.backgroundColor = UIColor.clear
                 contentView.addSubview(imageV)
                 imageV.snp.makeConstraints { (make) in
                     make.centerY.centerX.equalTo(showView)
-                    make.width.equalTo(image.size.width)
+                    make.width.equalTo(image.size.width).priority(250)
                     make.height.equalTo(image.size.height)
+                    make.width.lessThanOrEqualTo(SCREEN_WIDTH - 40)
+                    make.height.lessThanOrEqualTo(imageV.snp.width)
                 }
             }
         }

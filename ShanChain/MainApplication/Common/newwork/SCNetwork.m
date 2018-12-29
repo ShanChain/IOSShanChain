@@ -210,7 +210,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     manager.responseSerializer = responseSerializer;
     [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (show) {
-            [HHTool dismiss];
+            [HHTool immediatelyDismiss];
         }
         if (!error) {
             HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
@@ -250,18 +250,19 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 #endif
     if (show) {
         [HHTool showChrysanthemum];
+       
     }
     
     [self postWithUrl:url parameters:parameters success:^(id responseObject) {
         if (show) {
-            [HHTool dismiss];
+            [HHTool immediatelyDismiss];
         }
         HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
         callBlock(baseModel,nil);
         
     } failure:^(NSError *error) {
         if (show) {
-            [HHTool dismiss];
+            [HHTool immediatelyDismiss];
         }
         callBlock(nil,error);
         [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
@@ -286,14 +287,14 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     
     [self getWithUrl:url parameters:parameters success:^(id responseObject) {
         if (show) {
-            [HHTool dismiss];
+            [HHTool immediatelyDismiss];
         }
         HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
         callBlock(baseModel,nil);
         
     } failure:^(NSError *error) {
         if (show) {
-            [HHTool dismiss];
+            [HHTool immediatelyDismiss];
         }
         callBlock(nil,error);
         [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];

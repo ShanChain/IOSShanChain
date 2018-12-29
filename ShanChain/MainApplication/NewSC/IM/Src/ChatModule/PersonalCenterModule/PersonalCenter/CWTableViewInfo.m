@@ -76,6 +76,7 @@
     return _cellInfoArray.count;
 }
 
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
      return 50;
 }

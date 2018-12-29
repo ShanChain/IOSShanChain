@@ -19,6 +19,7 @@
 + (YYHud *)showSucess:(NSString *)msg;
 + (YYHud *)showError:(NSString *)msg;
 + (void)dismiss;
++ (void)immediatelyDismiss;
 + (YYHud *)show:(NSString *)msg;
 + (YYHud *)showResponseObject:(NSDictionary *)response;
 + (YYHud *)showChrysanthemum;

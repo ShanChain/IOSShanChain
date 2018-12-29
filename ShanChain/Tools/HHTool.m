@@ -44,6 +44,11 @@
     [[YYHud sharedInstance] dismiss];
 }
 
++ (void)immediatelyDismiss {
+    [[YYHud sharedInstance] immediatelyDismiss];
+}
+
+
 + (YYHud *)show:(NSString *)msg {
     return [[YYHud sharedInstance] show:msg];
 }

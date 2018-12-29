@@ -88,7 +88,7 @@ class JCDoubleButtonCell: UITableViewCell {
         rightButton.setTitle("发送消息", for: .normal)
         rightButton.layer.cornerRadius = 3.0
         rightButton.layer.masksToBounds = true
-        rightButton.backgroundColor = color
+        rightButton.backgroundColor = SC_ThemeMainColor
         contentView.addSubview(rightButton)
         
         addConstraint(_JCLayoutConstraintMake(leftButton, .left, .equal, contentView, .left, 15))

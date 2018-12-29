@@ -22,6 +22,7 @@ class JCButtonCell: UITableViewCell {
         }
         set {
             button.setTitle(newValue, for: .normal)
+            
         }
     }
     

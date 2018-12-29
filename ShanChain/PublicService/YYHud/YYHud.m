@@ -213,7 +213,21 @@ static const CGFloat YYHudImageContainerWidthWithStr = 182;
             [self removeFromSuperview];
         }];
     });
-  
+}
+
+
+-(void)immediatelyDismiss{
+    self.activityCount = 0;
+    [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionAllowUserInteraction animations:^{
+        //        self.hudContainer.transform = CGAffineTransformScale(_hudContainer.transform, 0.5, 0.5);
+        self.hudContainer.alpha = 0;
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.hudContainer.alpha = 0;
+        self.alpha = 0;
+        [self.progressView stopAnimating];
+        [self removeFromSuperview];
+    }];
 }
 
 

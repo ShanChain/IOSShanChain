@@ -31,7 +31,6 @@ class PopularCommunityViewController: SCBaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.showNavigationBarWithNormalColor()
     }
     
     @objc fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {

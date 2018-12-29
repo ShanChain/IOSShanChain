@@ -191,14 +191,14 @@ static CGFloat btnSmallImageWidth = 22;
     CGPoint point = [pan locationInView:self.superview];
     self.lhz_centerX = point.x;
     self.lhz_centerY = point.y;
-    
+    self.alpha = 1.0;
     switch (pan.state) {
         case UIGestureRecognizerStateFailed:
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:
             if (point.x < fullButtonWidth / 2) {
                 [UIView animateWithDuration:0.5 animations:^{
-                    self.lhz_x = 0;
+                    self.lhz_x = 0 - self.lhz_width/2;
                 }];
             }
             
@@ -210,13 +210,13 @@ static CGFloat btnSmallImageWidth = 22;
             
             if (point.y > KScreenHeight - fullButtonWidth / 2 - self.bottomLayGuide) {
                 [UIView animateWithDuration:0.5 animations:^{
-                    self.lhz_y = KScreenHeight - fullButtonWidth - self.bottomLayGuide;
+                    self.lhz_y = KScreenHeight - fullButtonWidth - self.bottomLayGuide - 15;
                 }];
             }
             
-            if (point.y < KNavBarHeight + fullButtonWidth / 2) {
+            if (point.y < KNavBarHeight) {
                 [UIView animateWithDuration:0.5 animations:^{
-                    self.lhz_y = KNavBarHeight - self.bottomLayGuide;
+                    self.lhz_y = KNavBarHeight;
                 }];
             }
             
@@ -319,12 +319,28 @@ static CGFloat btnSmallImageWidth = 22;
         [UIView animateWithDuration:0.5 animations:^{
             self.lhz_x = 0;
         }];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.3 animations:^{
+                self.lhz_x = 0 - self.lhz_width/2;
+                self.alpha = 0.5;
+            }];
+           
+        });
     }
     
     if (endPoint.x > KScreenWidth / 2) {
-        [UIView animateWithDuration:0.3 animations:^{
-            self.lhz_x = KScreenWidth - fullButtonWidth;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.lhz_x = KScreenWidth - self.lhz_width;
         }];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.3 animations:^{
+                self.lhz_x = KScreenWidth - fullButtonWidth + self.lhz_width/2;
+                self.alpha = 0.5;
+            }];
+            
+        });
     }
 }
 

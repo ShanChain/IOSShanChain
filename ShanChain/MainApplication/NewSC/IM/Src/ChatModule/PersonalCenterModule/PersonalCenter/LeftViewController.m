@@ -73,12 +73,19 @@
 }
 
 - (void)setupHeader {
-    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kCWSCREENWIDTH * 0.75, HeaderViewHeight)];
-    imageV.backgroundColor = [UIColor clearColor];
-    UIImage *image = [UIImage imageNamed:@"icon_background"];
-    [image mc_resetToSize:CGSizeMake(kCWSCREENWIDTH * 0.75, HeaderViewHeight)];
-    imageV.image = image;
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kCWSCREENWIDTH * 0.75, HeaderViewHeight *0.75)];
+    imageV.backgroundColor =  [UIColor whiteColor];
     [self.view addSubview:imageV];
+    
+    UIView  *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, HeaderViewHeight *0.75, kCWSCREENWIDTH * 0.75, HeaderViewHeight *0.15)];
+    sectionView.backgroundColor = RGB(245, 245, 245);
+    [self.view addSubview:sectionView];
+    
+//    imageV.backgroundColor = [UIColor clearColor];
+//    UIImage *image = [UIImage imageNamed:@"icon_background"];
+//    [image mc_resetToSize:CGSizeMake(kCWSCREENWIDTH * 0.75, HeaderViewHeight)];
+//    imageV.image = image;
+   
     
 
     UIView *layerView = [[UIView alloc]init];
@@ -108,7 +115,7 @@
     
     
     UILabel  *nikeNameLb = [[UILabel alloc]init];
-    nikeNameLb.textColor = [UIColor whiteColor];
+    nikeNameLb.textColor = Theme_MainTextColor;
     nikeNameLb.font = Font(17);
     NSString  *name = [SCCacheTool shareInstance].characterModel.characterInfo.name ? :NSLocalizedString(@"sc_whatsYourName", nil);
     nikeNameLb.text = name;
@@ -121,7 +128,7 @@
     }];
     
     UILabel  *signatureLb = [[UILabel alloc]init];
-    signatureLb.textColor = [UIColor whiteColor];
+    signatureLb.textColor = Theme_MainTextColor;
     signatureLb.font = Font(13);
     signatureLb.numberOfLines = 0;
     signatureLb.text = [SCCacheTool shareInstance].characterModel.characterInfo.signature ? :NSLocalizedString(@"sc_whatsUp", nil);
@@ -137,6 +144,8 @@
     UIButton  *editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [editBtn setImage:[UIImage imageNamed:@"sc_com_icon_edit"] forState:0];
     [editBtn addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
+    [editBtn.imageView setTintColor:Theme_MainTextColor];
+    [editBtn setImage: [[UIImage imageNamed:@"sc_com_icon_edit"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.view addSubview:editBtn];
     [editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(nikeNameLb.mas_right).offset(15);
@@ -176,7 +185,7 @@
 }
 - (void)setupTableView {
     
-    _tableViewInfo = [[CWTableViewInfo alloc] initWithFrame:CGRectMake(0, HeaderViewHeight, kCWSCREENWIDTH * 0.75, CGRectGetHeight(self.view.bounds)-HeaderViewHeight) style:UITableViewStylePlain];
+    _tableViewInfo = [[CWTableViewInfo alloc] initWithFrame:CGRectMake(0, HeaderViewHeight * 0.9, kCWSCREENWIDTH * 0.75, CGRectGetHeight(self.view.bounds)-HeaderViewHeight* 0.9) style:UITableViewStylePlain];
     
     for (int i = 0; i < self.titleArray.count; i++) {
         NSString *title = self.titleArray[i];

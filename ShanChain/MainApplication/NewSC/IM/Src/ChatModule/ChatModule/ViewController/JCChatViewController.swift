@@ -182,8 +182,8 @@ class JCChatViewController: SCBaseVC {
     fileprivate lazy var leftButton: UIButton = {
         let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 90, height: 65 / 3))
         
-        leftButton.setImage(UIImage.loadImage("com_icon_back"), for: .normal)
-        leftButton.setImage(UIImage.loadImage("com_icon_back"), for: .highlighted)
+        leftButton.setImage(UIImage.loadImage("nav_btn_back_default"), for: .normal)
+        leftButton.setImage(UIImage.loadImage("nav_btn_back_default"), for: .highlighted)
         leftButton.addTarget(self, action: #selector(_back), for: .touchUpInside)
         leftButton.setTitle("会话", for: .normal)
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
