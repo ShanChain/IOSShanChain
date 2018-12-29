@@ -35,7 +35,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         self.isJoinChatRoom = isJoinChat
         super.init(nibName: "HHChatRoomViewController", bundle: nil) // 加载xib视图
         automaticallyAdjustsScrollViewInsets = false;
-        self.title = navTitle
+       // self.title = navTitle
         if let draft = JCDraft.getDraft(conversation) {
             // 不为空时执行
             self.draft = draft // 获取编辑未发出的草稿
@@ -1687,10 +1687,10 @@ extension HHChatRoomViewController: SuspendBallDelegte{
 //            }
         }else if tag == 0{
        
-//            let vc = TaskListContainerViewController()
-//            vc.currentChatRoomID = self.currentChatRoomID
-//            vc._scrollToIndex = .all
-            let vc = CommunityHelpViewController()
+            let vc = TaskListContainerViewController()
+            vc.currentChatRoomID = self.currentChatRoomID
+            vc._scrollToIndex = .all
+           // let vc = CommunityHelpViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
