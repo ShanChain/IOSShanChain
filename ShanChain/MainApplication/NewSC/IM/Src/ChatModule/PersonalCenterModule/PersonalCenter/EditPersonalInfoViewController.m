@@ -37,7 +37,7 @@
     
     self.signatureTextView.placeholder = @"请输入签名...";
     self.signatureTextView.delegate = self;
-    [self addRightBarButtonItemWithTarget:self sel:@selector(determine) title:@"确定" tintColor:[UIColor whiteColor]];
+    [self addRightBarButtonItemWithTarget:self sel:@selector(determine) title:@"确定" tintColor:[UIColor blackColor]];
 }
 
 - (void)determine{

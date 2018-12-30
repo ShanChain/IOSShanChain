@@ -386,9 +386,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     // tcp长链接被关闭
     func _closeChatRoom()  {
-        HHTool.show("广场链接已断开，正在为您重新连接...")
+       // HHTool.show("广场链接已断开，正在为您重新连接...")
         EditInfoService.enterChatRoom(withId: self.currentChatRoomID, call: { (result, error) in
-            HHTool.dismiss()
+           // HHTool.dismiss()
             if let conversation = result as? JMSGConversation{
                 self.conversation = conversation
             }

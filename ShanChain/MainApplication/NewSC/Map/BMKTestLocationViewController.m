@@ -92,7 +92,7 @@
     [self.collapseBtn setEnlargeEdgeWithTop:20 right:20 bottom:0 left:20];
     [self.topView mas_makeConstraints:^(MASConstraintMaker * x) {
         x.height.equalTo(@42);
-        x.width.equalTo(@208);
+        x.width.equalTo(@220);
         x.centerX.equalTo(self.view);
         x.top.equalTo(@(37 + IPHONE_TOPSENSOR_HEIGHT));
         //x.top.equalTo(self.mas_topLayoutGuide);
@@ -164,7 +164,8 @@
         self.activeRuleBtn.hidden = NO;
         _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(activeCountdown) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-        self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld ",(long)days] color:[UIColor redColor] font:Font(18) secendString:NSLocalizedString(@"sc_NewYear_day", nil) color:Theme_MainTextColor font:Font(14)];
+        
+//        self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld ",(long)days] color:[UIColor redColor] font:Font(18) secendString:NSLocalizedString(@"sc_NewYear_day", nil) color:Theme_MainTextColor font:Font(14)];
     }
     
     // 活动开始
@@ -190,14 +191,21 @@
 // 活动开始倒计时
 - (void)activeCountdown{
     
-    NSInteger  second = self.activeInfo.startTimeInterval - [NSDate date].timeIntervalSince1970;
-    if (second == 0) {
+    NSInteger  timeInterval = self.activeInfo.startTimeInterval - [NSDate date].timeIntervalSince1970;
+    if (timeInterval == 0) {
         // 活动开始
         self.topView.hidden = YES;
         self.isActiveStar = YES;
         [self rushActiveStar:YES];
         [_timer invalidate];
         _timer = nil;
+    }else{
+       
+        NSInteger days = (int)(timeInterval/(3600*24));
+        NSInteger hours = (int)((timeInterval-days*24*3600)/3600);
+        NSInteger minute = (int)(timeInterval-days*24*3600-hours*3600)/60;
+        NSInteger second = timeInterval - days*24*3600 - hours*3600 - minute*60;
+        self.laveDayLabel.text = [NSString stringWithFormat:@"%02ld : %02ld : %02ld", hours + days * 24, (long)minute, second];
     }
 }
 

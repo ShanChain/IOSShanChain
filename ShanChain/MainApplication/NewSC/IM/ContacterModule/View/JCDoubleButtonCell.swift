@@ -76,30 +76,39 @@ class JCDoubleButtonCell: UITableViewCell {
     //MARK: - private func
     private func _init() {
         backgroundColor = .clear
-        leftButton.addTarget(self, action: #selector(_clickLeftButton(_:)), for: .touchUpInside)
-        leftButton.setTitle("加好友", for: .normal)
-        leftButton.setTitleColor(.black, for: .normal)
-        leftButton.backgroundColor = .white
-        leftButton.layer.cornerRadius = 3.0
-        leftButton.layer.masksToBounds = true
-        contentView.addSubview(leftButton)
+//        leftButton.addTarget(self, action: #selector(_clickLeftButton(_:)), for: .touchUpInside)
+//        leftButton.setTitle("加好友", for: .normal)
+//        leftButton.setTitleColor(.black, for: .normal)
+//        leftButton.backgroundColor = .white
+//        leftButton.layer.cornerRadius = 3.0
+//        leftButton.layer.masksToBounds = true
+//        contentView.addSubview(leftButton)
         
         rightButton.addTarget(self, action: #selector(_clickRightButton(_:)), for: .touchUpInside)
         rightButton.setTitle("发送消息", for: .normal)
-        rightButton.layer.cornerRadius = 3.0
+        rightButton.titleLabel?.font = Font(15)
         rightButton.layer.masksToBounds = true
         rightButton.backgroundColor = SC_ThemeMainColor
         contentView.addSubview(rightButton)
+        rightButton.layer.cornerRadius = 8.0
         
-        addConstraint(_JCLayoutConstraintMake(leftButton, .left, .equal, contentView, .left, 15))
-        addConstraint(_JCLayoutConstraintMake(leftButton, .right, .equal, contentView, .centerX, -12.5))
-        addConstraint(_JCLayoutConstraintMake(leftButton, .top, .equal, contentView, .top))
-        addConstraint(_JCLayoutConstraintMake(leftButton, .bottom, .equal, contentView, .bottom))
+//        addConstraint(_JCLayoutConstraintMake(leftButton, .left, .equal, contentView, .left, 15))
+//        addConstraint(_JCLayoutConstraintMake(leftButton, .right, .equal, contentView, .centerX, -12.5))
+//        addConstraint(_JCLayoutConstraintMake(leftButton, .top, .equal, contentView, .top))
+//        addConstraint(_JCLayoutConstraintMake(leftButton, .bottom, .equal, contentView, .bottom))
         
-        addConstraint(_JCLayoutConstraintMake(rightButton, .left, .equal, contentView, .centerX, 12.5))
-        addConstraint(_JCLayoutConstraintMake(rightButton, .right, .equal, contentView, .right, -15))
-        addConstraint(_JCLayoutConstraintMake(rightButton, .top, .equal, contentView, .top))
-        addConstraint(_JCLayoutConstraintMake(rightButton, .bottom, .equal, contentView, .bottom))
+        
+        rightButton.snp.makeConstraints { (mark) in
+            mark.left.equalTo(15)
+            mark.right.equalTo(-15)
+            mark.top.equalTo(contentView)
+            mark.height.equalTo(40)
+        }
+        
+//        addConstraint(_JCLayoutConstraintMake(rightButton, .left, .equal, contentView, .centerX, 12.5))
+//        addConstraint(_JCLayoutConstraintMake(rightButton, .right, .equal, contentView, .right, -15))
+//        addConstraint(_JCLayoutConstraintMake(rightButton, .top, .equal, contentView, .top))
+//        addConstraint(_JCLayoutConstraintMake(rightButton, .bottom, .equal, contentView, .bottom))
     }
     
     //MARK: - click func
