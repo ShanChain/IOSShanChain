@@ -93,6 +93,8 @@
 		222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C3102215A38E0009871C7 /* UIImage+MingleChang.m */; };
 		222EF6162186B999005B89EF /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6152186B999005B89EF /* NSObject+extension.swift */; };
 		222EF6182187E527005B89EF /* DefConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6172187E526005B89EF /* DefConst.swift */; };
+		2231087621DC9603006D458F /* MyHelpContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231087421DC9603006D458F /* MyHelpContainerViewController.swift */; };
+		2231087921DC9C0D006D458F /* MyHelpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231087821DC9C0D006D458F /* MyHelpListViewController.swift */; };
 		223F9876217F0C880031DB95 /* SCImManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F9875217F0C880031DB95 /* SCImManager.swift */; };
 		223F9878217F0DF00031DB95 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F9877217F0DF00031DB95 /* libstdc++.6.0.9.tbd */; };
 		223F987A217F0E440031DB95 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F9879217F0E440031DB95 /* CoreAudio.framework */; };
@@ -763,6 +765,8 @@
 		222C3102215A38E0009871C7 /* UIImage+MingleChang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MingleChang.m"; sourceTree = "<group>"; };
 		222EF6152186B999005B89EF /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
 		222EF6172187E526005B89EF /* DefConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefConst.swift; sourceTree = "<group>"; };
+		2231087421DC9603006D458F /* MyHelpContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHelpContainerViewController.swift; sourceTree = "<group>"; };
+		2231087821DC9C0D006D458F /* MyHelpListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHelpListViewController.swift; sourceTree = "<group>"; };
 		223F9874217F0C870031DB95 /* ShanChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShanChain-Bridging-Header.h"; sourceTree = "<group>"; };
 		223F9875217F0C880031DB95 /* SCImManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCImManager.swift; sourceTree = "<group>"; };
 		223F9877217F0DF00031DB95 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -2479,6 +2483,8 @@
 				22C917AD21943014002E5240 /* TaskDetailsViewController.xib */,
 				221BEF0221D4A522007C76BF /* CommunityHelpViewController.swift */,
 				221BEF0321D4A522007C76BF /* CommunityHelpViewController.xib */,
+				2231087421DC9603006D458F /* MyHelpContainerViewController.swift */,
+				2231087821DC9C0D006D458F /* MyHelpListViewController.swift */,
 			);
 			path = TaskModule;
 			sourceTree = "<group>";
@@ -4101,6 +4107,7 @@
 				223F999F217F12040031DB95 /* JCSingleSettingViewController.swift in Sources */,
 				223F99E0217F12040031DB95 /* UISearchBar+JChat.swift in Sources */,
 				48718D9D1F42277400010AA0 /* UIImageView+HighlightedWebCache.m in Sources */,
+				2231087621DC9603006D458F /* MyHelpContainerViewController.swift in Sources */,
 				223F99E5217F12040031DB95 /* JMSGConversation+.swift in Sources */,
 				2271058721B7723D009FC34D /* PublicShareService.m in Sources */,
 				485E65FF1F42862900B158BF /* UIViewController+DismissKeyboard.m in Sources */,
@@ -4377,6 +4384,7 @@
 				223F9991217F12040031DB95 /* JCChatViewLayoutAttributes.swift in Sources */,
 				223F9A5F21829BA80031DB95 /* CWDrawerTransition.m in Sources */,
 				2227012C21D21BAC00FCD269 /* NewYearActiveInfoModel.m in Sources */,
+				2231087921DC9C0D006D458F /* MyHelpListViewController.swift in Sources */,
 				223F9A07217F12040031DB95 /* JCLocation.swift in Sources */,
 				223F9A4E218067650031DB95 /* UIView+LSCore.m in Sources */,
 				48718D701F42277400010AA0 /* MJPhoto.m in Sources */,

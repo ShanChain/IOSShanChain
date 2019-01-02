@@ -11,7 +11,7 @@ import UIKit
 private let H_cell = "HelpCenterCell"
 
 class CommunityHelpViewController: SCBaseVC {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -70,7 +70,7 @@ class CommunityHelpViewController: SCBaseVC {
             automaticallyAdjustsScrollViewInsets = false
         }
         
-//        self.showNavigationBarWhiteColor()
+        //        self.showNavigationBarWhiteColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,11 +81,11 @@ class CommunityHelpViewController: SCBaseVC {
     
     // 寻求帮助
     @IBAction func seekHelpAction(_ sender: UIButton) {
-//        for view in self.view.subviews{
-//            if view.tag == 6666{
-//                return
-//            }
-//        }
+        //        for view in self.view.subviews{
+        //            if view.tag == 6666{
+        //                return
+        //            }
+        //        }
         
         // 发布任务
         UIView .animate(withDuration: 0.2) {
@@ -121,7 +121,10 @@ class CommunityHelpViewController: SCBaseVC {
     }
     
     func _myHelp(){
-        
+        let vc = MyHelpContainerViewController()
+        vc.currentChatRoomID = chatRoomId
+        vc._scrollToIndex = .I_helped
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func removeFromRecieveSuccessView(_ sender: Any) {
@@ -167,10 +170,10 @@ extension CommunityHelpViewController{
         }
         
     }
-
     
     
-     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
+    
+    fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
         SCNetwork.shareInstance().v1_post(withUrl: ROOMTASK_LIST_URL, params: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
             
             if error != nil{
@@ -213,7 +216,7 @@ extension CommunityHelpViewController{
     
     fileprivate func _requstPrameter(_ isLoad:Bool) -> Dictionary<String, Any> {
         let pageStr = isLoad ? "\(page+1)":"\(page)"
-       return ["characterId":characterId,"page":pageStr,"size":size,"roomId":chatRoomId ?? ""]
+        return ["characterId":characterId,"page":pageStr,"size":size,"roomId":chatRoomId ?? ""]
     }
     
     // 领取任务

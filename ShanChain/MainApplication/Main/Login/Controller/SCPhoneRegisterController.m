@@ -66,7 +66,7 @@
 -(UITextField *)verCodeValueFiled{
     if (!_verCodeValueFiled) {
         _verCodeValueFiled=[UITextField new];
-        _verCodeValueFiled.placeholder=@"请输入验证码";
+        _verCodeValueFiled.placeholder = NSLocalizedString(@"sc_login_Code", nil);
         _verCodeValueFiled.font=[UIFont systemFontOfSize:14];
         _verCodeValueFiled.clearButtonMode=UITextFieldViewModeWhileEditing;
         _verCodeValueFiled.textAlignment=NSTextAlignmentLeft;
@@ -90,7 +90,7 @@
 -(UIButton *)verCodeBtn{
     if (!_verCodeBtn) {
         _verCodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_verCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_verCodeBtn setTitle:NSLocalizedString(@"sc_login_Send", nil) forState:UIControlStateNormal];
         [_verCodeBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
         _verCodeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_verCodeBtn addTarget:self action:@selector(getVerCodeAction) forControlEvents:UIControlEventTouchUpInside];
@@ -101,7 +101,7 @@
 -(UITextField *)pwdField{
     if (!_pwdField) {
         _pwdField=[UITextField new];
-        _pwdField.placeholder=@"请输入密码(至少6位)";
+        _pwdField.placeholder = NSLocalizedString(@"sc_login_SetPassword", nil);
         _pwdField.font=[UIFont systemFontOfSize:14];
         _pwdField.clearButtonMode=UITextFieldViewModeWhileEditing;
         _pwdField.secureTextEntry=YES;
@@ -125,7 +125,7 @@
 -(UITextField *)pwdSureField{
     if (!_pwdSureField) {
         _pwdSureField=[UITextField new];
-        _pwdSureField.placeholder=@"请再次输入密码(至少6位)";
+        _pwdSureField.placeholder = NSLocalizedString(@"sc_login_EnterPasswordAgain", nil);
         _pwdSureField.font=[UIFont systemFontOfSize:14];
         _pwdSureField.clearButtonMode=UITextFieldViewModeWhileEditing;
         _pwdSureField.secureTextEntry=YES;
@@ -149,7 +149,7 @@
 -(UIButton *)sureBtn{
     if (!_sureBtn) {
         _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_sureBtn setTitle:@"同意服务条款并注册" forState:UIControlStateNormal];
+        [_sureBtn setTitle:NSLocalizedString(@"sc_login_AgreeAndSignUp", nil) forState:UIControlStateNormal];
         [_sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _sureBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_sureBtn addTarget:self action:@selector(sureAction) forControlEvents:UIControlEventTouchUpInside];
@@ -162,7 +162,7 @@
 -(UIButton *)serviceBtn{
     if (!_serviceBtn) {
         _serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_serviceBtn setTitle:@"《千千世界服务条款》" forState:UIControlStateNormal];
+        [_serviceBtn setTitle:NSLocalizedString(@"sc_login_MarJarTermsofservice", nil) forState:UIControlStateNormal];
         [_serviceBtn setTitleColor:Theme_MainThemeColor forState:UIControlStateNormal];
         _serviceBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [_serviceBtn addTarget:self action:@selector(serviceAction) forControlEvents:UIControlEventTouchUpInside];
@@ -256,7 +256,7 @@
                     dispatch_source_cancel(_timer);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         //设置按钮的样式
-                        [self.verCodeBtn setTitle:@"重新发送" forState:UIControlStateNormal];
+                        [self.verCodeBtn setTitle:NSLocalizedString(@"sc_login_resend", nil) forState:UIControlStateNormal];
                         [self.verCodeBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
                         self.verCodeBtn.userInteractionEnabled = YES;
                     });
@@ -301,7 +301,7 @@
         return YES;
         
     }else{
-        [SYProgressHUD showError:@"输入的手机号有误"];
+        [SYProgressHUD showError:NSLocalizedString(@"sc_login_wrongphonenumber", nil)];
         return NO;
     }
     
@@ -318,11 +318,11 @@
     }
     if ([self.verCodeValueFiled.text length]!=0) {
         if (![self.verCodeValueFiled.text isEqualToString:self.verCodeString]) {
-            [SYProgressHUD showError:@"验证码输入有误，请重新查看"];
+            [SYProgressHUD showError:NSLocalizedString(@"sc_login_wrongCode", nil)];
             return;
         }
     }else{
-        [SYProgressHUD showError:@"请输入验证码"];
+        [SYProgressHUD showError:NSLocalizedString(@"sc_login_Code", nil)];
         return;
     }
     
@@ -360,15 +360,15 @@
                     [self.navigationController popViewControllerAnimated:YES];
                 } failure:nil];
             } else {
-                [SYProgressHUD showError:@"两次输入密码不一致，请重新输入"];
+                [SYProgressHUD showError:NSLocalizedString(@"sc_login_Pleasere-enterit", nil)];
                 [self.pwdSureField becomeFirstResponder];
             }
         } else {
-            [SYProgressHUD showError:@"密码长度为6-16个字符"];
+            [SYProgressHUD showError:NSLocalizedString(@"sc_login_PasswordCharacters6-16", nil)];
             [self.pwdSureField becomeFirstResponder];
         }
     } else {
-        [SYProgressHUD showError:@"密码不能为空!"];
+        [SYProgressHUD showError:NSLocalizedString(@"sc_login_passwordcannotbeEmpty", nil)];
         [self.pwdSureField becomeFirstResponder];
     }
 

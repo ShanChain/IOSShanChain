@@ -107,7 +107,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
 -(UITextField *)verCodeValueFiled{
     if (!_verCodeValueFiled) {
         _verCodeValueFiled=[UITextField new];
-        _verCodeValueFiled.placeholder=@"请输入验证码";
+        _verCodeValueFiled.placeholder = NSLocalizedString(@"sc_login_Code", nil);
         _verCodeValueFiled.font=[UIFont systemFontOfSize:14];
         _verCodeValueFiled.textAlignment=NSTextAlignmentLeft;
         _verCodeValueFiled.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -129,7 +129,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
 -(UIButton *)verCodeBtn{
     if (!_verCodeBtn) {
         _verCodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_verCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_verCodeBtn setTitle:NSLocalizedString(@"sc_login_Send", nil) forState:UIControlStateNormal];
         [_verCodeBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
         _verCodeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_verCodeBtn addTarget:self action:@selector(getVerCodeAction) forControlEvents:UIControlEventTouchUpInside];
@@ -239,7 +239,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
                     dispatch_source_cancel(_timer);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         //设置按钮的样式
-                        [self.verCodeBtn setTitle:@"重新发送" forState:UIControlStateNormal];
+                        [self.verCodeBtn setTitle:NSLocalizedString(@"sc_login_resend", nil) forState:UIControlStateNormal];
                         [self.verCodeBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
                         self.verCodeBtn.userInteractionEnabled = YES;
                     });
@@ -286,7 +286,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
                 return;
             }
         } else {
-            [SYProgressHUD showError:@"请输入验证码"];
+            [SYProgressHUD showError:NSLocalizedString(@"sc_login_Code", nil)];
             return;
         }
         
@@ -352,7 +352,7 @@ static NSString * const TYPE_RESET_PASSWORD = @"RESET_PASSWORD";
                 return;
             }
         }else{
-            [SYProgressHUD showError:@"请输入验证码"];
+            [SYProgressHUD showError:NSLocalizedString(@"sc_login_Code", nil)];
             return;
         }
         NSMutableDictionary *bindParams = [NSMutableDictionary dictionary];

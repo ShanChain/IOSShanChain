@@ -58,6 +58,7 @@
     
     self.phoneNumberFid.placeholder = NSLocalizedString(@"sc_login_pleaseEnterPhoneNumber", nil);
     self.titleLb.text = NSLocalizedString(@"sc_login_others", nil);
+    [self.getVerifyCodeBtn setTitle:NSLocalizedString(@"sc_login_Send", nil) forState:0];
     
     if (self.loginType == LoginType_bindPhoneNumber) {
         self.stackView.hidden = YES;
@@ -80,7 +81,7 @@
             return ;
         }
         if (![weakSelf.phoneNumberFid.text isValidPhoneNumber]) {
-            [HHTool showError:@"输入的手机号有误"];
+            [HHTool showError:NSLocalizedString(@"sc_login_wrongphonenumber", nil)];
             return ;
         }
         [[SCNetwork shareInstance] v1_postWithUrl:Verifycode_URL params:@{@"mobile":weakSelf.phoneNumberFid.text} showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {

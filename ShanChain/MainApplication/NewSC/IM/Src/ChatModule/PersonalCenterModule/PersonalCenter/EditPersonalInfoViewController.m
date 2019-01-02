@@ -32,12 +32,12 @@
     
     if (!NULLString(info.signature)) {
         self.signatureTextView.text = info.signature;
-         self.modifyNameLb.text = [NSString stringWithFormat:@"%ld/30",MIN(self.signatureTextView.text.length, 30)];
+        self.modifyNameLb.text = [NSString stringWithFormat:@"%u/30",MIN(self.signatureTextView.text.length, 30)];
     }
     
     self.signatureTextView.placeholder = @"请输入签名...";
     self.signatureTextView.delegate = self;
-    [self addRightBarButtonItemWithTarget:self sel:@selector(determine) title:@"确定" tintColor:[UIColor blackColor]];
+    [self addRightBarButtonItemWithTarget:self sel:@selector(determine) title:@"确定" tintColor:Theme_MainThemeColor];
 }
 
 - (void)determine{
@@ -73,7 +73,7 @@
         textView.text = [textView.text substringToIndex:30];
         [HHTool showError:@"字数超出限制"];
     }
-    self.modifyNameLb.text = [NSString stringWithFormat:@"%ld/30",MIN(textView.text.length, 30)];
+    self.modifyNameLb.text = [NSString stringWithFormat:@"%u/30",MIN(textView.text.length, 30)];
 }
     
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{

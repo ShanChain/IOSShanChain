@@ -212,9 +212,12 @@
     
     NSString  *title = self.titleArray[indexPath.row];
     if ([title isEqualToString:NSLocalizedString(@"sc_MyTask", nil)]) {
-        TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
-        taskVC._oc_scrollToIndex = 1;
-        [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
+//        TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
+//        taskVC._oc_scrollToIndex = 1;
+//        [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
+        MyHelpContainerViewController *myHelpVC = [[MyHelpContainerViewController alloc]init];
+        myHelpVC._oc_scrollToIndex = 1;
+        [nav.topViewController.navigationController pushViewController:myHelpVC animated:YES];
     }else if ([title isEqualToString:NSLocalizedString(@"sc_MyMessage", nil)]){
         JCConversationListViewController *conversationListVC = [[JCConversationListViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:conversationListVC animated:YES];

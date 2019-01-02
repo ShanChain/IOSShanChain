@@ -167,5 +167,18 @@
 "sc_login_LogInMJ" = "登录马甲";
 "sc_login_loggingIn" = "登录中";
 
+"sc_login_SetPassword" = "请输入密码(至少6位)";
+"sc_login_Code" = "请输入验证码";
+"sc_login_Send" = "获取验证码";
+"sc_login_EnterPasswordAgain" = "请再次输入密码(至少6位)";
+"sc_login_AgreeAndSignUp" = "同意服务条款并注册";
+"sc_login_MarJarTermsofservice" = "《千千世界服务条款》";
+"sc_login_resend" = "重新发送";
+"sc_login_wrongphonenumber" = "输入的手机号有误";
+"sc_login_wrongCode" = "验证码有误";
+"sc_login_Pleasere-enterit" = "两次输入密码不一致，请重新输入";
+"sc_login_PasswordCharacters6-16" = "密码长度为6-16个字符";
+"sc_login_passwordcannotbeEmpty" = "密码不能为空!";
+
 
 

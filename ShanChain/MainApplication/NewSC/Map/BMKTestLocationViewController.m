@@ -201,11 +201,11 @@
         _timer = nil;
     }else{
        
-        NSInteger days = (int)(timeInterval/(3600*24));
-        NSInteger hours = (int)((timeInterval-days*24*3600)/3600);
-        NSInteger minute = (int)(timeInterval-days*24*3600-hours*3600)/60;
+        int days = (int)(timeInterval/(3600*24));
+        int hours = (int)((timeInterval-days*24*3600)/3600);
+        int minute = (int)(timeInterval-days*24*3600-hours*3600)/60;
         NSInteger second = timeInterval - days*24*3600 - hours*3600 - minute*60;
-        self.laveDayLabel.text = [NSString stringWithFormat:@"%02ld : %02ld : %02ld", hours + days * 24, (long)minute, second];
+        self.laveDayLabel.text = [NSString stringWithFormat:@"%02d : %02ld : %02ld",  (long)hours + days * 24, (long)minute, (long)second];
     }
 }
 

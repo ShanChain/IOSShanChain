@@ -1651,7 +1651,8 @@ extension HHChatRoomViewController: SuspendBallDelegte{
     func suspendBall(_ subBall: UIButton!, didSelectTag tag: Int) {
         self.suspendBallBtn?.showFunction =  !(self.suspendBallBtn?.showFunction)!
         if tag == 1 {
-            self.navigationController?.popViewController(animated: true)
+            HHTool .showSucess("新玩法开发中，尽请期待！")
+           // self.navigationController?.popViewController(animated: true)
             // 发布任务
 //            UIView .animate(withDuration: 0.2) {
 //                let pubTaskView:PublishTaskView? =
@@ -1687,10 +1688,10 @@ extension HHChatRoomViewController: SuspendBallDelegte{
 //            }
         }else if tag == 0{
        
-            let vc = TaskListContainerViewController()
-            vc.currentChatRoomID = self.currentChatRoomID
-            vc._scrollToIndex = .all
-           // let vc = CommunityHelpViewController()
+//            let vc = TaskListContainerViewController()
+//            vc.currentChatRoomID = self.currentChatRoomID
+//            vc._scrollToIndex = .all
+            let vc = CommunityHelpViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
