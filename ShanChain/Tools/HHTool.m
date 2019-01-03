@@ -36,6 +36,8 @@
     return  [YYHud showSucess:msg];
 }
 
+
+
 + (YYHud *)showError:(NSString *)msg{
     return  [YYHud showError:msg];
 }

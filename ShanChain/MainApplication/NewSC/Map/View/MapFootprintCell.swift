@@ -26,25 +26,12 @@ class MapFootprintCell: UITableViewCell {
         enterBtn.cornerRadius = enterBtn.height/2.0
         enterBtn.layer.borderColor = SC_ThemeMainColor.cgColor
         enterBtn.layer.borderWidth = 1
+        
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        let disposeBag = DisposeBag()
-        // 创建一个PublishSubject
-        let subject = ReplaySubject<String>.create(bufferSize: 2)
-        subject.onNext("111")
-        subject.onNext("222")
-        subject.onNext("333")
-        
-        subject.subscribe(onNext: { (string) in
-            
-        }, onError: { (error) in
-            
-        }, onCompleted: {
-            
-        }).disposed(by: disposeBag)
         
         
         // Configure the view for the selected state

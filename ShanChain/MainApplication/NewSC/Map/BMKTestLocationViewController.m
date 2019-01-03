@@ -820,14 +820,15 @@
 
 // 加入聊天室
 - (void)enterChatRoom{
+   
+    
     weakify(self);
     __block HHChatRoomViewController *roomVC;
-    [EditInfoService enterChatRoomWithId:self.currentRoomId callBlock:^(JMSGConversation * resultObject, NSError *error) {
+    [EditInfoService enterChatRoomWithId:self.currentRoomId showString:@"" callBlock:^(id resultObject, NSError *error) {
         strongify(self)
         [self getTakeSnapshot];
         roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO navTitle:self.currentRoomName];
         [self pushPage:roomVC Animated:YES];
-       
     }];
 }
 

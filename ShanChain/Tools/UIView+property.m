@@ -16,6 +16,7 @@
 
 -(void)setModel:(NSObject *)model{
     objc_setAssociatedObject(self, @selector(model), model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
 }
 
 -(NSObject *)model{

@@ -42,12 +42,7 @@
 }
 #pragma mark -- JPush 建立连接成功
 - (void)kJPFNetworkDidSetupNotification{
-    NSString  *userID = [SCCacheTool shareInstance].getCurrentUser;
-    if (!NULLString(userID)) {
-        [JPUSHService setAlias:userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-            
-        } seq:10];
-    }
+   
  
 }
 #pragma mark -- JPush 注册成功
@@ -84,54 +79,8 @@
     [JSHAREService setupWithConfig:config];
     [JSHAREService setDebug:YES];
     
-    
-    
-    
-   //[self setupShareConfig];
 }
 
-- (void)setupShareConfig{
-    [ShareSDK registerActivePlatforms:@[
-                                        @(SSDKPlatformTypeSinaWeibo),
-                                        @(SSDKPlatformTypeWechat),
-                                        @(SSDKPlatformTypeQQ),
-                                        ] onImport:^(SSDKPlatformType platformType) {
-                                            switch (platformType) {
-                                                case SSDKPlatformTypeWechat:
-                                                    [ShareSDKConnector connectWeChat:[WXApi class]];
-                                                    break;
-                                                case SSDKPlatformTypeQQ:
-                                                    [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
-                                                    break;
-                                                case SSDKPlatformTypeSinaWeibo:
-                                                    [ShareSDKConnector connectWeibo:[WeiboSDK class]];
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-                                        } onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
-                                            switch (platformType) {
-                                                case SSDKPlatformTypeSinaWeibo:
-                                                    //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
-                                                    [appInfo SSDKSetupSinaWeiboByAppKey:SinaWeibo_AppKey
-                                                                              appSecret:SinaWeibo_appSecret
-                                                                            redirectUri:@"https://api.weibo.com/oauth2/default.html"
-                                                                               authType:SSDKAuthTypeBoth];
-                                                    break;
-                                                case SSDKPlatformTypeWechat:
-                                                    [appInfo SSDKSetupWeChatByAppId:@"wxf3ca04328ebf58f1"
-                                                                          appSecret:@"10f4c1761c9be09d630e766b4a700843"];
-                                                    break;
-                                                case SSDKPlatformTypeQQ:
-                                                    [appInfo SSDKSetupQQByAppId:@"1106603714"
-                                                                         appKey:@"cysXSCMGkW5yGU62"
-                                                                       authType:SSDKAuthTypeBoth];
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-                                        }];
-}
 
 
 - (void)setupUMPushNoticationWithLaunchOptions:(NSDictionary *)launchOptions {
@@ -209,11 +158,35 @@
         [[SCAppManager shareInstance]logout];
     }else{
         JPushUserInfo *j_userInfo = [JPushUserInfo yy_modelWithDictionary:userInfo];
+        
+        if (NULLString(j_userInfo.sysPage)) {
+                NSDictionary  *custom = userInfo[@"custom"];
+            if (!NULLString(custom[JM_COMVERSATION_TYPE])) {
+                NSString  *conversationType = (NSString*)custom[JM_COMVERSATION_TYPE];
+                NSString  *userName = custom[JM_USERNAME];
+                NSString  *appkey = custom[JM_APPKET];
+                if ([conversationType isEqualToString:@"single"]) {
+                    // 单聊
+                    [JMSGConversation createSingleConversationWithUsername:userName appKey:appkey completionHandler:^(JMSGConversation * conversation, NSError *error) {
+                        if (!error) {
+                            [ChatPublicService jg_addFriendFeFocusWithFunsJmUserName:userName];
+                            JCChatViewController *chatVC = [[JCChatViewController alloc]initWithConversation:conversation];
+                            [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateConversation object:nil];
+                            JCNavigationController *nav = [self mainNav];
+                            [nav.topViewController.navigationController pushViewController:chatVC animated:YES];
+                        }
+                    }];
+                }else if ([conversationType isEqualToString:@"group"]){
+                    // 群聊
+                }
+            }
+            return;
+        }
+        
         UINavigationController *nav  = (UINavigationController*)self.window.rootViewController;
         if (nav.visibleViewController.navigationController.navigationBarHidden) {
             nav.visibleViewController.navigationController.navigationBarHidden = NO;
         }
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if ([j_userInfo.sysPage isEqualToString:@"webView"]) {
                 if (!NULLString(j_userInfo.url)) {
@@ -232,8 +205,23 @@
             }
            
         });
+        
+        
     }
 
 }
+
+- (JCNavigationController*)mainNav{
+    JCNavigationController *nav;
+    if ([[HHTool mainWindow].rootViewController isKindOfClass:[JCMainTabBarController  class]]) {
+        JCMainTabBarController  *tab = (JCMainTabBarController*)[HHTool mainWindow].rootViewController;
+        JCNavigationController *navController = tab.selectedViewController;
+        nav = navController;
+    }else{
+        nav = (JCNavigationController*)[HHTool mainWindow].rootViewController;
+    }
+    return nav;
+}
+
 
 @end

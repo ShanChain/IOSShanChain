@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 //msg_key
 static NSString * const MSG_KEY_WORLDVIEW_ILLEGAL = @"MSG_WORLDVIEW_ILLEGAL";//世界观因违规被暂停 消息编号：
 static NSString * const MSG_KEY_CHARACTER_BE_FOCUS = @"MSG_CHARACTER_BE_FOCUS";//你的当前人物被@

@@ -60,14 +60,14 @@
 }
 
 // 加入聊天室
-+(void)enterChatRoomWithId:(NSString *)roomId callBlock:(void (^)(id resultObject, NSError *error))callBlock{
-    [HHTool showChrysanthemum];
++(void)enterChatRoomWithId:(NSString *)roomId showString:(NSString *)showString callBlock:(void (^)(id, NSError *))callBlock{
+    [HHTool show:showString];
     [JMSGChatRoom enterChatRoomWithRoomId:roomId completionHandler:^(JMSGConversation * resultObject, NSError *error) {
         if (!error) {
             BLOCK_EXEC(callBlock,resultObject,error)
             // 加入聊天室成功 进入聊天室页面
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [HHTool dismiss];
+                [HHTool immediatelyDismiss];
             });
             
         }else{
@@ -76,16 +76,16 @@
                 [JMSGChatRoom leaveChatRoomWithRoomId:roomId completionHandler:^(id resultObject, NSError *error) {
                     [HHTool dismiss];
                     if (!error) {
-                        [EditInfoService enterChatRoomWithId:roomId callBlock:callBlock];
+                        [EditInfoService enterChatRoomWithId:roomId showString:showString callBlock:callBlock];
                     }else{
                         [HHTool showError:error.localizedDescription];
                     }
                 }];
             }else if (error.code == 6002){
-               // [HHTool showError:NSLocalizedString(@"sc_NetworkIsNot", nil)];
+                // [HHTool showError:NSLocalizedString(@"sc_NetworkIsNot", nil)];
             }else if (error.code == 800016){
                 // 设备不匹配，重新登录
-                [HHTool dismiss];
+                [HHTool immediatelyDismiss];
                 [[SCAppManager shareInstance]logout];
             } else{
                 [HHTool dismiss];
@@ -95,6 +95,8 @@
         
     }];
 }
+
+
 
 @end
 

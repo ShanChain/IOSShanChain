@@ -387,22 +387,13 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     // tcp长链接被关闭
     func _closeChatRoom()  {
        // HHTool.show("广场链接已断开，正在为您重新连接...")
-        EditInfoService.enterChatRoom(withId: self.currentChatRoomID, call: { (result, error) in
-           // HHTool.dismiss()
-            if let conversation = result as? JMSGConversation{
-                self.conversation = conversation
+        if HHTool.getCurrentVC() is HHChatRoomViewController{
+            EditInfoService.enterChatRoom(withId: self.currentChatRoomID, show: "广场链接已断开，正在为您重新连接...") { (result, error) in
+                if let conversation = result as? JMSGConversation{
+                    self.conversation = conversation
+                }
             }
-        })
-        //        self.hrShowAlert(withTitle: nil, message: "当前广场连接已被断开", buttonsTitles: ["确认"]) { (action, index) in
-        //            if index == 0{
-        //
-        ////                self.navigationController?.popViewController(animated: true)
-        ////                if let chatRoom = self.conversation.target as? JMSGChatRoom{
-        ////                    JMSGChatRoom.leaveChatRoom(withRoomId: chatRoom.roomID, completionHandler: nil)
-        ////                }
-        //
-        //            }
-        //        }
+        }
     }
     
     func _updateFileMessage(_ notification: Notification) {
@@ -850,12 +841,13 @@ extension HHChatRoomViewController: JMessageDelegate {
         
     }
     // 接收消息(服务器端下发的)回调
-    func onReceive(_ message: JMSGMessage!, error: Error!) {
-        if error != nil {
-            return
-        }
-        _handleMessage(message: message)
-    }
+//    func onReceive(_ message: JMSGMessage!, error: Error!) {
+//        if error != nil {
+//            return
+//        }
+//        
+//        _handleMessage(message: message)
+//    }
     // 处理接收到的消息 
     func _handleMessage(message:JMSGMessage){
         let message =  _parseMessage(message)
@@ -1651,7 +1643,7 @@ extension HHChatRoomViewController: SuspendBallDelegte{
     func suspendBall(_ subBall: UIButton!, didSelectTag tag: Int) {
         self.suspendBallBtn?.showFunction =  !(self.suspendBallBtn?.showFunction)!
         if tag == 1 {
-            HHTool .showSucess("新玩法开发中，尽请期待！")
+            YYHud.showTip("新玩法开发中，尽请期待！")
            // self.navigationController?.popViewController(animated: true)
             // 发布任务
 //            UIView .animate(withDuration: 0.2) {

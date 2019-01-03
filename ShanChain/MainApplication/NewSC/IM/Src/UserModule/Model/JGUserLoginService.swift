@@ -154,8 +154,8 @@ class JGUserLoginService: NSObject {
                         if chatRoomConversation.target is JMSGChatRoom{
                             if (chatRoomConversation.target as? JMSGChatRoom)?.roomID == roomId{
                               isEnter = true
-                                EditInfoService.enterChatRoom(withId: roomId, call: { (result, error) in
-                                    callBlock(result as! JMSGConversation?,error as NSError?)
+                                EditInfoService.enterChatRoom(withId: roomId,  show: "", call: { (result, error) in
+                                     callBlock(result as! JMSGConversation?,error as NSError?)
                                 })
                             }
                         }
@@ -176,7 +176,8 @@ class JGUserLoginService: NSObject {
             if createConversationError == nil{
                 // 创建会话成功 加入聊天室
 //                EditInfoService.enterChatRoom(withId: roomId, call: callBlock as! (JMSGConversation?, Error?) -> Void as! (Any?, Error?) -> Void)
-                EditInfoService.enterChatRoom(withId: roomId, call: { (result, error) in
+                
+                EditInfoService.enterChatRoom(withId: roomId, show: "", call: { (result, error) in
                     callBlock(result as! JMSGConversation?,error as NSError?)
                 })
                 
