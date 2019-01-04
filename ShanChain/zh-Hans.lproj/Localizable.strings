@@ -102,6 +102,7 @@
  */
 
 "sc_Personal" = "更改资料";
+"sc_set_Profile" = "修改个人资料";
 "sc_Notification" = "消息设置";
 "sc_AccountAndSecurity" = "账号与安全";
 "sc_ClearCache" = "缓存清理";
@@ -112,6 +113,8 @@
 "sc_whatsUp" = "暂无签名";
 "sc_takePhoto" = "拍照";
 "sc_Album" = "相册";
+"sc_set_up" = "请输入签名...";
+"sc_set_name" = "请输入昵称";
 
 
 /*
@@ -144,6 +147,7 @@
 "sc_NetworkIsNot" = "连接超时，请稍后再试~";
 "sc_TellUsProblem" = "请输入您要反馈的建议...";
 "sc_Please_check_the_networksettings" = "请检查网络设置";
+"sc_Nodata" = "暂无数据";
 
 
 /*
@@ -180,5 +184,63 @@
 "sc_login_PasswordCharacters6-16" = "密码长度为6-16个字符";
 "sc_login_passwordcannotbeEmpty" = "密码不能为空!";
 
+/*
+ 马甲劵
+ */
+
+"sc_Voucher_MarJar" = "马甲劵";
+"sc_Voucher_view" = "查看";
+"sc_Voucher_Get" = "领取";
+"sc_Voucher_Got" = "已领取";
+"sc_Voucher_remain" = "剩余*张";
+"sc_Voucher_change" = "更换（logo）";
+"sc_Voucher_name" = "名称";
+"sc_Voucher_symbol" = "代号";
+"sc_Voucher_price" = "单价";
+"sc_Voucher_amount" = "数量";
+"sc_Voucher_expiretime" = "失效时间";
+"sc_Voucher_detail" = "说明";
+"sc_Voucher_IDVerification" = "实名认证";
+"sc_Voucher_mortgagefee" = "抵押费";
+"sc_Voucher_Balance" = "钱包余额";
+"sc_Voucher_Creat" = "确认创建";
+"sc_Voucher_PleaseCheckTheInformationCarefully" = "请认真核对信息，一旦确认创建，则无法撤回";
+"sc_Voucher_enterName" = "请输入名称";
+"sc_Voucher_enterSymbol" = "请输入代号";
+"sc_Voucher_enterPrice" = "请输入单价";
+"sc_Voucher_enterAmount" = "请输入发布数量";
+"sc_Voucher_choose" = "选择时间";
+"sc_Voucher_instructions" = "请具体描述该券的使用说明，如联系电话、地址、金额限制等";
+"sc_Voucher_verified" = "已认证";
+"sc_Voucher_chargePrice" = "马甲将收取该券发动总价的1%作为抵押，待该券失效后，将全额返回到您的钱包账户中。";
+"sc_Voucher_Deposit" = "充值";
+"sc_Voucher_createsuccessful" = "创建成功";
+"sc_Voucher_Pleasedeposit" = "余额不足，请充值";
+"sc_Voucher_16wordstext" = "您最多可输入16个字，仅限文字、字母、数字及空格";
+"sc_Voucher_capitalLetters" = "代号为三个大写英文字母";
+"sc_Voucher_Incorrecttext" = "文本有误";
+"sc_Voucher_occupied" = "已被占用";
+
+// 我的
+"sc_Voucher_My" = "  我的";
+"sc_Voucher_MyVoucher" = "我的马甲券";
+"sc_Voucher_Creat" = "创建马甲券";
+"sc_Voucher_Igot" = "我领取的";
+"sc_Voucher_Icreated" = "我创建的";
+"sc_Voucher_Voucherverification" = "马甲券核销";
+"sc_Voucher_Voucherinformation" = "马甲券详情";
+"sc_Voucher_Avalible" = "待使用";
+"sc_Voucher_Used" = "已使用";
+"sc_Voucher_Expired" = "已失效";
+"sc_Voucher_View" = "查看";
+"sc_Voucher_Expired" = "已失效";
+"sc_Voucher_total" = "共*张";
+"sc_Voucher_Verify" = "核销马甲券";
+"sc_Voucher_Verifed" = "已核销";
+"sc_Voucher_UseVoucher" = "立即使用";
+"sc_Voucher_Used" = "已使用";
+"sc_Voucher_immediatelyGet" = "立即领取";
+"sc_Voucher_Expiretime" = "有效期至";
+"sc_Voucher_non-verified" = "待核销";
 
 

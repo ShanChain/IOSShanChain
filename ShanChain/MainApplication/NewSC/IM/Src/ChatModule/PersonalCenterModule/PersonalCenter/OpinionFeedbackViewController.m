@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"sc_Feedback", nil),
+    self.title = NSLocalizedString(@"sc_Feedback", nil);
     self.textView.placeholder = NSLocalizedString(@"sc_TellUsProblem", nil);
     
 }

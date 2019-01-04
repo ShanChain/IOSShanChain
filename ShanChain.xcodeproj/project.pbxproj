@@ -83,9 +83,7 @@
 		2229ED0821B9256100E33A8D /* AppointmentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED0621B9256100E33A8D /* AppointmentListViewController.swift */; };
 		2229ED0921B9256100E33A8D /* AppointmentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED0721B9256100E33A8D /* AppointmentListViewController.xib */; };
 		2229ED0C21B9265600E33A8D /* AppointmentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED0A21B9265600E33A8D /* AppointmentListCell.swift */; };
-		2229ED0D21B9265700E33A8D /* AppointmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED0B21B9265600E33A8D /* AppointmentListCell.xib */; };
 		2229ED1421B9412700E33A8D /* AppointmentCreateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */; };
-		2229ED1721B942A500E33A8D /* AppointmentCreateCardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */; };
 		2229ED1A21BA678200E33A8D /* MyCardCouponContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED1821BA678200E33A8D /* MyCardCouponContainerViewController.swift */; };
 		2229ED1E21BA726800E33A8D /* MyCardCouponListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2229ED1C21BA726800E33A8D /* MyCardCouponListViewController.swift */; };
 		2229ED1F21BA726800E33A8D /* MyCardCouponListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2229ED1D21BA726800E33A8D /* MyCardCouponListViewController.xib */; };
@@ -95,6 +93,10 @@
 		222EF6182187E527005B89EF /* DefConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6172187E526005B89EF /* DefConst.swift */; };
 		2231087621DC9603006D458F /* MyHelpContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231087421DC9603006D458F /* MyHelpContainerViewController.swift */; };
 		2231087921DC9C0D006D458F /* MyHelpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231087821DC9C0D006D458F /* MyHelpListViewController.swift */; };
+		2231087A21DF3231006D458F /* AppointmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2231087C21DF3231006D458F /* AppointmentListCell.xib */; };
+		2231088221DF33C9006D458F /* AppointmentCreateCardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2231088421DF33C9006D458F /* AppointmentCreateCardViewController.storyboard */; };
+		2231088921DF4C81006D458F /* SCDynamicLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2231088B21DF4C81006D458F /* SCDynamicLoginViewController.xib */; };
+		2231089021DF5371006D458F /* OpinionFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2231089221DF5371006D458F /* OpinionFeedbackViewController.xib */; };
 		223F9876217F0C880031DB95 /* SCImManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F9875217F0C880031DB95 /* SCImManager.swift */; };
 		223F9878217F0DF00031DB95 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F9877217F0DF00031DB95 /* libstdc++.6.0.9.tbd */; };
 		223F987A217F0E440031DB95 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F9879217F0E440031DB95 /* CoreAudio.framework */; };
@@ -368,12 +370,10 @@
 		22A2EB9B21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EB9A21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift */; };
 		22A2EB9F21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */; };
 		22A2EBA321BFAE0A00737265 /* SCDynamicLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBA121BFAE0A00737265 /* SCDynamicLoginViewController.m */; };
-		22A2EBA421BFAE0A00737265 /* SCDynamicLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */; };
 		22A2EBA721C09A5800737265 /* VerifyCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBA621C09A5800737265 /* VerifyCodeModel.m */; };
 		22A2EBAB21C0A43300737265 /* SCLoginDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBAA21C0A43300737265 /* SCLoginDataController.m */; };
 		22A2EBB621C23CC000737265 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBB521C23CBF00737265 /* Images.xcassets */; };
 		22A2EBBE21C2558B00737265 /* OpinionFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */; };
-		22A2EBBF21C2558B00737265 /* OpinionFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */; };
 		22BA100B21D25FF30044D38B /* HotCommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA100A21D25FF30044D38B /* HotCommunityModel.swift */; };
 		22BA100D21D31A8D0044D38B /* RedPaperModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA100C21D31A8C0044D38B /* RedPaperModel.swift */; };
 		22C9176F21918710002E5240 /* HHChatRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C9176E21918710002E5240 /* HHChatRoomViewController.xib */; };
@@ -753,9 +753,7 @@
 		2229ED0621B9256100E33A8D /* AppointmentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListViewController.swift; sourceTree = "<group>"; };
 		2229ED0721B9256100E33A8D /* AppointmentListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentListViewController.xib; sourceTree = "<group>"; };
 		2229ED0A21B9265600E33A8D /* AppointmentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListCell.swift; sourceTree = "<group>"; };
-		2229ED0B21B9265600E33A8D /* AppointmentListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentListCell.xib; sourceTree = "<group>"; };
 		2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCreateCardViewController.swift; sourceTree = "<group>"; };
-		2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppointmentCreateCardViewController.storyboard; sourceTree = "<group>"; };
 		2229ED1821BA678200E33A8D /* MyCardCouponContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardCouponContainerViewController.swift; sourceTree = "<group>"; };
 		2229ED1C21BA726800E33A8D /* MyCardCouponListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardCouponListViewController.swift; sourceTree = "<group>"; };
 		2229ED1D21BA726800E33A8D /* MyCardCouponListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCardCouponListViewController.xib; sourceTree = "<group>"; };
@@ -767,6 +765,18 @@
 		222EF6172187E526005B89EF /* DefConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefConst.swift; sourceTree = "<group>"; };
 		2231087421DC9603006D458F /* MyHelpContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHelpContainerViewController.swift; sourceTree = "<group>"; };
 		2231087821DC9C0D006D458F /* MyHelpListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHelpListViewController.swift; sourceTree = "<group>"; };
+		2231087E21DF3240006D458F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppointmentListCell.strings"; sourceTree = "<group>"; };
+		2231087F21DF3282006D458F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AppointmentListCell.xib; sourceTree = "<group>"; };
+		2231088121DF32D3006D458F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppointmentListCell.strings; sourceTree = "<group>"; };
+		2231088321DF33C9006D458F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AppointmentCreateCardViewController.storyboard; sourceTree = "<group>"; };
+		2231088621DF33D0006D458F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppointmentCreateCardViewController.strings; sourceTree = "<group>"; };
+		2231088821DF33D3006D458F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppointmentCreateCardViewController.strings"; sourceTree = "<group>"; };
+		2231088A21DF4C81006D458F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SCDynamicLoginViewController.xib; sourceTree = "<group>"; };
+		2231088D21DF4C88006D458F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SCDynamicLoginViewController.strings"; sourceTree = "<group>"; };
+		2231088F21DF4C8A006D458F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SCDynamicLoginViewController.strings; sourceTree = "<group>"; };
+		2231089121DF5371006D458F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpinionFeedbackViewController.xib; sourceTree = "<group>"; };
+		2231089421DF5375006D458F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpinionFeedbackViewController.strings"; sourceTree = "<group>"; };
+		2231089621DF5378006D458F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OpinionFeedbackViewController.strings; sourceTree = "<group>"; };
 		223F9874217F0C870031DB95 /* ShanChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShanChain-Bridging-Header.h"; sourceTree = "<group>"; };
 		223F9875217F0C880031DB95 /* SCImManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCImManager.swift; sourceTree = "<group>"; };
 		223F9877217F0DF00031DB95 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -1087,7 +1097,6 @@
 		22A2EB9E21BF570600737265 /* MyCardReceiveDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyCardReceiveDetailsViewController.storyboard; sourceTree = "<group>"; };
 		22A2EBA021BFAE0A00737265 /* SCDynamicLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCDynamicLoginViewController.h; sourceTree = "<group>"; };
 		22A2EBA121BFAE0A00737265 /* SCDynamicLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCDynamicLoginViewController.m; sourceTree = "<group>"; };
-		22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCDynamicLoginViewController.xib; sourceTree = "<group>"; };
 		22A2EBA521C09A5800737265 /* VerifyCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyCodeModel.h; sourceTree = "<group>"; };
 		22A2EBA621C09A5800737265 /* VerifyCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerifyCodeModel.m; sourceTree = "<group>"; };
 		22A2EBA921C0A43300737265 /* SCLoginDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCLoginDataController.h; sourceTree = "<group>"; };
@@ -1095,7 +1104,6 @@
 		22A2EBB521C23CBF00737265 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		22A2EBBB21C2558B00737265 /* OpinionFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpinionFeedbackViewController.h; sourceTree = "<group>"; };
 		22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpinionFeedbackViewController.m; sourceTree = "<group>"; };
-		22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpinionFeedbackViewController.xib; sourceTree = "<group>"; };
 		22BA100A21D25FF30044D38B /* HotCommunityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCommunityModel.swift; sourceTree = "<group>"; };
 		22BA100C21D31A8C0044D38B /* RedPaperModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPaperModel.swift; sourceTree = "<group>"; };
 		22C9176E21918710002E5240 /* HHChatRoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHChatRoomViewController.xib; sourceTree = "<group>"; };
@@ -1725,7 +1733,7 @@
 				2229ED0621B9256100E33A8D /* AppointmentListViewController.swift */,
 				2229ED0721B9256100E33A8D /* AppointmentListViewController.xib */,
 				2229ED1221B9412700E33A8D /* AppointmentCreateCardViewController.swift */,
-				2229ED1621B942A500E33A8D /* AppointmentCreateCardViewController.storyboard */,
+				2231088421DF33C9006D458F /* AppointmentCreateCardViewController.storyboard */,
 				2229ED1821BA678200E33A8D /* MyCardCouponContainerViewController.swift */,
 				2229ED1C21BA726800E33A8D /* MyCardCouponListViewController.swift */,
 				2229ED1D21BA726800E33A8D /* MyCardCouponListViewController.xib */,
@@ -1752,7 +1760,7 @@
 			isa = PBXGroup;
 			children = (
 				2229ED0A21B9265600E33A8D /* AppointmentListCell.swift */,
-				2229ED0B21B9265600E33A8D /* AppointmentListCell.xib */,
+				2231087C21DF3231006D458F /* AppointmentListCell.xib */,
 				22A2EB8E21BE1BB100737265 /* AppointmentCardDetialsCell.swift */,
 				22A2EB8F21BE1BB100737265 /* AppointmentCardDetialsCell.xib */,
 			);
@@ -2697,7 +2705,7 @@
 				22680AB9219E786400F2FA5B /* MyWalletViewController.xib */,
 				22A2EBBB21C2558B00737265 /* OpinionFeedbackViewController.h */,
 				22A2EBBC21C2558B00737265 /* OpinionFeedbackViewController.m */,
-				22A2EBBD21C2558B00737265 /* OpinionFeedbackViewController.xib */,
+				2231089221DF5371006D458F /* OpinionFeedbackViewController.xib */,
 			);
 			path = PersonalCenter;
 			sourceTree = "<group>";
@@ -3151,7 +3159,7 @@
 				4852A09F1FCE9F0300CDD7BE /* SCLoginController.m */,
 				22A2EBA021BFAE0A00737265 /* SCDynamicLoginViewController.h */,
 				22A2EBA121BFAE0A00737265 /* SCDynamicLoginViewController.m */,
-				22A2EBA221BFAE0A00737265 /* SCDynamicLoginViewController.xib */,
+				2231088B21DF4C81006D458F /* SCDynamicLoginViewController.xib */,
 				4852A0A01FCE9F0300CDD7BE /* SCPhoneRegisterController.h */,
 				4852A0A11FCE9F0300CDD7BE /* SCPhoneRegisterController.m */,
 			);
@@ -3636,6 +3644,7 @@
 				5DF0761D1DCD8E47FBD751DC /* [CP] Copy Pods Resources */,
 				892B39F31FE8EC5700292A75 /* Embed Frameworks */,
 				222C3104215A48D7009871C7 /* ShellScript */,
+				2231089721DF55B8006D458F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3753,7 +3762,7 @@
 				223F99BB217F12040031DB95 /* 定位2.png in Resources */,
 				221BEF0F21D503CC007C76BF /* PublishTaskView.xib in Resources */,
 				22C917AB219424FF002E5240 /* TaskListBackView.xib in Resources */,
-				2229ED0D21B9265700E33A8D /* AppointmentListCell.xib in Resources */,
+				2231087A21DF3231006D458F /* AppointmentListCell.xib in Resources */,
 				2271057321B4DA9B009FC34D /* Localizable.strings in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
 				2227012221C8F58600FCD269 /* HotCommunityCell.xib in Resources */,
@@ -3774,7 +3783,7 @@
 				3356B16C1F32F50700027E23 /* api.shanchain.com.cer in Resources */,
 				221BEF0521D4A522007C76BF /* CommunityHelpViewController.xib in Resources */,
 				22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */,
-				2229ED1721B942A500E33A8D /* AppointmentCreateCardViewController.storyboard in Resources */,
+				2231088221DF33C9006D458F /* AppointmentCreateCardViewController.storyboard in Resources */,
 				485E66631F42873F00B158BF /* MJRefresh.bundle in Resources */,
 				22C91782219274A8002E5240 /* BMKTestLocationViewController.xib in Resources */,
 				223F99BC217F12040031DB95 /* jiantou2@2x.png in Resources */,
@@ -3786,7 +3795,7 @@
 				223F9A742182AEC10031DB95 /* 0.jpg in Resources */,
 				2229ED0921B9256100E33A8D /* AppointmentListViewController.xib in Resources */,
 				223F99BD217F12040031DB95 /* icon_baidu_marker.png in Resources */,
-				22A2EBBF21C2558B00737265 /* OpinionFeedbackViewController.xib in Resources */,
+				2231089021DF5371006D458F /* OpinionFeedbackViewController.xib in Resources */,
 				22563F61219C3929004E34BB /* TaskListPersonalCell.xib in Resources */,
 				223F99BF217F12040031DB95 /* AddMapTableViewCell.xib in Resources */,
 				22C917B32194402D002E5240 /* TaskContentDetailsCell.xib in Resources */,
@@ -3812,7 +3821,7 @@
 				223F99BA217F12040031DB95 /* 定位1.png in Resources */,
 				22A2EBB621C23CC000737265 /* Images.xcassets in Resources */,
 				33B7CCF71EC5865700FB6378 /* Main.storyboard in Resources */,
-				22A2EBA421BFAE0A00737265 /* SCDynamicLoginViewController.xib in Resources */,
+				2231088921DF4C81006D458F /* SCDynamicLoginViewController.xib in Resources */,
 				22C917AF21943014002E5240 /* TaskDetailsViewController.xib in Resources */,
 				221B3C0921C782C00061BB3E /* MyCardScanCodeDetailsViewController.xib in Resources */,
 				2271058021B76273009FC34D /* HHShareView.xib in Resources */,
@@ -3848,7 +3857,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "# Without further ado, here’s the script. Add a Run Script step to your build steps, put it after your step to embed frameworks, set it to use /bin/sh and enter the following script:\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\n\n\n";
+			shellScript = "# Without further ado, here’s the script. Add a Run Script step to your build steps, put it after your step to embed frameworks, set it to use /bin/sh and enter the following script:\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\n";
+		};
+		2231089721DF55B8006D458F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\npython ${SRCROOT}/${TARGET_NAME}/RunScript/AutoGenStrings.py ${SRCROOT}/${TARGET_NAME}";
 		};
 		5DF0761D1DCD8E47FBD751DC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4456,6 +4478,46 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2231087C21DF3231006D458F /* AppointmentListCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2231087E21DF3240006D458F /* zh-Hans */,
+				2231087F21DF3282006D458F /* Base */,
+				2231088121DF32D3006D458F /* en */,
+			);
+			name = AppointmentListCell.xib;
+			sourceTree = "<group>";
+		};
+		2231088421DF33C9006D458F /* AppointmentCreateCardViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2231088321DF33C9006D458F /* Base */,
+				2231088621DF33D0006D458F /* en */,
+				2231088821DF33D3006D458F /* zh-Hans */,
+			);
+			name = AppointmentCreateCardViewController.storyboard;
+			sourceTree = "<group>";
+		};
+		2231088B21DF4C81006D458F /* SCDynamicLoginViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2231088A21DF4C81006D458F /* Base */,
+				2231088D21DF4C88006D458F /* zh-Hans */,
+				2231088F21DF4C8A006D458F /* en */,
+			);
+			name = SCDynamicLoginViewController.xib;
+			sourceTree = "<group>";
+		};
+		2231089221DF5371006D458F /* OpinionFeedbackViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2231089121DF5371006D458F /* Base */,
+				2231089421DF5375006D458F /* zh-Hans */,
+				2231089621DF5378006D458F /* en */,
+			);
+			name = OpinionFeedbackViewController.xib;
+			sourceTree = "<group>";
+		};
 		2271057121B4DA86009FC34D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

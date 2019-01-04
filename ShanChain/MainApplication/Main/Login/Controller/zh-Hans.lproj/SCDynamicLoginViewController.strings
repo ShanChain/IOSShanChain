@@ -1,0 +1,27 @@
+
+/* Class = "UITextField"; placeholder = "请输入手机号"; ObjectID = "CJJ-di-KD5"; */
+"CJJ-di-KD5.placeholder" = "请输入手机号";
+
+/* Class = "UILabel"; text = "QQ登录"; ObjectID = "J0z-KY-uWf"; */
+"J0z-KY-uWf.text" = "QQ登录";
+
+/* Class = "UITextField"; placeholder = "请输入验证码"; ObjectID = "RhN-2o-6If"; */
+"RhN-2o-6If.placeholder" = "请输入验证码";
+
+/* Class = "UIButton"; normalTitle = "密码登录"; ObjectID = "Usu-CO-9rE"; */
+"Usu-CO-9rE.normalTitle" = "密码登录";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "XuE-d3-fbo"; */
+"XuE-d3-fbo.normalTitle" = "登录";
+
+/* Class = "UILabel"; text = "第三方登录"; ObjectID = "Y3W-61-zJ0"; */
+"Y3W-61-zJ0.text" = "第三方登录";
+
+/* Class = "UILabel"; text = "微博登录"; ObjectID = "kto-wn-Cl5"; */
+"kto-wn-Cl5.text" = "微博登录";
+
+/* Class = "UIButton"; normalTitle = "获取验证码"; ObjectID = "nrM-Zc-vSs"; */
+"nrM-Zc-vSs.normalTitle" = "获取验证码";
+
+/* Class = "UILabel"; text = "微信登录"; ObjectID = "r2D-mc-MO6"; */
+"r2D-mc-MO6.text" = "微信登录";

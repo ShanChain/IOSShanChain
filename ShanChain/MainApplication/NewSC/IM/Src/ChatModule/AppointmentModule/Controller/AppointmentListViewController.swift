@@ -26,7 +26,8 @@ class AppointmentListViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "马甲劵"
+        title = NSLocalizedString("sc_Voucher_MarJar", comment: "字符串")
+        createBtn.setTitle(NSLocalizedString("sc_Voucher_Creat", comment: "字符串"), for: .normal)
 //        tableView.tableHeaderView = headView
 //        tableView.tableHeaderView?.backgroundColor = SC_ThemeBackgroundViewColor
         view.addSubview(headView)
@@ -44,7 +45,7 @@ class AppointmentListViewController: SCBaseVC {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
-        self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title: "  我的", tintColor: .black)
+        self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title:NSLocalizedString("sc_Voucher_My", comment: "字符串"), tintColor: .black)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         headView.backgroundColor = SC_ThemeBackgroundViewColor
         navigationController?.navigationBar.barTintColor = SC_ThemeMainColor
@@ -135,7 +136,7 @@ extension AppointmentListViewController{
             }
             
             if self.dataList.count == 0{
-                self.noDataTipShow(self.tableView, content: "暂无数据", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
+                self.noDataTipShow(self.tableView, content: NSLocalizedString("sc_Nodata", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
                 self.tableView.isScrollEnabled = false
             }else{
                 self.tableView.isScrollEnabled = true

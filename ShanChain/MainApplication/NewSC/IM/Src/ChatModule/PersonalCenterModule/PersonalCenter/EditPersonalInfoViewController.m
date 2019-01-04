@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"修改个人资料";
+    self.title = NSLocalizedString(@"sc_set_Profile", nil);
     // CHARCTER_MODIFY_URL
     SCCharacterModel_characterInfo *info =  [SCCacheTool shareInstance].characterModel.characterInfo;
     if (!NULLString(info.name)) {
@@ -32,12 +32,13 @@
     
     if (!NULLString(info.signature)) {
         self.signatureTextView.text = info.signature;
-        self.modifyNameLb.text = [NSString stringWithFormat:@"%u/30",MIN(self.signatureTextView.text.length, 30)];
+        self.modifyNameLb.text = [NSString stringWithFormat:@"%lu/30",MIN(self.signatureTextView.text.length, 30)];
     }
     
-    self.signatureTextView.placeholder = @"请输入签名...";
+    self.signatureTextView.placeholder = NSLocalizedString(@"sc_set_up", nil);
+    self.nickNameFid.placeholder = NSLocalizedString(@"sc_set_name", nil);
     self.signatureTextView.delegate = self;
-    [self addRightBarButtonItemWithTarget:self sel:@selector(determine) title:@"确定" tintColor:Theme_MainThemeColor];
+    [self addRightBarButtonItemWithTarget:self sel:@selector(determine) title:NSLocalizedString(@"sc_login_Confirm", nil) tintColor:Theme_MainThemeColor];
 }
 
 - (void)determine{
@@ -73,7 +74,7 @@
         textView.text = [textView.text substringToIndex:30];
         [HHTool showError:@"字数超出限制"];
     }
-    self.modifyNameLb.text = [NSString stringWithFormat:@"%u/30",MIN(textView.text.length, 30)];
+    self.modifyNameLb.text = [NSString stringWithFormat:@"%lu/30",MIN(textView.text.length, 30)];
 }
     
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{

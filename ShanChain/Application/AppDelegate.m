@@ -69,7 +69,7 @@
           
         }
         BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-        //  AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
+          //AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
     
     } else {

@@ -106,6 +106,7 @@
  */
 
 "sc_Personal" = "Personal";
+"sc_set_Profile" = "Profile";
 "sc_Notification" = "Notification";
 "sc_AccountAndSecurity" = "Account and Security";
 "sc_ClearCache" = "Clear cache";
@@ -116,6 +117,8 @@
 "sc_whatsUp" = "What's up？";
 "sc_takePhoto" = "take photo";
 "sc_Album" = "Album";
+"sc_set_up" = "What's up？";
+"sc_set_name" = "Name";
 
 /*
  举报
@@ -148,7 +151,7 @@
 "sc_NetworkIsNot" = "Network is not available,please try again later";
 "sc_TellUsProblem" = "Tell us what's problem you meet";
 "sc_Please_check_the_networksettings" = "Please check the network settings";
-
+"sc_Nodata" = "No data";
 
 /*
  登录注册
@@ -182,4 +185,64 @@
 "sc_login_Pleasere-enterit" = "password is inconsistent. Please re-enter it";
 "sc_login_PasswordCharacters6-16" = "Password length is 6-16 characters";
 "sc_login_passwordcannotbeEmpty" = "password cannot be empty";
+
+/*
+ 马甲劵
+ */
+
+"sc_Voucher_MarJar" = "MarJar Voucher";
+"sc_Voucher_view" = "View";
+"sc_Voucher_Get" = "Get";
+"sc_Voucher_Got" = "Got";
+"sc_Voucher_remain" = "remain *";
+"sc_Voucher_change" = "change";
+"sc_Voucher_name" = "name";
+"sc_Voucher_symbol" = "symbol";
+"sc_Voucher_price" = "price";
+"sc_Voucher_amount" = "amount";
+"sc_Voucher_expiretime" = "expire time";
+"sc_Voucher_detail" = "detail";
+"sc_Voucher_IDVerification" = "ID verification";
+"sc_Voucher_mortgagefee" = "mortgage fee";
+"sc_Voucher_Balance" = "Balance";
+"sc_Voucher_Creat" = "Creat";
+"sc_Voucher_PleaseCheckTheInformationCarefully" = "Please check the information carefully. Once the creation is confirmed, it cannot be withdrawn.";
+"sc_Voucher_enterName" = "enter";
+"sc_Voucher_enterSymbol" = "enter";
+"sc_Voucher_enterPrice" = "enter";
+"sc_Voucher_enterAmount" = "enter";
+"sc_Voucher_choose" = "choose";
+"sc_Voucher_instructions" = "Please specify the instructions for the use of the voucher, such as contact number, address, amount limit, etc.";
+"sc_Voucher_verified" = "verified";
+"sc_Voucher_chargePrice" = "MarJar will charge 1% of the total  price of the voucher as collateral. When the voucher expires, it will return the full amount to your wallet account.";
+"sc_Voucher_Deposit" = "Deposit";
+"sc_Voucher_createsuccessful" = "create successful！";
+"sc_Voucher_Pleasedeposit" = "Balance insufficient. Please deposit ";
+"sc_Voucher_16wordstext" = "You can enter up to 16 words, text, letters, numbers and spaces only.";
+"sc_Voucher_capitalLetters" = "Please input three capital letters";
+"sc_Voucher_Incorrecttext" = "Incorrect text";
+"sc_Voucher_occupied" = "occupied";
+
+// 我的
+"sc_Voucher_My" = "My";
+"sc_Voucher_MyVoucher" = "My Voucher";
+"sc_Voucher_Creat" = "Creat";
+"sc_Voucher_Igot" = "I got";
+"sc_Voucher_Icreated" = "I created";
+"sc_Voucher_Voucherverification" = "Voucher verification";
+"sc_Voucher_Voucherinformation" = "Voucher information";
+"sc_Voucher_Avalible" = "Avalible";
+"sc_Voucher_Used" = "Used";
+"sc_Voucher_Expired" = "Expired";
+"sc_Voucher_View" = "View";
+"sc_Voucher_Expired" = "Expired";
+"sc_Voucher_total" = "A total of * ";
+"sc_Voucher_Verify" = "Verify";
+"sc_Voucher_Verifed" = "Verifed";
+"sc_Voucher_UseVoucher" = "Use Voucher";
+"sc_Voucher_Used" = "Used";
+"sc_Voucher_immediatelyGet" = "Get";
+"sc_Voucher_Expiretime" = "Expire time";
+"sc_Voucher_non-verified" = "non-verified";
+
 

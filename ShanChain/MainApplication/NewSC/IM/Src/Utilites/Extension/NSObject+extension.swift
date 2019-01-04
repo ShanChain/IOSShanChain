@@ -54,7 +54,37 @@ extension UIView {
 
 }
 
+extension UIButton{
+    @IBInspectable var isSizeToFit: Bool {
+        get {
+            return self.titleLabel?.numberOfLines == 0 ? true:false
+        }
+        set {
+            if newValue == true {
+                self.sizeToFit()
+                self.titleLabel?.numberOfLines = 0
+            }
+            
+        }
+    }
+    
+}
+
 extension UILabel{
+    
+    @IBInspectable var isSizeToFit: Bool {
+        get {
+            return self.numberOfLines == 0 ? true:false
+        }
+        set {
+            if newValue == true {
+               self.sizeToFit()
+               self.numberOfLines = 0
+            }
+            
+        }
+    }
+    
     func needLines(withWidth width: CGFloat) -> Int {
         
         guard let text = self.text else { return 1 }

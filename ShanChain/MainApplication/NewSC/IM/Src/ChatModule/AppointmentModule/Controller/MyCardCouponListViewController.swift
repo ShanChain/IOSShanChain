@@ -136,7 +136,7 @@ extension MyCardCouponListViewController{
             }
             
             if self.dataList.count == 0{
-                self.noDataTipShow(self.tableView, content: "暂无数据", image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
+                self.noDataTipShow(self.tableView, content: NSLocalizedString("sc_Nodata", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
                 self.tableView.isScrollEnabled = false
             }else{
                 self.tableView.isScrollEnabled = true

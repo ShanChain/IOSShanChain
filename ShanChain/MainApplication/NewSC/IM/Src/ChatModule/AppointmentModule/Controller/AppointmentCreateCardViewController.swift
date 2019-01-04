@@ -114,14 +114,14 @@ class AppointmentCreateCardViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "创建马甲劵"
+        title = NSLocalizedString("sc_Voucher_Creat", comment: "字符串")
         CouponVerificationService.verificationCouponNameFid(nameFid)
         CouponVerificationService.verificationCardFid(cardFid)
        // CouponVerificationService.verificationIsCanCreate(self)
         let headImg = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
         icon._sd_setImage(withURLString: headImg)
         self.photoUrl = headImg
-        descriptionTextView.placeholder = "请具体描述该劵的使用说明，如联系电话、地址、金额限制等"
+        descriptionTextView.placeholder = NSLocalizedString("sc_Voucher_instructions", comment: "字符串")
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
         button.setImage(UIImage(named: "sc_com_icon_back"), for: .normal)
         button.addTarget(self, action: #selector(_back), for: .touchUpInside)

@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = "代号:"; ObjectID = "17d-Ps-QvF"; */
+"17d-Ps-QvF.text" = "symbol:";
+
+/* Class = "UILabel"; text = "使用说明:"; ObjectID = "4WY-1x-5Dl"; */
+"4WY-1x-5Dl.text" = "detail:";
+
+/* Class = "UILabel"; text = "名称:"; ObjectID = "5s3-WE-uHa"; */
+"5s3-WE-uHa.text" = "name:";
+
+/* Class = "UILabel"; text = "单价(￥):"; ObjectID = "7eR-RA-quw"; */
+"7eR-RA-quw.text" = "price(￥):";
+
+/* Class = "UIButton"; normalTitle = "确认创建"; ObjectID = "Ang-cF-WC9"; */
+"Ang-cF-WC9.normalTitle" = "Creat";
+
+/* Class = "UILabel"; text = "钱包余额"; ObjectID = "E6V-hV-nNI"; */
+"E6V-hV-nNI.text" = "Balance";
+
+/* Class = "UILabel"; text = "失效时间:"; ObjectID = "EQj-7z-vy1"; */
+"EQj-7z-vy1.text" = "expire time:";
+
+/* Class = "UILabel"; text = "抵押费: 1%"; ObjectID = "GuH-tj-ZmC"; */
+"GuH-tj-ZmC.text" = "mortgage fee: 1%";
+
+/* Class = "UIButton"; normalTitle = "充值"; ObjectID = "OKt-3z-vfR"; */
+"OKt-3z-vfR.normalTitle" = "Deposit";
+
+/* Class = "UIButton"; normalTitle = "示例"; ObjectID = "XS8-ER-AX7"; */
+"XS8-ER-AX7.normalTitle" = "Example";
+
+/* Class = "UITextField"; placeholder = "请输入代号"; ObjectID = "YSV-z3-rq1"; */
+"YSV-z3-rq1.placeholder" = "enter";
+
+/* Class = "UITextField"; placeholder = "请输入名称"; ObjectID = "bvm-Vv-HyG"; */
+"bvm-Vv-HyG.placeholder" = "enter";
+
+/* Class = "UILabel"; text = "SEAT"; ObjectID = "d8I-F8-mif"; */
+"d8I-F8-mif.text" = "SEAT";
+
+/* Class = "UILabel"; text = "*实名认证"; ObjectID = "dgz-fs-Z1Y"; */
+"dgz-fs-Z1Y.text" = "ID verification";
+
+/* Class = "UITextField"; placeholder = "请输入单价"; ObjectID = "gaT-7o-w5q"; */
+"gaT-7o-w5q.placeholder" = "enter";
+
+/* Class = "UITextField"; placeholder = "年-月-日"; ObjectID = "gtr-DD-u3z"; */
+"gtr-DD-u3z.placeholder" = "choose";
+
+/* Class = "UILabel"; text = "请认真核对填写信息，一旦确认创建，则无法撤回"; ObjectID = "hSA-cS-ak7"; */
+"hSA-cS-ak7.text" = "Please check the information carefully. Once the creation is confirmed, it cannot be withdrawn.";
+
+/* Class = "UILabel"; text = "已认证"; ObjectID = "hxX-Ze-hvZ"; */
+"hxX-Ze-hvZ.text" = "verified";
+
+/* Class = "UILabel"; text = "= 0 SEAT"; ObjectID = "ibQ-k0-wB1"; */
+"ibQ-k0-wB1.text" = "= 0 SEAT";
+
+/* Class = "UILabel"; text = "￥0.01"; ObjectID = "lOA-n5-xia"; */
+"lOA-n5-xia.text" = "￥0.01";
+
+/* Class = "UILabel"; text = "数量:"; ObjectID = "lOU-wQ-OFw"; */
+"lOU-wQ-OFw.text" = "amount:";
+
+/* Class = "UILabel"; text = "代号为三个大写英文字母"; ObjectID = "lrb-Yd-Ufi"; */
+"lrb-Yd-Ufi.text" = "Please input three capital letters";
+
+/* Class = "UITextField"; placeholder = "请输入发布数量"; ObjectID = "wKV-fV-jUE"; */
+"wKV-fV-jUE.placeholder" = "enter";
