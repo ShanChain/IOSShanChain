@@ -150,10 +150,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         _isSuper { (isSuper) in
             if isSuper == true{
                 self.isJoinChatRoom = true
-                HHTool.dismiss()
+                HHTool.immediatelyDismiss()
             }else{
                 SCNetwork.shareInstance().getWithUrl(COORDINATE_URL, parameters:["latitude":String(SCCacheTool.shareInstance().pt.latitude),"longitude":String(SCCacheTool.shareInstance().pt.longitude)], success: { (result) in
-                    HHTool.dismiss()
+                    HHTool.immediatelyDismiss()
                     let dic = result as! Dictionary<String, Any>
                     let data = dic["data"] as? Dictionary<String, Any>
                     if data != nil && (data?.values.count)! > 0{
@@ -169,7 +169,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                     }
                     
                 }) { (error) in
-                    HHTool.dismiss()
+                    HHTool.immediatelyDismiss()
                     HHTool.showError(error?.localizedDescription)
                 }
             }

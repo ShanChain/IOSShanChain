@@ -3,6 +3,7 @@ platform :ios,'8.0'
 target 'ShanChain' do
     use_frameworks!
     
+    pod 'Bugly'
     pod 'BaiduMapKit', '~> 4.0.0'
     pod 'JMessage', '~> 3.7.0’
     pod 'JPush'

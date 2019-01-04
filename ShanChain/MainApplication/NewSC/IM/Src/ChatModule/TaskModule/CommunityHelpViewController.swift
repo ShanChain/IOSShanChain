@@ -52,14 +52,14 @@ class CommunityHelpViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "社区帮"
+        title = NSLocalizedString("sc_RewardTask", comment: "字符串")
         _snpLayout()
         tableView.estimatedRowHeight = 120
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
-        self.addRightBarButtonItem(withTarget: self, sel: #selector(_myHelp), title: "  我的", tintColor: .black)
+        self.addRightBarButtonItem(withTarget: self, sel: #selector(_myHelp), title: NSLocalizedString("sc_Voucher_My", comment: "字符串"), tintColor: .black)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         headerView.backgroundColor = SC_ThemeBackgroundViewColor
         navigationController?.navigationBar.barTintColor = .white
@@ -70,6 +70,7 @@ class CommunityHelpViewController: SCBaseVC {
             automaticallyAdjustsScrollViewInsets = false
         }
         
+        helpBtn.setTitle(NSLocalizedString("sc_PostTask", comment: "字符串"), for: .normal)
         //        self.showNavigationBarWhiteColor()
     }
     

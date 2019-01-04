@@ -24,20 +24,8 @@
 #import "UncaughtExceptionHandler.h"
 #import "ShanChain-Swift.h"
 
-// 引入 JPush 功能所需头文件
-#import "JPUSHService.h"
-// iOS10 注册 APNs 所需头文件
-#ifdef NSFoundationVersionNumber_iOS_9_x_Max
-#import <UserNotifications/UserNotifications.h>
-#endif
 
-// 引入 JSHARE 功能所需头文件
-#import "JSHAREService.h"
-
-
-
-
-@interface AppDelegate ()<UNUserNotificationCenterDelegate, UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate,JPUSHRegisterDelegate>
+@interface AppDelegate ()< UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate,JPUSHRegisterDelegate>
 
 @property (nonatomic, strong) BMKMapManager *mapManager;
 @property (nonatomic, copy)   NSString   *versionUpdateUrl;
@@ -94,7 +82,11 @@
     InstallExceptionHandler();
     
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
+    if (@available(iOS 12.0, *)) {
+        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
+    } else {
+        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    }
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         // 可以添加自定义 categories
         // NSSet<UNNotificationCategory *> *categories for iOS10 or later

@@ -11,7 +11,7 @@ import UIKit
 extension UISearchBar {
     static var `default`: UISearchBar {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "搜索"
+        searchBar.placeholder = NSLocalizedString("sc_IM_search", comment: "字符串")
         searchBar.barStyle = .default
         searchBar.backgroundColor = .white
         searchBar.barTintColor = .white

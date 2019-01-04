@@ -21,6 +21,7 @@
 #import "ShanChain-Swift.h"
 #import "JPushUserInfo.h"
 #import "MyWalletViewController.h"
+#import <Bugly/Bugly.h>
 
 @implementation AppDelegate (Config)
 
@@ -90,6 +91,7 @@
     
     [UMessage setLogEnabled:NO];
     
+    [Bugly startWithAppId:QQ_AppId];
     //iOS10必须加下面这段代码。
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate=self;

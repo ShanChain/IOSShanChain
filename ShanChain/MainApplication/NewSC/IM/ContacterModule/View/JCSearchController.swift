@@ -74,7 +74,7 @@ class JCSearchController: UISearchController {
         searchBar.barTintColor = .white
         searchBar.delegate = self
         searchBar.autocapitalizationType = .none
-        searchBar.placeholder = "搜索"
+        searchBar.placeholder = NSLocalizedString("sc_IM_search", comment: "字符串")
         searchBar.layer.borderColor = UIColor.white.cgColor
         searchBar.layer.borderWidth = 1
         searchBar.layer.masksToBounds = true

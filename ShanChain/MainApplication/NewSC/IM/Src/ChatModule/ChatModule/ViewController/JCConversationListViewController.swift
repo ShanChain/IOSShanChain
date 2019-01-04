@@ -19,7 +19,7 @@ class JCConversationListViewController: SCBaseVC {
         super.viewDidLoad()
         _init()
       //  showNavigationBarWithNormalColor()
-        title = "消息"
+        title = NSLocalizedString("sc_IM_message", comment: "字符串")
     }
 
     

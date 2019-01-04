@@ -43,7 +43,8 @@
 "sc_H" = "帮";
 "sc_L" = "邀";
 "sc_P" = "玩";
-
+"sc_IM_message" = "消息";
+"sc_IM_search" = "搜索";
 
 /*
  任务
@@ -161,6 +162,7 @@
 "sc_login_pleaseEnterPhoneNumber" = "请输入手机号";
 "sc_login_Resend" = "重新获取";
 "sc_login_Confirm" = "确定";
+"sc_login_Exitcurrentaccount" = "是否退出当前账号";
 
 
 "sc_login_others" = "第三方登录";

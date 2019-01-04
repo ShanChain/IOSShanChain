@@ -42,6 +42,8 @@
 "sc_H" = "H";
 "sc_L" = "I";
 "sc_P" = "P";
+"sc_IM_message" = "Message";
+"sc_IM_search" = "search for";
 
 
 /*
@@ -89,7 +91,7 @@
 
 "sc_Enter_" = "enter...";
 "sc_rewardFid" = "￥";
-"sc_choose" = "choose";
+"sc_choose" = "      choose";
 
 // 提示语
 "sc_IncorrectFormat" = "Incorrect format";
@@ -164,6 +166,7 @@
 "sc_login_pleaseEnterPhoneNumber" = "please enter phone number";
 "sc_login_Resend" = "Resend";
 "sc_login_Confirm" = "Confirm";
+"sc_login_Exitcurrentaccount" = "Do you want to log out？";
 
 "sc_login_others" = "others";
 "sc_login_SMSLogIn" = "SMS log in";

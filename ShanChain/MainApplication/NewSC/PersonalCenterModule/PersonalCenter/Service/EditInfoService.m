@@ -88,7 +88,7 @@
                 [HHTool immediatelyDismiss];
                 [[SCAppManager shareInstance]logout];
             } else{
-                [HHTool dismiss];
+                [HHTool immediatelyDismiss];
                 [HHTool showError:error.localizedDescription];
             }
         }
