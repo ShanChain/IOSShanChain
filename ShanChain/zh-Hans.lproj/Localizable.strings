@@ -191,6 +191,7 @@
  */
 
 "sc_Voucher_MarJar" = "马甲劵";
+"sc_Voucher_MyVoucher" = "我的马甲劵";
 "sc_Voucher_view" = "查看";
 "sc_Voucher_Get" = "领取";
 "sc_Voucher_Got" = "已领取";

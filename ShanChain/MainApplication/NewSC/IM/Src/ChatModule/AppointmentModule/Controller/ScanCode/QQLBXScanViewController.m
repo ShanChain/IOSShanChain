@@ -12,6 +12,7 @@
 #import "LBXPermissionSetting.h"
 #import "Global.h"
 #import "StyleDIY.h"
+#import "ShanChain-Swift.h"
 
 @interface QQLBXScanViewController ()
 @property (nonatomic, strong) LBXScanVideoZoomView *zoomView;
@@ -203,9 +204,9 @@
     
     self.scanImage = scanResult.imgScanned;
     
-    if (!strResult) {
+    if (strResult) {
         
-        [self popAlertMsgWithScanResult:nil];
+        [self popAlertMsgWithScanResult:strResult];
         
         return;
     }
@@ -224,11 +225,18 @@
         strResult = @"识别失败";
     }
     
-    __weak __typeof(self) weakSelf = self;
-    [LBXAlertAction showAlertWithTitle:@"扫码内容" msg:strResult buttonsStatement:@[@"知道了"] chooseBlock:^(NSInteger buttonIdx) {
-        
-        [weakSelf reStartDevice];
-    }];
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"MyCardReceiveDetailsViewController" bundle:nil];
+    MyCardReceiveDetailsViewController *detailsVC = [storyboard instantiateViewControllerWithIdentifier:@"ReceiveCardID"];
+    detailsVC.orderId = strResult;
+    detailsVC.isUseCouponsing = YES;
+    [self.navigationController pushViewController:detailsVC animated:YES];
+ 
+
+    
+//    __weak __typeof(self) weakSelf = self;
+//    [LBXAlertAction showAlertWithTitle:@"扫码内容" msg:strResult buttonsStatement:@[@"知道了"] chooseBlock:^(NSInteger buttonIdx) {
+//        [weakSelf reStartDevice];
+//    }];
 }
 
 

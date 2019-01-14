@@ -27,6 +27,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     var maskView:UIView! // 蒙版
     var takeImage:UIImage? // 分享的区域截图
     var shareTakeUrl:String? // 分享的区域截图的URL
+    var isActivitying:Bool = false // 活动是否正在进行中
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
     public required init(conversation: JMSGConversation, isJoinChat:Bool, navTitle:String) {
@@ -1643,8 +1644,12 @@ extension HHChatRoomViewController: SuspendBallDelegte{
     func suspendBall(_ subBall: UIButton!, didSelectTag tag: Int) {
         self.suspendBallBtn?.showFunction =  !(self.suspendBallBtn?.showFunction)!
         if tag == 1 {
-            YYHud.showTip("新玩法开发中，尽请期待！")
-           // self.navigationController?.popViewController(animated: true)
+            if SCCacheTool.shareInstance().isActivitying == false{
+                YYHud.showTip("新玩法开发中，尽请期待！")
+            }else{
+                self.navigationController?.popViewController(animated: true)
+            }
+          
             // 发布任务
 //            UIView .animate(withDuration: 0.2) {
 //                let pubTaskView:PublishTaskView? =

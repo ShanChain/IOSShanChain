@@ -14,6 +14,7 @@
 
 + (void)verificationCouponNameFid:(UITextField*)textFid; //验证卡劵名
 + (void)verificationCardFid:(UITextField*)textFid; // 验证代号
++ (void)dynamicCalculationMortgageFreeNumberFid:(UITextField*)numberFid PriceFid:(UITextField*)priceFid callBack:(void (^)(CGFloat mortgageFree))callBack;
 + (void)verificationIsCanCreate:(UIViewController*)vc;
 
 @end

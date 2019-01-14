@@ -67,6 +67,7 @@
 @property (nonatomic,strong)  NewYearActiveRushModel  *activeInRush;
 
 @property (nonatomic,assign)    BOOL    isActiveStar; //活动是否开始
+
 @property (nonatomic,strong)    NewYearActivitiesView    *activeView;
 
 
@@ -140,6 +141,7 @@
         return;
     }
     
+    [SCCacheTool shareInstance].isActivitying = YES;
     NSInteger  days = [activeStartDate daysFrom:[MCDate date]];
     if (days == 0) {
         NSInteger  second = [activeStartDate secondsFrom:[MCDate date]];
@@ -205,7 +207,7 @@
         int hours = (int)((timeInterval-days*24*3600)/3600);
         int minute = (int)(timeInterval-days*24*3600-hours*3600)/60;
         NSInteger second = timeInterval - days*24*3600 - hours*3600 - minute*60;
-        self.laveDayLabel.text = [NSString stringWithFormat:@"%02d : %02ld : %02ld",  (long)hours + days * 24, (long)minute, (long)second];
+        self.laveDayLabel.text = [NSString stringWithFormat:@"%02ld : %02ld : %02ld",  (long)hours + days * 24, (long)minute, (long)second];
     }
 }
 
@@ -622,6 +624,7 @@
     self.activeRuleBtn.hidden = YES;
     self.activeView.hidden = YES;
     self.topView.hidden = YES;
+    [SCCacheTool shareInstance].isActivitying = NO;
 }
 
 -(NewYearActivitiesView *)activeView{

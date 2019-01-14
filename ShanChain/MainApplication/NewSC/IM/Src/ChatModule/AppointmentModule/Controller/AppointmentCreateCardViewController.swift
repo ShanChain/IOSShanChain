@@ -26,10 +26,13 @@ class AppointmentCreateCardViewController: UITableViewController {
     
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var mortgageLb: UILabel!
     
+    
+    @IBOutlet weak var mortgageSEAT_Lb: UILabel!
     @IBOutlet weak var createBtn: UIButton!
     
-    private var timestamp = Date().timeStamp
+    @objc open var timestamp:String = ""
     open var photoUrl:String? //     logohash
     
     // 点击示例
@@ -37,26 +40,36 @@ class AppointmentCreateCardViewController: UITableViewController {
         
     }
     
+    @IBAction func questionMarkAction(_ sender: UIButton) {
+        
+    }
     // 充值
     @IBAction func addMoneyAction(_ sender: UIButton) {
         let walletVC =  MyWalletViewController()
         navigationController?.pushViewController(walletVC, animated: true)
     }
     
-    
     func getParameter() -> Dictionary<String, Any>{
-        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":descriptionTextView.text!,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":cardFid.text!,"roomId":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser()]
+        // "subuserId":SCCacheTool.shareInstance().getCurrentCharacterId()
+        // "userId":SCCacheTool.shareInstance().getCurrentUser()
+        
+        var des:String = ""
+        if descriptionTextView.text == "" {
+            des = "empty"
+        }else{
+            des = descriptionTextView.text
+        }
+        
+        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":des,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":cardFid.text!,"roomid":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser()]
+        
     }
     
     @IBAction func createAction(_ sender: UIButton) {
-        if _verification() {
-            SCNetwork.shareInstance().v1_post(withUrl: CreateCoupons_URL, params:getParameter(), showLoading: true) { (baseModel, error) in
-                if error == nil{
-                   HHTool.showSucess("创建成功")
-                  self.navigationController?.popViewController(animated: true)
-                }
+        SCNetwork.shareInstance().v1_post(withUrl: CreateCoupons_URL, params:getParameter(), showLoading: true) { (baseModel, error) in
+            if error == nil{
+                HHTool.showSucess("创建成功")
+                self.navigationController?.popViewController(animated: true)
             }
-        
         }
     }
     
@@ -65,51 +78,17 @@ class AppointmentCreateCardViewController: UITableViewController {
       
     }
     
-    
     @IBAction func selectTimeAtion(_ sender: UITapGestureRecognizer) {
-        let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddDays(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMDHm) { [weak self] (date) in
-            self?.failureTimeFid.text = date.getString(format: "YYYY-MM-dd HH:mm")
+        let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddDays(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMD) { [weak self] (date) in
+            self?.failureTimeFid.text = date.getString(format: "YYYY-MM-dd")
             self?.view.endEditing(true)
-            self?.timestamp = String(Int(date.timeIntervalSince1970))
+            if self?.timestamp == ""{
+                CouponVerificationService.verificationIsCanCreate(self)
+            }
+            self?.timestamp = String(Int(date.timeIntervalSince1970 * 1000))
+           
         }
         datePicker.show()
-    }
-    
-    func _verification() -> Bool {
-        if (self.photoUrl == nil){
-            HHTool.showError("logo不能为空")
-            return false
-        }
-        if (self.nameFid.text?.isEmpty)!{
-            HHTool.showError("请输入名称")
-            return false
-        }
-        if (self.cardFid.text?.isEmpty)!{
-            HHTool.showError("请输入代号")
-            return false
-        }
-        
-        if (self.priceFid.text?.isEmpty)!{
-            HHTool.showError("请输入单价")
-            return false
-        }
-        
-        if (self.numberFid.text?.isEmpty)!{
-            HHTool.showError("请输入发布数量")
-            return false
-        }
-        
-        if (self.failureTimeFid.text?.isEmpty)!{
-            HHTool.showError("失效时间不能为空")
-            return false
-        }
-        
-        if (self.descriptionTextView.text?.isEmpty)!{
-            HHTool.showError("说明不能为空")
-            return false
-        }
-        
-        return true
     }
     
     override func viewDidLoad() {
@@ -117,15 +96,20 @@ class AppointmentCreateCardViewController: UITableViewController {
         title = NSLocalizedString("sc_Voucher_Creat", comment: "字符串")
         CouponVerificationService.verificationCouponNameFid(nameFid)
         CouponVerificationService.verificationCardFid(cardFid)
-       // CouponVerificationService.verificationIsCanCreate(self)
+        CouponVerificationService.dynamicCalculationMortgageFreeNumberFid(numberFid, priceFid: priceFid) {[weak self] (mortgageFree) in
+            self?.mortgageLb.text = "￥\(String(format: "%.2f", mortgageFree))"
+            self?.mortgageSEAT_Lb.text = "= \(String(format: "%.3f", mortgageFree * 0.1)) SEAT"
+        }
         let headImg = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
         icon._sd_setImage(withURLString: headImg)
         self.photoUrl = headImg
         descriptionTextView.placeholder = NSLocalizedString("sc_Voucher_instructions", comment: "字符串")
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        button.setImage(UIImage(named: "sc_com_icon_back"), for: .normal)
+        button.setImage(UIImage(named: "nav_btn_back_default"), for: .normal)
         button.addTarget(self, action: #selector(_back), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        createBtn.isEnabled = false
+        createBtn.backgroundColor = .lightGray
     }
     func _back(){
         navigationController?.popViewController(animated: true)
@@ -143,7 +127,6 @@ class AppointmentCreateCardViewController: UITableViewController {
     }
     
 }
-
 
 extension AppointmentCreateCardViewController:DUX_UploadUserIconDelegate{
     

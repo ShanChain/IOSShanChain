@@ -78,6 +78,9 @@ MJCodingImplementation;
     return [MCDate dateWithDate:[NSDate date]];
 }
 +(MCDate *)dateWithInterval:(NSTimeInterval)timestamp{
+    if (timestamp > 9999999999) {
+        timestamp = timestamp/1000;
+    }
     return [[MCDate alloc]initWithDate:[NSDate dateWithTimeIntervalSince1970:timestamp] calendar:[NSCalendar currentCalendar]];
 }
 +(MCDate *)dateWithDateComponent:(NSDateComponents *)dateComponent{

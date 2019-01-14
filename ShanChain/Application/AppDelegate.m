@@ -47,7 +47,9 @@
     [self setJMessageSDK:launchOptions];
     
     [self setupUMPushNoticationWithLaunchOptions:launchOptions];
-   
+  
+
+    
    __block UIViewController *rootVc = nil;
    // rootVc = [[SCTabbarController alloc]init];
     
@@ -56,8 +58,8 @@
         if ([[NSUserDefaults standardUserDefaults]objectForKey:kJCCurrentUserName]) {
           
         }
-        BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-          //AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
+      //  BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+        AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
     
     } else {

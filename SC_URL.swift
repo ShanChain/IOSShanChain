@@ -29,6 +29,7 @@ public let  WALLET_CURRENCY_URL  = "/web/api/wallet/seat/currency" // 获取当�
  */
 
 public let  VendorGet_URL = "/wallet/api/coupons/vendor/get" // 创建方获取卡券详情
+public let  CheckVendor_URL = "/wallet/api/coupons/vendor/check" // 判定当前卡券代号是否可用
 public let  CreateCoupons_URL = "/wallet/api/coupons/vendor/create" // 创建卡劵
 public let  CouponsVendorList_URL = "/wallet/api/coupons/vendor/list" // 获取当前用户可领取卡券列表
 public let  CouponsVendorDetails_URL = "/wallet/api/coupons/vendor/Get" // 获取当前卡劵详情
@@ -37,7 +38,18 @@ public let  User_Create_List_URL = "/wallet/api/coupons/vendor/createList" // �
 
 public let  User_Receive_List_URL = "/wallet/api/coupons/client/getList" // 获取用户已领取的子卡券列表
 
+public let  User_Receive_Details = "/wallet/api/coupons/client/Get" // 获取卡券详情
 
+public let  User_UseCoupons_URL = "/wallet/api/coupons/client/useCoupons" // 核销子卡券
+
+public let  User_ClientList_URL = "/wallet/api/coupons/vendor/clientList" // 发券人获取领券人员详情
+
+public let  ReceiveCoupons_URL = "/wallet/api/coupons/client/getCoupons" //领取卡券生成子卡券
+
+
+/*
+ 任务相关
+ */
 public let TASK_ADD_URL = "/v1/task/add" //添加任务
 public let TASKCOMMENT_URL  = "/v1/taskComment/query" //查询任务评论列表
 public let TASKCOMMENT_ADD_URL  = "/v1/taskComment/add" //添加任务评论

@@ -194,6 +194,7 @@
  */
 
 "sc_Voucher_MarJar" = "MarJar Voucher";
+"sc_Voucher_MyVoucher" = "My Voucher";
 "sc_Voucher_view" = "View";
 "sc_Voucher_Get" = "Get";
 "sc_Voucher_Got" = "Got";

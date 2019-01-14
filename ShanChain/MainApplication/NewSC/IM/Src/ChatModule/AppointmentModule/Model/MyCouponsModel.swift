@@ -8,10 +8,24 @@
 
 import UIKit
 
+
+enum CouponsStatus:Int{
+    
+    case create_Wait = 0 // 创建方创建成功  主卡劵
+    case create_Complete  // 创建方已核销
+    case create_Invalid // 创建方已失效
+    
+//    case receive_Un = 10    //领取方未领取
+    case receive_Wait = 10      // 领取方待使用
+    case receive_Complete   // 领取方已使用
+    case receive_Transfer // 转让中
+    case receive_Invalid // 领取方已失效
+}
+
+
 class MyCouponsModel: HandyJSON {
 
     var isNewRecord:Bool = false
-    
     var tokenName:String?
     var name:String?
     
@@ -22,6 +36,7 @@ class MyCouponsModel: HandyJSON {
     var photoUrl:String?
     var price:String?
     var tokenStatus:String?
+    var tokenSymbol:String?
     
     var orderID:String?{
         get{
@@ -42,6 +57,11 @@ class MyCouponsModel: HandyJSON {
         }
     }
     
+    var couponsStatus:CouponsStatus?{
+        get{
+            return CouponsStatus.init(rawValue: Int(tokenStatus!)!)
+        }
+    }
     required init() {}
     
 }

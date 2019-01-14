@@ -22,12 +22,15 @@ class MyCardScanCodeDetailsViewController: SCBaseVC {
     
     @IBOutlet weak var dealTimeLb: UILabel!
     
+    var detailsModel:CouponsDetailsModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "马甲劵详情"
-        codeImageView.image = ScanCodeService.createQR(with: "123232434", size: codeImageView.size)
-        
-       
+        nameLb.text = detailsModel?.tokenSymbol
+        codeImageView.image = ScanCodeService.createQR(with: detailsModel?.subCoupId, size: codeImageView.size)
+         self.icon._sd_setImage(withURLString: self.detailsModel?.photoUrl, placeholderImage:UIImage.loadImage(DefaultAvatar))
+        self.dealTimeLb.text = detailsModel?.deadlineStr
     }
 
     override func didReceiveMemoryWarning() {

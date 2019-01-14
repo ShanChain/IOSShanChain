@@ -33,7 +33,7 @@ class MyCardCouponListViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "我的马甲劵"
+        title = NSLocalizedString("sc_Voucher_MyVoucher", comment: "字符串")
         tableView.estimatedRowHeight = 163
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -163,6 +163,9 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.01
+        }
         return 10
     }
     
@@ -185,7 +188,8 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
             cell.iconImg._sd_setImage(withURLString: entity.photoUrl, placeholderImage: SC_defaultImage)
             cell.nikeNameLb.text = entity.name
             cell.nameLb.text = entity.nikeName
-            let mcDate:MCDate = MCDate.init(interval: entity.deadline!)
+            
+            let mcDate:MCDate = MCDate.init(interval: entity.deadline ?? Date.init().timeIntervalSince1970)
             let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd")
             cell.deadlineLb.text = "有效期至:\(dateStr!)"
             cell.priceLb.text = "￥\(entity.price!)"
@@ -213,18 +217,16 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let entity = dataList[indexPath.section]
         if self.type == .receive {
-            if indexPath.section % 2 == 0{
-                let codeVC = MyCardScanCodeDetailsViewController()
-                pushPage(codeVC, animated: true)
-            }else{
-                let storyboard = UIStoryboard(name: "MyCardReceiveDetailsViewController", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ReceiveCardID") as? MyCardReceiveDetailsViewController
-                pushPage(vc, animated: true)
-            }
+            let storyboard = UIStoryboard(name: "MyCardReceiveDetailsViewController", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ReceiveCardID") as? MyCardReceiveDetailsViewController
+            vc?.status = entity.couponsStatus!
+            vc?.orderId = entity.subCoupId
+            pushPage(vc, animated: true)
             
         }else{
-            let vc = MyCardDetailsViewController()
+            let vc = MyCardDetailsViewController.init(couponsId: entity.couponsId!, tokenSymbol: entity.tokenSymbol!)
             navigationController?.pushViewController(vc, animated: true)
         }
         

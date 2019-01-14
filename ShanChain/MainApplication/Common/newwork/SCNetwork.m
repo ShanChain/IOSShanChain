@@ -213,7 +213,15 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             [HHTool immediatelyDismiss];
         }
         if (!error) {
-            HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
+            HHBaseModel  *baseModel;
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                NSDictionary *dictionary =[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+                baseModel = [HHBaseModel yy_modelWithDictionary:dictionary];
+            }else{
+                baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
+            }
+            
+            
             if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE] || [baseModel.code isEqualToString:SC_WALLET_COMMON_SUC_CODE]) {
                 callBlock(baseModel,nil);
             }else{

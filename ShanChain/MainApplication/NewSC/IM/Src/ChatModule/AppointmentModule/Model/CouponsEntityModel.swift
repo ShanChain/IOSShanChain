@@ -20,8 +20,8 @@ class CouponsEntityModel: HandyJSON {
     var remainAmount:String?
     var price:String?
     var tokenStatus:String?
-    var createTime:String?
-    var deadline:Double?
+    var createTime:Double = NSDate.init().timeIntervalSince1970 * 1000
+    var deadline:Double = NSDate.init().timeIntervalSince1970 * 1000
     var photoUrl:String?
     var tokenSymbol:String?
     var detail:String?
@@ -29,9 +29,37 @@ class CouponsEntityModel: HandyJSON {
     var record:String?
     var roomid:String?
     var usedNum:String?
+    var getTime:String?
     var unusedNum:String?
     var mortgageHash:String?
     var mortgageSeat:String?
     
+    var couponsStatus:CouponsStatus?{
+        get{
+            return CouponsStatus.init(rawValue: Int(tokenStatus!)!)
+        }
+    }
+    
+    // 主卡劵是否已失效
+    var isMainInvalid:Bool?{
+        get{
+            if tokenStatus == "0" {
+                return  false
+            }
+            return  true
+        }
+    }
     required init() {}
+    
+    //  领取方状态
+    var recipientStatusTitle:String{
+        get{
+            if tokenStatus == "10" {
+                return  "已领取"
+            }else if tokenStatus == "11"{
+                return  "已核销"
+            }
+            return "已失效"
+        }
+    }
 }

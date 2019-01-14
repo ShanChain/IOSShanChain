@@ -21,8 +21,9 @@
     vc.libraryType = [Global sharedManager].libraryType;
     vc.scanCodeType = [Global sharedManager].scanCodeType;
     vc.style = [StyleDIY qqStyle];
+    vc.isNeedScanImage = NO;
     //镜头拉远拉近功能
-    vc.isVideoZoom = YES;
+//    vc.isVideoZoom = YES;
     [pushVC pushPage:vc Animated:YES];
 }
 

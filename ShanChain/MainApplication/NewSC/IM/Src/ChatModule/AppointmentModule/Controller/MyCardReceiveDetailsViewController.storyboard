@@ -111,8 +111,16 @@
                                                         <action selector="applyAction:" destination="jhl-Ia-1da" eventType="touchUpInside" id="5uq-7N-IM9"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余3张" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wod-qU-Exq">
+                                                    <rect key="frame" x="162" y="72" width="51.5" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="wod-qU-Exq" firstAttribute="centerX" secondItem="i7z-CO-jIx" secondAttribute="centerX" id="PX6-16-Rtr"/>
+                                                <constraint firstItem="wod-qU-Exq" firstAttribute="top" secondItem="mPc-oh-Wwl" secondAttribute="bottom" constant="5" id="R8h-aW-lb0"/>
                                                 <constraint firstItem="mPc-oh-Wwl" firstAttribute="centerY" secondItem="i7z-CO-jIx" secondAttribute="centerY" id="pVZ-Oi-4gy"/>
                                                 <constraint firstItem="mPc-oh-Wwl" firstAttribute="centerX" secondItem="i7z-CO-jIx" secondAttribute="centerX" id="uis-B1-OyD"/>
                                             </constraints>
@@ -168,7 +176,9 @@
                         <outlet property="dealTimeLb" destination="dZd-jt-xTZ" id="bma-1O-k19"/>
                         <outlet property="icon" destination="0Fp-Rm-juR" id="eiB-9A-lLW"/>
                         <outlet property="priceLb" destination="5dc-w4-dor" id="GN3-ge-XDy"/>
+                        <outlet property="remainderLb" destination="wod-qU-Exq" id="lu2-mR-mfe"/>
                         <outlet property="ruleLb" destination="cEr-0I-D2n" id="uyO-sz-1bw"/>
+                        <outlet property="statusBtn" destination="mPc-oh-Wwl" id="iuo-uz-Ipj"/>
                         <outlet property="titleLb" destination="JT7-0F-NsM" id="dUI-Jw-Icm"/>
                         <outlet property="userNameLb" destination="Qx1-sI-naB" id="OLb-Qc-tib"/>
                     </connections>

@@ -178,12 +178,12 @@
 #pragma  - mark 只能为大写
 - (BOOL)onlyInputACapital{
     
-       NSString *regex =@"[A-Z]*";
+      NSString *regex =@"[A-Z]*";
     
-       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     
-       BOOL inputString = [predicate evaluateWithObject:self];
-       return inputString;
+      BOOL inputString = [predicate evaluateWithObject:self];
+      return inputString;
     
 }
 
@@ -191,13 +191,13 @@
 
 - (BOOL)InputCapitalAndLowercaseLetter:(NSString*)string{
     
-       NSString *regex =@"[a-zA-Z]*";
+      NSString *regex =@"[a-zA-Z]*";
     
-       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     
-       BOOL  inputString = [predicate evaluateWithObject:string];
+      BOOL  inputString = [predicate evaluateWithObject:string];
     
-       return inputString;
+      return inputString;
     
 }
 

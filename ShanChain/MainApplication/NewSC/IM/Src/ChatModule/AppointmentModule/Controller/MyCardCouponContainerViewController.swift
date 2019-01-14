@@ -31,11 +31,10 @@ class MyCardCouponContainerViewController: SCBaseVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "我的马甲劵"
+        title = NSLocalizedString("sc_Voucher_MyVoucher", comment: "字符串")
         view.backgroundColor = SC_ThemeBackgroundViewColor
         automaticallyAdjustsScrollViewInsets = false
         view.addSubview(pageView)
-        navigationController?.navigationBar.barTintColor = kNavBlueColor
         pageView.didSelectIndexBlock = {(_, index) in
             print("pageView.didSelectIndexBlock", index)
         }
@@ -50,7 +49,7 @@ class MyCardCouponContainerViewController: SCBaseVC {
     }
     
     private lazy var titles:[String] = {
-        return [NSLocalizedString("sc_MyHelped", comment: "字符串"),"我创建的"]
+        return [NSLocalizedString("sc_Voucher_Igot", comment: "字符串"),NSLocalizedString("sc_Voucher_Icreated", comment: "字符串")]
     }()
     
     private lazy var layout: LTLayout = {

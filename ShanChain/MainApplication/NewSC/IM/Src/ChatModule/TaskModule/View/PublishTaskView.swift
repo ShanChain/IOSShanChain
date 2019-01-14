@@ -46,6 +46,7 @@ class PublishTaskView: UIView {
     convenience init(taskModel:TaskAddModel?, frame: CGRect) {
         self.init(frame: frame)
         self.taskModel = taskModel
+      
     }
     
     override init(frame: CGRect ) {
@@ -269,3 +270,7 @@ extension PublishTaskView:UITextViewDelegate{
     }
     
 }
+
+
+
+

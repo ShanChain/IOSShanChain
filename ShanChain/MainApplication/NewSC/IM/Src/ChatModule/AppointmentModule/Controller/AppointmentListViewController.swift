@@ -24,6 +24,7 @@ class AppointmentListViewController: SCBaseVC {
     let size:String = "10"
     var dataList:[CouponsEntityModel] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("sc_Voucher_MarJar", comment: "字符串")
@@ -47,9 +48,8 @@ class AppointmentListViewController: SCBaseVC {
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title:NSLocalizedString("sc_Voucher_My", comment: "字符串"), tintColor: .black)
         view.backgroundColor = SC_ThemeBackgroundViewColor
-        headView.backgroundColor = SC_ThemeBackgroundViewColor
-        navigationController?.navigationBar.barTintColor = SC_ThemeMainColor
-        
+       // headView.backgroundColor = SC_ThemeBackgroundViewColor
+       
         reftreshData()
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
@@ -171,6 +171,9 @@ extension AppointmentListViewController:UITableViewDataSource,UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.01
+        }
         return 10
     }
     
@@ -193,7 +196,7 @@ extension AppointmentListViewController:UITableViewDataSource,UITableViewDelegat
         cell.iconImg._sd_setImage(withURLString: entity.photoUrl, placeholderImage: SC_defaultImage)
         cell.nikeNameLb.text = entity.name
         cell.nameLb.text = entity.tokenSymbol
-        let mcDate:MCDate = MCDate.init(interval: entity.deadline!)
+        let mcDate:MCDate = MCDate.init(interval: entity.deadline/1000)
         let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd")
         cell.deadlineLb.text = "有效期至:\(dateStr!)"
         cell.priceLb.text = "￥\(entity.price!)"
@@ -218,22 +221,30 @@ extension AppointmentListViewController:UITableViewDataSource,UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        view.backgroundColor = SC_ThemeBackgroundViewColor
+        view.backgroundColor = UIColor.clear
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.backgroundColor = SC_ThemeBackgroundViewColor
+        view.backgroundColor = UIColor.clear
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let detailsVC = MyCardReceiveDetailsViewController()
-        pushPage(detailsVC, animated: true)
-        
         let entity = dataList[indexPath.section]
-        SCNetwork.shareInstance().hh_Get(withUrl: CouponsVendorDetails_URL, parameters: ["couponsId":Int(entity.couponsId!)], showLoading: true) { (baseModel, error) in
+        if entity.userId == SCCacheTool.shareInstance().getCurrentUser(){
+            // 我是创建方
+            let myCardDetailsVC = MyCardDetailsViewController.init(couponsId: entity.couponsId!, tokenSymbol: entity.tokenSymbol!)
+            pushPage(myCardDetailsVC, animated: true)
             
+        }else{
+            //别人创建的
+            let storyboard = UIStoryboard(name: "MyCardReceiveDetailsViewController", bundle: nil)
+            let detailsVC = storyboard.instantiateViewController(withIdentifier: "ReceiveCardID") as? MyCardReceiveDetailsViewController
+            detailsVC?.status = entity.couponsStatus!
+            detailsVC?.orderId = entity.couponsId
+            pushPage(detailsVC, animated: true)
         }
+        
         
     }
     
