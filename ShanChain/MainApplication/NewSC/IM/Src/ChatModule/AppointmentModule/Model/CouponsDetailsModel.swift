@@ -31,6 +31,7 @@ class CouponsDetailsModel: HandyJSON {
     var nikeName:String?
     var remainAmount:String?
     var deadline:Double = NSDate.init().timeIntervalSince1970 * 1000
+    var useTime:Double = NSDate.init().timeIntervalSince1970 * 1000 // 使用(核销)时间
     
     
     var couponsStatus:CouponsStatus?{

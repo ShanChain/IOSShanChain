@@ -346,6 +346,9 @@
 		22581B5121DF5F4200F1D1B1 /* OpinionFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22581B3F21DF5F4200F1D1B1 /* OpinionFeedbackViewController.m */; };
 		22581B5221DF5F4200F1D1B1 /* EditInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22581B4121DF5F4200F1D1B1 /* EditInfoService.m */; };
 		22581B5721E834E900F1D1B1 /* CouponsDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22581B5621E834E900F1D1B1 /* CouponsDetailsModel.swift */; };
+		22581B5921ED846600F1D1B1 /* CreateCouponExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22581B5821ED846600F1D1B1 /* CreateCouponExampleView.swift */; };
+		22581B5B21ED847500F1D1B1 /* CreateCouponExampleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22581B5A21ED847500F1D1B1 /* CreateCouponExampleView.xib */; };
+		22581B5D21EDD85B00F1D1B1 /* WalletPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22581B5C21EDD85B00F1D1B1 /* WalletPage.swift */; };
 		225F83F521AE931D0082C0E1 /* HHNumberForPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F83F321AE931D0082C0E1 /* HHNumberForPeopleViewController.swift */; };
 		225F83F621AE931D0082C0E1 /* HHNumberForPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225F83F421AE931D0082C0E1 /* HHNumberForPeopleViewController.xib */; };
 		225F83FB21AE94120082C0E1 /* HHNumberPeopleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F83F921AE94120082C0E1 /* HHNumberPeopleListCell.swift */; };
@@ -1065,6 +1068,9 @@
 		22581B4121DF5F4200F1D1B1 /* EditInfoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoService.m; sourceTree = "<group>"; };
 		22581B4221DF5F4200F1D1B1 /* EditInfoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInfoService.h; sourceTree = "<group>"; };
 		22581B5621E834E900F1D1B1 /* CouponsDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsDetailsModel.swift; sourceTree = "<group>"; };
+		22581B5821ED846600F1D1B1 /* CreateCouponExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCouponExampleView.swift; sourceTree = "<group>"; };
+		22581B5A21ED847500F1D1B1 /* CreateCouponExampleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCouponExampleView.xib; sourceTree = "<group>"; };
+		22581B5C21EDD85B00F1D1B1 /* WalletPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPage.swift; sourceTree = "<group>"; };
 		225F83F321AE931D0082C0E1 /* HHNumberForPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHNumberForPeopleViewController.swift; sourceTree = "<group>"; };
 		225F83F421AE931D0082C0E1 /* HHNumberForPeopleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHNumberForPeopleViewController.xib; sourceTree = "<group>"; };
 		225F83F921AE94120082C0E1 /* HHNumberPeopleListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHNumberPeopleListCell.swift; sourceTree = "<group>"; };
@@ -1756,6 +1762,7 @@
 				2227011721C883BD00FCD269 /* CouponsEntityModel.swift */,
 				2227011B21C8E97400FCD269 /* MyCouponsModel.swift */,
 				22581B5621E834E900F1D1B1 /* CouponsDetailsModel.swift */,
+				22581B5C21EDD85B00F1D1B1 /* WalletPage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1767,6 +1774,8 @@
 				2231087C21DF3231006D458F /* AppointmentListCell.xib */,
 				22A2EB8E21BE1BB100737265 /* AppointmentCardDetialsCell.swift */,
 				22A2EB8F21BE1BB100737265 /* AppointmentCardDetialsCell.xib */,
+				22581B5821ED846600F1D1B1 /* CreateCouponExampleView.swift */,
+				22581B5A21ED847500F1D1B1 /* CreateCouponExampleView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3808,6 +3817,7 @@
 				223F9A722182AEC10031DB95 /* 2.jpg in Resources */,
 				22581B4421DF5F4200F1D1B1 /* RealNameVeifiedViewController.xib in Resources */,
 				22A2EB9121BE1BB100737265 /* AppointmentCardDetialsCell.xib in Resources */,
+				22581B5B21ED847500F1D1B1 /* CreateCouponExampleView.xib in Resources */,
 				221BEF0921D4A8A9007C76BF /* HelpCenterCell.xib in Resources */,
 				223F9969217F12040031DB95 /* yh_image_picked@2x.png in Resources */,
 				89E031531FCECBA70089240B /* GWLPhotoSelector.bundle in Resources */,
@@ -4204,6 +4214,7 @@
 				223F9971217F12040031DB95 /* JCRemind.swift in Sources */,
 				22A2EB9321BE67CF00737265 /* AppointmentMyReceiveView.swift in Sources */,
 				223F99D7217F12040031DB95 /* JCNetworkManager.swift in Sources */,
+				22581B5D21EDD85B00F1D1B1 /* WalletPage.swift in Sources */,
 				223F9A41217F12B80031DB95 /* JCSearchFriendViewController.swift in Sources */,
 				223F99FD217F12040031DB95 /* SAIInputItem.swift in Sources */,
 				223F99F6217F12040031DB95 /* SAIInputBar+Resource.swift in Sources */,
@@ -4390,6 +4401,7 @@
 				4852A1421FCE9F0400CDD7BE /* SCPhoneRegisterController.m in Sources */,
 				223F99B2217F12040031DB95 /* JCEmoticonPreviewer.swift in Sources */,
 				223F998E217F12040031DB95 /* JCMessageTextContentView.swift in Sources */,
+				22581B5921ED846600F1D1B1 /* CreateCouponExampleView.swift in Sources */,
 				485E66621F42873F00B158BF /* MJRefreshStateHeader.m in Sources */,
 				33403F841F16156900666634 /* SCAES.m in Sources */,
 				221B3BD721C74DE60061BB3E /* UIWindow+LBXHierarchy.m in Sources */,
@@ -4685,8 +4697,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
@@ -4734,8 +4746,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "defebafb-82fe-4a17-aa94-9a014af9f4d6";
-				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
+				PROVISIONING_PROFILE = "00a79065-97be-43ac-8860-65ff90b8aa41";
+				PROVISIONING_PROFILE_SPECIFIER = adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4754,8 +4766,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
@@ -4803,8 +4815,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "defebafb-82fe-4a17-aa94-9a014af9f4d6";
-				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
+				PROVISIONING_PROFILE = "00a79065-97be-43ac-8860-65ff90b8aa41";
+				PROVISIONING_PROFILE_SPECIFIER = adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

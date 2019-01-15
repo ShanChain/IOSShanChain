@@ -20,7 +20,7 @@
 #define ACCEPT_TYPE_IMAGE @[@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json"]
 
 static const BOOL IS_USE_HTTPS = YES;
-static double  const  TIME_OUT_INTERVAL = 15.0;
+static double  const  TIME_OUT_INTERVAL = 25.0;
 
 typedef void (^NetworkStatusBlock)(AFNetworkReachabilityStatus status);
 

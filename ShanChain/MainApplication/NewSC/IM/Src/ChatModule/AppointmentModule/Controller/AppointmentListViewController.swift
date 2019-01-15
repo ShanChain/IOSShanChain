@@ -23,7 +23,7 @@ class AppointmentListViewController: SCBaseVC {
     var page:Int = 1
     let size:String = "10"
     var dataList:[CouponsEntityModel] = []
-    
+    fileprivate var controllerPage:WalletPage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +86,12 @@ extension AppointmentListViewController{
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 print("上拉加载更多数据")
                 self?._requstData(true, { [weak self] in
-                    self?.tableView.mj_footer.endRefreshing()
+                    
+                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                        self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    }else{
+                        self?.tableView.mj_footer.endRefreshing()
+                    }
                 })
                 
             })
@@ -96,7 +101,12 @@ extension AppointmentListViewController{
                 print("下拉刷新 --- 1")
                 self?.page = 1
                 self?._requstData(false, { [weak self] in
-                    self?.tableView.mj_header.endRefreshing()
+                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                        self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    }else{
+                         self?.tableView.mj_header.endRefreshing()
+                    }
+                   
                 });
             })
         }
@@ -112,8 +122,10 @@ extension AppointmentListViewController{
             }
             
             if let data = baseModel?.data as? Dictionary<String,Any>{
+                self.controllerPage =  WalletPage.deserialize(from: data)
                 if let arr = data["list"] as? NSArray{
                     if let datas:[CouponsEntityModel] = [CouponsEntityModel].deserialize(from: arr) as? [CouponsEntityModel]{
+                        
                         if (datas.count > 0){
                             if(isLoad){
                                 for content in datas{
@@ -128,13 +140,13 @@ extension AppointmentListViewController{
                             if isLoad == false{
                                 self.dataList.removeAll()
                             }
-                            self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                          self.tableView.mj_footer.endRefreshingWithNoMoreData()
                         }
                         
                     }
                 }
             }
-            
+
             if self.dataList.count == 0{
                 self.noDataTipShow(self.tableView, content: NSLocalizedString("sc_Nodata", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
                 self.tableView.isScrollEnabled = false
@@ -151,7 +163,7 @@ extension AppointmentListViewController{
     
     fileprivate func _requstPrameter(_ isLoad:Bool) -> Dictionary<String, Any> {
         let pageStr = isLoad ? page+1:page
-        return  ["roomid":SCCacheTool.shareInstance().chatRoomId,"pageSize":10,"pageNo":pageStr]
+        return  ["roomId":SCCacheTool.shareInstance().chatRoomId,"pageSize":size,"pageNo":pageStr,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId()]
     }
    
     
@@ -200,15 +212,17 @@ extension AppointmentListViewController:UITableViewDataSource,UITableViewDelegat
         let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd")
         cell.deadlineLb.text = "有效期至:\(dateStr!)"
         cell.priceLb.text = "￥\(entity.price!)"
-        
+        cell.statusLb.text = entity.listStatusTitle
+        cell.receiveNumberLb.text = entity.remainAmountTitle
         
         let section:Int = indexPath.section
-        if section % 2 == 0 {
+        if section % 2 == 1 {
             cell.bgIcon.image =  UIImage.init(name: "sc_com_icon_CardPackage_1")
             cell.nameLb.textColor = SC_EmphasisColor
             cell.nikeNameLb.textColor = SC_EmphasisColor
             cell.deadlineLb.textColor = SC_EmphasisColor
             cell.priceLb.textColor = SC_EmphasisColor
+            cell.receiveNumberLb.textColor = SC_EmphasisColor
             cell.statusLb.textColor = .white
         }else{
             cell.bgIcon.image =  UIImage.init(name: "sc_com_icon_CardPackage")
@@ -216,6 +230,7 @@ extension AppointmentListViewController:UITableViewDataSource,UITableViewDelegat
             cell.nikeNameLb.textColor = .white
             cell.deadlineLb.textColor = .white
             cell.priceLb.textColor = .white
+            cell.receiveNumberLb.textColor = .white
             cell.statusLb.textColor = SC_ThemeMainColor
         }
     }

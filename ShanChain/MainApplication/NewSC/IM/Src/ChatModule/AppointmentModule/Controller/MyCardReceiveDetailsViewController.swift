@@ -35,6 +35,7 @@ class MyCardReceiveDetailsViewController: UITableViewController {
     @IBOutlet weak var statusBtn: UIButton!
     
     
+    @IBOutlet weak var ruleTitleLb: UILabel!
     @IBOutlet weak var remainderLb: UILabel!
     var status:CouponsStatus = .receive_Wait
     @objc open  var orderId:String?
@@ -47,10 +48,16 @@ class MyCardReceiveDetailsViewController: UITableViewController {
             
         case .create_Wait:
             let index = self.detailsModel?.tokenSymbol!.index((self.detailsModel?.tokenSymbol!.startIndex)!, offsetBy: 3)
-            SCNetwork.shareInstance().hh_Get(withUrl: ReceiveCoupons_URL, parameters: ["quantities":"1","subuserId":SCCacheTool.shareInstance().getCurrentUser(),"tokenSymbol":self.detailsModel?.tokenSymbol?.substring(to: index!),"userId":self.detailsModel?.userId], showLoading: true) { (baseModel, error) in
-                if error == nil{
-                    HHTool.showSucess("领取成功")
-                    self.navigationController?.popViewController(animated: true)
+            SCNetwork.shareInstance().hh_Get(withUrl: ReceiveCoupons_URL, parameters: ["quantities":"1","subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":self.detailsModel?.tokenSymbol?.substring(to: index!),"userId":SCCacheTool.shareInstance().getCurrentUser()], showLoading: true) { (baseModel, error) in
+                if error != nil{
+                    return
+                }
+                if let data = baseModel?.data as? Dictionary<String,Any>{
+                    if let subCoupId = data["subCoupId"] as? String{
+                        self.status = .receive_Wait
+                        self.orderId = subCoupId
+                        self._requstDetaisData(isShow: true)
+                    }
                 }
             }
             break
@@ -58,7 +65,10 @@ class MyCardReceiveDetailsViewController: UITableViewController {
             if isUseCouponsing == true{
                 // 核销马甲劵
                 SCNetwork.shareInstance().hh_Get(withUrl: User_UseCoupons_URL, parameters: ["subCoupId":self.detailsModel?.subCoupId], showLoading: true) { (baseModel, error) in
-                    
+                    if error != nil{
+                        return
+                    }
+                    self._requstDetaisData(isShow: true)
                 }
             }else{
                 let  scanCodeVC = MyCardScanCodeDetailsViewController()
@@ -73,8 +83,22 @@ class MyCardReceiveDetailsViewController: UITableViewController {
     }
     
     
+    func _isHiddenSubView(_ isHidden:Bool){
+        icon.isHidden = isHidden
+        userNameLb.isHidden = isHidden
+        priceLb.isHidden = isHidden
+        titleLb.isHidden = isHidden
+        cardLb.isHidden = isHidden
+        ruleLb.isHidden = isHidden
+        statusBtn.isHidden = isHidden
+        remainderLb.isHidden = isHidden
+        ruleTitleLb.isHidden = isHidden
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        _isHiddenSubView(true)
         _requstDetaisData(isShow: true)
         self.icon.preventImageViewExtrudeDeformation()
         title = NSLocalizedString("sc_Voucher_Voucherinformation", comment: "字符串")
@@ -85,6 +109,8 @@ class MyCardReceiveDetailsViewController: UITableViewController {
         
     }
 
+ 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,6 +129,8 @@ class MyCardReceiveDetailsViewController: UITableViewController {
         self.remainderLb.text = "剩余\(detailsModel?.remainAmount ?? "0")张"
         if  detailsModel?.remainAmount == nil {
             self.remainderLb.isHidden = true
+        }else{
+            self.remainderLb.isHidden = false
         }
         
         var statusTitle = "立刻领取"
@@ -116,11 +144,23 @@ class MyCardReceiveDetailsViewController: UITableViewController {
             
             break
         case .receive_Complete:
-            statusTitle = "已使用"
+            
+            let mcDate:MCDate = MCDate.init(interval: ((detailsModel?.useTime)! / 1000))
+            let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd")
+            if isUseCouponsing == true{
+                statusTitle = "已核销 \(dateStr!)"
+            }else{
+                statusTitle = "已使用 \(dateStr!)"
+            }
+            statusBtn.backgroundColor = .gray
             break
         case .receive_Invalid:
-            NSDate.chatingTime("1")
-            statusTitle = "已失效\(MCDate.init(interval: TimeInterval(Int((detailsModel?.getTime!)!)!)).formattedDate(withFormat: "YYYY-MM-dd"))"
+            if isUseCouponsing == true{
+                statusTitle = "该劵已失效"
+            }else{
+                statusTitle = "已失效\(MCDate.init(interval: TimeInterval(Int((detailsModel?.getTime!)!)!)).formattedDate(withFormat: "YYYY-MM-dd"))"
+            }
+             statusBtn.backgroundColor = .gray
             break
         default: break
             
@@ -150,11 +190,15 @@ extension MyCardReceiveDetailsViewController{
         SCNetwork.shareInstance().hh_Get(withUrl: url, parameters: parameter, showLoading: isShow) { (baseModel, error) in
             if  let dic = baseModel?.data as? Dictionary<String,Any>{
                 self.detailsModel = CouponsDetailsModel.deserialize(from: dic)
+                if self.isUseCouponsing == true{
+                    self.status = (self.detailsModel?.couponsStatus)!
+                }
                 SCNetwork.shareInstance().v1_post(withUrl: "/v1/character/get/current", params: ["userId":self.detailsModel?.userId], showLoading: isShow, call: { (userModel, error) in
                     if let userDic = userModel?.data as? [String:Any]{
                         if let characterInfo = userDic["characterInfo"] as? [String:Any]{
                             let nikeName:String = characterInfo["name"] as! String
                             self.detailsModel?.nikeName = nikeName
+                            self._isHiddenSubView(false)
                             self._configurationUI()
                         }
                         

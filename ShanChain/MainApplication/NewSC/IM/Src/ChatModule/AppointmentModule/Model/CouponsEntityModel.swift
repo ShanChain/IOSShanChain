@@ -33,12 +33,25 @@ class CouponsEntityModel: HandyJSON {
     var unusedNum:String?
     var mortgageHash:String?
     var mortgageSeat:String?
+    var getStatus:Int?
     
     var couponsStatus:CouponsStatus?{
         get{
             return CouponsStatus.init(rawValue: Int(tokenStatus!)!)
         }
     }
+    // 卡劵列表状态判断显示title
+    var listStatusTitle:String{
+        get{
+            if getStatus == 20 {
+                return "查看"
+            }else if getStatus == 21{
+                return "已领取"
+            }
+            return "领取"
+        }
+    }
+    
     
     // 主卡劵是否已失效
     var isMainInvalid:Bool?{
@@ -49,7 +62,7 @@ class CouponsEntityModel: HandyJSON {
             return  true
         }
     }
-    required init() {}
+   
     
     //  领取方状态
     var recipientStatusTitle:String{
@@ -62,4 +75,10 @@ class CouponsEntityModel: HandyJSON {
             return "已失效"
         }
     }
+    
+    var remainAmountTitle:String{
+        return "剩余\(remainAmount!)张"
+    }
+    
+     required init() {}
 }

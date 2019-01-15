@@ -26,3 +26,20 @@ extension UITextView: TextProtocol {
         }
     }
 }
+
+private var adjust = "adjust"
+
+extension UITextField {
+    func setTintAjust(_ tintAjust: CGFloat) {
+        objc_setAssociatedObject(self, &adjust, tintAjust, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        let leftView = UILabel(frame: CGRect(x: tintAjust, y: 0, width: tintAjust, height: frame.size.height))
+        leftView.backgroundColor = UIColor.clear
+        self.leftView = leftView
+        leftViewMode = .always
+    }
+    
+    func tintAjust() -> CGFloat {
+        let value = objc_getAssociatedObject(self, &adjust)
+        return value as! CGFloat
+    }
+}

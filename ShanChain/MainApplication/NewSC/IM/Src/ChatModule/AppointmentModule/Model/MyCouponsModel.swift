@@ -37,6 +37,20 @@ class MyCouponsModel: HandyJSON {
     var price:String?
     var tokenStatus:String?
     var tokenSymbol:String?
+    var amount:Int = 0 // 总张数
+    var sendOutNum:Int = 0 // 被领取的张数
+    var remainAmount:Int = 0 // 剩余张数
+    
+    var sendOutNumTitle:String{
+        if sendOutNum > 0 {
+            return "被领取\(sendOutNum)张"
+        }
+        return "全部被领取"
+    }
+    
+    var remainAmountTitle:String{
+        return "剩余\(remainAmount)张"
+    }
     
     var orderID:String?{
         get{
@@ -54,6 +68,21 @@ class MyCouponsModel: HandyJSON {
                 return self.name
             }
             return self.tokenName
+        }
+    }
+    
+    var statusTitle:String{
+        
+        get{
+            if tokenStatus == "10" {
+                return "待使用"
+            }else if tokenStatus == "11"{
+                return "已使用"
+            }else if tokenStatus == "13"{
+                return "已失效"
+            }
+            
+            return "查看"
         }
     }
     

@@ -33,6 +33,11 @@
                                                         <constraint firstAttribute="width" constant="50" id="TI4-BI-f9H"/>
                                                         <constraint firstAttribute="height" constant="50" id="W9T-cu-lRp"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="25"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qx1-sI-naB">
                                                     <rect key="frame" x="161" y="85" width="52" height="21"/>
@@ -104,7 +109,7 @@
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="17"/>
+                                                            <real key="value" value="15"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -178,6 +183,7 @@
                         <outlet property="priceLb" destination="5dc-w4-dor" id="GN3-ge-XDy"/>
                         <outlet property="remainderLb" destination="wod-qU-Exq" id="lu2-mR-mfe"/>
                         <outlet property="ruleLb" destination="cEr-0I-D2n" id="uyO-sz-1bw"/>
+                        <outlet property="ruleTitleLb" destination="CWc-AR-TSi" id="lSr-KZ-h5y"/>
                         <outlet property="statusBtn" destination="mPc-oh-Wwl" id="iuo-uz-Ipj"/>
                         <outlet property="titleLb" destination="JT7-0F-NsM" id="dUI-Jw-Icm"/>
                         <outlet property="userNameLb" destination="Qx1-sI-naB" id="OLb-Qc-tib"/>

@@ -30,6 +30,7 @@ class MyCardCouponListViewController: SCBaseVC {
     let size:String = "10"
     var dataList:[MyCouponsModel] = []
     fileprivate var type:MyCardCouponType?
+    fileprivate var controllerPage:WalletPage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +47,6 @@ class MyCardCouponListViewController: SCBaseVC {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
-        
-
-    
     
     }
     
@@ -71,10 +69,15 @@ extension MyCardCouponListViewController{
     
     fileprivate func reftreshData()  {
         tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
-            DispatchQueue.main.asyncAfter(deadline: .now() , execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 print("上拉加载更多数据")
                 self?._requstData(true, { [weak self] in
-                    self?.tableView.mj_footer.endRefreshing()
+                    
+                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                        self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    }else{
+                        self?.tableView.mj_footer.endRefreshing()
+                    }
                 })
                 
             })
@@ -84,7 +87,12 @@ extension MyCardCouponListViewController{
                 print("下拉刷新 --- 1")
                 self?.page = 1
                 self?._requstData(false, { [weak self] in
-                    self?.tableView.mj_header.endRefreshing()
+                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                        self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    }else{
+                        self?.tableView.mj_header.endRefreshing()
+                    }
+                    
                 });
             })
         }
@@ -112,6 +120,7 @@ extension MyCardCouponListViewController{
                 return
             }
             if let data = baseModel?.data as? Dictionary<String,Any>{
+                self.controllerPage =  WalletPage.deserialize(from: data)
                 if let arr = data["list"] as? NSArray{
                     if let datas:[MyCouponsModel] = [MyCouponsModel].deserialize(from: arr) as? [MyCouponsModel]{
                         if (datas.count > 0){
@@ -193,16 +202,23 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
             let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd")
             cell.deadlineLb.text = "有效期至:\(dateStr!)"
             cell.priceLb.text = "￥\(entity.price!)"
+            cell.statusLb.text = entity.statusTitle
+            cell.receiveNumberLb.text = entity.sendOutNumTitle
 //            cell.priceLb.attributedText = NSString.setAttrFirst("￥", color: <#T##UIColor!#>, font: <#T##UIFont!#>, secendString: <#T##String!#>, color: <#T##UIColor!#>, font: <#T##UIFont!#>)
             
             
+            if type == .receive {
+                cell.receiveNumberLb.isHidden = true
+            }
+            
             let section:Int = indexPath.section
-            if section % 2 == 0 {
+            if section % 2 == 1 {
                 cell.bgIcon.image =  UIImage.init(name: "sc_com_icon_CardPackage_1")
                 cell.nameLb.textColor = SC_EmphasisColor
                 cell.nikeNameLb.textColor = SC_EmphasisColor
                 cell.deadlineLb.textColor = SC_EmphasisColor
                 cell.priceLb.textColor = SC_EmphasisColor
+                cell.receiveNumberLb.textColor = SC_EmphasisColor
                 cell.statusLb.textColor = .white
             }else{
                 cell.bgIcon.image =  UIImage.init(name: "sc_com_icon_CardPackage")
@@ -210,6 +226,7 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
                 cell.nikeNameLb.textColor = .white
                 cell.deadlineLb.textColor = .white
                 cell.priceLb.textColor = .white
+                cell.receiveNumberLb.textColor = .white
                 cell.statusLb.textColor = SC_ThemeMainColor
             }
             

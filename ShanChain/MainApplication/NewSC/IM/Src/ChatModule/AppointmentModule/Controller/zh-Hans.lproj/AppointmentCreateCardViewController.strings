@@ -42,7 +42,7 @@
 "dgz-fs-Z1Y.text" = "*实名认证";
 
 /* Class = "UITextField"; placeholder = "请输入单价"; ObjectID = "gaT-7o-w5q"; */
-"gaT-7o-w5q.placeholder" = "请输入单价";
+"gaT-7o-w5q.placeholder" = "请输入整数";
 
 /* Class = "UITextField"; placeholder = "年-月-日"; ObjectID = "gtr-DD-u3z"; */
 "gtr-DD-u3z.placeholder" = "年-月-日";

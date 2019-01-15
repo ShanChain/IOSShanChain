@@ -37,11 +37,12 @@ class AppointmentCreateCardViewController: UITableViewController {
     
     // 点击示例
     @IBAction func exampleAction(_ sender: UIButton) {
-        
+        let exampleView = CreateCouponExampleView.init(frame: tableView.frame)
+        HHTool.mainWindow().addSubview(exampleView)
     }
     
     @IBAction func questionMarkAction(_ sender: UIButton) {
-        
+        self.hrShowAlert(withTitle: "", message: "马甲将收取该券发放总价的1%作为抵押，待该券失效后，将全额返回到您的钱包账户中。")
     }
     // 充值
     @IBAction func addMoneyAction(_ sender: UIButton) {
@@ -60,7 +61,7 @@ class AppointmentCreateCardViewController: UITableViewController {
             des = descriptionTextView.text
         }
         
-        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":des,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":cardFid.text!,"roomid":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser()]
+        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":des,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":cardFid.text!,"roomId":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser()]
         
     }
     
@@ -100,6 +101,10 @@ class AppointmentCreateCardViewController: UITableViewController {
             self?.mortgageLb.text = "￥\(String(format: "%.2f", mortgageFree))"
             self?.mortgageSEAT_Lb.text = "= \(String(format: "%.3f", mortgageFree * 0.1)) SEAT"
         }
+        _ConfigurationUI()
+    }
+    
+    func _ConfigurationUI(){
         let headImg = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
         icon._sd_setImage(withURLString: headImg)
         self.photoUrl = headImg
@@ -110,6 +115,12 @@ class AppointmentCreateCardViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         createBtn.isEnabled = false
         createBtn.backgroundColor = .lightGray
+        
+        nameFid.setTintAjust(10)
+        cardFid.setTintAjust(10)
+        priceFid.setTintAjust(10)
+        numberFid.setTintAjust(10)
+        failureTimeFid.setTintAjust(10)
     }
     func _back(){
         navigationController?.popViewController(animated: true)

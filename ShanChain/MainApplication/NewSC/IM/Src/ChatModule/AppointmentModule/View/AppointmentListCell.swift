@@ -27,6 +27,10 @@ class AppointmentListCell: UITableViewCell {
     @IBOutlet weak var bgIcon: UIImageView!
     
     @IBOutlet weak var statusLb: UILabel!
+    
+    
+    @IBOutlet weak var receiveNumberLb: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = SC_ThemeBackgroundViewColor

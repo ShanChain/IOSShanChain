@@ -57,7 +57,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         _init()
         maskView = UIView.init(frame:chatView.frame)
         //        maskView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hiddenMaskView)))
-        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 50, y: UIDevice().navBarHeight + 10, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: [NSLocalizedString("sc_H", comment: "字符串"),NSLocalizedString("sc_P", comment: "字符串")])
+        let suspendBall:SuspendBall = SuspendBall.init(frame: CGRect(x: SCREEN_WIDTH - 50, y: UIDevice().navBarHeight + 10, width: 50, height: 50), delegate: self as SuspendBallDelegte, subBallImageArray: [NSLocalizedString("sc_H", comment: "字符串"),NSLocalizedString("sc_P", comment: "字符串"),NSLocalizedString("sc_L", comment: "字符串")])
         suspendBallBtn = suspendBall
         suspendBallBtn?.isHidden = true
         suspendBallBtn?.bottomLayGuide = toolbar.contentSize.height
@@ -1690,6 +1690,10 @@ extension HHChatRoomViewController: SuspendBallDelegte{
 //            vc._scrollToIndex = .all
             let vc = CommunityHelpViewController()
             self.navigationController?.pushViewController(vc, animated: true)
+        }else if tag == 2{
+            let vc = AppointmentListViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }
     }
 }
