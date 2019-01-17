@@ -40,13 +40,12 @@ extension UIColor {
 
 
 
-
 extension UIDevice{
     
     var navBarHeight:Int{return UIApplication.shared.statusBarFrame.height > 20 ? 88:64}
     var navStatusHeight:Int{return UIApplication.shared.statusBarFrame.height > 20 ? 44:20}
     var tabBarHeight:Int{return UIApplication.shared.statusBarFrame.height > 20 ? 82:49}
-    
+    var bottomConstraint:Float{return UIApplication.shared.statusBarFrame.height > 20 ? 32.0:0.0}
 }
 
 

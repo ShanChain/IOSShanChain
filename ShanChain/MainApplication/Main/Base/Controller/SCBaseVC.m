@@ -88,16 +88,6 @@
     [self.view endEditing:YES];
 }
 
-- (void)popToViewControllerClass:(Class)viewControllerClass withAnimation:(BOOL)animated {
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:viewControllerClass]) {
-            [self.navigationController popToViewController:vc animated:animated];
-            return;
-        }
-    }
-    
-    [self.navigationController popToRootViewControllerAnimated:animated];
-}
 
 - (void)pushPage:(UIViewController *)viewController Animated:(BOOL)animated{
     if (self.navigationController.navigationBarHidden) {

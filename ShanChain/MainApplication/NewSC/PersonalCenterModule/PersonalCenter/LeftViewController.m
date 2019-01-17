@@ -235,6 +235,9 @@
     }else if ([title isEqualToString:NSLocalizedString(@"sc_Feedback", nil)]){
         OpinionFeedbackViewController  *feedbackVC = [[OpinionFeedbackViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:feedbackVC animated:YES];
+    }else if ([title isEqualToString:NSLocalizedString(@"sc_Voucher_MyVoucher", nil)]){
+        AppointmentListViewController * couponVC = [[AppointmentListViewController alloc]init];
+         [nav.topViewController.navigationController pushViewController:couponVC animated:YES];
     }else{
         
     }
@@ -306,11 +309,14 @@
     if (_titleArray == nil) {
         if ([SCCacheTool shareInstance].status.integerValue == 0) {
             _titleArray = @[
+                            NSLocalizedString(@"sc_Voucher_MyVoucher", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
                             NSLocalizedString(@"sc_Feedback", nil),
                             NSLocalizedString(@"sc_SignOut", nil)];
         }else{
-            _titleArray = @[NSLocalizedString(@"sc_MyWallet", nil),
+            _titleArray = @[
+                            NSLocalizedString(@"sc_Voucher_MyVoucher", nil),
+                            NSLocalizedString(@"sc_MyWallet", nil),
                             NSLocalizedString(@"sc_MyTask", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
                             NSLocalizedString(@"sc_Feedback", nil),

@@ -231,7 +231,12 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             }
         } else {
             callBlock(nil,error);
-            [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
+            
+            NSString  *msg = [error.userInfo objectForKey:@"NSLocalizedDescription"];
+            if (error.code == SC_NOTENOUGH.integerValue) {
+                msg = @"您的余额不足";
+            }
+            [YYHud showError:msg];
         }
     }] resume];
 }
@@ -305,7 +310,10 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             [HHTool immediatelyDismiss];
         }
         callBlock(nil,error);
-        [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
+        if (error.code != SC_Token_Already_Exist.integerValue) {
+            [YYHud showError:[error.userInfo objectForKey:@"NSLocalizedDescription"]];
+        }
+        
     }];
     
 }
@@ -352,7 +360,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 msg = responseObject[@"msg"];
             }
             
-            failure([SCNetworkError errorWithCode:(NSInteger)responseObject[@"code"] msg:msg]);
+            failure([SCNetworkError errorWithCode:code.integerValue msg:msg]);
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

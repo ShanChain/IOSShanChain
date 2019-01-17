@@ -19,5 +19,6 @@
 
 -(void)hh_rewriteBackActionFunc:(SEL)sel;
 - (void)QRCodeScanVC:(UIViewController *)scanVC;//push到二维码页面
+- (void)popToViewControllerClass:(Class)viewControllerClass withAnimation:(BOOL)animated;
 
 @end

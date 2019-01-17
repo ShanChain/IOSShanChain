@@ -56,6 +56,7 @@ class MyCardDetailsViewController: SCBaseVC {
     var page:Int = 1
     let size:String = "10"
     var dataList:[CouponsEntityModel] = []
+    fileprivate var controllerPage:WalletPage?
     
     func _ConfigurationHeaderViewUI(){
         tableView.tableHeaderView = tableHeaderView
@@ -138,7 +139,7 @@ extension MyCardDetailsViewController:UITableViewDataSource,UITableViewDelegate{
         let entity = dataList[indexPath.row]
         cell.nikeNameLb.text = entity.userId
 //        cell.icon._sd_setImage(withURLString: entity.photoUrl, placeholderImage: UIImage.loadImage("DefaultAvatar"))
-        cell.timeLb.text = entity.getTime
+        cell.timeLb.text = entity.getTimeStr
         cell.statusLb.text = entity.recipientStatusTitle;
     }
     
@@ -151,8 +152,13 @@ extension  MyCardDetailsViewController{
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
               
                 self?._requstClientlDetailsWithTokenSymbol(true, {
-                    self?.tableView.mj_footer.endRefreshing()
+                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                        self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    }else{
+                        self?.tableView.mj_footer.endRefreshing()
+                    }
                 })
+                
             })
         }
         tableView.mj_header = MJRefreshNormalHeader {[weak self] in
@@ -160,6 +166,11 @@ extension  MyCardDetailsViewController{
                 print("下拉刷新 --- 1")
                 self?.page = 1
                 self?._requstClientlDetailsWithTokenSymbol(true, {
+                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                        self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    }else{
+                        self?.tableView.mj_footer.resetNoMoreData()
+                    }
                     self?.tableView.mj_header.endRefreshing()
                 })
             })
@@ -178,6 +189,7 @@ extension  MyCardDetailsViewController{
             }
             
             if let data = baseModel?.data as? Dictionary<String,Any>{
+                 self.controllerPage =  WalletPage.deserialize(from: data)
                 if let arr = data["list"] as? NSArray{
                     if let datas:[CouponsEntityModel] = [CouponsEntityModel].deserialize(from: arr) as? [CouponsEntityModel]{
                         if (datas.count > 0){

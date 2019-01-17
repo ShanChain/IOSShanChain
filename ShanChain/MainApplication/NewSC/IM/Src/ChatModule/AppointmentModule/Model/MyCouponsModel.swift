@@ -28,7 +28,6 @@ class MyCouponsModel: HandyJSON {
     var isNewRecord:Bool = false
     var tokenName:String?
     var name:String?
-    
     var couponsId:String?
     var subCoupId:String?
     
@@ -42,10 +41,11 @@ class MyCouponsModel: HandyJSON {
     var remainAmount:Int = 0 // 剩余张数
     
     var sendOutNumTitle:String{
-        if sendOutNum > 0 {
-            return "被领取\(sendOutNum)张"
+       
+        if remainAmount == 0 {
+            return "全部被领取"
         }
-        return "全部被领取"
+        return "被领取\(sendOutNum)张"
     }
     
     var remainAmountTitle:String{

@@ -29,7 +29,8 @@ class CouponsEntityModel: HandyJSON {
     var record:String?
     var roomid:String?
     var usedNum:String?
-    var getTime:String?
+    var getTime:Double = NSDate.init().timeIntervalSince1970 * 1000
+    var useTime:Double = NSDate.init().timeIntervalSince1970 * 1000
     var unusedNum:String?
     var mortgageHash:String?
     var mortgageSeat:String?
@@ -78,6 +79,21 @@ class CouponsEntityModel: HandyJSON {
     
     var remainAmountTitle:String{
         return "剩余\(remainAmount!)张"
+    }
+    
+    var getTimeStr:String{
+        
+        var myUseTime:Double = NSDate.init().timeIntervalSince1970 * 1000
+        if tokenStatus == "10" {
+            myUseTime = getTime
+        }else if tokenStatus == "11"{
+            myUseTime = useTime
+        }else{
+            myUseTime = deadline
+        }
+        let mcDate:MCDate = MCDate.init(interval: ((myUseTime) / 1000))
+        let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd HH:mm")
+        return dateStr!
     }
     
      required init() {}

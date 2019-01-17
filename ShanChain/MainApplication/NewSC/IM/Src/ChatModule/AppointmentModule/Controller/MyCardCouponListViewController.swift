@@ -16,6 +16,7 @@ class MyCardCouponListViewController: SCBaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableBottomConstraint: NSLayoutConstraint!
     
     public required init(type:MyCardCouponType){
         self.type = type
@@ -30,7 +31,7 @@ class MyCardCouponListViewController: SCBaseVC {
     let size:String = "10"
     var dataList:[MyCouponsModel] = []
     fileprivate var type:MyCardCouponType?
-    fileprivate var controllerPage:WalletPage?
+    fileprivate var controllerPage:WalletPage = WalletPage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +46,9 @@ class MyCardCouponListViewController: SCBaseVC {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+            automaticallyAdjustsScrollViewInsets = false;
+        };
+        tableBottomConstraint.constant = CGFloat(UIDevice().bottomConstraint)
     
     }
     
@@ -54,6 +56,8 @@ class MyCardCouponListViewController: SCBaseVC {
         super.viewWillAppear(animated)
         if dataList.count == 0{
             tableView.mj_header.beginRefreshing()
+        }else{
+            self._requstData(false) {}
         }
     }
 
@@ -73,7 +77,7 @@ extension MyCardCouponListViewController{
                 print("上拉加载更多数据")
                 self?._requstData(true, { [weak self] in
                     
-                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                    if (self?.controllerPage.pageNo)! == (self?.controllerPage.last)!{
                         self?.tableView.mj_footer.endRefreshingWithNoMoreData()
                     }else{
                         self?.tableView.mj_footer.endRefreshing()
@@ -87,12 +91,13 @@ extension MyCardCouponListViewController{
                 print("下拉刷新 --- 1")
                 self?.page = 1
                 self?._requstData(false, { [weak self] in
-                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                    if (self?.controllerPage.pageNo)! == (self?.controllerPage.last)!{
                         self?.tableView.mj_footer.endRefreshingWithNoMoreData()
                     }else{
-                        self?.tableView.mj_header.endRefreshing()
+                        
+                        self?.tableView.mj_footer.resetNoMoreData()
                     }
-                    
+                    self?.tableView.mj_header.endRefreshing()
                 });
             })
         }
@@ -120,7 +125,7 @@ extension MyCardCouponListViewController{
                 return
             }
             if let data = baseModel?.data as? Dictionary<String,Any>{
-                self.controllerPage =  WalletPage.deserialize(from: data)
+                self.controllerPage =  WalletPage.deserialize(from: data)!
                 if let arr = data["list"] as? NSArray{
                     if let datas:[MyCouponsModel] = [MyCouponsModel].deserialize(from: arr) as? [MyCouponsModel]{
                         if (datas.count > 0){
@@ -195,8 +200,8 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
             
             let entity = dataList[indexPath.section]
             cell.iconImg._sd_setImage(withURLString: entity.photoUrl, placeholderImage: SC_defaultImage)
-            cell.nikeNameLb.text = entity.name
-            cell.nameLb.text = entity.nikeName
+            cell.nikeNameLb.text = entity.tokenName
+            cell.nameLb.text = entity.tokenSymbol
             
             let mcDate:MCDate = MCDate.init(interval: entity.deadline ?? Date.init().timeIntervalSince1970)
             let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd")

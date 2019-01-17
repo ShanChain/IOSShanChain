@@ -18,6 +18,8 @@ class AppointmentCreateCardViewController: UITableViewController {
     @IBOutlet weak var cardFid: UITextField!
     
     
+    @IBOutlet weak var nameTipLabel: UILabel!
+    @IBOutlet weak var cardTipLabel: UILabel!
     @IBOutlet weak var priceFid: UITextField!
     
     @IBOutlet weak var numberFid: UITextField!
@@ -32,8 +34,11 @@ class AppointmentCreateCardViewController: UITableViewController {
     @IBOutlet weak var mortgageSEAT_Lb: UILabel!
     @IBOutlet weak var createBtn: UIButton!
     
+    @IBOutlet weak var walletBalanceLb: UILabel!
+    
     @objc open var timestamp:String = ""
     open var photoUrl:String? //     logohash
+    var  KeyBoard:KPKeyBoard = KPKeyBoard.shareInstance()
     
     // 点击示例
     @IBAction func exampleAction(_ sender: UIButton) {
@@ -94,19 +99,42 @@ class AppointmentCreateCardViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        _ConfigurationUI()
+        _getWalletAddressInfo()
+        
         title = NSLocalizedString("sc_Voucher_Creat", comment: "字符串")
-        CouponVerificationService.verificationCouponNameFid(nameFid)
-        CouponVerificationService.verificationCardFid(cardFid)
+      //  CouponVerificationService.verificationCouponNameFid(nameFid, tip: nameTipLabel)
+        CouponVerificationService.verificationCardFid(cardFid, tip: cardTipLabel)
         CouponVerificationService.dynamicCalculationMortgageFreeNumberFid(numberFid, priceFid: priceFid) {[weak self] (mortgageFree) in
             self?.mortgageLb.text = "￥\(String(format: "%.2f", mortgageFree))"
             self?.mortgageSEAT_Lb.text = "= \(String(format: "%.3f", mortgageFree * 0.1)) SEAT"
         }
-        _ConfigurationUI()
+        
+        cardFid.inputView = KeyBoard
+        KeyBoard.delegate = self
+        nameFid.delegate = self as? UITextFieldDelegate
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(_handleTap))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    func _getWalletAddressInfo(){
+        SCNetwork.shareInstance().hh_Get(withUrl: WALLET_ADDRESSINFO_URL, parameters: ["characterId":SCCacheTool.shareInstance().getCurrentCharacterId(),"userId":SCCacheTool.shareInstance().getCurrentUser()], showLoading: false) { (baseModel, error) in
+            if let data = baseModel?.data as? Dictionary<String,Any>{
+                if let price = data["price"] as? NSNumber{
+                    self.walletBalanceLb.text = "钱包余额: ￥\(price)"
+                }
+            }
+        }
+    }
+    func _handleTap(){
+        self.view.endEditing(true)
     }
     
     func _ConfigurationUI(){
         let headImg = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
-        icon._sd_setImage(withURLString: headImg)
+        icon._sd_setImage(withURLString: headImg, placeholderImage: UIImage.loadImage("DefaultAvatar"))
         self.photoUrl = headImg
         descriptionTextView.placeholder = NSLocalizedString("sc_Voucher_instructions", comment: "字符串")
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
@@ -155,5 +183,44 @@ extension AppointmentCreateCardViewController:DUX_UploadUserIconDelegate{
         
     }
     
+}
+
+extension AppointmentCreateCardViewController:KPKeyBoardDelegate{
+    
+    func didTouchedDelete() {
+        self.cardFid.deleteBackward()
+    }
+    
+    func didTouchedKey(_ string: String!) {
+        self.cardFid.insertText(string)
+    }
+    
+    func didTouchedConfirm() {
+        self.view.endEditing(true)
+    }
+}
+
+extension AppointmentCreateCardViewController:UITextFieldDelegate{
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var text:String = "\(textField.text ?? "")\(string)"
+        if text.length > 16 {
+            let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 16))
+            let subText = text.substring(with: range)
+            text = subText
+            return false
+        }
+        
+        if !NSString.isInputRuleAndBlank(text) {
+            self.nameTipLabel.text = "文本有误"
+            self.nameTipLabel.textColor = UIColor.red
+        } else {
+            self.nameTipLabel.text = "仅可输入文字、数字、字母、空格"
+            self.nameTipLabel.textColor = UIColor.lightGray
+        }
+        return true
+    }
+    
+
 }
 

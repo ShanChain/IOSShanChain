@@ -44,11 +44,6 @@
               buttonsTitles:(nullable NSArray<NSString *> *)buttonTitles
                  andHandler:(void (^ __nullable)(UIAlertAction * _Nullable action, NSInteger indexOfAction))handler;
 
-#pragma mark -- 根据需求新增
--(void)pn_hrShowAlertWithTitle:(nullable NSString *)title
-                       message:(nullable NSString *)message
-                 buttonsTitles:(nullable NSArray<NSString *> *)buttonTitles
-                    andHandler:(void (^ __nullable)(UIAlertAction * _Nullable action, NSInteger indexOfAction))handler;
 
 /**
  *  Method for showing UIAlertController with AlertStyle with one default "OK" button.

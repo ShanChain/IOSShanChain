@@ -65,6 +65,8 @@
 #import "ScanCodeService.h"
 #import "CouponVerificationService.h"
 #import "UIView+LSCore.h"
+#import "KPKeyBoard.h"  //大写键盘
+
 
 
 

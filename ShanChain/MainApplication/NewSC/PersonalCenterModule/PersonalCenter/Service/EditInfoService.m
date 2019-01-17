@@ -57,6 +57,7 @@
     } failure:^(NSError *error) {
         
     }];
+    
 }
 
 // 加入聊天室

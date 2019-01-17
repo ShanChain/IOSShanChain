@@ -12,6 +12,7 @@ import Foundation
 @_exported import SnapKit
 @_exported import HandyJSON
 @_exported import RxSwift
+@_exported import IQKeyboardManager
 
 let SCREEN_HEIGHT = Int(UIScreen.main.bounds.size.height)
 let SCREEN_WIDTH = Int(UIScreen.main.bounds.size.width)

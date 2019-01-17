@@ -9,6 +9,7 @@
 import UIKit
 
 
+
 class MyCardReceiveDetailsViewController: UITableViewController {
 
     @IBOutlet weak var icon: UIImageView!
@@ -64,10 +65,19 @@ class MyCardReceiveDetailsViewController: UITableViewController {
         case .receive_Wait:
             if isUseCouponsing == true{
                 // 核销马甲劵
-                SCNetwork.shareInstance().hh_Get(withUrl: User_UseCoupons_URL, parameters: ["subCoupId":self.detailsModel?.subCoupId], showLoading: true) { (baseModel, error) in
+                SCNetwork.shareInstance().hh_Get(withUrl: User_UseCoupons_URL, parameters: ["subCoupId":self.detailsModel?.subCoupId,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId()], showLoading: true) { (baseModel, error) in
+                    
                     if error != nil{
+                         var message:String = "识别失败"
+                        if (error as NSError?)?.code == 10050{
+                            message = "很抱歉，您无法核销他人创建的马甲券，尝试创建自己的马甲券吧～"
+                        }
+                        self.hrShowAlert(withTitle: nil, message: message, buttonsTitles: ["我知道了"], andHandler: { (_, _) in
+                            self.pop(toViewControllerClass: MyCardCouponContainerViewController.self, withAnimation: true)
+                        })
                         return
                     }
+                    
                     self._requstDetaisData(isShow: true)
                 }
             }else{
@@ -188,12 +198,23 @@ extension MyCardReceiveDetailsViewController{
             parameter = ["subCoupId":orderId!]
         }
         SCNetwork.shareInstance().hh_Get(withUrl: url, parameters: parameter, showLoading: isShow) { (baseModel, error) in
+            if error != nil{
+                var message:String = "识别失败"
+                if (error as NSError?)?.code == 10050{
+                    message = "很抱歉，您无法核销他人创建的马甲券，尝试创建自己的马甲券吧～"
+                }
+                
+                self.hrShowAlert(withTitle: nil, message: message, buttonsTitles: ["我知道了"], andHandler: { (_, _) in
+                    self.pop(toViewControllerClass: MyCardCouponContainerViewController.self, withAnimation: true)
+                })
+                return
+            }
             if  let dic = baseModel?.data as? Dictionary<String,Any>{
                 self.detailsModel = CouponsDetailsModel.deserialize(from: dic)
                 if self.isUseCouponsing == true{
                     self.status = (self.detailsModel?.couponsStatus)!
                 }
-                SCNetwork.shareInstance().v1_post(withUrl: "/v1/character/get/current", params: ["userId":self.detailsModel?.userId], showLoading: isShow, call: { (userModel, error) in
+                SCNetwork.shareInstance().v1_post(withUrl: "/v1/character/get/current", params: ["userId":self.detailsModel?.vendorUserStr], showLoading: isShow, call: { (userModel, error) in
                     if let userDic = userModel?.data as? [String:Any]{
                         if let characterInfo = userDic["characterInfo"] as? [String:Any]{
                             let nikeName:String = characterInfo["name"] as! String

@@ -318,6 +318,17 @@
 		2242C0032159C34E00707024 /* YYHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2242BFFE2159C34D00707024 /* YYHud.xib */; };
 		2242C0042159C34E00707024 /* YYHud.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2242BFFF2159C34D00707024 /* YYHud.xcassets */; };
 		2242C0072159C3AB00707024 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242C0062159C3AB00707024 /* UIColor+Extention.m */; };
+		224E6AFD21EEC147007C172E /* keyboard_pop_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AEF21EEC147007C172E /* keyboard_pop_right@2x.png */; };
+		224E6AFE21EEC147007C172E /* keyboard_pop_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AF021EEC147007C172E /* keyboard_pop_right@3x.png */; };
+		224E6AFF21EEC147007C172E /* keyboard_pop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AF121EEC147007C172E /* keyboard_pop@2x.png */; };
+		224E6B0021EEC147007C172E /* keyboard_pop_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AF221EEC147007C172E /* keyboard_pop_left@2x.png */; };
+		224E6B0121EEC147007C172E /* keyboard_pop_left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AF321EEC147007C172E /* keyboard_pop_left@3x.png */; };
+		224E6B0221EEC147007C172E /* keyboard_pop@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AF421EEC147007C172E /* keyboard_pop@3x.png */; };
+		224E6B0321EEC147007C172E /* icon_letterDelete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AF521EEC147007C172E /* icon_letterDelete@3x.png */; };
+		224E6B0421EEC147007C172E /* icon_letterDelete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AF621EEC147007C172E /* icon_letterDelete@2x.png */; };
+		224E6B0521EEC147007C172E /* KPKeyboardPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 224E6AF821EEC147007C172E /* KPKeyboardPopView.m */; };
+		224E6B0621EEC147007C172E /* KPKeyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 224E6AF921EEC147007C172E /* KPKeyBoard.m */; };
+		224E6B0721EEC147007C172E /* KPKeyboardPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 224E6AFA21EEC147007C172E /* KPKeyboardPopView.xib */; };
 		225052BC218BF58C001FBD65 /* TaskListContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */; };
 		225052BE218BF67E001FBD65 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225052BD218BF67E001FBD65 /* TaskListViewController.swift */; };
 		22538A9E21D5D17900B873F7 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22538A9C21D5D17800B873F7 /* NSString+Additions.m */; };
@@ -1026,6 +1037,20 @@
 		2242BFFF2159C34D00707024 /* YYHud.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YYHud.xcassets; sourceTree = "<group>"; };
 		2242C0052159C3AA00707024 /* UIColor+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extention.h"; sourceTree = "<group>"; };
 		2242C0062159C3AB00707024 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
+		224E6AEF21EEC147007C172E /* keyboard_pop_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_pop_right@2x.png"; sourceTree = "<group>"; };
+		224E6AF021EEC147007C172E /* keyboard_pop_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_pop_right@3x.png"; sourceTree = "<group>"; };
+		224E6AF121EEC147007C172E /* keyboard_pop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_pop@2x.png"; sourceTree = "<group>"; };
+		224E6AF221EEC147007C172E /* keyboard_pop_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_pop_left@2x.png"; sourceTree = "<group>"; };
+		224E6AF321EEC147007C172E /* keyboard_pop_left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_pop_left@3x.png"; sourceTree = "<group>"; };
+		224E6AF421EEC147007C172E /* keyboard_pop@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_pop@3x.png"; sourceTree = "<group>"; };
+		224E6AF521EEC147007C172E /* icon_letterDelete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_letterDelete@3x.png"; sourceTree = "<group>"; };
+		224E6AF621EEC147007C172E /* icon_letterDelete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_letterDelete@2x.png"; sourceTree = "<group>"; };
+		224E6AF721EEC147007C172E /* KPKeyBoardConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPKeyBoardConstant.h; sourceTree = "<group>"; };
+		224E6AF821EEC147007C172E /* KPKeyboardPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPKeyboardPopView.m; sourceTree = "<group>"; };
+		224E6AF921EEC147007C172E /* KPKeyBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPKeyBoard.m; sourceTree = "<group>"; };
+		224E6AFA21EEC147007C172E /* KPKeyboardPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KPKeyboardPopView.xib; sourceTree = "<group>"; };
+		224E6AFB21EEC147007C172E /* KPKeyBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPKeyBoard.h; sourceTree = "<group>"; };
+		224E6AFC21EEC147007C172E /* KPKeyboardPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPKeyboardPopView.h; sourceTree = "<group>"; };
 		225052BB218BF58C001FBD65 /* TaskListContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListContainerViewController.swift; sourceTree = "<group>"; };
 		225052BD218BF67E001FBD65 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		22538A9C21D5D17800B873F7 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
@@ -2492,6 +2517,35 @@
 			path = YYHud;
 			sourceTree = "<group>";
 		};
+		224E6AED21EEC147007C172E /* KPFullKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				224E6AEE21EEC147007C172E /* iconImageSource */,
+				224E6AF721EEC147007C172E /* KPKeyBoardConstant.h */,
+				224E6AF821EEC147007C172E /* KPKeyboardPopView.m */,
+				224E6AF921EEC147007C172E /* KPKeyBoard.m */,
+				224E6AFA21EEC147007C172E /* KPKeyboardPopView.xib */,
+				224E6AFB21EEC147007C172E /* KPKeyBoard.h */,
+				224E6AFC21EEC147007C172E /* KPKeyboardPopView.h */,
+			);
+			path = KPFullKeyboard;
+			sourceTree = "<group>";
+		};
+		224E6AEE21EEC147007C172E /* iconImageSource */ = {
+			isa = PBXGroup;
+			children = (
+				224E6AEF21EEC147007C172E /* keyboard_pop_right@2x.png */,
+				224E6AF021EEC147007C172E /* keyboard_pop_right@3x.png */,
+				224E6AF121EEC147007C172E /* keyboard_pop@2x.png */,
+				224E6AF221EEC147007C172E /* keyboard_pop_left@2x.png */,
+				224E6AF321EEC147007C172E /* keyboard_pop_left@3x.png */,
+				224E6AF421EEC147007C172E /* keyboard_pop@3x.png */,
+				224E6AF521EEC147007C172E /* icon_letterDelete@3x.png */,
+				224E6AF621EEC147007C172E /* icon_letterDelete@2x.png */,
+			);
+			path = iconImageSource;
+			sourceTree = "<group>";
+		};
 		225052BA218BF4EC001FBD65 /* TaskModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -3597,6 +3651,7 @@
 		996048EF1ED7C21E007634EE /* Catagory */ = {
 			isa = PBXGroup;
 			children = (
+				224E6AED21EEC147007C172E /* KPFullKeyboard */,
 				2226DB7321A7ACD9002F6195 /* Aspects */,
 				2226DB7021A7ACD9002F6195 /* ExceptionHandler */,
 				221E355C215C6C83003FAA73 /* UIViewController+HRAlertViewController.h */,
@@ -3784,8 +3839,10 @@
 				22581B4721DF5F4200F1D1B1 /* MyWalletViewController.xib in Resources */,
 				2242C0032159C34E00707024 /* YYHud.xib in Resources */,
 				223F99EC217F12040031DB95 /* blackTheme.bundle in Resources */,
+				224E6AFE21EEC147007C172E /* keyboard_pop_right@3x.png in Resources */,
 				222849232176E07500CDC86C /* mapapi.bundle in Resources */,
 				225F83F621AE931D0082C0E1 /* HHNumberForPeopleViewController.xib in Resources */,
+				224E6AFD21EEC147007C172E /* keyboard_pop_right@2x.png in Resources */,
 				2227012621C8F8B500FCD269 /* PopularCommunityViewController.xib in Resources */,
 				22A2EB8D21BE165C00737265 /* MyCardDetailsViewController.xib in Resources */,
 				223F99E8217F12040031DB95 /* defaultTheme.bundle in Resources */,
@@ -3797,6 +3854,7 @@
 				22C91782219274A8002E5240 /* BMKTestLocationViewController.xib in Resources */,
 				223F99BC217F12040031DB95 /* jiantou2@2x.png in Resources */,
 				223F9968217F12040031DB95 /* yh_image_no_picked@3x.png in Resources */,
+				224E6B0421EEC147007C172E /* icon_letterDelete@2x.png in Resources */,
 				48718D711F42277400010AA0 /* MJPhotoBrowser.bundle in Resources */,
 				223F996A217F12040031DB95 /* yh_image_picked@3x.png in Resources */,
 				2229ED1F21BA726800E33A8D /* MyCardCouponListViewController.xib in Resources */,
@@ -3804,9 +3862,12 @@
 				22581B4A21DF5F4200F1D1B1 /* EditPersonalInfoViewController.xib in Resources */,
 				2229ED0921B9256100E33A8D /* AppointmentListViewController.xib in Resources */,
 				223F99BD217F12040031DB95 /* icon_baidu_marker.png in Resources */,
+				224E6B0021EEC147007C172E /* keyboard_pop_left@2x.png in Resources */,
+				224E6B0121EEC147007C172E /* keyboard_pop_left@3x.png in Resources */,
 				22563F61219C3929004E34BB /* TaskListPersonalCell.xib in Resources */,
 				223F99BF217F12040031DB95 /* AddMapTableViewCell.xib in Resources */,
 				22C917B32194402D002E5240 /* TaskContentDetailsCell.xib in Resources */,
+				224E6B0721EEC147007C172E /* KPKeyboardPopView.xib in Resources */,
 				223F996B217F12040031DB95 /* emoticons.bundle in Resources */,
 				223F99EE217F12040031DB95 /* JCMessageImageCollectionViewCell.xib in Resources */,
 				225F83FC21AE94120082C0E1 /* HHNumberPeopleListCell.xib in Resources */,
@@ -3829,12 +3890,15 @@
 				223F9967217F12040031DB95 /* yh_image_no_picked@2x.png in Resources */,
 				223F99BA217F12040031DB95 /* 定位1.png in Resources */,
 				22A2EBB621C23CC000737265 /* Images.xcassets in Resources */,
+				224E6AFF21EEC147007C172E /* keyboard_pop@2x.png in Resources */,
 				33B7CCF71EC5865700FB6378 /* Main.storyboard in Resources */,
 				2231088921DF4C81006D458F /* SCDynamicLoginViewController.xib in Resources */,
 				22C917AF21943014002E5240 /* TaskDetailsViewController.xib in Resources */,
+				224E6B0221EEC147007C172E /* keyboard_pop@3x.png in Resources */,
 				221B3C0921C782C00061BB3E /* MyCardScanCodeDetailsViewController.xib in Resources */,
 				2271058021B76273009FC34D /* HHShareView.xib in Resources */,
 				892B39E91FE8EC0300292A75 /* AliyunImageSource.bundle in Resources */,
+				224E6B0321EEC147007C172E /* icon_letterDelete@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4021,6 +4085,7 @@
 				223F9A36217F12B80031DB95 /* JCDoubleButtonCell.swift in Sources */,
 				223F99A9217F12040031DB95 /* JCUpdateMemberViewController.swift in Sources */,
 				2229ED0C21B9265600E33A8D /* AppointmentListCell.swift in Sources */,
+				224E6B0521EEC147007C172E /* KPKeyboardPopView.m in Sources */,
 				2293A73F218C3B5100FB977C /* RoomNavTitleView.swift in Sources */,
 				48718D9E1F42277400010AA0 /* UIImageView+WebCache.m in Sources */,
 				33C1A17A1F4C50FB003E22CA /* MASCompositeConstraint.m in Sources */,
@@ -4365,6 +4430,7 @@
 				223F9A09217F12040031DB95 /* DLTabedSlideView.m in Sources */,
 				221BEF0B21D4B883007C76BF /* ChatPublicService.swift in Sources */,
 				223F99EF217F12040031DB95 /* JCMessageImageCollectionViewCell.swift in Sources */,
+				224E6B0621EEC147007C172E /* KPKeyBoard.m in Sources */,
 				48718D9B1F42277400010AA0 /* UIImage+MultiFormat.m in Sources */,
 				89E031521FCECBA70089240B /* GWLPhotoLibrayController.m in Sources */,
 				223F99AA217F12040031DB95 /* JCRemindListViewController.swift in Sources */,

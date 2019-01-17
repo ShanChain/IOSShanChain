@@ -33,6 +33,16 @@ class CouponsDetailsModel: HandyJSON {
     var deadline:Double = NSDate.init().timeIntervalSince1970 * 1000
     var useTime:Double = NSDate.init().timeIntervalSince1970 * 1000 // 使用(核销)时间
     
+    var vendorUserStr:String{
+        if vendorUser != nil {
+            return  vendorUser!
+        }
+        if userId != nil {
+           return  userId!
+        }
+        
+        return ""
+    }
     
     var couponsStatus:CouponsStatus?{
         get{

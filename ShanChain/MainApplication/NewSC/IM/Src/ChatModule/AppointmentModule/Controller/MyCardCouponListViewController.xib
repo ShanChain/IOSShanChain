@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyCardCouponListViewController" customModule="ShanChain" customModuleProvider="target">
             <connections>
+                <outlet property="tableBottomConstraint" destination="aLQ-d0-whK" id="YXb-2f-CRg"/>
                 <outlet property="tableView" destination="I7T-UB-A8y" id="aoN-d3-tds"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,8 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="I7T-UB-A8y">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="I7T-UB-A8y">
+                    <rect key="frame" x="0.0" y="20" width="375" height="617"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="cYV-Fw-QKe"/>
@@ -34,7 +35,7 @@
             <constraints>
                 <constraint firstItem="I7T-UB-A8y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="BnU-da-r3E"/>
                 <constraint firstItem="I7T-UB-A8y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="NsH-9k-EFn"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="I7T-UB-A8y" secondAttribute="bottom" id="aLQ-d0-whK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="I7T-UB-A8y" secondAttribute="bottom" constant="30" id="aLQ-d0-whK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="I7T-UB-A8y" secondAttribute="trailing" id="my0-xt-K1M"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

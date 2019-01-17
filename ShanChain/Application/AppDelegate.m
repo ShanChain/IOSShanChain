@@ -58,8 +58,13 @@
         if ([[NSUserDefaults standardUserDefaults]objectForKey:kJCCurrentUserName]) {
           
         }
-        BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-      //  AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
+#ifdef DEBUG
+  AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
+#else
+    BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+#endif
+     
+     
         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
     
     } else {

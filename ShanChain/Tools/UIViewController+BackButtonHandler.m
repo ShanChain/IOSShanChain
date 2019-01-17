@@ -17,6 +17,15 @@
     [button addTarget:self action:sel forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)popToViewControllerClass:(Class)viewControllerClass withAnimation:(BOOL)animated {
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:viewControllerClass]) {
+            [self.navigationController popToViewController:vc animated:animated];
+            return;
+        }
+    }
+    [self.navigationController popToRootViewControllerAnimated:animated];
+}
 
 - (void)QRCodeScanVC:(UIViewController *)scanVC {
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];

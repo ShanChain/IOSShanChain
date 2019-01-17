@@ -20,10 +20,12 @@ class AppointmentListViewController: SCBaseVC {
     
     @IBOutlet weak var createBtn: UIButton!
     
+    @IBOutlet weak var tableBottomConstraint: NSLayoutConstraint!
+    
     var page:Int = 1
     let size:String = "10"
     var dataList:[CouponsEntityModel] = []
-    fileprivate var controllerPage:WalletPage?
+    fileprivate var controllerPage:WalletPage = WalletPage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +35,7 @@ class AppointmentListViewController: SCBaseVC {
 //        tableView.tableHeaderView?.backgroundColor = SC_ThemeBackgroundViewColor
         view.addSubview(headView)
         
-
+        tableBottomConstraint.constant = CGFloat(UIDevice().bottomConstraint)
         headView.snp.makeConstraints { (mk) in
             mk.left.right.equalTo(0)
             mk.top.equalTo(self.topLayoutGuide.snp.bottom)
@@ -48,14 +50,18 @@ class AppointmentListViewController: SCBaseVC {
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title:NSLocalizedString("sc_Voucher_My", comment: "字符串"), tintColor: .black)
         view.backgroundColor = SC_ThemeBackgroundViewColor
-       // headView.backgroundColor = SC_ThemeBackgroundViewColor
+        headView.backgroundColor = SC_ThemeBackgroundViewColor
        
         reftreshData()
+        extendedLayoutIncludesOpaqueBars = true;
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+            automaticallyAdjustsScrollViewInsets = false;
+        };
+        self.tableView.contentInset = UIEdgeInsetsMake(CGFloat(UIDevice().navBarHeight), 0, CGFloat(UIDevice().tabBarHeight), 0)
+        self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+        
     }
     
     func _clickMy(){
@@ -68,6 +74,8 @@ class AppointmentListViewController: SCBaseVC {
         super.viewWillAppear(animated)
         if dataList.count == 0{
             tableView.mj_header.beginRefreshing()
+        }else{
+            self._requstData(false) {}
         }
     }
     
@@ -87,7 +95,7 @@ extension AppointmentListViewController{
                 print("上拉加载更多数据")
                 self?._requstData(true, { [weak self] in
                     
-                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                    if (self?.controllerPage.pageNo)! == (self?.controllerPage.last)!{
                         self?.tableView.mj_footer.endRefreshingWithNoMoreData()
                     }else{
                         self?.tableView.mj_footer.endRefreshing()
@@ -96,17 +104,19 @@ extension AppointmentListViewController{
                 
             })
         }
+        tableView.mj_footer.ignoredScrollViewContentInsetBottom = CGFloat(UIDevice().tabBarHeight)
         tableView.mj_header = MJRefreshNormalHeader {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 print("下拉刷新 --- 1")
                 self?.page = 1
                 self?._requstData(false, { [weak self] in
-                    if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
+                    if (self?.controllerPage.pageNo)! == (self?.controllerPage.last)!{
                         self?.tableView.mj_footer.endRefreshingWithNoMoreData()
                     }else{
-                         self?.tableView.mj_header.endRefreshing()
+                        
+                         self?.tableView.mj_footer.resetNoMoreData()
                     }
-                   
+                    self?.tableView.mj_header.endRefreshing()
                 });
             })
         }
@@ -122,7 +132,7 @@ extension AppointmentListViewController{
             }
             
             if let data = baseModel?.data as? Dictionary<String,Any>{
-                self.controllerPage =  WalletPage.deserialize(from: data)
+                self.controllerPage =  WalletPage.deserialize(from: data)!
                 if let arr = data["list"] as? NSArray{
                     if let datas:[CouponsEntityModel] = [CouponsEntityModel].deserialize(from: arr) as? [CouponsEntityModel]{
                         
@@ -150,9 +160,11 @@ extension AppointmentListViewController{
             if self.dataList.count == 0{
                 self.noDataTipShow(self.tableView, content: NSLocalizedString("sc_Nodata", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
                 self.tableView.isScrollEnabled = false
+                self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
             }else{
                 self.tableView.isScrollEnabled = true
                 self.noDataTipDismiss()
+               
             }
             
             complete()
