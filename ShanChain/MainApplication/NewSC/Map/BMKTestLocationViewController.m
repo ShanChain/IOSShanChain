@@ -288,8 +288,24 @@
     }
     self.isLBS = YES;
     weakify(self);
-    [[SCNetwork shareInstance]getWithUrl:GETCOORDINATE parameters:[self getParameter] success:^(id responseObject) {
-        NSArray  *arr = responseObject[@"data"][@"room"];
+    
+    [[SCNetwork shareInstance]HH_GetWithUrl:COORDINATEINFO parameters:[self getParameter] showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+        if (error) {
+            return ;
+        }
+        CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:baseModel.data];
+        weak_self.myLocationCoordModel = model;
+        [weak_self sc_mapViewRestoration:nil];
+        [weak_self sc_addOverlayWithModel:model];
+        
+    }];
+    
+    [[SCNetwork shareInstance]HH_GetWithUrl:GETCOORDINATE parameters:[self getParameter] showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+        if (error) {
+            weak_self.isLBS = NO;
+            return ;
+        }
+          NSArray  *arr = baseModel.data[@"room"];
         if(arr.count > 0){
             NSMutableArray  *mAry = [NSMutableArray arrayWithCapacity:0];
             [arr enumerateObjectsUsingBlock:^(id  _Nonnull dic, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -308,9 +324,6 @@
             [weak_self sc_addOverlayWithCoordnates];
             [weak_self setChatRoomCenterPoint];
         }
-        
-    } failure:^(NSError *error) {
-         weak_self.isLBS = NO;
     }];
 }
 

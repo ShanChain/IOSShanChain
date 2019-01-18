@@ -165,7 +165,7 @@ extension  MyCardDetailsViewController{
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 print("下拉刷新 --- 1")
                 self?.page = 1
-                self?._requstClientlDetailsWithTokenSymbol(true, {
+                self?._requstClientlDetailsWithTokenSymbol(false, {
                     if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
                         self?.tableView.mj_footer.endRefreshingWithNoMoreData()
                     }else{

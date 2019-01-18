@@ -35,14 +35,13 @@ class AppointmentListViewController: SCBaseVC {
 //        tableView.tableHeaderView?.backgroundColor = SC_ThemeBackgroundViewColor
         view.addSubview(headView)
         
-        tableBottomConstraint.constant = CGFloat(UIDevice().bottomConstraint)
+       // tableBottomConstraint.constant = CGFloat(UIDevice().bottomConstraint)
         headView.snp.makeConstraints { (mk) in
             mk.left.right.equalTo(0)
             mk.top.equalTo(self.topLayoutGuide.snp.bottom)
             mk.height.equalTo(50)
         }
-        
-        
+       
         tableView.estimatedRowHeight = 163
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -51,16 +50,7 @@ class AppointmentListViewController: SCBaseVC {
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title:NSLocalizedString("sc_Voucher_My", comment: "字符串"), tintColor: .black)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         headView.backgroundColor = SC_ThemeBackgroundViewColor
-       
         reftreshData()
-        extendedLayoutIncludesOpaqueBars = true;
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false;
-        };
-        self.tableView.contentInset = UIEdgeInsetsMake(CGFloat(UIDevice().navBarHeight), 0, CGFloat(UIDevice().tabBarHeight), 0)
-        self.tableView.scrollIndicatorInsets = self.tableView.contentInset
         
     }
     
@@ -72,11 +62,22 @@ class AppointmentListViewController: SCBaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+          extendedLayoutIncludesOpaqueBars = true;
+         self.tableView.contentInset = UIEdgeInsetsMake(CGFloat(UIDevice().navBarHeight), 0, CGFloat(UIDevice().tabBarHeight), 0)
+        self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false;
+        };
+        
         if dataList.count == 0{
             tableView.mj_header.beginRefreshing()
         }else{
             self._requstData(false) {}
         }
+        
     }
     
     @IBAction func createAction(_ sender: UIButton) {

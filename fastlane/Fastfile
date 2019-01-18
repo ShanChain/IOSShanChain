@@ -24,6 +24,6 @@ platform :ios do
 
   lane :beta do
       build_app(export_method: "ad-hoc")
-      pgyer(api_key: "82f584c10019b8efdb484003bda9b543", user_key: "d1d68f0fe41cdf8ed7ad7236c65c152c", update_description: "update by fastlane")
+      pgyer(api_key: "4f26608844e57b9b96245793e11ce649", user_key: "9a87d0e786998ecdb55071337eb8df6f", update_description: "update by fastlane")
   end
 end

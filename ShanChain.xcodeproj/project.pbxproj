@@ -425,6 +425,9 @@
 		22D247872189CA8C009C1E6A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D247862189CA8C009C1E6A /* UIView+Extension.swift */; };
 		22D247892189D5A8009C1E6A /* RecieveTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D247882189D5A8009C1E6A /* RecieveTaskView.swift */; };
 		22D2478B2189D5B3009C1E6A /* RecieveTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D2478A2189D5B3009C1E6A /* RecieveTaskView.xib */; };
+		22E11A3221F1A89000B76A3D /* SCSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E11A3121F1A89000B76A3D /* SCSettingViewController.swift */; };
+		22E11A3421F1A89E00B76A3D /* SCSettingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22E11A3321F1A89E00B76A3D /* SCSettingViewController.storyboard */; };
+		22E11A3621F1C12A00B76A3D /* AccountSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */; };
 		22EBC11321533BAE00C11359 /* MCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EBC11121533BA800C11359 /* MCDate.m */; };
 		33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33055FE91F0503AC005740E0 /* StoreKit.framework */; };
 		332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5D91F4ED69F00888313 /* NSMutableAttributedString+TY.m */; };
@@ -1180,6 +1183,9 @@
 		22D247862189CA8C009C1E6A /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		22D247882189D5A8009C1E6A /* RecieveTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecieveTaskView.swift; sourceTree = "<group>"; };
 		22D2478A2189D5B3009C1E6A /* RecieveTaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecieveTaskView.xib; sourceTree = "<group>"; };
+		22E11A3121F1A89000B76A3D /* SCSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSettingViewController.swift; sourceTree = "<group>"; };
+		22E11A3321F1A89E00B76A3D /* SCSettingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SCSettingViewController.storyboard; sourceTree = "<group>"; };
+		22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSecurityViewController.swift; sourceTree = "<group>"; };
 		22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentConfiguration.h; sourceTree = "<group>"; };
 		22EBC11121533BA800C11359 /* MCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDate.m; sourceTree = "<group>"; };
 		22EBC11221533BA900C11359 /* MCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDate.h; sourceTree = "<group>"; };
@@ -2566,6 +2572,7 @@
 		22538AA321D5D3A900B873F7 /* PersonalCenterModule */ = {
 			isa = PBXGroup;
 			children = (
+				22E11A2C21F1A69B00B76A3D /* Setting */,
 				22581B2321DF5F4200F1D1B1 /* NameVerified */,
 				22581B2621DF5F4200F1D1B1 /* PersonalCenter */,
 				22538AA421D5D3A900B873F7 /* Report */,
@@ -2789,6 +2796,16 @@
 				22070691219AC0A300404459 /* TaskListModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		22E11A2C21F1A69B00B76A3D /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				22E11A3121F1A89000B76A3D /* SCSettingViewController.swift */,
+				22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */,
+				22E11A3321F1A89E00B76A3D /* SCSettingViewController.storyboard */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		33055FE81F0503AC005740E0 /* Frameworks */ = {
@@ -3887,6 +3904,7 @@
 				22581B4B21DF5F4200F1D1B1 /* OpinionFeedbackViewController.xib in Resources */,
 				2229ED0121B9091B00E33A8D /* NewYearActivitiesView.xib in Resources */,
 				33B7CCF91EC5865700FB6378 /* Assets.xcassets in Resources */,
+				22E11A3421F1A89E00B76A3D /* SCSettingViewController.storyboard in Resources */,
 				223F9967217F12040031DB95 /* yh_image_no_picked@2x.png in Resources */,
 				223F99BA217F12040031DB95 /* 定位1.png in Resources */,
 				22A2EBB621C23CC000737265 /* Images.xcassets in Resources */,
@@ -4070,6 +4088,7 @@
 				221BBD372195A5300004EE03 /* JGUserLoginService.swift in Sources */,
 				48718D751F42277400010AA0 /* MJPhotoToolbar.m in Sources */,
 				22A2EB8C21BE165C00737265 /* MyCardDetailsViewController.swift in Sources */,
+				22E11A3221F1A89000B76A3D /* SCSettingViewController.swift in Sources */,
 				22581B4321DF5F4200F1D1B1 /* RealNameVeifiedViewController.swift in Sources */,
 				33C1A1821F4C50FB003E22CA /* View+MASAdditions.m in Sources */,
 				332AB6551F4ED8C900888313 /* UIImage+Resize.m in Sources */,
@@ -4149,6 +4168,7 @@
 				22A2EBA721C09A5800737265 /* VerifyCodeModel.m in Sources */,
 				48718D9C1F42277400010AA0 /* UIImage+WebP.m in Sources */,
 				223F998C217F12040031DB95 /* JCBusinessCardContentView.swift in Sources */,
+				22E11A3621F1C12A00B76A3D /* AccountSecurityViewController.swift in Sources */,
 				223F9975217F12040031DB95 /* JCMessageAvatarView.swift in Sources */,
 				48718D741F42277400010AA0 /* MJPhotoProgressView.m in Sources */,
 				223F9A5D21829BA80031DB95 /* UIViewController+CWLateralSlide.m in Sources */,
@@ -4763,8 +4783,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
@@ -4812,8 +4832,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a79065-97be-43ac-8860-65ff90b8aa41";
-				PROVISIONING_PROFILE_SPECIFIER = adhoc;
+				PROVISIONING_PROFILE = "defebafb-82fe-4a17-aa94-9a014af9f4d6";
+				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4832,8 +4852,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = ShanChain/ShanChain.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
@@ -4881,8 +4901,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a79065-97be-43ac-8860-65ff90b8aa41";
-				PROVISIONING_PROFILE_SPECIFIER = adhoc;
+				PROVISIONING_PROFILE = "defebafb-82fe-4a17-aa94-9a014af9f4d6";
+				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

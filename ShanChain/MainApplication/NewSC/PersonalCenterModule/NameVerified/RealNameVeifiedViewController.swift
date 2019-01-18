@@ -36,12 +36,13 @@ class RealNameVeifiedViewController: SCBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("sc_Real_name_authentication", comment: "字符串")
-        self.addRightBarButtonItem(withTarget: self, sel: #selector(_back), title: "取消", tintColor: .white)
+        self.addRightBarButtonItem(withTarget: self, sel: #selector(_back), title: "取消", tintColor: .black)
         
     }
     
     func _back(){
-        backViewController()
+        let nav =  backViewController() as! JCNavigationController
+        nav.popViewController(animated: false)
     }
     
     func _isValid() -> Bool {

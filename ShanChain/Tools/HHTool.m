@@ -284,6 +284,10 @@
              @"duration" : @(seconds)};
 }
 
++ (UIViewController*)storyBoardWithName:(NSString*)name Identifier:(NSString*)identifier{
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:name bundle:nil];
+    return [storyBoard instantiateViewControllerWithIdentifier:identifier ?:name];
+}
 
 
 @end

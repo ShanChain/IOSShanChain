@@ -12,6 +12,7 @@
 
 @implementation CouponVerificationService
 
+
 + (void)verificationCouponNameFid:(UITextField *)textFid tipLabel:(UILabel *)tipLb{
     RAC(textFid,text) = [RACSignal combineLatest:@[textFid.rac_textSignal] reduce:^id _Nullable(NSString *name){
         if (name.length > 16) {
@@ -40,12 +41,20 @@
   __block  NSString  *priceStr;
     
     RAC(numberFid,text) = [RACSignal combineLatest:@[numberFid.rac_textSignal] reduce:^id _Nullable(NSString *number){
+        if ([number isEqualToString:@"0"]) {
+            [HHTool showError:@"数量不能为0"];
+            number = @"";
+        }
         numberStr = number;
         callBack(numberStr.integerValue * priceStr.integerValue * 0.01);
         return number;
     }];
     
     RAC(priceFid,text) = [RACSignal combineLatest:@[priceFid.rac_textSignal] reduce:^id _Nullable(NSString *price){
+        if ([price isEqualToString:@"0"]) {
+            [HHTool showError:@"单价不能为0"];
+            price = @"";
+        }
         priceStr = price;
         callBack(numberStr.integerValue * priceStr.integerValue * 0.01);
         return price;
@@ -86,7 +95,7 @@
 +(void)verificationIsCanCreate:(UIViewController *)vc{
     AppointmentCreateCardViewController  *createVC = (AppointmentCreateCardViewController*)vc;
     RAC(createVC.createBtn,enabled) = [RACSignal combineLatest:@[createVC.nameFid.rac_textSignal,createVC.cardFid.rac_textSignal,createVC.priceFid.rac_textSignal,createVC.numberFid.rac_textSignal] reduce:^id _Nullable(NSString *name, NSString *card, NSString *price, NSString *number){
-        return @(name.length > 0 && card.length > 0 && price.length > 0 && number.length > 0);
+        return @(name.length > 0 && card.length == 3 && price.length > 0 && number.length > 0);
     }];
 
     RAC(createVC.createBtn,backgroundColor) = [RACSignal combineLatest:@[createVC.nameFid.rac_textSignal,createVC.cardFid.rac_textSignal,createVC.priceFid.rac_textSignal,createVC.numberFid.rac_textSignal] reduce:^id _Nullable(NSString *name, NSString *card, NSString *price, NSString *number){
@@ -97,6 +106,10 @@
 //    RAC(createVC.createBtn,backgroundColor) = [RACSignal combineLatest:@[createVC.nameFid.rac_textSignal,createVC.cardFid.rac_textSignal,createVC.priceFid.rac_textSignal,createVC.numberFid.rac_textSignal,createVC.failureTimeFid.rac_textSignal,createVC.descriptionTextView.rac_textSignal] reduce:^id _Nullable(NSString *name, NSString *card, NSString *price, NSString *number, NSString *dealTime , NSString *des){
 //
 //    }];
+    
+    
+
+
 
 }
 

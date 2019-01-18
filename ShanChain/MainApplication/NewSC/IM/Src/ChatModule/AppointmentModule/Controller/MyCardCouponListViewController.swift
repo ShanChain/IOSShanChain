@@ -200,7 +200,7 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
             
             let entity = dataList[indexPath.section]
             cell.iconImg._sd_setImage(withURLString: entity.photoUrl, placeholderImage: SC_defaultImage)
-            cell.nikeNameLb.text = entity.tokenName
+            cell.nikeNameLb.text = entity.nikeName
             cell.nameLb.text = entity.tokenSymbol
             
             let mcDate:MCDate = MCDate.init(interval: entity.deadline ?? Date.init().timeIntervalSince1970)

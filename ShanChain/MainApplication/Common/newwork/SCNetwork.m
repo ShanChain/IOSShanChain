@@ -226,6 +226,9 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 callBlock(baseModel,nil);
             }else{
                 if (!NULLString(baseModel.message)) {
+                    if (baseModel.code.integerValue == SC_NOTENOUGH.integerValue) {
+                        baseModel.message = @"您的余额不足";
+                    }
                     [HHTool showError:baseModel.message];
                 }
             }
@@ -348,6 +351,8 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             [[SCAppManager shareInstance] realNameAuthenticate];
         } else if([code isEqualToString:SC_REQUEST_TOKEN_EXPIRE]){
             [[SCAppManager shareInstance] logout];
+        }else  if ([code isEqualToString:SC_NOTENOUGH] ) {
+            [HHTool showError:@"您的余额不足"];
         }else{
             SCLog(@"Request error%@", responseObject);
             

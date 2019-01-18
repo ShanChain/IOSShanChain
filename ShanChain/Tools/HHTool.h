@@ -47,4 +47,6 @@
  */
 + (NSDictionary *)getVideoInfoWithSourcePath:(NSURL *)path;
 
++ (UIViewController*)storyBoardWithName:(NSString*)name Identifier:(NSString*)identifier;
+
 @end

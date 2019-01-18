@@ -236,7 +236,7 @@
         OpinionFeedbackViewController  *feedbackVC = [[OpinionFeedbackViewController alloc]init];
         [nav.topViewController.navigationController pushViewController:feedbackVC animated:YES];
     }else if ([title isEqualToString:NSLocalizedString(@"sc_Voucher_MyVoucher", nil)]){
-        AppointmentListViewController * couponVC = [[AppointmentListViewController alloc]init];
+        MyCardCouponContainerViewController * couponVC = [[MyCardCouponContainerViewController alloc]init];
          [nav.topViewController.navigationController pushViewController:couponVC animated:YES];
     }else{
         

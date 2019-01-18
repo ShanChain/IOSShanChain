@@ -59,7 +59,9 @@
           
         }
 #ifdef DEBUG
-  AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
+//  AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
+         BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+//        SCSettingViewController *locationVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
 #else
     BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
 #endif
@@ -72,8 +74,7 @@
         rootVc = [[SCBaseNavigationController alloc]initWithRootViewController:loginVC];
        
     }
-//    BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-//    rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
+
     self.window.rootViewController = rootVc;
     
     [self.window makeKeyAndVisible];
@@ -183,7 +184,7 @@
     [param setObject:XcodeAppVersion forKey:@"version"];
     [SCNetwork.shareInstance postWithUrl:COMMONCHECKVERSION parameters:param success:^(id responseObject) {
         NSDictionary *dictionary = responseObject[@"data"];
-        if (dictionary) {
+        if (dictionary || [dictionary isKindOfClass:[NSDictionary class]]) {
             NSString *version = dictionary[@"version"];
             [SCCacheTool shareInstance].status = dictionary[@"status"];
             if (version && [VersionUtils compareVersion:XcodeAppVersion withServerVersion:version]) {

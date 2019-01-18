@@ -86,12 +86,18 @@ class AppointmentCreateCardViewController: UITableViewController {
     
     @IBAction func selectTimeAtion(_ sender: UITapGestureRecognizer) {
         let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddDays(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMD) { [weak self] (date) in
-            self?.failureTimeFid.text = date.getString(format: "YYYY-MM-dd")
+            
+            var mc_date:MCDate = MCDate.init(date: date)
+            if MCDate.init(date: date).isSameDay(MCDate.init(date: Date())){
+                 mc_date = mc_date.byAddDays(1)
+            }
+            self?.failureTimeFid.text = mc_date.formattedDate(withFormat: "YYYY-MM-dd")
+            //date.getString(format: "YYYY-MM-dd")
             self?.view.endEditing(true)
             if self?.timestamp == ""{
                 CouponVerificationService.verificationIsCanCreate(self)
             }
-            self?.timestamp = String(Int(date.timeIntervalSince1970 * 1000))
+            self?.timestamp = String(Int(mc_date.date.timeIntervalSince1970 * 1000))
            
         }
         datePicker.show()
@@ -112,7 +118,7 @@ class AppointmentCreateCardViewController: UITableViewController {
         
         cardFid.inputView = KeyBoard
         KeyBoard.delegate = self
-        nameFid.delegate = self as? UITextFieldDelegate
+        nameFid.delegate = self
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(_handleTap))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
