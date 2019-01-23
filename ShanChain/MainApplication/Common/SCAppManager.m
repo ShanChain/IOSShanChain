@@ -218,10 +218,14 @@ static SCAppManager *instance = nil;
                 spaceId:(NSString *)spaceId
             chatacterId:(NSString *)characterId
              hxUserName:(NSString *)hxUserName
-             hxPassword:(NSString *)hxPassword{
+             hxPassword:(NSString *)hxPassword channel:(NSString *)channel
+{
     [[SCCacheTool shareInstance]setCacheValue:characterId withUserID:userId andKey:CACHE_CHARACTER_ID];
     [[SCCacheTool shareInstance]setCacheValue:spaceId withUserID:userId andKey:CACHE_SPACE_ID];
     [[SCCacheTool shareInstance] setCacheValue:userId withUserID:@"0" andKey:CACHE_CUR_USER];
+    if (!NULLString(channel)) {
+        [[SCCacheTool shareInstance] setCacheValue:channel withUserID:userId  andKey:CACHE_APP_CHANNEL];
+    }
     if (!NULLString(token)) {
         [[SCCacheTool shareInstance] setCacheValue:token withUserID:userId  andKey:CACHE_TOKEN];
     }
@@ -263,7 +267,7 @@ static SCAppManager *instance = nil;
                 NSString *characterId = [characterInfo[@"characterId"] stringValue];
                 NSString *hxUserName = hxAccount[@"hxUserName"];
                 NSString *hxPassword = hxAccount[@"hxPassword"];
-                [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:spaceId chatacterId:characterId hxUserName:hxUserName hxPassword:hxPassword];
+                [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:spaceId chatacterId:characterId hxUserName:hxUserName hxPassword:hxPassword channel:SC_APP_CHANNEL];
                 NSMutableDictionary *params0 = [NSMutableDictionary dictionary];
                 [params0 setObject:spaceId forKey:@"spaceId"];
                 [params0 setObject:token forKey:@"token"];

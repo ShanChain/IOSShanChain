@@ -285,6 +285,7 @@
         [params setObject:[NSString stringWithFormat:@"%0.f",time] forKey:@"Timestamp"];
         [params setObject:encryptAccount forKey:@"encryptAccount"];
         [params setObject:encryptPassword forKey:@"encryptPassword"];
+        [params setObject:SC_APP_CHANNEL forKey:@"channel"];
         [SYProgressHUD showMessage:NSLocalizedString(@"sc_login_loggingIn", nil)];
         [SCNetwork.shareInstance postWithUrl:COMMONUSERLOGIN parameters:params success:^(id responseObject) {
             NSDictionary *data = responseObject[@"data"];
@@ -336,6 +337,8 @@
     [SCLoginDataController otherLoginWithPlatfrom:JSHAREPlatformWechatSession bindPhoneNumberCallBack:^(NSString *encryptOpenId) {
         [self bindPhoneNumberWithEncryptOpenId:encryptOpenId];
     }];
+    
+    
 }
 
 - (void)qqLoginBtnClick{
@@ -394,6 +397,7 @@
 
             [params setObject:encryptAccount forKey:@"encryptOpenId"];
             [params setObject:encryptPassword forKey:@"encryptToken16"];
+            [params setObject:SC_APP_CHANNEL forKey:@"channel"];
             [SYProgressHUD hideHUD];
             [[SCNetwork shareInstance]postWithUrl:COMMONUSERLOGINTHIRD parameters:params success:^(id responseObject) {
                 [SYProgressHUD showSuccess:@"正在获取数据"];

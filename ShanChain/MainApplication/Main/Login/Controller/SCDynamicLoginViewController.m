@@ -48,9 +48,9 @@
     [mStr appendString:self.verifyCodeModel.timestamp];
     NSString *sign = [SCMD5Tool MD5ForUpper32Bate:mStr.copy];
     if (!NULLString(self.encryptOpenId)) {
-        return  @{@"encryptOpenId":self.encryptOpenId,@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text};
+        return  @{@"encryptOpenId":self.encryptOpenId,@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text,@"channel":SC_APP_CHANNEL};
     }
-    return @{@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text};
+    return @{@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text,@"channel":SC_APP_CHANNEL};
 }
 
 

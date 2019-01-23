@@ -77,6 +77,8 @@
     config.WeChatAppId = WeChat_AppId;
     config.WeChatAppSecret = WeChat_appSecret;
     config.JChatProAuth = JMSSAGE_APPKEY;
+    config.FacebookAppID = FACEBOOK_ID;
+    config.FacebookDisplayName = @"MarJar";
     [JSHAREService setupWithConfig:config];
     [JSHAREService setDebug:YES];
     

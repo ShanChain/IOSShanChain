@@ -20,12 +20,9 @@
 #endif
 
 
-
-
 @interface MyWalletViewController ()<XMWebViewDelegate>
 
 @property (nonatomic, strong) XMWebView *webView;
-
 
 
 @end
@@ -37,6 +34,7 @@
     _webView = [[XMWebView alloc] initWithFrame:self.view.frame viewType:WebViewTypeWkWebView];
     _webView.backgroundColor = [UIColor whiteColor];
     _webView.delegate = self;
+    
     [self.view addSubview:_webView];
     [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -50,6 +48,7 @@
     [self.webView loadRequest:request];
     
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES;
@@ -94,6 +93,8 @@
         [urlString appendString:[NSString stringWithFormat:@"token=%@",[SCCacheTool shareInstance].getUserToken]];
         [urlString appendString:@"&"];
         [urlString appendString:[NSString stringWithFormat:@"userId=%@",[SCCacheTool shareInstance].getCurrentUser]];
+        [urlString appendString:@"&"];
+        [urlString appendString:[NSString stringWithFormat:@"channel=%@",SC_APP_CHANNEL]];
         NSURL *url = [NSURL URLWithString:urlString];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [self.webView loadRequest:request];
@@ -124,6 +125,8 @@
             [urlString appendString:[NSString stringWithFormat:@"token=%@",[SCCacheTool shareInstance].getUserToken]];
             [urlString appendString:@"&"];
             [urlString appendString:[NSString stringWithFormat:@"userId=%@",[SCCacheTool shareInstance].getCurrentUser]];
+            [urlString appendString:@"&"];
+            [urlString appendString:[NSString stringWithFormat:@"channel=%@",SC_APP_CHANNEL]];
             NSURL *url = [NSURL URLWithString:urlString];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             [self.webView loadRequest:request];

@@ -37,7 +37,7 @@
 - (BOOL)isLogin;
 
 
-- (void)cacheLoginUserId:(NSString *)userId token:(NSString *)token spaceId:(NSString *)spaceId chatacterId:(NSString *)chatacterId hxUserName:(NSString *)hxUserName hxPassword:(NSString *)hxPassword;
+- (void)cacheLoginUserId:(NSString *)userId token:(NSString *)token spaceId:(NSString *)spaceId chatacterId:(NSString *)chatacterId hxUserName:(NSString *)hxUserName hxPassword:(NSString *)hxPassword channel:(NSString *)channel;
 
 - (void)clearLoginCache;
 

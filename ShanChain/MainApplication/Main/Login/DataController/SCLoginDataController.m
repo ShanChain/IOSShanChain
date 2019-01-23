@@ -41,7 +41,7 @@
                 NSDictionary *hxInfo = data[@"hxAccount"];
                 NSString *hxUserName = hxInfo[@"hxUserName"];
                 NSString *hxPassword = hxInfo[@"hxPassword"];
-                [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:spaceId chatacterId:characterId hxUserName:hxUserName hxPassword:hxPassword];
+                [[SCAppManager shareInstance] cacheLoginUserId:userId token:token spaceId:spaceId chatacterId:characterId hxUserName:hxUserName hxPassword:hxPassword channel:SC_APP_CHANNEL];
                 [[SCCacheTool shareInstance] cacheCharacterInfo:characterInfo withUserId:userId];
                 NSMutableDictionary *params1 = [NSMutableDictionary dictionary];
                 [params1 setObject:spaceId forKey:@"spaceId"];
@@ -96,6 +96,7 @@
 
 // 三方平台唯一标识
 + (void)otherLoginWithPlatfrom:(JSHAREPlatform)platfrom bindPhoneNumberCallBack:(void (^)(NSString *encryptOpenId))callBack{
+    
     [JSHAREService getSocialUserInfo:platfrom handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
         if (error) {
             [HHTool showError:error.localizedDescription];
@@ -131,6 +132,7 @@
         [params setObject:[NSString stringWithFormat:@"%0.f",time] forKey:@"Timestamp"];
         [params setObject:encryptAccount forKey:@"encryptOpenId"];
         [params setObject:encryptPassword forKey:@"encryptToken16"];
+        [params setObject:SC_APP_CHANNEL forKey:@"channel"];
         
         [[SCNetwork shareInstance]v1_postWithUrl:Third_login_URL params:params showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
             if ([baseModel.code isEqualToString:SC_PHONENUMBER_NOBIND]) {

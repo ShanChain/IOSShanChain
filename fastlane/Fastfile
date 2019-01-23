@@ -18,11 +18,35 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new release build to the App Store"
   lane :release do
-    build_app(workspace: "ShanChain.xcworkspace", scheme: "ShanChain")
-    upload_to_app_store
+      # 增加build版本号
+    increment_build_number
+    scheme_name = "ShanChain"
+    output_name = "#{scheme_name}_#{Time.now.strftime('%Y%m%d%H%M%S')}.ipa"
+    gym(
+      export_method: "app-store", 
+      export_xcargs: "-allowProvisioningUpdates",
+      clean:true, #打包前clean项目
+      scheme: scheme_name,# target的名字
+      output_directory:".././api_output_directory/AppStore",#ipa的存放目录
+  )
+    #build_app(workspace: "ShanChain.xcworkspace", scheme: "ShanChain")
+    #upload_to_app_store
+    deliver
   end
 
   lane :beta do
+
+    output_name = "#{scheme_name}_#{Time.now.strftime('%Y%m%d%H%M%S')}.ipa"
+  	gym(
+      clean:true, #打包前clean项目
+      export_method: "ad-hoc", #导出方式
+      scheme:"ShanChain", #scheme
+      # configuration: "Debug",#环境
+      silent:true #在构建时隐藏终端不必要输出的信息
+      output_directory:".././api_output_directory/pgyer",#ipa的存放目录
+       #output_name:get_build_number()#输出ipa的文件名为当前的build号
+  )
+
       build_app(export_method: "ad-hoc")
       pgyer(api_key: "4f26608844e57b9b96245793e11ce649", user_key: "9a87d0e786998ecdb55071337eb8df6f", update_description: "update by fastlane")
   end

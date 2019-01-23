@@ -22,6 +22,7 @@
 #define CACHE_SPACE_COLLECTION  @"spaceCollection"
 #define CACHE_HX_USER_NAME  @"hxUserName"
 #define CACHE_HX_PWD  @"hxPwd"
+#define CACHE_APP_CHANNEL  @"channel"
 #define CACHE_DEVICE_TOKEN  @"deviceToken"
 #define CACHE_APP_ENV  @"true"
 #define CACHE_USER_MSG @"userMessage"

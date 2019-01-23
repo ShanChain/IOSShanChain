@@ -19,6 +19,7 @@ let SCREEN_WIDTH = Int(UIScreen.main.bounds.size.width)
 let kApplicationStatusBarHeight = Int(UIApplication.shared.statusBarFrame.size.height)
 let kNavBlueColor = SC_ThemeMainColor
 let SC_ThemeMainColor = _ThemeMainColor()
+let SC_CantClickColor = UIColor.init(valueStr: "BBBBBB") // 按钮不能点击颜色
 let SC_ThemeBackgroundViewColor = RGB(245, 245, 245)
 let SC_EmphasisColor = UIColor.black // 主要字体颜色
 let SC_defaultImage = UIImage.loadImage("sc_com_icon_DefaultAvatar")

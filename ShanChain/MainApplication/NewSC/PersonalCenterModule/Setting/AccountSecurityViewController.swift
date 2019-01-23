@@ -10,6 +10,10 @@ import UIKit
 
 class AccountSecurityViewController: UITableViewController {
 
+    
+    @IBOutlet weak var editPasswordLb: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "账号与安全"

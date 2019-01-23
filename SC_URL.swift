@@ -24,6 +24,7 @@ public let  RealNameVerified_URL = "/v1/2.0/Verified" // 实名认证
 public let  IsSuper_URL  = "/web/api/sys/isSuper" //是否是超级用户
 public let  WALLET_CURRENCY_URL  = "/web/api/wallet/seat/currency" // 获取当前汇率
 public let  WALLET_ADDRESSINFO_URL  = "/web/api/wallet/info" // 用户查询马甲账户信息API
+public let  GetVerifycode_URL  = "/v1/2.0/sms/login/verifycode" // 获取验证码
 
 
 /*
