@@ -358,6 +358,7 @@
                         <outlet property="wx_bindStatusLb" destination="DLm-kD-sFc" id="Q0n-HY-KOJ"/>
                         <segue destination="Tx3-ef-IhD" kind="push" identifier="setPassword" id="2m1-c5-hhG"/>
                         <segue destination="h4u-g1-MA0" kind="push" identifier="resetPassword" id="oYp-qX-t8d"/>
+                        <segue destination="h4u-g1-MA0" kind="push" identifier="bindPhone" id="xgN-LD-lne"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGY-Ya-3iN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -541,6 +542,7 @@
                         <outlet property="codeFid" destination="0Ld-pg-o5x" id="1Yf-kl-yFH"/>
                         <outlet property="errorTipLb" destination="uLx-Vw-MN8" id="2Oh-rg-urM"/>
                         <outlet property="nextBtn" destination="Uyr-0m-v05" id="BS4-Lf-wk7"/>
+                        <outlet property="titleLb" destination="6Ke-n1-yeP" id="mCL-a7-NoI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YcN-hg-BbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -549,6 +551,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2m1-c5-hhG"/>
+        <segue reference="xgN-LD-lne"/>
+        <segue reference="yi8-gN-oAr"/>
     </inferredMetricsTieBreakers>
 </document>

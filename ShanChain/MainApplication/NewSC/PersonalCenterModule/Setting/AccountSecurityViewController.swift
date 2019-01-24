@@ -64,6 +64,12 @@ class AccountSecurityViewController: UITableViewController {
                 break
             case 2:
                 
+                hrShowAlert(withTitle: "更换已绑定的手机号？", message: bindModel?.mobile, buttonsTitles: ["取消","更换"]) { (_, idx) in
+                    if idx == 1{
+                        self.performSegue(withIdentifier: "bindPhone", sender: nil)
+                    }
+                }
+                
                 break
             default: break
                 
@@ -75,6 +81,16 @@ class AccountSecurityViewController: UITableViewController {
         }
         
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let controller = segue.destination as? ResetPasswordViewController {
+            if segue.identifier == "resetPassword" {
+                controller.pageType = .resetPassword
+            }else if segue.identifier == "bindPhone"{
+                controller.pageType = .bindPhone
+            }
+            
+        }
+    }
     
 }

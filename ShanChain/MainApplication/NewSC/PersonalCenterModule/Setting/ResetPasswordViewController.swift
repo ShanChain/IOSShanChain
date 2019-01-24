@@ -8,11 +8,17 @@
 
 import UIKit
 
+
+enum BindPageType:Int {
+    case bindPhone = 1
+    case resetPassword
+}
+
+
 class ResetPasswordViewController: SCBaseVC {
 
     
     @IBOutlet weak var codeFid: UITextField!
-    
     
     @IBOutlet weak var nextBtn: UIButton!
     
@@ -20,13 +26,26 @@ class ResetPasswordViewController: SCBaseVC {
     @IBOutlet weak var codeBtn: UIButton!
     
     
+    @IBOutlet weak var titleLb: UILabel!
     @IBOutlet weak var errorTipLb: UILabel!
     var disposeBag = DisposeBag()
+    var pageType:BindPageType = .bindPhone
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "重置密码"
         bindPhoneLb.text = "输入当前绑定手机\n1888888888发送短信"
+        
+        
+        if pageType ==  .bindPhone{
+            title = "更换绑定手机"
+            titleLb.text = "更换绑定手机"
+            
+        }else if pageType ==  .resetPassword{
+             title = "重置密码"
+             titleLb.text = "更换绑定手机"
+        }
+        
         let codeValid = codeFid.rx.text.orEmpty
             .map { $0.count > 0 }.shareReplay(1)
         
