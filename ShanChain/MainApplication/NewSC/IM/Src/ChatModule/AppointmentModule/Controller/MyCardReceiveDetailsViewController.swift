@@ -132,7 +132,7 @@ class MyCardReceiveDetailsViewController: UITableViewController {
     
     func _configurationUI(){
         self.icon._sd_setImage(withURLString: self.detailsModel?.photoUrl, placeholderImage:UIImage.loadImage(DefaultAvatar))
-        self.titleLb.text = detailsModel?.tokenName
+        self.titleLb.text = detailsModel?.tokenName ?? detailsModel?.name
         self.cardLb.text = detailsModel?.tokenSymbol
         self.userNameLb.text = detailsModel?.nikeName
         self.priceLb.text = "￥\(detailsModel?.price ?? "")"
@@ -165,10 +165,14 @@ class MyCardReceiveDetailsViewController: UITableViewController {
             statusBtn.backgroundColor = .gray
             break
         case .receive_Invalid:
+            
+            let mcDate:MCDate = MCDate.init(interval: ((detailsModel?.getTime)! / 1000))
+            let dateStr = mcDate.formattedDate(withFormat: "YYYY-MM-dd")
+            
             if isUseCouponsing == true{
                 statusTitle = "该劵已失效"
             }else{
-                statusTitle = "已失效\(MCDate.init(interval: TimeInterval(Int((detailsModel?.getTime!)!)!)).formattedDate(withFormat: "YYYY-MM-dd"))"
+                statusTitle = "已失效\(dateStr!)"
             }
              statusBtn.backgroundColor = .gray
             break
@@ -199,20 +203,21 @@ extension MyCardReceiveDetailsViewController{
         }
         SCNetwork.shareInstance().hh_Get(withUrl: url, parameters: parameter, showLoading: isShow) { (baseModel, error) in
             if error != nil{
-                var message:String = "识别失败"
-                if (error as NSError?)?.code == 10050{
-                    message = "很抱歉，您无法核销他人创建的马甲券，尝试创建自己的马甲券吧～"
-                }
-                
-                self.hrShowAlert(withTitle: nil, message: message, buttonsTitles: ["我知道了"], andHandler: { (_, _) in
-                    self.pop(toViewControllerClass: MyCardCouponContainerViewController.self, withAnimation: true)
-                })
                 return
             }
             if  let dic = baseModel?.data as? Dictionary<String,Any>{
                 self.detailsModel = CouponsDetailsModel.deserialize(from: dic)
                 if self.isUseCouponsing == true{
-                    self.status = (self.detailsModel?.couponsStatus)!
+                  
+                    if self.detailsModel?.vendorUser != SCCacheTool.shareInstance().getCurrentUser(){
+                        let message:String = "很抱歉，您无法核销他人创建的马甲券，尝试创建自己的马甲券吧～"
+                        self.hrShowAlert(withTitle: nil, message: message, buttonsTitles: ["我知道了"], andHandler: { (_, _) in
+                            self.pop(toViewControllerClass: MyCardCouponContainerViewController.self, withAnimation: true)
+                        })
+                        return
+                    }else{
+                          self.status = (self.detailsModel?.couponsStatus)!
+                    }
                 }
                 SCNetwork.shareInstance().v1_post(withUrl: "/v1/character/get/current", params: ["userId":self.detailsModel?.vendorUserStr], showLoading: isShow, call: { (userModel, error) in
                     if let userDic = userModel?.data as? [String:Any]{

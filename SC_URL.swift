@@ -78,8 +78,12 @@ public let TASK_CONRIRM_COMPLETE_URL  = "/v1/task/confirm/complete" //发布者�
 public let TASK_URGE_URL  = "/v1/task/urge" //催促确认/完成任务
 
 public let COORDINATE_URL  = "/v1/lbs/coordinate/info" // 获取当前位置聊天室信息
-
-
 public let JM_RoomMembers_URL  = "/jm/room/RoomMembers" //获取极光聊天室成员信息
+
+
+/*
+  设置
+ */
+public let User_Bind_URL  = "/v1/user/bound" //查看绑定情况
 
 

@@ -22,16 +22,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fnk-if-whc">
-                    <rect key="frame" x="0.0" y="80" width="375" height="200"/>
+                    <rect key="frame" x="25" y="80" width="325" height="200"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="Myl-Ig-Wmg"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkW-SJ-6m5">
-                    <rect key="frame" x="20" y="300" width="335" height="46"/>
+                    <rect key="frame" x="20" y="360" width="335" height="46"/>
                     <color key="backgroundColor" red="0.67450980390000004" green="0.50588235290000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="46" id="fZN-7v-H0J"/>
@@ -48,15 +56,23 @@
                         <action selector="submitAction:" destination="-1" eventType="touchUpInside" id="pyB-PX-BjK"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一起把MarJar做得更好！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGA-ao-1KJ">
+                    <rect key="frame" x="91.5" y="305" width="191.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.67450980390000004" green="0.50588235290000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Fnk-if-whc" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="3Se-ig-WCm"/>
-                <constraint firstItem="Fnk-if-whc" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="8fw-rz-BJe"/>
+                <constraint firstItem="Fnk-if-whc" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" constant="-25" id="8fw-rz-BJe"/>
+                <constraint firstItem="mGA-ao-1KJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Br8-YC-BXq"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="CkW-SJ-6m5" secondAttribute="trailing" constant="20" id="DKC-DY-ccr"/>
-                <constraint firstItem="CkW-SJ-6m5" firstAttribute="top" secondItem="Fnk-if-whc" secondAttribute="bottom" constant="20" id="oK3-bw-KiH"/>
+                <constraint firstItem="CkW-SJ-6m5" firstAttribute="top" secondItem="Fnk-if-whc" secondAttribute="bottom" constant="80" id="oK3-bw-KiH"/>
+                <constraint firstItem="mGA-ao-1KJ" firstAttribute="top" secondItem="Fnk-if-whc" secondAttribute="bottom" constant="25" id="rB2-lg-Ser"/>
                 <constraint firstItem="CkW-SJ-6m5" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="uEA-wJ-xQd"/>
-                <constraint firstItem="Fnk-if-whc" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="xPg-BD-60e"/>
+                <constraint firstItem="Fnk-if-whc" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="25" id="xPg-BD-60e"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>

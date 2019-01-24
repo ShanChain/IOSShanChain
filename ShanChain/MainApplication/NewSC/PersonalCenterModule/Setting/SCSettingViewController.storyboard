@@ -214,9 +214,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="h4u-g1-MA0" kind="push" id="W0y-CV-edk"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="xI1-ce-qOT">
                                         <rect key="frame" x="0.0" y="123" width="375" height="44"/>
@@ -353,6 +350,14 @@
                     <navigationItem key="navigationItem" id="JcX-Jn-ncU"/>
                     <connections>
                         <outlet property="editPasswordLb" destination="mI7-oy-jlm" id="rCo-m1-s5E"/>
+                        <outlet property="fb_bindStatusLb" destination="FKB-Fo-iWb" id="Udc-o5-4ar"/>
+                        <outlet property="phoneLb" destination="flw-XZ-wwa" id="0XL-D2-qf3"/>
+                        <outlet property="qq_bindStatusLb" destination="xUv-IO-wHz" id="Sg3-hd-uVd"/>
+                        <outlet property="realNameStatusLb" destination="W6x-Sd-WH2" id="ist-E6-k1j"/>
+                        <outlet property="userIdLb" destination="AWz-7h-B0d" id="V2e-Xe-vfU"/>
+                        <outlet property="wx_bindStatusLb" destination="DLm-kD-sFc" id="Q0n-HY-KOJ"/>
+                        <segue destination="Tx3-ef-IhD" kind="push" identifier="setPassword" id="2m1-c5-hhG"/>
+                        <segue destination="h4u-g1-MA0" kind="push" identifier="resetPassword" id="oYp-qX-t8d"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGY-Ya-3iN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -362,7 +367,7 @@
         <!--Setting Password View Controller-->
         <scene sceneID="gJ5-Cm-Vlw">
             <objects>
-                <viewController id="Tx3-ef-IhD" customClass="SettingPasswordViewController" customModule="ShanChain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingPasswordViewController" id="Tx3-ef-IhD" customClass="SettingPasswordViewController" customModule="ShanChain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w7a-g6-bRX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -436,7 +441,7 @@
         <!--Reset Password View Controller-->
         <scene sceneID="H86-Jf-lLj">
             <objects>
-                <viewController id="h4u-g1-MA0" customClass="ResetPasswordViewController" customModule="ShanChain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetPasswordViewController" id="h4u-g1-MA0" customClass="ResetPasswordViewController" customModule="ShanChain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="18w-a1-9Nj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -471,6 +476,9 @@
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Tx3-ef-IhD" kind="push" id="yi8-gN-oAr"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="输入当前绑定手机\n18888888" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPv-mW-bSn">
                                 <rect key="frame" x="25" y="94" width="181" height="16"/>
@@ -500,6 +508,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码有误" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLx-Vw-MN8">
+                                <rect key="frame" x="25" y="192" width="66.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -509,7 +523,9 @@
                             <constraint firstItem="Kde-OR-yln" firstAttribute="centerY" secondItem="0Ld-pg-o5x" secondAttribute="centerY" id="TsO-9q-aBv"/>
                             <constraint firstItem="Uyr-0m-v05" firstAttribute="top" secondItem="0Ld-pg-o5x" secondAttribute="bottom" constant="45" id="XVf-R2-UkO"/>
                             <constraint firstItem="0Ld-pg-o5x" firstAttribute="leading" secondItem="ltB-zB-bZM" secondAttribute="leading" constant="25" id="clk-43-Ou4"/>
+                            <constraint firstItem="uLx-Vw-MN8" firstAttribute="top" secondItem="0Ld-pg-o5x" secondAttribute="bottom" constant="13" id="gHw-Sv-AlO"/>
                             <constraint firstItem="6Ke-n1-yeP" firstAttribute="top" secondItem="ltB-zB-bZM" secondAttribute="top" constant="40" id="hbo-QD-VZK"/>
+                            <constraint firstItem="Uyr-0m-v05" firstAttribute="leading" secondItem="uLx-Vw-MN8" secondAttribute="leading" id="nof-7i-rDn"/>
                             <constraint firstItem="6Ke-n1-yeP" firstAttribute="leading" secondItem="ltB-zB-bZM" secondAttribute="leading" constant="25" id="pmh-rx-cfH"/>
                             <constraint firstItem="Uyr-0m-v05" firstAttribute="leading" secondItem="ltB-zB-bZM" secondAttribute="leading" constant="25" id="rZC-Yp-78R"/>
                             <constraint firstItem="mPv-mW-bSn" firstAttribute="top" secondItem="6Ke-n1-yeP" secondAttribute="bottom" constant="10" id="ryr-fe-cm3"/>
@@ -523,6 +539,7 @@
                         <outlet property="bindPhoneLb" destination="mPv-mW-bSn" id="2Gw-it-axr"/>
                         <outlet property="codeBtn" destination="Kde-OR-yln" id="R24-dB-hbq"/>
                         <outlet property="codeFid" destination="0Ld-pg-o5x" id="1Yf-kl-yFH"/>
+                        <outlet property="errorTipLb" destination="uLx-Vw-MN8" id="2Oh-rg-urM"/>
                         <outlet property="nextBtn" destination="Uyr-0m-v05" id="BS4-Lf-wk7"/>
                     </connections>
                 </viewController>
@@ -531,4 +548,7 @@
             <point key="canvasLocation" x="1372" y="830"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="2m1-c5-hhG"/>
+    </inferredMetricsTieBreakers>
 </document>

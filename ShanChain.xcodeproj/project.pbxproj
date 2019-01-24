@@ -16,6 +16,7 @@
 		22070692219AC0A400404459 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070691219AC0A300404459 /* TaskListModel.swift */; };
 		2207069C219AEBE700404459 /* ShowSelectTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22070699219AEBE700404459 /* ShowSelectTableView.m */; };
 		2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207069A219AEBE700404459 /* ShowSelectTableView.xib */; };
+		2215C00021F9B37200D624C6 /* BindInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */; };
 		2218E18D217606B200719844 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E18C217606B200719844 /* MobileCoreServices.framework */; };
 		2218E191217606D900719844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E190217606D900719844 /* QuartzCore.framework */; };
 		2218E193217606E200719844 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E192217606E200719844 /* OpenGLES.framework */; };
@@ -673,6 +674,7 @@
 		22070699219AEBE700404459 /* ShowSelectTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowSelectTableView.m; sourceTree = "<group>"; };
 		2207069A219AEBE700404459 /* ShowSelectTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowSelectTableView.xib; sourceTree = "<group>"; };
 		2207069B219AEBE700404459 /* ShowSelectTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSelectTableView.h; sourceTree = "<group>"; };
+		2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindInfoModel.swift; sourceTree = "<group>"; };
 		2218E18C217606B200719844 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2218E18E217606C900719844 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2218E190217606D900719844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1639,6 +1641,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2215BFFE21F9B33700D624C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		221B3BC321C74D880061BB3E /* ScanCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -2805,6 +2815,7 @@
 		22E11A2C21F1A69B00B76A3D /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				2215BFFE21F9B33700D624C6 /* Model */,
 				22E11A3121F1A89000B76A3D /* SCSettingViewController.swift */,
 				22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */,
 				222CCAB321F819DB007E13BB /* SettingPasswordViewController.swift */,
@@ -3730,6 +3741,7 @@
 				222C3104215A48D7009871C7 /* ShellScript */,
 				2231089721DF55B8006D458F /* ShellScript */,
 				22581B5321E2E56900F1D1B1 /* ShellScript */,
+				2215BFFD21F9AF1200D624C6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3943,6 +3955,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2215BFFD21F9AF1200D624C6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ $CONFIGURATION == Release ]; then\necho \"Bumping build number...\"\nplist=${PROJECT_DIR}/${INFOPLIST_FILE}\n\n#increment the build number (ie 115 to 116)\nbuildnum=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${plist}\")\nif [[ \"${buildnum}\" == \"\" ]]; then\necho \"No build number in $plist\"\nexit 2\nfi\n\nbuildnum=$(expr $buildnum + 1)\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $buildnum\" \"${plist}\"\necho \"Bumped build number to $buildnum\"\n\nelse\necho $CONFIGURATION \" build - Not bumping build number.\"\n\nfi";
+		};
 		222C3104215A48D7009871C7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -4407,6 +4432,7 @@
 				221B3C0521C77B3E0061BB3E /* ScanCodeService.m in Sources */,
 				22A2EB9B21BF4FB500737265 /* MyCardReceiveDetailsViewController.swift in Sources */,
 				223F99E3217F12040031DB95 /* ExJMessage.swift in Sources */,
+				2215C00021F9B37200D624C6 /* BindInfoModel.swift in Sources */,
 				223F9A11217F12040031DB95 /* Log.swift in Sources */,
 				332AB6501F4ED8C900888313 /* NSString+Extension.m in Sources */,
 				223F996E217F12040031DB95 /* JCCEmoticonGroup.swift in Sources */,
@@ -4840,8 +4866,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a79065-97be-43ac-8860-65ff90b8aa41";
-				PROVISIONING_PROFILE_SPECIFIER = adhoc;
+				PROVISIONING_PROFILE = "10875f27-8b2c-4824-8254-9d9dca6e57b9";
+				PROVISIONING_PROFILE_SPECIFIER = "马甲_APPStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4909,8 +4935,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a79065-97be-43ac-8860-65ff90b8aa41";
-				PROVISIONING_PROFILE_SPECIFIER = adhoc;
+				PROVISIONING_PROFILE = "10875f27-8b2c-4824-8254-9d9dca6e57b9";
+				PROVISIONING_PROFILE_SPECIFIER = "马甲_APPStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

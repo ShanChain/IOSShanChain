@@ -24,7 +24,7 @@
 +(void)sc_editPersonalInfo:(NSDictionary *)params callBlock:(void (^)(BOOL))callBlock{
     [[SCNetwork shareInstance]v1_postWithUrl:CHANGE_USER_CHARACTER params:params.copy showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
         if (!error) {
-            [HHTool showSucess:baseModel.message];
+           // [HHTool showSucess:baseModel.message];
             if (baseModel.data[@"characterInfo"] && [baseModel.data[@"characterInfo"] isKindOfClass:[NSDictionary class]]) {
                 SCCharacterModel_characterInfo *info = [SCCharacterModel_characterInfo mj_objectWithKeyValues:baseModel.data[@"characterInfo"]];
                 [SCCacheTool shareInstance].characterModel.characterInfo = info;

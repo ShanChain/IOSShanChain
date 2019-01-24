@@ -54,7 +54,7 @@
 
 
 - (BOOL)isPureFloat;
-//检验字符串是否是 6-20位的字母和数字的组合
+//检验字符串是否是 8 -20位的字母和数字符号的组合
 - (BOOL)isValidatePassword;
 
 - (BOOL)isContainSerialCharacters;

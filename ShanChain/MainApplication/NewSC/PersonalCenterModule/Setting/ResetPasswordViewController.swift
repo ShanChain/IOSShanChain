@@ -19,6 +19,8 @@ class ResetPasswordViewController: SCBaseVC {
     @IBOutlet weak var bindPhoneLb: UILabel!
     @IBOutlet weak var codeBtn: UIButton!
     
+    
+    @IBOutlet weak var errorTipLb: UILabel!
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {

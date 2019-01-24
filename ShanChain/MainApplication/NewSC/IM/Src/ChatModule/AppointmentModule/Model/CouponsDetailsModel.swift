@@ -16,13 +16,14 @@ class CouponsDetailsModel: HandyJSON {
     var userId:String?
     var subuserId:String?
     var tokenName:String?
+    var name:String?
     var amount:String?
     var vendorUser:String?
     var vendorSubuser:String?
     var price:String?
     var tokenStatus:String?
     var roomid:String?
-    var getTime:String?
+    var getTime:Double = NSDate.init().timeIntervalSince1970 * 1000
     var photoUrl:String?
     var tokenSymbol:String?
     var detail:String?

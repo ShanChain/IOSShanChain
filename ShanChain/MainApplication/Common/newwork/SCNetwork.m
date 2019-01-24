@@ -159,10 +159,10 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     NSData* json = [NSJSONSerialization dataWithJSONObject:mdic.copy options:NSJSONWritingPrettyPrinted error:nil];
     NSString  *str = [[NSString alloc]initWithData:json encoding:NSUTF8StringEncoding];
     str = [str stringByReplacingOccurrencesOfString:@"\r\n"withString:@""];
-    str = [str stringByReplacingOccurrencesOfString:@"\n"withString:@""];
+//    str = [str stringByReplacingOccurrencesOfString:@"\n"withString:@""];
     str = [str stringByReplacingOccurrencesOfString:@"\t"withString:@""];
     str = [str stringByReplacingOccurrencesOfString:@"\t"withString:@""];
-    str = [str stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+   // str = [str stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
     return data;
 }

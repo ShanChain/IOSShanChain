@@ -59,9 +59,12 @@ class MyCardDetailsViewController: SCBaseVC {
     fileprivate var controllerPage:WalletPage?
     
     func _ConfigurationHeaderViewUI(){
-        tableView.tableHeaderView = tableHeaderView
+       
+       tableView.reloadData()
+       // tableView.tableHeaderView = tableHeaderView
         header_icon._sd_setImage(withURLString: couponsModel?.photoUrl, placeholderImage: SC_defaultImage)
-        header_cardLb.text = couponsModel?.name
+        header_cardLb.text = couponsModel?.tokenSymbol
+        header_nikeNameLb.text = couponsModel?.name
         header_priceLb.text = "￥\(couponsModel?.price ?? "0")"
         header_totalLb.text = "共\(couponsModel?.amount ?? "0")张"
         invalidIcon.isHidden = !(couponsModel?.isMainInvalid)!
@@ -76,6 +79,7 @@ class MyCardDetailsViewController: SCBaseVC {
         header_waitLb.text = "待核销:\(couponsModel?.unusedNum ?? "0")张"
         header_completeLb.text = "已核销:\(couponsModel?.usedNum ?? "0")张"
         header_laveLB.text = "剩余:\(couponsModel?.remainAmount ?? "0")张"
+      
     }
     
     override func viewDidLoad() {
@@ -126,7 +130,22 @@ extension MyCardDetailsViewController:UITableViewDataSource,UITableViewDelegate{
         return 0
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if couponsModel == nil {
+            return 135
+        }
+       
+        return (couponsModel?.detail?.heightForAdaptive(Font: Font(17), CGFloat(SCREEN_WIDTH - 60)))! + 165
+    }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableHeaderView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: H_cell, for: indexPath) as! AppointmentCardDetialsCell
         return cell
@@ -218,19 +237,20 @@ extension  MyCardDetailsViewController{
     }
     
     func _requstDetaisData(){
-        SCNetwork.shareInstance().hh_Get(withUrl: CouponsVendorDetails_URL, parameters: ["couponsId":self.couponsId], showLoading: true) { (baseModel, error) in
+        SCNetwork.shareInstance().hh_Get(withUrl: CouponsVendorDetails_URL, parameters: ["couponsId":self.couponsId], showLoading: true) {[weak self] (baseModel, error) in
             if let data = baseModel?.data as? Dictionary<String,Any>{
                 if let model = CouponsEntityModel.deserialize(from: data){
-                    self.couponsModel = model;
-                    SCNetwork.shareInstance().v1_post(withUrl: "/v1/character/get/current", params: ["userId":model.userId], showLoading: true, call: { (userModel, error) in
-                        if let userDic = userModel?.data as? [String:Any]{
-                            if let characterInfo = userDic["characterInfo"] as? [String:Any]{
-                                let nikeName:String = characterInfo["name"] as! String
-                                self.header_nikeNameLb.text = nikeName
-                                self._ConfigurationHeaderViewUI()
-                            }
-                        }
-                    })
+                    self?.couponsModel = model;
+                    self?._ConfigurationHeaderViewUI()
+//                    SCNetwork.shareInstance().v1_post(withUrl: "/v1/character/get/current", params: ["userId":model.userId], showLoading: true, call: { (userModel, error) in
+//                        if let userDic = userModel?.data as? [String:Any]{
+//                            if let characterInfo = userDic["characterInfo"] as? [String:Any]{
+//                                let nikeName:String = characterInfo["name"] as! String
+//                                self.header_nikeNameLb.text = nikeName
+//                                self._ConfigurationHeaderViewUI()
+//                            }
+//                        }
+//                    })
                     
                 }
             }
@@ -238,4 +258,8 @@ extension  MyCardDetailsViewController{
     }
     
 }
+
+
+
+
 

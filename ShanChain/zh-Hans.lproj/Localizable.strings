@@ -146,7 +146,7 @@
 "sc_map_Loading" = "正在获取该元社区信息，请稍等";
 "sc_map_Imhere" = "您当前位置";
 "sc_NetworkIsNot" = "连接超时，请稍后再试~";
-"sc_TellUsProblem" = "请输入您要反馈的建议...";
+"sc_TellUsProblem" = "把你的遇到的问题、想法、意见告诉我们吧~";
 "sc_Please_check_the_networksettings" = "请检查网络设置";
 "sc_Nodata" = "暂无数据";
 
@@ -213,7 +213,7 @@
 "sc_Voucher_enterPrice" = "请输入单价";
 "sc_Voucher_enterAmount" = "请输入发布数量";
 "sc_Voucher_choose" = "选择时间";
-"sc_Voucher_instructions" = "请具体描述该券的使用说明，如联系电话、地址、金额限制等";
+"sc_Voucher_instructions" = "如联系电话、地址、金额限制等";
 "sc_Voucher_verified" = "已认证";
 "sc_Voucher_chargePrice" = "马甲将收取该券发动总价的1%作为抵押，待该券失效后，将全额返回到您的钱包账户中。";
 "sc_Voucher_Deposit" = "充值";

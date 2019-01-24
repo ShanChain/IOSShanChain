@@ -119,6 +119,7 @@ class AppointmentCreateCardViewController: UITableViewController {
         cardFid.inputView = KeyBoard
         KeyBoard.delegate = self
         nameFid.delegate = self
+        descriptionTextView.delegate = self
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(_handleTap))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
@@ -228,5 +229,17 @@ extension AppointmentCreateCardViewController:UITextFieldDelegate{
     }
     
 
+}
+
+extension AppointmentCreateCardViewController:UITextViewDelegate{
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            
+        }
+        return true
+    }
+    
+    
 }
 

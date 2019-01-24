@@ -325,7 +325,7 @@
 
 - (BOOL)isValidatePassword
 {
-    if (self.length < 6 || self.length > 20 || [self isPureInt] || [self isPureLetters] || [self isPureSymbol]  ) {
+    if (self.length < 8 || self.length > 20 || [self isPureInt] || [self isPureLetters] || [self isPureSymbol]  ) {
         return NO;
     }
     return YES;

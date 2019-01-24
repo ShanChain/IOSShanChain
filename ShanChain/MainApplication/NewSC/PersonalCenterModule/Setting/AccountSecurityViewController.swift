@@ -11,90 +11,70 @@ import UIKit
 class AccountSecurityViewController: UITableViewController {
 
     
+    @IBOutlet weak var userIdLb: UILabel!
+    
+    
     @IBOutlet weak var editPasswordLb: UILabel!
     
+    @IBOutlet weak var phoneLb: UILabel!
+    
+    
+    @IBOutlet weak var wx_bindStatusLb: UILabel!
+    
+    @IBOutlet weak var qq_bindStatusLb: UILabel!
+    
+    
+    @IBOutlet weak var realNameStatusLb: UILabel!
+    @IBOutlet weak var fb_bindStatusLb: UILabel!
+    
+    var bindModel:BindInfoModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "账号与安全"
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        SCNetwork.shareInstance().v1_post(withUrl: User_Bind_URL, params: ["userId":SCCacheTool.shareInstance().getCurrentUser()], showLoading: true) { [weak self] (baseModel, error) in
+            if let model = BindInfoModel.deserialize(from: baseModel?.data as? Dictionary){
+                self?._bind(model)
+                self?.bindModel = model
+            }
+        }
     }
-
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-//
-//    // MARK: - Table view data source
-//
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    func _bind(_ model:BindInfoModel){
+      userIdLb.text = model.userId
+      editPasswordLb.text = model.pwTitle
+      phoneLb.text = model.mobile
+      wx_bindStatusLb.text = model.wxBindTitle
+      qq_bindStatusLb.text = model.qqBindTitle
+      fb_bindStatusLb.text = model.fbBindTitle
+      realNameStatusLb.text = model.idCardTitle
+       
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            switch indexPath.row {
+            case 1:
+                if self.bindModel?.password == false{
+                    self.performSegue(withIdentifier: "setPassword", sender: nil)
+                }else{
+                     self.performSegue(withIdentifier: "resetPassword", sender: nil)
+                }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+                break
+            case 2:
+                
+                break
+            default: break
+                
+            }
+        }
+        
+        if indexPath.section == 1{
+            
+        }
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
 }
