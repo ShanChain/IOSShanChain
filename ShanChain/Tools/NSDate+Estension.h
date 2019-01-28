@@ -32,5 +32,8 @@
     
     // 根据时间戳获取当前显示时间
 +(NSString*)ChatingTime:(NSString *)timestring;
+
+// 获取当天零点时间
+- (NSDate *)zeroOfDate;
     
 @end

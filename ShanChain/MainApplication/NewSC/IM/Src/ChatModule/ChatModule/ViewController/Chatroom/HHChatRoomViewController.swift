@@ -484,9 +484,14 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                     shareModel.background = dic["background"] as! String
                     let shareView:HHShareView = HHShareView.init(frame: (self.view.frame), shareImage: self.takeImage ?? SCCacheTool.shareInstance().takeImage, type: 2, shareModel: shareModel)
                     self.view.addSubview(shareView)
-//                    shareView.closure = {[weak self] () in
-//                        self?.toolbar.isHidden = false
-//                    }
+                    if self.isJoinChatRoom == true{
+                        self.toolbar.isHidden = true
+                        shareView.closure = {[weak self] () in
+                            self?.toolbar.isHidden = false
+                        }
+                    }
+                    
+                    
                 }
                 
             }
@@ -495,7 +500,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         
         // 分享区域截图
         navTitleView.shareRoomClosure = { [weak self] () in
-            self?.toolbar.isHidden = true
+            
             
             if self!.shareTakeUrl == nil {
                 HHTool.showChrysanthemum(); SCAliyunUploadMananger.uploadImage(SCCacheTool.shareInstance().takeImage, withCompressionQuality: 1.0, withCallBack: { (url) in

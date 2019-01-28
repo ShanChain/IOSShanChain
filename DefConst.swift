@@ -23,6 +23,7 @@ let SC_CantClickColor = UIColor.init(valueStr: "BBBBBB") // 按钮不能点击�
 let SC_ThemeBackgroundViewColor = RGB(245, 245, 245)
 let SC_EmphasisColor = UIColor.black // 主要字体颜色
 let SC_defaultImage = UIImage.loadImage("sc_com_icon_DefaultAvatar")
+let SC_phoneNumber:String =   UserDefaults.standard.object(forKey: "K_USERNAME") as! String //当前用户手机号
 
 func IS_IPHONE_X() ->Bool{
     if UIScreen.main.bounds.height == 812 {

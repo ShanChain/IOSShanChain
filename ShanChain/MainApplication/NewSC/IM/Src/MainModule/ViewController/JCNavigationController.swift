@@ -21,7 +21,7 @@ extension CustomNavigation {
         leftButton.setImage(UIImage.loadImage("nav_btn_back_default"), for: .normal)
         leftButton.setImage(UIImage.loadImage("nav_btn_back_default"), for: .highlighted)
         leftButton.addTarget(vc, action: #selector(vc.back(_:)), for: .touchUpInside)
-        leftButton.setTitle("返回", for: .normal)
+        leftButton.setTitle("", for: .normal)
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         leftButton.contentHorizontalAlignment = .left
         let item = UIBarButtonItem(customView: leftButton)

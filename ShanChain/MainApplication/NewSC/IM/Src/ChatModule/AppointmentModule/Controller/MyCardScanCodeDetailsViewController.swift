@@ -27,7 +27,7 @@ class MyCardScanCodeDetailsViewController: SCBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "马甲劵详情"
-        nameLb.text = detailsModel?.tokenSymbol
+        nameLb.text = detailsModel?.tokenName
         codeImageView.image = ScanCodeService.createQR(with: detailsModel?.subCoupId, size: codeImageView.size)
          self.icon._sd_setImage(withURLString: self.detailsModel?.photoUrl, placeholderImage:UIImage.loadImage(DefaultAvatar))
         self.dealTimeLb.text = detailsModel?.deadlineStr

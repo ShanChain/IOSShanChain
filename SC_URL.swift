@@ -25,6 +25,7 @@ public let  IsSuper_URL  = "/web/api/sys/isSuper" //是否是超级用户
 public let  WALLET_CURRENCY_URL  = "/web/api/wallet/seat/currency" // 获取当前汇率
 public let  WALLET_ADDRESSINFO_URL  = "/web/api/wallet/info" // 用户查询马甲账户信息API
 public let  GetVerifycode_URL  = "/v1/2.0/sms/login/verifycode" // 获取验证码
+public let  checkUpdate_URL  = "/oss/apk/get/latest" // 检查更新
 
 
 /*
@@ -85,5 +86,7 @@ public let JM_RoomMembers_URL  = "/jm/room/RoomMembers" //获取极光聊天室�
   设置
  */
 public let User_Bind_URL  = "/v1/user/bound" //查看绑定情况
+public let User_Bind_Account_URL  = "/v1/user/bind_other_account" //绑定账号/解绑账号
+public let Unlogin_Verifycode_URL  = "/v1/sms/unlogin/verifycode" //重置密码获取验证码
 
 

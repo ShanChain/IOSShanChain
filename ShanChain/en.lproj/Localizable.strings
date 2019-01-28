@@ -182,7 +182,6 @@
 "sc_login_EnterPasswordAgain" = "Enter your password again";
 "sc_login_AgreeAndSignUp" = "Agree and sign up";
 "sc_login_MarJarTermsofservice" = "《 MarJar Terms of service  》";
-"sc_login_resend" = "resend";
 "sc_login_wrongphonenumber" = "wrong phone number";
 "sc_login_wrongCode" = "wrong code";
 "sc_login_Pleasere-enterit" = "password is inconsistent. Please re-enter it";

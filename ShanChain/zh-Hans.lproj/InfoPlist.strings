@@ -8,3 +8,17 @@
 
 
 CFBundleDisplayName = "马甲App";
+
+NSCalendarsUsageDescription = "马甲App用于获取具体时间，是否允许使用日历权限？";
+NSCameraUsageDescription = "马甲App会使用拍照、扫描二维码功能，是否允许打开摄像头？";
+NSContactsUsageDescription = "马甲App可能会读取好友列表，是否允许访问通讯录？";
+NSHealthShareUsageDescription = "马甲App需要健康数据，为提供给您更好的服务 ";
+NSHealthUpdateUsageDescription = "马甲App需要健康数据，为提供给您更好的服务";
+NSLocationAlwaysAndWhenInUseUsageDescription = "马甲App可以根据定位提供精准生活服务，是否允许App使用定位？";
+NSLocationAlwaysUsageDescription = "马甲App可以根据定位提供精准生活服务，是否允许App使用定位？";
+NSLocationWhenInUseUsageDescription = "马甲App可以根据定位提供精准生活服务，是否允许App使用定位？";
+NSMicrophoneUsageDescription = "马甲App可以使用语音功能，是否允许使用麦克风？";
+NSPhotoLibraryAddUsageDescription = "马甲App需要添加图片，是否允许访问相册？";
+NSPhotoLibraryUsageDescription = "马甲App需要媒体资料权限，以便于扫描二维码等";
+
+

@@ -90,10 +90,8 @@
     [UMessage startWithAppkey:kUMengPushKey launchOptions:launchOptions httpsEnable:YES];
     //注册通知，如果要使用category的自定义策略，可以参考demo中的代码。
     [UMessage registerForRemoteNotifications];
-    
     [UMessage setLogEnabled:NO];
-    
-    [Bugly startWithAppId:QQ_AppId];
+    [Bugly startWithAppId:@"0b5bef698c"];
     //iOS10必须加下面这段代码。
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate=self;

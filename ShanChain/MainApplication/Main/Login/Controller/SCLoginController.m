@@ -17,6 +17,8 @@
 #import "SCCharacterModel.h"
 #import "SCDynamicLoginViewController.h"
 #import "SCLoginDataController.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
 
 #define K_USERNAME @"K_USERNAME"
 
@@ -231,12 +233,29 @@
     [self.scrollView addSubview:self.registerBtn];
     [self.scrollView addSubview:self.rnDemoBtn];
     [self.scrollView addSubview:self.forgetPwdBtn];
-    [self.scrollView addSubview:self.socialBtn];
+    
     [self.scrollView addSubview:self.socialView];
     
-    [self.socialView addSubview:self.weiBtn];
-    [self.socialView addSubview:self.qqBtn];
-    [self.socialView addSubview:self.weibBtn];
+    
+    BOOL qq = [[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"mqqapi://"]];
+    if (qq) {
+       [self.socialView addSubview:self.qqBtn];
+    }
+    
+    BOOL weixin = [[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"weixin://"]];
+    if (weixin) {
+        [self.socialView addSubview:self.weiBtn];
+    }
+    
+    BOOL weibo = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Sinaweibo://"]];
+    if (weibo) {
+         [self.socialView addSubview:self.weibBtn];
+    }
+    
+    if (qq || weixin || weibo) {
+        [self.scrollView addSubview:self.socialBtn];
+    }
+    
     
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -257,8 +276,8 @@
     
    self.socialView.frame=CGRectMake(45,SCREEN_HEIGHT-70.0/667*SCREEN_HEIGHT - IPHONE_NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH - 45 * 2 , 50);
     self.socialBtn.frame = CGRectMake((SCREEN_WIDTH-75)/2,CGRectGetMinY(self.socialView.frame) - 45, 75,20);
-    self.weiBtn.frame=CGRectMake(0, 0, 50, 50);
-    self.weibBtn.frame=CGRectMake((SCREEN_WIDTH- 50)/2-45, 0, 50, 50);
+    self.weiBtn.frame = CGRectMake((SCREEN_WIDTH- 50)/2-45, 0, 50, 50);
+    self.weibBtn.frame = CGRectMake(0, 0, 50, 50);
     self.qqBtn.frame=CGRectMake(self.socialView.frame.size.width - 50, 0, 50, 50);
 }
 

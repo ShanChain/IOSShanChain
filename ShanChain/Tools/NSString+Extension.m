@@ -325,7 +325,7 @@
 
 - (BOOL)isValidatePassword
 {
-    if (self.length < 8 || self.length > 20 || [self isPureInt] || [self isPureLetters] || [self isPureSymbol]  ) {
+    if (self.length < 8 || self.length > 20 || [self mj_isPureInt] || [self isPureLetters] || [self isPureSymbol]  ) {
         return NO;
     }
     return YES;
@@ -652,6 +652,30 @@
         imageUrl = [NSString stringWithFormat:@"%@%@",Base_url,self];
     }
     return imageUrl;
+}
+
+
++(BOOL)compareVersion:(NSString *)nowVersion withServerVersion:(NSString *)serverVersion{
+    if (![NSString isBlankString:nowVersion] && ![NSString isBlankString:serverVersion]) {
+        NSArray *nowVersions = [nowVersion componentsSeparatedByString:@"."];
+        NSArray *serverVersions = [serverVersion componentsSeparatedByString:@"."];
+        if (nowVersions != nil && serverVersions != nil && nowVersions.count > 1 && serverVersions.count > 1) {
+            int nowVersionsFirst = [nowVersions[0] integerValue];
+            int serverVersionFirst = [serverVersions[0] integerValue];
+            int nowVersionsSecond = [nowVersions[1] integerValue];
+            int serverVersionSecond = [serverVersions[1] integerValue];
+            int nowVersionsThird = [nowVersions[2] integerValue];
+            int serverVersionThird = [serverVersions[2] integerValue];
+            if (nowVersionsFirst < serverVersionFirst) {
+                return YES;
+            } else if (nowVersionsFirst == serverVersionFirst && nowVersionsSecond < serverVersionSecond) {
+                return YES;
+            } else if (nowVersionsFirst == serverVersionFirst && nowVersionsSecond == serverVersionSecond && nowVersionsThird < serverVersionThird) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 @end

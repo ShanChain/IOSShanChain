@@ -13,6 +13,8 @@
 #import "JSHAREService.h"
 #import "VerifyCodeModel.h"
 #import "SCLoginDataController.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
 
 @interface SCDynamicLoginViewController ()
 
@@ -34,6 +36,11 @@
 @property (weak, nonatomic) IBOutlet UIView *line2;
 
 @property  (nonatomic,strong) VerifyCodeModel  *verifyCodeModel;
+
+@property (weak, nonatomic) IBOutlet UIView *weiboView;
+@property (weak, nonatomic) IBOutlet UIView *wxView;
+
+@property (weak, nonatomic) IBOutlet UIView *qqView;
 
 @end
 
@@ -94,6 +101,31 @@
             
         }];
     }];
+    
+    BOOL qq = [[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"mqqapi://"]];
+    if (!qq) {
+        [_stackView removeArrangedSubview:self.qqView];
+        [self.qqView removeFromSuperview];
+    }
+    
+    BOOL weixin = [[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"weixin://"]];
+    if (!weixin) {
+         [_stackView removeArrangedSubview:self.wxView];
+         [self.wxView removeFromSuperview];
+    }
+    
+    BOOL weibo = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Sinaweibo://"]];
+    if (!weibo) {
+        [_stackView removeArrangedSubview:self.weiboView];
+        [self.weiboView removeFromSuperview];
+    }
+    
+    if (!qq && !weixin && !weibo) {
+        self.titleLb.hidden = YES;
+        self.line1.hidden = YES;
+        self.line2.hidden = YES;
+    }
+    
 }
 
 - (void)viewDidLoad {

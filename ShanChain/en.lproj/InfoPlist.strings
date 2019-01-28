@@ -8,3 +8,15 @@
 
 
 CFBundleDisplayName = "MarJar";
+
+NSCalendarsUsageDescription = "App is used to get specific time. Is calendar permission allowed?";
+NSCameraUsageDescription = "App will use the function of taking pictures and scanning QR codes. Is it allowed to open the camera?";
+NSContactsUsageDescription = " App may read the list of friends, Is it allowed to access the contact?";
+NSHealthShareUsageDescription = "In order to provide you a smarter services, Is it allowed to access your Health data? ";
+NSHealthUpdateUsageDescription = "In order to provide you a smarter services, Is it allowed to access your Health data?";
+NSLocationAlwaysAndWhenInUseUsageDescription = "App can provide precise life services according to location. Is it allowed to use location?";
+NSLocationAlwaysUsageDescription = "App can provide precise life services according to location. Is it allowed to use location?";
+NSLocationWhenInUseUsageDescription = "App can provide precise life services according to location. Is it allowed to use location?";
+NSMicrophoneUsageDescription = "App can use voice function. Is microphone allowed?";
+NSPhotoLibraryAddUsageDescription = "App needs to add pictures. Is it allowed to access the album?";
+NSPhotoLibraryUsageDescription = "App needs media permissions to scan QR codes, etc.";

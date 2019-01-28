@@ -56,5 +56,65 @@ class BindInfoModel: HandyJSON {
         return "未认证"
     }
     
+    
+    func _isBind(_ row:Int) -> Bool{
+        if row == 0 {
+            return wechat
+        }
+        
+        if row == 1 {
+            return qq
+        }
+        
+        if row == 2 {
+            return facebook
+        }
+        
+        return false
+    }
+    
+    func _getBindParameter(_ row:Int,_ complete: @escaping (_ userInfo:Dictionary<String, Any>) -> ()){
+        var otherAccount:String = ""
+        if row == 0 {
+            if wechat == false{
+                JSHAREService.getSocialUserInfo(.wechatSession) { (userInfo, error) in
+                    if let userInfo = userInfo{
+                        otherAccount = userInfo.openid ?? userInfo.uid
+                    complete(["otherAccount":otherAccount,"userType":"USER_TYPE_WEIXIN","userId":self.userId!])
+                    }
+                }
+            }else{
+                complete(["otherAccount":otherAccount,"userType":"USER_TYPE_WEIXIN","userId":self.userId!])
+            }
+        }
+        if row == 1 {
+            if qq == false{
+                JSHAREService.getSocialUserInfo(.QQ) { (userInfo, error) in
+                    if let userInfo = userInfo{
+                        otherAccount = userInfo.openid ?? userInfo.uid
+                    complete(["otherAccount":otherAccount,"userType":"USER_TYPE_QQ","userId":self.userId!])
+                    }
+                }
+            }else{
+                complete(["otherAccount":otherAccount,"userType":"USER_TYPE_QQ","userId":self.userId!])
+            }
+           
+        }
+        
+        if row == 2 {
+            if facebook == false{
+                JSHAREService.getSocialUserInfo(.facebook) { (userInfo, error) in
+                    if let userInfo = userInfo{
+                        otherAccount = userInfo.openid ?? userInfo.uid
+                    complete(["otherAccount":otherAccount,"userType":"USER_TYPE_FB","userId":self.userId!])
+                    }
+                }
+            }else{
+                complete(["otherAccount":otherAccount,"userType":"USER_TYPE_FB","userId":self.userId!])
+            }
+        }
+        
+    }
+    
     required init() {}
 }

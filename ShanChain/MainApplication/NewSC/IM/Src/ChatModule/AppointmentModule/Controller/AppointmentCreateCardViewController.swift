@@ -97,7 +97,8 @@ class AppointmentCreateCardViewController: UITableViewController {
             if self?.timestamp == ""{
                 CouponVerificationService.verificationIsCanCreate(self)
             }
-            self?.timestamp = String(Int(mc_date.date.timeIntervalSince1970 * 1000))
+            let a =   (mc_date.byAddDays(1).date as!NSDate).zeroOf().timeIntervalSince1970 - 1
+            self?.timestamp = String(Int(a * 1000))
            
         }
         datePicker.show()

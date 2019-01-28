@@ -39,17 +39,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     [self setupHXConfigWithApplication:application];
-    
     [self setIQkeyboard];
     [self setBMKManager];
     [self setupMapConfig];
     [self setupJshareConfig];
     [self setJMessageSDK:launchOptions];
-    
     [self setupUMPushNoticationWithLaunchOptions:launchOptions];
   
 
-    
    __block UIViewController *rootVc = nil;
    // rootVc = [[SCTabbarController alloc]init];
     
@@ -59,13 +56,12 @@
           
         }
 #ifdef DEBUG
-//  AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
-//         BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-        SCSettingViewController *locationVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
+ // AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
+         BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+    //    SCSettingViewController *locationVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
 #else
     BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
 #endif
-     
      
         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
     
@@ -204,18 +200,16 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == alertView.firstOtherButtonIndex) {
        // [HHTool openAppStore];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.versionUpdateUrl]];
+       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.versionUpdateUrl]];
     }
 }
 
-//- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-//    if (alertView.firstOtherButtonIndex != 0) {
-//        [alertView dismissWithClickedButtonIndex:buttonIndex animated:true];
-//    } else {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新版本有较大改进，请更新" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//        [alert show];
-//    }
-//}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.firstOtherButtonIndex) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.versionUpdateUrl]];
+       
+    }
+}
 
 
 

@@ -117,5 +117,17 @@
     
 }
 
+
+- (NSDate *)zeroOfDate
+{
+   NSCalendar *calendar = [NSCalendar currentCalendar];
+   NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:self];
+    
+   NSDate *zeroDate = [calendar dateFromComponents:components];
+    
+    return zeroDate;
+}
+
+
     
 @end

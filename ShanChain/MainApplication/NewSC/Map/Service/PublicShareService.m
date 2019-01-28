@@ -32,7 +32,11 @@
 +(void)share:(ShareContentModel *)shareContentModel platform:(NSInteger)platform mediaType:(NSInteger)mediaType handler:(JSHARECallHandler)handler{
     JSHAREMessage *msg = [JSHAREMessage message];
     msg.title = shareContentModel.title;
-    msg.thumbnail = UIImageJPEGRepresentation([UIImage imageWithData:shareContentModel.thumbnail], 0.2);
+    if (mediaType != 3) {
+        msg.thumbnail = UIImageJPEGRepresentation([UIImage imageWithData:shareContentModel.thumbnail], 0.2);
+    }else{
+        msg.image = UIImageJPEGRepresentation([UIImage imageWithData:shareContentModel.thumbnail], 0.2);
+    }
     msg.text = shareContentModel.text;
     switch (mediaType) {
         case JSHAREText:

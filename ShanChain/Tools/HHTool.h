@@ -16,6 +16,7 @@
 + (BOOL)_IS_IPHONE_6P;
 + (BOOL)_IS_IPHONE_X;
 
++ (YYHud *)showTip:(NSString *)msg duration:(NSTimeInterval)duration;
 + (YYHud *)showSucess:(NSString *)msg;
 + (YYHud *)showError:(NSString *)msg;
 + (void)dismiss;

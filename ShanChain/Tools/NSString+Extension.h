@@ -106,4 +106,6 @@
 
 - (NSString*)getImageUrlWithPath;
 
++(BOOL)compareVersion:(NSString *)nowVersion withServerVersion:(NSString *)serverVersion; // 检查版本更新
+
 @end

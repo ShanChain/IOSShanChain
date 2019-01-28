@@ -32,11 +32,13 @@
 
 @implementation HHTool
 
++ (YYHud *)showTip:(NSString *)msg duration:(NSTimeInterval)duration {
+    return [[YYHud sharedInstance] showTip:msg duration:duration];
+}
+
 + (YYHud *)showSucess:(NSString *)msg{
     return  [YYHud showSucess:msg];
 }
-
-
 
 + (YYHud *)showError:(NSString *)msg{
     return  [YYHud showError:msg];

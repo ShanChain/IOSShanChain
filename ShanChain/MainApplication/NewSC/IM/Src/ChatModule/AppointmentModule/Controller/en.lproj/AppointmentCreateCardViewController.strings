@@ -12,7 +12,7 @@
 "7eR-RA-quw.text" = "price(￥):";
 
 /* Class = "UIButton"; normalTitle = "确认创建"; ObjectID = "Ang-cF-WC9"; */
-"Ang-cF-WC9.normalTitle" = "Creat";
+"Ang-cF-WC9.normalTitle" = "Create";
 
 /* Class = "UILabel"; text = "钱包余额"; ObjectID = "E6V-hV-nNI"; */
 "E6V-hV-nNI.text" = "Balance";
