@@ -20,6 +20,8 @@ class VersionUpdateModel: HandyJSON {
     var latest:String?
     var mobile:String?
     var status:String?
+    var intro:String?
+    var title:String?
     
     
     required init() {}

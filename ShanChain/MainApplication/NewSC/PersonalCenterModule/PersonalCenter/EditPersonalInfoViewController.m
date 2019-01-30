@@ -53,7 +53,7 @@
         [mDic setObject:self.nickNameFid.text forKey:@"name"];
     }
     
-    if (![self.nickNameFid.text isEqualToString:characterModel.characterInfo.signature]) {
+    if (![self.signatureTextView.text isEqualToString:characterModel.characterInfo.signature]) {
         [mDic setObject:self.signatureTextView.text forKey:@"signature"];
     }
     

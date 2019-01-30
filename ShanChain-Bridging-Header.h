@@ -67,6 +67,9 @@
 #import "CouponVerificationService.h"
 #import "UIView+LSCore.h"
 #import "KPKeyBoard.h"  //大写键盘
+#import "SCMD5Tool.h"
+#import "SCAES.h"
+
 
 
 

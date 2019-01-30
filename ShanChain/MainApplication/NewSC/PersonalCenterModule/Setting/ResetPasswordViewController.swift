@@ -30,19 +30,20 @@ class ResetPasswordViewController: SCBaseVC {
     @IBOutlet weak var errorTipLb: UILabel!
     var disposeBag = DisposeBag()
     var pageType:BindPageType = .bindPhone
+    var smsModel:SmsVerifycodeModel?
     var smsVerifyCode:String = ""
+    let mobile = UserDefaults.standard.object(forKey: "K_USERNAME") as! String
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindPhoneLb.text = "输入当前绑定手机\n\(SC_phoneNumber)发送短信"
-        
+        bindPhoneLb.text = "输入当前绑定手机\n\(mobile)发送短信"
         if pageType ==  .bindPhone{
             title = "更换绑定手机"
             titleLb.text = "更换绑定手机"
             
         }else if pageType ==  .resetPassword{
              title = "重置密码"
-             titleLb.text = "更换绑定手机"
+             titleLb.text = "重置登录密码"
         }
         
         let codeValid = codeFid.rx.text.orEmpty
@@ -76,11 +77,12 @@ class ResetPasswordViewController: SCBaseVC {
         
         codeBtn.rx.tap.subscribe(onNext: { [weak self] in
             // 发送验证码
-        SCNetwork.shareInstance().v1_post(withUrl: Unlogin_Verifycode_URL, params: ["mobile":SC_phoneNumber], showLoading: true, call: { (baseModel, error) in
+        SCNetwork.shareInstance().v1_post(withUrl: Unlogin_Verifycode_URL, params: ["mobile":self?.mobile], showLoading: true, call: { (baseModel, error) in
                     if error != nil{
                         return
                     }
             if let data = baseModel?.data as? Dictionary<String, Any>{
+                self?.smsModel = SmsVerifycodeModel.deserialize(from: data)
                 if let smsVerifyCode = data["smsVerifyCode"] as? String{
                     self?.smsVerifyCode = smsVerifyCode
                     self?.codeBtn.start(withTime: 59, title: NSLocalizedString("sc_login_Resend", comment: "字符串"), countDownTitle: "s", mainColor: SC_EmphasisColor, count: SC_EmphasisColor)
@@ -96,7 +98,12 @@ class ResetPasswordViewController: SCBaseVC {
         
         if let controller = segue.destination as? SettingPasswordViewController {
              controller.isChangePassword = true
+             controller.smsVerifyModel = smsModel
         }
+        if let controller = segue.destination as? ChangePhoneNumberViewController {
+            controller.smsVerifyModel = smsModel
+        }
+        
     }
     
 }

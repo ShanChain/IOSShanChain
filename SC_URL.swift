@@ -87,6 +87,9 @@ public let JM_RoomMembers_URL  = "/jm/room/RoomMembers" //获取极光聊天室�
  */
 public let User_Bind_URL  = "/v1/user/bound" //查看绑定情况
 public let User_Bind_Account_URL  = "/v1/user/bind_other_account" //绑定账号/解绑账号
-public let Unlogin_Verifycode_URL  = "/v1/sms/unlogin/verifycode" //重置密码获取验证码
+public let Unlogin_Verifycode_URL  = "/v1/2.0/sms/setting/verifycode" //重置密码获取验证码
+public let Reset_Password_URL  = "/v1/2.0/user/reset_password" //重置密码
+public let Change_phone_URL  = "/v1/2.0/user/change_phone" //修改手机号
+public let RealVerified_detail_URL  = "/v1/2.0/Verified/detail" //实名认证详情
 
 

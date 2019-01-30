@@ -11,6 +11,7 @@
 
 @implementation EditInfoService
 
+
 + (void)sc_uploadImage:(UIImage *)image withCompressionQuality:(CGFloat)cq callBlock:(void (^)(BOOL))callBlock{
     [SCAliyunUploadMananger uploadImage:image withCompressionQuality:cq withCallBack:^(NSString *url) {
         if (!NULLString(url)) {
@@ -30,7 +31,8 @@
                 [SCCacheTool shareInstance].characterModel.characterInfo = info;
                  [[SCCacheTool shareInstance] cacheCharacterInfo:baseModel.data[@"characterInfo"] withUserId:[SCCacheTool shareInstance].getCurrentUser];
                 [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateUserInfo object:nil];
-                 [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateAvatarSuccess object:nil];
+                [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateAvatarSuccess object:nil];
+                
 //                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:params[@"headImg"]]];
 //                NSData  *data = [NSKeyedArchiver archivedDataWithRootObject:imageData];
 //                [[NSUserDefaults standardUserDefaults]setObject:data forKey:kLastUserAvator];

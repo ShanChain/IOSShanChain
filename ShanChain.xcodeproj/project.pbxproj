@@ -18,7 +18,6 @@
 		2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207069A219AEBE700404459 /* ShowSelectTableView.xib */; };
 		2215C00021F9B37200D624C6 /* BindInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */; };
 		2215C00221FA9FC900D624C6 /* AboutMarJarViewContriller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215C00121FA9FC900D624C6 /* AboutMarJarViewContriller.swift */; };
-		2215C00421FAAB2C00D624C6 /* EnterNewPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215C00321FAAB2C00D624C6 /* EnterNewPhoneViewController.swift */; };
 		2215C00621FB0AE600D624C6 /* VersionUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215C00521FB0AE600D624C6 /* VersionUpdateModel.swift */; };
 		2218E18D217606B200719844 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E18C217606B200719844 /* MobileCoreServices.framework */; };
 		2218E191217606D900719844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218E190217606D900719844 /* QuartzCore.framework */; };
@@ -62,6 +61,8 @@
 		221E355B215C6100003FAA73 /* UIImageView+sd.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355A215C6100003FAA73 /* UIImageView+sd.m */; };
 		221E355E215C6C83003FAA73 /* UIViewController+HRAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221E355D215C6C83003FAA73 /* UIViewController+HRAlertViewController.m */; };
 		222394D421FEF1570027F25B /* ChangePhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222394D321FEF1570027F25B /* ChangePhoneNumberViewController.swift */; };
+		222394DC21FFF6220027F25B /* SmsVerifycodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222394DB21FFF6220027F25B /* SmsVerifycodeModel.swift */; };
+		222394DF22004DCA0027F25B /* PersonalCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222394DE22004DCA0027F25B /* PersonalCenterService.swift */; };
 		2226DB7621A7ACD9002F6195 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226DB7221A7ACD9002F6195 /* UncaughtExceptionHandler.m */; };
 		2226DB7721A7ACD9002F6195 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226DB7521A7ACD9002F6195 /* Aspects.m */; };
 		2226DB7A21ABA553002F6195 /* NSObject+customProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226DB7921ABA553002F6195 /* NSObject+customProperty.m */; };
@@ -435,6 +436,8 @@
 		22E11A3221F1A89000B76A3D /* SCSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E11A3121F1A89000B76A3D /* SCSettingViewController.swift */; };
 		22E11A3421F1A89E00B76A3D /* SCSettingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22E11A3321F1A89E00B76A3D /* SCSettingViewController.storyboard */; };
 		22E11A3621F1C12A00B76A3D /* AccountSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */; };
+		22E1A1202200664A004CCE9D /* RealNameDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A11F2200664A004CCE9D /* RealNameDetailsViewController.swift */; };
+		22E1A1222201439D004CCE9D /* RealNameVerifiedDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A1212201439D004CCE9D /* RealNameVerifiedDetailsModel.swift */; };
 		22EBC11321533BAE00C11359 /* MCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EBC11121533BA800C11359 /* MCDate.m */; };
 		33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33055FE91F0503AC005740E0 /* StoreKit.framework */; };
 		332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5D91F4ED69F00888313 /* NSMutableAttributedString+TY.m */; };
@@ -680,7 +683,6 @@
 		2207069B219AEBE700404459 /* ShowSelectTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSelectTableView.h; sourceTree = "<group>"; };
 		2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindInfoModel.swift; sourceTree = "<group>"; };
 		2215C00121FA9FC900D624C6 /* AboutMarJarViewContriller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMarJarViewContriller.swift; sourceTree = "<group>"; };
-		2215C00321FAAB2C00D624C6 /* EnterNewPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNewPhoneViewController.swift; sourceTree = "<group>"; };
 		2215C00521FB0AE600D624C6 /* VersionUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionUpdateModel.swift; sourceTree = "<group>"; };
 		2215C00721FE9ADE00D624C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
 		2218E18C217606B200719844 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -751,6 +753,8 @@
 		221E355C215C6C83003FAA73 /* UIViewController+HRAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HRAlertViewController.h"; sourceTree = "<group>"; };
 		221E355D215C6C83003FAA73 /* UIViewController+HRAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HRAlertViewController.m"; sourceTree = "<group>"; };
 		222394D321FEF1570027F25B /* ChangePhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumberViewController.swift; sourceTree = "<group>"; };
+		222394DB21FFF6220027F25B /* SmsVerifycodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmsVerifycodeModel.swift; sourceTree = "<group>"; };
+		222394DE22004DCA0027F25B /* PersonalCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCenterService.swift; sourceTree = "<group>"; };
 		2226DB7121A7ACD9002F6195 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
 		2226DB7221A7ACD9002F6195 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 		2226DB7421A7ACD9002F6195 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
@@ -1201,6 +1205,8 @@
 		22E11A3121F1A89000B76A3D /* SCSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSettingViewController.swift; sourceTree = "<group>"; };
 		22E11A3321F1A89E00B76A3D /* SCSettingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SCSettingViewController.storyboard; sourceTree = "<group>"; };
 		22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSecurityViewController.swift; sourceTree = "<group>"; };
+		22E1A11F2200664A004CCE9D /* RealNameDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNameDetailsViewController.swift; sourceTree = "<group>"; };
+		22E1A1212201439D004CCE9D /* RealNameVerifiedDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNameVerifiedDetailsModel.swift; sourceTree = "<group>"; };
 		22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentConfiguration.h; sourceTree = "<group>"; };
 		22EBC11121533BA800C11359 /* MCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDate.m; sourceTree = "<group>"; };
 		22EBC11221533BA900C11359 /* MCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDate.h; sourceTree = "<group>"; };
@@ -1654,6 +1660,8 @@
 			children = (
 				2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */,
 				2215C00521FB0AE600D624C6 /* VersionUpdateModel.swift */,
+				222394DB21FFF6220027F25B /* SmsVerifycodeModel.swift */,
+				22E1A1212201439D004CCE9D /* RealNameVerifiedDetailsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1747,6 +1755,14 @@
 				22A2EBA621C09A5800737265 /* VerifyCodeModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		222394DD22004DA30027F25B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				222394DE22004DCA0027F25B /* PersonalCenterService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		2226DB7021A7ACD9002F6195 /* ExceptionHandler */ = {
@@ -2824,14 +2840,15 @@
 		22E11A2C21F1A69B00B76A3D /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				222394DD22004DA30027F25B /* Service */,
 				2215BFFE21F9B33700D624C6 /* Model */,
 				22E11A3121F1A89000B76A3D /* SCSettingViewController.swift */,
 				22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */,
 				222CCAB321F819DB007E13BB /* SettingPasswordViewController.swift */,
 				222CCAB521F81AAC007E13BB /* ResetPasswordViewController.swift */,
-				2215C00321FAAB2C00D624C6 /* EnterNewPhoneViewController.swift */,
 				2215C00121FA9FC900D624C6 /* AboutMarJarViewContriller.swift */,
 				222394D321FEF1570027F25B /* ChangePhoneNumberViewController.swift */,
+				22E1A11F2200664A004CCE9D /* RealNameDetailsViewController.swift */,
 				22E11A3321F1A89E00B76A3D /* SCSettingViewController.storyboard */,
 			);
 			path = Setting;
@@ -4345,7 +4362,6 @@
 				22A2EB9321BE67CF00737265 /* AppointmentMyReceiveView.swift in Sources */,
 				223F99D7217F12040031DB95 /* JCNetworkManager.swift in Sources */,
 				22581B5D21EDD85B00F1D1B1 /* WalletPage.swift in Sources */,
-				2215C00421FAAB2C00D624C6 /* EnterNewPhoneViewController.swift in Sources */,
 				223F9A41217F12B80031DB95 /* JCSearchFriendViewController.swift in Sources */,
 				223F99FD217F12040031DB95 /* SAIInputItem.swift in Sources */,
 				223F99F6217F12040031DB95 /* SAIInputBar+Resource.swift in Sources */,
@@ -4355,6 +4371,7 @@
 				223F9876217F0C880031DB95 /* SCImManager.swift in Sources */,
 				332AB64A1F4ED8C900888313 /* CWAceColorUtility.m in Sources */,
 				332D3E441F500331001ADDB3 /* NSObject+MJClass.m in Sources */,
+				22E1A1222201439D004CCE9D /* RealNameVerifiedDetailsModel.swift in Sources */,
 				221B3BF821C74F3F0061BB3E /* LBXPermissionPhotos.m in Sources */,
 				221B3BF221C74F3F0061BB3E /* LBXPermissionMicrophone.m in Sources */,
 				221E355E215C6C83003FAA73 /* UIViewController+HRAlertViewController.m in Sources */,
@@ -4362,6 +4379,7 @@
 				485E66651F42873F00B158BF /* NSBundle+MJRefresh.m in Sources */,
 				223F99E6217F12040031DB95 /* JMSGMessage+.swift in Sources */,
 				223F9985217F12040031DB95 /* JCMessageNoticeContent.swift in Sources */,
+				222394DF22004DCA0027F25B /* PersonalCenterService.swift in Sources */,
 				332D3E3F1F500331001ADDB3 /* MJExtensionConst.m in Sources */,
 				223F99DC217F12040031DB95 /* UIImage+JChat.swift in Sources */,
 				223F99AF217F12040031DB95 /* JCMessageContentViewType.swift in Sources */,
@@ -4480,6 +4498,7 @@
 				8997A5DD1FE505BA0024B3AB /* SYGuiderScrollview.m in Sources */,
 				332AB5EF1F4ED69F00888313 /* TYImageCache.m in Sources */,
 				223F99F0217F12040031DB95 /* JCImageBrowserViewController.swift in Sources */,
+				222394DC21FFF6220027F25B /* SmsVerifycodeModel.swift in Sources */,
 				223F9981217F12040031DB95 /* JCMessageVideoContentView.swift in Sources */,
 				221B3BD921C74DE60061BB3E /* UIAlertView+LBXAlertAction.m in Sources */,
 				223F9992217F12040031DB95 /* JCMessageCardView.swift in Sources */,
@@ -4581,6 +4600,7 @@
 				2293A751218FE32000FB977C /* DUX_UploadUserIcon.m in Sources */,
 				4809ECA91FE28230009FFF4A /* SCDatePicker.m in Sources */,
 				892B3A041FE9126A00292A75 /* SCAliyunPlayerVodView.m in Sources */,
+				22E1A1202200664A004CCE9D /* RealNameDetailsViewController.swift in Sources */,
 				221B3BF621C74F3F0061BB3E /* LBXPermissionHealth.m in Sources */,
 				225052BE218BF67E001FBD65 /* TaskListViewController.swift in Sources */,
 				223F998D217F12040031DB95 /* JCMessageVoiceContent.swift in Sources */,

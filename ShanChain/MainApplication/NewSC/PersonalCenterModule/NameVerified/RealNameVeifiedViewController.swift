@@ -41,8 +41,9 @@ class RealNameVeifiedViewController: SCBaseVC {
     }
     
     func _back(){
-        let nav =  backViewController() as! JCNavigationController
-        nav.popViewController(animated: false)
+        if let  viewController = backViewController() as? JCNavigationController{
+            viewController.popViewController(animated: false)
+        }
     }
     
     func _isValid() -> Bool {

@@ -12,56 +12,29 @@
 
 @implementation UIViewController (HRAlertView)
 
-//-(nonnull UIAlertController *)pn_hrAlertWithTitle:(nullable NSString *)title
-//                                       message:(nullable NSString *)message
-//                                 buttonsTitles:(nullable NSArray<NSString *> *)buttonTitles
-//                                    andHandler:(void (^ __nullable)(UIAlertAction * _Nullable action, NSInteger indexOfAction))handler {
-//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
-//                                                                             message:message
-//                                                                      preferredStyle:UIAlertControllerStyleAlert];
-//    if (title && title != nil && ![title isKindOfClass:[NSNull class]]) {
-//        NSMutableAttributedString *alertControllerStr = [[NSMutableAttributedString alloc] initWithString:title];
-//        [alertControllerStr addAttribute:NSForegroundColorAttributeName value:Theme_MainThemeColor range:NSMakeRange(0, title.length)];
-//        [alertControllerStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, title.length)];
-//        [alertController setValue:alertControllerStr forKey:@"attributedTitle"];
-//    }
-//
-//
-//    if (message && message != nil && ![message isKindOfClass:[NSNull class]]) {
-//        NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:message];
-////        [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0, message.length)];
-//        [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, message.length)];
-//        [alertController setValue:alertControllerMessageStr forKey:@"attributedMessage"];
-//    }
-//
-//    UIView *subView1 = alertController.view.subviews[0];
-//    UIView *subView2 = subView1.subviews[0];
-//    UIView *subView3 = subView2.subviews[0];
-//    UIView *subView4 = subView3.subviews[0];
-//    UIView *subView5 = subView4.subviews[0];
-//    if ([subView5.subviews[1] isKindOfClass:[UILabel class]]) {
-//        UILabel *messageLB = subView5.subviews[1];
-//        messageLB.textAlignment = 1;
-//    }
-//
-//
-//    for (NSString *btnTitle in buttonTitles) {
-//        UIAlertAction *action = [UIAlertAction actionWithTitle:btnTitle
-//                                                         style:UIAlertActionStyleDefault
-//                                                       handler:^(UIAlertAction * _Nonnull action) {
-//                                                           if (handler) {
-//                                                               handler(action, [alertController.actions indexOfObject:action]);
-//                                                           }
-//                                                       }];
-////        if ([action.title isEqualToString:@"确定"]) {
-////            [action setValue:Theme_MainThemeColor forKey:@"_titleTextColor"];
-////        }else if ([action.title isEqualToString:@"取消"] || [action.title isEqualToString:@"稍后再说"]){
-////            [action setValue:Theme_MainAssociatedTextStyle.color forKey:@"_titleTextColor"];
-////        }
-//         [alertController addAction:action];
-//    }
-//    return alertController;
-//}
+-(nonnull UIAlertController *)sc_hrAlertWithTitle:(nullable NSString *)title
+                                       message:(nullable NSString *)message
+                                 buttonsTitles:(nullable NSArray<NSString *> *)buttonTitles
+                                       andHandler:(void (^ __nullable)(UIAlertAction * _Nullable action, NSInteger indexOfAction))handler{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:message
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    for (NSString *btnTitle in buttonTitles) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:btnTitle
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                           if (handler) {
+                                                               handler(action, [alertController.actions indexOfObject:action]);
+                                                           }
+                                                       }];
+        if ([action.title isEqualToString:@"立即更新"]) {
+            [action setValue:Theme_MainThemeColor forKey:@"titleTextColor"];
+        }
+        [alertController addAction:action];
+    }
+    return alertController;
+}
 
 
 -(nonnull UIAlertController *)hrAlertWithTitle:(nullable NSString *)title
@@ -86,16 +59,17 @@
 }
 
 
-//-(void)pn_hrShowAlertWithTitle:(nullable NSString *)title
-//                    message:(nullable NSString *)message
-//              buttonsTitles:(NSArray<NSString *> *)buttonTitles
-//                 andHandler:(void (^ __nullable)(UIAlertAction * _Nullable action, NSInteger indexOfAction))handler {
-//    UIAlertController *alertController = [self pn_hrAlertWithTitle:title
-//                                                        message:message
-//                                                  buttonsTitles:buttonTitles
-//                                                     andHandler:handler];
-//    [self presentViewController:alertController animated:YES completion:nil];
-//}
+-(UIAlertController*)sc_hrShowAlertWithTitle:(nullable NSString *)title
+                    message:(nullable NSString *)message
+              buttonsTitles:(NSArray<NSString *> *)buttonTitles
+                 andHandler:(void (^ __nullable)(UIAlertAction * _Nullable action, NSInteger indexOfAction))handler {
+    UIAlertController *alertController = [self sc_hrAlertWithTitle:title
+                                                        message:message
+                                                  buttonsTitles:buttonTitles
+                                                     andHandler:handler];
+    [self presentViewController:alertController animated:YES completion:nil];
+    return alertController;
+}
 
 
 -(void)hrShowAlertWithTitle:(nullable NSString *)title

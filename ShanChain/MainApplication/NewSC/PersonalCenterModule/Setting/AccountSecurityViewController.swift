@@ -83,8 +83,12 @@ class AccountSecurityViewController: UITableViewController {
         
         if indexPath.section == 1{
             if indexPath.row == 3{// 实名认证
-                let realNameVC = RealNameVeifiedViewController()
-                navigationController?.pushViewController(realNameVC, animated: true)
+                if self.bindModel?.idcard == true{
+                    self.performSegue(withIdentifier: "realName", sender: nil)
+                }else{
+                    let realNameVC = RealNameVeifiedViewController()
+                    navigationController?.pushViewController(realNameVC, animated: true)
+                }
                 return
             }
             

@@ -21,6 +21,22 @@ class SettingPasswordViewController: SCBaseVC {
     
     var isChangePassword:Bool = false // 是否是更换密码
     var disposeBag = DisposeBag()
+    var smsVerifyModel:SmsVerifycodeModel?
+    let mobile = UserDefaults.standard.object(forKey: "K_USERNAME") as! String
+    
+    func _getParameter() -> Dictionary<String,Any> {
+        if isChangePassword == true {
+            return (smsVerifyModel?._getSetPasswordParameter(settingTextFid.text!))!
+        }
+        
+        let pwdMD5 = SCMD5Tool.md5(forUpper32Bate: settingTextFid.text!)
+        let time:Int64 = Int64(Date().timeIntervalSince1970)
+        let typeAppend = "USER_TYPE_MOBILE\(time)"
+        let encryptAccount = SCAES.encryptShanChain(withPaddingString: typeAppend, withContent: mobile)
+        let encryptPassword = SCAES.encryptShanChain(withPaddingString: "\(typeAppend)\(mobile)", withContent: pwdMD5)
+        return ["userType":"USER_TYPE_MOBILE","Timestamp":"\(time)","encryptAccount":encryptAccount ?? "","encryptPassword":encryptPassword ?? ""]
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +66,47 @@ class SettingPasswordViewController: SCBaseVC {
         passwordValid.bind(to: completeBtn.rx.isEnabled).disposed(by: disposeBag)
         
         completeBtn.rx.tap.subscribe(onNext: { [weak self] in
-            print("点击完成")
+        
+            typealias JSON = Int
+            let json:Observable<JSON> = Observable.create { (observer) -> Disposable in
+                SCNetwork.shareInstance().v1_post(withUrl: Reset_Password_URL, params:self?._getParameter(), showLoading: true, call: { (baseModel, error) in
+                    guard error == nil else{
+                        observer.onError(error!)
+                        return
+                    }
+                    
+                    guard let data = baseModel?.data as? Int else{
+                         HHTool.showError("重置密码失败")
+                         return
+                    }
+                    
+                    observer.onNext(data)
+                    observer.onCompleted()
+                })
+                return Disposables.create()
+            }
+            
+            json.subscribe(onNext: { json in
+            
+                if json == 1{
+                    if self?.isChangePassword == false{
+                        HHTool.showTip("密码设置成功!", duration: 1.0)
+                    }else{
+                        HHTool.showTip("密码重置成功!", duration: 1.0)
+                    }
+                    
+                    _ = delay(1.0, task: {
+                        SCAppManager.shareInstance().logout()
+                    })
+                }
+                
+                }, onError: { error in
+                    print("取得 json 失败 Error: \(error.localizedDescription)")
+                }, onCompleted: {
+                    print("取得 json 任务成功完成")
+                })
+                .disposed(by: (self?.disposeBag)!)
+            
         }).disposed(by: disposeBag)
     }
 

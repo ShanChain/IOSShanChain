@@ -28,7 +28,6 @@
 @interface AppDelegate ()< UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate,JPUSHRegisterDelegate>
 
 @property (nonatomic, strong) BMKMapManager *mapManager;
-@property (nonatomic, copy)   NSString   *versionUpdateUrl;
 
 @end
 
@@ -57,8 +56,8 @@
         }
 #ifdef DEBUG
  // AppointmentListViewController * locationVC = [[AppointmentListViewController alloc]init];
-         BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-    //    SCSettingViewController *locationVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
+//         BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+        SCSettingViewController *locationVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
 #else
     BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
 #endif
@@ -175,43 +174,8 @@
 }
 
 - (void)checkVersion {
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param setObject:@"ios" forKey:@"type"];
-    [param setObject:XcodeAppVersion forKey:@"version"];
-    [SCNetwork.shareInstance postWithUrl:COMMONCHECKVERSION parameters:param success:^(id responseObject) {
-        NSDictionary *dictionary = responseObject[@"data"];
-        if (dictionary || [dictionary isKindOfClass:[NSDictionary class]]) {
-            NSString *version = dictionary[@"version"];
-            [SCCacheTool shareInstance].status = dictionary[@"status"];
-            if (version && [VersionUtils compareVersion:XcodeAppVersion withServerVersion:version]) {
-                self.versionUpdateUrl = [dictionary objectForKey:@"url"];
-                if ([dictionary[@"forceUpdate"] isEqualToString:@"true"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新版本有较大改进，请更新" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-                    [alert show];
-                } else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发现新版本，请更新" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-                    [alert show];
-                }
-            }
-        }
-    } failure:nil];
+    [PersonalCenterService _checkingUpdate:NO];
 }
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == alertView.firstOtherButtonIndex) {
-       // [HHTool openAppStore];
-       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.versionUpdateUrl]];
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == alertView.firstOtherButtonIndex) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.versionUpdateUrl]];
-       
-    }
-}
-
-
 
 
 - (void)setupMapConfig {

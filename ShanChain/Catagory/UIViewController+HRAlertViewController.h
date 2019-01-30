@@ -26,6 +26,12 @@
  *  @return UIAlertController instance.
  *
  */
+
+-(UIAlertController*)sc_hrShowAlertWithTitle:(nullable NSString *)title
+                                     message:(nullable NSString *)message
+                               buttonsTitles:(NSArray<NSString *> *)buttonTitles
+                                  andHandler:(void (^ __nullable)(UIAlertAction * _Nullable action, NSInteger indexOfAction))handler;
+
 -(nonnull UIAlertController *)hrAlertWithTitle:(nullable NSString *)title
                                        message:(nullable NSString *)message
                                  buttonsTitles:(nullable NSArray<NSString *> *)buttonTitles
