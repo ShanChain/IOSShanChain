@@ -43,6 +43,7 @@ class AccountSecurityViewController: UITableViewController {
         super.viewDidLoad()
         title = "账号与安全"
         _requestBindData()
+        showNavigationBarWhiteColor()
     }
     
     func _bind(_ model:BindInfoModel){

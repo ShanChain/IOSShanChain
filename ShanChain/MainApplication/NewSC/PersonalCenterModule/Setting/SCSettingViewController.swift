@@ -10,12 +10,14 @@ import UIKit
 
 class SCSettingViewController: UITableViewController {
 
+    @IBOutlet weak var pushSwich: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "设置"
-       
+        showNavigationBarWhiteColor()
+        pushSwich.isOn = SCCacheTool.shareInstance().characterModel.characterInfo.allowNotify
     }
-    
     
     @IBAction func modifyPushStateAction(_ sender: UISwitch) {
         

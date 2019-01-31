@@ -12,5 +12,6 @@
 
 
 @property  (nonatomic,strong)  NSString     *mark; //唯一标记
+@property  (nonatomic,strong)  NSObject     *object; //唯一标记
 
 @end

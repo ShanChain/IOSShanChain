@@ -103,13 +103,7 @@
     [self.navigationController.navigationBar setShadowImage:nil];
     // self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor=[UIColor blackColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-//    if (self.navigationItem.titleView && [self.navigationItem.titleView isKindOfClass:[UILabel class]]) {
-//        UILabel *textLabel = (UILabel *)self.navigationItem.titleView;
-//        textLabel.textColor = [UIColor blackColor];
-//
-//    }
-    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];    
     if (![self.navigationController.viewControllers.firstObject isEqual:self]) {
         
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];

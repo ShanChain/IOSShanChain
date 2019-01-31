@@ -75,7 +75,7 @@ public class YLDatePicker: UIView {
         
         self.doneBlock = doneBlock
         
-        let currentDate = currentDate ?? Date()
+        let currentDate = currentDate ??  Date()
         let scrollToYear = String(currentDate.getComponent(component: .year))
         let scrollToMonth = addZero(currentDate.getComponent(component: .month))
         let scrollToDay = addZero(currentDate.getComponent(component: .day))

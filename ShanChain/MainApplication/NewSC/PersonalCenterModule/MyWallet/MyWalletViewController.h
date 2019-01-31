@@ -11,6 +11,6 @@
 @interface MyWalletViewController : SCBaseVC
 
 @property (nonatomic, copy) NSString *urlStr;
-
+@property (nonatomic, assign) BOOL   isShowNav;
 
 @end

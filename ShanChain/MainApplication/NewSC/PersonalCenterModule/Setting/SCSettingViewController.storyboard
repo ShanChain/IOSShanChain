@@ -178,6 +178,9 @@
                             <outlet property="delegate" destination="2TN-uW-0jB" id="ld6-Px-64P"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="pushSwich" destination="Dgg-zL-hpx" id="TFK-uu-5uY"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOw-Xx-wNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -219,15 +222,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZU-hD-92T">
-                                <rect key="frame" x="78" y="570" width="219" height="30"/>
-                                <state key="normal" title="《马甲用户协议》 《隐私政策》">
+                                <rect key="frame" x="54" y="570" width="127" height="30"/>
+                                <state key="normal" title="《马甲用户协议》 ">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSP-8C-pEa">
+                                <rect key="frame" x="211.5" y="570" width="92" height="30"/>
+                                <state key="normal" title="《隐私政策》">
                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="DZU-hD-92T" firstAttribute="centerX" secondItem="1qQ-vD-VOv" secondAttribute="centerX" id="9hV-kH-spC"/>
+                            <constraint firstItem="DZU-hD-92T" firstAttribute="centerX" secondItem="1qQ-vD-VOv" secondAttribute="centerX" constant="-70" id="9hV-kH-spC"/>
                             <constraint firstItem="288-nA-4Ls" firstAttribute="top" secondItem="Lgo-Bi-FNH" secondAttribute="bottom" constant="12" id="Aec-LA-rof"/>
                             <constraint firstItem="p0J-gw-jwz" firstAttribute="bottom" secondItem="gBC-R7-VRQ" secondAttribute="bottom" constant="10" id="Bu2-oO-H9p"/>
                             <constraint firstItem="QZq-H9-WFg" firstAttribute="top" secondItem="p0J-gw-jwz" secondAttribute="top" constant="60" id="WND-hB-3mc"/>
@@ -238,6 +247,8 @@
                             <constraint firstItem="gBC-R7-VRQ" firstAttribute="top" secondItem="Ab9-IV-lSc" secondAttribute="bottom" constant="10" id="lon-mB-UfP"/>
                             <constraint firstItem="Lgo-Bi-FNH" firstAttribute="top" secondItem="QZq-H9-WFg" secondAttribute="bottom" constant="50" id="rqK-FV-XLl"/>
                             <constraint firstItem="Lgo-Bi-FNH" firstAttribute="centerX" secondItem="1qQ-vD-VOv" secondAttribute="centerX" id="uTp-dd-nWX"/>
+                            <constraint firstItem="NSP-8C-pEa" firstAttribute="centerY" secondItem="DZU-hD-92T" secondAttribute="centerY" id="unf-gn-rLP"/>
+                            <constraint firstItem="NSP-8C-pEa" firstAttribute="centerX" secondItem="1qQ-vD-VOv" secondAttribute="centerX" constant="70" id="wgf-v6-c7p"/>
                             <constraint firstItem="Ab9-IV-lSc" firstAttribute="top" secondItem="DZU-hD-92T" secondAttribute="bottom" constant="15" id="z8S-9s-dme"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p0J-gw-jwz"/>
@@ -246,6 +257,7 @@
                     <connections>
                         <outlet property="officialSiteBtn" destination="288-nA-4Ls" id="2hZ-Ww-NZ9"/>
                         <outlet property="pactBtn" destination="DZU-hD-92T" id="wpA-nK-FSD"/>
+                        <outlet property="privacyBtn" destination="NSP-8C-pEa" id="xEH-aB-m6h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7x8-nc-QUL" userLabel="First Responder" sceneMemberID="firstResponder"/>

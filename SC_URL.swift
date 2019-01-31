@@ -92,4 +92,10 @@ public let Reset_Password_URL  = "/v1/2.0/user/reset_password" //重置密码
 public let Change_phone_URL  = "/v1/2.0/user/change_phone" //修改手机号
 public let RealVerified_detail_URL  = "/v1/2.0/Verified/detail" //实名认证详情
 
+/*
+ 钱包
+ */
+
+public let GetWalletPassword_URL  = "/wallet/api/wallet/2.0/hideInfo" //获取用户密码
+
 

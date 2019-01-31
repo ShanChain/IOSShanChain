@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyWalletWelcomeViewController" customModule="ShanChain" customModuleProvider="target">
+            <connections>
+                <outlet property="joinWalletBtn" destination="Fla-RI-ScJ" id="6DN-id-aUU"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ogZ-US-KBA">
+                    <rect key="frame" x="111" y="100" width="153" height="153"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="153" id="2lm-w9-SP7"/>
+                        <constraint firstAttribute="height" constant="153" id="JHP-tT-NWA"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎来到马甲钱包！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUe-dL-Mi2">
+                    <rect key="frame" x="78" y="273" width="219" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <color key="textColor" red="0.67450980390000004" green="0.50588235290000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fla-RI-ScJ">
+                    <rect key="frame" x="107" y="392" width="160" height="35"/>
+                    <color key="backgroundColor" red="0.67450980390000004" green="0.50588235290000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="j8s-W9-ke4"/>
+                        <constraint firstAttribute="height" constant="35" id="jL4-bq-YLD"/>
+                    </constraints>
+                    <state key="normal" title="进入钱包">
+                        <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="17.5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="XUe-dL-Mi2" firstAttribute="top" secondItem="ogZ-US-KBA" secondAttribute="bottom" constant="20" id="19k-V6-0TP"/>
+                <constraint firstItem="ogZ-US-KBA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="5Kt-aa-8oa"/>
+                <constraint firstItem="XUe-dL-Mi2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Bzc-aL-C5k"/>
+                <constraint firstItem="ogZ-US-KBA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h6V-Gb-lhI"/>
+                <constraint firstItem="Fla-RI-ScJ" firstAttribute="top" secondItem="XUe-dL-Mi2" secondAttribute="bottom" constant="90" id="y4u-rF-eGk"/>
+                <constraint firstItem="Fla-RI-ScJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yjQ-Ik-WY3"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

@@ -95,6 +95,8 @@
 		222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */ = {isa = PBXBuildFile; fileRef = 222C3102215A38E0009871C7 /* UIImage+MingleChang.m */; };
 		222CCAB421F819DB007E13BB /* SettingPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222CCAB321F819DB007E13BB /* SettingPasswordViewController.swift */; };
 		222CCAB621F81AAC007E13BB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222CCAB521F81AAC007E13BB /* ResetPasswordViewController.swift */; };
+		222D3FF02202CD2E004DE8C6 /* MyWalletWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222D3FEE2202CD2E004DE8C6 /* MyWalletWelcomeViewController.swift */; };
+		222D3FF12202CD2E004DE8C6 /* MyWalletWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 222D3FEF2202CD2E004DE8C6 /* MyWalletWelcomeViewController.xib */; };
 		222EF6162186B999005B89EF /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6152186B999005B89EF /* NSObject+extension.swift */; };
 		222EF6182187E527005B89EF /* DefConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6172187E526005B89EF /* DefConst.swift */; };
 		2231087621DC9603006D458F /* MyHelpContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231087421DC9603006D458F /* MyHelpContainerViewController.swift */; };
@@ -352,9 +354,7 @@
 		22581B4421DF5F4200F1D1B1 /* RealNameVeifiedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22581B2521DF5F4200F1D1B1 /* RealNameVeifiedViewController.xib */; };
 		22581B4521DF5F4200F1D1B1 /* OpinionFeedbackViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22581B2821DF5F4200F1D1B1 /* OpinionFeedbackViewController.strings */; };
 		22581B4621DF5F4200F1D1B1 /* CWTableViewCellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22581B2C21DF5F4200F1D1B1 /* CWTableViewCellInfo.m */; };
-		22581B4721DF5F4200F1D1B1 /* MyWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22581B2D21DF5F4200F1D1B1 /* MyWalletViewController.xib */; };
 		22581B4821DF5F4200F1D1B1 /* EditPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22581B2E21DF5F4200F1D1B1 /* EditPersonalInfoViewController.m */; };
-		22581B4921DF5F4200F1D1B1 /* MyWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22581B2F21DF5F4200F1D1B1 /* MyWalletViewController.m */; };
 		22581B4A21DF5F4200F1D1B1 /* EditPersonalInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22581B3121DF5F4200F1D1B1 /* EditPersonalInfoViewController.xib */; };
 		22581B4B21DF5F4200F1D1B1 /* OpinionFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22581B3221DF5F4200F1D1B1 /* OpinionFeedbackViewController.xib */; };
 		22581B4C21DF5F4200F1D1B1 /* CWTableViewInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22581B3521DF5F4200F1D1B1 /* CWTableViewInfo.m */; };
@@ -438,6 +438,13 @@
 		22E11A3621F1C12A00B76A3D /* AccountSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */; };
 		22E1A1202200664A004CCE9D /* RealNameDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A11F2200664A004CCE9D /* RealNameDetailsViewController.swift */; };
 		22E1A1222201439D004CCE9D /* RealNameVerifiedDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A1212201439D004CCE9D /* RealNameVerifiedDetailsModel.swift */; };
+		22E1A12722018067004CCE9D /* MyWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A12522018066004CCE9D /* MyWalletViewController.m */; };
+		22E1A12822018067004CCE9D /* MyWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E1A12622018067004CCE9D /* MyWalletViewController.xib */; };
+		22E1A12B220180AA004CCE9D /* MyWalletPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A129220180AA004CCE9D /* MyWalletPasswordViewController.swift */; };
+		22E1A12C220180AA004CCE9D /* MyWalletPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E1A12A220180AA004CCE9D /* MyWalletPasswordViewController.xib */; };
+		22E1A12F2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A12D2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.swift */; };
+		22E1A1302201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E1A12E2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.xib */; };
+		22E1A1342201B3A3004CCE9D /* SavePhotoToAssignpath.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A1332201B3A3004CCE9D /* SavePhotoToAssignpath.m */; };
 		22EBC11321533BAE00C11359 /* MCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EBC11121533BA800C11359 /* MCDate.m */; };
 		33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33055FE91F0503AC005740E0 /* StoreKit.framework */; };
 		332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5D91F4ED69F00888313 /* NSMutableAttributedString+TY.m */; };
@@ -796,6 +803,8 @@
 		222C3102215A38E0009871C7 /* UIImage+MingleChang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MingleChang.m"; sourceTree = "<group>"; };
 		222CCAB321F819DB007E13BB /* SettingPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPasswordViewController.swift; sourceTree = "<group>"; };
 		222CCAB521F81AAC007E13BB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		222D3FEE2202CD2E004DE8C6 /* MyWalletWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalletWelcomeViewController.swift; sourceTree = "<group>"; };
+		222D3FEF2202CD2E004DE8C6 /* MyWalletWelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletWelcomeViewController.xib; sourceTree = "<group>"; };
 		222EF6152186B999005B89EF /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
 		222EF6172187E526005B89EF /* DefConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefConst.swift; sourceTree = "<group>"; };
 		2231087421DC9603006D458F /* MyHelpContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHelpContainerViewController.swift; sourceTree = "<group>"; };
@@ -1095,16 +1104,13 @@
 		22581B2A21DF5F4200F1D1B1 /* CWTableViewInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewInfo.h; sourceTree = "<group>"; };
 		22581B2B21DF5F4200F1D1B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OpinionFeedbackViewController.strings; sourceTree = "<group>"; };
 		22581B2C21DF5F4200F1D1B1 /* CWTableViewCellInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewCellInfo.m; sourceTree = "<group>"; };
-		22581B2D21DF5F4200F1D1B1 /* MyWalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWalletViewController.xib; sourceTree = "<group>"; };
 		22581B2E21DF5F4200F1D1B1 /* EditPersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonalInfoViewController.m; sourceTree = "<group>"; };
-		22581B2F21DF5F4200F1D1B1 /* MyWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletViewController.m; sourceTree = "<group>"; };
 		22581B3021DF5F4200F1D1B1 /* OpinionFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionFeedbackViewController.h; sourceTree = "<group>"; };
 		22581B3121DF5F4200F1D1B1 /* EditPersonalInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditPersonalInfoViewController.xib; sourceTree = "<group>"; };
 		22581B3321DF5F4200F1D1B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpinionFeedbackViewController.xib; sourceTree = "<group>"; };
 		22581B3421DF5F4200F1D1B1 /* CWTableViewCellInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTableViewCellInfo.h; sourceTree = "<group>"; };
 		22581B3521DF5F4200F1D1B1 /* CWTableViewInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewInfo.m; sourceTree = "<group>"; };
 		22581B3621DF5F4200F1D1B1 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
-		22581B3721DF5F4200F1D1B1 /* MyWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWalletViewController.h; sourceTree = "<group>"; };
 		22581B3821DF5F4200F1D1B1 /* EditPersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonalInfoViewController.h; sourceTree = "<group>"; };
 		22581B3A21DF5F4200F1D1B1 /* CWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTableViewCell.m; sourceTree = "<group>"; };
 		22581B3B21DF5F4200F1D1B1 /* LeftWalletTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftWalletTableViewCell.h; sourceTree = "<group>"; };
@@ -1207,6 +1213,15 @@
 		22E11A3521F1C12A00B76A3D /* AccountSecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSecurityViewController.swift; sourceTree = "<group>"; };
 		22E1A11F2200664A004CCE9D /* RealNameDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNameDetailsViewController.swift; sourceTree = "<group>"; };
 		22E1A1212201439D004CCE9D /* RealNameVerifiedDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNameVerifiedDetailsModel.swift; sourceTree = "<group>"; };
+		22E1A12422018066004CCE9D /* MyWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWalletViewController.h; sourceTree = "<group>"; };
+		22E1A12522018066004CCE9D /* MyWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletViewController.m; sourceTree = "<group>"; };
+		22E1A12622018067004CCE9D /* MyWalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWalletViewController.xib; sourceTree = "<group>"; };
+		22E1A129220180AA004CCE9D /* MyWalletPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalletPasswordViewController.swift; sourceTree = "<group>"; };
+		22E1A12A220180AA004CCE9D /* MyWalletPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletPasswordViewController.xib; sourceTree = "<group>"; };
+		22E1A12D2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalletGenerateSuccessViewController.swift; sourceTree = "<group>"; };
+		22E1A12E2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletGenerateSuccessViewController.xib; sourceTree = "<group>"; };
+		22E1A1322201B3A3004CCE9D /* SavePhotoToAssignpath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavePhotoToAssignpath.h; sourceTree = "<group>"; };
+		22E1A1332201B3A3004CCE9D /* SavePhotoToAssignpath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavePhotoToAssignpath.m; sourceTree = "<group>"; };
 		22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentConfiguration.h; sourceTree = "<group>"; };
 		22EBC11121533BA800C11359 /* MCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDate.m; sourceTree = "<group>"; };
 		22EBC11221533BA900C11359 /* MCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDate.h; sourceTree = "<group>"; };
@@ -2611,6 +2626,7 @@
 		22538AA321D5D3A900B873F7 /* PersonalCenterModule */ = {
 			isa = PBXGroup;
 			children = (
+				22E1A1232201801A004CCE9D /* MyWallet */,
 				22E11A2C21F1A69B00B76A3D /* Setting */,
 				22581B2321DF5F4200F1D1B1 /* NameVerified */,
 				22581B2621DF5F4200F1D1B1 /* PersonalCenter */,
@@ -2658,9 +2674,6 @@
 				22581B2821DF5F4200F1D1B1 /* OpinionFeedbackViewController.strings */,
 				22581B2A21DF5F4200F1D1B1 /* CWTableViewInfo.h */,
 				22581B2C21DF5F4200F1D1B1 /* CWTableViewCellInfo.m */,
-				22581B2D21DF5F4200F1D1B1 /* MyWalletViewController.xib */,
-				22581B3721DF5F4200F1D1B1 /* MyWalletViewController.h */,
-				22581B2F21DF5F4200F1D1B1 /* MyWalletViewController.m */,
 				22581B3821DF5F4200F1D1B1 /* EditPersonalInfoViewController.h */,
 				22581B2E21DF5F4200F1D1B1 /* EditPersonalInfoViewController.m */,
 				22581B3121DF5F4200F1D1B1 /* EditPersonalInfoViewController.xib */,
@@ -2852,6 +2865,32 @@
 				22E11A3321F1A89E00B76A3D /* SCSettingViewController.storyboard */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		22E1A1232201801A004CCE9D /* MyWallet */ = {
+			isa = PBXGroup;
+			children = (
+				22E1A1312201B284004CCE9D /* Service */,
+				22E1A12422018066004CCE9D /* MyWalletViewController.h */,
+				22E1A12522018066004CCE9D /* MyWalletViewController.m */,
+				22E1A12622018067004CCE9D /* MyWalletViewController.xib */,
+				22E1A129220180AA004CCE9D /* MyWalletPasswordViewController.swift */,
+				22E1A12A220180AA004CCE9D /* MyWalletPasswordViewController.xib */,
+				22E1A12D2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.swift */,
+				22E1A12E2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.xib */,
+				222D3FEE2202CD2E004DE8C6 /* MyWalletWelcomeViewController.swift */,
+				222D3FEF2202CD2E004DE8C6 /* MyWalletWelcomeViewController.xib */,
+			);
+			path = MyWallet;
+			sourceTree = "<group>";
+		};
+		22E1A1312201B284004CCE9D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				22E1A1322201B3A3004CCE9D /* SavePhotoToAssignpath.h */,
+				22E1A1332201B3A3004CCE9D /* SavePhotoToAssignpath.m */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		33055FE81F0503AC005740E0 /* Frameworks */ = {
@@ -3879,6 +3918,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E1A1302201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.xib in Resources */,
 				223F9A732182AEC10031DB95 /* 1.jpg in Resources */,
 				22581B4521DF5F4200F1D1B1 /* OpinionFeedbackViewController.strings in Resources */,
 				223F9A04217F12040031DB95 /* area.plist in Resources */,
@@ -3890,6 +3930,7 @@
 				221BEF0F21D503CC007C76BF /* PublishTaskView.xib in Resources */,
 				22C917AB219424FF002E5240 /* TaskListBackView.xib in Resources */,
 				2231087A21DF3231006D458F /* AppointmentListCell.xib in Resources */,
+				222D3FF12202CD2E004DE8C6 /* MyWalletWelcomeViewController.xib in Resources */,
 				2271057321B4DA9B009FC34D /* Localizable.strings in Resources */,
 				892B39ED1FE8EC0300292A75 /* AliyunLanguageSource.bundle in Resources */,
 				2227012221C8F58600FCD269 /* HotCommunityCell.xib in Resources */,
@@ -3900,7 +3941,6 @@
 				485E66251F42862900B158BF /* EaseUIResource.bundle in Resources */,
 				22581B4F21DF5F4200F1D1B1 /* LeftWalletTableViewCell.xib in Resources */,
 				22C9178A219284B5002E5240 /* TaskListCell.xib in Resources */,
-				22581B4721DF5F4200F1D1B1 /* MyWalletViewController.xib in Resources */,
 				2242C0032159C34E00707024 /* YYHud.xib in Resources */,
 				223F99EC217F12040031DB95 /* blackTheme.bundle in Resources */,
 				224E6AFE21EEC147007C172E /* keyboard_pop_right@3x.png in Resources */,
@@ -3926,6 +3966,7 @@
 				22581B4A21DF5F4200F1D1B1 /* EditPersonalInfoViewController.xib in Resources */,
 				2229ED0921B9256100E33A8D /* AppointmentListViewController.xib in Resources */,
 				223F99BD217F12040031DB95 /* icon_baidu_marker.png in Resources */,
+				22E1A12822018067004CCE9D /* MyWalletViewController.xib in Resources */,
 				224E6B0021EEC147007C172E /* keyboard_pop_left@2x.png in Resources */,
 				224E6B0121EEC147007C172E /* keyboard_pop_left@3x.png in Resources */,
 				22563F61219C3929004E34BB /* TaskListPersonalCell.xib in Resources */,
@@ -3949,6 +3990,7 @@
 				2207068E219A81E800404459 /* PersonalChatInfoViewController.xib in Resources */,
 				22C9178E2192BA76002E5240 /* HHDefaultCell.xib in Resources */,
 				22581B4B21DF5F4200F1D1B1 /* OpinionFeedbackViewController.xib in Resources */,
+				22E1A12C220180AA004CCE9D /* MyWalletPasswordViewController.xib in Resources */,
 				2229ED0121B9091B00E33A8D /* NewYearActivitiesView.xib in Resources */,
 				33B7CCF91EC5865700FB6378 /* Assets.xcassets in Resources */,
 				22E11A3421F1A89E00B76A3D /* SCSettingViewController.storyboard in Resources */,
@@ -4141,6 +4183,7 @@
 				48718D2E1F42277400010AA0 /* AFURLRequestSerialization.m in Sources */,
 				22680AB6219E779000F2FA5B /* XMWebView.m in Sources */,
 				22D247892189D5A8009C1E6A /* RecieveTaskView.swift in Sources */,
+				222D3FF02202CD2E004DE8C6 /* MyWalletWelcomeViewController.swift in Sources */,
 				2226DB7A21ABA553002F6195 /* NSObject+customProperty.m in Sources */,
 				223F99CF217F12040031DB95 /* JCMineViewController.swift in Sources */,
 				22A2EB9721BE805500737265 /* NewYearActivityRuleView.swift in Sources */,
@@ -4193,12 +4236,12 @@
 				2229ED1421B9412700E33A8D /* AppointmentCreateCardViewController.swift in Sources */,
 				223F99E1217F12040031DB95 /* Date+JChat.swift in Sources */,
 				222C3103215A38E0009871C7 /* UIImage+MingleChang.m in Sources */,
+				22E1A12F2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.swift in Sources */,
 				223F99AB217F12040031DB95 /* JCDocumentViewController.swift in Sources */,
 				48718D8E1F42277400010AA0 /* MKAnnotationView+WebCache.m in Sources */,
 				223F99DA217F12040031DB95 /* NSLayoutConstraint+JChat.swift in Sources */,
 				2227012121C8F58600FCD269 /* HotCommunityCell.swift in Sources */,
 				33C1A1831F4C50FB003E22CA /* ViewController+MASAdditions.m in Sources */,
-				22581B4921DF5F4200F1D1B1 /* MyWalletViewController.m in Sources */,
 				332D3E451F500331001ADDB3 /* NSObject+MJCoding.m in Sources */,
 				33403F6C1F15BEE400666634 /* SCBase64.m in Sources */,
 				22631C4F216DE85200D5AB0B /* UIViewController+BackButtonHandler.m in Sources */,
@@ -4232,6 +4275,7 @@
 				22E11A3621F1C12A00B76A3D /* AccountSecurityViewController.swift in Sources */,
 				223F9975217F12040031DB95 /* JCMessageAvatarView.swift in Sources */,
 				48718D741F42277400010AA0 /* MJPhotoProgressView.m in Sources */,
+				22E1A12B220180AA004CCE9D /* MyWalletPasswordViewController.swift in Sources */,
 				223F9A5D21829BA80031DB95 /* UIViewController+CWLateralSlide.m in Sources */,
 				223F9A3D217F12B80031DB95 /* JCGroupListViewController.swift in Sources */,
 				89E031561FCF916C0089240B /* SCAliyunUploadMananger.m in Sources */,
@@ -4406,6 +4450,7 @@
 				223F997F217F12040031DB95 /* JCMessageLocationContent.swift in Sources */,
 				223F9A14217F12040031DB95 /* JCConstants.swift in Sources */,
 				223F99A6217F12040031DB95 /* JCGroupMembersViewController.swift in Sources */,
+				22E1A1342201B3A3004CCE9D /* SavePhotoToAssignpath.m in Sources */,
 				221B3BFC21C74F3F0061BB3E /* LBXPermission.m in Sources */,
 				221B3C0D21C79B440061BB3E /* CouponVerificationService.m in Sources */,
 				223F9A0D217F12040031DB95 /* DLCustomSlideView.m in Sources */,
@@ -4619,6 +4664,7 @@
 				223F9A0A217F12040031DB95 /* DLScrollTabbarView.m in Sources */,
 				223F9A34217F12B80031DB95 /* JCVerificationCell.swift in Sources */,
 				223F99C4217F12040031DB95 /* JCMineAvatorCell.swift in Sources */,
+				22E1A12722018067004CCE9D /* MyWalletViewController.m in Sources */,
 				2254A11621C35BF700C6FCD1 /* CommonShareModel.m in Sources */,
 				22538A9E21D5D17900B873F7 /* NSString+Additions.m in Sources */,
 				485E66601F42873F00B158BF /* MJRefreshGifHeader.m in Sources */,

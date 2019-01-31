@@ -69,6 +69,8 @@
 #import "KPKeyBoard.h"  //大写键盘
 #import "SCMD5Tool.h"
 #import "SCAES.h"
+#import "DUX_UploadUserIcon.h"
+#import "SavePhotoToAssignpath.h" 
 
 
 

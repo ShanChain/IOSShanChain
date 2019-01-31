@@ -44,5 +44,6 @@
 @property  (nonatomic,copy)  NSString  *createTime;
 @property  (nonatomic,copy)  NSString  *sex;
 @property  (nonatomic,copy)  NSString  *groupSet;
+@property  (nonatomic,assign)  BOOL  allowNotify;// 是否开启推送
 
 @end

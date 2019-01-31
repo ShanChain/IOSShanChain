@@ -19,4 +19,13 @@
     return objc_getAssociatedObject(self, _cmd);
 }
 
+
+- (void)setObject:(NSObject *)object{
+    objc_setAssociatedObject(self, _cmd, object, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSObject *)object{
+    return objc_getAssociatedObject(self, _cmd);
+}
+
 @end

@@ -321,22 +321,28 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     
 }
 
-- (void)getWithUrl:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
-    if (IS_USE_HTTPS) {
-        [_afManager setSecurityPolicy:[self customSecurityPolicy]];
-    }
-    _afManager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPT_TYPE_NORMAL];
-    _afManager.requestSerializer.timeoutInterval = TIME_OUT_INTERVAL;
+
+
+static NSString* getRequstToken(){
     NSString *userId = @"";
     userId = [[SCCacheTool shareInstance] getCurrentUser];
     NSString *token = @"";
     if(userId && ![userId isEqualToString:@""] ){
         token = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:userId andKey:@"token"];
     }
+    return token;
+}
+
+- (void)getWithUrl:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    if (IS_USE_HTTPS) {
+        [_afManager setSecurityPolicy:[self customSecurityPolicy]];
+    }
+    _afManager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPT_TYPE_NORMAL];
+    _afManager.requestSerializer.timeoutInterval = TIME_OUT_INTERVAL;
     
     NSMutableDictionary *params = [parameters mutableCopy];
     if([parameters objectForKey:@"token"] == nil || [[parameters objectForKey:@"token"]  isEqual: @""]){
-        [params setValue:token forKey:@"token"];
+        [params setValue:getRequstToken() forKey:@"token"];
     }
     if([url hasPrefix:@"/"]) {
         url = [SC_BASE_URL stringByAppendingString:url];
@@ -377,8 +383,38 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
  *  图片上传
  *
  *  @param imgArr 图片数组
- *  @param block  返回图片地址数组
+ *  @param callBlock  返回图片地址数组
  */
+
+
+- (void)HH_uploadFileWithArr:(NSArray*)imgArr url:(NSString *)url parameters:(id)parameters showLoading:(BOOL)show callBlock:(void(^)(HHBaseModel *baseModel,NSError *error))callBlock{
+#if TARGET_OS_IPHONE
+    [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
+        if (status < 1) {
+            [HHTool showError:NSLocalizedString(@"sc_Please_check_the_networksettings", nil)];
+            callBlock(nil,[NSError errorWithDomain:NSURLErrorDomain code:-1001 userInfo:nil]);
+            return ;
+        }
+    }];
+#endif
+    if (show) {
+        [HHTool showChrysanthemum];
+    }
+    [self uploadImagesWihtImgArr:imgArr url:url parameters:parameters block:^(id objc, BOOL success) {
+        
+        if (show) {
+            [HHTool immediatelyDismiss];
+        }
+        if (success) {
+            HHBaseModel  *baseModel = [HHBaseModel yy_modelWithDictionary:objc];
+            callBlock(baseModel,nil);
+        }else{
+            callBlock(nil,objc);
+        }
+    }];
+    
+}
+
 - (void)uploadImagesWihtImgArr:(NSArray *)imgArr
                            url:(NSString *)url
                     parameters:(id)parameters
@@ -389,10 +425,15 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     // 基于AFN3.0+ 封装的HTPPSession句柄
     _afManager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPT_TYPE_IMAGE];
     // 在parameters里存放照片以外的对象
-    [_afManager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSMutableDictionary *params = [parameters mutableCopy];
+//    if([parameters objectForKey:@"token"] == nil || [[parameters objectForKey:@"token"]  isEqual: @""]){
+//        [params setValue:getRequstToken() forKey:@"token"];
+//    }
+    
+    NSMutableString  *mutabUrl = [[NSMutableString alloc]initWithString:url];
+    [mutabUrl appendFormat:@"?token=%@",getRequstToken()];
+    [_afManager POST:mutabUrl.copy parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for (int i = 0; i < imgArr.count; i++) {
-            UIImage *image = imgArr[i];
-            NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"yyyyMMddHHmmss"];
             NSString *dateString = [formatter stringFromDate:[NSDate date]];
@@ -404,14 +445,46 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
              3. fileName：要保存在服务器上的文件名
              4. mimeType：上传的文件的类型
              */
-            [formData appendPartWithFileData:imageData name:@"multipartFile" fileName:fileName mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:imgArr[i] name:@"file" fileName:fileName mimeType:@"image/jpeg"];
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         SCLog(@"%@",uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        block(responseObject,YES);
+        
+        NSString  *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
+        if ([code isEqualToString:SC_COMMON_SUC_CODE] || [code isEqualToString:SC_WALLET_COMMON_SUC_CODE] || [code isEqualToString:SC_REALNAME_NOMATCH]) {
+            SCLog(@"success");
+            block(responseObject,YES);
+        }else if ([code isEqualToString:SC_REALNAME_AUTHENTICATE]){
+            [[SCAppManager shareInstance] realNameAuthenticate];
+        } else if([code isEqualToString:SC_REQUEST_TOKEN_EXPIRE]){
+            [[SCAppManager shareInstance] logout];
+        }else  if ([code isEqualToString:SC_NOTENOUGH] ) {
+            [HHTool showError:@"您的余额不足"];
+        }else{
+            SCLog(@"Request error%@", responseObject);
+            
+            NSString *msg = @"Request data error";
+            if (!NULLString(responseObject[@"message"])) {
+                msg = responseObject[@"message"];
+            }
+            
+            if (!NULLString(responseObject[@"msg"])) {
+                msg = responseObject[@"msg"];
+            }
+            block([SCNetworkError errorWithCode:code.integerValue msg:msg],NO);
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        block(nil,NO);
+        
+        NSString  *mimeType = task.response.MIMEType;
+        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        if (errorData) {
+            block(@{@"data":errorData,@"code":@"000000",@"message":@""},YES);
+        }else{
+            block(error,NO);
+        }
+        
     }];
 }
 

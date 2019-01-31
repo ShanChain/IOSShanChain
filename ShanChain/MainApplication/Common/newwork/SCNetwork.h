@@ -34,10 +34,6 @@
                   success:(void (^)(id responseObject))success
                   failure:(void (^)(NSError *error))failure;
 
-- (void)uploadImagesWihtImgArr:(NSArray *)imgArr
-                           url:(NSString *)url
-                    parameters:(id)parameters
-                         block:(void (^)(id objc,BOOL success))block;
 
 - (void)downFileWithUrl:(NSString *)urlString
                   block:(void (^)(id objc,BOOL success))block;
@@ -46,6 +42,8 @@
 -(void)v1_postWithUrl:(NSString *)url params:(id)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock;
 - (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show callBlock:(void(^)(HHBaseModel *baseModel,NSError *error))callBlock;
 - (void)HH_GetWithUrl:(NSString *)url parameters:(id)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock;
+
+- (void)HH_uploadFileWithArr:(NSArray*)imgArr url:(NSString *)url parameters:(id)parameters showLoading:(BOOL)show callBlock:(void(^)(HHBaseModel *baseModel,NSError *error))callBlock;
 
 @end
 

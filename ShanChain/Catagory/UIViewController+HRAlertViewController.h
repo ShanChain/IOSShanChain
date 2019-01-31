@@ -27,9 +27,9 @@
  *
  */
 
--(UIAlertController*)sc_hrShowAlertWithTitle:(nullable NSString *)title
+-(UIAlertController*_Nullable)sc_hrShowAlertWithTitle:(nullable NSString *)title
                                      message:(nullable NSString *)message
-                               buttonsTitles:(NSArray<NSString *> *)buttonTitles
+                                        buttonsTitles:(NSArray<NSString *> *_Nullable)buttonTitles
                                   andHandler:(void (^ __nullable)(UIAlertAction * _Nullable action, NSInteger indexOfAction))handler;
 
 -(nonnull UIAlertController *)hrAlertWithTitle:(nullable NSString *)title

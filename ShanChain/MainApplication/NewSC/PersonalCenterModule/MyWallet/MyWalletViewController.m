@@ -8,6 +8,7 @@
 
 #import "MyWalletViewController.h"
 #import "XMWebView.h"
+#import "ShanChain-Swift.h"
 
 #if PN_ENVIRONMENT == 3  //生产环境
 
@@ -39,6 +40,16 @@
     [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+
+    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    if (!self.isShowNav) {
+        self.navigationController.navigationBarHidden = YES;
+    }
+    
     //此处链接要写全
     if (NULLString(self.urlStr)) {
         self.urlStr = WalletURL;
@@ -46,12 +57,6 @@
     NSURL *url = [NSURL URLWithString:self.urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
-    
-}
-
-
--(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBarHidden = YES;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -107,6 +112,11 @@
     [urlParameter enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([key isEqualToString:@"toLogin"] && [obj isEqualToString:@"true"]) {
              [[SCAppManager shareInstance] logout];
+        }
+        
+        if ([key isEqualToString:@"toPwd"] && [obj isEqualToString:@"true"]) {
+            MyWalletPasswordViewController *wallPassword = [[MyWalletPasswordViewController alloc]init];
+            [self.navigationController pushViewController:wallPassword animated:YES];
         }
         
         if ([key isEqualToString:@"toPrev"] && [obj isEqualToString:@"true"]) {

@@ -226,8 +226,9 @@
         MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
 //        walletVC.urlStr = @"http://m.qianqianshijie.com/orderDetails?id=15450393575245641";
         [nav.topViewController.navigationController pushViewController:walletVC animated:YES];
-    }else if ([title isEqualToString:NSLocalizedString(@"sc_SignOut", nil)]){
-        [[SCAppManager shareInstance]selectLogout];
+    }else if ([title isEqualToString:NSLocalizedString(@"sc_Setting", nil)]){
+       SCSettingViewController *settingVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
+          [nav.topViewController.navigationController pushViewController:settingVC animated:YES];
        // [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
     }else if ([title isEqualToString:NSLocalizedString(@"sc_Real_name_authentication", nil)]){
         RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
@@ -312,15 +313,17 @@
                             NSLocalizedString(@"sc_Voucher_MyVoucher", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
                             NSLocalizedString(@"sc_Feedback", nil),
-                            NSLocalizedString(@"sc_SignOut", nil)];
+                            NSLocalizedString(@"sc_Real_name_authentication",nil),
+                            NSLocalizedString(@"sc_Setting", nil)];
         }else{
             _titleArray = @[
                             NSLocalizedString(@"sc_Voucher_MyVoucher", nil),
                             NSLocalizedString(@"sc_MyWallet", nil),
                             NSLocalizedString(@"sc_MyTask", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
-                            NSLocalizedString(@"sc_Feedback", nil),
-                            NSLocalizedString(@"sc_SignOut", nil)];
+                            NSLocalizedString(@"sc_Real_name_authentication",nil),
+                            NSLocalizedString(@"sc_Setting", nil)];
+                        
         }
         
      

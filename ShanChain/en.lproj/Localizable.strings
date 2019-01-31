@@ -6,7 +6,7 @@
   Copyright © 2018年 ShanChain. All rights reserved.
 */
 
-
+"sc_MJ" = "MarJar";
 
 "sc_enter" = "Go";
 "sc_E" = "E";
@@ -107,6 +107,7 @@
  设置
  */
 
+"sc_Setting" = "Setting";
 "sc_Personal" = "Personal";
 "sc_set_Profile" = "Profile";
 "sc_Notification" = "Notification";

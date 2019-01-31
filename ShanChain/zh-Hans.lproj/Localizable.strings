@@ -6,7 +6,7 @@
   Copyright © 2018年 ShanChain. All rights reserved.
 */
 
-
+"sc_MJ" = "马甲App";
 
 "sc_enter" = "进入广场";
 "sc_E" = "东经";
@@ -103,6 +103,7 @@
  */
 
 "sc_Personal" = "更改资料";
+"sc_Setting" = "设置";
 "sc_set_Profile" = "修改个人资料";
 "sc_Notification" = "消息设置";
 "sc_AccountAndSecurity" = "账号与安全";

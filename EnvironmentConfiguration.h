@@ -21,8 +21,8 @@
 
 #if PN_ENVIRONMENT == 0
 
-#define HostName @"67.218.159.56"
-#define PORT @"9090"
+#define HostName @"172.16.14.6"
+#define PORT @"8089"
 #define Base_url [NSString stringWithFormat:@"%@%@:%@",Prtocol,HostName,PORT]
 
 
