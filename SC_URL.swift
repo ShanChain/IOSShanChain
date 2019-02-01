@@ -91,6 +91,8 @@ public let Unlogin_Verifycode_URL  = "/v1/2.0/sms/setting/verifycode" //重置�
 public let Reset_Password_URL  = "/v1/2.0/user/reset_password" //重置密码
 public let Change_phone_URL  = "/v1/2.0/user/change_phone" //修改手机号
 public let RealVerified_detail_URL  = "/v1/2.0/Verified/detail" //实名认证详情
+public let Jpush_AllowNotify_URL  = "/push/jpush/allowNotify" //用户设置是否接受系统通知
+
 
 /*
  钱包

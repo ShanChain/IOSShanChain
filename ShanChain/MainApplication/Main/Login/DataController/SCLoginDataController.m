@@ -133,6 +133,10 @@
         [params setObject:encryptAccount forKey:@"encryptOpenId"];
         [params setObject:encryptPassword forKey:@"encryptToken16"];
         [params setObject:SC_APP_CHANNEL forKey:@"channel"];
+        NSString  *deviceToken = [JPUSHService registrationID];
+        if (!NULLString(deviceToken)) {
+            [params setValue:deviceToken forKey:@"deviceToken"];
+        }
         
         [[SCNetwork shareInstance]v1_postWithUrl:Third_login_URL params:params showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
             if ([baseModel.code isEqualToString:SC_PHONENUMBER_NOBIND]) {

@@ -44,9 +44,20 @@
                                                         <outletCollection property="gestureRecognizers" destination="wRJ-2c-kbT" appends="YES" id="jw8-8F-DFK"/>
                                                     </connections>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lV-wb-O9b">
+                                                    <rect key="frame" x="242.5" y="70" width="31" height="30"/>
+                                                    <state key="normal" title="更换">
+                                                        <color key="titleColor" red="0.67450980390000004" green="0.50588235290000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="changeIconAction:" destination="dL8-th-nHB" eventType="touchUpInside" id="pu9-sP-Kp3"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="0lV-wb-O9b" firstAttribute="leading" secondItem="tZ7-HO-4gO" secondAttribute="trailing" constant="15" id="JPC-GW-OrQ"/>
                                                 <constraint firstItem="tZ7-HO-4gO" firstAttribute="centerX" secondItem="ycK-cO-5Qq" secondAttribute="centerX" id="SA7-Iz-jRx"/>
+                                                <constraint firstItem="0lV-wb-O9b" firstAttribute="bottom" secondItem="tZ7-HO-4gO" secondAttribute="bottom" id="oWd-Ss-mHC"/>
                                                 <constraint firstItem="tZ7-HO-4gO" firstAttribute="centerY" secondItem="ycK-cO-5Qq" secondAttribute="centerY" id="vcU-eg-5Ve"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -443,7 +454,7 @@
                                         <rect key="frame" x="0.0" y="779" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xpk-2P-wEc" id="8vT-30-BYJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ang-cF-WC9">
@@ -486,7 +497,7 @@
                                         <rect key="frame" x="0.0" y="879" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b0R-Dq-FwD" id="vFY-Gm-Vys">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

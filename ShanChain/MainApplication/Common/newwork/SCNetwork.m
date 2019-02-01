@@ -525,7 +525,9 @@ static NSString* getRequstToken(){
 }
 
 - (void)apendTOBaseParams:(NSDictionary*)params{
-    [params setValue:@"ios" forKey:@"Os"];
+    [params setValue:@"ios" forKey:@"os"];
+ 
+    
     return;
 }
 

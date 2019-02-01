@@ -305,6 +305,10 @@
         [params setObject:encryptAccount forKey:@"encryptAccount"];
         [params setObject:encryptPassword forKey:@"encryptPassword"];
         [params setObject:SC_APP_CHANNEL forKey:@"channel"];
+        NSString  *deviceToken = [JPUSHService registrationID];
+        if (!NULLString(deviceToken)) {
+            [params setValue:deviceToken forKey:@"deviceToken"];
+        }
         [SYProgressHUD showMessage:NSLocalizedString(@"sc_login_loggingIn", nil)];
         [SCNetwork.shareInstance postWithUrl:COMMONUSERLOGIN parameters:params success:^(id responseObject) {
             NSDictionary *data = responseObject[@"data"];
@@ -417,6 +421,10 @@
             [params setObject:encryptAccount forKey:@"encryptOpenId"];
             [params setObject:encryptPassword forKey:@"encryptToken16"];
             [params setObject:SC_APP_CHANNEL forKey:@"channel"];
+            NSString  *deviceToken = [JPUSHService registrationID];
+            if (!NULLString(deviceToken)) {
+                [params setValue:deviceToken forKey:@"deviceToken"];
+            }
             [SYProgressHUD hideHUD];
             [[SCNetwork shareInstance]postWithUrl:COMMONUSERLOGINTHIRD parameters:params success:^(id responseObject) {
                 [SYProgressHUD showSuccess:@"正在获取数据"];

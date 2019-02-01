@@ -84,6 +84,10 @@ class AppointmentCreateCardViewController: UITableViewController {
       
     }
     
+    @IBAction func changeIconAction(_ sender: UIButton) {
+        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: self, imageTag: 0, delegate: self as DUX_UploadUserIconDelegate)
+    }
+    
     @IBAction func selectTimeAtion(_ sender: UITapGestureRecognizer) {
         let datePicker = YLDatePicker(currentDate: MCDate.init(date: Date()).byAddDays(1).date, minLimitDate:MCDate.init(date: Date()).byAddDays(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMD) { [weak self] (date) in
             

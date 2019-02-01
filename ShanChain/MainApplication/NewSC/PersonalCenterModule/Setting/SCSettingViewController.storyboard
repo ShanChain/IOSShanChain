@@ -180,6 +180,7 @@
                     </tableView>
                     <connections>
                         <outlet property="pushSwich" destination="Dgg-zL-hpx" id="TFK-uu-5uY"/>
+                        <outlet property="versionLb" destination="u8J-Mf-bWu" id="ddJ-gl-PZP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOw-Xx-wNG" userLabel="First Responder" sceneMemberID="firstResponder"/>

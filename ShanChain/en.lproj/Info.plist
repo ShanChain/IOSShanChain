@@ -79,12 +79,12 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>1350</string>
 	<key>FacebookAppID</key>
 	<string>351737942088473</string>
 	<key>FacebookDisplayName</key>
 	<string>MarJar</string>
-	<key>CFBundleVersion</key>
-	<string>1346</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -124,7 +124,6 @@
 		<string>alipay</string>
 		<string>alipayshare</string>
 		<string>baidumap</string>
-        <!-- Facebook URL Scheme 白名单-->
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>

@@ -38,6 +38,7 @@ typedef enum : NSInteger {
 
 + (NSError *)errorWithCode:(NSInteger)code msg:(NSString *)msg;
 
+
 @end
 
 #endif /* SCNetworkError_h */
