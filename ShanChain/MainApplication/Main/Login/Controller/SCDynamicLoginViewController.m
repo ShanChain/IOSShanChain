@@ -118,13 +118,17 @@
          [self.wxView removeFromSuperview];
     }
     
-    BOOL weibo = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Sinaweibo://"]];
-    if (!weibo) {
+//    BOOL weibo = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Sinaweibo://"]];
+    
+    BOOL facebook = [JSHAREService isFacebookInstalled];
+    
+    
+    if (!facebook) {
         [_stackView removeArrangedSubview:self.weiboView];
         [self.weiboView removeFromSuperview];
     }
     
-    if (!qq && !weixin && !weibo) {
+    if (!qq && !weixin && !facebook) {
         self.titleLb.hidden = YES;
         self.line1.hidden = YES;
         self.line2.hidden = YES;
@@ -184,7 +188,7 @@
 
 - (IBAction)weiboLoginAction:(UIButton *)sender {
     
-    [SCLoginDataController otherLoginWithPlatfrom:JSHAREPlatformSinaWeibo bindPhoneNumberCallBack:^(NSString *encryptOpenId) {
+    [SCLoginDataController otherLoginWithPlatfrom:JSHAREPlatformFacebook bindPhoneNumberCallBack:^(NSString *encryptOpenId) {
         [self bindPhoneNumberWithEncryptOpenId:encryptOpenId];
     }];
 }

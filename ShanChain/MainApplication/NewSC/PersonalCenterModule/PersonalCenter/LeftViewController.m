@@ -317,8 +317,8 @@
                             NSLocalizedString(@"sc_Setting", nil)];
         }else{
             _titleArray = @[
-                            NSLocalizedString(@"sc_Voucher_MyVoucher", nil),
                             NSLocalizedString(@"sc_MyWallet", nil),
+                            NSLocalizedString(@"sc_Voucher_MyVoucher", nil),
                             NSLocalizedString(@"sc_MyTask", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
                             NSLocalizedString(@"sc_Real_name_authentication",nil),

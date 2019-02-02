@@ -115,6 +115,9 @@
             case JSHAREPlatformSinaWeibo:
                 loginTypeStr = @"USER_TYPE_WEIBO";
                 break;
+            case JSHAREPlatformFacebook:
+                loginTypeStr = @"USER_TYPE_FB";
+                break;
             default: ;
         }
         

@@ -175,7 +175,7 @@
 -(UIButton *)weibBtn{
     if (!_weibBtn) {
         _weibBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        [_weibBtn setBackgroundImage:[UIImage imageNamed:@"abs_login_btn_weibo_default"] forState:UIControlStateNormal];
+        [_weibBtn setBackgroundImage:[UIImage imageNamed:@"login_facebock"] forState:UIControlStateNormal];
         [_weibBtn addTarget:self action:@selector(weiBLoginBtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _weibBtn;
@@ -247,12 +247,16 @@
         [self.socialView addSubview:self.weiBtn];
     }
     
-    BOOL weibo = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Sinaweibo://"]];
-    if (weibo) {
+
+    BOOL facebook = facebook = [JSHAREService isFacebookInstalled];
+    
+
+    
+    if (facebook) {
          [self.socialView addSubview:self.weibBtn];
     }
     
-    if (qq || weixin || weibo) {
+    if (qq || weixin || facebook) {
         [self.scrollView addSubview:self.socialBtn];
     }
     
@@ -371,7 +375,7 @@
 }
 
 - (void)weiBLoginBtnClick{
-    [SCLoginDataController otherLoginWithPlatfrom:JSHAREPlatformSinaWeibo bindPhoneNumberCallBack:^(NSString *encryptOpenId) {
+    [SCLoginDataController otherLoginWithPlatfrom:JSHAREPlatformFacebook bindPhoneNumberCallBack:^(NSString *encryptOpenId) {
         [self bindPhoneNumberWithEncryptOpenId:encryptOpenId];
     }];
 }

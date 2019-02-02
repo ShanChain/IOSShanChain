@@ -176,7 +176,10 @@ class HHShareView: UIView {
     
     func _shareMediaType(shareEntity:ShareContentModel,PlatforType:Int,mediaType:Int){
         PublicShareService.share(shareEntity, platform:PlatforType, mediaType: mediaType) { (state, error) in
-            HHTool.showError(error?.localizedDescription)
+            if let error = error{
+                HHTool.showError(error.localizedDescription)
+            }
+            
         }
     }
     
@@ -196,7 +199,7 @@ class HHShareView: UIView {
     
     
     @IBAction func shareSinaWeiboAction(_ sender: UIButton) {
-        _share(PlatforType: JSHAREPlatform.JSHAREPlatformSinaWeibo.rawValue)
+        _share(PlatforType: JSHAREPlatform.JSHAREPlatformFacebook.rawValue)
     }
     
 }

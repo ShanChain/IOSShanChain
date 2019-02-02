@@ -110,13 +110,13 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbD-os-Oce">
                                     <rect key="frame" x="36" y="10" width="54" height="54"/>
-                                    <state key="normal" image="com_share_sina"/>
+                                    <state key="normal" image="login_facebock"/>
                                     <connections>
                                         <action selector="weiboLoginAction:" destination="-1" eventType="touchUpInside" id="8mj-PZ-vON"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微博登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kto-wn-Cl5">
-                                    <rect key="frame" x="32" y="74" width="61.5" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="facebook登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kto-wn-Cl5">
+                                    <rect key="frame" x="15.5" y="74" width="94.5" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -242,7 +242,7 @@
     </objects>
     <resources>
         <image name="com_share_qq" width="54" height="54"/>
-        <image name="com_share_sina" width="54" height="54"/>
         <image name="com_share_wechat" width="54" height="54"/>
+        <image name="login_facebock" width="54" height="54"/>
     </resources>
 </document>
