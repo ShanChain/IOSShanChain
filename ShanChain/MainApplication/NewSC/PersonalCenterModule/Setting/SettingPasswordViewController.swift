@@ -22,7 +22,7 @@ class SettingPasswordViewController: SCBaseVC {
     var isChangePassword:Bool = false // 是否是更换密码
     var disposeBag = DisposeBag()
     var smsVerifyModel:SmsVerifycodeModel?
-    let mobile = UserDefaults.standard.object(forKey: "K_USERNAME") as! String
+    let mobile = SC_phoneNumber ?? SCCacheTool.shareInstance().mobile
     
     func _getParameter() -> Dictionary<String,Any> {
         if isChangePassword == true {
@@ -90,9 +90,9 @@ class SettingPasswordViewController: SCBaseVC {
             
                 if json == 1{
                     if self?.isChangePassword == false{
-                        HHTool.showTip("密码设置成功!", duration: 1.0)
+                        HHTool.showTip("密码设置成功!", duration: 1.5)
                     }else{
-                        HHTool.showTip("密码重置成功!", duration: 1.0)
+                        HHTool.showTip("密码重置成功!", duration: 1.5)
                     }
                     
                     _ = delay(1.0, task: {

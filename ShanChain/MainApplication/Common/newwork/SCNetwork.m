@@ -66,15 +66,13 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     if (IS_USE_HTTPS) {
         [_afManager setSecurityPolicy:[self customSecurityPolicy]];
     }
-    NSString *userId = @"";
-    userId = [[SCCacheTool shareInstance] getCurrentUser];
+    
+    NSString *userId = [[SCCacheTool shareInstance] getCurrentUser];
     NSString *token = @"";
-    NSString *userIdString = [userId stringByAppendingString:@"_"];
-    if(userId && ![userId isEqualToString:@""] ){
+    if(userId && ![userId isEqualToString:@""]){
          token = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:userId andKey:@"token"];
     }
     
-   
     NSMutableDictionary *params = [parameters mutableCopy];
     if ([token isNotBlank]) {
         [params setValue:token forKey:@"token"];
@@ -129,6 +127,8 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 [[SCAppManager shareInstance] realNameAuthenticate];
             } else if ([code isEqualToString:SC_SHARE_NOOPEN]){
                 [SYProgressHUD showError:msg];
+            }else if ([code isEqualToString:SC_ERROR_WalletAccountNotexist] || [code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
+                [[SCAppManager shareInstance]configWalletInfo];
             }else {
                 [YYHud showError:msg];
                 if (failure) {
@@ -184,12 +184,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     if (IS_USE_HTTPS) {
         [_afManager setSecurityPolicy:[self customSecurityPolicy]];
     }
-    NSString *userId = @"";
-    userId = [[SCCacheTool shareInstance] getCurrentUser];
-    NSString *token = @"";
-    if(userId && ![userId isEqualToString:@""] ){
-        token = [[SCCacheTool shareInstance] getCacheValueInfoWithUserID:userId andKey:@"token"];
-    }
+    NSString *token = getRequstToken();
     NSMutableDictionary *params = [parameters mutableCopy];
     if ([token isNotBlank]) {
         [params setValue:token forKey:@"token"];
@@ -212,27 +207,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         if (show) {
             [HHTool immediatelyDismiss];
         }
-        if (!error) {
-            HHBaseModel  *baseModel;
-            if ([responseObject isKindOfClass:[NSData class]]) {
-                NSDictionary *dictionary =[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-                baseModel = [HHBaseModel yy_modelWithDictionary:dictionary];
-            }else{
-                baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
-            }
-            
-            
-            if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE] || [baseModel.code isEqualToString:SC_WALLET_COMMON_SUC_CODE]) {
-                callBlock(baseModel,nil);
-            }else{
-                if (!NULLString(baseModel.message)) {
-                    if (baseModel.code.integerValue == SC_NOTENOUGH.integerValue) {
-                        baseModel.message = @"您的余额不足";
-                    }
-                    [HHTool showError:baseModel.message];
-                }
-            }
-        } else {
+        if (error) {
             callBlock(nil,error);
             
             NSString  *msg = [error.userInfo objectForKey:@"NSLocalizedDescription"];
@@ -240,7 +215,35 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 msg = @"您的余额不足";
             }
             [YYHud showError:msg];
+            return ;
         }
+        
+        HHBaseModel  *baseModel;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            NSDictionary *dictionary =[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+            baseModel = [HHBaseModel yy_modelWithDictionary:dictionary];
+        }else{
+            baseModel = [HHBaseModel yy_modelWithDictionary:responseObject];
+        }
+        
+        if ([baseModel.code isEqualToString:SC_COMMON_SUC_CODE] || [baseModel.code isEqualToString:SC_WALLET_COMMON_SUC_CODE]) {
+            callBlock(baseModel,nil);
+        }else{
+            if ([baseModel.code isEqualToString:SC_ERROR_WalletAccountNotexist] || [baseModel.code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
+                [[SCAppManager shareInstance]configWalletInfo];
+            }
+            
+            
+            
+            if (!NULLString(baseModel.message)) {
+                if (baseModel.code.integerValue == SC_NOTENOUGH.integerValue) {
+                    baseModel.message = @"您的余额不足";
+                }
+                [HHTool showError:baseModel.message];
+            }
+        }
+        
+        
     }] resume];
 }
 
@@ -322,7 +325,6 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 }
 
 
-
 static NSString* getRequstToken(){
     NSString *userId = @"";
     userId = [[SCCacheTool shareInstance] getCurrentUser];
@@ -359,6 +361,8 @@ static NSString* getRequstToken(){
             [[SCAppManager shareInstance] logout];
         }else  if ([code isEqualToString:SC_NOTENOUGH] ) {
             [HHTool showError:@"您的余额不足"];
+        }else if ([code isEqualToString:SC_ERROR_WalletAccountNotexist] || [code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
+            [[SCAppManager shareInstance]configWalletInfo];
         }else{
             SCLog(@"Request error%@", responseObject);
             
@@ -542,6 +546,8 @@ static NSString* getRequstToken(){
         BLOCK_EXEC(block,status);
     }];
 }
+
+
 
 @end
 

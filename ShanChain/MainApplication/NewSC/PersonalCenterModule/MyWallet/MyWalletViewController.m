@@ -46,9 +46,8 @@
 
 
 -(void)viewWillAppear:(BOOL)animated{
-    if (!self.isShowNav) {
-        self.navigationController.navigationBarHidden = YES;
-    }
+   
+    self.navigationController.navigationBarHidden = !self.isShowNav;
     
     //此处链接要写全
     if (NULLString(self.urlStr)) {
@@ -120,10 +119,10 @@
         }
         
         if ([key isEqualToString:@"toPrev"] && [obj isEqualToString:@"true"]) {
-            if (self.navigationController.navigationBarHidden) {
-                self.navigationController.navigationBarHidden = NO;
-            }
-            [self.navigationController popViewControllerAnimated:YES];
+//            if (self.navigationController.navigationBarHidden) {
+//                self.navigationController.navigationBarHidden = NO;
+//            }
+            [self dismissViewControllerAnimated:YES completion:NULL];
         }
         
         if ([key isEqualToString:@"comfirm"] && [obj isEqualToString:@"true"]) {

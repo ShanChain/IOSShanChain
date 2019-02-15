@@ -15,6 +15,7 @@ class MyWalletWelcomeViewController: SCBaseVC {
     @IBOutlet weak var joinWalletBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         self.navigationItem.hidesBackButton = true
         let  walletPage =  self.navigationController?.viewControllers.filter{
             return $0 is MyWalletViewController
@@ -23,10 +24,18 @@ class MyWalletWelcomeViewController: SCBaseVC {
             self?.navigationController?.isNavigationBarHidden = false
             self?.navigationController?.popToViewController((walletPage?.last)!, animated: true)
         }).disposed(by: disposeBag)
+        
+        
+        self.hh_rewriteBackActionFunc(#selector(_back))
+        
+    }
+    
+    func _back(){
+        self.dismissPrestingViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
+//        navigationController?.isNavigationBarHidden = true
         super.viewWillAppear(animated)
     }
 

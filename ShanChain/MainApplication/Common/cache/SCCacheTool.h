@@ -92,6 +92,8 @@
 @property   (nonatomic,strong)  WalletCurrencyModel         *currencyModel;
 
 @property   (nonatomic,copy)    NSString            *chatRoomId;
+@property   (nonatomic,copy)    NSString            *mobile;
+
 @property   (nonatomic,assign)    BOOL              isActivitying; // 是否要进行活动
 @property   (nonatomic,copy)    NSString            *status;//0 未上  1 以上
 @property   (nonatomic,assign)   BOOL   isJGSetup; //极光sdk是否连接成功

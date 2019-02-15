@@ -224,8 +224,9 @@
     }else if ([title isEqualToString:NSLocalizedString(@"sc_MyWallet", nil)]){
         //
         MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
+        JCNavigationController *walletNav = [[JCNavigationController alloc]initWithRootViewController:walletVC];
 //        walletVC.urlStr = @"http://m.qianqianshijie.com/orderDetails?id=15450393575245641";
-        [nav.topViewController.navigationController pushViewController:walletVC animated:YES];
+        [nav.topViewController.navigationController presentViewController:walletNav animated:YES completion:nil];
     }else if ([title isEqualToString:NSLocalizedString(@"sc_Setting", nil)]){
        SCSettingViewController *settingVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
           [nav.topViewController.navigationController pushViewController:settingVC animated:YES];

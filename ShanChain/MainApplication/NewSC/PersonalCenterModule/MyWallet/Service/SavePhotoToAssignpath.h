@@ -39,7 +39,6 @@ typedef void (^SaveCompletion)(BOOL success,PHAsset *asset);
  *  保存图片到系统相册
  *
  *  @param imagePath  保存的图片路径
- *  @param folderName 目的文件的路径
  */
 - (void)saveImagePath:(NSString *)imagePath;
 - (void)saveDataWithPhtotoKit:(id)data completion:(SaveCompletion)completion;
@@ -48,7 +47,6 @@ typedef void (^SaveCompletion)(BOOL success,PHAsset *asset);
  *  保存视频到系统相册
  *
  *  @param videoPath  保存的视频路径
- *  @param folderName 目的文件的路径
  */
 - (void)saveVideoPath:(NSString *)videoPath;
 
@@ -56,7 +54,6 @@ typedef void (^SaveCompletion)(BOOL success,PHAsset *asset);
  *  删除系统相册中的文件
  *
  *  @param filePath   文件的路径
- *  @param folderName 文件夹的名字
  */
 - (void)deleteFile:(NSString *)filePath;
 

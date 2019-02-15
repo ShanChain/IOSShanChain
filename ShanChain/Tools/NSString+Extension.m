@@ -678,4 +678,16 @@
     return NO;
 }
 
+BOOL notEmpty(NSString *str) {
+    if (!str) return NO;
+    static NSSet *emptySet;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        emptySet = [NSSet setWithObjects:@"", @"(null)", @"null", @"<null>", @"NULL", nil];
+    });
+    if ([emptySet containsObject:str]) return NO;
+    if ([str isKindOfClass:NSNull.class]) return NO;
+    return YES;
+}
+
 @end

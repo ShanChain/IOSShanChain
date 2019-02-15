@@ -593,7 +593,6 @@
 
 - (void)mapView:(BMKMapView *)mapView onClickedBMKOverlayView:(BMKOverlayView *)overlayView{
     NSLog(@"onClickedBMKOverlayView");
-    
 }
 
 

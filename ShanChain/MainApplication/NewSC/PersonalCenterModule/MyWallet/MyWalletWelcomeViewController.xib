@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ogZ-US-KBA">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sc_MJ" translatesAutoresizingMaskIntoConstraints="NO" id="ogZ-US-KBA">
                     <rect key="frame" x="111" y="100" width="153" height="153"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="153" id="2lm-w9-SP7"/>
@@ -63,4 +63,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
+    <resources>
+        <image name="sc_MJ" width="133" height="122"/>
+    </resources>
 </document>

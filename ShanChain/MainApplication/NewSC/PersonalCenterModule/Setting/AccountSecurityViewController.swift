@@ -34,6 +34,7 @@ class AccountSecurityViewController: UITableViewController {
             if let model = BindInfoModel.deserialize(from: baseModel?.data as? Dictionary){
                 self?._bind(model)
                 self?.bindModel = model
+                SCCacheTool.shareInstance().mobile = self?.bindModel?.mobile
             }
         }
     }
@@ -54,7 +55,6 @@ class AccountSecurityViewController: UITableViewController {
       qq_bindStatusLb.text = model.qqBindTitle
       fb_bindStatusLb.text = model.fbBindTitle
       realNameStatusLb.text = model.idCardTitle
-        
     }
     
     
@@ -130,6 +130,7 @@ class AccountSecurityViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let controller = segue.destination as? ResetPasswordViewController {
+            controller.mobile = (bindModel?.mobile)!
             if segue.identifier == "resetPassword" {
                 controller.pageType = .resetPassword
             }else if segue.identifier == "bindPhone"{

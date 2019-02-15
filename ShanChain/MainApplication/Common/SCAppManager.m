@@ -339,5 +339,12 @@ static SCAppManager *instance = nil;
     [[HHTool getCurrentVC]presentViewController:nav animated:YES completion:nil];
 }
 
+-(void)configWalletInfo{
+    
+    MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
+    JCNavigationController *walletNav = [[JCNavigationController alloc]initWithRootViewController:walletVC];
+    [[HHTool getCurrentVC].navigationController presentViewController:walletNav animated:YES completion:nil];
+}
+
 
 @end

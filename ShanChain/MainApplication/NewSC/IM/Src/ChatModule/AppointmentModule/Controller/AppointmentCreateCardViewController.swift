@@ -66,7 +66,7 @@ class AppointmentCreateCardViewController: UITableViewController {
             des = descriptionTextView.text
         }
         
-        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":des,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":cardFid.text!,"roomId":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser()]
+        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":des,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":"empty","roomId":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser()]
         
     }
     
@@ -115,7 +115,7 @@ class AppointmentCreateCardViewController: UITableViewController {
         
         title = NSLocalizedString("sc_Voucher_Creat", comment: "字符串")
       //  CouponVerificationService.verificationCouponNameFid(nameFid, tip: nameTipLabel)
-        CouponVerificationService.verificationCardFid(cardFid, tip: cardTipLabel)
+       // CouponVerificationService.verificationCardFid(cardFid, tip: cardTipLabel)
         CouponVerificationService.dynamicCalculationMortgageFreeNumberFid(numberFid, priceFid: priceFid) {[weak self] (mortgageFree) in
             self?.mortgageLb.text = "￥\(String(format: "%.2f", mortgageFree))"
             self?.mortgageSEAT_Lb.text = "= \(String(format: "%.3f", mortgageFree * 0.1)) SEAT"

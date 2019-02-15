@@ -123,9 +123,9 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:YES completion:nil];
-    if (self.uploadImageDelegate && [self.uploadImageDelegate respondsToSelector:@selector(uploadImageToServerWithImage:Tag:)]) {
-        [self.uploadImageDelegate uploadImageToServerWithImage:nil Tag:self.tag];
-    }
+//    if (self.uploadImageDelegate && [self.uploadImageDelegate respondsToSelector:@selector(uploadImageToServerWithImage:Tag:)]) {
+//        [self.uploadImageDelegate uploadImageToServerWithImage:nil Tag:self.tag];
+//    }
     
 }
 

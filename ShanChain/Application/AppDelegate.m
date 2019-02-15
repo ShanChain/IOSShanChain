@@ -57,8 +57,8 @@
 #ifdef DEBUG
    // AppointmentListViewController *locationVC = [[AppointmentListViewController alloc]init];
    // MyWalletViewController * locationVC = [[MyWalletViewController alloc]init];
-    // BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-        SCSettingViewController *locationVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
+     BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+       // SCSettingViewController *locationVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
 #else
     BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
 #endif
@@ -107,6 +107,7 @@
                           channel:@"App Store"
                  apsForProduction:isProduction
             advertisingIdentifier:nil];
+    
     return YES;
 }
 

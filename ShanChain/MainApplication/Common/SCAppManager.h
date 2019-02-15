@@ -46,6 +46,7 @@
 - (void)logout;
 - (void)selectLogout;
 - (void)realNameAuthenticate;
+- (void)configWalletInfo;
 
 
 

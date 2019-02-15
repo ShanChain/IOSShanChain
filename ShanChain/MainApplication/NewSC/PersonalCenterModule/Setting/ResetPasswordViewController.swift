@@ -32,11 +32,11 @@ class ResetPasswordViewController: SCBaseVC {
     var pageType:BindPageType = .bindPhone
     var smsModel:SmsVerifycodeModel?
     var smsVerifyCode:String = ""
-    let mobile = UserDefaults.standard.object(forKey: "K_USERNAME") as! String
+    var mobile:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindPhoneLb.text = "输入当前绑定手机\n\(mobile)发送短信"
+        bindPhoneLb.text = "输入当前绑定手机\n\(mobile!)发送短信"
         if pageType ==  .bindPhone{
             title = "更换绑定手机"
             titleLb.text = "更换绑定手机"
