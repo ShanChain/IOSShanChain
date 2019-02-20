@@ -92,6 +92,7 @@ public let Reset_Password_URL  = "/v1/2.0/user/reset_password" //重置密码
 public let Change_phone_URL  = "/v1/2.0/user/change_phone" //修改手机号
 public let RealVerified_detail_URL  = "/v1/2.0/Verified/detail" //实名认证详情
 public let Jpush_AllowNotify_URL  = "/push/jpush/allowNotify" //用户设置是否接受系统通知
+public let NeedBindPwd_URL  = "/web/api/sys/needBindPwd" //设置消费安全码是否绑定设备（免密）统通知
 
 
 /*
@@ -99,5 +100,5 @@ public let Jpush_AllowNotify_URL  = "/push/jpush/allowNotify" //用户设置是�
  */
 
 public let GetWalletPassword_URL  = "/wallet/api/wallet/2.0/hideInfo" //获取用户密码
-
+public let CreateAuthCode_URL  = "/wallet/api/wallet/2.0/bind" //设备绑定安全码返回authCode（app调用）
 

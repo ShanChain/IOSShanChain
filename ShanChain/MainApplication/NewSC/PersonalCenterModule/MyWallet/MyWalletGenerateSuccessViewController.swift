@@ -18,7 +18,7 @@ class MyWalletGenerateSuccessViewController: SCBaseVC {
     @IBOutlet weak var saveBtn: UIButton!
     var disposeBag = DisposeBag()
     var codeData:Data!
-    lazy var photeManager: SavePhotoToAssignpath = {
+    var photeManager: SavePhotoToAssignpath = {
         let  manager = SavePhotoToAssignpath(folderName: SC_SavePhotoFileName)
         return manager!
     }()

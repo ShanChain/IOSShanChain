@@ -12,7 +12,7 @@ class PersonalCenterService: NSObject {
     
     class func _checkingUpdate(_ isTip:Bool){
         // 检查更新
-        SCNetwork.shareInstance().v1_post(withUrl: checkUpdate_URL, params: ["type":"ios"], showLoading: true) { (baseModel, error) in
+        SCNetwork.shareInstance().v1_post(withUrl: checkUpdate_URL, params: ["type":"ios"], showLoading: isTip) { (baseModel, error) in
             if let data = baseModel?.data as? Dictionary<String,Any>{
                 let model = VersionUpdateModel.deserialize(from: data)
                 let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"]

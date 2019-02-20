@@ -21,6 +21,9 @@ public let JM_APPKET   =   "appkey"
 public let JM_USERNAME   = "userName"
 public let JM_COMVERSATION_TYPE  = "conversationType" // 会话类型
 
+public let SC_AUTHCODE = "authCode"
+
+
 
 typealias Task = (_ cancel : Bool) -> Void
 

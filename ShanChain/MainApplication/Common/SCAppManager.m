@@ -346,5 +346,16 @@ static SCAppManager *instance = nil;
     [[HHTool getCurrentVC].navigationController presentViewController:walletNav animated:YES completion:nil];
 }
 
+- (void)againUploadPasswordCallback:(void(^)(NSString * authCode))callback{
+    UploadPhotePasswordView  *uploadView = [[UploadPhotePasswordView alloc]initWithFrame:[HHTool getCurrentVC].view.frame];
+    weakify(uploadView);
+    uploadView.closure = ^(BOOL  success, NSString * _Nonnull authCode) {
+        BLOCK_EXEC(callback,authCode);
+        [weak_uploadView removeFromSuperview];
+    };
+    [[HHTool getCurrentVC].view addSubview:uploadView];
+    
+}
+
 
 @end

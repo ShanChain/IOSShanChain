@@ -47,6 +47,7 @@
 - (void)selectLogout;
 - (void)realNameAuthenticate;
 - (void)configWalletInfo;
+- (void)againUploadPasswordCallback:(void(^)(NSString * authCode))callback;
 
 
 

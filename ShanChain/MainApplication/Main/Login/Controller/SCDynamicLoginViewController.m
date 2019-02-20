@@ -16,6 +16,19 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 
+
+
+// 节点结构
+typedef struct _node {
+    int val;
+    struct _node *next;
+}Node;
+
+typedef struct _stack {
+    int length;
+    struct _node *top;
+}StackList;
+
 @interface SCDynamicLoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberFid;
@@ -44,7 +57,9 @@
 
 @end
 
+
 @implementation SCDynamicLoginViewController
+
 
 
 - (NSDictionary*)getParameter{
@@ -174,7 +189,9 @@
         }
         NSDictionary *data = (NSDictionary*)baseModel.data;
         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] initWithDictionary:data[@"userInfo"]];
-        [userInfo setObject:data[@"token"] forKey:@"token"];
+        if (data[@"token"] && [data[@"token"] isKindOfClass:[NSString class]]) {
+            [userInfo setObject:data[@"token"] forKey:@"token"];
+        }
         [SCLoginDataController successLoginedWithContent:userInfo];
     }];
     

@@ -19,7 +19,7 @@ static NSString * const SC_Token_Already_Exist = @"400"; // token已存在
 static NSString * const SC_NOTENOUGH = @"10001"; // 余额不足
 static NSString * const SC_ERROR_WalletAccountNotexist = @"10003"; // 钱包账户不存在
 static NSString * const SC_ERROR_WalletPasswordNotexist = @"10024"; // 钱包密码不存在
-
+static NSString * const SC_ERROR_WalletPasswordInvalid = @"10004"; // 钱包无效
 
 static NSString * const SC_PHONENUMBER_NOBIND = @"999993"; // 手机号未绑定
 static NSString * const SC_LOGIN_ERR_CODE = @"999996";

@@ -62,10 +62,13 @@
 - (NSString *)getGdata;
 
 - (NSString *)getUserToken;
+- (NSString *)getDeviceToken;
 
 - (NSString *)getHeadImg;
 
 - (NSString *)getHxUserName;
+- (NSString *)getAuthCode;
+
 /*
     "characterInfo": {
     "characterId": 2351,

@@ -308,6 +308,10 @@ static NSDateFormatter* DateFormat(){
     return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:@"token"];
 }
 
+-(NSString *)getDeviceToken{
+    return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:CACHE_DEVICE_TOKEN];
+}
+
 - (NSString *)getCurrentSpaceId {
     return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:@"spaceId"];
 }
@@ -327,6 +331,11 @@ static NSDateFormatter* DateFormat(){
 - (NSString*)getHeadImg{
     return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:@"headImg"];
 }
+
+-(NSString *)getAuthCode{
+    return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:@"authCode"];
+}
+
 
 - (NSMutableDictionary *)getCharacterInfo {
     NSMutableDictionary *characterInfo = [JsonTool dictionaryFromString:[self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:CACHE_CHARACTER_INFO]];

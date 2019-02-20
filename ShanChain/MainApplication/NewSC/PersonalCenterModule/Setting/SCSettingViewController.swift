@@ -12,7 +12,9 @@ class SCSettingViewController: UITableViewController {
 
     @IBOutlet weak var pushSwich: UISwitch!
     
+    @IBOutlet weak var bindpwdSwitch: UISwitch!
     @IBOutlet weak var versionLb: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "设置"
@@ -20,14 +22,24 @@ class SCSettingViewController: UITableViewController {
         let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
         self.versionLb.text = "v\(currentVersion)"
         pushSwich.isOn = SCCacheTool.shareInstance().characterModel.characterInfo.allowNotify
+        bindpwdSwitch.isOn = SCCacheTool.shareInstance().characterModel.characterInfo.isBindPwd
     }
     
     @IBAction func modifyPushStateAction(_ sender: UISwitch) {
-        SCNetwork.shareInstance().hh_Get(withUrl: Jpush_AllowNotify_URL, parameters: ["allow":sender.isOn], showLoading: true) { (baseModel, error) in
-            if baseModel?.message != "ok"{
-                sender.isOn = !sender.isOn
+        EditInfoService.sc_editPersonalInfo(["allow":sender.isOn], call: { (isSuccess) in
+            if isSuccess == true{
+                sender.isOn = SCCacheTool.shareInstance().characterModel.characterInfo.allowNotify
             }
-        }
+        })
+    }
+    
+    
+    @IBAction func modifyBindPwdAction(_ sender: UISwitch) {
+        EditInfoService.sc_editPersonalInfo(["bind":sender.isOn], call: { (isSuccess) in
+            if isSuccess == true{
+                sender.isOn = SCCacheTool.shareInstance().characterModel.characterInfo.isBindPwd
+            }
+        })
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

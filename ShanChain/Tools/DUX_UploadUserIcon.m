@@ -118,6 +118,16 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
     if (self.uploadImageDelegate && [self.uploadImageDelegate respondsToSelector:@selector(uploadImageToServerWithImage:Tag:)]) {
         [self.uploadImageDelegate uploadImageToServerWithImage:image Tag:self.tag];
     }
+    
+    if (self.uploadImageDelegate && [self.uploadImageDelegate respondsToSelector:@selector(uploadImageToServerWithImage:FileUrl:)]) {
+        if (@available(iOS 11.0, *)) {
+            NSString  *url = [info objectForKey:UIImagePickerControllerImageURL];
+            [self.uploadImageDelegate uploadImageToServerWithImage:image FileUrl:[NSString stringWithFormat:@"%@",url]];
+        } else {
+            [self.uploadImageDelegate uploadImageToServerWithImage:image FileUrl:[NSString stringWithFormat:@"%@",info[UIImagePickerControllerReferenceURL]]];
+            
+        }
+    }
 }
 
 

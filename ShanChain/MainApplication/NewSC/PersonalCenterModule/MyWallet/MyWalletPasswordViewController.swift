@@ -8,7 +8,9 @@
 
 import UIKit
 
+
 class MyWalletPasswordViewController: SCBaseVC {
+
 
     
     @IBOutlet weak var selectImageBtn: UIButton!
@@ -24,6 +26,7 @@ class MyWalletPasswordViewController: SCBaseVC {
                 
             }
         })
+        
     }
     
     override func viewDidLoad() {

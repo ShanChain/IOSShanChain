@@ -29,4 +29,6 @@
 #define CACHE_USER_MSG_READ_STATUS  @"cache_user_msg_read_status"
 #define CACHE_USER_MSG_IS_RECEIVE  @"isMsgReceive"
 
+#define SC_AUTHCODE  @"authCode"
+
 #endif /* BaseConstants_h */

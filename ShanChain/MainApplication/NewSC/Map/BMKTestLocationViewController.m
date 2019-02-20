@@ -114,7 +114,7 @@
     [HHTool immediatelyDismiss];
     if (self.isClickJoin) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self getAllChatRoomConversation];
+            [self joinPressed:self.joinBtn];
         });
     }
 }
@@ -347,8 +347,6 @@
     self.mapView.delegate = self;
     self.mapView.buildingsEnabled = YES;
 
-
-    
     self.mapView.mapScaleBarPosition = CGPointMake(100, 100);
     //打开实时路况图层
     //    [_mapView setTrafficEnabled:YES];
@@ -752,7 +750,12 @@
         
         if ([SCCacheTool shareInstance].isJGSetup) {
             [HHTool showChrysanthemum];
-            [self getAllChatRoomConversation];
+//            [self getAllChatRoomConversation];
+            [JGUserLoginService jg_enterchatRoomWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable Conversation, NSError * _Nullable error) {
+                [self getTakeSnapshot];
+                HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:Conversation isJoinChat:NO navTitle:self.currentRoomName];
+                [self pushPage:roomVC Animated:YES];
+            }];
         }else{
             [HHTool show:NSLocalizedString(@"sc_map_Loading", nil)];
             self.isClickJoin = YES;
@@ -779,73 +782,73 @@
     }];
 }
 
-- (void)createChatRoomConversation{
-    // 创建会话 有的话直接返回
-    weakify(self);
-    [JGUserLoginService
-     jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
-         if (!error) {
-              [weak_self enterChatRoom];
-             return ;
-         }
-         if (error.code == 863004) {
-             // 未登录
-             [weak_self jg_automaticLoginComplete:^{
-                 [weak_self enterChatRoom];
-             }];
-         }
-         [HHTool showError:error.localizedDescription];
-     }];
-}
-
-- (void)getAllChatRoomConversation{
-    weakify(self);
-    [JMSGConversation allChatRoomConversation:^(id resultObject, NSError *error) {
-         strongify(self);
-        if (error) {
-            if (error.code == 863004) {
-                // 未登录
-                [self jg_automaticLoginComplete:^{
-                    [self createChatRoomConversation];
-                }];
-            }else{
-                [self createChatRoomConversation];
-            }
-            return ;
-        }
-        
-        NSArray <JMSGConversation*> *conversations = resultObject;
-        __block  BOOL  isEnter = NO;
-        if (conversations.count > 0) {
-            [conversations enumerateObjectsUsingBlock:^(JMSGConversation * _Nonnull conversation, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([conversation.target isKindOfClass:[JMSGChatRoom class]]) {
-                    if ([((JMSGChatRoom*)conversation.target).roomID isEqualToString:self.currentRoomId]) {
-                        [self enterChatRoom];
-                       isEnter = YES;
-                    }
-                }
-            }];
-        }
-        if (!isEnter) {
-            [self createChatRoomConversation];
-        }
-    }];
-}
-
-
-// 加入聊天室
-- (void)enterChatRoom{
-   
-    
-    weakify(self);
-    __block HHChatRoomViewController *roomVC;
-    [EditInfoService enterChatRoomWithId:self.currentRoomId showString:@"" callBlock:^(id resultObject, NSError *error) {
-        strongify(self)
-        [self getTakeSnapshot];
-        roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO navTitle:self.currentRoomName];
-        [self pushPage:roomVC Animated:YES];
-    }];
-}
+//- (void)createChatRoomConversation{
+//    // 创建会话 有的话直接返回
+//    weakify(self);
+//    [JGUserLoginService
+//     jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
+//         if (!error) {
+//              [weak_self enterChatRoom];
+//             return ;
+//         }
+//         if (error.code == 863004) {
+//             // 未登录
+//             [weak_self jg_automaticLoginComplete:^{
+//                 [weak_self enterChatRoom];
+//             }];
+//         }
+//         [HHTool showError:error.localizedDescription];
+//     }];
+//}
+//
+//- (void)getAllChatRoomConversation{
+//    weakify(self);
+//    [JMSGConversation allChatRoomConversation:^(id resultObject, NSError *error) {
+//         strongify(self);
+//        if (error) {
+//            if (error.code == 863004) {
+//                // 未登录
+//                [self jg_automaticLoginComplete:^{
+//                    [self createChatRoomConversation];
+//                }];
+//            }else{
+//                [self createChatRoomConversation];
+//            }
+//            return ;
+//        }
+//
+//        NSArray <JMSGConversation*> *conversations = resultObject;
+//        __block  BOOL  isEnter = NO;
+//        if (conversations.count > 0) {
+//            [conversations enumerateObjectsUsingBlock:^(JMSGConversation * _Nonnull conversation, NSUInteger idx, BOOL * _Nonnull stop) {
+//                if ([conversation.target isKindOfClass:[JMSGChatRoom class]]) {
+//                    if ([((JMSGChatRoom*)conversation.target).roomID isEqualToString:self.currentRoomId]) {
+//                        [self enterChatRoom];
+//                       isEnter = YES;
+//                    }
+//                }
+//            }];
+//        }
+//        if (!isEnter) {
+//            [self createChatRoomConversation];
+//        }
+//    }];
+//}
+//
+//
+//// 加入聊天室
+//- (void)enterChatRoom{
+//
+//
+//    weakify(self);
+//    __block HHChatRoomViewController *roomVC;
+//    [EditInfoService enterChatRoomWithId:self.currentRoomId showString:@"" callBlock:^(id resultObject, NSError *error) {
+//        strongify(self)
+//        [self getTakeSnapshot];
+//        roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO navTitle:self.currentRoomName];
+//        [self pushPage:roomVC Animated:YES];
+//    }];
+//}
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

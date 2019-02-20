@@ -25,8 +25,7 @@
         tk = content[@"token"];
     }
     NSString *token = [[userId stringByAppendingString:@"_"] stringByAppendingString:tk];
-  
-    [params setObject:[[userId stringByAppendingString:@"_"] stringByAppendingString:content[@"token"]]  forKey:@"token"];
+    [params setObject:token  forKey:@"token"];
     [params setObject:userId forKey:@"userId"];
     [[SCNetwork shareInstance]v1_postWithUrl:STORYCHARACTERGETCURRENT params:params showLoading:YES callBlock:^(HHBaseModel *baseModel, NSError *error) {
         NSDictionary *data = baseModel.data;

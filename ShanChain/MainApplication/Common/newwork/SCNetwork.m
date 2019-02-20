@@ -49,7 +49,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     self = [super init];
     if (self) {
         _afManager = [AFHTTPSessionManager manager];
-        [_afManager.requestSerializer setTimeoutInterval:30];
+        [_afManager.requestSerializer setTimeoutInterval:60];
         [_afManager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"User-Agent"];
         _afManager.requestSerializer     = [AFHTTPRequestSerializer serializer];
         _afManager.responseSerializer    = [AFJSONResponseSerializer serializer];
@@ -76,6 +76,9 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     NSMutableDictionary *params = [parameters mutableCopy];
     if ([token isNotBlank]) {
         [params setValue:token forKey:@"token"];
+    }
+    if ([[JPUSHService registrationID]_notEmpty]) {
+        [params setValue:[JPUSHService registrationID] forKey:@"deviceToken"];
     }
     
     if([url hasPrefix:@"/"]) {
@@ -129,6 +132,12 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 [SYProgressHUD showError:msg];
             }else if ([code isEqualToString:SC_ERROR_WalletAccountNotexist] || [code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
                 [[SCAppManager shareInstance]configWalletInfo];
+            } else if( [code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
+                [[SCAppManager shareInstance]againUploadPasswordCallback:^(NSString *authCode) {
+                    NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:parameters];
+                    [mDic setObject:authCode forKey:@"authCode"];
+                    [[SCNetwork shareInstance]postWithUrl:url parameters:mDic.copy success:success failure:failure];
+                }];
             }else {
                 [YYHud showError:msg];
                 if (failure) {
@@ -192,6 +201,9 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
         [params setValue:@"3_69eb6205f2714244b306b07c6d1d7d1a1541750543777" forKey:@"token"];
         [params setObject:@"95" forKey:@"characterId"];
     }
+    if ([[JPUSHService registrationID]_notEmpty]) {
+        [params setValue:[JPUSHService registrationID] forKey:@"deviceToken"];
+    }
     url = [SC_BASE_URL stringByAppendingString:url];
     [self apendTOBaseParams:params];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -233,6 +245,13 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 [[SCAppManager shareInstance]configWalletInfo];
             }
             
+             if([baseModel.code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
+                [[SCAppManager shareInstance]againUploadPasswordCallback:^(NSString *authCode) {
+                    NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:parameters];
+                    [mDic setObject:authCode forKey:@"authCode"];
+                    [[SCNetwork shareInstance]HH_postWithUrl:url params:mDic showLoading:show callBlock:callBlock];
+                }];
+            }
             
             
             if (!NULLString(baseModel.message)) {
@@ -346,6 +365,9 @@ static NSString* getRequstToken(){
     if([parameters objectForKey:@"token"] == nil || [[parameters objectForKey:@"token"]  isEqual: @""]){
         [params setValue:getRequstToken() forKey:@"token"];
     }
+    if ([[JPUSHService registrationID]_notEmpty]) {
+        [params setValue:[JPUSHService registrationID] forKey:@"deviceToken"];
+    }
     if([url hasPrefix:@"/"]) {
         url = [SC_BASE_URL stringByAppendingString:url];
     }
@@ -363,6 +385,12 @@ static NSString* getRequstToken(){
             [HHTool showError:@"您的余额不足"];
         }else if ([code isEqualToString:SC_ERROR_WalletAccountNotexist] || [code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
             [[SCAppManager shareInstance]configWalletInfo];
+        } else if( [code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
+            [[SCAppManager shareInstance]againUploadPasswordCallback:^(NSString *authCode) {
+                NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:parameters];
+                [mDic setObject:authCode forKey:@"authCode"];
+                [[SCNetwork shareInstance]postWithUrl:url parameters:mDic.copy success:success failure:failure];
+            }];
         }else{
             SCLog(@"Request error%@", responseObject);
             
@@ -434,6 +462,12 @@ static NSString* getRequstToken(){
 //        [params setValue:getRequstToken() forKey:@"token"];
 //    }
     
+    
+    BOOL  isURL = NO;
+    if ([imgArr.lastObject isKindOfClass:[NSString class]]) {
+        isURL = YES;
+    }
+    
     NSMutableString  *mutabUrl = [[NSMutableString alloc]initWithString:url];
     [mutabUrl appendFormat:@"?token=%@",getRequstToken()];
     [_afManager POST:mutabUrl.copy parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -449,7 +483,16 @@ static NSString* getRequstToken(){
              3. fileName：要保存在服务器上的文件名
              4. mimeType：上传的文件的类型
              */
-            [formData appendPartWithFileData:imgArr[i] name:@"file" fileName:fileName mimeType:@"image/jpeg"];
+            if (isURL) {
+                NSError  *error = nil;
+                [formData appendPartWithFileURL:[NSURL URLWithString:imgArr[i]] name:@"file" fileName:fileName mimeType:@"image/jpeg" error:&error];
+            }else{
+                [formData appendPartWithFileData:imgArr[i] name:@"file" fileName:fileName mimeType:@"image/jpeg"];
+            }
+            
+            
+//            [formData appendPartWithInputStream:[[NSInputStream alloc]initWithData:imgArr[i]] name:@"file" fileName:fileName length:((NSData*)imgArr[i]).length mimeType:@"image/jpeg"];
+        
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         SCLog(@"%@",uploadProgress);
@@ -490,6 +533,11 @@ static NSString* getRequstToken(){
         }
         
     }];
+    
+    
+
+
+
 }
 
 - (void)downFileWithUrl:(NSString *)urlString

@@ -690,4 +690,8 @@ BOOL notEmpty(NSString *str) {
     return YES;
 }
 
+- (BOOL)_notEmpty{
+    return notEmpty(self);
+}
+
 @end

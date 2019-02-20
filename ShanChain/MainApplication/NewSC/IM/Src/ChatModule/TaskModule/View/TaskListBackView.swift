@@ -10,6 +10,7 @@ import UIKit
 
 
 
+
 class TaskListBackView: UIView {
 
     
@@ -105,10 +106,6 @@ class TaskListBackView: UIView {
     convenience init(listModel:TaskListModel,frame:CGRect) {
         self.init(frame: frame)
         self.listModel = listModel
-        
-        
-//     self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: CGFloat(listModel.backViewHeight))
-        
     }
     
     override init(frame: CGRect) {
