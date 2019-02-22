@@ -333,7 +333,12 @@ static NSDateFormatter* DateFormat(){
 }
 
 -(NSString *)getAuthCode{
-    return [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:@"authCode"];
+    
+    NSString  *authCode = [self getCacheValueInfoWithUserID:[self getCurrentUser] andKey:@"authCode"];
+    if ([authCode _notEmpty] && self.characterModel.characterInfo.isBindPwd) {
+        return authCode;
+    }
+    return @"";
 }
 
 

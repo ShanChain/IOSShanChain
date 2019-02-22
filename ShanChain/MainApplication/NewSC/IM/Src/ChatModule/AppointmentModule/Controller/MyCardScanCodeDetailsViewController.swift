@@ -23,12 +23,13 @@ class MyCardScanCodeDetailsViewController: SCBaseVC {
     @IBOutlet weak var dealTimeLb: UILabel!
     
     var detailsModel:CouponsDetailsModel?
+    var createQR_jsonStr:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "马甲劵详情"
         nameLb.text = detailsModel?.tokenName
-        codeImageView.image = ScanCodeService.createQR(with: detailsModel?.subCoupId, size: codeImageView.size)
+        codeImageView.image = ScanCodeService.createQR(with: createQR_jsonStr, size: codeImageView.size)
          self.icon._sd_setImage(withURLString: self.detailsModel?.photoUrl, placeholderImage:UIImage.loadImage(DefaultAvatar))
         self.dealTimeLb.text = detailsModel?.deadlineStr
     }

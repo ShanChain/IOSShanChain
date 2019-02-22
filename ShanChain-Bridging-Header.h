@@ -71,7 +71,7 @@
 #import "SCAES.h"
 #import "DUX_UploadUserIcon.h"
 #import "SavePhotoToAssignpath.h" 
-
+#import "MJExtension.h"
 
 
 

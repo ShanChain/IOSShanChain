@@ -38,6 +38,7 @@ class UploadPhotePasswordView: UIView {
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(removeFromSuperview))
         self.addGestureRecognizer(tap)
         
+        HHTool.immediatelyDismiss()//取消掉业务菊花
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,6 +47,11 @@ class UploadPhotePasswordView: UIView {
     
     
     @IBAction func confirmAction(_ sender: Any) {
+// 验证密码是否正确
+//    SCNetwork.shareInstance().hh_uploadFile(withArr: [self.imageURL ?? ""], url: "/wallet/api/wallet/2.0/checkInfo", parameters: ["suberUser":SCCacheTool.shareInstance().getCurrentCharacterId(),"userId":SCCacheTool.shareInstance().getCurrentUser()], showLoading: false) { (baseModel, error) in
+//
+//        }
+        
         let registrationID:String = JPUSHService.registrationID() ?? ""
         SCNetwork.shareInstance().hh_uploadFile(withArr: [self.imageURL ?? ""], url: CreateAuthCode_URL, parameters: ["deviceToken":registrationID], showLoading: true, call: { (baseModel, error) in
             if let authCode  = baseModel?.data , ((baseModel?.data as? String) != nil){
@@ -56,6 +62,7 @@ class UploadPhotePasswordView: UIView {
                             // 开通免密
                             EditInfoService.sc_editPersonalInfo(["bind":true], call: { (isSuccess) in
                                 if isSuccess == true{
+                                    HHTool.showSucess("开通成功!")
                                     SCCacheTool.shareInstance().setCacheValue(authCode as! String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
                                 }
                             })

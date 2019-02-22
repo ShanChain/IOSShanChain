@@ -40,6 +40,7 @@ class MyCardReceiveDetailsViewController: UITableViewController {
     @IBOutlet weak var remainderLb: UILabel!
     var status:CouponsStatus = .receive_Wait
     @objc open  var orderId:String?
+    @objc open  var couponsToken:String? //核销凭证
     @objc open  var isUseCouponsing:Bool = false // 是否正在核销当前子卡劵
     
     var detailsModel:CouponsDetailsModel?
@@ -65,10 +66,9 @@ class MyCardReceiveDetailsViewController: UITableViewController {
         case .receive_Wait:
             if isUseCouponsing == true{
                 // 核销马甲劵
-                SCNetwork.shareInstance().hh_Get(withUrl: User_UseCoupons_URL, parameters: ["subCoupId":self.detailsModel?.subCoupId,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId()], showLoading: true) { (baseModel, error) in
-                    
+                SCNetwork.shareInstance().hh_Get(withUrl: User_UseCoupons_URL, parameters: ["couponsToken":couponsToken], showLoading: true) { (baseModel, error) in
                     if error != nil{
-                         var message:String = "识别失败"
+                        var message:String = "识别失败"
                         if (error as NSError?)?.code == 10050{
                             message = "很抱歉，您无法核销他人创建的马甲券，尝试创建自己的马甲券吧～"
                         }
@@ -80,10 +80,15 @@ class MyCardReceiveDetailsViewController: UITableViewController {
                     
                     self._requstDetaisData(isShow: true)
                 }
+
             }else{
-                let  scanCodeVC = MyCardScanCodeDetailsViewController()
-                scanCodeVC.detailsModel = detailsModel
-                navigationController?.pushViewController(scanCodeVC, animated: true)
+                _getCouponsToken { (createQR_jsonStr) in
+                    let  scanCodeVC = MyCardScanCodeDetailsViewController()
+                    scanCodeVC.createQR_jsonStr = createQR_jsonStr
+                    scanCodeVC.detailsModel = self.detailsModel
+                    self.navigationController?.pushViewController(scanCodeVC, animated: true)
+                }
+                
             }
           
             break
@@ -92,6 +97,17 @@ class MyCardReceiveDetailsViewController: UITableViewController {
         }
     }
     
+    // 获取子卡劵的核销凭证
+    func _getCouponsToken(_ complete: @escaping (_ createQR_jsonStr:String) -> ()){
+        SCNetwork.shareInstance().hh_Get(withUrl: GetCouponsToken_URL, parameters: ["authCode":SCCacheTool.shareInstance().getAuthCode(),"deviceToken":SCCacheTool.shareInstance().getDeviceToken(),"subCoupId":self.detailsModel?.subCoupId], showLoading: true) { (baseModel, error) in
+            if let data = baseModel?.data as? NSDictionary{
+               complete(data.mj_JSONString())
+            }else{
+                complete("")
+            }
+            
+        }
+    }
     
     func _isHiddenSubView(_ isHidden:Bool){
         icon.isHidden = isHidden
@@ -226,10 +242,11 @@ extension MyCardReceiveDetailsViewController{
                             self.detailsModel?.nikeName = nikeName
                             self._isHiddenSubView(false)
                             self._configurationUI()
+                     
                         }
                         
                     }
-                   
+                    
                 })
     
             }

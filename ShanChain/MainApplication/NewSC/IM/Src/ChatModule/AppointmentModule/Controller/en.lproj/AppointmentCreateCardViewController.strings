@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "代号:"; ObjectID = "17d-Ps-QvF"; */
-"17d-Ps-QvF.text" = "symbol:";
+//"17d-Ps-QvF.text" = "symbol:";
 
 /* Class = "UILabel"; text = "使用说明:"; ObjectID = "4WY-1x-5Dl"; */
 "4WY-1x-5Dl.text" = "detail:";
@@ -30,13 +30,13 @@
 "XS8-ER-AX7.normalTitle" = "Example";
 
 /* Class = "UITextField"; placeholder = "请输入代号"; ObjectID = "YSV-z3-rq1"; */
-"YSV-z3-rq1.placeholder" = "enter";
+//"YSV-z3-rq1.placeholder" = "enter";
 
 /* Class = "UITextField"; placeholder = "请输入名称"; ObjectID = "bvm-Vv-HyG"; */
 "bvm-Vv-HyG.placeholder" = "enter";
 
 /* Class = "UILabel"; text = "SEAT"; ObjectID = "d8I-F8-mif"; */
-"d8I-F8-mif.text" = "SEAT";
+//"d8I-F8-mif.text" = "SEAT";
 
 /* Class = "UILabel"; text = "*实名认证"; ObjectID = "dgz-fs-Z1Y"; */
 "dgz-fs-Z1Y.text" = "ID verification";
@@ -63,7 +63,7 @@
 "lOU-wQ-OFw.text" = "amount:";
 
 /* Class = "UILabel"; text = "代号为三个大写英文字母"; ObjectID = "lrb-Yd-Ufi"; */
-"lrb-Yd-Ufi.text" = "Please input three capital letters";
+//"lrb-Yd-Ufi.text" = "Please input three capital letters";
 
 /* Class = "UITextField"; placeholder = "请输入发布数量"; ObjectID = "wKV-fV-jUE"; */
 "wKV-fV-jUE.placeholder" = "enter";

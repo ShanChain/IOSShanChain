@@ -341,9 +341,28 @@ static SCAppManager *instance = nil;
 
 -(void)configWalletInfo{
     
+    [HHTool immediatelyDismiss];
     MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
     JCNavigationController *walletNav = [[JCNavigationController alloc]initWithRootViewController:walletVC];
-    [[HHTool getCurrentVC].navigationController presentViewController:walletNav animated:YES completion:nil];
+    
+    UINavigationController  *nav;
+    if ([[HHTool getCurrentVC] isKindOfClass:[UINavigationController class]]) {
+        nav = (UINavigationController*)[HHTool getCurrentVC];
+    }else{
+        nav = [HHTool getCurrentVC].navigationController;
+    }
+    
+    [nav presentViewController:walletNav animated:YES completion:nil];
+}
+
+- (void)againUploadPasswordWithUrl:(NSString*)url parameters:(NSDictionary*)parameters Callback:(void(^)(NSString * authCode, NSString * _url, NSDictionary * _parameters))callback{
+    UploadPhotePasswordView  *uploadView = [[UploadPhotePasswordView alloc]initWithFrame:[HHTool getCurrentVC].view.frame];
+    weakify(uploadView);
+    uploadView.closure = ^(BOOL  success, NSString * _Nonnull authCode) {
+        BLOCK_EXEC(callback,authCode,[[[NSMutableString alloc]initWithString:url]copy],parameters.copy);
+        [weak_uploadView removeFromSuperview];
+    };
+    [[HHTool getCurrentVC].view addSubview:uploadView];
 }
 
 - (void)againUploadPasswordCallback:(void(^)(NSString * authCode))callback{

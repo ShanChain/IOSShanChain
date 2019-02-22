@@ -104,10 +104,7 @@
         [self.webView loadRequest:request];
      
     }
-    MyWalletPasswordViewController *wallPassword = [[MyWalletPasswordViewController alloc]init];
-    [self.navigationController pushViewController:wallPassword animated:YES];
-    return;
-    
+
     NSDictionary  *  urlParameter = [URL.absoluteString getURLParameters].copy;
     [urlParameter enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([key isEqualToString:@"toLogin"] && [obj isEqualToString:@"true"]) {

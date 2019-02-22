@@ -48,6 +48,7 @@
 - (void)realNameAuthenticate;
 - (void)configWalletInfo;
 - (void)againUploadPasswordCallback:(void(^)(NSString * authCode))callback;
+- (void)againUploadPasswordWithUrl:(NSString*)url parameters:(NSDictionary*)parameters Callback:(void(^)(NSString * authCode, NSString * _url, NSDictionary * _parameters))callback;
 
 
 

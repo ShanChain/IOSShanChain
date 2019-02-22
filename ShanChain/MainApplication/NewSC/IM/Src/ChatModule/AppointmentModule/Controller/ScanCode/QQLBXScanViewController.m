@@ -225,9 +225,12 @@
         strResult = @"识别失败";
     }
     
+    NSDictionary  *dic = strResult.mj_JSONObject;
+    
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"MyCardReceiveDetailsViewController" bundle:nil];
     MyCardReceiveDetailsViewController *detailsVC = [storyboard instantiateViewControllerWithIdentifier:@"ReceiveCardID"];
-    detailsVC.orderId = strResult;
+    detailsVC.orderId = dic[@"subCoupId"];
+    detailsVC.couponsToken = dic[@"couponsToken"];
     detailsVC.isUseCouponsing = YES;
     [self.navigationController pushViewController:detailsVC animated:YES];
  

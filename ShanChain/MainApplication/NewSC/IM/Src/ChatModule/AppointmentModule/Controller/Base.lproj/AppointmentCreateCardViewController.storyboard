@@ -114,63 +114,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="0.0" id="JyT-MC-686">
-                                        <rect key="frame" x="0.0" y="185" width="375" height="0.0"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JyT-MC-686" id="hhG-Gx-4Yf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代号:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17d-Ps-QvF">
-                                                    <rect key="frame" x="50" y="-15" width="35" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入代号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-z3-rq1">
-                                                    <rect key="frame" x="100" y="-15" width="125" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="j0u-zQ-Ftg"/>
-                                                    </constraints>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="ASCIICapableNumberPad"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="0.5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEAT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8I-F8-mif">
-                                                    <rect key="frame" x="230" y="-8.5" width="36" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代号为三个大写英文字母" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrb-Yd-Ufi">
-                                                    <rect key="frame" x="100" y="17.5" width="124" height="13.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="YSV-z3-rq1" secondAttribute="trailing" constant="150" id="AQ8-R4-Q71"/>
-                                                <constraint firstItem="lrb-Yd-Ufi" firstAttribute="top" secondItem="d8I-F8-mif" secondAttribute="bottom" constant="8" id="BUQ-Lb-Wee"/>
-                                                <constraint firstItem="17d-Ps-QvF" firstAttribute="centerY" secondItem="hhG-Gx-4Yf" secondAttribute="centerY" id="CrN-M8-yMm"/>
-                                                <constraint firstItem="YSV-z3-rq1" firstAttribute="centerY" secondItem="17d-Ps-QvF" secondAttribute="centerY" id="P7X-D3-iQS"/>
-                                                <constraint firstItem="d8I-F8-mif" firstAttribute="centerY" secondItem="YSV-z3-rq1" secondAttribute="centerY" id="SMV-f6-0T5"/>
-                                                <constraint firstItem="17d-Ps-QvF" firstAttribute="leading" secondItem="hhG-Gx-4Yf" secondAttribute="leading" constant="50" id="Ujh-IJ-Hm9"/>
-                                                <constraint firstItem="YSV-z3-rq1" firstAttribute="leading" secondItem="17d-Ps-QvF" secondAttribute="trailing" constant="15" id="aln-Mi-txJ"/>
-                                                <constraint firstItem="YSV-z3-rq1" firstAttribute="bottom" secondItem="17d-Ps-QvF" secondAttribute="bottom" id="dtb-3e-ogI"/>
-                                                <constraint firstItem="d8I-F8-mif" firstAttribute="leading" secondItem="YSV-z3-rq1" secondAttribute="trailing" constant="5" id="hAg-xF-kWe"/>
-                                                <constraint firstItem="lrb-Yd-Ufi" firstAttribute="leading" secondItem="YSV-z3-rq1" secondAttribute="leading" id="tvN-TJ-1zz"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="60" id="xCC-BT-l16">
                                         <rect key="frame" x="0.0" y="185" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -510,8 +453,6 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="cardFid" destination="YSV-z3-rq1" id="LZH-NF-alQ"/>
-                        <outlet property="cardTipLabel" destination="lrb-Yd-Ufi" id="nIs-l5-VTd"/>
                         <outlet property="createBtn" destination="Ang-cF-WC9" id="qgU-u1-uRR"/>
                         <outlet property="descriptionTextView" destination="USW-eK-gat" id="ZKN-gl-uls"/>
                         <outlet property="failureTimeFid" destination="gtr-DD-u3z" id="hx7-RK-wNP"/>

@@ -94,11 +94,11 @@
 
 +(void)verificationIsCanCreate:(UIViewController *)vc{
     AppointmentCreateCardViewController  *createVC = (AppointmentCreateCardViewController*)vc;
-    RAC(createVC.createBtn,enabled) = [RACSignal combineLatest:@[createVC.nameFid.rac_textSignal,createVC.cardFid.rac_textSignal,createVC.priceFid.rac_textSignal,createVC.numberFid.rac_textSignal] reduce:^id _Nullable(NSString *name, NSString *card, NSString *price, NSString *number){
-        return @(name.length > 0 && card.length == 3 && price.length > 0 && number.length > 0);
+    RAC(createVC.createBtn,enabled) = [RACSignal combineLatest:@[createVC.nameFid.rac_textSignal,createVC.priceFid.rac_textSignal,createVC.numberFid.rac_textSignal] reduce:^id _Nullable(NSString *name, NSString *price, NSString *number){
+        return @(name.length > 0  && price.length > 0 && number.length > 0);
     }];
 
-    RAC(createVC.createBtn,backgroundColor) = [RACSignal combineLatest:@[createVC.nameFid.rac_textSignal,createVC.cardFid.rac_textSignal,createVC.priceFid.rac_textSignal,createVC.numberFid.rac_textSignal] reduce:^id _Nullable(NSString *name, NSString *card, NSString *price, NSString *number){
+    RAC(createVC.createBtn,backgroundColor) = [RACSignal combineLatest:@[createVC.nameFid.rac_textSignal,createVC.priceFid.rac_textSignal,createVC.numberFid.rac_textSignal] reduce:^id _Nullable(NSString *name, NSString *price, NSString *number){
         return createVC.createBtn.enabled ? Theme_MainThemeColor:[UIColor lightGrayColor];
     }];
     

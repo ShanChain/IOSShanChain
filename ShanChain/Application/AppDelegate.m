@@ -158,6 +158,7 @@
     [JMessage registerDeviceToken:deviceToken];
     [JPUSHService registerDeviceToken:deviceToken];
     
+    
    
 }
 

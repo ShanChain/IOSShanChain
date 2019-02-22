@@ -50,6 +50,7 @@ public let  User_ClientList_URL = "/wallet/api/coupons/vendor/clientList" // 发
 
 public let  ReceiveCoupons_URL = "/wallet/api/coupons/client/getCoupons" //领取卡券生成子卡券
 
+public let  GetCouponsToken_URL = "/wallet/api/coupons/token" // 获取子卡券的核销凭证
 
 /*
  任务相关

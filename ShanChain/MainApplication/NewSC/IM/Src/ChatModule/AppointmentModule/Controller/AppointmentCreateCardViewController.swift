@@ -65,8 +65,8 @@ class AppointmentCreateCardViewController: UITableViewController {
         }else{
             des = descriptionTextView.text
         }
-        
-        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":des,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":"empty","roomId":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser()]
+        let authCode:String =  SCCacheTool.shareInstance().getAuthCode()
+        return ["amount":numberFid.text!,"deadline":"\(self.timestamp)","detail":des,"name":nameFid.text!,"photoUrl":photoUrl!,"price":priceFid.text!,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"tokenSymbol":"empty","roomId":SCCacheTool.shareInstance().chatRoomId,"userId":SCCacheTool.shareInstance().getCurrentUser(),"authCode":authCode]
         
     }
     
@@ -101,7 +101,7 @@ class AppointmentCreateCardViewController: UITableViewController {
             if self?.timestamp == ""{
                 CouponVerificationService.verificationIsCanCreate(self)
             }
-            let a =   (mc_date.byAddDays(1).date as!NSDate).zeroOf().timeIntervalSince1970 - 1
+            let a =   (mc_date.byAddDays(1).date as NSDate).zeroOf().timeIntervalSince1970 - 1
             self?.timestamp = String(Int(a * 1000))
            
         }
@@ -121,7 +121,7 @@ class AppointmentCreateCardViewController: UITableViewController {
             self?.mortgageSEAT_Lb.text = "= \(String(format: "%.3f", mortgageFree * 0.1)) SEAT"
         }
         
-        cardFid.inputView = KeyBoard
+       // cardFid.inputView = KeyBoard
         KeyBoard.delegate = self
         nameFid.delegate = self
         descriptionTextView.delegate = self
@@ -157,7 +157,7 @@ class AppointmentCreateCardViewController: UITableViewController {
         createBtn.backgroundColor = .lightGray
         
         nameFid.setTintAjust(10)
-        cardFid.setTintAjust(10)
+      //  cardFid.setTintAjust(10)
         priceFid.setTintAjust(10)
         numberFid.setTintAjust(10)
         failureTimeFid.setTintAjust(10)

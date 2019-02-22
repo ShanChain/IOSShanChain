@@ -133,11 +133,12 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             }else if ([code isEqualToString:SC_ERROR_WalletAccountNotexist] || [code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
                 [[SCAppManager shareInstance]configWalletInfo];
             } else if( [code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
-                [[SCAppManager shareInstance]againUploadPasswordCallback:^(NSString *authCode) {
-                    NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:parameters];
+                [[SCAppManager shareInstance]againUploadPasswordWithUrl:url parameters:((NSDictionary*)kparameters).mutableCopy Callback:^(NSString *authCode, NSString *_url, NSDictionary *_parameters) {
+                    NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:_parameters];
                     [mDic setObject:authCode forKey:@"authCode"];
-                    [[SCNetwork shareInstance]postWithUrl:url parameters:mDic.copy success:success failure:failure];
+                    [[SCNetwork shareInstance]postWithUrl:_url parameters:mDic.copy success:success failure:failure];
                 }];
+       
             }else {
                 [YYHud showError:msg];
                 if (failure) {
@@ -177,6 +178,14 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 }
 
 - (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show callBlock:(void(^)(HHBaseModel *baseModel,NSError *error))callBlock{
+    
+    NSMutableString  *mutabUrl = [[NSMutableString alloc]initWithString:url];
+    if (getRequstToken()._notEmpty) {
+        [mutabUrl appendFormat:@"?token=%@",getRequstToken()];
+    }
+    url = mutabUrl.copy;
+    
+    
 #if TARGET_OS_IPHONE
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {
@@ -246,13 +255,18 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             }
             
              if([baseModel.code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
-                [[SCAppManager shareInstance]againUploadPasswordCallback:^(NSString *authCode) {
-                    NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:parameters];
-                    [mDic setObject:authCode forKey:@"authCode"];
-                    [[SCNetwork shareInstance]HH_postWithUrl:url params:mDic showLoading:show callBlock:callBlock];
-                }];
+                 
+                 [[SCAppManager shareInstance]againUploadPasswordWithUrl:url parameters:params.mutableCopy Callback:^(NSString *authCode, NSString *_url, NSDictionary *_parameters) {
+                     NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:_parameters];
+                      [mDic setObject:authCode forKey:@"authCode"];
+                      [[SCNetwork shareInstance]HH_postWithUrl:_url params:mDic showLoading:show callBlock:callBlock];
+                 }];
+                 
             }
             
+            if([baseModel.code isEqualToString:SC_REQUEST_TOKEN_EXPIRE]){
+                [[SCAppManager shareInstance] logout];
+            }
             
             if (!NULLString(baseModel.message)) {
                 if (baseModel.code.integerValue == SC_NOTENOUGH.integerValue) {
@@ -261,7 +275,6 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 [HHTool showError:baseModel.message];
             }
         }
-        
         
     }] resume];
 }
@@ -310,6 +323,8 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 
 - (void)HH_GetWithUrl:(NSString *)url parameters:(id)parameters showLoading:(BOOL)show callBlock:(void (^)(HHBaseModel *baseModel, NSError *error))callBlock{
     
+    
+    
 #if TARGET_OS_IPHONE
     [SCNetwork netWorkStatus:^(AFNetworkReachabilityStatus status) {
         if (status < 1) {
@@ -355,6 +370,13 @@ static NSString* getRequstToken(){
 }
 
 - (void)getWithUrl:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    
+//    NSMutableString  *mutabUrl = [[NSMutableString alloc]initWithString:url];
+//    if (getRequstToken()._notEmpty) {
+//        [mutabUrl appendFormat:@"?token=%@",getRequstToken()];
+//    }
+//    url = mutabUrl.copy;
+    
     if (IS_USE_HTTPS) {
         [_afManager setSecurityPolicy:[self customSecurityPolicy]];
     }
@@ -386,10 +408,10 @@ static NSString* getRequstToken(){
         }else if ([code isEqualToString:SC_ERROR_WalletAccountNotexist] || [code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
             [[SCAppManager shareInstance]configWalletInfo];
         } else if( [code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
-            [[SCAppManager shareInstance]againUploadPasswordCallback:^(NSString *authCode) {
-                NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:parameters];
+            [[SCAppManager shareInstance]againUploadPasswordWithUrl:url parameters:params.mutableCopy Callback:^(NSString *authCode, NSString *_url, NSDictionary *_parameters) {
+                NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:_parameters];
                 [mDic setObject:authCode forKey:@"authCode"];
-                [[SCNetwork shareInstance]postWithUrl:url parameters:mDic.copy success:success failure:failure];
+                [[SCNetwork shareInstance]postWithUrl:_url parameters:mDic.copy success:success failure:failure];
             }];
         }else{
             SCLog(@"Request error%@", responseObject);

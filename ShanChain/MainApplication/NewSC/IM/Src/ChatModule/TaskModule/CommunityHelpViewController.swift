@@ -98,14 +98,10 @@ class CommunityHelpViewController: SCBaseVC {
                     return
                 }
                 let characterId:String = SCCacheTool.shareInstance().getCurrentCharacterId()
-                
-                let isPwd = SCCacheTool.shareInstance().characterModel.characterInfo.isBindPwd == true && SCCacheTool.shareInstance().getAuthCode().isEmpty == false
-                let authCode:String = isPwd  == true ? SCCacheTool.shareInstance().getAuthCode():""
+                let authCode:String =  SCCacheTool.shareInstance().getAuthCode()
                 let params:Dictionary = ["bounty":reward,"currency":"rmb","dataString":dataString,"roomId":self!.chatRoomId ?? "","time":timestamp,"characterId":characterId,"authCode":authCode] as [String : Any]
                 // 添加任务
-                HHTool.showChrysanthemum()
                 SCNetwork.shareInstance().v1_post(withUrl: TASK_ADD_URL, params: params, showLoading: true, call: { (baseModel, error) in
-                    HHTool.immediatelyDismiss()
                     if((error) != nil){
                         HHTool .showError(NSLocalizedString("sc_helpFailed", comment: "字符串"))
                         return
