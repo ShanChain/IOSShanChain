@@ -28,7 +28,7 @@
                                                                handler(action, [alertController.actions indexOfObject:action]);
                                                            }
                                                        }];
-        if ([action.title isEqualToString:@"立即更新"] || [action.title isEqualToString:@"马上保存"] || [action.title isEqualToString:@"确认"] || [action.title isEqualToString:@"立即开通"]) {
+        if ([action.title isEqualToString:@"立即更新"] || [action.title isEqualToString:@"马上保存"] || [action.title isEqualToString:@"确认"] || [action.title isEqualToString:@"立即开通"] || [action.title isEqualToString:@"我知道了"]) {
             [action setValue:Theme_MainThemeColor forKey:@"titleTextColor"];
         }
         [alertController addAction:action];

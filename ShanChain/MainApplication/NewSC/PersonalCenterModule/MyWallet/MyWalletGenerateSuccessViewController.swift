@@ -49,6 +49,17 @@ class MyWalletGenerateSuccessViewController: SCBaseVC {
         })
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.backButton.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.backButton.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包密码"
@@ -56,11 +67,11 @@ class MyWalletGenerateSuccessViewController: SCBaseVC {
         addRightBarButtonItem(withTarget: self, sel: #selector(_clickTip), title: "提示", tintColor: SC_ThemeMainColor)
         codeIcon.image = UIImage(data: codeData)
         saveBtn.rx.tap.subscribe(onNext: { [weak self] in
-            self?.photeManager.saveData(withPhtotoKit: self?.codeData, completion: { (status, _) in
-                if status == true{
-                  self?.savePhoto()
-                }
-            })
+            if HHTool.checkDetectionPhotoPermission({}) == false{
+                return
+            }
+            
+           self?._photeManagerSaveData()
             
         }).disposed(by: disposeBag)
         
@@ -69,6 +80,17 @@ class MyWalletGenerateSuccessViewController: SCBaseVC {
             self?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: disposeBag)
     }
-
+    
+    func _photeManagerSaveData(){
+        self.photeManager.saveData(withPhtotoKit: self.codeData, completion: { (status, _) in
+            if status == true{
+                self.savePhoto()
+            }else{
+                self.photeManager.createFolder(SC_SavePhotoFileName, success: {
+                    self._photeManagerSaveData()
+                })
+            }
+        })
+    }
 
 }

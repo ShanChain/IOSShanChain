@@ -16,6 +16,9 @@
 
 
 +(void)newInstancetypeWithPushVC:(SCBaseVC*)pushVC{
+    if (![HHTool checkCameraPermission]) {
+        return;
+    }
     //添加一些扫码或相册结果处理
     QQLBXScanViewController *vc = [QQLBXScanViewController new];
     vc.libraryType = [Global sharedManager].libraryType;

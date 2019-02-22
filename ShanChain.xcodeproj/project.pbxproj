@@ -110,6 +110,7 @@
 		222D401A221A972F004DE8C6 /* UploadPhotePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 222D4019221A972F004DE8C6 /* UploadPhotePasswordView.xib */; };
 		222EF6162186B999005B89EF /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6152186B999005B89EF /* NSObject+extension.swift */; };
 		222EF6182187E527005B89EF /* DefConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EF6172187E526005B89EF /* DefConst.swift */; };
+		222F8242221FD3BB00345162 /* YHPhotoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222F8241221FD3BB00345162 /* YHPhotoKit.framework */; };
 		2231087621DC9603006D458F /* MyHelpContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231087421DC9603006D458F /* MyHelpContainerViewController.swift */; };
 		2231087921DC9C0D006D458F /* MyHelpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231087821DC9C0D006D458F /* MyHelpListViewController.swift */; };
 		2231087A21DF3231006D458F /* AppointmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2231087C21DF3231006D458F /* AppointmentListCell.xib */; };
@@ -838,6 +839,7 @@
 		222D4019221A972F004DE8C6 /* UploadPhotePasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadPhotePasswordView.xib; sourceTree = "<group>"; };
 		222EF6152186B999005B89EF /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
 		222EF6172187E526005B89EF /* DefConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefConst.swift; sourceTree = "<group>"; };
+		222F8241221FD3BB00345162 /* YHPhotoKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YHPhotoKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2231087421DC9603006D458F /* MyHelpContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHelpContainerViewController.swift; sourceTree = "<group>"; };
 		2231087821DC9C0D006D458F /* MyHelpListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHelpListViewController.swift; sourceTree = "<group>"; };
 		2231087E21DF3240006D458F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppointmentListCell.strings"; sourceTree = "<group>"; };
@@ -1633,6 +1635,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				222F8242221FD3BB00345162 /* YHPhotoKit.framework in Frameworks */,
 				22538AAD21D5FC1E00B873F7 /* CoreLocation.framework in Frameworks */,
 				892B3A261FE9EF6A00292A75 /* CoreMedia.framework in Frameworks */,
 				332F48491F261976002C4D12 /* CoreGraphics.framework in Frameworks */,
@@ -3026,6 +3029,7 @@
 		33055FE81F0503AC005740E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				222F8241221FD3BB00345162 /* YHPhotoKit.framework */,
 				22538AAB21D5F6D300B873F7 /* AVFoundation.framework */,
 				2271057B21B62CCA009FC34D /* AdSupport.framework */,
 				2226DB7D21AE2CE9002F6195 /* CoreFoundation.framework */,
@@ -5167,7 +5171,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "acf01926-5adf-445b-9ffb-6aea6bade8e4";
+				PROVISIONING_PROFILE = "1bbf1f72-3561-4fab-ad25-f42a4fcc58ca";
 				PROVISIONING_PROFILE_SPECIFIER = adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

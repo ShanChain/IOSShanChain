@@ -60,8 +60,9 @@ class AppointmentListViewController: SCBaseVC {
    
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+         super.viewWillAppear(animated)
         
           extendedLayoutIncludesOpaqueBars = true;
          self.tableView.contentInset = UIEdgeInsetsMake(CGFloat(UIDevice().navBarHeight), 0, CGFloat(UIDevice().tabBarHeight), 0)

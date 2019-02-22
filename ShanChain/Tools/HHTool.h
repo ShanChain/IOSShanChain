@@ -50,4 +50,9 @@
 
 + (UIViewController*)storyBoardWithName:(NSString*)name Identifier:(NSString*)identifier;
 
+// 检查相册访问权限
++(BOOL)checkDetectionPhotoPermission:(void(^)(void))authorizedBlock;
+// 检查相机访问权限
++(BOOL)checkCameraPermission;
+
 @end

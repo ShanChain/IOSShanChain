@@ -35,7 +35,25 @@
     //设置扫码后需要扫码图像
     self.isNeedScanImage = YES;
     self.title = @"二维码扫描";
+    [self showNavigationBarWhiteColor];
     
+}
+
+- (void)showNavigationBarWhiteColor{
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setBackgroundImage:nil  forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    // self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor=[UIColor blackColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    if (![self.navigationController.viewControllers.firstObject isEqual:self]) {
+        
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        [button setImage:[UIImage imageNamed:@"nav_btn_back_default"] forState:UIControlStateNormal];
+        //        [button setBackgroundImage:[UIImage imageNamed:@"arrowLeft.png"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(_back) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    }
 }
 
 

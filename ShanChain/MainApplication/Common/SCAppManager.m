@@ -334,6 +334,7 @@ static SCAppManager *instance = nil;
 
 // 实名认证
 - (void)realNameAuthenticate{
+    [HHTool immediatelyDismiss];
     RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
     JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:realNameVC];
     [[HHTool getCurrentVC]presentViewController:nav animated:YES completion:nil];

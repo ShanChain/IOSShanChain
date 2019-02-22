@@ -11,6 +11,9 @@
 
 @interface SCBaseVC : SCBaseViewController
 
+
+@property  (nonatomic,strong)   UIButton  *backButton;
+
 - (void)setKeyBoardAutoHidden;
 
 - (void)showLoading;

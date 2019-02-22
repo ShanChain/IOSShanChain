@@ -42,6 +42,7 @@ typedef void (^SaveCompletion)(BOOL success,PHAsset *asset);
  */
 - (void)saveImagePath:(NSString *)imagePath;
 - (void)saveDataWithPhtotoKit:(id)data completion:(SaveCompletion)completion;
+- (void)createFolder:(NSString *)folderName success:(void(^)(void))successBlock;
 
 /**
  *  保存视频到系统相册

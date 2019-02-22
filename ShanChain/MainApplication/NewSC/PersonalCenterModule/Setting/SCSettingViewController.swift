@@ -23,6 +23,7 @@ class SCSettingViewController: UITableViewController {
         self.versionLb.text = "v\(currentVersion)"
         pushSwich.isOn = SCCacheTool.shareInstance().characterModel.characterInfo.allowNotify
         bindpwdSwitch.isOn = SCCacheTool.shareInstance().characterModel.characterInfo.isBindPwd
+        
     }
     
     @IBAction func modifyPushStateAction(_ sender: UISwitch) {

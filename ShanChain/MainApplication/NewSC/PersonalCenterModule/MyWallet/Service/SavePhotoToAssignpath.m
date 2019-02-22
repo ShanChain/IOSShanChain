@@ -30,6 +30,16 @@
     return self;
 }
 
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.plistName = @"Asset";
+    }
+    return self;
+}
+
 - (void)saveImagePath:(NSString *)imagePath{
     NSURL *url = [NSURL fileURLWithPath:imagePath];
     
@@ -208,7 +218,7 @@
     return isExisted;
 }
 
-- (void)createFolder:(NSString *)folderName {
+- (void)createFolder:(NSString *)folderName success:(void(^)(void))successBlock{
     if (![self isExistFolder:folderName]) {
         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
             //添加HUD文件夹
@@ -217,6 +227,7 @@
         } completionHandler:^(BOOL success, NSError * _Nullable error) {
             if (success) {
                 NSLog(@"创建相册文件夹成功!");
+                BLOCK_EXEC(successBlock)
             } else {
                 NSLog(@"创建相册文件夹失败:%@", error);
             }
@@ -228,7 +239,7 @@
 - (void)setFolderName:(NSString *)folderName {
     if (!_folderName) {
         _folderName = folderName;
-        [self createFolder:folderName];
+        [self createFolder:folderName success:^{}];
     }
 }
 

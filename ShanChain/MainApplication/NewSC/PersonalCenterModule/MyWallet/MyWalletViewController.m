@@ -25,7 +25,6 @@
 
 @property (nonatomic, strong) XMWebView *webView;
 
-
 @end
 
 @implementation MyWalletViewController
@@ -42,13 +41,6 @@
     }];
 
     
-}
-
-
--(void)viewWillAppear:(BOOL)animated{
-   
-    self.navigationController.navigationBarHidden = !self.isShowNav;
-    
     //此处链接要写全
     if (NULLString(self.urlStr)) {
         self.urlStr = WalletURL;
@@ -56,12 +48,23 @@
     NSURL *url = [NSURL URLWithString:self.urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
+    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+   
+    self.navigationController.navigationBarHidden = !self.isShowNav;
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
     
+}
+
+-(void)dealloc{
     // 清除Cookie 和缓存
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -70,10 +73,10 @@
     }
     
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-     NSURLCache * cache = [NSURLCache sharedURLCache];
-     [cache removeAllCachedResponses];
-     [cache setDiskCapacity:0];
-     [cache setMemoryCapacity:0];
+    NSURLCache * cache = [NSURLCache sharedURLCache];
+    [cache removeAllCachedResponses];
+    [cache setDiskCapacity:0];
+    [cache setMemoryCapacity:0];
 }
 
 #pragma maek - 子类重写

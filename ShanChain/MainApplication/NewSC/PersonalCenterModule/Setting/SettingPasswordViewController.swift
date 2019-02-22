@@ -89,15 +89,20 @@ class SettingPasswordViewController: SCBaseVC {
             json.subscribe(onNext: { json in
             
                 if json == 1{
+                    var title:String = "密码重置成功! 请重新登录"
                     if self?.isChangePassword == false{
-                        HHTool.showTip("密码设置成功!", duration: 1.5)
+//                        HHTool.showTip("密码设置成功!", duration: 1.5)
+                        title = "密码设置成功! 请重新登录"
                     }else{
-                        HHTool.showTip("密码重置成功!", duration: 1.5)
+                       // HHTool.showTip("密码重置成功!", duration: 1.5)
+                        
                     }
-                    
-                    _ = delay(1.0, task: {
+                    self?.sc_hrShowAlert(withTitle: nil, message: title, buttonsTitles: ["确定"], andHandler: { (_, _) in
                         SCAppManager.shareInstance().logout()
                     })
+//                    _ = delay(1.0, task: {
+//
+//                    })
                 }
                 
                 }, onError: { error in

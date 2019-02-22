@@ -134,7 +134,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
                 [[SCAppManager shareInstance]configWalletInfo];
             } else if( [code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
                 [[SCAppManager shareInstance]againUploadPasswordWithUrl:url parameters:((NSDictionary*)kparameters).mutableCopy Callback:^(NSString *authCode, NSString *_url, NSDictionary *_parameters) {
-                    NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:_parameters];
+                    NSMutableDictionary  *mDic = [NSMutableDictionary dictionaryWithDictionary:_parameters];
                     [mDic setObject:authCode forKey:@"authCode"];
                     [[SCNetwork shareInstance]postWithUrl:_url parameters:mDic.copy success:success failure:failure];
                 }];
@@ -180,7 +180,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
 - (void)HH_postWithUrl:(NSString *)url params:(NSDictionary *)parameters showLoading:(BOOL)show callBlock:(void(^)(HHBaseModel *baseModel,NSError *error))callBlock{
     
     NSMutableString  *mutabUrl = [[NSMutableString alloc]initWithString:url];
-    if (getRequstToken()._notEmpty) {
+    if (getRequstToken()._notEmpty && ![mutabUrl containsString:@"token="]) {
         [mutabUrl appendFormat:@"?token=%@",getRequstToken()];
     }
     url = mutabUrl.copy;
@@ -213,7 +213,9 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     if ([[JPUSHService registrationID]_notEmpty]) {
         [params setValue:[JPUSHService registrationID] forKey:@"deviceToken"];
     }
-    url = [SC_BASE_URL stringByAppendingString:url];
+    if (![url containsString:SC_BASE_URL]) {
+        url = [SC_BASE_URL stringByAppendingString:url];
+    }
     [self apendTOBaseParams:params];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:params error:nil];
@@ -257,9 +259,9 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
              if([baseModel.code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
                  
                  [[SCAppManager shareInstance]againUploadPasswordWithUrl:url parameters:params.mutableCopy Callback:^(NSString *authCode, NSString *_url, NSDictionary *_parameters) {
-                     NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:_parameters];
+                     NSMutableDictionary  *mDic = [NSMutableDictionary dictionaryWithDictionary:_parameters];
                       [mDic setObject:authCode forKey:@"authCode"];
-                      [[SCNetwork shareInstance]HH_postWithUrl:_url params:mDic showLoading:show callBlock:callBlock];
+                      [[SCNetwork shareInstance]HH_postWithUrl:_url params:mDic.copy showLoading:show callBlock:callBlock];
                  }];
                  
             }
@@ -390,9 +392,11 @@ static NSString* getRequstToken(){
     if ([[JPUSHService registrationID]_notEmpty]) {
         [params setValue:[JPUSHService registrationID] forKey:@"deviceToken"];
     }
-    if([url hasPrefix:@"/"]) {
+    if([url hasPrefix:@"/"] && ![url containsString:SC_BASE_URL]) {
         url = [SC_BASE_URL stringByAppendingString:url];
     }
+    
+    
     [self apendTOBaseParams:params];
     [_afManager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
          NSString  *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
@@ -409,9 +413,9 @@ static NSString* getRequstToken(){
             [[SCAppManager shareInstance]configWalletInfo];
         } else if( [code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
             [[SCAppManager shareInstance]againUploadPasswordWithUrl:url parameters:params.mutableCopy Callback:^(NSString *authCode, NSString *_url, NSDictionary *_parameters) {
-                NSMutableDictionary  *mDic = [[NSMutableDictionary alloc]initWithDict:_parameters];
+                NSMutableDictionary  *mDic = [NSMutableDictionary dictionaryWithDictionary:_parameters];
                 [mDic setObject:authCode forKey:@"authCode"];
-                [[SCNetwork shareInstance]postWithUrl:_url parameters:mDic.copy success:success failure:failure];
+                [[SCNetwork shareInstance]getWithUrl:_url parameters:mDic.copy success:success failure:failure];
             }];
         }else{
             SCLog(@"Request error%@", responseObject);
@@ -473,9 +477,10 @@ static NSString* getRequstToken(){
                            url:(NSString *)url
                     parameters:(id)parameters
                          block:(void (^)(id objc,BOOL success))block{
-    if([url hasPrefix:@"/"]){
+    if([url hasPrefix:@"/"] && ![url containsString:SC_BASE_URL]){
         url = [SC_BASE_URL stringByAppendingString:url];
     }
+
     // 基于AFN3.0+ 封装的HTPPSession句柄
     _afManager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPT_TYPE_IMAGE];
     // 在parameters里存放照片以外的对象

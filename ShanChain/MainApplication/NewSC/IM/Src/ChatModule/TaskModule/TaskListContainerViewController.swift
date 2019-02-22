@@ -85,6 +85,7 @@ class TaskListContainerViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = NSLocalizedString("sc_RewardTask", comment: "字符串")
         view.backgroundColor = UIColor.white
         automaticallyAdjustsScrollViewInsets = false

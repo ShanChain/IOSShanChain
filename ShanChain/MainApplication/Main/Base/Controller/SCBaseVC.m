@@ -111,6 +111,7 @@
         //        [button setBackgroundImage:[UIImage imageNamed:@"arrowLeft.png"] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(_back) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.backButton = button;
     }
 }
 
@@ -135,6 +136,7 @@
         //        [button setBackgroundImage:[UIImage imageNamed:@"arrowLeft.png"] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(_back) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.backButton = button;
     }
 }
 

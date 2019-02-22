@@ -23,12 +23,16 @@
 #include <net/if_dl.h>
 
 #import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 
 #define IOS_CELLULAR    @"pdp_ip0"
 #define IOS_WIFI        @"en0"
 //#define IOS_VPN       @"utun0"
 #define IP_ADDR_IPv4    @"ipv4"
 #define IP_ADDR_IPv6    @"ipv6"
+
+
 
 @implementation HHTool
 
@@ -292,5 +296,91 @@
     return [storyBoard instantiateViewControllerWithIdentifier:identifier ?:name];
 }
 
+
+// 检查相机访问权限
++(BOOL)checkCameraPermission{
+    
+    BOOL isAvalible = NO;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied) {
+      
+        //提示用户开启相册权限
+        [[HHTool getCurrentVC]sc_hrShowAlertWithTitle:@"温馨提示" message:@"检测到手机系统已关闭读取相机权限，请前往【设置】-【隐私】-【相机】中开启" buttonsTitles:@[@"我知道了"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+            
+        }];
+        
+    } else {
+        isAvalible = YES;
+    }
+    return isAvalible;
+}
+
+// 检查相册访问权限
++(BOOL)checkDetectionPhotoPermission:(void(^)(void))authorizedBlock
+{
+    BOOL isAvalible = NO;
+    
+    if (iOS8x_systemVersion)
+    {
+        PHAuthorizationStatus authStatus = [PHPhotoLibrary authorizationStatus];
+        //用户尚未授权
+        if (authStatus == PHAuthorizationStatusNotDetermined)
+        {
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                
+                if (status == PHAuthorizationStatusAuthorized)
+                {
+                    if (authorizedBlock)
+                    {
+                        authorizedBlock();
+                    }
+              }}];
+        }
+        //用户已经授权
+        else if (authStatus == PHAuthorizationStatusAuthorized)
+        {
+            isAvalible = YES;
+            
+            if (authorizedBlock)
+            {
+                authorizedBlock();
+            }
+        }
+        //用户拒绝授权
+        else
+        {
+            //提示用户开启相册权限
+            [[HHTool getCurrentVC]sc_hrShowAlertWithTitle:@"温馨提示" message:@"检测到手机系统已关闭读取相册权限，请前往【设置】-【隐私】-【照片】中开启" buttonsTitles:@[@"我知道了"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+                
+            }];
+        }
+    }
+    else
+    {
+        ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
+        
+        //用户已经授权
+        if (authStatus == ALAuthorizationStatusAuthorized)
+        {
+            isAvalible = YES;
+            
+            if (authorizedBlock)
+            {
+                authorizedBlock();
+            }
+        }
+        //用户拒绝授权
+        else
+        {
+            //提示用户开启相册权限
+            [[HHTool getCurrentVC]sc_hrShowAlertWithTitle:@"温馨提示" message:@"检测到手机系统已关闭读取相册权限，请前往【设置】-【隐私】-【照片】中开启" buttonsTitles:@[@"我知道了"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+                
+            }];
+        }
+    }
+    
+    return isAvalible;
+    
+}
 
 @end
