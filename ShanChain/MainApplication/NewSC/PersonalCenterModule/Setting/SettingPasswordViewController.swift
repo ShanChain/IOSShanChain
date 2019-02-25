@@ -22,7 +22,7 @@ class SettingPasswordViewController: SCBaseVC {
     var isChangePassword:Bool = false // 是否是更换密码
     var disposeBag = DisposeBag()
     var smsVerifyModel:SmsVerifycodeModel?
-    let mobile = SC_phoneNumber ?? SCCacheTool.shareInstance().mobile
+    let mobile:String = SCCacheTool.shareInstance().mobile
     
     func _getParameter() -> Dictionary<String,Any> {
         if isChangePassword == true {
@@ -103,6 +103,7 @@ class SettingPasswordViewController: SCBaseVC {
 //                    _ = delay(1.0, task: {
 //
 //                    })
+                    
                 }
                 
                 }, onError: { error in

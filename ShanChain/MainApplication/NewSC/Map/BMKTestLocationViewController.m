@@ -154,7 +154,13 @@
         self.activeRuleBtn.hidden = NO;
             // 活动倒计时未开始倒计时
         if ([[MCDate date] isEarlierThanOrEqualTo:activeStartDate]) {
-            _timer1 = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(_startTiveCountdown) userInfo:nil repeats:YES];
+            __weak typeof(self) weakSelf = self;
+            _timer1 = [NSTimer bl_scheduledTimerWithTimeInterval:1 block:^{
+                [weakSelf _startTiveCountdown];
+            } repeats:YES];
+//
+//
+//            _timer1 = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(_startTiveCountdown) userInfo:nil repeats:YES];
             [[NSRunLoop mainRunLoop] addTimer:_timer1 forMode:NSRunLoopCommonModes];
 
         }
@@ -164,7 +170,11 @@
     if (days > 0 && days < 3) {
         self.topView.hidden = NO;
         self.activeRuleBtn.hidden = NO;
-        _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(activeCountdown) userInfo:nil repeats:YES];
+        __weak typeof(self) weakSelf = self;
+        _timer = [NSTimer bl_scheduledTimerWithTimeInterval:1 block:^{
+            [weakSelf activeCountdown];
+        } repeats:YES];
+//        _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(activeCountdown) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
         
 //        self.laveDayLabel.attributedText = [NSString setAttrFirstString:[NSString stringWithFormat:@"%ld ",(long)days] color:[UIColor redColor] font:Font(18) secendString:NSLocalizedString(@"sc_NewYear_day", nil) color:Theme_MainTextColor font:Font(14)];
@@ -781,74 +791,6 @@
         }
     }];
 }
-
-//- (void)createChatRoomConversation{
-//    // 创建会话 有的话直接返回
-//    weakify(self);
-//    [JGUserLoginService
-//     jg_createChatRoomConversationWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable conversation, NSError * _Nullable error) {
-//         if (!error) {
-//              [weak_self enterChatRoom];
-//             return ;
-//         }
-//         if (error.code == 863004) {
-//             // 未登录
-//             [weak_self jg_automaticLoginComplete:^{
-//                 [weak_self enterChatRoom];
-//             }];
-//         }
-//         [HHTool showError:error.localizedDescription];
-//     }];
-//}
-//
-//- (void)getAllChatRoomConversation{
-//    weakify(self);
-//    [JMSGConversation allChatRoomConversation:^(id resultObject, NSError *error) {
-//         strongify(self);
-//        if (error) {
-//            if (error.code == 863004) {
-//                // 未登录
-//                [self jg_automaticLoginComplete:^{
-//                    [self createChatRoomConversation];
-//                }];
-//            }else{
-//                [self createChatRoomConversation];
-//            }
-//            return ;
-//        }
-//
-//        NSArray <JMSGConversation*> *conversations = resultObject;
-//        __block  BOOL  isEnter = NO;
-//        if (conversations.count > 0) {
-//            [conversations enumerateObjectsUsingBlock:^(JMSGConversation * _Nonnull conversation, NSUInteger idx, BOOL * _Nonnull stop) {
-//                if ([conversation.target isKindOfClass:[JMSGChatRoom class]]) {
-//                    if ([((JMSGChatRoom*)conversation.target).roomID isEqualToString:self.currentRoomId]) {
-//                        [self enterChatRoom];
-//                       isEnter = YES;
-//                    }
-//                }
-//            }];
-//        }
-//        if (!isEnter) {
-//            [self createChatRoomConversation];
-//        }
-//    }];
-//}
-//
-//
-//// 加入聊天室
-//- (void)enterChatRoom{
-//
-//
-//    weakify(self);
-//    __block HHChatRoomViewController *roomVC;
-//    [EditInfoService enterChatRoomWithId:self.currentRoomId showString:@"" callBlock:^(id resultObject, NSError *error) {
-//        strongify(self)
-//        [self getTakeSnapshot];
-//        roomVC = [[HHChatRoomViewController alloc]initWithConversation:resultObject isJoinChat:NO navTitle:self.currentRoomName];
-//        [self pushPage:roomVC Animated:YES];
-//    }];
-//}
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

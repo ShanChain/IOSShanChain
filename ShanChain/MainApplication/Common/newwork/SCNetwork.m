@@ -131,7 +131,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             } else if ([code isEqualToString:SC_SHARE_NOOPEN]){
                 [SYProgressHUD showError:msg];
             }else if ([code isEqualToString:SC_ERROR_WalletAccountNotexist] || [code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
-                [[SCAppManager shareInstance]configWalletInfo];
+                [[SCAppManager shareInstance]configWalletInfoWithType:code];
             } else if( [code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
                 [[SCAppManager shareInstance]againUploadPasswordWithUrl:url parameters:((NSDictionary*)kparameters).mutableCopy Callback:^(NSString *authCode, NSString *_url, NSDictionary *_parameters) {
                     NSMutableDictionary  *mDic = [NSMutableDictionary dictionaryWithDictionary:_parameters];
@@ -253,7 +253,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
             callBlock(baseModel,nil);
         }else{
             if ([baseModel.code isEqualToString:SC_ERROR_WalletAccountNotexist] || [baseModel.code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
-                [[SCAppManager shareInstance]configWalletInfo];
+                [[SCAppManager shareInstance]configWalletInfoWithType:baseModel.code];
             }
             
              if([baseModel.code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
@@ -410,7 +410,7 @@ static NSString* getRequstToken(){
         }else  if ([code isEqualToString:SC_NOTENOUGH] ) {
             [HHTool showError:@"您的余额不足"];
         }else if ([code isEqualToString:SC_ERROR_WalletAccountNotexist] || [code isEqualToString:SC_ERROR_WalletPasswordNotexist]) {
-            [[SCAppManager shareInstance]configWalletInfo];
+            [[SCAppManager shareInstance]configWalletInfoWithType:code];
         } else if( [code isEqualToString:SC_ERROR_WalletPasswordInvalid]){
             [[SCAppManager shareInstance]againUploadPasswordWithUrl:url parameters:params.mutableCopy Callback:^(NSString *authCode, NSString *_url, NSDictionary *_parameters) {
                 NSMutableDictionary  *mDic = [NSMutableDictionary dictionaryWithDictionary:_parameters];

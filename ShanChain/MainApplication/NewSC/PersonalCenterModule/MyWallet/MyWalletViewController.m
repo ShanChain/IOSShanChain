@@ -9,6 +9,7 @@
 #import "MyWalletViewController.h"
 #import "XMWebView.h"
 #import "ShanChain-Swift.h"
+#import <Foundation/Foundation.h>
 
 #if PN_ENVIRONMENT == 3  //生产环境
 
@@ -105,6 +106,7 @@
         NSURL *url = [NSURL URLWithString:urlString];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [self.webView loadRequest:request];
+        
      
     }
 

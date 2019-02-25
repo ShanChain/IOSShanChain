@@ -47,3 +47,16 @@ typedef NS_ENUM(NSInteger, AppNetworkReachabilityStatus) {
 // 加载本地json文件
 - (NSArray*)loadLocalJsonFilesName:(NSString*)fileName;
 @end
+
+
+
+@interface NSTimer  (BlcokTimer)
+
++ (NSTimer *)bl_scheduledTimerWithTimeInterval:(NSTimeInterval)interval block:(void (^)(void))block repeats:(BOOL)repeats;
+
+@end
+
+
+
+
+

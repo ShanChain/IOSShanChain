@@ -109,9 +109,11 @@
         }
     }
     
+    if ([window subviews].count == 0) {
+        return window.rootViewController;
+    }
     UIView *frontView = [[window subviews] objectAtIndex:0];
     id nextResponder = [frontView nextResponder];
-    
     if ([nextResponder isKindOfClass:[UIViewController class]])
         result = nextResponder;
     else

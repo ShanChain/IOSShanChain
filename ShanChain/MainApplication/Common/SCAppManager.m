@@ -340,12 +340,23 @@ static SCAppManager *instance = nil;
     [[HHTool getCurrentVC]presentViewController:nav animated:YES completion:nil];
 }
 
--(void)configWalletInfo{
-    
+-(void)configWalletInfoWithType:(NSString*)type{
     [HHTool immediatelyDismiss];
+    if ([type isEqualToString:SC_ERROR_WalletAccountNotexist]) {
+        [[HHTool getCurrentVC]sc_hrShowAlertWithTitle:nil message:@"您尚未开通马甲钱包，开通后方可使用该功能" buttonsTitles:@[@"返回",@"去开通"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+            if (indexOfAction == 1) {
+                [self openH5_WalletInfo];
+            }
+        }];
+    } else {
+        [self openH5_WalletInfo];
+    }
+}
+
+
+-(void)openH5_WalletInfo{
     MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
     JCNavigationController *walletNav = [[JCNavigationController alloc]initWithRootViewController:walletVC];
-    
     UINavigationController  *nav;
     if ([[HHTool getCurrentVC] isKindOfClass:[UINavigationController class]]) {
         nav = (UINavigationController*)[HHTool getCurrentVC];
