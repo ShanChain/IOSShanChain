@@ -13,4 +13,6 @@
 @property (nonatomic, copy) NSString *urlStr;
 @property (nonatomic, assign) BOOL   isShowNav;
 
+- (void)_deallocCache;
+
 @end

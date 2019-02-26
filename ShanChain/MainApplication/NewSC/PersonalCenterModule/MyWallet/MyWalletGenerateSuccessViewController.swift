@@ -26,7 +26,7 @@ class MyWalletGenerateSuccessViewController: SCBaseVC {
     func _clickTip(){
         _ = self.sc_hrShowAlert(withTitle: "温馨提示", message: "该钱包安全码仅展示一次\n不可修改、不可找回！\n请检查您的相册里是否已保存。", buttonsTitles: ["我已保存","马上保存"], andHandler: { (_, index) in
             if index == 1{
-                self.savePhoto()
+                self._photeManagerSaveData()
             }
         })
     }

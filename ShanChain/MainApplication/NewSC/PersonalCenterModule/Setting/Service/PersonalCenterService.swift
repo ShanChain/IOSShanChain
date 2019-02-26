@@ -36,7 +36,7 @@ class PersonalCenterService: NSObject {
                     }
                 }else{
                     // 已经是最新版本
-                    HHTool.showTip("当前已是最新版本", duration: 1.0)
+                   // HHTool.showTip("当前已是最新版本", duration: 1.0)
                 }
             }else{
                 if isTip == true{

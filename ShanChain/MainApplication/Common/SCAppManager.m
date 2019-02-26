@@ -335,9 +335,16 @@ static SCAppManager *instance = nil;
 // 实名认证
 - (void)realNameAuthenticate{
     [HHTool immediatelyDismiss];
-    RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
-    JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:realNameVC];
-    [[HHTool getCurrentVC]presentViewController:nav animated:YES completion:nil];
+    // 实名认证由H5那边处理
+//    RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
+//    JCNavigationController *nav = [[JCNavigationController alloc]initWithRootViewController:realNameVC];
+//    [[HHTool getCurrentVC]presentViewController:nav animated:YES completion:nil];
+    [[HHTool getCurrentVC]sc_hrShowAlertWithTitle:nil message:@"您尚未进行实名认证，实名后方可使用该功能" buttonsTitles:@[@"返回",@"去实名"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
+        if (indexOfAction == 1) {
+            [self openH5_WalletInfo];
+        }
+    }];
+    
 }
 
 -(void)configWalletInfoWithType:(NSString*)type{
@@ -346,12 +353,26 @@ static SCAppManager *instance = nil;
         [[HHTool getCurrentVC]sc_hrShowAlertWithTitle:nil message:@"您尚未开通马甲钱包，开通后方可使用该功能" buttonsTitles:@[@"返回",@"去开通"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
             if (indexOfAction == 1) {
                 [self openH5_WalletInfo];
+                return ;
             }
+            
+            UINavigationController  *nav;
+            if ([[HHTool getCurrentVC] isKindOfClass:[UINavigationController class]]) {
+                nav = (UINavigationController*)[HHTool getCurrentVC];
+            }else{
+                nav = [HHTool getCurrentVC].navigationController;
+            }
+            if ([nav.topViewController isKindOfClass:[AppointmentCreateCardViewController class]]) {
+                [nav popViewControllerAnimated:YES];
+            }
+            
         }];
     } else {
         [self openH5_WalletInfo];
     }
 }
+
+
 
 
 -(void)openH5_WalletInfo{
@@ -363,7 +384,6 @@ static SCAppManager *instance = nil;
     }else{
         nav = [HHTool getCurrentVC].navigationController;
     }
-    
     [nav presentViewController:walletNav animated:YES completion:nil];
 }
 

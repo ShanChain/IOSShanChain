@@ -65,7 +65,7 @@
     
 }
 
--(void)dealloc{
+- (void)_deallocCache{
     // 清除Cookie 和缓存
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -78,6 +78,10 @@
     [cache removeAllCachedResponses];
     [cache setDiskCapacity:0];
     [cache setMemoryCapacity:0];
+}
+
+-(void)dealloc{
+    [self _deallocCache];
 }
 
 #pragma maek - 子类重写

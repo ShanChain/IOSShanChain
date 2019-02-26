@@ -81,7 +81,6 @@
     [self.noteBtn _setCornerRadiusCircle];
     [self.footprintBtn _setCornerRadiusCircle];
     
-    
     [self.mapView bringSubviewToFront:self.topView];
     [self.mapView bringSubviewToFront:self.joinBtn];
     [self.mapView bringSubviewToFront:self.noteBtn];

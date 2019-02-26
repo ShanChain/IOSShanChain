@@ -17,12 +17,15 @@ class MyWalletWelcomeViewController: SCBaseVC {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationItem.hidesBackButton = true
-        let  walletPage =  self.navigationController?.viewControllers.filter{
-            return $0 is MyWalletViewController
-        }
+//        let  walletPage:[MyWalletViewController] =  self.navigationController?.viewControllers.filter{
+//            return $0 is MyWalletViewController
+//            } as! [MyWalletViewController]
         joinWalletBtn.rx.tap.subscribe(onNext: { [weak self] in
             self?.navigationController?.isNavigationBarHidden = false
-            self?.navigationController?.popToViewController((walletPage?.last)!, animated: true)
+            let walletVC = MyWalletViewController()
+            self?.navigationController?.pushViewController(walletVC, animated: true)
+//            walletPage.last?._deallocCache()
+//            self?.navigationController?.popToViewController((walletPage.last)!, animated: true)
         }).disposed(by: disposeBag)
         
         
