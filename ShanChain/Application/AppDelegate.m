@@ -36,12 +36,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
+    [self setupJshareConfig];
     [self setupHXConfigWithApplication:application];
     [self setIQkeyboard];
     [self setBMKManager];
     [self setupMapConfig];
-    [self setupJshareConfig];
     [self setJMessageSDK:launchOptions];
     [self setupUMPushNoticationWithLaunchOptions:launchOptions];
   

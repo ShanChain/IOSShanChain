@@ -750,6 +750,16 @@
 
 - (IBAction)joinPressed:(id)sender{
     
+    __block  BOOL  _status = NO;
+    [self appNetworkStatus:^(AFNetworkReachabilityStatus status) {
+        if (status > 0) {
+            _status = YES;
+        }
+    }];
+    if (!self.currentRoomId._notEmpty && _status) {
+        [HHTool showTip:NSLocalizedString(@"sc_map_Loading", nil) duration:0.8];
+        return;
+    }
    // [HHTool mainWindow].rootViewController = nil;
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"kJCCurrentUserName"]){
 //        JCMainTabBarController  *tabBarVC = [[JCMainTabBarController alloc]init];

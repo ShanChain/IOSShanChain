@@ -188,6 +188,9 @@ typedef struct _stack {
             return ;
         }
         NSDictionary *data = (NSDictionary*)baseModel.data;
+        if (!data) {
+            return;
+        }
         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] initWithDictionary:data[@"userInfo"]];
         if (data[@"token"] && [data[@"token"] isKindOfClass:[NSString class]]) {
             [userInfo setObject:data[@"token"] forKey:@"token"];

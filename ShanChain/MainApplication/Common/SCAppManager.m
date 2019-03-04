@@ -342,7 +342,9 @@ static SCAppManager *instance = nil;
     [[HHTool getCurrentVC]sc_hrShowAlertWithTitle:nil message:@"您尚未进行实名认证，实名后方可使用该功能" buttonsTitles:@[@"返回",@"去实名"] andHandler:^(UIAlertAction * _Nullable action, NSInteger indexOfAction) {
         if (indexOfAction == 1) {
             [self openH5_WalletInfo];
+            return ;
         }
+        [self popPreviousPage];
     }];
     
 }
@@ -356,15 +358,7 @@ static SCAppManager *instance = nil;
                 return ;
             }
             
-            UINavigationController  *nav;
-            if ([[HHTool getCurrentVC] isKindOfClass:[UINavigationController class]]) {
-                nav = (UINavigationController*)[HHTool getCurrentVC];
-            }else{
-                nav = [HHTool getCurrentVC].navigationController;
-            }
-            if ([nav.topViewController isKindOfClass:[AppointmentCreateCardViewController class]]) {
-                [nav popViewControllerAnimated:YES];
-            }
+            [self popPreviousPage];
             
         }];
     } else {
@@ -373,7 +367,17 @@ static SCAppManager *instance = nil;
 }
 
 
-
+-(void)popPreviousPage{
+    UINavigationController  *nav;
+    if ([[HHTool getCurrentVC] isKindOfClass:[UINavigationController class]]) {
+        nav = (UINavigationController*)[HHTool getCurrentVC];
+    }else{
+        nav = [HHTool getCurrentVC].navigationController;
+    }
+    if ([nav.topViewController isKindOfClass:[AppointmentCreateCardViewController class]]) {
+        [nav popViewControllerAnimated:YES];
+    }
+}
 
 -(void)openH5_WalletInfo{
     MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
