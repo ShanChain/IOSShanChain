@@ -77,7 +77,6 @@ class UploadPhotePasswordView: UIView {
     }
 
     
-    
     @IBAction func uploadAction(_ sender: UIButton) {
         DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: HHTool.getCurrentVC(), imageTag: 0, delegate: self as DUX_UploadUserIconDelegate)
     }
@@ -97,7 +96,6 @@ extension UploadPhotePasswordView:DUX_UploadUserIconDelegate{
     
     func uploadImageToServer(with image: UIImage!, fileUrl: String!) {
         self.imageURL = fileUrl;
-        
     }
     
 }

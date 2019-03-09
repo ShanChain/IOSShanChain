@@ -9,7 +9,7 @@
 import UIKit
 import JMessage
 
-class JCFriendSettingViewController: UIViewController {
+class JCFriendSettingViewController: SCBaseVC {
 
     var user: JMSGUser!
     

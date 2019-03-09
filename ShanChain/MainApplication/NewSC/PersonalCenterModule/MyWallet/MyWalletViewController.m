@@ -129,7 +129,8 @@
 //            if (self.navigationController.navigationBarHidden) {
 //                self.navigationController.navigationBarHidden = NO;
 //            }
-            [self dismissViewControllerAnimated:YES completion:NULL];
+           // [self dismissViewControllerAnimated:YES completion:NULL];
+            [self backViewController];
         }
         
         if ([key isEqualToString:@"comfirm"] && [obj isEqualToString:@"true"]) {

@@ -31,7 +31,6 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJMSGNetworkDidCloseNotification) name:kJMSGNetworkDidCloseNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJPFNetworkDidSetupNotification) name:kJPFNetworkDidSetupNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(kJPFNetworkDidRegisterNotification) name:kJPFNetworkDidRegisterNotification object:nil];
-    
 }
 #pragma mark -- JMessage 建立连接成功
 - (void)kJMSGNetworkDidSetupNotification{

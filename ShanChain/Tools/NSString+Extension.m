@@ -115,7 +115,7 @@
         return NO;
     }
     
-    NSString *pattern =@"^1+[3578]+\\d{9}$";
+    NSString *pattern =@"^1+[35678]+\\d{9}$";
     
     return [self isValidStringWithPredicate:pattern];
     

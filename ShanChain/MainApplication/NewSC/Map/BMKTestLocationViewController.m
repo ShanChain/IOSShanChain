@@ -336,6 +336,8 @@
     }];
 }
 
+
+
 - (void)setChatRoomCenterPoint{
     CoordnateInfosModel *model = self.roomInfos.firstObject;
     [self sc_configurationMapViewCenterLocationWithModel:model];
@@ -355,7 +357,7 @@
     self.mapView.showsUserLocation = YES; //是否显示定位图层
     self.mapView.delegate = self;
     self.mapView.buildingsEnabled = YES;
-
+//    self.mapView.baiduHeatMapEnabled = YES;
     self.mapView.mapScaleBarPosition = CGPointMake(100, 100);
     //打开实时路况图层
     //    [_mapView setTrafficEnabled:YES];
