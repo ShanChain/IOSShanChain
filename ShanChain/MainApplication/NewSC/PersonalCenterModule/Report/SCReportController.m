@@ -169,9 +169,11 @@
     [params setObject:targetId forKey:@"targetId"];
     [HHTool showChrysanthemum];
     [[SCNetwork shareInstance] postWithUrl:self.isReportPersonal ? REPORT_USER_URL:STORYREPORT parameters:params success:^(id responseObject) {
-        SYReportSuccessController *successVC = [[SYReportSuccessController alloc]init];
-        [HHTool dismiss];
-        [self.navigationController pushViewController:successVC animated:YES];
+//        SYReportSuccessController *successVC = [[SYReportSuccessController alloc]init];
+//        [HHTool dismiss];
+//        [self.navigationController pushViewController:successVC animated:YES];
+        [HHTool showSucess:@"举报成功"];
+        [self backViewController];
     } failure:^(NSError *error) {
         [HHTool dismiss];
         SCLog(@"%@",error);

@@ -55,7 +55,7 @@ class UploadPhotePasswordView: UIView {
         let registrationID:String = JPUSHService.registrationID() ?? ""
         SCNetwork.shareInstance().hh_uploadFile(withArr: [self.imageURL ?? ""], url: CreateAuthCode_URL, parameters: ["deviceToken":registrationID], showLoading: true, call: { (baseModel, error) in
             if let authCode  = baseModel?.data , ((baseModel?.data as? String) != nil){
-                self.closure!(true,authCode as! String)
+                
                 if SCCacheTool.shareInstance().characterModel.characterInfo.isBindPwd != true{
                     HHTool.getCurrentVC().sc_hrShowAlert(withTitle: "验证成功！", message: "您也可以选择开启免密功能，在下次使用马甲券时便无需再次上传安全码，让使用更加方便快捷，是否开通免密功能？", buttonsTitles: ["暂不需要","立即开通"], andHandler: { (_, index) in
                         if index == 1{
@@ -67,9 +67,11 @@ class UploadPhotePasswordView: UIView {
                                 }
                             })
                         }
+                        self.closure!(true,authCode as! String)
                     })
                 }else{
                     SCCacheTool.shareInstance().setCacheValue(authCode as! String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
+                    self.closure!(true,authCode as! String)
                 }
                 
             }

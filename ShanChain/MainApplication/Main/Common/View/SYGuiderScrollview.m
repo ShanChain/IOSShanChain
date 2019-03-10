@@ -49,7 +49,7 @@
     UIView *view1 = [[UIView alloc] init];
     [self addSubview:view1];
     NSString  *imageNamed;
-    if (IS_IPHONE_X) {
+    if (IS_IPHONE_X || IS_IPHONE_Xr || IS_IPHONE_Xs || IS_IPHONE_Xs_Max) {
         imageNamed = @"iPhone X_2";
     }else{
         imageNamed = @"guide_icon_1";
@@ -93,7 +93,7 @@
     [self addSubview:view2];
     
     NSString  *imageNamed1;
-    if (IS_IPHONE_X) {
+    if (IS_IPHONE_X || IS_IPHONE_Xr || IS_IPHONE_Xs || IS_IPHONE_Xs_Max) {
         imageNamed1 = @"iPhone X_3";
     }else{
         imageNamed1 = @"guide_icon_2";
@@ -133,7 +133,7 @@
     [self addSubview:view3];
     
     NSString  *imageNamed2;
-    if (IS_IPHONE_X) {
+    if (IS_IPHONE_X || IS_IPHONE_Xr || IS_IPHONE_Xs || IS_IPHONE_Xs_Max) {
         imageNamed2 = @"iPhone X_4";
     }else{
         imageNamed2 = @"guide_icon_3";

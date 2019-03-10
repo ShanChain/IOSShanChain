@@ -284,9 +284,22 @@ class JCChatViewController: SCBaseVC {
             return
         }
         var msgs: [JCMessage] = []
+        var isInsert:Bool = false
         for index in 0..<messages.count {
             let message = messages[index]
             let msg = _parseMessage(message)
+            isInsert = true
+            // 修复消息重复加载的bug
+            if self.messages.contains(where: { (m) -> Bool in
+                return m.msgId == msg.msgId
+            }) {
+                isInsert = false
+                if index == messages.count - 1{
+                    return
+                }
+                continue
+            }
+            
             msgs.insert(msg, at: 0)
             if isNeedInsertTimeLine(message.timestamp.intValue) || index == messages.count - 1 {
                 let timeContent = JCMessageTimeLineContent(date: Date(timeIntervalSince1970: TimeInterval(message.timestamp.intValue / 1000)))
@@ -295,6 +308,11 @@ class JCChatViewController: SCBaseVC {
                 msgs.insert(m, at: 0)
             }
         }
+        
+        if isInsert == false{
+            return
+        }
+        
         if page != 0 {
             minIndex = minIndex + msgs.count
             chatView.insert(contentsOf: msgs, at: 0)
