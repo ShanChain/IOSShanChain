@@ -70,12 +70,25 @@ class AppointmentCreateCardViewController: UITableViewController {
         
     }
     
-    @IBAction func createAction(_ sender: UIButton) {
+    func _CreateCoupons(){
         SCNetwork.shareInstance().v1_post(withUrl: CreateCoupons_URL, params:getParameter(), showLoading: true) { (baseModel, error) in
             if error == nil{
                 HHTool.showSucess("创建成功")
                 self.navigationController?.popViewController(animated: true)
             }
+        }
+    }
+    @IBAction func createAction(_ sender: UIButton) {
+        let isPut:Bool = (UserDefaults.standard.object(forKey: FirstCreateCoupons) != nil)
+        if isPut == false{
+            self.sc_hrShowAlert(withTitle: nil, message: PUBLISH_TITLE, buttonsTitles: ["拒绝","我同意"]) { (_, idx) in
+                if idx == 1{
+                    UserDefaults.standard.set(true, forKey: FirstCreateCoupons)
+                    self._CreateCoupons()
+                }
+            }
+        }else{
+            self._CreateCoupons()
         }
     }
     

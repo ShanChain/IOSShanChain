@@ -28,10 +28,26 @@
                                                                handler(action, [alertController.actions indexOfObject:action]);
                                                            }
                                                        }];
-        if ([action.title isEqualToString:@"立即更新"] || [action.title isEqualToString:@"马上保存"] || [action.title isEqualToString:@"确认"] || [action.title isEqualToString:@"立即开通"] || [action.title isEqualToString:@"我知道了"] || [action.title isEqualToString:@"去开通"] || [action.title isEqualToString:@"去实名"]) {
+        if ([action.title isEqualToString:@"立即更新"] || [action.title isEqualToString:@"马上保存"] || [action.title isEqualToString:@"确认"] || [action.title isEqualToString:@"立即开通"] || [action.title isEqualToString:@"我知道了"] || [action.title isEqualToString:@"去开通"] || [action.title isEqualToString:@"去实名"] || [action.title isEqualToString:@"去开通"] || [action.title isEqualToString:@"我同意"]) {
             [action setValue:Theme_MainThemeColor forKey:@"titleTextColor"];
         }
         [alertController addAction:action];
+//        UIView *subView1 = alertController.view.subviews[0];
+//        UIView *subView2 = subView1.subviews[0];
+//        UIView *subView3 = subView2.subviews[0];
+//        UIView *subView4 = subView3.subviews[0];
+//        UIView *subView5 = subView4.subviews[0];
+//        UILabel *messageLab = subView5.subviews[1];
+        UIView *v = alertController.view.subviews[0];
+        while (v.subviews.count > 0) {
+            v = v.subviews[0];
+            if (v.subviews.count > 1 && [v.subviews[0] isKindOfClass:[UILabel class]]) {
+                ((UILabel*)v.subviews[1]).textAlignment = NSTextAlignmentLeft;
+                break;
+                
+            }
+            
+        }
     }
     return alertController;
 }

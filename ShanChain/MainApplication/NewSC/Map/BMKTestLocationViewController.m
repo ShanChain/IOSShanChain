@@ -77,6 +77,7 @@
 
 - (void)sc_ConfigurationUI{
     
+    self.title = @"元社区";
    // [self.joinBtn _setCornerRadiusCircle];
     [self.noteBtn _setCornerRadiusCircle];
     [self.footprintBtn _setCornerRadiusCircle];
@@ -252,7 +253,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.mapView viewWillAppear];
-    self.navigationController.navigationBarHidden = YES;
+  //  self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)sc_addOverlayWithCoordnates{

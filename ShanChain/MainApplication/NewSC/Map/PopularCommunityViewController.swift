@@ -25,13 +25,19 @@ class PopularCommunityViewController: SCBaseVC {
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
         tableView.showsVerticalScrollIndicator = false
         tableView.register(UINib.init(nibName: k_cellID, bundle: nil), forCellReuseIdentifier: k_cellID)
-
         _requstData(false) {}
+        self.addRightBarButtonItem(withTarget: self, sel: #selector(_earthAction), image: UIImage.loadDefaultImage("sc_Earth"), selectedImage: UIImage.loadDefaultImage("sc_Earth"))
+    }
+    
+    func _earthAction(){
+        let vc = BMKTestLocationViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
     
     @objc fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
         

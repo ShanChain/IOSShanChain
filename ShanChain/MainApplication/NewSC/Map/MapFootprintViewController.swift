@@ -43,13 +43,11 @@ class MapFootprintViewController: SCBaseVC {
         case .collection:
             title = "收藏夹"
         }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension MapFootprintViewController:UITableViewDelegate,UITableViewDataSource{

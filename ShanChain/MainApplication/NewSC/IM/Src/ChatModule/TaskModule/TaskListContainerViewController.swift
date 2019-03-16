@@ -97,14 +97,7 @@ class TaskListContainerViewController: SCBaseVC {
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_publish), title: NSLocalizedString("sc_post", comment: "字符串"), tintColor: .black)
     }
     
-    func _publish() {
-        
-        for view in self.view.subviews{
-            if view.tag == 6666{
-                return
-            }
-        }
-        
+    func _publishTask(){
         // 发布任务
         UIView .animate(withDuration: 0.2) {
             
@@ -131,11 +124,34 @@ class TaskListContainerViewController: SCBaseVC {
                         HHTool .showError(NSLocalizedString("sc_helpFailed", comment: "字符串"))
                         return
                     }
-                     HHTool .showSucess(NSLocalizedString("sc_helpAccomplished", comment: "字符串"))
+                    HHTool .showSucess(NSLocalizedString("sc_helpAccomplished", comment: "字符串"))
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
+                    
                 })
             }
             self.view.addSubview(pubTaskView!)
+        }
+    }
+    
+    
+    func _publish() {
+        
+        for view in self.view.subviews{
+            if view.tag == 6666{
+                return
+            }
+        }
+        
+        let isPut:Bool = (UserDefaults.standard.object(forKey: FirstReleaseTask) != nil)
+        if isPut == false{
+            self.sc_hrShowAlert(withTitle: nil, message: PUBLISH_TITLE, buttonsTitles: ["拒绝","我同意"]) { (_, idx) in
+                if idx == 1{
+                    UserDefaults.standard.set(true, forKey: FirstReleaseTask)
+                    self._publishTask()
+                }
+            }
+        }else{
+            self._publishTask()
         }
     }
     

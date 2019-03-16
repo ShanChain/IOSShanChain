@@ -80,9 +80,7 @@ class CommunityHelpViewController: SCBaseVC {
     }
     
     
-    // 寻求帮助
-    @IBAction func seekHelpAction(_ sender: UIButton) {
-        
+    func _PublishTask(){
         // 发布任务
         UIView .animate(withDuration: 0.2) {
             
@@ -109,10 +107,27 @@ class CommunityHelpViewController: SCBaseVC {
                     self?.tableView.mj_header.beginRefreshing()
                     HHTool .showSucess(NSLocalizedString("sc_helpAccomplished", comment: "字符串"))
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
+                    
                 })
             }
             self.view.addSubview(pubTaskView!)
         }
+    }
+    
+    // 寻求帮助
+    @IBAction func seekHelpAction(_ sender: UIButton) {
+        let isPut:Bool = (UserDefaults.standard.object(forKey: FirstReleaseTask) != nil)
+        if isPut == false{
+            self.sc_hrShowAlert(withTitle: nil, message: PUBLISH_TITLE, buttonsTitles: ["拒绝","我同意"]) { (_, idx) in
+                if idx == 1{
+                    UserDefaults.standard.set(true, forKey: FirstReleaseTask)
+                    self._PublishTask()
+                }
+            }
+        }else{
+            self._PublishTask()
+        }
+
     }
     
     func _myHelp(){

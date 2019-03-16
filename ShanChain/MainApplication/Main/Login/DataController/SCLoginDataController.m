@@ -51,7 +51,8 @@
                     if (!error) {
                         // 登录成功
                         UIViewController *rootVc = nil;
-                        BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+//                        BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+                        PopularCommunityViewController *locationVC = [[PopularCommunityViewController alloc]init];
                         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
                         //                    SCTabbarController *tabbarC=[[SCTabbarController alloc]init];
                         [HHTool mainWindow].rootViewController=rootVc;

@@ -43,8 +43,12 @@ class AccountSecurityViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "账号与安全"
-        _requestBindData()
+        
         showNavigationBarWhiteColor()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        _requestBindData()
     }
     
     func _bind(_ model:BindInfoModel){

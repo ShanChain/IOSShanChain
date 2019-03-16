@@ -250,11 +250,10 @@
 
     BOOL facebook = facebook = [JSHAREService isFacebookInstalled];
     
-
-    
     if (facebook) {
-         [self.socialView addSubview:self.weibBtn];
+        [self.socialView addSubview:self.weibBtn];
     }
+    
     
     if (qq || weixin || facebook) {
         [self.scrollView addSubview:self.socialBtn];

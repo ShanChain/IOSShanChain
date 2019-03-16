@@ -72,6 +72,7 @@
 #import "DUX_UploadUserIcon.h"
 #import "SavePhotoToAssignpath.h" 
 #import "MJExtension.h"
+#import "BMKTestLocationViewController.h" // 地图
 
 
 

@@ -53,13 +53,15 @@
         if ([[NSUserDefaults standardUserDefaults]objectForKey:kJCCurrentUserName]) {
           
         }
+            PopularCommunityViewController *locationVC = [[PopularCommunityViewController alloc]init];
 #ifdef DEBUG
    // AppointmentListViewController *locationVC = [[AppointmentListViewController alloc]init];
    // MyWalletViewController * locationVC = [[MyWalletViewController alloc]init];
-     BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+//     BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+
        // SCSettingViewController *locationVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
 #else
-    BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
+//    BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
 #endif
         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
     

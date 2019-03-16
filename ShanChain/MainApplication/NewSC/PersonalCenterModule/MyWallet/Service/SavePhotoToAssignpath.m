@@ -115,14 +115,15 @@
               
                 localIdentifier = placeHolder.localIdentifier;
             } completionHandler:^(BOOL success, NSError *error) {
-                if (success && localIdentifier) {
-                    //成功后取相册中的图片对象
-                    PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:@[localIdentifier] options:nil];
-                    PHAsset* asset = [result firstObject];
-                    completion(success,asset);
-                }else{
-                    completion(success,nil);
-                }
+                completion(success,nil);
+//                if (success) {
+//                    //成功后取相册中的图片对象
+//                    PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:@[localIdentifier] options:nil];
+//                    PHAsset* asset = [result firstObject];
+//                    completion(success,asset);
+//                }else{
+//                    completion(success,nil);
+//                }
             }];
         }
     }];
