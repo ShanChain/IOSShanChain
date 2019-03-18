@@ -95,7 +95,6 @@ open class JCMessageVoiceContentView: UIView, JCMessageContentViewType {
         if let player = JCAudioPlayerHelper.sharedInstance.player {
             if player.isPlaying {
                 JCAudioPlayerHelper.sharedInstance.stopAudio()
-                return
             }
         }
         JCAudioPlayerHelper.sharedInstance.delegate = self

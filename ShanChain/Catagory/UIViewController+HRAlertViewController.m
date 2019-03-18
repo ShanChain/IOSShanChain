@@ -44,10 +44,12 @@
             if (v.subviews.count > 1) {
                 if ([v.subviews[0] isKindOfClass:[UILabel class]]) {
                     ((UILabel*)v.subviews[0]).textAlignment = NSTextAlignmentLeft;
+                    ((UILabel*)v.subviews[0]).numberOfLines = 0;
                     break;
                 }
                 if ([v.subviews[1] isKindOfClass:[UILabel class]]) {
                     ((UILabel*)v.subviews[1]).textAlignment = NSTextAlignmentLeft;
+                    ((UILabel*)v.subviews[1]).numberOfLines = 0;
                     break;
                 }
             }

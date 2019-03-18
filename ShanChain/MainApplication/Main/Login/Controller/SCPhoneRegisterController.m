@@ -352,13 +352,17 @@
                 [params setObject:encryptAccount1 forKey:@"encryptPassword"];
                 
                 [HHTool showChrysanthemum];
+                self.sureBtn.userInteractionEnabled = NO;
                 [[SCNetwork shareInstance]postWithUrl:COMMONUSERREGISTER parameters:params success:^(id responseObject) {
                     [HHTool dismiss];
+                    self.sureBtn.userInteractionEnabled = YES;
                     [SYProgressHUD showSuccess:@"注册成功"];
                     
                     
                     [self.navigationController popViewControllerAnimated:YES];
-                } failure:nil];
+                } failure:^(NSError *error) {
+                    self.sureBtn.userInteractionEnabled = YES;
+                }];
             } else {
                 [SYProgressHUD showError:NSLocalizedString(@"sc_login_Pleasere-enterit", nil)];
                 [self.pwdSureField becomeFirstResponder];
