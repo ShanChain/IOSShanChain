@@ -40,7 +40,7 @@ class HelpCenterCell: UITableViewCell {
         
         set{
             _listModel = newValue
-            self.rewardLb.text = "￥ \(_listModel?.bounty ?? "")"
+            self.rewardLb.text = " \(_listModel?.bounty ?? "") SEAT"
             self.contentLb.text = _listModel?.intro
             self.icon._sd_setImage(withURLString: _listModel?.headImg, placeholderImage: SC_defaultImage)
             self.nameLb.text = _listModel?.name ?? ""

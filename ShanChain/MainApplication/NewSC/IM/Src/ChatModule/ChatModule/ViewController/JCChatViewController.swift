@@ -863,7 +863,7 @@ extension JCChatViewController: JCMessageDelegate {
         vc.lon = lon
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+    // 放大图片
     func message(message: JCMessageType, image: UIImage?) {
         let browserImageVC = JCImageBrowserViewController()
         browserImageVC.messages = messages

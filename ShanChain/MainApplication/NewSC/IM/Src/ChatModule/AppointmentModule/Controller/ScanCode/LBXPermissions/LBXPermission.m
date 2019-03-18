@@ -13,7 +13,6 @@
 #import "LBXPermissionPhotos.h"
 #import "LBXPermissionContacts.h"
 #import "LBXPermissionLocation.h"
-#import "LBXPermissionHealth.h"
 #import "LBXPermissionCalendar.h"
 #import "LBXPermissionReminders.h"
 #import "LBXPermissionMicrophone.h"
@@ -35,7 +34,7 @@
 {
     if (type == LBXPermissionType_Health) {
         
-        return  [LBXPermissionHealth isHealthDataAvailable];
+        return  YES;
     }
     
     return YES;
@@ -66,7 +65,7 @@
             return [LBXPermissionMicrophone authorized];
             break;
         case LBXPermissionType_Health:
-            return [LBXPermissionHealth authorized];
+            return YES;
             break;
         case LBXPermissionType_Network:
             return [LBXPermissionNetwork authorized];
@@ -100,9 +99,6 @@
             break;
         case LBXPermissionType_Microphone:
             return [LBXPermissionMicrophone authorizeWithCompletion:completion];
-            break;
-        case LBXPermissionType_Health:
-            return [LBXPermissionHealth authorizeWithCompletion:completion];
             break;
         case LBXPermissionType_Network:
             return [LBXPermissionNetwork authorizeWithCompletion:completion];

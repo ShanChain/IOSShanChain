@@ -81,6 +81,7 @@ public class JCMessageImageCollectionViewCell: UICollectionViewCell {
         content.thumbImageData { (data, msgId, error) in
             if msgId == message.msgId {
                 if let data = data {
+                    self.messageImage.layer.magnificationFilter = "nearest"
                     self.messageImage.image = UIImage(data: data)
                 }
             }

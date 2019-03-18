@@ -183,6 +183,10 @@ class JGUserLoginService: NSObject {
                 
                 return
             }
+            if createConversationError?.code == 863004{
+                SCAppManager.shareInstance().logout()
+                return
+            }
             HHTool.showError(createConversationError?.localizedDescription)
         })
         

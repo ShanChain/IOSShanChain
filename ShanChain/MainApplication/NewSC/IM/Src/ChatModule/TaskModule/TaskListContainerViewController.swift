@@ -144,7 +144,7 @@ class TaskListContainerViewController: SCBaseVC {
         
         let isPut:Bool = (UserDefaults.standard.object(forKey: FirstReleaseTask) != nil)
         if isPut == false{
-            self.sc_hrShowAlert(withTitle: nil, message: PUBLISH_TITLE, buttonsTitles: ["拒绝","我同意"]) { (_, idx) in
+            self.sc_hrShowAlert(withTitle: PUBLISH_TIPNAME, message: PUBLISH_TITLE, buttonsTitles: ["拒绝","我同意"]) { (_, idx) in
                 if idx == 1{
                     UserDefaults.standard.set(true, forKey: FirstReleaseTask)
                     self._publishTask()

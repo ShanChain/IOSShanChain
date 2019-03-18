@@ -41,11 +41,17 @@
         UIView *v = alertController.view.subviews[0];
         while (v.subviews.count > 0) {
             v = v.subviews[0];
-            if (v.subviews.count > 1 && [v.subviews[0] isKindOfClass:[UILabel class]]) {
-                ((UILabel*)v.subviews[1]).textAlignment = NSTextAlignmentLeft;
-                break;
-                
+            if (v.subviews.count > 1) {
+                if ([v.subviews[0] isKindOfClass:[UILabel class]]) {
+                    ((UILabel*)v.subviews[0]).textAlignment = NSTextAlignmentLeft;
+                    break;
+                }
+                if ([v.subviews[1] isKindOfClass:[UILabel class]]) {
+                    ((UILabel*)v.subviews[1]).textAlignment = NSTextAlignmentLeft;
+                    break;
+                }
             }
+            
             
         }
     }

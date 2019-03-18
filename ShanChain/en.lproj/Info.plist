@@ -80,7 +80,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1400</string>
+	<string>1403</string>
 	<key>FacebookAppID</key>
 	<string>351737942088473</string>
 	<key>FacebookDisplayName</key>
@@ -226,10 +226,6 @@
 	<string>马甲App会使用拍照、扫描二维码功能，是否允许打开摄像头？</string>
 	<key>NSContactsUsageDescription</key>
 	<string>马甲App可能会读取好友列表，是否允许访问通讯录？</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>马甲App需要健康数据，为提供给您更好的服务</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>马甲App需要您的同意,才能访问您的健康数据</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>马甲App可以根据定位提供精准生活服务，是否允许App使用定位？</string>
 	<key>NSLocationAlwaysUsageDescription</key>

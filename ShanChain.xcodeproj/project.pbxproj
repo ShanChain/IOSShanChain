@@ -33,7 +33,6 @@
 		221B3BF321C74F3F0061BB3E /* LBXPermissionNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BDD21C74F3F0061BB3E /* LBXPermissionNetwork.m */; };
 		221B3BF421C74F3F0061BB3E /* LBXPermissionCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BDE21C74F3F0061BB3E /* LBXPermissionCalendar.m */; };
 		221B3BF521C74F3F0061BB3E /* LBXPermissionReminders.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BE321C74F3F0061BB3E /* LBXPermissionReminders.m */; };
-		221B3BF621C74F3F0061BB3E /* LBXPermissionHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BE421C74F3F0061BB3E /* LBXPermissionHealth.m */; };
 		221B3BF721C74F3F0061BB3E /* LBXPermissionSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BE521C74F3F0061BB3E /* LBXPermissionSetting.m */; };
 		221B3BF821C74F3F0061BB3E /* LBXPermissionPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BE621C74F3F0061BB3E /* LBXPermissionPhotos.m */; };
 		221B3BF921C74F3F0061BB3E /* LBXPermissionLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 221B3BEA21C74F3F0061BB3E /* LBXPermissionLocation.m */; };
@@ -729,7 +728,6 @@
 		221B3BE121C74F3F0061BB3E /* LBXPermissionCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXPermissionCamera.h; sourceTree = "<group>"; };
 		221B3BE221C74F3F0061BB3E /* LBXPermissionContacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXPermissionContacts.h; sourceTree = "<group>"; };
 		221B3BE321C74F3F0061BB3E /* LBXPermissionReminders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBXPermissionReminders.m; sourceTree = "<group>"; };
-		221B3BE421C74F3F0061BB3E /* LBXPermissionHealth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBXPermissionHealth.m; sourceTree = "<group>"; };
 		221B3BE521C74F3F0061BB3E /* LBXPermissionSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBXPermissionSetting.m; sourceTree = "<group>"; };
 		221B3BE621C74F3F0061BB3E /* LBXPermissionPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBXPermissionPhotos.m; sourceTree = "<group>"; };
 		221B3BE721C74F3F0061BB3E /* LBXPermissionCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXPermissionCalendar.h; sourceTree = "<group>"; };
@@ -741,7 +739,6 @@
 		221B3BED21C74F3F0061BB3E /* LBXPermission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBXPermission.m; sourceTree = "<group>"; };
 		221B3BEE21C74F3F0061BB3E /* LBXPermissionPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXPermissionPhotos.h; sourceTree = "<group>"; };
 		221B3BEF21C74F3F0061BB3E /* LBXPermissionSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXPermissionSetting.h; sourceTree = "<group>"; };
-		221B3BF021C74F3F0061BB3E /* LBXPermissionHealth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXPermissionHealth.h; sourceTree = "<group>"; };
 		221B3BF121C74F3F0061BB3E /* LBXPermissionReminders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXPermissionReminders.h; sourceTree = "<group>"; };
 		221B3BFD21C775290061BB3E /* Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
 		221B3BFE21C7752A0061BB3E /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
@@ -1768,7 +1765,6 @@
 				221B3BE121C74F3F0061BB3E /* LBXPermissionCamera.h */,
 				221B3BE221C74F3F0061BB3E /* LBXPermissionContacts.h */,
 				221B3BE321C74F3F0061BB3E /* LBXPermissionReminders.m */,
-				221B3BE421C74F3F0061BB3E /* LBXPermissionHealth.m */,
 				221B3BE521C74F3F0061BB3E /* LBXPermissionSetting.m */,
 				221B3BE621C74F3F0061BB3E /* LBXPermissionPhotos.m */,
 				221B3BE721C74F3F0061BB3E /* LBXPermissionCalendar.h */,
@@ -1780,7 +1776,6 @@
 				221B3BED21C74F3F0061BB3E /* LBXPermission.m */,
 				221B3BEE21C74F3F0061BB3E /* LBXPermissionPhotos.h */,
 				221B3BEF21C74F3F0061BB3E /* LBXPermissionSetting.h */,
-				221B3BF021C74F3F0061BB3E /* LBXPermissionHealth.h */,
 				221B3BF121C74F3F0061BB3E /* LBXPermissionReminders.h */,
 			);
 			path = LBXPermissions;
@@ -4792,7 +4787,6 @@
 				4809ECA91FE28230009FFF4A /* SCDatePicker.m in Sources */,
 				892B3A041FE9126A00292A75 /* SCAliyunPlayerVodView.m in Sources */,
 				22E1A1202200664A004CCE9D /* RealNameDetailsViewController.swift in Sources */,
-				221B3BF621C74F3F0061BB3E /* LBXPermissionHealth.m in Sources */,
 				225052BE218BF67E001FBD65 /* TaskListViewController.swift in Sources */,
 				223F998D217F12040031DB95 /* JCMessageVoiceContent.swift in Sources */,
 				2227011821C883BD00FCD269 /* CouponsEntityModel.swift in Sources */,
