@@ -536,8 +536,15 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
         self.hrShowAlert(withTitle: nil, message: NSLocalizedString("sc_LeaveCommunity", comment: "字符串"), buttonsTitles: [NSLocalizedString("sc_confirm", comment: "字符串"),NSLocalizedString("sc_cancel", comment: "字符串")]) { (action, index) in
             if index == 0{
-                JMSGChatRoom.leaveChatRoom(withRoomId: self.currentChatRoomID!, completionHandler: nil)
-                self.navigationController?.popViewController(animated: true)
+                if let player = JCAudioPlayerHelper.sharedInstance.player {
+                    if player.isPlaying {
+                        JCAudioPlayerHelper.sharedInstance.stopAudio()
+                    }
+                }
+                JMSGChatRoom.leaveChatRoom(withRoomId: self.currentChatRoomID!, completionHandler: { (_, _) in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                
             }
         }
         
@@ -856,7 +863,19 @@ extension HHChatRoomViewController: JMessageDelegate {
 //    }
     // 处理接收到的消息 
     func _handleMessage(message:JMSGMessage){
-        let message =  _parseMessage(message)
+        DispatchQueue.global(qos: .default).async {
+            let message =  self._parseMessage(message)
+            DispatchQueue.main.async {
+                self.messages.append(message)
+                self.chatView.append(message)
+                self.updateUnread([message])
+                self.conversation.clearUnreadCount()
+                if !self.chatView.isRoll {
+                    self.chatView.scrollToLast(animated: true)
+                }
+            }
+        }
+        
         // TODO: 这个判断是sdk bug导致的，暂时只能这么改
         //        if self.messages.contains(where: { (m) -> Bool in
         //            return m.msgId == message.msgId
@@ -878,13 +897,7 @@ extension HHChatRoomViewController: JMessageDelegate {
         //            return
         //        }
         
-        self.messages.append(message)
-        chatView.append(message)
-        updateUnread([message])
-        conversation.clearUnreadCount()
-        if !chatView.isRoll {
-            chatView.scrollToLast(animated: true)
-        }
+     
     }
     
     // 发送消息成功的回调

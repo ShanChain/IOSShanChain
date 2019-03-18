@@ -18,7 +18,7 @@ open class JCMessageVoiceContent: NSObject, JCMessageContentType {
     open var data: Data?
     open var duration: TimeInterval = 9999
     open var attributedText: NSAttributedString?
-    
+    open var jm_voiceContent:JMSGVoiceContent?
     open func sizeThatFits(_ size: CGSize) -> CGSize {
         // +---------------+
         // | |||  99'59''  |

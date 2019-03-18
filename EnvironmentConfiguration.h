@@ -11,8 +11,8 @@
 
 
 #define Prtocol @"http://"
-#define SC_APP_CHANNEL     @"appStore"
-//#define SC_APP_CHANNEL     @"pgyer"
+//#define SC_APP_CHANNEL     @"appStore"
+#define SC_APP_CHANNEL     @"pgyer"
 
 
 

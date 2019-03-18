@@ -95,6 +95,7 @@ extension JMSGMessage {
             let voiceContent = JCMessageVoiceContent()
             voiceContent.duration = TimeInterval(content.duration.intValue)
             voiceContent.delegate = delegate
+            voiceContent.jm_voiceContent = content
             msg = JCMessage(content: voiceContent)
             content.voiceData({ (data, id, error) in
                 if let data = data {

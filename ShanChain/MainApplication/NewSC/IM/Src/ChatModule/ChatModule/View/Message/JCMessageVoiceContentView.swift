@@ -35,6 +35,7 @@ open class JCMessageVoiceContentView: UIView, JCMessageContentViewType {
         _updateViewLayouts(message.options)
         _data = content.data
         _titleLabel.attributedText = content.attributedText
+        _jm_voiceContent = content.jm_voiceContent
     }
     
     private func _updateViewLayouts(_ options: JCMessageOptions) {
@@ -99,8 +100,19 @@ open class JCMessageVoiceContentView: UIView, JCMessageContentViewType {
         }
         JCAudioPlayerHelper.sharedInstance.delegate = self
         let content:JCMessageVoiceContent = _message.content as! JCMessageVoiceContent
-        JCAudioPlayerHelper.sharedInstance.managerAudioWithData(content.data!, toplay: true)
-        _animationView.startAnimating()
+        if content.data == nil {
+            _jm_voiceContent?.voiceData({ (data, id, error) in
+                if let data = data {
+                content.data = data
+                JCAudioPlayerHelper.sharedInstance.managerAudioWithData(data, toplay: true)
+                    self._animationView.startAnimating()
+                }
+            })
+        }else{
+            JCAudioPlayerHelper.sharedInstance.managerAudioWithData(content.data!, toplay: true)
+            _animationView.startAnimating()
+        }
+       
     }
 
     private var _duration: Double = 0.0
@@ -110,6 +122,7 @@ open class JCMessageVoiceContentView: UIView, JCMessageContentViewType {
     private lazy var _titleLabel: UILabel = UILabel()
     private var _data: Data?
     private var _alignment: JCMessageAlignment = .center
+    private var _jm_voiceContent:JMSGVoiceContent?
 }
 
 extension JCMessageVoiceContentView: JCAudioPlayerHelperDelegate {
