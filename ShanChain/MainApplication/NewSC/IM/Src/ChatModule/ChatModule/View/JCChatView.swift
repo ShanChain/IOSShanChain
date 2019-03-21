@@ -115,6 +115,7 @@ var isWait = false
     
     func append(_ newMessage: JCMessageType) {
         insert(newMessage, at: _chatViewData.count)
+        
     }
     func append(contentsOf newMessages: Array<JCMessageType>) {
         insert(contentsOf: newMessages, at: _chatViewData.count)
@@ -315,7 +316,6 @@ extension JCChatView: UICollectionViewDataSource, JCChatViewLayoutDelegate {
 //        let options = (message.options.showsCard.hashValue << 0) | (message.options.showsAvatar.hashValue << 1)
         let alignment = message.options.alignment.rawValue
         let identifier = NSStringFromClass(type(of: message.content)) + ".\(alignment)"
-        
         if !_chatContainerRegistedTypes.contains(identifier) {
             _chatContainerRegistedTypes.insert(identifier)
             _chatContainerView.register(JCChatViewCell.self, forCellWithReuseIdentifier: identifier)

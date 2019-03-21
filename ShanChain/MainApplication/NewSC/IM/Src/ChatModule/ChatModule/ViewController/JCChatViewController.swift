@@ -652,6 +652,12 @@ extension JCChatViewController: JMessageDelegate {
             return m1.timestamp.intValue < m2.timestamp.intValue
         })
         for item in msgs {
+            
+            if item.targetType != .single {
+                print("处理单聊消息出现在聊天室里")
+                return
+            }
+
             let message = _parseMessage(item)//先解析成JCMessage
             messages.append(message)
             chatView.append(message)

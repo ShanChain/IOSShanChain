@@ -357,6 +357,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     private func _init() {
         
+
+        
         myAvator = UIImage.getMyAvator()
         //  _updateTitle()
         view.backgroundColor = .white
@@ -536,6 +538,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
         self.hrShowAlert(withTitle: nil, message: NSLocalizedString("sc_LeaveCommunity", comment: "字符串"), buttonsTitles: [NSLocalizedString("sc_confirm", comment: "字符串"),NSLocalizedString("sc_cancel", comment: "字符串")]) { (action, index) in
             if index == 0{
+                
                 if let player = JCAudioPlayerHelper.sharedInstance.player {
                     if player.isPlaying {
                         JCAudioPlayerHelper.sharedInstance.stopAudio()
@@ -848,6 +851,7 @@ extension HHChatRoomViewController: JMessageDelegate {
     func onReceiveChatRoomConversation(_ conversation: JMSGConversation!, messages: [JMSGMessage]!) {
         
         for message in messages{
+
             _handleMessage(message: message)
             
         }
@@ -863,17 +867,30 @@ extension HHChatRoomViewController: JMessageDelegate {
 //    }
     // 处理接收到的消息 
     func _handleMessage(message:JMSGMessage){
-        DispatchQueue.global(qos: .default).async {
-            let message =  self._parseMessage(message)
-            DispatchQueue.main.async {
-                self.messages.append(message)
-                self.chatView.append(message)
-                self.updateUnread([message])
-                self.conversation.clearUnreadCount()
-                if !self.chatView.isRoll {
-                    self.chatView.scrollToLast(animated: true)
-                }
-            }
+        
+        
+//        DispatchQueue.global(qos: .default).async {
+//            let message =  self._parseMessage(message)
+//            DispatchQueue.main.async {
+//                self.messages.append(message)
+//                self.chatView.append(message)
+//                self.updateUnread([message])
+//                self.conversation.clearUnreadCount()
+//                if !self.chatView.isRoll {
+//                    self.chatView.scrollToLast(animated: true)
+//                }
+//            }
+//        }
+        
+        //修改聊天室历史消息排序问题,之前用了异步导致排序问题 -R
+        let message =  self._parseMessage(message)
+        
+        self.messages.append(message)
+        self.chatView.append(message)
+        self.updateUnread([message])
+        self.conversation.clearUnreadCount()
+        if !self.chatView.isRoll {
+            self.chatView.scrollToLast(animated: true)
         }
         
         // TODO: 这个判断是sdk bug导致的，暂时只能这么改
@@ -932,6 +949,12 @@ extension HHChatRoomViewController: JMessageDelegate {
             return m1.timestamp.intValue < m2.timestamp.intValue
         })
         for item in msgs {
+            
+            if item.targetType != .chatRoom {
+                print("处理单聊消息出现在聊天室里")
+                return
+            }
+
             let message = _parseMessage(item)//先解析成JCMessage
             messages.append(message)
             chatView.append(message)

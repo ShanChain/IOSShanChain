@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyQRCodeViewController: UIViewController {
+class MyQRCodeViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +88,7 @@ class MyQRCodeViewController: UIViewController {
     
     private func _bindData() {
         let user = JMSGUser.myInfo()
-        let nickname = user.nickname
+        let nickname = user.nickname ?? ""
         let appkey = user.appKey
         
         user.thumbAvatarData { (data, id, error) in
