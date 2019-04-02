@@ -45,6 +45,8 @@
 
 - (void)HH_uploadFileWithArr:(NSArray*)imgArr url:(NSString *)url parameters:(id)parameters showLoading:(BOOL)show callBlock:(void(^)(HHBaseModel *baseModel,NSError *error))callBlock;
 
+/// 转账 -R
+- (void)transferWithUrl:(NSString *)url data:(NSDictionary *)dic block:(void (^)(id objc,BOOL success))block;
 @end
 
 

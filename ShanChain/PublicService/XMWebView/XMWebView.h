@@ -92,4 +92,10 @@ typedef enum {
 - (void)loadHTMLString:(NSString *)HTMLString;
 
 
+#pragma - mark      ---------- 与JS的交互 ----------
+// handlerName:和js沟通好的统一的方法名    finishBlock:成功后调用这个block
+- (void)ocAndJSInteractionWithRegisterHandlerName:(NSString *)handlerName
+                                      finishBlock:(void(^)(NSDictionary *dataDic))finishBlock;
+- (void)JSAndOCSInteractionWithRegisterHandlerName:(NSString *)handlerName data:(id)data;
+
 @end

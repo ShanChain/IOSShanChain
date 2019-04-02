@@ -16,6 +16,11 @@
 		22070692219AC0A400404459 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070691219AC0A300404459 /* TaskListModel.swift */; };
 		2207069C219AEBE700404459 /* ShowSelectTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22070699219AEBE700404459 /* ShowSelectTableView.m */; };
 		2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207069A219AEBE700404459 /* ShowSelectTableView.xib */; };
+		22104B4F224A202200EB26A2 /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B47224A202100EB26A2 /* WebViewJavascriptBridgeBase.m */; };
+		22104B50224A202200EB26A2 /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B48224A202100EB26A2 /* WKWebViewJavascriptBridge.m */; };
+		22104B51224A202200EB26A2 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B49224A202100EB26A2 /* WebViewJavascriptBridge.m */; };
+		22104B52224A202200EB26A2 /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B4C224A202100EB26A2 /* WebViewJavascriptBridge_JS.m */; };
+		22116CC62248D79E008EF672 /* SCCacheChatRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 22116CC52248D79E008EF672 /* SCCacheChatRecord.m */; };
 		2215C00021F9B37200D624C6 /* BindInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */; };
 		2215C00221FA9FC900D624C6 /* AboutMarJarViewContriller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215C00121FA9FC900D624C6 /* AboutMarJarViewContriller.swift */; };
 		2215C00621FB0AE600D624C6 /* VersionUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215C00521FB0AE600D624C6 /* VersionUpdateModel.swift */; };
@@ -699,6 +704,16 @@
 		22070699219AEBE700404459 /* ShowSelectTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowSelectTableView.m; sourceTree = "<group>"; };
 		2207069A219AEBE700404459 /* ShowSelectTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowSelectTableView.xib; sourceTree = "<group>"; };
 		2207069B219AEBE700404459 /* ShowSelectTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSelectTableView.h; sourceTree = "<group>"; };
+		22104B47224A202100EB26A2 /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
+		22104B48224A202100EB26A2 /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		22104B49224A202100EB26A2 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		22104B4A224A202100EB26A2 /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
+		22104B4B224A202100EB26A2 /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
+		22104B4C224A202100EB26A2 /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
+		22104B4D224A202100EB26A2 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		22104B4E224A202100EB26A2 /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		22116CC42248D79E008EF672 /* SCCacheChatRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCacheChatRecord.h; sourceTree = "<group>"; };
+		22116CC52248D79E008EF672 /* SCCacheChatRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCacheChatRecord.m; sourceTree = "<group>"; };
 		2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindInfoModel.swift; sourceTree = "<group>"; };
 		2215C00121FA9FC900D624C6 /* AboutMarJarViewContriller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMarJarViewContriller.swift; sourceTree = "<group>"; };
 		2215C00521FB0AE600D624C6 /* VersionUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionUpdateModel.swift; sourceTree = "<group>"; };
@@ -1701,6 +1716,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22104B46224A202100EB26A2 /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				22104B47224A202100EB26A2 /* WebViewJavascriptBridgeBase.m */,
+				22104B48224A202100EB26A2 /* WKWebViewJavascriptBridge.m */,
+				22104B49224A202100EB26A2 /* WebViewJavascriptBridge.m */,
+				22104B4A224A202100EB26A2 /* WebViewJavascriptBridge_JS.h */,
+				22104B4B224A202100EB26A2 /* WebViewJavascriptBridgeBase.h */,
+				22104B4C224A202100EB26A2 /* WebViewJavascriptBridge_JS.m */,
+				22104B4D224A202100EB26A2 /* WebViewJavascriptBridge.h */,
+				22104B4E224A202100EB26A2 /* WKWebViewJavascriptBridge.h */,
+			);
+			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
 		2215BFFE21F9B33700D624C6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -3374,6 +3404,7 @@
 		33F7254C1F0B3570006382F6 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				22104B46224A202100EB26A2 /* WebViewJavascriptBridge */,
 				33F7254D1F0B3570006382F6 /* Required */,
 			);
 			path = SDK;
@@ -3490,6 +3521,8 @@
 				4852A1511FCE9F7200CDD7BE /* fmdb */,
 				4852A15D1FCE9F7200CDD7BE /* SCCacheTool.h */,
 				4852A15E1FCE9F7200CDD7BE /* SCCacheTool.m */,
+				22116CC42248D79E008EF672 /* SCCacheChatRecord.h */,
+				22116CC52248D79E008EF672 /* SCCacheChatRecord.m */,
 			);
 			path = cache;
 			sourceTree = "<group>";
@@ -4566,6 +4599,7 @@
 				22070692219AC0A400404459 /* TaskListModel.swift in Sources */,
 				22581B4821DF5F4200F1D1B1 /* EditPersonalInfoViewController.m in Sources */,
 				332D3E471F500331001ADDB3 /* NSObject+MJProperty.m in Sources */,
+				22116CC62248D79E008EF672 /* SCCacheChatRecord.m in Sources */,
 				22D2477D21883596009C1E6A /* AppDelegate+Config.m in Sources */,
 				22538AA921D5D3A900B873F7 /* SCReportController.m in Sources */,
 				221B3BDA21C74DE60061BB3E /* UIAlertController+supportedInterfaceOrientations.m in Sources */,
@@ -4618,6 +4652,7 @@
 				485E66671F42873F00B158BF /* UIScrollView+MJRefresh.m in Sources */,
 				223F99D0217F12040031DB95 /* JCMyInfoViewController.swift in Sources */,
 				22BA100D21D31A8D0044D38B /* RedPaperModel.swift in Sources */,
+				22104B51224A202200EB26A2 /* WebViewJavascriptBridge.m in Sources */,
 				223F99E4217F12040031DB95 /* JMSGOptionalContent+.swift in Sources */,
 				2207068A219A66A600404459 /* TaskDetailsModel.swift in Sources */,
 				223F9974217F12040031DB95 /* GroupAvatorCell.swift in Sources */,
@@ -4635,6 +4670,7 @@
 				223F9A3F217F12B80031DB95 /* JCVerificationDetailViewController.swift in Sources */,
 				4852A13B1FCE9F0400CDD7BE /* SCBaseVC.m in Sources */,
 				22D247872189CA8C009C1E6A /* UIView+Extension.swift in Sources */,
+				22104B52224A202200EB26A2 /* WebViewJavascriptBridge_JS.m in Sources */,
 				332AB5F31F4ED69F00888313 /* TYTextContainer.m in Sources */,
 				223F99ED217F12040031DB95 /* Reachability.m in Sources */,
 				2271058321B76A66009FC34D /* UIButton+EnlargeTouchArea.m in Sources */,
@@ -4731,6 +4767,7 @@
 				223F99AD217F12040031DB95 /* JCUserType.swift in Sources */,
 				221B3BFB21C74F3F0061BB3E /* LBXPermissionCamera.m in Sources */,
 				485E66001F42862900B158BF /* UIViewController+HUD.m in Sources */,
+				22104B4F224A202200EB26A2 /* WebViewJavascriptBridgeBase.m in Sources */,
 				223F9A17217F12040031DB95 /* JCMainTabBarController.swift in Sources */,
 				485E66661F42873F00B158BF /* UIScrollView+MJExtension.m in Sources */,
 				223F9A12217F12040031DB95 /* JCAlertView.swift in Sources */,
@@ -4752,6 +4789,7 @@
 				223F99CE217F12040031DB95 /* JCSignatureViewController.swift in Sources */,
 				48718D2B1F42277400010AA0 /* AFHTTPSessionManager.m in Sources */,
 				485E665D1F42873F00B158BF /* MJRefreshBackGifFooter.m in Sources */,
+				22104B50224A202200EB26A2 /* WKWebViewJavascriptBridge.m in Sources */,
 				223F997A217F12040031DB95 /* ImageFileCell.swift in Sources */,
 				222D4018221A9725004DE8C6 /* UploadPhotePasswordView.swift in Sources */,
 				223F99DF217F12040031DB95 /* UIViewController+JChat.swift in Sources */,

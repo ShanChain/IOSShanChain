@@ -7,6 +7,7 @@
 //
 
 #import "XMWebView.h"
+#import "WebViewJavascriptBridge.h"
 
 #define isSystemiOS8 [[[UIDevice currentDevice] systemVersion] floatValue]>=8.0
 #define XMRGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
@@ -18,7 +19,8 @@
 @property (nonatomic, strong) NSURL *uiWebViewCurrentURL;
 @property (nonatomic, strong) NSURL *URLToLaunchWithPermission;
 @property (nonatomic, strong) UIAlertView *externalAppPermissionAlertView;
-
+/**  JS交互对象  */
+@property (nonatomic, strong) WebViewJavascriptBridge* bridge;
 @end
 
 @implementation XMWebView
@@ -41,12 +43,20 @@
         
         if(self.wkWebView) {
             [self.wkWebView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-            [self.wkWebView setNavigationDelegate:self];
+//            [self.wkWebView setNavigationDelegate:self];
             [self.wkWebView setUIDelegate:self];
             [self.wkWebView setMultipleTouchEnabled:YES];
             [self.wkWebView setAutoresizesSubviews:YES];
             [self.wkWebView.scrollView setAlwaysBounceVertical:YES];
             [self addSubview:self.wkWebView];
+            
+            [WebViewJavascriptBridge enableLogging];
+//            // 联结webView和交互类库
+            _bridge = [WebViewJavascriptBridge bridgeForWebView:self.wkWebView];
+            [_bridge setWebViewDelegate:self];
+
+           
+            
             self.wkWebView.scrollView.bounces = NO;
             self.wkWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
             // KVO，监听webView属性值得变化(estimatedProgress,title为特定的key)
@@ -272,6 +282,26 @@
     }
 }
 
+#pragma - mark      ---------- 与JS的交互 ----------
+// handlerName:和js沟通好的统一的方法名    finishBlock:成功后调用这个block
+- (void)ocAndJSInteractionWithRegisterHandlerName:(NSString *)handlerName
+                                      finishBlock:(void(^)(NSDictionary *dataDic))finishBlock {
+    
+    [_bridge registerHandler:handlerName handler:^(id data, WVJBResponseCallback responseCallback) {
+        SCLog(@"js返回的交互数据: %@", data);
+        
+        finishBlock(data);
+        
+        responseCallback(@"可以正常交互");
+    }];
+    
+}
+
+- (void)JSAndOCSInteractionWithRegisterHandlerName:(NSString *)handlerName data:(id)data {
+    //JSEcho
+    [_bridge callHandler:handlerName data:data];
+}
+
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -410,6 +440,7 @@
     //back delegate
     if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithURL:)]) {
         [self.delegate webView:self shouldStartLoadWithURL:request.URL];
+        
     }
     return YES;
 }

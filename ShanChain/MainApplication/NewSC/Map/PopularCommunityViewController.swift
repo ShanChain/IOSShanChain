@@ -27,11 +27,26 @@ class PopularCommunityViewController: SCBaseVC {
         tableView.register(UINib.init(nibName: k_cellID, bundle: nil), forCellReuseIdentifier: k_cellID)
         _requstData(false) {}
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_earthAction), image: UIImage.loadDefaultImage("sc_Earth"), selectedImage: UIImage.loadDefaultImage("sc_Earth"))
+        
+        let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
+        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
+        
+        // 抽屉
+        self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
+            if direction == CWDrawerTransitionDirection.fromLeft{
+                self._maskAnimationFromLeft()
+            }
+        }
     }
     
     func _earthAction(){
         let vc = BMKTestLocationViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func _maskAnimationFromLeft(){
+        let vc = LeftViewController()
+        self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

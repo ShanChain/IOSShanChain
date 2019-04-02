@@ -385,4 +385,13 @@
     
 }
 
++ (BOOL)checkIsChinese:(NSString *)string{
+    for (int i=0; i<string.length; i++) {
+        unichar ch = [string characterAtIndex:i];
+        if (0x4E00 <= ch  && ch <= 0x9FA5) {
+            return YES;
+        }
+    }
+    return NO;
+}
 @end

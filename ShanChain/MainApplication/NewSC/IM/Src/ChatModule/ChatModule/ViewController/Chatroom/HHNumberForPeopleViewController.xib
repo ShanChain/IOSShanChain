@@ -34,8 +34,8 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="zmY-Cg-Xne" secondAttribute="bottom" id="26p-XR-K3I"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zmY-Cg-Xne" secondAttribute="trailing" id="3Xi-jm-sFq"/>
+                <constraint firstItem="zmY-Cg-Xne" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="3s9-Zk-4VE"/>
                 <constraint firstItem="zmY-Cg-Xne" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="D9z-9m-ikv"/>
-                <constraint firstItem="zmY-Cg-Xne" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LBe-mL-nNc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

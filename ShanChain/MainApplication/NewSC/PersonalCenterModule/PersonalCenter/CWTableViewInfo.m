@@ -102,10 +102,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     CWTableViewCellInfo *cellInfo = _cellInfoArray[indexPath.row];
-    
+
     id target = cellInfo.actionTarget;
     SEL selector = cellInfo.actionSel;
-    
+
     if (cellInfo.selectionStyle) {
         if ([target respondsToSelector:selector]) {
             IMP imp = [target methodForSelector:selector];

@@ -186,14 +186,14 @@
 - (void)setupTableView {
     
     _tableViewInfo = [[CWTableViewInfo alloc] initWithFrame:CGRectMake(0, HeaderViewHeight * 0.9, kCWSCREENWIDTH * 0.75, CGRectGetHeight(self.view.bounds)-HeaderViewHeight* 0.9) style:UITableViewStylePlain];
-    
+    SEL sel = @selector(didSelectCell:indexPath:);
     for (int i = 0; i < self.titleArray.count; i++) {
         NSString *title = self.titleArray[i];
         NSString *imageName = self.imageArray[i];
-        SEL sel = @selector(didSelectCell:indexPath:);
         CWTableViewCellInfo *cellInfo = [CWTableViewCellInfo cellInfoWithTitle:title imageName:imageName target:self sel:sel];
         [_tableViewInfo addCell:cellInfo];
     }
+
     
     [self.view addSubview:[_tableViewInfo getTableView]];
     [_tableViewInfo getTableView].backgroundColor = Theme_ViewBackgroundColor;
@@ -207,42 +207,50 @@
     if (!nav) {
         return;
     }
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
+    WEAKSELF
     NSString  *title = self.titleArray[indexPath.row];
-    if ([title isEqualToString:NSLocalizedString(@"sc_MyTask", nil)]) {
-//        TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
-//        taskVC._oc_scrollToIndex = 1;
-//        [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
-        MyHelpContainerViewController *myHelpVC = [[MyHelpContainerViewController alloc]init];
-        myHelpVC._oc_scrollToIndex = 1;
-        [nav.topViewController.navigationController pushViewController:myHelpVC animated:YES];
-    }else if ([title isEqualToString:NSLocalizedString(@"sc_MyMessage", nil)]){
-        JCConversationListViewController *conversationListVC = [[JCConversationListViewController alloc]init];
-        [nav.topViewController.navigationController pushViewController:conversationListVC animated:YES];
-    }else if ([title isEqualToString:NSLocalizedString(@"sc_MyWallet", nil)]){
-        //
-        MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
-        JCNavigationController *walletNav = [[JCNavigationController alloc]initWithRootViewController:walletVC];
-//        walletVC.urlStr = @"http://m.qianqianshijie.com/orderDetails?id=15450393575245641";
-        [nav.topViewController.navigationController presentViewController:walletNav animated:YES completion:nil];
-    }else if ([title isEqualToString:NSLocalizedString(@"sc_Setting", nil)]){
-       SCSettingViewController *settingVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
-          [nav.topViewController.navigationController pushViewController:settingVC animated:YES];
-       // [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
-    }else if ([title isEqualToString:NSLocalizedString(@"sc_Real_name_authentication", nil)]){
-        RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
-        [nav.topViewController.navigationController pushViewController:realNameVC animated:YES];
-    }else if ([title isEqualToString:NSLocalizedString(@"sc_Feedback", nil)]){
-        OpinionFeedbackViewController  *feedbackVC = [[OpinionFeedbackViewController alloc]init];
-        [nav.topViewController.navigationController pushViewController:feedbackVC animated:YES];
-    }else if ([title isEqualToString:NSLocalizedString(@"sc_Voucher_MyVoucher", nil)]){
-        MyCardCouponContainerViewController * couponVC = [[MyCardCouponContainerViewController alloc]init];
-         [nav.topViewController.navigationController pushViewController:couponVC animated:YES];
-    }else{
+    // 修复 dismissViewControllerAnimated 卡顿问题，这里 dispatch_async(dispatch_get_main_queue() 是问题的关键
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf dismissViewControllerAnimated:YES completion:^{
+            if ([title isEqualToString:NSLocalizedString(@"sc_MyTask", nil)]) {
+                //        TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
+                //        taskVC._oc_scrollToIndex = 1;
+                //        [nav.topViewController.navigationController pushViewController:taskVC animated:YES];
+                MyHelpContainerViewController *myHelpVC = [[MyHelpContainerViewController alloc]init];
+                myHelpVC._oc_scrollToIndex = 1;
+                [nav.topViewController.navigationController pushViewController:myHelpVC animated:YES];
+            }else if ([title isEqualToString:NSLocalizedString(@"sc_MyMessage", nil)]){
+                JCConversationListViewController *conversationListVC = [[JCConversationListViewController alloc]init];
+                [nav.topViewController.navigationController pushViewController:conversationListVC animated:YES];
+            }else if ([title isEqualToString:NSLocalizedString(@"sc_MyWallet", nil)]){
+                //
+                MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];
+                JCNavigationController *walletNav = [[JCNavigationController alloc]initWithRootViewController:walletVC];
+                //        walletVC.urlStr = @"http://m.qianqianshijie.com/orderDetails?id=15450393575245641";
+                [nav.topViewController.navigationController presentViewController:walletNav animated:YES completion:nil];
+            }else if ([title isEqualToString:NSLocalizedString(@"sc_Setting", nil)]){
+                SCSettingViewController *settingVC = (SCSettingViewController*)[HHTool storyBoardWithName:@"SCSettingViewController" Identifier:nil];
+                [nav.topViewController.navigationController pushViewController:settingVC animated:YES];
+                // [NotificationHandler handlerNotificationWithCustom:@{@"msg_body":@{@"action_type":@"open_page",@"action_body":@{@"page_name":@"setting_page"}},@"action_type":@"open_page"}];
+            }else if ([title isEqualToString:NSLocalizedString(@"sc_Real_name_authentication", nil)]){
+                RealNameVeifiedViewController  *realNameVC = [[RealNameVeifiedViewController alloc]init];
+                [nav.topViewController.navigationController pushViewController:realNameVC animated:YES];
+            }else if ([title isEqualToString:NSLocalizedString(@"sc_Feedback", nil)]){
+                OpinionFeedbackViewController  *feedbackVC = [[OpinionFeedbackViewController alloc]init];
+                [nav.topViewController.navigationController pushViewController:feedbackVC animated:YES];
+            }else if ([title isEqualToString:NSLocalizedString(@"sc_Voucher_MyVoucher", nil)]){
+                MyCardCouponContainerViewController * couponVC = [[MyCardCouponContainerViewController alloc]init];
+                [nav.topViewController.navigationController pushViewController:couponVC animated:YES];
+            }else{
+                
+            }
+        }];
         
-    }
+    });
+
+    
+    NSLog(@"%@",title);
+
 //    switch (indexPath.row) {
 //        case 0:
 //            // 我的钱包
@@ -332,7 +340,7 @@
 
 #pragma mark -- DUX_UploadUserIconDelegate
 
--(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag{
+-(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag Info:(NSDictionary *)info{
     
      [[CWMaskView shareInstance]singleTap];
     if (!image) {

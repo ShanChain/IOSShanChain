@@ -170,6 +170,7 @@ extension  MyCardDetailsViewController{
         tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
               
+                self?.page += 1
                 self?._requstClientlDetailsWithTokenSymbol(true, {
                     if (self?.controllerPage?.pageNo)! == (self?.controllerPage?.last)!{
                         self?.tableView.mj_footer.endRefreshingWithNoMoreData()
@@ -216,7 +217,6 @@ extension  MyCardDetailsViewController{
                                 for content in datas{
                                     self.dataList.append(content)
                                 }
-                                self.page += 1
                             }else{
                                 self.dataList = datas
                             }

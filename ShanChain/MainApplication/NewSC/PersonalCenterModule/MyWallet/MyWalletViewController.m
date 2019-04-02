@@ -22,14 +22,37 @@
 #endif
 
 
-@interface MyWalletViewController ()<XMWebViewDelegate>
+@interface MyWalletViewController ()<XMWebViewDelegate,DUX_UploadUserIconDelegate>
 
 @property (nonatomic, strong) XMWebView *webView;
-
+@property (nonatomic, strong) NSData *imageData;
 @end
 
 @implementation MyWalletViewController
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [_webView ocAndJSInteractionWithRegisterHandlerName:@"testa" finishBlock:^(id data) {
+        
+//        SCLog(@"%@",dataDic);
+        NSDictionary *dic = (NSDictionary *)data;
+        UploadPhotePasswordView  *uploadView = [[UploadPhotePasswordView alloc]initWithFrame:self.view.frame];
+        uploadView.imageViewTag = 214;
+        uploadView.vc = self;
+        uploadView.transferDic = dic;
+        
+        weakify(uploadView);
+
+        
+        uploadView.closure = ^(BOOL  success, NSString * _Nonnull authCode) {
+            
+            [_webView JSAndOCSInteractionWithRegisterHandlerName:@"JSEcho" data:authCode];
+            [weak_uploadView removeFromSuperview];
+        };
+        [self.view addSubview:uploadView];
+
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     _webView = [[XMWebView alloc] initWithFrame:self.view.frame viewType:WebViewTypeWkWebView];
@@ -40,7 +63,6 @@
     [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-
     
     //此处链接要写全
     if (NULLString(self.urlStr)) {
@@ -82,6 +104,52 @@
 
 -(void)dealloc{
     [self _deallocCache];
+}
+
+-(NSDictionary *)setPar:(NSDictionary *)dic {
+    
+    /**
+     let operationType = transferDic?["operationType"] as! String
+     if operationType == "PostSale"{
+     // 发布 出售
+     tmp = String(format: "&%@&%@", transferDic?["imgHashValue"]as! String,transferDic?["orderDesc"]as! String)
+     url = String(format: "/wallet/api/exchange/sell/pendingOrder/create?token=%@%@", SCCacheTool.shareInstance().getUserToken(),tmp)
+     }else if operationType == "DigitalAssets" {
+     // 发起委托交易
+     
+     }else if operationType == "LiftBond" {
+     // 提券
+     
+     }else if operationType == "SellComfirmedList" {
+     // 确认出售
+     
+     }else if operationType == "Transfer" {
+     // 转账
+     tmp = transferDic?["data"] as! String
+     
+     url = String(format: "/wallet/api/wallet/2.0/creatTransaction?token=%@%@", SCCacheTool.shareInstance().getUserToken(),tmp)
+     }
+     */
+    
+    NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithDictionary:dic];
+    [tmp removeObjectForKey:@"operationType"];
+    if ([dic[@"operationType"] isEqualToString:@"PostSale"]) {
+        
+    }
+    else if ([dic[@"operationType"] isEqualToString:@"DigitalAssets"]) {
+        
+    }
+    else if ([dic[@"operationType"] isEqualToString:@"LiftBond"]) {
+        
+    }
+    else if ([dic[@"operationType"] isEqualToString:@"SellComfirmedList"]) {
+        
+    }
+    else if ([dic[@"operationType"] isEqualToString:@"Transfer"]) {
+
+    }
+    
+    return dic;
 }
 
 #pragma maek - 子类重写
@@ -149,6 +217,10 @@
             [self.webView loadRequest:request];
         }
         
+//        if ([key isEqualToString:@"toUpload"] && [obj isEqualToString:@"true"]) {
+//            SCLog(@"我是大连人");
+//        }
+        
     }];
     
 }
@@ -158,6 +230,29 @@
 - (void)webView:(XMWebView *)webview didFailToLoadURL:(NSURL *)URL error:(NSError *)error {
     NSLog(@"error=%@",error);
 }
+
+
+#pragma mark  -DUX_UploadUserIconDelegate
+-(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag {
+    
+    
+    
+    self.imageData = UIImagePNGRepresentation(image);
+    
+//    NSString *autoCode = [[SCCacheTool shareInstance] getAuthCode];
+//    [_webView JSAndOCSInteractionWithRegisterHandlerName:@"JSEcho" data:autoCode];
+//    SCLog(@"%@--%ld--%@",image,tag,self.imageData);
+//    NSString *tmp = [[NSString alloc] initWithData:self.imageData
+//                                         encoding:NSUTF8StringEncoding];
+//    if (!tmp) { // 解决NSData转化为NSString时，可能返回nil的情况
+//        NSData *data = ALUTF8NSData(self.imageData);
+//        tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    }
+//    NSDictionary *tmp = @{@"imageData":self.imageData};
+//    
+//    [_webView JSAndOCSInteractionWithRegisterHandlerName:@"JSEcho" data:info];
+}
+
 
 
 @end

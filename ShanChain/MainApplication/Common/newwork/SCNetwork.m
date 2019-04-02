@@ -337,7 +337,7 @@ NSString *SCRequestErrDomain = @"SCRequestErrDomain";
     }];
 #endif
     if (show) {
-        [HHTool showChrysanthemum];
+//        [HHTool showChrysanthemum];
     }
     
     [self getWithUrl:url parameters:parameters success:^(id responseObject) {
@@ -417,6 +417,10 @@ static NSString* getRequstToken(){
                 [mDic setObject:authCode forKey:@"authCode"];
                 [[SCNetwork shareInstance]getWithUrl:_url parameters:mDic.copy success:success failure:failure];
             }];
+            
+        }else if ([code isEqualToString:SC_ERROR_WalletSavePasswordFail]) {
+            // 保存密码失败
+            [HHTool showError:responseObject[@"msg"]];
         }else{
             SCLog(@"Request error%@", responseObject);
             
@@ -483,6 +487,10 @@ static NSString* getRequstToken(){
 
     // 基于AFN3.0+ 封装的HTPPSession句柄
     _afManager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPT_TYPE_IMAGE];
+//    if ([url containsString:@"/wallet/api/wallet/2.0/hideInfo"]) {
+//        _afManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    }
+    
     // 在parameters里存放照片以外的对象
     NSMutableDictionary *params = [parameters mutableCopy];
 //    if([parameters objectForKey:@"token"] == nil || [[parameters objectForKey:@"token"]  isEqual: @""]){
@@ -510,6 +518,7 @@ static NSString* getRequstToken(){
              3. fileName：要保存在服务器上的文件名
              4. mimeType：上传的文件的类型
              */
+            SCLog(@"%@",imgArr[i]);
             if (isURL) {
                 NSError  *error = nil;
                 [formData appendPartWithFileURL:[NSURL URLWithString:imgArr[i]] name:@"file" fileName:fileName mimeType:@"image/jpeg" error:&error];
@@ -525,6 +534,11 @@ static NSString* getRequstToken(){
         SCLog(@"%@",uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+//        if ([url containsString:@"/wallet/api/wallet/2.0/hideInfo"]) {
+//            SCLog(@"%@",responseObject);
+//            
+//            return;
+//        }
         NSString  *code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
         if ([code isEqualToString:SC_COMMON_SUC_CODE] || [code isEqualToString:SC_WALLET_COMMON_SUC_CODE] || [code isEqualToString:SC_REALNAME_NOMATCH]) {
             SCLog(@"success");
@@ -535,6 +549,8 @@ static NSString* getRequstToken(){
             [[SCAppManager shareInstance] logout];
         }else  if ([code isEqualToString:SC_NOTENOUGH] ) {
             [HHTool showError:@"您的余额不足"];
+        }else  if ([code isEqualToString:SC_ERROR_WalletPasswordInvalid] ) {
+            [HHTool showError:@"验证失败，请上传正确的二维码图片"];
         }else{
             SCLog(@"Request error%@", responseObject);
             
@@ -550,7 +566,8 @@ static NSString* getRequstToken(){
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        SCLog(@"failure error%@", error);
+//        [HHTool showError:@"请求错误！"];
         NSString  *mimeType = task.response.MIMEType;
         NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
         if (errorData) {
@@ -622,7 +639,55 @@ static NSString* getRequstToken(){
     }];
 }
 
+/// 转账 -R
+- (void)transferWithUrl:(NSString *)url data:(NSDictionary *)dic block:(void (^)(id objc,BOOL success))block {
+    
+    if([url hasPrefix:@"/"] && ![url containsString:SC_BASE_URL]){
+        url = [SC_BASE_URL stringByAppendingString:url];
+    }
+    
 
+    NSString *imgUrl = dic[@"file"];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    NSString *fileName = [NSString  stringWithFormat:@"%@.jpg", dateString];
+    
+    _afManager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPT_TYPE_IMAGE];
+    
+        
+    [_afManager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            
+            if ([obj isKindOfClass:[NSNumber class]]) {
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+                formatter.numberStyle = NSNumberFormatterDecimalStyle;
+                NSString *string = [formatter stringFromNumber:obj];
+                [formData appendPartWithFormData:[string dataUsingEncoding:NSUTF8StringEncoding]
+                                            name:key];
+            }else {
+                NSString *str = (NSString *)obj;
+                [formData appendPartWithFormData:[str dataUsingEncoding:NSUTF8StringEncoding]
+                                            name:key];
+            }
+            
+            
+        }];
+
+        NSError  *error = nil;
+        [formData appendPartWithFileURL:[NSURL URLWithString:imgUrl] name:@"file" fileName:fileName mimeType:@"image/jpeg" error:&error];
+
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        SCLog(@"%@",responseObject[@"msg"]);
+
+        block(responseObject,YES);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        SCLog(@"%@",error);
+        block(error,NO);
+    }];
+}
 
 @end
 

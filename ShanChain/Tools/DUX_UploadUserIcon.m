@@ -32,15 +32,25 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
     uploadUserIcon.tag = tag;
     self.fatherViewController = fatherVC;
     
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"sc_cancel", nil)
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:NSLocalizedString(@"sc_Album", nil), NSLocalizedString(@"sc_takePhoto", nil), nil];
-    [sheet showInView:fatherVC.view];
+
     
     
-    
+//    if (tag == 214) {
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"sc_cancel", nil)
+                                             destructiveButtonTitle:nil
+                                                  otherButtonTitles:NSLocalizedString(@"sc_Album", nil), nil];
+        [sheet showInView:fatherVC.view];
+//    }else {
+//        
+//        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
+//                                                           delegate:self
+//                                                  cancelButtonTitle:NSLocalizedString(@"sc_cancel", nil)
+//                                             destructiveButtonTitle:nil
+//                                                  otherButtonTitles:NSLocalizedString(@"sc_Album", nil), NSLocalizedString(@"sc_takePhoto", nil), nil];
+//        [sheet showInView:fatherVC.view];
+//    }
 //    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 //
 //    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -71,7 +81,7 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
     if (buttonIndex == 0) {
         [self fromPhotos];
     }else if (buttonIndex == 1) {
-        [self createPhotoView];
+//        [self createPhotoView];
     }
   
 }

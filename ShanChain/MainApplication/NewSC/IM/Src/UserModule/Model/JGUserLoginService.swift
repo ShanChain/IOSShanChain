@@ -128,6 +128,10 @@ class JGUserLoginService: NSObject {
    // 加入聊天室
     open static func jg_enterchatRoom(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
         
+//        EditInfoService.enterChatRoom(withId: roomId,  show: "", call: { (result, error) in
+//            callBlock(result as! JMSGConversation?,error as NSError?)
+//
+//        })
         // 先异步获取聊天室的Conversation列表
         JMSGConversation.allChatRoomConversation { (result, error) in
             if error != nil {
@@ -146,7 +150,7 @@ class JGUserLoginService: NSObject {
                 }
                 return
             }
-            
+
             if let conversations = result as? [JMSGConversation]{
                 var isEnter = false
                 if conversations.count > 0 {
@@ -160,13 +164,13 @@ class JGUserLoginService: NSObject {
                             }
                         }
                     }
-                    
+
                 }
                 if !isEnter {
                     self.jg_getConversationEnterChatRoom(roomId: roomId, callBlock: callBlock)
                 }
             }
-            
+
         }
     }
     

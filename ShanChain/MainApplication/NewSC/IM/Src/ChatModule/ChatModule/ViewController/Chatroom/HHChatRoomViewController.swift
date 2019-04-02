@@ -6,12 +6,10 @@
 //  Copyright © 2018年 ShanChain. All rights reserved.
 //
 
-
 import UIKit
 import YHPhotoKit
 import MobileCoreServices
 import ASExtendedCircularMenu
-
 
 class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
@@ -77,6 +75,15 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
         
         _configureDraggebleCircularMenuButton()
+        
+        //当前时间的时间戳
+        let timeInterval:TimeInterval = NSDate().timeIntervalSince1970
+        let timeStamp = Int(timeInterval) * 1000
+        print(timeStamp,self.currentChatRoomID!)
+        SCNetwork.shareInstance().v1_post(withUrl: "/jm/room/message", params: ["roomId":self.currentChatRoomID!,"timeStamp":timeStamp], showLoading: false) { (model, error) in
+            print(model?.message,model?.data)
+            
+        }
     }
     
     //    func hiddenMaskView(){
@@ -197,6 +204,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
         
         navigationController?.navigationBar.barTintColor = .white
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -457,7 +465,12 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 46))
         navTitleView.positionBtn .setTitle(self.navTitle, for: .normal)
         if let chatRoom = conversation.target as? JMSGChatRoom{
-            navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)人", for: .normal)
+            if self.navTitle! == "加密聊天社区" {
+                navTitleView.numberForPeopleBtn .setTitle("16968人", for: .normal)
+            }else {
+                navTitleView.numberForPeopleBtn .setTitle("\(chatRoom.totalMemberCount)人", for: .normal)
+            }
+            
         }
         
         // 查看聊天室成员
@@ -485,6 +498,10 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                     shareModel.intro = dic["intro"] as! String
                     shareModel.background = dic["background"] as! String
                     let shareView:HHShareView = HHShareView.init(frame: (self.view.frame), shareImage: self.takeImage ?? SCCacheTool.shareInstance().takeImage, type: 2, shareModel: shareModel)
+                    
+                    shareView.closure = {[weak self] () in
+                        self?.navTitleView.positionBtn.isEnabled = true
+                    }
                     self.view.addSubview(shareView)
                     if self.isJoinChatRoom == true{
                         self.toolbar.isHidden = true
@@ -588,7 +605,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         self.messages.insert(contentsOf: msgs, at: 0)
     }
     
-    private func isNeedInsertTimeLine(_ time: Int) -> Bool {
+    func isNeedInsertTimeLine(_ time: Int) -> Bool {
         if maxTime == 0 || minTime == 0 {
             maxTime = time
             minTime = time
@@ -853,9 +870,19 @@ extension HHChatRoomViewController: JMessageDelegate {
         for message in messages{
 
             _handleMessage(message: message)
-            
+//            print(message,"微笑")
+//            NSData *d = [NSKeyedArchiver archivedDataWithRootObject:message];
+//            let dic = ["chatRecord" : message]
+//            
+//            let d = NSKeyedArchiver.archivedData(withRootObject: messages)
+//            print(d,"微笑")
+//            let userDefaults = UserDefaults.standard
+//            userDefaults.set(messages, forKey: "keyjj")
+//            userDefaults.synchronize()
         }
         
+        
+
     }
     // 接收消息(服务器端下发的)回调
 //    func onReceive(_ message: JMSGMessage!, error: Error!) {
@@ -883,11 +910,19 @@ extension HHChatRoomViewController: JMessageDelegate {
 //        }
         
         //修改聊天室历史消息排序问题,之前用了异步导致排序问题 -R
-        let message =  self._parseMessage(message)
+        let msg =  self._parseMessage(message)
         
-        self.messages.append(message)
-        self.chatView.append(message)
-        self.updateUnread([message])
+        //添加 消息历史 时间线
+        if isNeedInsertTimeLine(message.timestamp.intValue) {// 是否显示时间
+            let timeContent = JCMessageTimeLineContent(date: Date(timeIntervalSince1970: TimeInterval(message.timestamp.intValue / 1000)))
+            let m = JCMessage(content: timeContent)
+            m.options.showsTips = false
+            self.messages.append(m)
+            self.chatView.append(m)
+        }
+        self.messages.append(msg)
+        self.chatView.append(msg)
+        self.updateUnread([msg])
         self.conversation.clearUnreadCount()
         if !self.chatView.isRoll {
             self.chatView.scrollToLast(animated: true)

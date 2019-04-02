@@ -9,7 +9,7 @@
 import UIKit
 import JMessage
 
-class JCNicknameViewController: UIViewController {
+class JCNicknameViewController: SCBaseVC {
     
     var nickName = ""
 
@@ -83,15 +83,28 @@ class JCNicknameViewController: UIViewController {
     
     //MARK: - click func
     func _saveNickname() {
+        if nicknameTextField.text == nickName {
+            HHTool.showTip("没有做任何修改", duration: 0.5)
+            return
+        }
         nicknameTextField.resignFirstResponder()
         let nickname = nicknameTextField.text!
         EditInfoService.sc_editPersonalInfo(["name":nickname]) { (isSuccess) in
             if isSuccess{
-                self.navigationController?.popViewController(animated: true)
+                let userInfo = JMSGUserInfo()
+                userInfo.nickname = nickname
+                JMSGUser.updateMyInfo(with: userInfo, completionHandler: { (result, err) in
+                    if err == nil {
+                        self.navigationController?.popViewController(animated: true)
+                    } else {
+                        HHTool.showError("修改失败")
+                    }
+                })
+                
             }
             
         }
-        
+
 //        JMSGUser.updateMyInfo(withParameter: nickname, userFieldType: .fieldsNickname) { (resultObject, error) -> Void in
 //            if error == nil {
 //                NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)

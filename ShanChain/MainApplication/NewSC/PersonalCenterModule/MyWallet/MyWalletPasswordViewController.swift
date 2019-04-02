@@ -19,6 +19,7 @@ class MyWalletPasswordViewController: SCBaseVC {
     
     var disposeBag = DisposeBag()
     var imageData:Data?
+    var imageURL:String?
     
     func _clickTip(){
         _ = self.sc_hrShowAlert(withTitle: "温馨提示", message: "该钱包安全码仅展示一次\n不可修改、不可找回！\n请检查您的相册里是否已保存。", buttonsTitles: ["我已保存","马上保存"], andHandler: { (_, index) in
@@ -61,10 +62,13 @@ class MyWalletPasswordViewController: SCBaseVC {
 extension MyWalletPasswordViewController:DUX_UploadUserIconDelegate{
     
     func uploadImageToServer(with image: UIImage!, tag: Int) {
-         self.imageData = UIImagePNGRepresentation(image.mc_reset(to: CGSize(width: 100, height: 100)))
+         self.imageData = UIImagePNGRepresentation(image)
         generateBtn.backgroundColor = SC_ThemeMainColor
         generateBtn.isUserInteractionEnabled = true
         selectImageBtn.setImage(image, for: .normal)
+    }
+    func uploadImageToServer(with image: UIImage!, fileUrl: String!) {
+        self.imageURL = fileUrl;
     }
 }
 

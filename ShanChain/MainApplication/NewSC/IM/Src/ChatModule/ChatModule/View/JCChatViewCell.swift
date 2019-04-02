@@ -263,9 +263,9 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         
         menuController.menuItems = [
             UIMenuItem(title: "复制", action: #selector(copyMessage(_:))),
-            UIMenuItem(title: "转发", action: #selector(forwardMessage(_:))),
-            UIMenuItem(title: "撤回", action: #selector(withdrawMessage(_:))),
-            UIMenuItem(title: "删除", action: #selector(deleteMessage(_:)))
+//            UIMenuItem(title: "转发", action: #selector(forwardMessage(_:))),
+//            UIMenuItem(title: "撤回", action: #selector(withdrawMessage(_:))),
+//            UIMenuItem(title: "删除", action: #selector(deleteMessage(_:)))
         ]
     
         // set menu display position

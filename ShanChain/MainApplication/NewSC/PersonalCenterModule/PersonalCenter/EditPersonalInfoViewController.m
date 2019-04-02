@@ -49,7 +49,7 @@
     
     NSMutableDictionary  *mDic = [NSMutableDictionary dictionaryWithCapacity:0];
     SCCharacterModel*characterModel = [SCCacheTool shareInstance].characterModel;
-    if (![self.nickNameFid.text isEqualToString:characterModel.characterInfo.headImg]) {
+    if (![self.nickNameFid.text isEqualToString:characterModel.characterInfo.name]) {
         [mDic setObject:self.nickNameFid.text forKey:@"name"];
     }
     
@@ -61,9 +61,26 @@
         weakify(self);
         [EditInfoService sc_editPersonalInfo:mDic callBlock:^(BOOL isSuccess) {
             if (isSuccess) {
-                [weak_self.navigationController popViewControllerAnimated:YES];
+                
+                characterModel.characterInfo.name = self.nickNameFid.text;
+                characterModel.characterInfo.signature = self.signatureTextView.text;
+                
+                JMSGUserInfo * userInfo = [JMSGUserInfo new];
+                userInfo.nickname = self.nickNameFid.text;
+                userInfo.signature = self.signatureTextView.text;
+                // 更新 极光 用户信息
+                [JMSGUser updateMyInfoWithUserInfo:userInfo completionHandler:^(id resultObject, NSError *error) {
+                    if (error) {
+                        [HHTool showError:@"修改失败"];
+                    }else {
+                        [weak_self.navigationController popViewControllerAnimated:YES];
+                    }
+                }];
+                
             }
         }];
+    }else {
+        [HHTool showTip:@"没有修改任何信息" duration:0.5];
     }
    
 }

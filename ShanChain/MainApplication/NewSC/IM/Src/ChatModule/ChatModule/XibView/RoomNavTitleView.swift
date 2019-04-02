@@ -52,6 +52,7 @@ class RoomNavTitleView: UIView {
     
     // 分享该聊天室
     @IBAction func shareRoomAction(_ sender: UIButton) {
+        positionBtn.isEnabled = false
         shareRoomClosure!()
     }
     

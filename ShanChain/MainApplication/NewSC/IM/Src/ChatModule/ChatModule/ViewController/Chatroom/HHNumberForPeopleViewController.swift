@@ -22,6 +22,7 @@ class HHNumberForPeopleViewController: SCBaseVC {
     
     fileprivate var dataList:[PeopleListModel] = []
     fileprivate var users:[JMSGUser] = []
+    fileprivate var newUsers:[JMSGUser] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,13 @@ class HHNumberForPeopleViewController: SCBaseVC {
         tableView.rowHeight = 65
         tableView.tableFooterView = UIView()
         reftreshData()
+        self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)//这一句，修复偏移问题！
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         } else {
             automaticallyAdjustsScrollViewInsets = false
+
+            
         }
         _requstData(false) {}
     }
@@ -54,8 +58,8 @@ class HHNumberForPeopleViewController: SCBaseVC {
 extension  HHNumberForPeopleViewController{
     
     fileprivate func _requstPrameter(_ isLoad:Bool) -> Dictionary<String, Any> {
-        let pageStr = isLoad ? "\(page+1)":"\(page)"
-        return ["count":"\(count)","roomId":roomId,"page":pageStr,"size":"\(size)"]
+//        let pageStr = isLoad ? "\(page+1)":"\(page)"
+        return ["count":"\(count)","roomId":roomId,"page":self.page,"size":"\(size)"]
     }
     
     
@@ -63,6 +67,7 @@ extension  HHNumberForPeopleViewController{
         tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 print("上拉加载更多数据")
+                self?.page += 1
                 self?._requstData(true, { [weak self] in
                     self?.tableView.mj_footer.endRefreshing()
                 })
@@ -80,8 +85,10 @@ extension  HHNumberForPeopleViewController{
         }
         
     }
+
     
     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()){
+        print(self._requstPrameter(isLoad))
         SCNetwork.shareInstance().v1_post(withUrl: JM_RoomMembers_URL, params: self._requstPrameter(isLoad), showLoading: true) { (baseModel, error) in
             if ((error) != nil){
                 return
@@ -94,8 +101,9 @@ extension  HHNumberForPeopleViewController{
                         for people in arr{
                             self.dataList.append(people)
                         }
-                        self.page += 1
+//                        self.page += 1
                     }else{
+                        self.dataList = []
                         self.dataList = arr
                     }
                     
@@ -103,26 +111,37 @@ extension  HHNumberForPeopleViewController{
                     for  list in  self.dataList{
                         userNameArray.append(list.username!)
                     }
-                    HHTool.showChrysanthemum()
+                    print(userNameArray)//这里的数据顺序是对的
+//                    HHTool.showChrysanthemum()
                     JMSGUser.userInfoArray(withUsernameArray: userNameArray, completionHandler: { (result, error) in
-                        HHTool.dismiss()
+//                        HHTool.dismiss()
                         if (error) == nil {
                             self.users = result as! [JMSGUser]
+//                            print(self.users)//这里的数据顺序是错的
+                            self.newUsers = []
                             for (index,people) in (self.dataList.enumerated()){
+                                // 这里是处理列表排序错乱问题，这个问题出在 userInfoArray 函数的返回值本身就是乱序的，需要自己做匹配
+                                for (_,user) in (self.users.enumerated()) {
+                                    if (people.username == user.username) {
+//                                        print(index,idx)
+                                        self.newUsers.append(user)
+                                    }
+                                }
+                                
                                 if index >= self.users.count{
                                     break
                                 }
-                                self.users[index].thumbAvatarData({ (data, userName, error) in
+                                self.newUsers[index].thumbAvatarData({ (data, userName, error) in
                                     if data != nil{
                                         let img = UIImage.init(data: data!)
                                         people.iconImage = img!
-                                         self.tableView.reloadData()
+//                                         self.tableView.reloadData()
+                                        self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
                                     }
-//                                    self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+                                    
                                 })
-                                people.user = self.users[index]
-                                people.nickname = self.users[index].nickname
-                               
+                                people.user = self.newUsers[index]
+                                people.nickname = self.newUsers[index].nickname
                             }
                              self.tableView.reloadData()
                         }
@@ -165,7 +184,7 @@ extension HHNumberForPeopleViewController:UITableViewDelegate,UITableViewDataSou
         guard let cell = cell as? HHNumberPeopleListCell else{
             return
         }
-        
+
         let people = dataList[indexPath.row]
         cell.nikeNameLb.text = people.nickname
         cell.icon.image = people.iconImage

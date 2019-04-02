@@ -16,6 +16,13 @@ class UploadPhotePasswordView: UIView {
     var closure:UploadSuccessClosure?
     var imageData:Data?
     var imageURL:String?
+    var imageViewTag:Int = 0
+    
+    var vc:UIViewController?
+    var transferDic: Dictionary<String, Any>?
+    
+    
+    
     
     @IBOutlet weak var confirmBtn: UIButton!
     
@@ -26,6 +33,8 @@ class UploadPhotePasswordView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+//        imageViewTag = 0
         contentView = loadViewFromNib()
         alphaComponentMake()
         //contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,32 +56,38 @@ class UploadPhotePasswordView: UIView {
     
     
     @IBAction func confirmAction(_ sender: Any) {
-// 验证密码是否正确
-//    SCNetwork.shareInstance().hh_uploadFile(withArr: [self.imageURL ?? ""], url: "/wallet/api/wallet/2.0/checkInfo", parameters: ["suberUser":SCCacheTool.shareInstance().getCurrentCharacterId(),"userId":SCCacheTool.shareInstance().getCurrentUser()], showLoading: false) { (baseModel, error) in
-//
-//        }
         
+        
+        // 验证密码是否正确        
+
         let registrationID:String = JPUSHService.registrationID() ?? ""
         SCNetwork.shareInstance().hh_uploadFile(withArr: [self.imageURL ?? ""], url: CreateAuthCode_URL, parameters: ["deviceToken":registrationID], showLoading: true, call: { (baseModel, error) in
             if let authCode  = baseModel?.data , ((baseModel?.data as? String) != nil){
-                
-                if SCCacheTool.shareInstance().characterModel.characterInfo.isBindPwd != true{
-                    HHTool.getCurrentVC().sc_hrShowAlert(withTitle: "验证成功！", message: "您也可以选择开启免密功能，在下次使用马甲券时便无需再次上传安全码，让使用更加方便快捷，是否开通免密功能？", buttonsTitles: ["暂不需要","立即开通"], andHandler: { (_, index) in
-                        if index == 1{
-                            // 开通免密
-                            EditInfoService.sc_editPersonalInfo(["bind":true], call: { (isSuccess) in
-                                if isSuccess == true{
-                                    HHTool.showSucess("开通成功!")
-                                    SCCacheTool.shareInstance().setCacheValue(authCode as! String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
-                                }
-                            })
-                        }
+                if self.imageViewTag == 214 {
+                    // 将原本H5做得请求放在原生做
+                    self.transferHandle()
+                    
+                    
+                }else {
+                    if SCCacheTool.shareInstance().characterModel.characterInfo.isBindPwd != true{
+                        self.vc?.sc_hrShowAlert(withTitle: "验证成功！", message: "您也可以选择开启免密功能，在下次使用马甲券时便无需再次上传安全码，让使用更加方便快捷，是否开通免密功能？", buttonsTitles: ["暂不需要","立即开通"], andHandler: { (_, index) in
+                            if index == 1{
+                                // 开通免密
+                                EditInfoService.sc_editPersonalInfo(["bind":true], call: { (isSuccess) in
+                                    if isSuccess == true{
+                                        HHTool.showSucess("开通成功!")
+                                        SCCacheTool.shareInstance().setCacheValue(authCode as! String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
+                                    }
+                                })
+                            }
+                            self.closure!(true,authCode as! String)
+                        })
+                    }else{
+                        SCCacheTool.shareInstance().setCacheValue(authCode as! String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
                         self.closure!(true,authCode as! String)
-                    })
-                }else{
-                    SCCacheTool.shareInstance().setCacheValue(authCode as! String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
-                    self.closure!(true,authCode as! String)
+                    }
                 }
+                
                 
             }
         })
@@ -80,7 +95,68 @@ class UploadPhotePasswordView: UIView {
 
     
     @IBAction func uploadAction(_ sender: UIButton) {
-        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: HHTool.getCurrentVC(), imageTag: 0, delegate: self as DUX_UploadUserIconDelegate)
+        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: self.vc, imageTag: self.imageViewTag, delegate: self as DUX_UploadUserIconDelegate)
+    }
+    
+    func transferHandle() {
+        
+        // 转账数据
+        
+        guard var tmpTransferDic = transferDic else {
+            print("数据有问题")
+            return
+        }
+        
+        var tmp: String = ""
+        var url: String = ""
+        tmpTransferDic["file"] = self.imageURL
+        
+        
+        let operationType = tmpTransferDic["operationType"] as! String
+        tmpTransferDic.removeValue(forKey: "operationType")
+        
+        if operationType == "PostSale"{
+            // 发布 出售
+            tmp = String(format: "&imgHashValue=%@&orderDesc=%@", tmpTransferDic["imgHashValue"]as! String,tmpTransferDic["orderDesc"]as! String)
+            tmpTransferDic.removeValue(forKey: "imgHashValue")
+            tmpTransferDic.removeValue(forKey: "orderDesc")
+            url = String(format: "/wallet/api/exchange/sell/pendingOrder/create?token=%@%@", SCCacheTool.shareInstance().getUserToken(),tmp)
+        }else if operationType == "DigitalAssets" {
+            // 发起委托交易
+            url = String(format: "/wallet/api/exchange/cointrade/order/save?token=%@", SCCacheTool.shareInstance().getUserToken())
+        }else if operationType == "LiftBond" {
+            // 提券
+            url = String(format: "/wallet/api/exchange/cointrade/withdraw?token=%@", SCCacheTool.shareInstance().getUserToken())
+        }else if operationType == "SellComfirmedList" {
+            // 确认出售
+            tmp = String(format: "&imgHashValue=%@&orderDesc=%@", tmpTransferDic["imgHashValue"]as! String,tmpTransferDic["orderDesc"]as! String)
+            tmpTransferDic.removeValue(forKey: "imgHashValue")
+            tmpTransferDic.removeValue(forKey: "orderDesc")
+            url = String(format: "/wallet/api/buy/order/confirm?token=%@%@", SCCacheTool.shareInstance().getUserToken(),tmp)
+        }else if operationType == "Transfer" {
+            // 转账
+            tmp = tmpTransferDic["data"] as! String
+            tmpTransferDic.removeValue(forKey: "data")
+            tmpTransferDic.removeValue(forKey: "transferType")
+            url = String(format: "/wallet/api/wallet/2.0/creatTransaction?token=%@%@", SCCacheTool.shareInstance().getUserToken(),tmp)
+        }
+        // 判断 url 是否有中文
+        if HHTool.checkIsChinese(url) {
+            url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        }
+        print(url,tmpTransferDic)
+        SCNetwork.shareInstance().transfer(withUrl: url, data: tmpTransferDic, block: { (result, bool) in
+            if (bool) {
+                let r = result as! Dictionary<String, Any>
+                let code = r["code"]
+                let formatter = NumberFormatter()
+                formatter.minimumIntegerDigits = 2
+                let tmp = formatter.string(from: code as! NSNumber)
+                self.closure!(true,tmp!)
+                return
+                
+            }
+        })
     }
 }
 
