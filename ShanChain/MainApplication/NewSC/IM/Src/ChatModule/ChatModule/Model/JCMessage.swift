@@ -9,7 +9,17 @@
 import UIKit
 import JMessage
 
-open class JCMessage: NSObject, JCMessageType {
+open class JCMessage: NSObject, JCMessageType, NSCoding {
+    // NSCoding 添加 作用于历史消息本地缓存 -R
+    public func encode(with aCoder: NSCoder) {
+        self.mj_encode(aCoder)
+    }
+    
+    public convenience required init?(coder aDecoder: NSCoder) {
+        self.init(content: JCMessageNoticeContent.unsupport)
+        self.mj_decode(aDecoder)
+    }
+    
 
     init(content: JCMessageContentType) {
         self.content = content
@@ -17,7 +27,7 @@ open class JCMessage: NSObject, JCMessageType {
         super.init()
     }
     
-    open let identifier: UUID = .init()
+    public let identifier: UUID = .init()
     open var msgId = ""
     open var name: String = "UserName"
     open var date: Date = .init()
@@ -25,7 +35,7 @@ open class JCMessage: NSObject, JCMessageType {
     open var senderAvator: UIImage?
     open var receiver: JMSGUser?
     open var content: JCMessageContentType
-    open let options: JCMessageOptions
+    public let options: JCMessageOptions
     open var updateSizeIfNeeded: Bool = false
     open var unreadCount: Int = 0  //消息未读数
     open var targetType: MessageTargetType = .single

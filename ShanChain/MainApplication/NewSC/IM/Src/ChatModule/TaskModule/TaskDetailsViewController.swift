@@ -73,7 +73,7 @@ class TaskDetailsViewController: SCBaseVC {
         view.addSubview(bottomSendView)
         bottomSendView.isHidden = true
         tableView.register(UINib.init(nibName: H_cellID, bundle: nil), forCellReuseIdentifier: H_cellID)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80
         tableView.tableFooterView = UIView()
         glt_scrollView = tableView
@@ -317,7 +317,7 @@ extension TaskDetailsViewController{
     }
     
     // 点击头像
-    func _tapGestureAvatar(){
+    @objc func _tapGestureAvatar(){
         if self.taskDetailsModel?.isMyBublish == false{
             guard let hxUserName = self.taskDetailsModel?.hxUserName else{
                 return

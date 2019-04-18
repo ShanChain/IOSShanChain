@@ -59,13 +59,13 @@ class HHShareView: UIView {
     @IBOutlet weak var redenvelopeImageView: UIImageView!
     private  var shareType:JSHAREMediaType = .JSHAREText
     
-    var closure:HHShareViewClosure?
+    @objc var closure:HHShareViewClosure?
     var shareModel:CommonShareModel?
     
     
     @IBOutlet weak var showViewTop: NSLayoutConstraint!
     @IBOutlet weak var scaleLbTop: NSLayoutConstraint!
-    convenience init(frame:CGRect,shareImage:UIImage?,type:Int,shareModel:CommonShareModel?){
+    @objc convenience init(frame:CGRect,shareImage:UIImage?,type:Int,shareModel:CommonShareModel?){
         self.init(frame: frame)
         self.shareImage = shareImage;
         self.shareType = JSHAREMediaType.init(rawValue: type)!

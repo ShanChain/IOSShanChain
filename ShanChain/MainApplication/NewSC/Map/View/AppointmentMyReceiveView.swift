@@ -56,7 +56,7 @@ class AppointmentMyReceiveView: UIView {
     }
     
     
-    func _removeFromSuperview(){
+    @objc func _removeFromSuperview(){
         self.removeFromSuperview()
     }
 

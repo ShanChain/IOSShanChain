@@ -308,11 +308,14 @@
         [params setObject:encryptAccount forKey:@"encryptAccount"];
         [params setObject:encryptPassword forKey:@"encryptPassword"];
         [params setObject:SC_APP_CHANNEL forKey:@"channel"];
+        NSString *version = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+        [params setObject:version forKey:@"version"];
+
         NSString  *deviceToken = [JPUSHService registrationID];
         if (!NULLString(deviceToken)) {
             [params setValue:deviceToken forKey:@"deviceToken"];
         }
-        [SYProgressHUD showMessage:NSLocalizedString(@"sc_login_loggingIn", nil)];
+        [YYHud show:NSLocalizedString(@"sc_login_loggingIn", nil)];
         [SCNetwork.shareInstance postWithUrl:COMMONUSERLOGIN parameters:params success:^(id responseObject) {
             NSDictionary *data = responseObject[@"data"];
             if (data[@"userInfo"] != [NSNull null]) {
@@ -323,10 +326,10 @@
             } else {
                 [SYProgressHUD showError:@"用户信息不存在"];
             }
+            [YYHud dismiss];
         } failure:^(NSError *error) {
-            SCLog(@"%@",error);
-            [SYProgressHUD hideHUD];
-            [SYProgressHUD showError:error.localizedDescription];
+//            SCLog(@"%@",error);
+            [YYHud dismiss];
         }];
     }
 }

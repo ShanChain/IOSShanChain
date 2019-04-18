@@ -31,9 +31,9 @@ extension UIView {
         
     }
     /// 添加约束 -> [attr1]丶toItem丶[attr2]丶constant
-    func addLayoutConstraints(attributes attr1s: [NSLayoutAttribute],
+    func addLayoutConstraints(attributes attr1s: [NSLayoutConstraint.Attribute],
                               toItem: Any?,
-                              attributes attr2s: [NSLayoutAttribute]?,
+                              attributes attr2s: [NSLayoutConstraint.Attribute]?,
                               constant: CGFloat) {
         for (i,attr1) in attr1s.enumerated() {
             let attr2 = attr2s == nil ? nil:attr2s![i]
@@ -41,9 +41,9 @@ extension UIView {
         }
     }
     /// 添加约束 -> [attr1]丶toItem丶[attr2]丶[constant]
-    func addLayoutConstraints(attributes attr1s: [NSLayoutAttribute],
+    func addLayoutConstraints(attributes attr1s: [NSLayoutConstraint.Attribute],
                               toItem: Any?,
-                              attributes attr2s: [NSLayoutAttribute]?,
+                              attributes attr2s: [NSLayoutConstraint.Attribute]?,
                               constants: [CGFloat]) {
         for (i,attr1) in attr1s.enumerated() {
             let attr2 = attr2s == nil ? nil:attr2s![i]
@@ -52,17 +52,17 @@ extension UIView {
         }
     }
     /// 添加约束 -> attr1丶toItem丶attr2丶constant
-    func addLayoutConstraint(attribute attr1: NSLayoutAttribute,
+    func addLayoutConstraint(attribute attr1: NSLayoutConstraint.Attribute,
                              toItem: Any?,
-                             attribute attr2: NSLayoutAttribute?,
+                             attribute attr2: NSLayoutConstraint.Attribute?,
                              constant: CGFloat) {
         addLayoutConstraint(attribute: attr1, relatedBy: .equal, toItem: toItem, attribute: attr2, multiplier: 1, constant: constant)
     }
     /// 添加约束 -> attr1丶relatedBy丶toItem丶attr2丶multiplier丶constant
-    func addLayoutConstraint(attribute attr1: NSLayoutAttribute,
-                             relatedBy relation: NSLayoutRelation,
+    func addLayoutConstraint(attribute attr1: NSLayoutConstraint.Attribute,
+                             relatedBy relation: NSLayoutConstraint.Relation,
                              toItem: Any?,
-                             attribute attr2: NSLayoutAttribute?,
+                             attribute attr2: NSLayoutConstraint.Attribute?,
                              multiplier: CGFloat,
                              constant: CGFloat) {
         
@@ -91,9 +91,9 @@ extension UIView {
         
     }
     /// 修改约束 -> [attr1]丶toItem丶[attr2]丶constant
-    func updateLayoutConstraints(attributes attr1s: [NSLayoutAttribute],
+    func updateLayoutConstraints(attributes attr1s: [NSLayoutConstraint.Attribute],
                                  toItem: Any?,
-                                 attributes attr2s: [NSLayoutAttribute]?,
+                                 attributes attr2s: [NSLayoutConstraint.Attribute]?,
                                  constant: CGFloat) {
         for (i,attr1) in attr1s.enumerated() {
             let attr2 = attr2s == nil ? attr1:attr2s![i]
@@ -101,9 +101,9 @@ extension UIView {
         }
     }
     /// 修改约束 -> [attr1]丶toItem丶[attr2]丶[constant]
-    func updateLayoutConstraints(attributes attr1s: [NSLayoutAttribute],
+    func updateLayoutConstraints(attributes attr1s: [NSLayoutConstraint.Attribute],
                                  toItem: Any?,
-                                 attributes attr2s: [NSLayoutAttribute]?,
+                                 attributes attr2s: [NSLayoutConstraint.Attribute]?,
                                  constants: [CGFloat]) {
         for (i,attr1) in attr1s.enumerated() {
             let attr2 = attr2s == nil ? attr1:attr2s![i]
@@ -112,17 +112,17 @@ extension UIView {
         }
     }
     /// 修改约束 -> attr1丶toItem丶attr2丶constant
-    func updateLayoutConstraint(attribute attr1: NSLayoutAttribute,
+    func updateLayoutConstraint(attribute attr1: NSLayoutConstraint.Attribute,
                                 toItem: Any?,
-                                attribute attr2: NSLayoutAttribute?,
+                                attribute attr2: NSLayoutConstraint.Attribute?,
                                 constant: CGFloat) {
         updateLayoutConstraint(attribute: attr1, relatedBy: .equal, toItem: toItem, attribute: attr2, multiplier: 1, constant: constant)
     }
     /// 修改约束 -> attr1丶relatedBy丶toItem丶attr2丶multiplier丶constant
-    func updateLayoutConstraint(attribute attr1: NSLayoutAttribute,
-                                relatedBy relation: NSLayoutRelation,
+    func updateLayoutConstraint(attribute attr1: NSLayoutConstraint.Attribute,
+                                relatedBy relation: NSLayoutConstraint.Relation,
                                 toItem: Any?,
-                                attribute attr2: NSLayoutAttribute?,
+                                attribute attr2: NSLayoutConstraint.Attribute?,
                                 multiplier: CGFloat,
                                 constant: CGFloat) {
         
@@ -134,18 +134,18 @@ extension UIView {
     /*----------------------------删除约束----------------------------*/
     
     /// 删除约束 -> [attr1]丶toItem丶[attr2]
-    func removeLayoutConstraints(attributes attr1s: [NSLayoutAttribute],
+    func removeLayoutConstraints(attributes attr1s: [NSLayoutConstraint.Attribute],
                                  toItem: Any?,
-                                 attributes attr2s: [NSLayoutAttribute]?) {
+                                 attributes attr2s: [NSLayoutConstraint.Attribute]?) {
         for (i,attr1) in attr1s.enumerated() {
             let attr2 = attr2s == nil ? nil:attr2s![i]
             removeLayoutConstraint(attribute: attr1, toItem: toItem, attribute: attr2)
         }
     }
     /// 删除约束 -> attr1丶toItem丶attr2
-    func removeLayoutConstraint(attribute attr1: NSLayoutAttribute,
+    func removeLayoutConstraint(attribute attr1: NSLayoutConstraint.Attribute,
                                 toItem: Any?,
-                                attribute attr2: NSLayoutAttribute?) {
+                                attribute attr2: NSLayoutConstraint.Attribute?) {
         
         let attr2 = attr2 ?? attr1
         
@@ -171,7 +171,7 @@ extension UIView {
 }
 
 extension UIView {
-    func signleDragable() -> Void {
+    @objc func signleDragable() -> Void {
         signleDraggableInView(view: self.superview, damping: CGFloat(0.4))
     }
     
@@ -218,7 +218,7 @@ extension UIView {
         let panLocation = pan.location(in: zm_playground)
         if pan.state == .began {
             signleUpdateSnapPoint()
-            let offSet = UIOffsetMake(panLocation.x - (zm_centerPoint?.x)!, panLocation.y - (zm_centerPoint?.y)!)
+            let offSet = UIOffset(horizontal: panLocation.x - (zm_centerPoint?.x)!, vertical: panLocation.y - (zm_centerPoint?.y)!)
             zm_animator?.removeAllBehaviors()
             zm_attachmentBehavior = UIAttachmentBehavior.init(item: self, offsetFromCenter: offSet, attachedToAnchor: panLocation)
             zm_animator?.addBehavior(zm_attachmentBehavior!)

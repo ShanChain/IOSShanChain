@@ -43,7 +43,7 @@ class JCSingleSettingViewController: UIViewController, CustomNavigation {
         addRightBarButtonItem(withTarget: self, sel: #selector(_reportAction), image: UIImage.loadImage("Fill-11"), selectedImage: UIImage.loadImage("Fill-11"))
     }
     
-    func _reportAction(){
+    @objc func _reportAction(){
         let reportVC:SCReportController = SCReportController()
         reportVC.userId = user.username
         reportVC.isReportPersonal = true

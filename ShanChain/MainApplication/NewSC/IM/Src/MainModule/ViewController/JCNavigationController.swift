@@ -75,9 +75,9 @@ final class JCNavigationController: UINavigationController {
         self.navigationBar.isTranslucent = true
         navBar.barTintColor = SC_ThemeMainColor
         navBar.tintColor = .white
-        var attrs = [String : AnyObject]()
-        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18)
-        attrs[NSForegroundColorAttributeName] = UIColor.white
+        var attrs = [NSAttributedString.Key : AnyObject]()
+        attrs[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 18)
+        attrs[NSAttributedString.Key.foregroundColor] = UIColor.white
         navBar.titleTextAttributes = attrs
         navBar.backIndicatorTransitionMaskImage = UIImage.loadImage("nav_btn_back_default")
         navBar.backIndicatorImage = UIImage.loadImage("nav_btn_back_default")

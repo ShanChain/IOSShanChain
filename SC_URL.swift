@@ -15,7 +15,7 @@ import Foundation
 public let  HotChatRoom_URL = "/web/api/sys/hotChatRoom" // 热门元社区
 public let  ShareRoom_URL = "/v1/2.0/share/shareRoom" // 分享聊天室
 public let  AddFocus_URL = "/v1/focus/focus" // 添加关注
-
+public let  SearchRoom_URL = "/v1/2.0/hotChatRoom/search" // 搜索聊天室
 
 /*
  公共接口
@@ -36,6 +36,7 @@ public let  VendorGet_URL = "/wallet/api/coupons/vendor/get" // 创建方获取�
 public let  CheckVendor_URL = "/wallet/api/coupons/vendor/check" // 判定当前卡券代号是否可用
 public let  CreateCoupons_URL = "/wallet/api/coupons/vendor/create" // 创建卡劵
 public let  CouponsVendorList_URL = "/wallet/api/coupons/vendor/list" // 获取当前用户可领取卡券列表
+public let  CouponsVendorListAll_URL = "/wallet/api/coupons/vendor/listAll" // 获取当前用户可领取卡券列表
 public let  CouponsVendorDetails_URL = "/wallet/api/coupons/vendor/Get" // 获取当前卡劵详情
 
 public let  User_Create_List_URL = "/wallet/api/coupons/vendor/createList" // 获取用户已发布的卡券列表
@@ -65,6 +66,7 @@ public let TASK_DETAILS_URL  = "/v1/task/detail" //任务详情
 public let TASK_RECEIVE_URL  = "/v1/task/receive" //任务领取
 
 // 我的任务
+public let TOTALTASK_LIST_URL  = "/v1/task/totaltask/list" //首页社区帮所有任务列表
 public let ROOMTASK_LIST_URL  = "/v1/task/roomtask/list" //查询广场所有任务列表
 public let NACCALIMED_LIST_URL  = "/v1/task/unaccalimed/list" //查询广场未领取任务列表
 

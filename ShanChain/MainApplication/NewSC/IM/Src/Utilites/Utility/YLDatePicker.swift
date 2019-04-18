@@ -53,7 +53,7 @@ public class YLDatePicker: UIView {
     
     fileprivate var backWindow: UIWindow = {
         let backWindow = UIWindow(frame: UIScreen.main.bounds)
-        backWindow.windowLevel = UIWindowLevelStatusBar
+        backWindow.windowLevel = UIWindow.Level.statusBar
         backWindow.backgroundColor = UIColor(white: 0, alpha: 0.3)
         backWindow.isHidden = true
         return backWindow

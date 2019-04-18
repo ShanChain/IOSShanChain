@@ -65,7 +65,7 @@ extension AppDelegate: JMessageDelegate {
     func _logout() {
         JCVerificationInfoDB.shareInstance.queue = nil
         UserDefaults.standard.removeObject(forKey: kCurrentUserName)
-        let alertView = UIAlertView(title: "您的账号在其它设备上登录", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "重新登录")
+        let alertView = UIAlertView(title: "您的账号在其它设备上登录", message: "", delegate: self, cancelButtonTitle: "重新登录")
         alertView.show()
     }
     
@@ -86,29 +86,30 @@ extension AppDelegate: UIAlertViewDelegate {
     }
     
     public func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-        if buttonIndex == 1 {
-            guard let username = UserDefaults.standard.object(forKey: kLastUserName) as? String  else {
-                pushToLoginView()
-                return
-            }
-            guard let password = UserDefaults.standard.object(forKey: kCurrentUserPassword) as? String else {
-                pushToLoginView()
-                return
-            }
-            MBProgressHUD_JChat.showMessage(message: "登录中", toView: nil)
-            JMSGUser.login(withUsername: username, password: password) { (result, error) in
-                MBProgressHUD_JChat.hide(forView: nil, animated: true)
-                if error == nil {
-                    UserDefaults.standard.set(username, forKey: kLastUserName)
-                    UserDefaults.standard.set(username, forKey: kCurrentUserName)
-                    UserDefaults.standard.set(password, forKey: kCurrentUserPassword)
-                } else {
-                    self.pushToLoginView()
-                    MBProgressHUD_JChat.show(text: "\(String.errorAlert(error! as NSError))", view: self.window?.rootViewController?.view, 2)
-                }
-            }
-        } else {
-            pushToLoginView()
-        }
+//        if buttonIndex == 1 {
+//            guard let username = UserDefaults.standard.object(forKey: kLastUserName) as? String  else {
+//                pushToLoginView()
+//                return
+//            }
+//            guard let password = UserDefaults.standard.object(forKey: kCurrentUserPassword) as? String else {
+//                pushToLoginView()
+//                return
+//            }
+//            MBProgressHUD_JChat.showMessage(message: "登录中", toView: nil)
+//            JMSGUser.login(withUsername: username, password: password) { (result, error) in
+//                MBProgressHUD_JChat.hide(forView: nil, animated: true)
+//                if error == nil {
+//                    UserDefaults.standard.set(username, forKey: kLastUserName)
+//                    UserDefaults.standard.set(username, forKey: kCurrentUserName)
+//                    UserDefaults.standard.set(password, forKey: kCurrentUserPassword)
+//                } else {
+//                    self.pushToLoginView()
+//                    MBProgressHUD_JChat.show(text: "\(String.errorAlert(error! as NSError))", view: self.window?.rootViewController?.view, 2)
+//                }
+//            }
+//        } else {
+//            pushToLoginView()
+//        }
+        pushToLoginView()
     }
 }

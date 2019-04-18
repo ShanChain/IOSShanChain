@@ -566,8 +566,14 @@ static NSString* getRequstToken(){
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        SCLog(@"failure error%@", error);
-//        [HHTool showError:@"请求错误！"];
+        SCLog(@"failure error%@", error.userInfo[@"NSUnderlyingError"]);
+        NSError *tmp = error.userInfo[@"NSUnderlyingError"];
+        NSHTTPURLResponse *response = tmp.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
+        NSInteger statusCode = response.statusCode;
+        if (statusCode == 413) {
+            // 413 上传图片过大
+            [HHTool showError:@"上传图片有误！"];
+        }
         NSString  *mimeType = task.response.MIMEType;
         NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
         if (errorData) {

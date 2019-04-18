@@ -21,6 +21,7 @@
 		22104B51224A202200EB26A2 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B49224A202100EB26A2 /* WebViewJavascriptBridge.m */; };
 		22104B52224A202200EB26A2 /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B4C224A202100EB26A2 /* WebViewJavascriptBridge_JS.m */; };
 		22116CC62248D79E008EF672 /* SCCacheChatRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 22116CC52248D79E008EF672 /* SCCacheChatRecord.m */; };
+		22122EC5226474EA00C60995 /* SystemInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22122EC4226474EA00C60995 /* SystemInformationViewController.m */; };
 		2215C00021F9B37200D624C6 /* BindInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */; };
 		2215C00221FA9FC900D624C6 /* AboutMarJarViewContriller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215C00121FA9FC900D624C6 /* AboutMarJarViewContriller.swift */; };
 		2215C00621FB0AE600D624C6 /* VersionUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2215C00521FB0AE600D624C6 /* VersionUpdateModel.swift */; };
@@ -120,6 +121,8 @@
 		2231087A21DF3231006D458F /* AppointmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2231087C21DF3231006D458F /* AppointmentListCell.xib */; };
 		2231088221DF33C9006D458F /* AppointmentCreateCardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2231088421DF33C9006D458F /* AppointmentCreateCardViewController.storyboard */; };
 		2231088921DF4C81006D458F /* SCDynamicLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2231088B21DF4C81006D458F /* SCDynamicLoginViewController.xib */; };
+		223892A822671F79008E7734 /* yh_image_picked_im@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223892A622671F78008E7734 /* yh_image_picked_im@3x.png */; };
+		223892A922671F79008E7734 /* yh_image_picked_im@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223892A722671F79008E7734 /* yh_image_picked_im@2x.png */; };
 		223F9876217F0C880031DB95 /* SCImManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F9875217F0C880031DB95 /* SCImManager.swift */; };
 		223F9878217F0DF00031DB95 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F9877217F0DF00031DB95 /* libstdc++.6.0.9.tbd */; };
 		223F987A217F0E440031DB95 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F9879217F0E440031DB95 /* CoreAudio.framework */; };
@@ -127,8 +130,6 @@
 		223F987E217F0E5E0031DB95 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F987D217F0E5E0031DB95 /* AudioToolbox.framework */; };
 		223F9967217F12040031DB95 /* yh_image_no_picked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223F9880217F12030031DB95 /* yh_image_no_picked@2x.png */; };
 		223F9968217F12040031DB95 /* yh_image_no_picked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223F9881217F12030031DB95 /* yh_image_no_picked@3x.png */; };
-		223F9969217F12040031DB95 /* yh_image_picked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223F9882217F12030031DB95 /* yh_image_picked@2x.png */; };
-		223F996A217F12040031DB95 /* yh_image_picked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223F9883217F12030031DB95 /* yh_image_picked@3x.png */; };
 		223F996B217F12040031DB95 /* emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 223F9885217F12030031DB95 /* emoticons.bundle */; };
 		223F996C217F12040031DB95 /* JCCEmoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F988A217F12030031DB95 /* JCCEmoticon.swift */; };
 		223F996D217F12040031DB95 /* JCCEmoticonLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223F988B217F12030031DB95 /* JCCEmoticonLarge.swift */; };
@@ -462,6 +463,7 @@
 		22E1A1302201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E1A12E2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.xib */; };
 		22E1A1342201B3A3004CCE9D /* SavePhotoToAssignpath.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1A1332201B3A3004CCE9D /* SavePhotoToAssignpath.m */; };
 		22EBC11321533BAE00C11359 /* MCDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EBC11121533BA800C11359 /* MCDate.m */; };
+		22FBA1A2226480D0003C9699 /* SystemInformationCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FBA1A1226480D0003C9699 /* SystemInformationCollectionViewCell.m */; };
 		33055FEA1F0503AC005740E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33055FE91F0503AC005740E0 /* StoreKit.framework */; };
 		332AB5EC1F4ED69F00888313 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5D91F4ED69F00888313 /* NSMutableAttributedString+TY.m */; };
 		332AB5ED1F4ED69F00888313 /* TYAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AB5DB1F4ED69F00888313 /* TYAttributedLabel.m */; };
@@ -714,6 +716,8 @@
 		22104B4E224A202100EB26A2 /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		22116CC42248D79E008EF672 /* SCCacheChatRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCacheChatRecord.h; sourceTree = "<group>"; };
 		22116CC52248D79E008EF672 /* SCCacheChatRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCacheChatRecord.m; sourceTree = "<group>"; };
+		22122EC3226474EA00C60995 /* SystemInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemInformationViewController.h; sourceTree = "<group>"; };
+		22122EC4226474EA00C60995 /* SystemInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemInformationViewController.m; sourceTree = "<group>"; };
 		2215BFFF21F9B37200D624C6 /* BindInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindInfoModel.swift; sourceTree = "<group>"; };
 		2215C00121FA9FC900D624C6 /* AboutMarJarViewContriller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMarJarViewContriller.swift; sourceTree = "<group>"; };
 		2215C00521FB0AE600D624C6 /* VersionUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionUpdateModel.swift; sourceTree = "<group>"; };
@@ -863,6 +867,8 @@
 		2231088A21DF4C81006D458F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SCDynamicLoginViewController.xib; sourceTree = "<group>"; };
 		2231088D21DF4C88006D458F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SCDynamicLoginViewController.strings"; sourceTree = "<group>"; };
 		2231088F21DF4C8A006D458F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SCDynamicLoginViewController.strings; sourceTree = "<group>"; };
+		223892A622671F78008E7734 /* yh_image_picked_im@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yh_image_picked_im@3x.png"; sourceTree = "<group>"; };
+		223892A722671F79008E7734 /* yh_image_picked_im@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yh_image_picked_im@2x.png"; sourceTree = "<group>"; };
 		223F9874217F0C870031DB95 /* ShanChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShanChain-Bridging-Header.h"; sourceTree = "<group>"; };
 		223F9875217F0C880031DB95 /* SCImManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCImManager.swift; sourceTree = "<group>"; };
 		223F9877217F0DF00031DB95 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -871,8 +877,6 @@
 		223F987D217F0E5E0031DB95 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		223F9880217F12030031DB95 /* yh_image_no_picked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yh_image_no_picked@2x.png"; sourceTree = "<group>"; };
 		223F9881217F12030031DB95 /* yh_image_no_picked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yh_image_no_picked@3x.png"; sourceTree = "<group>"; };
-		223F9882217F12030031DB95 /* yh_image_picked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yh_image_picked@2x.png"; sourceTree = "<group>"; };
-		223F9883217F12030031DB95 /* yh_image_picked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yh_image_picked@3x.png"; sourceTree = "<group>"; };
 		223F9885217F12030031DB95 /* emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = emoticons.bundle; sourceTree = "<group>"; };
 		223F988A217F12030031DB95 /* JCCEmoticon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCCEmoticon.swift; sourceTree = "<group>"; };
 		223F988B217F12030031DB95 /* JCCEmoticonLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCCEmoticonLarge.swift; sourceTree = "<group>"; };
@@ -1270,6 +1274,8 @@
 		22EBC1042149E73000C11359 /* EnvironmentConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentConfiguration.h; sourceTree = "<group>"; };
 		22EBC11121533BA800C11359 /* MCDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDate.m; sourceTree = "<group>"; };
 		22EBC11221533BA900C11359 /* MCDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDate.h; sourceTree = "<group>"; };
+		22FBA1A0226480D0003C9699 /* SystemInformationCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemInformationCollectionViewCell.h; sourceTree = "<group>"; };
+		22FBA1A1226480D0003C9699 /* SystemInformationCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemInformationCollectionViewCell.m; sourceTree = "<group>"; };
 		287B6C88B89479077A2AC137 /* Pods-ShanChain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShanChain.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShanChain/Pods-ShanChain.debug.xcconfig"; sourceTree = "<group>"; };
 		33055FE91F0503AC005740E0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		332AB5D81F4ED69F00888313 /* NSMutableAttributedString+TY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+TY.h"; sourceTree = "<group>"; };
@@ -2018,6 +2024,8 @@
 			children = (
 				222D4017221A9725004DE8C6 /* UploadPhotePasswordView.swift */,
 				222D4019221A972F004DE8C6 /* UploadPhotePasswordView.xib */,
+				22FBA1A0226480D0003C9699 /* SystemInformationCollectionViewCell.h */,
+				22FBA1A1226480D0003C9699 /* SystemInformationCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2063,10 +2071,10 @@
 		223F987F217F12030031DB95 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				223892A722671F79008E7734 /* yh_image_picked_im@2x.png */,
+				223892A622671F78008E7734 /* yh_image_picked_im@3x.png */,
 				223F9880217F12030031DB95 /* yh_image_no_picked@2x.png */,
 				223F9881217F12030031DB95 /* yh_image_no_picked@3x.png */,
-				223F9882217F12030031DB95 /* yh_image_picked@2x.png */,
-				223F9883217F12030031DB95 /* yh_image_picked@3x.png */,
 				223F9884217F12030031DB95 /* Themes */,
 			);
 			path = Resources;
@@ -3038,6 +3046,8 @@
 				22E1A12E2201AC3C004CCE9D /* MyWalletGenerateSuccessViewController.xib */,
 				222D3FEE2202CD2E004DE8C6 /* MyWalletWelcomeViewController.swift */,
 				222D3FEF2202CD2E004DE8C6 /* MyWalletWelcomeViewController.xib */,
+				22122EC3226474EA00C60995 /* SystemInformationViewController.h */,
+				22122EC4226474EA00C60995 /* SystemInformationViewController.m */,
 			);
 			path = MyWallet;
 			sourceTree = "<group>";
@@ -4059,6 +4069,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hant",
@@ -4103,6 +4114,7 @@
 				223F9A7B2182C46D0031DB95 /* RoomTopView.xib in Resources */,
 				485E66251F42862900B158BF /* EaseUIResource.bundle in Resources */,
 				22581B4F21DF5F4200F1D1B1 /* LeftWalletTableViewCell.xib in Resources */,
+				223892A822671F79008E7734 /* yh_image_picked_im@3x.png in Resources */,
 				22C9178A219284B5002E5240 /* TaskListCell.xib in Resources */,
 				2242C0032159C34E00707024 /* YYHud.xib in Resources */,
 				223F99EC217F12040031DB95 /* blackTheme.bundle in Resources */,
@@ -4117,6 +4129,7 @@
 				221BEF0521D4A522007C76BF /* CommunityHelpViewController.xib in Resources */,
 				22C917772191BDE5002E5240 /* MapFootprintViewController.xib in Resources */,
 				222D401A221A972F004DE8C6 /* UploadPhotePasswordView.xib in Resources */,
+				223892A922671F79008E7734 /* yh_image_picked_im@2x.png in Resources */,
 				2231088221DF33C9006D458F /* AppointmentCreateCardViewController.storyboard in Resources */,
 				485E66631F42873F00B158BF /* MJRefresh.bundle in Resources */,
 				22C91782219274A8002E5240 /* BMKTestLocationViewController.xib in Resources */,
@@ -4124,7 +4137,6 @@
 				223F9968217F12040031DB95 /* yh_image_no_picked@3x.png in Resources */,
 				224E6B0421EEC147007C172E /* icon_letterDelete@2x.png in Resources */,
 				48718D711F42277400010AA0 /* MJPhotoBrowser.bundle in Resources */,
-				223F996A217F12040031DB95 /* yh_image_picked@3x.png in Resources */,
 				2229ED1F21BA726800E33A8D /* MyCardCouponListViewController.xib in Resources */,
 				223F9A742182AEC10031DB95 /* 0.jpg in Resources */,
 				22581B4A21DF5F4200F1D1B1 /* EditPersonalInfoViewController.xib in Resources */,
@@ -4149,7 +4161,6 @@
 				22A2EB9121BE1BB100737265 /* AppointmentCardDetialsCell.xib in Resources */,
 				22581B5B21ED847500F1D1B1 /* CreateCouponExampleView.xib in Resources */,
 				221BEF0921D4A8A9007C76BF /* HelpCenterCell.xib in Resources */,
-				223F9969217F12040031DB95 /* yh_image_picked@2x.png in Resources */,
 				89E031531FCECBA70089240B /* GWLPhotoSelector.bundle in Resources */,
 				2207068E219A81E800404459 /* PersonalChatInfoViewController.xib in Resources */,
 				22C9178E2192BA76002E5240 /* HHDefaultCell.xib in Resources */,
@@ -4252,9 +4263,9 @@
 				"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle",
 				"${PODS_ROOT}/RedPacketAlipay/AlipaySDK.bundle",
 				"${PODS_ROOT}/RedpacketAliAuthLib/Redpacket/resources/RedpacketBundle.bundle",
-				"${PODS_ROOT}/mob_sharesdk/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
-				"${PODS_ROOT}/mob_sharesdk/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
-				"${PODS_ROOT}/mob_sharesdk/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
+				"${PODS_ROOT}/mob_sharesdk/ShareSDK/Support/Required/ShareSDK.bundle",
+				"${PODS_ROOT}/mob_sharesdk/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
+				"${PODS_ROOT}/mob_sharesdk/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -4479,6 +4490,7 @@
 				223F99F2217F12040031DB95 /* SAIInputBackgroundView.swift in Sources */,
 				223F9984217F12040031DB95 /* JCMessageVideoContent.swift in Sources */,
 				48718D771F42277400010AA0 /* SDWebImageManager+MJ.m in Sources */,
+				22122EC5226474EA00C60995 /* SystemInformationViewController.m in Sources */,
 				33B7CCEE1EC5865700FB6378 /* main.m in Sources */,
 				223F99A7217F12040031DB95 /* JCRemoveMemberViewController.swift in Sources */,
 				223F99D4217F12040031DB95 /* JCNicknameViewController.swift in Sources */,
@@ -4727,6 +4739,7 @@
 				221BEF0421D4A522007C76BF /* CommunityHelpViewController.swift in Sources */,
 				485E65FE1F42862900B158BF /* NSString+Valid.m in Sources */,
 				223F99CA217F12040031DB95 /* JCNoteNameViewController.swift in Sources */,
+				22FBA1A2226480D0003C9699 /* SystemInformationCollectionViewCell.m in Sources */,
 				332AB6541F4ED8C900888313 /* UIImage+Extension.m in Sources */,
 				223F9A16217F12040031DB95 /* JCNavigationController.swift in Sources */,
 				223F9983217F12040031DB95 /* JCMessageTimeLineContentView.swift in Sources */,
@@ -5021,6 +5034,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -5070,6 +5084,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5107,13 +5122,7 @@
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ShanChain/PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/RedpacketAliAuthLib\"",
-					"\"${PODS_ROOT}/Headers/Public/React\"",
-					"\"${PODS_ROOT}/Headers/Public/yoga\"",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ShanChain/en.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5134,11 +5143,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ae974025-c15e-471d-934c-4d5de3cda5d1";
+				PROVISIONING_PROFILE = "c8c8d155-506c-431c-9842-d8b782e5b46c";
 				PROVISIONING_PROFILE_SPECIFIER = Development_PP;
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s arm64 armv7";
 			};
@@ -5176,13 +5186,7 @@
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ShanChain/PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/RedpacketAliAuthLib\"",
-					"\"${PODS_ROOT}/Headers/Public/React\"",
-					"\"${PODS_ROOT}/Headers/Public/yoga\"",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ShanChain/en.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5203,10 +5207,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shanchain.shandata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1bbf1f72-3561-4fab-ad25-f42a4fcc58ca";
-				PROVISIONING_PROFILE_SPECIFIER = adhoc;
+				PROVISIONING_PROFILE = "10875f27-8b2c-4824-8254-9d9dca6e57b9";
+				PROVISIONING_PROFILE_SPECIFIER = "马甲_APPStore";
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kilokilo/Desktop/TRUNK_ShanChain/ShanChain-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s arm64 armv7";
 			};

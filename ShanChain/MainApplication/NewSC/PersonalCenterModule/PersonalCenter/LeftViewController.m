@@ -16,7 +16,7 @@
 #import "MyWalletViewController.h"
 #import "NotificationHandler.h"
 #import "OpinionFeedbackViewController.h"
-
+//#import "SystemInformationViewController.h"
 #define HeaderViewHeight 200
 
 @interface LeftViewController ()<DUX_UploadUserIconDelegate>
@@ -222,6 +222,8 @@
             }else if ([title isEqualToString:NSLocalizedString(@"sc_MyMessage", nil)]){
                 JCConversationListViewController *conversationListVC = [[JCConversationListViewController alloc]init];
                 [nav.topViewController.navigationController pushViewController:conversationListVC animated:YES];
+//                SystemInformationViewController *vc = [[SystemInformationViewController alloc]init];
+//                [nav.visibleViewController.navigationController pushViewController:vc animated:YES];
             }else if ([title isEqualToString:NSLocalizedString(@"sc_MyWallet", nil)]){
                 //
                 MyWalletViewController  *walletVC = [[MyWalletViewController alloc]init];

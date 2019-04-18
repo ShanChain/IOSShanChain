@@ -104,11 +104,11 @@ class JCRegisterInfoViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
-    func textFieldDidChanged(_ textField: UITextField) {
+    @objc func textFieldDidChanged(_ textField: UITextField) {
         if textField.markedTextRange == nil {
             let text = textField.text!
-            if text.characters.count > 30 {
-                let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 30))
+            if text.count > 30 {
+                let range = text.startIndex ..< text.index(text.startIndex, offsetBy: 30)
                 
                 let subText = text.substring(with: range)
                 textField.text = subText
@@ -116,11 +116,11 @@ class JCRegisterInfoViewController: UIViewController {
         }
     }
     
-    func _tapView() {
+    @objc func _tapView() {
         view.endEditing(true)
     }
      
-    func _tapHandler() {
+    @objc func _tapHandler() {
         view.endEditing(true)
         let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), destructiveButtonTitle: nil, otherButtonTitles: "  从相册中选择", "拍照")
         actionSheet.tag = 1001
@@ -128,7 +128,7 @@ class JCRegisterInfoViewController: UIViewController {
     }
 
     //MARK: - click event
-    func _userRegister() {
+    @objc func _userRegister() {
         MBProgressHUD_JChat.showMessage(message: "保存中", toView: self.view)
         userLogin(withUsername: self.username, password: self.password)
     }
@@ -162,7 +162,7 @@ class JCRegisterInfoViewController: UIViewController {
     
     private func uploadImage() {
         if let image = image {
-            let imageData = UIImageJPEGRepresentation(image, 0.8)
+            let imageData = image.jpegData(compressionQuality: 0.8)
             JMSGUser.updateMyInfo(withParameter: imageData!, userFieldType: .fieldsAvatar, completionHandler: { (result, error) in
                 if error == nil {
                     let avatorData = NSKeyedArchiver.archivedData(withRootObject: imageData!)
@@ -206,9 +206,9 @@ extension JCRegisterInfoViewController: UINavigationControllerDelegate, UIImageP
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        var image = info[UIImagePickerControllerOriginalImage] as! UIImage?
+        var image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage?
         image = image?.fixOrientation()
         self.image = image
         avatorView.image = image

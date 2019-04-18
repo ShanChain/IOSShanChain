@@ -46,7 +46,7 @@ class HHPublishTaskContent: NSObject,JCMessageContentType{
             text = NSAttributedString(string:task)
         }
         let mattr = NSMutableAttributedString(attributedString: text)
-        mattr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 14), range: NSMakeRange(0, mattr.length))
+        mattr.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 14), range: NSMakeRange(0, mattr.length))
         let mattrSize = mattr.boundingRect(with: CGSize(width: Double(SCREEN_WIDTH - 120), height: Double(MAXFLOAT)), options: [.usesLineFragmentOrigin,.usesFontLeading], context: nil)
         self.text = mattr
         return .init(width: CGFloat(SCREEN_WIDTH - 120), height: mattrSize.height + 200)

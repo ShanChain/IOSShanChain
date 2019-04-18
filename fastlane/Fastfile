@@ -45,6 +45,6 @@ platform :ios do
   )
 
       build_app(export_method: "ad-hoc")
-      pgyer(api_key: "82f584c10019b8efdb484003bda9b543", user_key: "d1d68f0fe41cdf8ed7ad7236c65c152c", update_description: "update by fastlane")
+      pgyer(api_key: "524793b674ba75a634b1cb2468ed1605", user_key: "4b3765e514060845a86d793b0291868d", update_description: "update by fastlane")
   end
 end

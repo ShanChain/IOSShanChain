@@ -48,15 +48,15 @@ public class JCMessageImageCollectionViewCell: UICollectionViewCell {
         addGestureRecognizer(longTapGesture)
     }
     
-    func singleTapImage(_ gestureRecognizer: UITapGestureRecognizer)  {
+    @objc func singleTapImage(_ gestureRecognizer: UITapGestureRecognizer)  {
         delegate?.singleTap?()
     }
     
-    func doubleTapImage(_ gestureRecognizer: UITapGestureRecognizer) {
+    @objc func doubleTapImage(_ gestureRecognizer: UITapGestureRecognizer) {
         adjustImageScale()
     }
     
-    func longTapImage(_ gestureRecognizer: UILongPressGestureRecognizer)  {
+    @objc func longTapImage(_ gestureRecognizer: UILongPressGestureRecognizer)  {
         if gestureRecognizer.state == .began {
             delegate?.longTap?(tableviewCell: self)
         }
@@ -81,7 +81,7 @@ public class JCMessageImageCollectionViewCell: UICollectionViewCell {
         content.thumbImageData { (data, msgId, error) in
             if msgId == message.msgId {
                 if let data = data {
-                    self.messageImage.layer.magnificationFilter = "nearest"
+                    self.messageImage.layer.magnificationFilter = CALayerContentsFilter(rawValue: "nearest")
                     self.messageImage.image = UIImage(data: data)
                 }
             }

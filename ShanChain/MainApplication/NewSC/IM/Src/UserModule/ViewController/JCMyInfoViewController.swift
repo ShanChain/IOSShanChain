@@ -68,7 +68,7 @@ class JCMyInfoViewController: SCBaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(_updateUserInfo), name: NSNotification.Name(rawValue: kUpdateUserInfo), object: nil)
     }
     
-    func _updateUserInfo() {
+    @objc func _updateUserInfo() {
         user = JMSGUser.myInfo()
         tableview.reloadData()
     }
@@ -257,9 +257,9 @@ extension JCMyInfoViewController: UINavigationControllerDelegate, UIImagePickerC
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        var image = info[UIImagePickerControllerEditedImage] as! UIImage?
+        var image = info[UIImagePickerController.InfoKey.editedImage] as! UIImage?
         image = image?.fixOrientation()
         if image != nil {
             MBProgressHUD_JChat.showMessage(message: "正在上传", toView: view)
@@ -270,7 +270,7 @@ extension JCMyInfoViewController: UINavigationControllerDelegate, UIImagePickerC
                     MBProgressHUD_JChat.show(text: "上传成功", view: self.view)
                     NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateUserInfo), object: nil)
                     self.tableview.reloadData()
-                    guard let imageData = UIImageJPEGRepresentation(image!, 0.8) else {
+                    guard let imageData = image?.jpegData(compressionQuality: 0.8) else {
                         return
                     }
                     let avatorData = NSKeyedArchiver.archivedData(withRootObject: imageData)
@@ -281,7 +281,7 @@ extension JCMyInfoViewController: UINavigationControllerDelegate, UIImagePickerC
                 
             }
             
-            guard let imageData = UIImageJPEGRepresentation(image!, 0.8) else {
+            guard let imageData = image?.jpegData(compressionQuality: 0.8) else {
                 return
             }
             JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar) { (resultObject, error) -> Void in

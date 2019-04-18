@@ -17,6 +17,7 @@ class HotCommunityModel: HandyJSON {
     var background:String?
     var sortNo:String?
     var userNum:String?
+    var type:String?
     
     required init() {}
 }

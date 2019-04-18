@@ -14,7 +14,7 @@ class SCSettingViewController: UITableViewController {
     
     @IBOutlet weak var bindpwdSwitch: UISwitch!
     @IBOutlet weak var versionLb: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "设置"

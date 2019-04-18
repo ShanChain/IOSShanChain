@@ -36,7 +36,7 @@ class JCButtonCell: UITableViewCell {
         }
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         _init()
     }
@@ -77,7 +77,7 @@ class JCButtonCell: UITableViewCell {
     }
     
     //MARK: - click func
-    func _click(_ sender: UIButton) {
+    @objc func _click(_ sender: UIButton) {
         delegate?.buttonCell?(clickButton: sender)
     }
 }

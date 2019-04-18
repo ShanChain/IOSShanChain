@@ -101,6 +101,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="AmO-B9-jkO"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="contentLb" destination="gBD-oq-j15" id="8Us-tW-htW"/>
                 <outlet property="dealLineLb" destination="XkZ-U8-CTU" id="f7f-8V-4oB"/>

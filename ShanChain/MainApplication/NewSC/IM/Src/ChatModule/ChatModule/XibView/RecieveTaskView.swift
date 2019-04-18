@@ -85,7 +85,7 @@ class RecieveTaskView: UIView {
         animation.fromValue = NSNumber.init(value: 1.0)
         animation.toValue = NSNumber.init(value: 0.01)
         animation.isRemovedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = CAMediaTimingFillMode.forwards
         layer.add(animation, forKey: "scale-layer")
         _ = delay(0.45) {
             self.removeFromSuperview()

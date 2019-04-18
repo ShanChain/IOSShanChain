@@ -27,13 +27,13 @@ open class JCMessageNoticeContent: NSObject, JCMessageContentType {
     open func sizeThatFits(_ size: CGSize) -> CGSize {
         
         let attr = NSMutableAttributedString(string: text, attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 12),
-            NSForegroundColorAttributeName: UIColor.white,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12),
+            NSAttributedString.Key.foregroundColor: UIColor.white,
             ]) 
         let mattrSize = attr.boundingRect(with: CGSize(width: 250.0, height: Double(MAXFLOAT)), options: [.usesLineFragmentOrigin,.usesFontLeading], context: nil)
         let size = CGSize(width: mattrSize.size.width + 11, height: mattrSize.size.height + 4)
         return size
     }
 
-    open static let unsupport: JCMessageNoticeContent = JCMessageNoticeContent(text: "The message does not support")
+    public static let unsupport: JCMessageNoticeContent = JCMessageNoticeContent(text: "The message does not support")
 }

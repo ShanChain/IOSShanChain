@@ -70,7 +70,7 @@ open class JCMessageTipsView: UIView, JCMessageContentViewType {
     
     private lazy var activityView: UIActivityIndicatorView = {
         let activityView = UIActivityIndicatorView(frame: CGRect(x: 100 - 15, y: 5, width: 10, height: 10))
-        activityView.activityIndicatorViewStyle = .gray
+        activityView.style = .gray
         activityView.isUserInteractionEnabled = false
         return activityView
     }()
@@ -104,11 +104,11 @@ open class JCMessageTipsView: UIView, JCMessageContentViewType {
         #endif
     }
     
-    func _clickUnreadCount() {
+    @objc func _clickUnreadCount() {
         delegate?.tapUnreadTips?(message: message)
     }
     
-    func _tapHandler(sender: UITapGestureRecognizer) {
+    @objc func _tapHandler(sender: UITapGestureRecognizer) {
         delegate?.clickTips?(message: message)
     }
 }

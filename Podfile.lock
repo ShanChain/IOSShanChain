@@ -3,13 +3,13 @@ PODS:
   - ASExtendedCircularMenu (0.1.1)
   - BaiduMapKit (4.0.0)
   - Bugly (2.5.0)
-  - HandyJSON (4.1.3)
-  - IQKeyboardManager (6.2.0)
-  - JCore (1.2.5)
+  - HandyJSON (5.0.0-beta.1)
+  - IQKeyboardManager (6.2.1)
+  - JCore (1.2.6)
   - JMessage (3.7.0):
     - JCore (~> 1.0)
-  - JPush (3.1.1.1):
-    - JCore (~> 1.2.5)
+  - JPush (3.1.2):
+    - JCore (~> 1.2.6)
   - JShare (1.6.0):
     - JCore (~> 1.2)
   - LBXScan/LBXNative (2.3):
@@ -22,33 +22,33 @@ PODS:
   - LBXScan/Types (2.3)
   - LBXScan/UI (2.3):
     - LBXScan/Types (~> 2.2)
-  - LTScrollView (0.2.0)
+  - LTScrollView (0.2.1)
   - MBProgressHUD (1.0.0)
-  - mob_sharesdk (4.2.0):
-    - mob_sharesdk/ShareSDK (= 4.2.0)
+  - mob_sharesdk (4.2.4):
+    - mob_sharesdk/ShareSDK (= 4.2.4)
     - MOBFoundation
-  - mob_sharesdk/ShareSDK (4.2.0):
+  - mob_sharesdk/ShareSDK (4.2.4):
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/QQ (4.2.0):
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.2.4):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.2.0):
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.2.4):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.2.0):
+  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.2.4):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKUI (4.2.0):
+  - mob_sharesdk/ShareSDKUI (4.2.4):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - MOBFoundation (3.1.9)
+  - MOBFoundation (3.2.2)
   - ReactiveObjC (2.1.2)
   - RedpacketAliAuthLib (1.1.4):
     - RedPacketAlipay
   - RedPacketAlipay (15.0.2)
-  - RxCocoa (3.6.1):
-    - RxSwift (~> 3.6)
-  - RxSwift (3.6.1)
+  - RxCocoa (4.5.0):
+    - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxSwift (4.5.0)
   - SnapKit (4.0.1)
   - UMengAnalytics-NO-IDFA (4.2.5)
   - YHPhotoKit (0.2.1)
@@ -61,7 +61,7 @@ DEPENDENCIES:
   - ASExtendedCircularMenu (from `https://github.com/anshul18895/ASExtendedCircularMenu`)
   - BaiduMapKit (~> 4.0.0)
   - Bugly
-  - HandyJSON (~> 4.1.1)
+  - HandyJSON (~> 5.0.0-beta.1)
   - IQKeyboardManager
   - JMessage (~> 3.7.0)
   - JPush
@@ -79,8 +79,8 @@ DEPENDENCIES:
   - mob_sharesdk/ShareSDKUI
   - ReactiveObjC (~> 2.1.0)
   - RedpacketAliAuthLib (~> 1.1.4)
-  - RxCocoa (~> 3.6.1)
-  - RxSwift (~> 3.6.1)
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
   - UMengAnalytics-NO-IDFA
   - YHPhotoKit
@@ -129,22 +129,22 @@ SPEC CHECKSUMS:
   ASExtendedCircularMenu: c6012cee87d7686981c2f0d184a461ae41c5dac0
   BaiduMapKit: 8fa2eb2ca81b92b740b19d9ff3b59d751d3e92e1
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
-  HandyJSON: bc81fbeb62d65ae5d5942ed29bc4a8265d18c1e8
-  IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
-  JCore: 14706de2640b25fb77dbd02332696491407f37c9
+  HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
+  IQKeyboardManager: 964638372b4a61892cc74fdfa6fd26de8c9464a2
+  JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7
   JMessage: 90c194ca878a1724694da320aad4867b489276e9
-  JPush: 25dd9013fbe106082c14f9f30a82364ee98852fb
+  JPush: d0cead70ba223a6a3b52749899ebda830dfbc49a
   JShare: 47cf1b3389ff09c333f0599d57be9f7fe1b43073
   LBXScan: e51449f0832d1fe17da632af0d22adeb3cfa3543
-  LTScrollView: 1a18ae14884eb99c27f0222203aedaccd21b72fc
+  LTScrollView: 93fff4aed9f9545f541a99b320b27808f5307c12
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  mob_sharesdk: fc8a9aab921c08e5e88a5b1f36229c6d406a2ff8
-  MOBFoundation: 11500153c10d83e4ac341f6ad6301b3998ce6db2
+  mob_sharesdk: 9797e05209dce16507be7797141f523daa033f76
+  MOBFoundation: b5ff4038ddb9a0f06b685b86408f905a10aa147c
   ReactiveObjC: 7b6782ae39f9ac0f57205c3b0c0b69b9dd7048c0
   RedpacketAliAuthLib: 6173b52c25ab728db907da89fbcda3200d1cf98a
   RedPacketAlipay: a5de6db2e2671fc9255d6d396be869e3ba2f0489
-  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
-  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   YHPhotoKit: e88368af1fca0a110d41b88417088f7e49876981
@@ -152,6 +152,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: c210922f3b4931466565cc92fab3564be30fca6d
+PODFILE CHECKSUM: 4d82288aca137df2477916d675cc3dfc3a85690e
 
 COCOAPODS: 1.5.3

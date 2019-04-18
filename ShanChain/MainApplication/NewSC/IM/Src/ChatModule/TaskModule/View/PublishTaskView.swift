@@ -82,7 +82,7 @@ class PublishTaskView: UIView {
         publishBtn.addRoundedCorners(.bottomRight, withRadii:CGSize(width: 10, height: 10))
     }
     
-    func _tapSelectTime(){
+    @objc func _tapSelectTime(){
         
         let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddHours(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMDHm) { [weak self] (date) in
             self?.selectTimeTextFid.text = date.getString(format: "YYYY-MM-dd HH:mm")
@@ -121,7 +121,7 @@ class PublishTaskView: UIView {
         animation.fromValue = NSNumber.init(value: 1.0)
         animation.toValue = NSNumber.init(value: 0.01)
         animation.isRemovedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = CAMediaTimingFillMode.forwards
         layer.add(animation, forKey: "scale-layer")
       _ = delay(0.45) {
            self.removeFromSuperview()
@@ -161,7 +161,7 @@ class PublishTaskView: UIView {
     @IBAction func _close(_ sender: UIButton) {
         self.pbCallClosure!(self.taskDesTextFid.text!,(_taskReward),(self.selectTimeTextFid.text)!,timestamp,false)
     }
-    func _publishPressed(){
+    @objc func _publishPressed(){
         if _verification(){
         self.pbCallClosure!(self.taskDesTextFid.text!,(_taskReward),(self.selectTimeTextFid.text)!,timestamp,true)
         }
@@ -260,8 +260,9 @@ extension PublishTaskView:UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         if textView.markedTextRange == nil {
             let text = textView.text!
-            if text.characters.count > 50 {
-                let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 50))
+            if text.count > 50 {
+                let range = text.startIndex ..< text.index(text.startIndex, offsetBy: 50)
+
                 let subText = text.substring(with: range)
                 textView.text = subText
                 HHTool.showError("任务描述不能超过50个字")

@@ -177,7 +177,7 @@ var isWait = false
     
     fileprivate lazy var _chatContainerRegistedTypes: Set<String> = []
     
-    func _onPullToFresh() {
+    @objc func _onPullToFresh() {
         delegate?.refershChatView?(chatView: self)
     }
     func stopRefresh() {
@@ -444,10 +444,10 @@ extension JCChatView: UICollectionViewDataSource, JCChatViewLayoutDelegate {
         return false
     }
     
-    func copyMessage(_ sender: Any) {}
-    func deleteMessage(_ sender: Any) {}
-    func forwardMessage(_ sender: Any) {}
-    func withdrawMessage(_ sender: Any) {}
+    @objc func copyMessage(_ sender: Any) {}
+    @objc func deleteMessage(_ sender: Any) {}
+    @objc func forwardMessage(_ sender: Any) {}
+    @objc func withdrawMessage(_ sender: Any) {}
     
     open func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         let message = _chatViewData[indexPath.item]

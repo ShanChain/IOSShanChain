@@ -64,7 +64,8 @@ class JCImageBrowserViewController: UIViewController {
                 guard let jcMessageContent =  message.content as? JCMessageImageContent else{
                     continue
                 }
-                let data = UIImageJPEGRepresentation(jcMessageContent.image!, 1.0)
+                let data = jcMessageContent.image?.jpegData(compressionQuality: 1.0)
+                
                 let jmsgMessageContent:JMSGImageContent = JMSGImageContent.init(imageData:data!)!
                 let msg = JMSGMessage.createChatRoomMessage(with:jmsgMessageContent as JMSGAbstractContent, chatRoomId: (chatRoom?.roomID)!)
                 msg.mark = message.msgId
@@ -168,7 +169,7 @@ extension JCImageBrowserViewController: UIActionSheetDelegate {
         }
     }
     
-    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer){
+    @objc func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer){
         if error == nil {
             MBProgressHUD_JChat.show(text: "保存成功", view: view)
         } else {

@@ -22,6 +22,9 @@
 #import "JPushUserInfo.h"
 #import "MyWalletViewController.h"
 #import <Bugly/Bugly.h>
+#import "SystemInformationViewController.h"
+#import "NSDate+Formatter.h"
+
 
 @implementation AppDelegate (Config)
 
@@ -195,7 +198,10 @@
                     urlVC.urlStr = j_userInfo.url;
                     [nav.visibleViewController.navigationController pushViewController:urlVC animated:YES];
                 }
-            }else{
+            }
+            else if ([j_userInfo.sysPage isEqualToString:@"messageList"]) {
+//                return;                
+            } else {
                 TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
                 taskVC._oc_scrollToIndex = 1;
 //                if ([j_userInfo.sysPage isEqualToString:@"publishTaskList"]) {
@@ -224,5 +230,51 @@
     return nav;
 }
 
+- (void)systemInformationActionWithUserInfo:(NSDictionary *)info {
+    
+    if (![[SCAppManager shareInstance] isLogin]) {
+        [[SCAppManager shareInstance]logout];
+    }else{
+        JPushUserInfo *j_userInfo = [JPushUserInfo yy_modelWithDictionary:info];
+        
+        UINavigationController *nav  = (UINavigationController*)self.window.rootViewController;
+        if (nav.visibleViewController.navigationController.navigationBarHidden) {
+            nav.visibleViewController.navigationController.navigationBarHidden = NO;
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([j_userInfo.sysPage isEqualToString:@"messageList"]) {
+                // 系统消息
+                SCLog(@"系统消息--%@",j_userInfo);
+                
+                [[SCCacheChatRecord shareInstance] insertDataWithType:j_userInfo.type TITLE:j_userInfo.title EXTRA:j_userInfo.extra block:^(BOOL success) {
+                    if (success) {
+                        
+                        if (![nav.visibleViewController isKindOfClass:[SystemInformationViewController class]]) {
+                            SystemInformationViewController *vc = [[SystemInformationViewController alloc]init];
+                            [nav.visibleViewController.navigationController pushViewController:vc animated:YES];
+                        }else {
+                            SystemInformationViewController *vc = (SystemInformationViewController *)nav.visibleViewController;
+                            NSDate *date = [NSDate date];
+                            NSString *time = [date yyyyMMddByLineWithDate];
+                            NSDictionary *dic = @{
+                                                  @"type":j_userInfo.type,
+                                                  @"title":j_userInfo.title,
+                                                  @"extra":j_userInfo.extra,
+                                                  @"time":time,
+                                                  };
+                            [vc reloadViewWithNewObj:dic];
+                        }
+                        
+                    }
+                }];
+                
+                
+            }
+            
+        });
+        
+        
+    }
+}
 
 @end

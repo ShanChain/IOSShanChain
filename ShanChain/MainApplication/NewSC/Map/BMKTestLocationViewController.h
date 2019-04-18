@@ -9,7 +9,9 @@
 #import "SCBaseVC.h"
 
 @interface BMKTestLocationViewController : SCBaseVC
+/// 是否是添加聊天室
+@property (nonatomic,assign) BOOL isAddChatRoom;
 
-
-
+///
+@property (nonatomic,copy) void (^addChatRoomBlock)(void);
 @end

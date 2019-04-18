@@ -154,12 +154,12 @@ class HHPublishTaskContentView: UIView , JCMessageContentViewType{
 //        return view
 //    }()
     
-    func _receiveTask(){
+    @objc func _receiveTask(){
         // 查看任务
         _delegate?.message?(message: _message, receiveTask: "111")
     }
     
-     func _tapAction(){
+    @objc func _tapAction(){
         _delegate?.clickTaskMessage!(message: _message, tuple: [CUSTOM_CONTENT:_taskContent as AnyObject,CUSTOM_REWARD:_reward as AnyObject,CUSTOM_COMPLETETIME:_completeTime as AnyObject,CUSTOM_TASKID:_taskId as AnyObject])
     }
     

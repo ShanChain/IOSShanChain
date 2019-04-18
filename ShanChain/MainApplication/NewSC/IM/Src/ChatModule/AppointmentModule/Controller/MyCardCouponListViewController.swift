@@ -38,7 +38,7 @@ class MyCardCouponListViewController: SCBaseVC {
         title = NSLocalizedString("sc_Voucher_MyVoucher", comment: "字符串")
         tableView.estimatedRowHeight = 163
         tableView.tableFooterView = UIView()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
         view.backgroundColor = SC_ThemeBackgroundViewColor
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
@@ -48,8 +48,7 @@ class MyCardCouponListViewController: SCBaseVC {
         } else {
             automaticallyAdjustsScrollViewInsets = false;
         };
-        tableBottomConstraint.constant = CGFloat(UIDevice().bottomConstraint)
-    
+//        tableBottomConstraint.constant = CGFloat(UIDevice().bottomConstraint)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +74,7 @@ extension MyCardCouponListViewController{
         tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 print("上拉加载更多数据")
+                self?.page += 1
                 self?._requstData(true, { [weak self] in
                     
                     if (self?.controllerPage.pageNo)! == (self?.controllerPage.last)!{
@@ -113,11 +113,11 @@ extension MyCardCouponListViewController{
     }
     
     func _getPrameter() -> Dictionary<String,Any> {
-        return ["subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"pageNo":page,"pageSize":10]
+        return ["subuserId":SCCacheTool.shareInstance().getCurrentCharacterId(),"pageNo":page,"pageSize":size]
     }
     
     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()){
-       
+
         SCNetwork.shareInstance().hh_Get(withUrl: _getRequstUrl(), parameters: _getPrameter(), showLoading: false) { (baseModel, error) in
             
             if error != nil{
@@ -133,7 +133,6 @@ extension MyCardCouponListViewController{
                                 for content in datas{
                                     self.dataList.append(content)
                                 }
-                                self.page += 1
                             }else{
                                 self.dataList = datas
                             }
@@ -184,6 +183,9 @@ extension MyCardCouponListViewController:UITableViewDataSource,UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == dataList.count - 1 {
+            return 30
+        }
         return 0.01
     }
     

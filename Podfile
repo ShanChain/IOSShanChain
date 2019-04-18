@@ -8,15 +8,15 @@ target 'ShanChain' do
     pod 'JMessage', '~> 3.7.0’
     pod 'JPush'
     pod 'JShare'
-    pod 'RxSwift', '~> 3.6.1'
-    pod 'RxCocoa', '~> 3.6.1'
+    pod 'RxSwift', '~> 4.0'
+    pod 'RxCocoa', '~> 4.0'
     pod 'YHPopupView'
     pod 'YHPhotoKit'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'IQKeyboardManager'
     pod 'SnapKit', '~> 4.0.0'
     pod 'LTScrollView'
-    pod 'HandyJSON', '~> 4.1.1'
+    pod 'HandyJSON', '~> 5.0.0-beta.1'
     pod 'ReactiveObjC', '~> 2.1.0'
     
     pod 'UMengAnalytics-NO-IDFA'

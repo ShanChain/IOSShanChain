@@ -26,12 +26,20 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     var takeImage:UIImage? // 分享的区域截图
     var shareTakeUrl:String? // 分享的区域截图的URL
     var isActivitying:Bool = false // 活动是否正在进行中
+    
+    // 缓存 历史消息 数组
+    var chatRecords:[String]
+    // 接收 历史消息 数组
+    var receiveMessages:[JMSGMessage]
+    
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
-    public required init(conversation: JMSGConversation, isJoinChat:Bool, navTitle:String) {
+    @objc public required init(conversation: JMSGConversation, isJoinChat:Bool, navTitle:String) {
         self.navTitle = navTitle
         self.conversation = conversation
         self.isJoinChatRoom = isJoinChat
+        self.chatRecords = []
+        self.receiveMessages = []
         super.init(nibName: "HHChatRoomViewController", bundle: nil) // 加载xib视图
         automaticallyAdjustsScrollViewInsets = false;
        // self.title = navTitle
@@ -62,12 +70,12 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         maskView.backgroundColor = UIColor.black.withAlphaComponent(0.35)
         maskView.isHidden = true
         view.addSubview(maskView)
-        view.bringSubview(toFront: maskView)
-        view.bringSubview(toFront: taskButton)
-        view.bringSubview(toFront: joinCahtView)
+        view.bringSubviewToFront(maskView)
+        view.bringSubviewToFront(taskButton)
+        view.bringSubviewToFront(joinCahtView)
         
-        view.addSubview(suspendBallBtn!)// 添加悬浮按钮
-        view.bringSubview(toFront: suspendBallBtn!)
+//        view.addSubview(suspendBallBtn!)// 添加悬浮按钮
+        view.bringSubviewToFront(suspendBallBtn!)
         
         
         if isIPhoneX{
@@ -76,14 +84,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         
         _configureDraggebleCircularMenuButton()
         
-        //当前时间的时间戳
-        let timeInterval:TimeInterval = NSDate().timeIntervalSince1970
-        let timeStamp = Int(timeInterval) * 1000
-        print(timeStamp,self.currentChatRoomID!)
-        SCNetwork.shareInstance().v1_post(withUrl: "/jm/room/message", params: ["roomId":self.currentChatRoomID!,"timeStamp":timeStamp], showLoading: false) { (model, error) in
-            print(model?.message,model?.data)
-            
-        }
+    
     }
     
     //    func hiddenMaskView(){
@@ -96,7 +97,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         configureDraggebleCircularMenuButton(button: taskButton, numberOfMenuItems: 3, menuRedius: 300, postion: .centerTop)
         taskButton.menuButtonSize = .medium
         // taskButton.sholudMenuButtonAnimate = false
-        taskButton.bottomLayouSafeBorder = toolbar.intrinsicContentSize.height
+//        taskButton.bottomLayouSafeBorder = toolbar.intrinsicContentSize.height
         taskButton.isHidden = true
     }
     
@@ -205,18 +206,19 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         
         navigationController?.navigationBar.barTintColor = .white
 
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         navTitleView.isHidden = true
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         // 增加侧滑返回
         //  navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
@@ -244,7 +246,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         //析构函数 类似OC的delloc
         NotificationCenter.default.removeObserver(self)
         navTitleView.removeFromSuperview()
-        
+        print(self)
     }
     
     private var draft: String?
@@ -311,7 +313,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     fileprivate lazy var _emoticonSendBtn: UIButton = {
         var button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.contentEdgeInsets = UIEdgeInsetsMake(0, 10 + 8, 0, 8)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10 + 8, bottom: 0, right: 8)
         button.setTitle(NSLocalizedString("sc_send", comment: "字符串"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundImage(UIImage.loadImage("chat_emoticon_btn_send_blue"), for: .normal)
@@ -380,7 +382,22 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         chatView.addGestureRecognizer(tap)
         view.addSubview(chatView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+
+        // 本地缓存
+//        if self.chatRecords.count > 0 {
+//
+//            for chatRecord in self.chatRecords {
+//
+//                let msg = JMSGMessage.fromJson(chatRecord)
+//
+//                _handleMessage(message: msg!)
+//
+//            }
+//
+//        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_reloadMessage), name: NSNotification.Name(rawValue: kReloadAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
@@ -394,9 +411,30 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
             }
         }
     }
+    // 运用 lazy 关键字的技巧 来实现 只执行一次（这里之所以这么做，反正就是有个坑没填）
+    lazy var receiveChatRoomRecords: Void = {
+        
+        print(self.currentChatRoomID!,self.chatRecords.count,"0-0-0-0-0-0")
+        
+        if self.chatRecords.count > 0 {
+            SCCacheChatRecord.shareInstance().deleteData(withRoomId: self.currentChatRoomID)
+            for message in self.receiveMessages{
+                let msgJsonString = message.toJsonString()
+                SCCacheChatRecord.shareInstance().insertData(withRoomId: self.currentChatRoomID, record: msgJsonString)
+            }
+        } else {
+            for message in self.receiveMessages{
+                self._handleMessage(message: message)
+                let msgJsonString = message.toJsonString()
+                SCCacheChatRecord.shareInstance().insertData(withRoomId: self.currentChatRoomID, record: msgJsonString)
+//                print(msgJsonString,self.currentChatRoomID!,"微笑")
+            }
+        }
+
+    }()
     
     // tcp长链接被关闭
-    func _closeChatRoom()  {
+    @objc func _closeChatRoom()  {
        // HHTool.show("广场链接已断开，正在为您重新连接...")
         if HHTool.getCurrentVC() is HHChatRoomViewController{
             EditInfoService.enterChatRoom(withId: self.currentChatRoomID, show: "广场链接已断开，正在为您重新连接...") { (result, error) in
@@ -407,7 +445,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
     }
     
-    func _updateFileMessage(_ notification: Notification) {
+    @objc func _updateFileMessage(_ notification: Notification) {
         let userInfo = notification.userInfo
         let msgId = userInfo?[kUpdateFileMessage] as! String
         let message = conversation.message(withMessageId: msgId)!
@@ -427,7 +465,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     
     // 刷新消息（界面）
-    func _reloadMessage() {
+    @objc func _reloadMessage() {
         _removeAllMessage()
         messagePage = 0
         _loadMessage(messagePage)
@@ -437,18 +475,18 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
     }
     
-    func _removeAllMessage() {
+    @objc func _removeAllMessage() {
         jMessageCount = 0
         messages.removeAll()
         chatView.removeAll()
     }
     
-    func _tapView() {
+    @objc func _tapView() {
         view.endEditing(true)
         toolbar.resignFirstResponder()
     }
     
-    func _updateAvatar(){
+    @objc func _updateAvatar(){
         let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
         self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
     }
@@ -548,7 +586,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         //        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
-    func _closePage(){
+    @objc func _closePage(){
         // 从登录页rootViewController过来的
         if navigationController?.viewControllers.count == 1 {
             
@@ -562,7 +600,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                     }
                 }
                 JMSGChatRoom.leaveChatRoom(withRoomId: self.currentChatRoomID!, completionHandler: { (_, _) in
-                    self.navigationController?.popViewController(animated: true)
+//                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popToRootViewController(animated: true)
                 })
                 
             }
@@ -570,7 +609,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         
     }
     
-    func _maskAnimationFromLeft(){
+    @objc func _maskAnimationFromLeft(){
         let vc = LeftViewController()
         self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
     }
@@ -708,7 +747,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         messageContent.delegate = self
         let message = JCMessage(content: messageContent)
         
-        let content = JMSGImageContent(imageData: UIImagePNGRepresentation(image)!)
+        let content = JMSGImageContent(imageData: image.jpegData(compressionQuality: 1.0)!)
         let msg = JMSGMessage.ex.createMessage(conversation, content!, nil)
         msg.ex.isLargeEmoticon = true
         message.options.showsTips = true
@@ -716,7 +755,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     }
     // 发送图片
     func send(forImage image: UIImage) {
-        let data = UIImageJPEGRepresentation(image, 1.0)!
+        let data = image.jpegData(compressionQuality: 1.0)!
         let content = JMSGImageContent(imageData: data)
         
         let message = JMSGMessage.ex.createMessage(conversation, content!, nil)
@@ -763,7 +802,8 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         videoContent.delegate = self
         let dic = HHTool.getVideoInfo(withSourcePath: videoUrl)
         let duration:NSNumber = dic!["duration"] as! NSNumber
-        let content = JMSGVideoContent(videoData: videoData, thumbData:UIImagePNGRepresentation(HHTool.getVideoPreViewImage(videoUrl)), duration:duration)
+        
+        let content = JMSGVideoContent(videoData: videoData, thumbData:HHTool.getVideoPreViewImage(videoUrl).jpegData(compressionQuality: 1.0)!, duration:duration)
         let message = JMSGMessage.ex.createMessage(conversation, content, nil)
         message.ex.isShortVideo = true
         let msg = JCMessage(content: videoContent)
@@ -787,11 +827,11 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         send(msg, message)
     }
     // 键盘发送改变通知
-    func keyboardFrameChanged(_ notification: Notification) {
+    @objc func keyboardFrameChanged(_ notification: Notification) {
         let dic = NSDictionary(dictionary: (notification as NSNotification).userInfo!)
-        let keyboardValue = dic.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardValue = dic.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let bottomDistance = UIScreen.main.bounds.size.height - keyboardValue.cgRectValue.origin.y
-        let duration = Double(dic.object(forKey: UIKeyboardAnimationDurationUserInfoKey) as! NSNumber)
+        let duration = Double(dic.object(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as! NSNumber)
         
         UIView.animate(withDuration: duration, animations: {
         }) { (finish) in
@@ -805,7 +845,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         }
     }
     // 点击emoji发送按钮发送编辑好的文本
-    func _sendHandler() {
+    @objc func _sendHandler() {
         let text = toolbar.attributedText
         if text != nil && (text?.length)! > 0 {
             send(forText: text!)
@@ -864,23 +904,42 @@ extension HHChatRoomViewController: JMessageDelegate {
         }
     }
     
+    
+    
     // 接收聊天室的消息
     func onReceiveChatRoomConversation(_ conversation: JMSGConversation!, messages: [JMSGMessage]!) {
+//        self.receiveMessages = messages
+//        _ = self.receiveChatRoomRecords
+//        print("0-0-0-0-0-0")
+//        SCCacheChatRecord.shareInstance().deleteData(withRoomId: self.currentChatRoomID)
+//        if self.chatRecords.count > 0 {
+//            SCCacheChatRecord.shareInstance().deleteData(withRoomId: self.currentChatRoomID)
+//            for message in messages{
+//
+//                let msgJsonString = message.toJsonString()
+//
+//                SCCacheChatRecord.shareInstance().insertData(withRoomId: self.currentChatRoomID, record: msgJsonString)
+//                print(msgJsonString,self.currentChatRoomID!,"微笑")
+//
+//            }
+//
+//        }else {
+//            for message in messages{
+//                _handleMessage(message: message)
+//                let msgJsonString = message.toJsonString()
+//
+//                SCCacheChatRecord.shareInstance().insertData(withRoomId: self.currentChatRoomID, record: msgJsonString)
+//                print(msgJsonString,self.currentChatRoomID!,"微笑")
+//            }
+//
+//        }
+        
         
         for message in messages{
-
             _handleMessage(message: message)
-//            print(message,"微笑")
-//            NSData *d = [NSKeyedArchiver archivedDataWithRootObject:message];
-//            let dic = ["chatRecord" : message]
-//            
-//            let d = NSKeyedArchiver.archivedData(withRootObject: messages)
-//            print(d,"微笑")
-//            let userDefaults = UserDefaults.standard
-//            userDefaults.set(messages, forKey: "keyjj")
-//            userDefaults.synchronize()
         }
         
+//        print("当前房间ID",self.currentChatRoomID!,chatRecords.count,"0-0-0-0-0-0")
         
 
     }
@@ -911,6 +970,10 @@ extension HHChatRoomViewController: JMessageDelegate {
         
         //修改聊天室历史消息排序问题,之前用了异步导致排序问题 -R
         let msg =  self._parseMessage(message)
+
+//        let msgData = NSKeyedArchiver.archivedData(withRootObject: msg)
+//
+//        print(msgData)
         
         //添加 消息历史 时间线
         if isNeedInsertTimeLine(message.timestamp.intValue) {// 是否显示时间
@@ -925,7 +988,7 @@ extension HHChatRoomViewController: JMessageDelegate {
         self.updateUnread([msg])
         self.conversation.clearUnreadCount()
         if !self.chatView.isRoll {
-            self.chatView.scrollToLast(animated: true)
+            self.chatView.scrollToLast(animated: false)
         }
         
         // TODO: 这个判断是sdk bug导致的，暂时只能这么改
@@ -1043,7 +1106,7 @@ extension HHChatRoomViewController: JCEmoticonInputViewDataSource, JCEmoticonInp
     }
     
     open func emoticon(_ emoticon: JCEmoticonInputView, insetForGroupAt index: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(12, 10, 12 + 24, 10)
+        return UIEdgeInsets(top: 12, left: 10, bottom: 12 + 24, right: 10)
     }
     
     open func emoticon(_ emoticon: JCEmoticonInputView, didSelectFor item: JCEmoticon) {
@@ -1087,7 +1150,7 @@ extension HHChatRoomViewController: SAIToolboxInputViewDataSource, SAIToolboxInp
         return 4
     }
     open func toolbox(_ toolbox: SAIToolboxInputView, insetForSectionAt index: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(12, 10, 12, 10)
+        return UIEdgeInsets(top: 12, left: 10, bottom: 12, right: 10)
     }
     open func toolbox(_ toolbox: SAIToolboxInputView, shouldSelectFor item: SAIToolboxItem) -> Bool {
         return true
@@ -1169,13 +1232,13 @@ extension HHChatRoomViewController: YHPhotoPickerViewControllerDelegate, UINavig
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage?
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage?
         if let image = image?.fixOrientation() {
             send(forImage: image)
         }
-        let videoUrl = info[UIImagePickerControllerMediaURL] as! URL?
+        let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as! URL?
         if videoUrl != nil {
             let data = try! Data(contentsOf: videoUrl!)
             //send(fileData: data)
@@ -1387,7 +1450,7 @@ extension HHChatRoomViewController: JCChatViewDelegate {
                 if msg.isHaveRead {
                     continue
                 }
-                msg.setMessageHaveRead({ _ in
+                msg.setMessageHaveRead({ _,_  in
                     
                 })
             }
@@ -1557,9 +1620,9 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
             inputBar.text = text + displayName + " "
         } else {
             let index1 = text.index(text.endIndex, offsetBy: currentIndex - text.length + 1)
-            let prefix = text.substring(with: Range<String.Index>(text.startIndex..<index1))
+            let prefix = text.substring(with: text.startIndex..<index1)
             let index2 = text.index(text.startIndex, offsetBy: currentIndex + 1)
-            let suffix = text.substring(with: Range<String.Index>(index2..<text.endIndex))
+            let suffix = text.substring(with: index2..<text.endIndex)
             inputBar.text = prefix + displayName + " " + suffix
             let _ = self.updateRemids(inputBar, "@" + displayName + " ", range, currentIndex)
         }
@@ -1615,7 +1678,7 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
             let tempDic = reminds[index]
             let startIndex = tempDic.startIndex
             if currentIndex <= startIndex {
-                if string.characters.count == 0 {
+                if string.count == 0 {
                     for subIndex in index..<reminds.count {
                         let subTemp = reminds[subIndex]
                         subTemp.startIndex -= 1
@@ -1643,7 +1706,7 @@ extension HHChatRoomViewController: SAIInputBarDelegate, SAIInputBarDisplayable 
         recordHelper.updateMeterDelegate = recordingHub
         recordingHub.startRecordingHUDAtView(view)
         recordingHub.frame = CGRect(x: view.centerX - 70, y: view.centerY - 70, width: 136, height: 136)
-        recordHelper.startRecordingWithPath(String.getRecorderPath()) { _ in
+        recordHelper.startRecordingWithPath(String.getRecorderPath()) {
         }
     }
     

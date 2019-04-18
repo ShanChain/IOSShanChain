@@ -11,7 +11,7 @@ import JMessage
 
 class JCConversationCell: JCTableViewCell {
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         _init()
     }
@@ -172,7 +172,7 @@ class JCConversationCell: JCTableViewCell {
     func getAttributString(attributString: String, string: String) -> NSMutableAttributedString {
         let attr = NSMutableAttributedString(string: "")
         var attrSearchString: NSAttributedString!
-        attrSearchString = NSAttributedString(string: attributString, attributes: [ NSForegroundColorAttributeName : UIColor(netHex: 0xEB424C), NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14.0)])
+        attrSearchString = NSAttributedString(string: attributString, attributes: [ NSAttributedString.Key.foregroundColor : UIColor(netHex: 0xEB424C), NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14.0)])
         attr.append(attrSearchString)
         attr.append(NSAttributedString(string: string))
         return attr

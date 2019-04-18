@@ -68,7 +68,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         tableView.register(UINib.init(nibName: H_TaskListCellID, bundle: nil), forCellReuseIdentifier: H_TaskListCellID)
         tableView.register(UINib.init(nibName: H_TaskListPersonalCellID, bundle: nil), forCellReuseIdentifier: H_TaskListPersonalCellID)
         tableView.estimatedRowHeight = 200
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         return tableView
@@ -114,7 +114,7 @@ class TaskListViewController: SCBaseVC,LTTableViewProtocal {
         NotificationCenter.default.addObserver(self, selector: #selector(_notificationUpdateData), name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
     }
     
-    func _notificationUpdateData(){
+    @objc func _notificationUpdateData(){
         tableView.mj_header.beginRefreshing()
     }
     
@@ -242,21 +242,21 @@ extension TaskListViewController {
     }
     
     
-    public func tableViewConfig(_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableViewStyle?) -> UITableView  {
+    public func tableViewConfig(_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableView.Style?) -> UITableView  {
         let tableView = UITableView(frame:  CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), style: style ?? .plain)
         tableView.delegate = delegate
         tableView.dataSource = dataSource
         return tableView
     }
     
-    public func tableViewConfig(_ frame: CGRect ,_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableViewStyle?) -> UITableView  {
+    public func tableViewConfig(_ frame: CGRect ,_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableView.Style?) -> UITableView  {
         let tableView = UITableView(frame: frame, style: style ?? .grouped)
         tableView.delegate = delegate
         tableView.dataSource = dataSource
         return tableView
     }
     
-    func clickSelectStatusAction(_ sender:UIButton){
+    @objc func clickSelectStatusAction(_ sender:UIButton){
         let selectView:ShowSelectTableView = ShowSelectTableView(frame: CGRect(x: 0, y: 0, width: Int(view.width), height: Int(view.height)), modelsArray: selectEntitys)
         selectView.selectEntityBlock = { (entity) in
             if entity != nil {

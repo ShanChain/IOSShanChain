@@ -66,7 +66,7 @@ class JCRecordVoiceHelper: NSObject {
         recordPath = nil
     }
     
-    func updateMeters() {
+    @objc func updateMeters() {
         if recorder == nil {
             return
         }
@@ -127,7 +127,7 @@ class JCRecordVoiceHelper: NSObject {
         
         let audioSession:AVAudioSession = AVAudioSession.sharedInstance()
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try audioSession.setCategory(AVAudioSession.Category.playAndRecord)
         } catch let error as NSError {
             print("could not set session category")
             print(error.localizedDescription)

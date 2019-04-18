@@ -70,13 +70,14 @@ typedef struct _stack {
     [mStr appendString:self.verifyCodeModel.timestamp];
     NSString *sign = [SCMD5Tool MD5ForUpper32Bate:mStr.copy];
     NSString  *deviceToken = [JPUSHService registrationID];
+    NSString *version = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     if (!NULLString(deviceToken)) {
         deviceToken = @"";
     }
     if (!NULLString(self.encryptOpenId)) {
-        return  @{@"encryptOpenId":self.encryptOpenId,@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text,@"channel":SC_APP_CHANNEL,@"deviceToken":deviceToken};
+        return  @{@"encryptOpenId":self.encryptOpenId,@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text,@"channel":SC_APP_CHANNEL,@"deviceToken":deviceToken,@"version":version};
     }
-    return @{@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text,@"channel":SC_APP_CHANNEL,@"deviceToken":deviceToken};
+    return @{@"mobile":self.phoneNumberFid.text,@"sign":sign,@"verifyCode":self.verifyCodeFid.text,@"channel":SC_APP_CHANNEL,@"deviceToken":deviceToken,@"version":version};
 }
 
 

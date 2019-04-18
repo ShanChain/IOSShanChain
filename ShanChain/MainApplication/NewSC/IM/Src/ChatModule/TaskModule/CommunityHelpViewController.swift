@@ -56,7 +56,8 @@ class CommunityHelpViewController: SCBaseVC {
         _snpLayout()
         tableView.estimatedRowHeight = 120
         tableView.tableFooterView = UIView()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.showsVerticalScrollIndicator = false
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_myHelp), title: NSLocalizedString("sc_Voucher_My", comment: "字符串"), tintColor: .black)
@@ -130,7 +131,7 @@ class CommunityHelpViewController: SCBaseVC {
 
     }
     
-    func _myHelp(){
+    @objc func _myHelp(){
         let vc = MyHelpContainerViewController()
         vc.currentChatRoomID = chatRoomId
         vc._scrollToIndex = .I_helped
@@ -184,8 +185,7 @@ extension CommunityHelpViewController{
     
     
     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
-        SCNetwork.shareInstance().v1_post(withUrl: ROOMTASK_LIST_URL, params: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
-            
+        SCNetwork.shareInstance().hh_Get(withUrl: TOTALTASK_LIST_URL, parameters: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
             if error != nil{
                 return
             }
@@ -222,11 +222,52 @@ extension CommunityHelpViewController{
             self.tableView.reloadData()
             complete()
         }
+        
+//        SCNetwork.shareInstance().v1_post(withUrl: TOTALTASK_LIST_URL, params: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
+//
+//            if error != nil{
+//                return
+//            }
+//            let data = baseModel?.data as! Dictionary<String,Any>
+//            let arr = data["content"] as! NSArray
+//            if let datas:[TaskListModel] = [TaskListModel].deserialize(from: arr) as? [TaskListModel]{
+//                if (datas.count > 0){
+//                    if(isLoad){
+//                        for content in datas{
+//                            self.dataList.append(content)
+//                        }
+//                        self.page += 1
+//                    }else{
+//                        self.dataList = datas
+//                    }
+//                    self.tableView.reloadData()
+//                }else{
+//                    if isLoad == false{
+//                        self.dataList.removeAll()
+//                    }
+//                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+//                }
+//
+//            }
+//
+//            if self.dataList.count == 0 {
+//                self.noDataTipShow(self.tableView, content:NSLocalizedString("sc_taskEmpty", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
+//                self.tableView.isScrollEnabled = false
+//            }else{
+//                self.tableView.isScrollEnabled = true
+//                self.noDataTipDismiss()
+//            }
+//
+//            self.tableView.reloadData()
+//            complete()
+//        }
     }
     
     fileprivate func _requstPrameter(_ isLoad:Bool) -> Dictionary<String, Any> {
         let pageStr = isLoad ? "\(page+1)":"\(page)"
-        return ["characterId":characterId,"page":pageStr,"size":size,"roomId":chatRoomId ?? ""]
+        let token = SCCacheTool.shareInstance().getUserToken()
+        
+        return ["page":pageStr,"size":size,"token":token ?? ""]
     }
     
     // 领取任务

@@ -69,7 +69,7 @@ class JCRemindListViewController: UIViewController {
         navigationItem.leftBarButtonItem = item
     }
     
-    func _clickNavRightButton() {
+    @objc func _clickNavRightButton() {
         dismiss(animated: true, completion: nil)
     }
     

@@ -114,7 +114,7 @@ extension String{
     // 高度自适应
     func heightForAdaptive(Font font:UIFont , _ width:CGFloat ) -> CGFloat {
         let attr = NSMutableAttributedString(string: self, attributes: [
-            NSFontAttributeName:font
+            NSAttributedString.Key.font:font
             ])
         let mattrSize = attr.boundingRect(with:  CGSize(width: width, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin,.usesFontLeading], context: nil)
         return mattrSize.height

@@ -40,7 +40,7 @@ class RealNameVeifiedViewController: SCBaseVC {
         
     }
     
-    func _back(){
+    @objc func _back(){
         if let  viewController = backViewController() as? JCNavigationController{
             viewController.popViewController(animated: false)
         }

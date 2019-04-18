@@ -11,7 +11,7 @@ import UIKit
 class JCAppManager {
     
     static func openAppSetter() {
-        let url = URL(string: UIApplicationOpenSettingsURLString)
+        let url = URL(string: UIApplication.openSettingsURLString)
         if UIApplication.shared.canOpenURL(url!) {
             UIApplication.shared.openURL(url!)
         }

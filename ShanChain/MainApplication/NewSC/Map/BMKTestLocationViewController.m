@@ -50,6 +50,8 @@
 @property (nonatomic,strong)  NSArray  <CoordnateInfosModel*> *roomInfos;
 
 @property (nonatomic,copy)    NSString   *currentRoomId; //当前的聊天室ID
+@property (nonatomic,copy)    NSString   *currentLocationRoomId; //当前位置的聊天室ID
+
 @property (nonatomic,strong)   CoordnateInfosModel   *myLocationCoordModel; //我当前位置所在的聊天室model
 @property (nonatomic,copy)    NSString   *currentRoomName; //当前的聊天室名称
 
@@ -74,7 +76,9 @@
 @end
 
 @implementation BMKTestLocationViewController
-
+- (void)dealloc {
+    NSLog(@"%s",__func__);
+}
 - (void)sc_ConfigurationUI{
     
     self.title = @"元社区";
@@ -254,6 +258,15 @@
 -(void)viewWillAppear:(BOOL)animated{
     [self.mapView viewWillAppear];
   //  self.navigationController.navigationBarHidden = YES;
+    if (self.isAddChatRoom) {
+
+//        [[HHTool getCurrentVC] sc_hrShowAlertWithTitle:@"选择需要创建元社区的区域" message:nil buttonsTitles:@[@"好的👌"] andHandler:nil];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择需要创建元社区的区域" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的👌" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (void)sc_addOverlayWithCoordnates{
@@ -305,6 +318,7 @@
         }
         CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:baseModel.data];
         weak_self.myLocationCoordModel = model;
+        weak_self.currentLocationRoomId = model.roomId;
         [weak_self sc_mapViewRestoration:nil];
         [weak_self sc_addOverlayWithModel:model];
         
@@ -312,7 +326,7 @@
     
     [[SCNetwork shareInstance]HH_GetWithUrl:GETCOORDINATE parameters:[self getParameter] showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
         if (error) {
-            weak_self.isLBS = NO;
+//            weak_self.isLBS = NO;
             return ;
         }
           NSArray  *arr = baseModel.data[@"room"];
@@ -321,7 +335,7 @@
             [arr enumerateObjectsUsingBlock:^(id  _Nonnull dic, NSUInteger idx, BOOL * _Nonnull stop) {
                 CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
                 if (idx == 0) {
-                    self.myLocationCoordModel = model;
+                    weak_self.myLocationCoordModel = model;
                 }
                 if (model) {
                     [mAry addObject:model];
@@ -347,8 +361,8 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [self.mapView viewWillDisappear];
-//    self.mapView.delegate = nil; // 不用时，置nil
-//    self.searcher.delegate = nil;
+    self.mapView.delegate = nil; // 不用时，置nil
+    self.searcher.delegate = nil;
 }
 
 - (void)pn_ConfigurationMapView{
@@ -411,10 +425,12 @@
 }
 
 - (void)sc_mapViewRestoration:(dispatch_block_t)callback{
+
     self.mapView.centerCoordinate = CLLocationCoordinate2DMake(self.myLocationCoordModel.focusLatitude.floatValue, self.myLocationCoordModel.focusLongitude.floatValue);
     self.mapView.zoomLevel = 17.95;
     [self configurationLocationButtonTitle:CLLocationCoordinate2DMake(self.myLocationCoordModel.focusLatitude.floatValue, self.myLocationCoordModel.focusLongitude.floatValue)];
     self.currentRoomId = self.myLocationCoordModel.roomId;
+    
     BLOCK_EXEC(callback);
 }
 
@@ -425,6 +441,81 @@
     [self pushPage:popularVC Animated:YES];
 }
 
+
+- (void)configurationCreatChatRoomAlertLatitude:(NSString *)latitude Longitude:(NSString *)longitude {
+
+    
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请输入元社区名称" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *creatAction = [UIAlertAction actionWithTitle:@"创建" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UITextField *field = alert.textFields.firstObject;
+        NSLog(@"text = %@", field.text);
+        
+        
+        
+        if (field.text.length > 0) {
+            
+            [HHTool showChrysanthemum];
+            
+            [SCAliyunUploadMananger uploadImage:self.takeImage withCompressionQuality:0.5 withCallBack:^(NSString *url) {
+                
+                if (!NULLString(url)) {
+                    NSDictionary *params = @{
+                                             @"latitude":latitude,
+                                             @"longitude":longitude,
+                                             @"roomName":field.text,
+                                             @"thumbnails":url
+                                             };
+                    
+                    [[SCNetwork shareInstance]HH_postWithUrl:ADDCHATROOM params:params showLoading:NO callBlock:^(HHBaseModel *baseModel, NSError *error) {
+                        SCLog(@"code:%@msg:%@",baseModel.code,baseModel.message);
+                        if ([baseModel.message isEqualToString:@"ok"]) {
+                            
+                            [HHTool immediatelyDismiss];
+                            
+                            NSDictionary *data = (NSDictionary *)baseModel.data;
+                            NSDictionary *hotChatRoomDic = data[@"hotChatRoom"];
+                            NSString *roomId = hotChatRoomDic[@"roomId"];
+                            NSString *roomName = hotChatRoomDic[@"roomName"];
+                            if ([SCCacheTool shareInstance].isJGSetup) {
+                                
+                                [JGUserLoginService jg_enterchatRoomWithRoomId:roomId callBlock:^(JMSGConversation * _Nullable Conversation, NSError * _Nullable error) {
+                                    
+                                    HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:Conversation isJoinChat:NO navTitle:roomName];
+                                    [self pushPage:roomVC Animated:YES];
+                                }];
+                            }else{
+                                [HHTool show:NSLocalizedString(@"sc_map_Loading", nil)];
+                            }
+                            
+                            if (self.addChatRoomBlock) {
+                                self.addChatRoomBlock();
+                            }
+                        }
+                    }];
+                }
+            } withErrorCallBack:^(NSError *error) {
+                [HHTool showError:error.localizedDescription];
+                
+            }];
+        } else {
+            [HHTool showTip:@"请输入元社区名称" duration:0.5];
+        }
+        
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入聊天室名称";
+    }];
+    
+    [alert addAction:creatAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 #pragma mark - BMK_LocationDelegate 百度地图
 /**
@@ -459,6 +550,8 @@
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
+//    long long delta = [Util getSystemTime];
+//    SCLog(@"当前时间戳---->%lld",delta);
     //从manager获取左边
     CLLocationCoordinate2D coordinate = userLocation.location.coordinate;//位置坐标
     self.pt = coordinate;
@@ -607,32 +700,59 @@
 
 
 - (void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate{
+    
+    
+    weakify(self);
     NSString  *latitude = [NSString stringWithFormat:@"%f",coordinate.latitude];
     self.latitude = latitude;
     NSString  *longitude = [NSString stringWithFormat:@"%f",coordinate.longitude];
     self.longitude = longitude;
-    weakify(self);
-    [HHTool show:NSLocalizedString(@"sc_map_Locating", nil)];
-    [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
-        [HHTool immediatelyDismiss];
-        NSDictionary  *dic = responseObject[@"data"];
-        if (dic.allValues > 0) {
-            CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
-            //self.myLocationCoordModel = model;
-            [weak_self sc_configurationMapViewCenterLocationWithModel:model];
-            __block  BOOL isContainRoom = NO;
-            [self.mapView.overlays enumerateObjectsUsingBlock:^(BMKPolygon *  _Nonnull polygon, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([polygon.mark isEqualToString:model.roomId]) {
-                    isContainRoom = YES;
-                }
-            }];
-            if (!isContainRoom) {
-                [self sc_addOverlayWithModel:model];
+    
+    if (self.isAddChatRoom) {
+        
+        NSDictionary *parameters = @{
+                                     @"latitude":latitude,
+                                     @"longitude":longitude,
+                                     @"token":[[SCCacheTool shareInstance] getUserToken]
+                                     };
+        [[SCNetwork shareInstance] getWithUrl:ADDCHATROOM_COORDINATEINFO parameters:parameters success:^(id responseObject) {
+            NSDictionary  *dic = responseObject[@"data"];
+            if (dic.allValues > 0) {
+                [weak_self getTakeSnapshot];
+                CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
+                [weak_self sc_configurationMapViewCenterLocationWithModel:model];
+                [weak_self sc_addOverlayWithModel:model];
+                [weak_self configurationCreatChatRoomAlertLatitude:latitude Longitude:longitude];
             }
-        }
-    } failure:^(NSError *error) {
-        [HHTool showError:error.localizedDescription];
-    }];
+        } failure:^(NSError *error) {
+            [HHTool showError:error.localizedDescription];
+        }];
+        
+    }else {
+        
+        [HHTool show:NSLocalizedString(@"sc_map_Locating", nil)];
+        [[SCNetwork shareInstance] getWithUrl:COORDINATEINFO parameters:@{@"latitude":latitude,@"longitude":longitude} success:^(id responseObject) {
+            [HHTool immediatelyDismiss];
+            NSDictionary  *dic = responseObject[@"data"];
+            if (dic.allValues > 0) {
+                CoordnateInfosModel  *model = [CoordnateInfosModel yy_modelWithDictionary:dic];
+                //self.myLocationCoordModel = model;
+                [weak_self sc_configurationMapViewCenterLocationWithModel:model];
+                __block  BOOL isContainRoom = NO;
+                [self.mapView.overlays enumerateObjectsUsingBlock:^(BMKPolygon *  _Nonnull polygon, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([polygon.mark isEqualToString:model.roomId]) {
+                        isContainRoom = YES;
+                    }
+                }];
+                if (!isContainRoom) {
+                    [self sc_addOverlayWithModel:model];
+                }
+            }
+        } failure:^(NSError *error) {
+            [HHTool showError:error.localizedDescription];
+        }];
+    }
+    
     
     
     if (self.isActiveStar) {
@@ -773,7 +893,11 @@
         if ([SCCacheTool shareInstance].isJGSetup) {
             [HHTool showChrysanthemum];
 //            [self getAllChatRoomConversation];
-            [JGUserLoginService jg_enterchatRoomWithRoomId:self.currentRoomId callBlock:^(JMSGConversation * _Nullable Conversation, NSError * _Nullable error) {
+            NSString *roomId = self.currentRoomId;
+            if (NULLString(self.currentRoomId)) {
+                roomId = self.currentLocationRoomId;
+            }
+            [JGUserLoginService jg_enterchatRoomWithRoomId:roomId callBlock:^(JMSGConversation * _Nullable Conversation, NSError * _Nullable error) {
                 [self getTakeSnapshot];
                 HHChatRoomViewController *roomVC = [[HHChatRoomViewController alloc]initWithConversation:Conversation isJoinChat:NO navTitle:self.currentRoomName];
                 [self pushPage:roomVC Animated:YES];

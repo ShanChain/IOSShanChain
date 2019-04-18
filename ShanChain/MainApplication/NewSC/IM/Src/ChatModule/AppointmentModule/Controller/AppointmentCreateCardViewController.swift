@@ -153,7 +153,7 @@ class AppointmentCreateCardViewController: UITableViewController {
             }
         }
     }
-    func _handleTap(){
+    @objc func _handleTap(){
         self.view.endEditing(true)
     }
     
@@ -175,7 +175,7 @@ class AppointmentCreateCardViewController: UITableViewController {
         numberFid.setTintAjust(10)
         failureTimeFid.setTintAjust(10)
     }
-    func _back(){
+    @objc func _back(){
         navigationController?.popViewController(animated: true)
     }
     
@@ -230,8 +230,10 @@ extension AppointmentCreateCardViewController:UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var text:String = "\(textField.text ?? "")\(string)"
         if text.length > 16 {
-            let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 16))
-            let subText = text.substring(with: range)
+//            let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 16))
+            let range = Range.init(range, in: text)
+            
+            let subText = text.substring(with: range!)
             text = subText
             return false
         }

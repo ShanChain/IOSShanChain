@@ -44,7 +44,7 @@ class AppointmentListViewController: SCBaseVC {
        
         tableView.estimatedRowHeight = 163
         tableView.tableFooterView = UIView()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib.init(nibName: H_cell, bundle: nil), forCellReuseIdentifier: H_cell)
         tableView.backgroundColor = SC_ThemeBackgroundViewColor
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_clickMy), title:NSLocalizedString("sc_Voucher_My", comment: "字符串"), tintColor: .black)
@@ -54,7 +54,7 @@ class AppointmentListViewController: SCBaseVC {
         
     }
     
-    func _clickMy(){
+    @objc func _clickMy(){
         let vc = MyCardCouponContainerViewController()
         navigationController?.pushViewController(vc, animated: true)
    
@@ -65,7 +65,7 @@ class AppointmentListViewController: SCBaseVC {
          super.viewWillAppear(animated)
         
           extendedLayoutIncludesOpaqueBars = true;
-         self.tableView.contentInset = UIEdgeInsetsMake(CGFloat(UIDevice().navBarHeight), 0, CGFloat(UIDevice().tabBarHeight), 0)
+        self.tableView.contentInset = UIEdgeInsets(top: CGFloat(UIDevice().navBarHeight), left: 0, bottom: CGFloat(UIDevice().tabBarHeight), right: 0)
         self.tableView.scrollIndicatorInsets = self.tableView.contentInset
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
@@ -127,7 +127,7 @@ extension AppointmentListViewController{
     
     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()){
         
-        SCNetwork.shareInstance().hh_Get(withUrl: CouponsVendorList_URL, parameters: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
+        SCNetwork.shareInstance().hh_Get(withUrl: CouponsVendorListAll_URL, parameters: _requstPrameter(isLoad), showLoading: false) { (baseModel, error) in
             if error != nil{
                 complete()
                 return
@@ -152,21 +152,21 @@ extension AppointmentListViewController{
                             if isLoad == false{
                                 self.dataList.removeAll()
                             }
-                          self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                            self.tableView.mj_footer.endRefreshingWithNoMoreData()
                         }
                         
                     }
                 }
             }
-
+            
             if self.dataList.count == 0{
                 self.noDataTipShow(self.tableView, content: NSLocalizedString("sc_Nodata", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
                 self.tableView.isScrollEnabled = false
-                self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+                self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             }else{
                 self.tableView.isScrollEnabled = true
                 self.noDataTipDismiss()
-               
+                
             }
             
             complete()
@@ -177,7 +177,7 @@ extension AppointmentListViewController{
     
     fileprivate func _requstPrameter(_ isLoad:Bool) -> Dictionary<String, Any> {
         let pageStr = isLoad ? page+1:page
-        return  ["roomId":SCCacheTool.shareInstance().chatRoomId,"pageSize":size,"pageNo":pageStr,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId()]
+        return  ["pageSize":size,"pageNo":pageStr,"subuserId":SCCacheTool.shareInstance().getCurrentCharacterId()]
     }
    
     

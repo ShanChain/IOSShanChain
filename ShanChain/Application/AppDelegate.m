@@ -24,7 +24,6 @@
 #import "UncaughtExceptionHandler.h"
 #import "ShanChain-Swift.h"
 
-
 @interface AppDelegate ()< UIAlertViewDelegate,UIApplicationDelegate,JMessageDelegate,JPUSHRegisterDelegate>
 
 @property (nonatomic, strong) BMKMapManager *mapManager;
@@ -43,7 +42,7 @@
     [self setupMapConfig];
     [self setJMessageSDK:launchOptions];
     [self setupUMPushNoticationWithLaunchOptions:launchOptions];
-  
+    
 
    __block UIViewController *rootVc = nil;
    // rootVc = [[SCTabbarController alloc]init];
@@ -80,6 +79,8 @@
     [self checkGuideView];
     
     [self setReceiveMonitorNotification];
+    // 创建系统消息表
+    [[SCCacheChatRecord shareInstance] createSystemInformationTable];
     
     [EditInfoService sc_requstWalletCurrency]; // 获取当前汇率
     // 捕获异常
@@ -213,7 +214,8 @@
     
     // Required, For systems with less than or equal to iOS 6
     [JPUSHService handleRemoteNotification:userInfo];
-     [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+    [self systemInformationActionWithUserInfo:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
@@ -236,7 +238,7 @@
 }
 
 //iOS10新增：处理后台点击通知的代理方法
--(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler{
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(void))completionHandler{
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //应用处于后台时的远程推送接受
@@ -247,7 +249,8 @@
         //应用处于后台时的本地推送接受
     }
     NSDictionary *custom = userInfo[@"custom"];
-     [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+//    [self systemInformationActionWithUserInfo:userInfo];
     [NotificationHandler handlerNotificationWithCustom:custom];
 }
 

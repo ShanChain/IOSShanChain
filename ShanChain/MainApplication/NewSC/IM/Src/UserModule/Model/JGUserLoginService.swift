@@ -15,7 +15,7 @@ typealias CreateChatRoomConversationComplete = (_ resultObject:JMSGConversation?
 class JGUserLoginService: NSObject {
     
   // 设置极光用户信息
-    open static func jg_SetUserInfo(nickNmae:String?, signature:String?,icon:String?, complete:@escaping JMSGCompletionHandler){
+    public static func jg_SetUserInfo(nickNmae:String?, signature:String?,icon:String?, complete:@escaping JMSGCompletionHandler){
         
 //        if let icon = icon {
 //            let data = NSData.init(contentsOf: NSURL.fileURL(withPath: icon))
@@ -46,7 +46,7 @@ class JGUserLoginService: NSObject {
         if characterModel.characterInfo.headImg != nil{
             let image = UIImage.init(fromURLString: characterModel.characterInfo.headImg)
             if let image = image{
-                if let imageData = UIImagePNGRepresentation(image){
+                if let imageData = image.pngData(){
                     JMSGUser.updateMyInfo(withParameter: imageData, userFieldType: .fieldsAvatar, completionHandler: nil)
                 }
             }
@@ -57,7 +57,7 @@ class JGUserLoginService: NSObject {
     }
     
   // 极光登录
-  open static func  jg_userLogin(username: String, password: String , loginComplete:@escaping LoginComplete ){
+    @objc public static func  jg_userLogin(username: String, password: String , loginComplete:@escaping LoginComplete ){
         JMSGUser.login(withUsername: username, password: password) { (result, error) in
             if error == nil {
                 UserDefaults.standard.set(username, forKey: kLastUserName)
@@ -94,7 +94,7 @@ class JGUserLoginService: NSObject {
     }
     
     // 获取会话
-    open static  func jg_createChatRoomConversation(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
+    public static  func jg_createChatRoomConversation(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
         
         if let roomConversation = JMSGConversation.chatRoomConversation(withRoomId: roomId){
             callBlock(roomConversation,nil)
@@ -114,7 +114,7 @@ class JGUserLoginService: NSObject {
     }
     
     // 自动登录极光
-    open static func jg_automaticLogin(loginComplete:@escaping LoginComplete){
+    @objc public static func jg_automaticLogin(loginComplete:@escaping LoginComplete){
         let userName:String? = UserDefaults.standard.object(forKey: kCurrentUserName) as? String
         let password:String? = UserDefaults.standard.object(forKey: kCurrentUserPassword) as? String
         if (userName != nil) && (password != nil) {
@@ -126,7 +126,7 @@ class JGUserLoginService: NSObject {
     }
     
    // 加入聊天室
-    open static func jg_enterchatRoom(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
+    @objc public static func jg_enterchatRoom(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
         
 //        EditInfoService.enterChatRoom(withId: roomId,  show: "", call: { (result, error) in
 //            callBlock(result as! JMSGConversation?,error as NSError?)
@@ -175,7 +175,7 @@ class JGUserLoginService: NSObject {
     }
     
     // 获取聊天室会话并根据会话加入聊天室
-    open static func jg_getConversationEnterChatRoom(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
+    public static func jg_getConversationEnterChatRoom(roomId:String , callBlock:@escaping CreateChatRoomConversationComplete){
         self.jg_createChatRoomConversation(roomId: roomId, callBlock: { (conversation, createConversationError) in
             if createConversationError == nil{
                 // 创建会话成功 加入聊天室

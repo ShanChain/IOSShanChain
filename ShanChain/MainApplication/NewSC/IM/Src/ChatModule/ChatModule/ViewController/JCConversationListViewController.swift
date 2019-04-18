@@ -20,6 +20,16 @@ class JCConversationListViewController: SCBaseVC {
         _init()
       //  showNavigationBarWithNormalColor()
         title = NSLocalizedString("sc_IM_message", comment: "字符串")
+        
+        // 系统消息
+        let systemInfo = SCCacheChatRecord.shareInstance().selectSystemInformationData()
+        
+        if let tmp = systemInfo {
+            if tmp.count > 0 {
+                self.addRightBarButtonItem(withTarget: self, sel: #selector(systemInfomationAction), image: UIImage.loadDefaultImage("systemInfomation"), selectedImage: UIImage.loadDefaultImage("systemInfomation"))
+            }
+        }
+        
     }
 
     
@@ -95,6 +105,13 @@ class JCConversationListViewController: SCBaseVC {
         return view
     }()
     
+    //
+    @objc func systemInfomationAction() {
+
+        let vc = SystemInformationViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     //Mark: - private func
     private func _init() {
         view.backgroundColor = UIColor(netHex: 0xe8edf3)
@@ -128,7 +145,7 @@ class JCConversationListViewController: SCBaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(connecting), name: NSNotification.Name.jmsgNetworkIsConnecting, object: nil)
     }
     
-    func reachabilityChanged(note: NSNotification) {
+    @objc func reachabilityChanged(note: NSNotification) {
         if let curReach = note.object as? Reachability {
             let status = curReach.currentReachabilityStatus()
             switch status {
@@ -158,7 +175,7 @@ class JCConversationListViewController: SCBaseVC {
         }
     }
     
-    func _getConversations() {
+    @objc func _getConversations() {
         JMSGConversation.allConversations { (result, error) in
             guard let conversatios = result else {
                 return
@@ -443,17 +460,17 @@ extension JCConversationListViewController {
         }
     }
     
-    func connectClose() {
+    @objc func connectClose() {
         isConnecting = false
         titleTipsView.isHidden = true
     }
     
-    func connectSucceed() {
+    @objc func connectSucceed() {
         isConnecting = false
         titleTipsView.isHidden = true
     }
     
-    func connecting() {
+    @objc func connecting() {
         _connectingSate()
     }
     

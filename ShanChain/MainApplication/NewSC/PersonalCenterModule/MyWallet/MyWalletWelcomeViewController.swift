@@ -33,7 +33,7 @@ class MyWalletWelcomeViewController: SCBaseVC {
         
     }
     
-    func _back(){
+    @objc func _back(){
         self.dismissPrestingViewController()
     }
     

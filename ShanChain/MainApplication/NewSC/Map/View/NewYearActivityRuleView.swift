@@ -22,7 +22,7 @@ class NewYearActivityRuleView: UIView {
     
     
     
-    convenience init(ruleDes:String?, frame: CGRect) {
+    @objc convenience init(ruleDes:String?, frame: CGRect) {
         self.init(frame: frame)
         textView.text = ruleDes ?? ""
     }

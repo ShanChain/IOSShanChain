@@ -88,6 +88,8 @@
 #define  Feedback_URL @"/v1/feedback/user"  //意见反馈
 
 
+#define  ADDCHATROOM_COORDINATEINFO   @"/v1/lbs/hotChatRoom/coordinateInfo" // 添加自定义元社区描绘边框
+#define  ADDCHATROOM   @"/v1/2.0/hotChatRoom/add" // 添加自定义元社区（聊天室）
 #define  GETCOORDINATE   @"/v1/lbs/coordinate/infos" // 获取当前位置及周边聊天室信息
 #define  COORDINATEINFO  @"/v1/lbs/coordinate/info" // 获获取当前位置聊天室信息
 #define  NewYearActiveInfo_URL  @"/v1/2.0/light/active" //  获取跨年活动信息

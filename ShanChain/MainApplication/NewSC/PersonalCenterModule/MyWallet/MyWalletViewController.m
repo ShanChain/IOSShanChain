@@ -41,13 +41,13 @@
         uploadView.vc = self;
         uploadView.transferDic = dic;
         
-        weakify(uploadView);
+//        weakify(uploadView);
 
         
         uploadView.closure = ^(BOOL  success, NSString * _Nonnull authCode) {
             
             [_webView JSAndOCSInteractionWithRegisterHandlerName:@"JSEcho" data:authCode];
-            [weak_uploadView removeFromSuperview];
+//            [weak_uploadView removeFromSuperview];
         };
         [self.view addSubview:uploadView];
 

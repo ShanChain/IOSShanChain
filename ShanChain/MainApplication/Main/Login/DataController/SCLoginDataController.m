@@ -46,6 +46,7 @@
                 [params1 setObject:spaceId forKey:@"spaceId"];
                 [params1 setObject:token forKey:@"token"];
                 [[NSNotificationCenter defaultCenter]postNotificationName:kLoginSuccess object:nil];
+                
                 [JGUserLoginService jg_userLoginWithUsername:characterModel.hxAccount.hxUserName password:characterModel.hxAccount.hxPassword loginComplete:^(id _Nonnull result, NSError * _Nonnull error) {
                     [SYProgressHUD hideHUD];
                     if (!error) {
@@ -136,6 +137,8 @@
         [params setObject:encryptAccount forKey:@"encryptOpenId"];
         [params setObject:encryptPassword forKey:@"encryptToken16"];
         [params setObject:SC_APP_CHANNEL forKey:@"channel"];
+        NSString *version = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+        [params setObject:version forKey:@"version"];
         NSString  *deviceToken = [JPUSHService registrationID];
         if (!NULLString(deviceToken)) {
             [params setValue:deviceToken forKey:@"deviceToken"];

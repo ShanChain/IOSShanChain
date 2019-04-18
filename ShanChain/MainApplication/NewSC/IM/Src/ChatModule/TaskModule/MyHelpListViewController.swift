@@ -43,7 +43,7 @@ class MyHelpListViewController: SCBaseVC,LTTableViewProtocal {
         table.register(UINib.init(nibName: H_TaskListCellID, bundle: nil), forCellReuseIdentifier: H_TaskListCellID)
         table.register(UINib.init(nibName: H_TaskListPersonalCellID, bundle: nil), forCellReuseIdentifier: H_TaskListPersonalCellID)
         table.estimatedRowHeight = 200
-        table.rowHeight = UITableViewAutomaticDimension
+        table.rowHeight = UITableView.automaticDimension
         table.separatorStyle = .none
         table.tableFooterView = UIView()
         return table
@@ -66,7 +66,7 @@ class MyHelpListViewController: SCBaseVC,LTTableViewProtocal {
         NotificationCenter.default.addObserver(self, selector: #selector(_notificationUpdateData), name: NSNotification.Name(rawValue: kPublishTaskSuccess), object: nil)
     }
 
-    func _notificationUpdateData(){
+    @objc func _notificationUpdateData(){
         tableView.mj_header.beginRefreshing()
     }
     
@@ -194,14 +194,14 @@ extension MyHelpListViewController {
     }
     
     
-    fileprivate func tableViewConfig(_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableViewStyle?) -> UITableView  {
+    fileprivate func tableViewConfig(_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableView.Style?) -> UITableView  {
         let tableView = UITableView(frame:  CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), style: style ?? .plain)
         tableView.delegate = delegate
         tableView.dataSource = dataSource
         return tableView
     }
     
-    fileprivate func tableViewConfig(_ frame: CGRect ,_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableViewStyle?) -> UITableView  {
+    fileprivate func tableViewConfig(_ frame: CGRect ,_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource, _ style: UITableView.Style?) -> UITableView  {
         let tableView = UITableView(frame: frame, style: style ?? .grouped)
         tableView.delegate = delegate
         tableView.dataSource = dataSource

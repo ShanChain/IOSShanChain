@@ -28,6 +28,8 @@ class RoomNavTitleView: UIView {
         self.frame = frame;
         contentView = loadViewFromNib()
         addSubview(contentView)
+//        numberForPeopleBtn.titleLabel?.textColor = UIColor.init(red: 172, green: 129, blue: 233)
+        numberForPeopleBtn.setTitleColor(UIColor.init(red: 172, green: 129, blue: 233), for: .normal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,7 +39,7 @@ class RoomNavTitleView: UIView {
     
     override var intrinsicContentSize:CGSize{
     
-    return UILayoutFittingExpandedSize
+        return UIView.layoutFittingExpandedSize
     
     }
     

@@ -17,7 +17,7 @@ class JCChatViewController: SCBaseVC {
     
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
-    public required init(conversation: JMSGConversation) {
+    @objc public required init(conversation: JMSGConversation) {
         self.conversation = conversation
         super.init(nibName: nil, bundle: nil)
         automaticallyAdjustsScrollViewInsets = false;
@@ -36,6 +36,7 @@ class JCChatViewController: SCBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         _init()
+
     }
     
     override func loadView() {
@@ -59,12 +60,12 @@ class JCChatViewController: SCBaseVC {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         if let group = conversation.target as? JMSGGroup {
             // 如果是群组获取群组昵称
             self.title = group.displayName()
@@ -79,6 +80,8 @@ class JCChatViewController: SCBaseVC {
         // 更新草稿内容
         JCDraft.update(text: toolbar.text, conversation: conversation)
     }
+    
+    
     
     deinit {
         //析构函数 类似OC的delloc
@@ -128,7 +131,7 @@ class JCChatViewController: SCBaseVC {
     fileprivate lazy var _emoticonSendBtn: UIButton = {
         var button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.contentEdgeInsets = UIEdgeInsetsMake(0, 10 + 8, 0, 8)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10 + 8, bottom: 0, right: 8)
         button.setTitle(NSLocalizedString("sc_send", comment: "字符串"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundImage(UIImage.loadImage("chat_emoticon_btn_send_blue"), for: .normal)
@@ -207,13 +210,13 @@ class JCChatViewController: SCBaseVC {
         
         _updateBadge()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_removeAllMessage), name: NSNotification.Name(rawValue: kDeleteAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_reloadMessage), name: NSNotification.Name(rawValue: kReloadAllMessage), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_updateFileMessage(_:)), name: NSNotification.Name(rawValue: kUpdateFileMessage), object: nil)
     }
     
-    func _updateFileMessage(_ notification: Notification) {
+    @objc func _updateFileMessage(_ notification: Notification) {
         let userInfo = notification.userInfo
         let msgId = userInfo?[kUpdateFileMessage] as! String
         let message = conversation.message(withMessageId: msgId)!
@@ -233,7 +236,7 @@ class JCChatViewController: SCBaseVC {
     }
 
 
-    func _reloadMessage() {
+    @objc func _reloadMessage() {
         _removeAllMessage()
         messagePage = 0
         _loadMessage(messagePage)
@@ -243,13 +246,13 @@ class JCChatViewController: SCBaseVC {
         }
     }
     
-    func _removeAllMessage() {
+    @objc func _removeAllMessage() {
         jMessageCount = 0
         messages.removeAll()
         chatView.removeAll()
     }
     
-    func _tapView() {
+    @objc func _tapView() {
         view.endEditing(true)
         toolbar.resignFirstResponder()
     }
@@ -273,7 +276,7 @@ class JCChatViewController: SCBaseVC {
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
-    func _back() {
+    @objc func _back() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -406,7 +409,7 @@ class JCChatViewController: SCBaseVC {
         messageContent.delegate = self
         let message = JCMessage(content: messageContent)
         
-        let content = JMSGImageContent(imageData: UIImagePNGRepresentation(image)!)
+        let content = JMSGImageContent(imageData: image.jpegData(compressionQuality: 0.8)!)
         content?.addStringExtra(JMSSAGE_APPKEY, forKey: JM_APPKET)
         content?.addStringExtra(SCCacheTool.shareInstance().getHxUserName(), forKey: JM_USERNAME)
         if  ((conversation.target as? JMSGGroup) != nil) {
@@ -421,8 +424,8 @@ class JCChatViewController: SCBaseVC {
     }
     // 发送图片
     func send(forImage image: UIImage) {
-        let data = UIImageJPEGRepresentation(image, 1.0)!
-        let content = JMSGImageContent(imageData: data)
+        let data = image.jpegData(compressionQuality: 1.0)
+        let content = JMSGImageContent(imageData: data!)
         content?.addStringExtra(JMSSAGE_APPKEY, forKey: JM_APPKET)
         content?.addStringExtra(SCCacheTool.shareInstance().getHxUserName(), forKey: JM_USERNAME)
         if  ((conversation.target as? JMSGGroup) != nil) {
@@ -500,11 +503,11 @@ class JCChatViewController: SCBaseVC {
         send(msg, message)
     }
     // 键盘发送改变通知
-    func keyboardFrameChanged(_ notification: Notification) {
+    @objc func keyboardFrameChanged(_ notification: Notification) {
         let dic = NSDictionary(dictionary: (notification as NSNotification).userInfo!)
-        let keyboardValue = dic.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardValue = dic.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let bottomDistance = UIScreen.main.bounds.size.height - keyboardValue.cgRectValue.origin.y
-        let duration = Double(dic.object(forKey: UIKeyboardAnimationDurationUserInfoKey) as! NSNumber)
+        let duration = Double(dic.object(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as! NSNumber)
         
         UIView.animate(withDuration: duration, animations: {
         }) { (finish) in
@@ -518,7 +521,7 @@ class JCChatViewController: SCBaseVC {
         }
     }
     // 点击emoji发送按钮发送编辑好的文本
-    func _sendHandler() {
+    @objc func _sendHandler() {
         let text = toolbar.attributedText
         if text != nil && (text?.length)! > 0 {
             send(forText: text!)
@@ -526,13 +529,13 @@ class JCChatViewController: SCBaseVC {
         }
     }
     // 单聊 进入聊天设置
-    func _getSingleInfo() {
+    @objc func _getSingleInfo() {
         let vc = JCSingleSettingViewController()
         vc.user = conversation.target as! JMSGUser
         navigationController?.pushViewController(vc, animated: true)
     }
     // 群聊 进入群聊设置
-    func _getGroupInfo() {
+    @objc func _getGroupInfo() {
         let vc = JCGroupSettingViewController()
         let group = conversation.target as! JMSGGroup
         vc.group = group
@@ -711,7 +714,7 @@ extension JCChatViewController: JCEmoticonInputViewDataSource, JCEmoticonInputVi
     }
 
     open func emoticon(_ emoticon: JCEmoticonInputView, insetForGroupAt index: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(12, 10, 12 + 24, 10)
+        return UIEdgeInsets(top: 12, left: 10, bottom: 12 + 24, right: 10)
     }
 
     open func emoticon(_ emoticon: JCEmoticonInputView, didSelectFor item: JCEmoticon) {
@@ -755,7 +758,7 @@ extension JCChatViewController: SAIToolboxInputViewDataSource, SAIToolboxInputVi
         return 4
     }
     open func toolbox(_ toolbox: SAIToolboxInputView, insetForSectionAt index: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(12, 10, 12, 10)
+        return UIEdgeInsets(top: 12, left: 10, bottom: 12, right: 10)
     }
     open func toolbox(_ toolbox: SAIToolboxInputView, shouldSelectFor item: SAIToolboxItem) -> Bool {
         return true
@@ -837,13 +840,13 @@ extension JCChatViewController: YHPhotoPickerViewControllerDelegate, UINavigatio
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage?
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage?
         if let image = image?.fixOrientation() {
             send(forImage: image)
         }
-        let videoUrl = info[UIImagePickerControllerMediaURL] as! URL?
+        let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as! URL?
         if videoUrl != nil {
             let data = try! Data(contentsOf: videoUrl!)
             send(fileData: data)
@@ -1036,7 +1039,7 @@ extension JCChatViewController: JCChatViewDelegate {
                 if msg.isHaveRead {
                     continue
                 }
-                msg.setMessageHaveRead({ _ in
+                msg.setMessageHaveRead({ _,_  in
 
                 })
             }
@@ -1199,9 +1202,9 @@ extension JCChatViewController: SAIInputBarDelegate, SAIInputBarDisplayable {
             inputBar.text = text + displayName + " "
         } else {
             let index1 = text.index(text.endIndex, offsetBy: currentIndex - text.length + 1)
-            let prefix = text.substring(with: Range<String.Index>(text.startIndex..<index1))
+            let prefix = text.substring(with: text.startIndex..<index1)
             let index2 = text.index(text.startIndex, offsetBy: currentIndex + 1)
-            let suffix = text.substring(with: Range<String.Index>(index2..<text.endIndex))
+            let suffix = text.substring(with: index2..<text.endIndex)
             inputBar.text = prefix + displayName + " " + suffix
             let _ = self.updateRemids(inputBar, "@" + displayName + " ", range, currentIndex)
         }
@@ -1257,7 +1260,7 @@ extension JCChatViewController: SAIInputBarDelegate, SAIInputBarDisplayable {
             let tempDic = reminds[index]
             let startIndex = tempDic.startIndex
             if currentIndex <= startIndex {
-                if string.characters.count == 0 {
+                if string.count == 0 {
                     for subIndex in index..<reminds.count {
                         let subTemp = reminds[subIndex]
                         subTemp.startIndex -= 1
@@ -1285,7 +1288,7 @@ extension JCChatViewController: SAIInputBarDelegate, SAIInputBarDisplayable {
         recordHelper.updateMeterDelegate = recordingHub
         recordingHub.startRecordingHUDAtView(view)
         recordingHub.frame = CGRect(x: view.centerX - 70, y: view.centerY - 70, width: 136, height: 136)
-        recordHelper.startRecordingWithPath(String.getRecorderPath()) { _ in
+        recordHelper.startRecordingWithPath(String.getRecorderPath()) {
         }
     }
     

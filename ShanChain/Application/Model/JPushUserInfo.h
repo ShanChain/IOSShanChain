@@ -17,6 +17,8 @@
 @property  (nonatomic,copy)   NSString   *sysPage;
 @property  (nonatomic,copy)   NSString   *title;
 @property  (nonatomic,copy)   NSString   *url;
+@property  (nonatomic,copy)   NSString   *extra;
+@property  (nonatomic,copy)   NSString   *type;
 @end
 
 

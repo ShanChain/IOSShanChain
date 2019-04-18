@@ -71,7 +71,7 @@ class GroupAvatorViewController: UIViewController {
         navigationItem.rightBarButtonItems =  [item]
     }
 
-    func _more() {
+    @objc func _more() {
         let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: NSLocalizedString("sc_cancel", comment: "字符串"), destructiveButtonTitle: nil, otherButtonTitles: "从相册中选择", "拍照")
         actionSheet.show(in: self.view)
     }
@@ -104,14 +104,15 @@ extension GroupAvatorViewController: UINavigationControllerDelegate, UIImagePick
         picker.dismiss(animated: true, completion: nil)
     }
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        var image = info[UIImagePickerControllerEditedImage] as! UIImage?
+        var image = info[UIImagePickerController.InfoKey.editedImage] as! UIImage?
         image = image?.fixOrientation()
         if image != nil {
             MBProgressHUD_JChat.showMessage(message: "正在上传", toView: view)
 
-            guard let imageData = UIImageJPEGRepresentation(image!, 0.8) else {
+
+            guard let imageData = image!.jpegData(compressionQuality: 0.8) else {
                 return
             }
             let info = JMSGGroupInfo()

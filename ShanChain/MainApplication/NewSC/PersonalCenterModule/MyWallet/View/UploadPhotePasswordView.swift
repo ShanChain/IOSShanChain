@@ -13,13 +13,13 @@ typealias UploadSuccessClosure = (_ isSuccess:Bool ,_ authCode:String) ->Void //
 class UploadPhotePasswordView: UIView {
 
     var contentView:UIView!
-    var closure:UploadSuccessClosure?
+    @objc var closure:UploadSuccessClosure?
     var imageData:Data?
     var imageURL:String?
-    var imageViewTag:Int = 0
+    @objc var imageViewTag:Int = 0
     
-    var vc:UIViewController?
-    var transferDic: Dictionary<String, Any>?
+    @objc var vc:UIViewController?
+    @objc var transferDic: Dictionary<String, Any>?
     
     
     
@@ -62,9 +62,11 @@ class UploadPhotePasswordView: UIView {
 
         let registrationID:String = JPUSHService.registrationID() ?? ""
         SCNetwork.shareInstance().hh_uploadFile(withArr: [self.imageURL ?? ""], url: CreateAuthCode_URL, parameters: ["deviceToken":registrationID], showLoading: true, call: { (baseModel, error) in
+            
             if let authCode  = baseModel?.data , ((baseModel?.data as? String) != nil){
                 if self.imageViewTag == 214 {
                     // 将原本H5做得请求放在原生做
+                    self.removeFromSuperview()
                     self.transferHandle()
                     
                     
@@ -165,7 +167,7 @@ extension UploadPhotePasswordView:DUX_UploadUserIconDelegate{
     
     func uploadImageToServer(with image: UIImage!, tag: Int) {
 //        self.imageData = UIImagePNGRepresentation(image.mc_reset(to: CGSize(width: 100, height: 100)))
-        self.imageData = UIImagePNGRepresentation(image)
+        self.imageData = image.jpegData(compressionQuality: 1.0)
         confirmBtn.backgroundColor = SC_ThemeMainColor
         confirmBtn.isUserInteractionEnabled = true
         selectImageBtn.setImage(image, for: .normal)

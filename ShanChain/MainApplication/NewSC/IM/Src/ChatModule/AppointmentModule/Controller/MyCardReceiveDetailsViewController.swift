@@ -142,7 +142,7 @@ class MyCardReceiveDetailsViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func _back(){
+    @objc func _back(){
         navigationController?.popViewController(animated: true)
     }
     

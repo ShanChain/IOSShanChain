@@ -107,7 +107,7 @@ class JCFileDownloadViewController: SCBaseVC {
         view.addConstraint(_JCLayoutConstraintMake(_openButton, .height, .equal, nil, .notAnAttribute, 40))
     }
     
-    func _openFile() {
+    @objc func _openFile() {
         if let fileType = message.ex.fileType {
             let content = message.content as! JMSGFileContent
             switch fileType.fileFormat() {
@@ -135,7 +135,7 @@ class JCFileDownloadViewController: SCBaseVC {
         }
     }
     
-    func _downloadFile() {
+    @objc func _downloadFile() {
         let content = message.content as! JMSGFileContent
         MBProgressHUD_JChat.showMessage(message: "下载中", toView: view)
         content.fileData { (data, id, error) in

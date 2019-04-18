@@ -44,7 +44,7 @@ class MyCardCouponContainerViewController: SCBaseVC {
     }
     
     // 扫码二维码
-    func _scanCode(){
+    @objc func _scanCode(){
        ScanCodeService.newInstancetype(withPush: self)
     }
     

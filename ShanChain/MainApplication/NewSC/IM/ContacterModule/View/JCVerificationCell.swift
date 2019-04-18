@@ -11,7 +11,7 @@ import JMessage
 
 class JCVerificationCell: JCTableViewCell {
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         _init()
     }
@@ -127,7 +127,7 @@ class JCVerificationCell: JCTableViewCell {
         
     }
     
-    func _clickAcceptButton() {
+    @objc func _clickAcceptButton() {
         JMSGFriendManager.acceptInvitation(withUsername: info.username, appKey: info.appkey) { (result, error) in
             if error == nil {
                 self.info.state = JCVerificationType.accept.rawValue

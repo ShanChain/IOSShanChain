@@ -20,7 +20,7 @@ enum TaskListType:Int{
 class TaskListContainerViewController: SCBaseVC {
 
     // 兼容OC
-    public var _oc_scrollToIndex = 1{
+    @objc public var _oc_scrollToIndex = 1{
         willSet{
             if newValue ==  1{
                 _scrollToIndex = .my
@@ -134,7 +134,7 @@ class TaskListContainerViewController: SCBaseVC {
     }
     
     
-    func _publish() {
+    @objc func _publish() {
         
         for view in self.view.subviews{
             if view.tag == 6666{

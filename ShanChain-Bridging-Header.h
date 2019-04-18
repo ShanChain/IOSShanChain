@@ -74,7 +74,7 @@
 #import "MJExtension.h"
 #import "BMKTestLocationViewController.h" // 地图
 #import "SCCacheChatRecord.h"
-
+#import "SystemInformationViewController.h"//系统消息
 
 
 #endif /* ShanChain_Bridging_Header_h */

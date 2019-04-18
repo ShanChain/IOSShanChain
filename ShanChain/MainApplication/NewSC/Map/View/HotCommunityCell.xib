@@ -74,11 +74,11 @@
                             <constraint firstItem="xz0-MU-TV9" firstAttribute="leading" secondItem="kz8-Cz-1dg" secondAttribute="trailing" constant="10" id="eiA-w6-DW1"/>
                             <constraint firstItem="Kin-pk-0N4" firstAttribute="leading" secondItem="kz8-Cz-1dg" secondAttribute="trailing" constant="10" id="pyw-Lk-Y9m"/>
                             <constraint firstItem="kz8-Cz-1dg" firstAttribute="centerY" secondItem="ALd-fv-ua2" secondAttribute="centerY" id="qM0-1v-Lso"/>
+                            <constraint firstAttribute="height" constant="72.5" id="soe-Jw-gaJ"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ALd-fv-ua2" firstAttribute="top" secondItem="MHS-Xs-pv1" secondAttribute="bottom" id="BOw-HG-8wJ"/>
                     <constraint firstItem="ALd-fv-ua2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QjT-QX-wz6"/>
                     <constraint firstItem="MHS-Xs-pv1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Vpc-hT-Hxa"/>
                     <constraint firstItem="MHS-Xs-pv1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Zor-c8-EUp"/>
@@ -86,11 +86,22 @@
                     <constraint firstAttribute="trailing" secondItem="MHS-Xs-pv1" secondAttribute="trailing" id="kFe-Tm-fe4"/>
                     <constraint firstAttribute="bottom" secondItem="ALd-fv-ua2" secondAttribute="bottom" id="o1Z-l5-Ky3"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                        <real key="value" value="0.0"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                     <real key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="0.5"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                    <color key="value" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
@@ -101,7 +112,7 @@
                 <outlet property="nameLb" destination="Kin-pk-0N4" id="xkj-td-oJy"/>
                 <outlet property="peopleNumberLb" destination="xz0-MU-TV9" id="C58-13-d1T"/>
             </connections>
-            <point key="canvasLocation" x="36" y="95"/>
+            <point key="canvasLocation" x="-67" y="53"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -78,7 +78,7 @@ class HelpCenterCell: UITableViewCell {
     }
     
     // 点击头像
-    func _tapGestureAvatar(){
+    @objc func _tapGestureAvatar(){
         if let delegate = delegate {
             delegate._clickAvatar(listModel: _listModel!)
         }

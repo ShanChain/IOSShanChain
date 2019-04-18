@@ -10,7 +10,7 @@ import UIKit
 
 class PersonalCenterService: NSObject {
     
-    class func _checkingUpdate(_ isTip:Bool){
+    @objc class func _checkingUpdate(_ isTip:Bool){
         // 检查更新
         SCNetwork.shareInstance().v1_post(withUrl: checkUpdate_URL, params: ["type":"ios"], showLoading: isTip) { (baseModel, error) in
             if let data = baseModel?.data as? Dictionary<String,Any>{

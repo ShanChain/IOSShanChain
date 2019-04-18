@@ -152,7 +152,7 @@ class TaskListPersonalCell: UITableViewCell {
         }
     }
     
-    func _tapGestureAvatar(){
+    @objc func _tapGestureAvatar(){
         if let delegate = delegate {
             delegate._clickAvatar(listModel: _listModel!)
         }

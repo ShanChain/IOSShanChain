@@ -19,7 +19,7 @@ enum HelpType:Int{
 class MyHelpContainerViewController: SCBaseVC {
 
     // 兼容OC
-    public var _oc_scrollToIndex = 1{
+    @objc public var _oc_scrollToIndex = 1{
         willSet{
             if newValue ==  1{
                 _scrollToIndex = .I_helped

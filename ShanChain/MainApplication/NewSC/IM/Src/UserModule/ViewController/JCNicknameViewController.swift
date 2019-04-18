@@ -17,7 +17,7 @@ class JCNicknameViewController: SCBaseVC {
         super.viewDidLoad()
         _init()
         nicknameTextField.text = nickName
-        var count = 20 - nickName.characters.count
+        var count = 20 - nickName.count
         count = count < 0 ? 0 : count
         tipLabel.text = "\(count)"
         nicknameTextField.becomeFirstResponder()
@@ -66,23 +66,23 @@ class JCNicknameViewController: SCBaseVC {
         navigationItem.rightBarButtonItem =  navRightButton
     }
     
-    func textFieldDidChanged(_ textField: UITextField) {
+    @objc func textFieldDidChanged(_ textField: UITextField) {
         // markedTextRange指的是当前高亮选中的，除了长按选中，用户中文输入拼音过程往往也是高亮选中状态
         if textField.markedTextRange == nil {
             let text = textField.text!
-            if text.characters.count > 20 {
-                let range = Range<String.Index>(text.startIndex ..< text.index(text.startIndex, offsetBy: 20))
+            if text.count > 20 {
+                let range = text.startIndex ..< text.index(text.startIndex, offsetBy: 20)
                 
                 let subText = text.substring(with: range)
                 textField.text = subText
             }
-            let count = 20 - (textField.text?.characters.count)!
+            let count = 20 - (textField.text?.count)!
             tipLabel.text = "\(count)"
         }
     }
     
     //MARK: - click func
-    func _saveNickname() {
+    @objc func _saveNickname() {
         if nicknameTextField.text == nickName {
             HHTool.showTip("没有做任何修改", duration: 0.5)
             return
