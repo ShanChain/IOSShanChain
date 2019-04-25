@@ -235,7 +235,7 @@
     [self.scrollView addSubview:self.forgetPwdBtn];
     
     [self.scrollView addSubview:self.socialView];
-    
+
     
     BOOL qq = [[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"mqqapi://"]];
     if (qq) {
@@ -282,6 +282,24 @@
     self.weiBtn.frame = CGRectMake((SCREEN_WIDTH- 50)/2-45, 0, 50, 50);
     self.weibBtn.frame = CGRectMake(0, 0, 50, 50);
     self.qqBtn.frame=CGRectMake(self.socialView.frame.size.width - 50, 0, 50, 50);
+    
+    NSString *deviceType = [UIDevice currentDevice].model;
+    
+    if(![deviceType isEqualToString:@"iPhone"]) {
+        
+        self.socialView.hidden = YES;
+        self.socialBtn.hidden = YES;
+        self.weibBtn.hidden = YES;
+        self.weiBtn.hidden = YES;
+        self.qqBtn.hidden = YES;
+    }else {
+        //iPhone
+        self.socialView.hidden = NO;
+        self.socialBtn.hidden = NO;
+        self.weibBtn.hidden = NO;
+        self.weiBtn.hidden = NO;
+        self.qqBtn.hidden = NO;
+    }
 }
 
 - (void)dynamicLoginClick{
