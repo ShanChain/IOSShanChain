@@ -37,7 +37,7 @@
     
     NSString *tableName = [NSString stringWithFormat:@"chatRecordTable%@",roomId];
     
-    NSString * createTableSql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@(record TEXT)",tableName];
+    NSString * createTableSql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@(msgid TEXT unique,record TEXT)",tableName];
     
     NSString *selectSql = [NSString stringWithFormat:@"select name from sqlite_master where type = 'table' and name = '%@'", tableName];
     
@@ -75,17 +75,17 @@
     }];
 }
 // 插入数据
-- (void)insertDataWithRoomId:(NSString *)roomId record:(NSString *)record{
+- (void)insertDataWithRoomId:(NSString *)roomId msgid:(NSString *)msgid record:(NSString *)record{
     
     [self.chatRecordQueue inDatabase:^(FMDatabase *db) {
         
         if ([db open]) {
             
-            NSString *insertSql = [NSString stringWithFormat:@"insert into chatRecordTable%@ (record) values(?) ",roomId];
+            NSString *insertSql = [NSString stringWithFormat:@"insert into chatRecordTable%@ (msgid,record) values(?,?) ",roomId];
             
-            BOOL result = [db executeUpdate:insertSql, record];
+            BOOL result = [db executeUpdate:insertSql, msgid, record];
             if (result) {
-                SCLog(@"%@插入数据成功%@",roomId,record);
+                SCLog(@"%@%@插入数据成功%@",roomId,msgid,record);
             }
             else{
                 SCLog(@"插入数据失败");

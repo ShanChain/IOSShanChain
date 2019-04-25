@@ -93,12 +93,12 @@ class AppointmentCreateCardViewController: UITableViewController {
     }
     
     @IBAction func clickIcon(_ sender: UITapGestureRecognizer) {
-        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: self, imageTag: 0, delegate: self as DUX_UploadUserIconDelegate)
+        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: self, imageTag: 214, delegate: self as DUX_UploadUserIconDelegate)
       
     }
     
     @IBAction func changeIconAction(_ sender: UIButton) {
-        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: self, imageTag: 0, delegate: self as DUX_UploadUserIconDelegate)
+        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: self, imageTag: 214, delegate: self as DUX_UploadUserIconDelegate)
     }
     
     @IBAction func selectTimeAtion(_ sender: UITapGestureRecognizer) {

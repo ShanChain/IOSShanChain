@@ -47,10 +47,10 @@ class PopularCommunityViewController: SCBaseVC {
         reftreshData()
         _requstData(false) {}
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_earthAction), image: UIImage.loadDefaultImage("sc_EarthNew"), selectedImage: UIImage.loadDefaultImage("sc_EarthNew"))
-        
-        let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
-        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
-        
+        _updateAvatar()
+//        let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
+//        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
+        NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
         // 抽屉
         self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
             if direction == CWDrawerTransitionDirection.fromLeft{
@@ -95,6 +95,10 @@ class PopularCommunityViewController: SCBaseVC {
         self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
     }
     
+    @objc func _updateAvatar(){
+        let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
+        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -306,10 +310,23 @@ extension PopularCommunityViewController:HotCommunityCellProtocol{
                 
                 chatRoomVC.chatRecords = chatRecords
                 self.pushPage(chatRoomVC, animated: true)
+                if let roomid = hotModel.roomId {
+                    self.updateList(roomid)
+                }
+                
             }
         }
     }
-    
+    // 首页更新缓存列表（点击进入社区时调用）
+    func updateList(_ roomID: String) {
+        
+
+        let tmp = String(format: "/v1/2.0/hotChatRoom/updateList?roomId=%@&token=%@", roomID,SCCacheTool.shareInstance().getUserToken())
+        
+        SCNetwork.shareInstance()?.hh_post(withUrl: tmp, params: [:], showLoading: false, call: { (baseModel, error) in
+            
+        })
+    }
 }
 extension PopularCommunityViewController: UISearchBarDelegate {
     

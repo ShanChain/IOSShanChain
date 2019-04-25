@@ -43,8 +43,26 @@ class MyCardReceiveDetailsViewController: UITableViewController {
     @objc open  var couponsToken:String? //核销凭证
     @objc open  var isUseCouponsing:Bool = false // 是否正在核销当前子卡劵
     
+    var hxUserName:String? //极光用户名
+    
+    
     var detailsModel:CouponsDetailsModel?
 
+    @IBAction func headAction(_ sender: UIButton) {
+        //
+        if let userName = self.hxUserName {
+            
+            JMSGConversation.createSingleConversation(withUsername: userName) { (result, error) in
+                if error == nil {
+                    ChatPublicService.jg_addFriendFeFocus(funsJmUserName: userName)
+                    let conv = result as! JMSGConversation
+                    let vc = JCChatViewController(conversation: conv)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUpdateConversation), object: nil, userInfo: nil)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
     @IBAction func applyAction(_ sender: UIButton) {
         switch status{
             
@@ -244,8 +262,12 @@ extension MyCardReceiveDetailsViewController{
                             self._configurationUI()
                      
                         }
+                        let account = userDic["hxAccount"] as? [String : Any]
+                        self.hxUserName = (account?["hxUserName"] as! String)
+
                         
                     }
+                    
                     
                 })
     

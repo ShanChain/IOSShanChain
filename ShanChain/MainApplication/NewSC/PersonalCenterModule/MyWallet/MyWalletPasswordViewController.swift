@@ -36,7 +36,7 @@ class MyWalletPasswordViewController: SCBaseVC {
         generateBtn.isUserInteractionEnabled = false
        // addRightBarButtonItem(withTarget: self, sel: #selector(_clickTip), title: "提示", tintColor: SC_ThemeMainColor)
         selectImageBtn.rx.tap.subscribe(onNext: { [weak self] in
-        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: self, imageTag: 100, delegate: self)
+        DUX_UploadUserIcon.shareUploadImage().showActionSheet(inFatherViewController: self, imageTag: 214, delegate: self)
         }).disposed(by: disposeBag)
         
         generateBtn.rx.tap.subscribe(onNext: { [weak self] in

@@ -394,6 +394,7 @@ static SCAppManager *instance = nil;
 - (void)againUploadPasswordWithUrl:(NSString*)url parameters:(NSDictionary*)parameters Callback:(void(^)(NSString * authCode, NSString * _url, NSDictionary * _parameters))callback{
     UploadPhotePasswordView  *uploadView = [[UploadPhotePasswordView alloc]initWithFrame:[HHTool getCurrentVC].view.frame];
     uploadView.vc = [HHTool getCurrentVC];
+    uploadView.imageViewTag = 214;
     weakify(uploadView);
     uploadView.closure = ^(BOOL  success, NSString * _Nonnull authCode) {
         BLOCK_EXEC(callback,authCode,[[[NSMutableString alloc]initWithString:url]copy],parameters.copy);
@@ -405,6 +406,7 @@ static SCAppManager *instance = nil;
 - (void)againUploadPasswordCallback:(void(^)(NSString * authCode))callback{
     UploadPhotePasswordView  *uploadView = [[UploadPhotePasswordView alloc]initWithFrame:[HHTool getCurrentVC].view.frame];
     uploadView.vc = [HHTool getCurrentVC];
+    uploadView.imageViewTag = 214;
     weakify(uploadView);
     uploadView.closure = ^(BOOL  success, NSString * _Nonnull authCode) {
         BLOCK_EXEC(callback,authCode);

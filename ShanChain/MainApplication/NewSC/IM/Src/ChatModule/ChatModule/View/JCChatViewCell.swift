@@ -198,6 +198,7 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         
         _cardView?.apply(message)
         _tipsView?.apply(message)
+//        print(">>>>>>>>",message.senderAvator as Any);
         _avatarView?.apply(message)
         let avatarView = _avatarView as? JCMessageAvatarView
         if avatarView != nil {
@@ -240,11 +241,11 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     }
     
     @objc func copyMessage(_ sender: Any) {}
-    func deleteMessage(_ sender: Any) {}
-    func forwardMessage(_ sender: Any) {}
-    func withdrawMessage(_ sender: Any) {}
+    @objc func deleteMessage(_ sender: Any) {}
+    @objc func forwardMessage(_ sender: Any) {}
+    @objc func withdrawMessage(_ sender: Any) {}
 
-    private dynamic func _handleMenuGesture(_ sender: UILongPressGestureRecognizer) {
+    @objc private dynamic func _handleMenuGesture(_ sender: UILongPressGestureRecognizer) {
         guard sender.state == .began else {
             return
         }
@@ -292,6 +293,8 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         }
     }
     
+    
+    
     open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         // menu bar only process
         guard sender is UIMenuController else {
@@ -326,6 +329,9 @@ open class JCChatViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     }
     
     private func _commonInit() {
+        let gesture = UILongPressGestureRecognizer.init(target: self, action: #selector(_handleMenuGesture))
+        //附加识别器到视图
+        self.contentView.addGestureRecognizer(gesture)
     }
     
     fileprivate var _bubbleView: UIImageView? //显示框

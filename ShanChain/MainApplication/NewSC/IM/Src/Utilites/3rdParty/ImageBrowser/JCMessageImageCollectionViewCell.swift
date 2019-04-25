@@ -26,7 +26,7 @@ public class JCMessageImageCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         messageImage = UIImageView()
         messageImage.contentMode = .scaleAspectFit
-        messageImage.backgroundColor = UIColor.black
+        messageImage.backgroundColor = UIColor.clear
         messageImage.frame = UIScreen.main.bounds
         
         messageImageContent.addSubview(messageImage)
@@ -78,6 +78,7 @@ public class JCMessageImageCollectionViewCell: UICollectionViewCell {
         guard let content = message.content as? JMSGImageContent else {
             return
         }
+        
         content.thumbImageData { (data, msgId, error) in
             if msgId == message.msgId {
                 if let data = data {
@@ -92,8 +93,15 @@ public class JCMessageImageCollectionViewCell: UICollectionViewCell {
                         return
                     }
                     if let data = data {
+//                        let imageW = self.messageImage.size.width
+//                        let scale = content.imageSize.width / imageW
+//                        let imageH = content.imageSize.height / scale
+//
+//                        self.messageImage.image = UIImage(data: data)?.mc_reset(to: CGSize.init(width: imageW, height: imageH))
                         self.messageImage.image = UIImage(data: data)
                     }
+                }else {
+                    print(error.debugDescription,content)
                 }
             })
         }

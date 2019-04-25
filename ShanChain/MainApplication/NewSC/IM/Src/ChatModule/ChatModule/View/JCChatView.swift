@@ -312,7 +312,6 @@ extension JCChatView: UICollectionViewDataSource, JCChatViewLayoutDelegate {
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let message = _chatViewData[indexPath.item]
-        
 //        let options = (message.options.showsCard.hashValue << 0) | (message.options.showsAvatar.hashValue << 1)
         let alignment = message.options.alignment.rawValue
         let identifier = NSStringFromClass(type(of: message.content)) + ".\(alignment)"
@@ -415,6 +414,7 @@ extension JCChatView: UICollectionViewDataSource, JCChatViewLayoutDelegate {
     }
     
     open func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        print(action,"---",sender!)
         let message = _chatViewData[indexPath.item]
         if message.content is JCMessageNoticeContent || message.content is JCMessageTimeLineContent  {
             return false

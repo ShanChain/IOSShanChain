@@ -509,7 +509,7 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"请输入聊天室名称";
+        textField.placeholder = @"例如：x x x 社区";
     }];
     
     [alert addAction:creatAction];

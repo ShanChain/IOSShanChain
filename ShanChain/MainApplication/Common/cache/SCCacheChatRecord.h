@@ -16,7 +16,7 @@
 - (void)createTableWithRoomId:(NSString *)roomId;
 
 /// 插入数据
-- (void)insertDataWithRoomId:(NSString *)roomId record:(NSString *)record;
+- (void)insertDataWithRoomId:(NSString *)roomId msgid:(NSString *)msgid record:(NSString *)record;
 
 /// 删除数据
 - (void)deleteDataWithRoomId:(NSString *)roomId;

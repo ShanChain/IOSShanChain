@@ -25,7 +25,7 @@ class JCImageBrowserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = UIColor.black        
         
         if let messages = messages {
             imageMessages = getImageMessages(messages)
@@ -72,7 +72,6 @@ class JCImageBrowserViewController: UIViewController {
                 if msg.contentType == .image {
                     imageMessages.append(msg)
                 }
-              
             }
         }
         return imageMessages
@@ -82,9 +81,9 @@ class JCImageBrowserViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 0
-        imageBrowser = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
+        flowLayout.itemSize = view.frame.size
+        imageBrowser = UICollectionView(frame: view.frame, collectionViewLayout: flowLayout)
         view.addSubview(imageBrowser)
-        imageBrowser.frame = view.frame
         
         imageBrowser.backgroundColor = UIColor.clear
         imageBrowser.delegate = self
@@ -119,11 +118,11 @@ extension JCImageBrowserViewController: UICollectionViewDelegate, UICollectionVi
         return imageArr.count
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-    }
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+//    }
     
     
     func collectionView(_ collectionView: UICollectionView,
