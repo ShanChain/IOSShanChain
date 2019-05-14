@@ -42,7 +42,14 @@ class MyCardReceiveDetailsViewController: UITableViewController {
     @objc open  var orderId:String?
     @objc open  var couponsToken:String? //核销凭证
     @objc open  var isUseCouponsing:Bool = false // 是否正在核销当前子卡劵
-    
+    @objc open  var isJPush:Bool = false {
+        didSet {
+            if isJPush {
+                status = .receive_Complete
+            }
+            
+        }
+    }// 推送（已核销）
     var hxUserName:String? //极光用户名
     
     

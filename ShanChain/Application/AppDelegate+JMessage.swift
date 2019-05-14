@@ -20,14 +20,24 @@ extension AppDelegate: JMessageDelegate {
         MBProgressHUD_JChat.hide(forView: nil, animated: true)
         MBProgressHUD_JChat.show(text: "数据库升级完成", view: nil)
     }
-    
-   public func onReceive(_ event: JMSGNotificationEvent!) {
-        switch event.eventType {
-        case .receiveFriendInvitation, .acceptedFriendInvitation, .declinedFriendInvitation:
-            cacheInvitation(event: event)
-        case .loginKicked, .serverAlterPassword, .userLoginStatusUnexpected:
+    public func onReceive(_ event: JMSGUserLoginStatusChangeEvent!) {
+        switch event.eventType.rawValue {
+        case JMSGLoginStatusChangeEventType.eventNotificationLoginKicked.rawValue,
+             JMSGLoginStatusChangeEventType.eventNotificationServerAlterPassword.rawValue,
+             JMSGLoginStatusChangeEventType.eventNotificationUserLoginStatusUnexpected.rawValue:
             _logout()
-        case .deletedFriend, .receiveServerFriendUpdate:
+        default:
+            break
+        }
+    }
+    public func onReceive(_ event: JMSGFriendNotificationEvent!) {
+        switch event.eventType.rawValue {
+        case JMSGFriendEventType.eventNotificationReceiveFriendInvitation.rawValue,
+             JMSGFriendEventType.eventNotificationAcceptedFriendInvitation.rawValue,
+             JMSGFriendEventType.eventNotificationDeclinedFriendInvitation.rawValue:
+            cacheInvitation(event: event)
+        case JMSGFriendEventType.eventNotificationDeletedFriend.rawValue,
+             JMSGFriendEventType.eventNotificationReceiveServerFriendUpdate.rawValue:
             NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateFriendList), object: nil)
         default:
             break
@@ -39,15 +49,15 @@ extension AppDelegate: JMessageDelegate {
         let user = friendEvent.getFromUser()
         let reason = friendEvent.getReason()
         let info = JCVerificationInfo.create(username: user!.username, nickname: user?.nickname, appkey: user!.appKey!, resaon: reason, state: JCVerificationType.wait.rawValue)
-        switch event.eventType {
-        case .receiveFriendInvitation:
+        switch event.eventType.rawValue {
+        case JMSGFriendEventType.eventNotificationReceiveFriendInvitation.rawValue:
             info.state = JCVerificationType.receive.rawValue
             JCVerificationInfoDB.shareInstance.insertData(info)
-        case .acceptedFriendInvitation:
+        case JMSGFriendEventType.eventNotificationAcceptedFriendInvitation.rawValue:
             info.state = JCVerificationType.accept.rawValue
             JCVerificationInfoDB.shareInstance.updateData(info)
             NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateFriendList), object: nil)
-        case .declinedFriendInvitation:
+        case JMSGFriendEventType.eventNotificationDeclinedFriendInvitation.rawValue:
             info.state = JCVerificationType.reject.rawValue
             JCVerificationInfoDB.shareInstance.updateData(info)
         default:
@@ -61,6 +71,7 @@ extension AppDelegate: JMessageDelegate {
         }
         NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateVerification), object: nil)
     }
+
     
     func _logout() {
         JCVerificationInfoDB.shareInstance.queue = nil

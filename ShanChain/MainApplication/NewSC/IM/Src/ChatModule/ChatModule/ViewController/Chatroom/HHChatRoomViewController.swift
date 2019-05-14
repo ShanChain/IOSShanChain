@@ -27,14 +27,15 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     var shareTakeUrl:String? // 分享的区域截图的URL
     var isActivitying:Bool = false // 活动是否正在进行中
     
-    // 缓存 历史消息 数组
-    var chatRecords:[String]
-    // 接收 历史消息 数组
-    var receiveMessages:[JMSGMessage]
-    //
+    /// 缓存 历史消息 数组
+    var chatRecords:[String] = []
+    ///
     var isChatRecordLoad = false
-    // 缓存 历史消息 数组 最后一个数据的 ServerMessageId
+    /// 缓存 历史消息 数组 最后一个数据的 ServerMessageId
     var charRecordsLastServerMessageId: String?
+    ///
+    var chatImageMessages:[JMSGMessage] = []
+    
     
     //MARK - life cycle
     // 通过requite关键字强制子类对某个初始化方法进行重写，也就是说必须要实现这个方法。
@@ -42,8 +43,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         self.navTitle = navTitle
         self.conversation = conversation
         self.isJoinChatRoom = isJoinChat
-        self.chatRecords = []
-        self.receiveMessages = []
         super.init(nibName: "HHChatRoomViewController", bundle: nil) // 加载xib视图
         automaticallyAdjustsScrollViewInsets = false;
        // self.title = navTitle
@@ -372,7 +371,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     
     private func _init() {
         
-
         
         myAvator = UIImage.getMyAvator()
         //  _updateTitle()
@@ -492,12 +490,9 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         _updateAvatar()
         self.addNavigationRight(withImageName: "sc_com_icon_close", withTarget: self, withAction: #selector(_closePage))
         navigationController?.navigationBar.barTintColor = .white
-        //        var attrs = [String : AnyObject]()
-        //        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18)
-        //        attrs[NSForegroundColorAttributeName] = UIColor.black
-        //        navigationController?.navigationBar.titleTextAttributes = attrs
+
         // titleView
-        navTitleView = RoomNavTitleView(frame: CGRect(x: 100, y: 0, width: 200, height: 46))
+        navTitleView = RoomNavTitleView(frame: CGRect(x: (navigationController?.navigationBar.centerX)! - 100, y: 0, width: 200, height: 50))
         navTitleView.positionBtn .setTitle(self.navTitle, for: .normal)
         if let chatRoom = conversation.target as? JMSGChatRoom{
             if self.navTitle! == "加密聊天社区" {
@@ -543,11 +538,11 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
 
         navTitleView.backgroundColor = UIColor.clear
         navigationController?.navigationBar.addSubview(navTitleView)
-        navTitleView.snp.makeConstraints { (mark) in
-            mark.centerX.centerY.equalTo( (navigationController?.navigationBar)!)
-            mark.width.equalTo(200)
-            mark.height.equalTo(50)
-        }
+//        navTitleView.snp.makeConstraints { (mark) in
+//            mark.centerX.centerY.equalTo( (navigationController?.navigationBar)!)
+//            mark.width.equalTo(200)
+//            mark.height.equalTo(50)
+//        }
         //        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         //        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
@@ -925,42 +920,68 @@ extension HHChatRoomViewController: JMessageDelegate {
     
     // 接收聊天室的消息
     func onReceiveChatRoomConversation(_ conversation: JMSGConversation!, messages: [JMSGMessage]!) {
-
+        // MARK: - Warning 注意释放对象，不然这里就会出现奇妙的现象！
         
         let tmp = messages.last!
         let serverMessageId = tmp.serverMessageId!
-        
-        for message in messages{
-            
-            if let tmp1 = self.charRecordsLastServerMessageId {
-                if serverMessageId != tmp1 {
-                    if isChatRecordLoad {
-                        //第一次 清空聊天消息 重载(不在聊天室内，就要加载)
-                        self._reloadMessage()
-                        
-                        isChatRecordLoad = false
-                    }
-                    _handleMessage(message: message)
-                    // print(serverMessageId,">>>>>>>",tmp1)
-                }else {
-                    // 相等 只能是 第一次
+        // 有缓存
+        if let tmp1 = self.charRecordsLastServerMessageId {
+            // 不是最新的 缓存过期，需要更新
+            if serverMessageId != tmp1 {
+                self.chatImageMessages = []
+                if isChatRecordLoad {
+                    //第一次 清空聊天消息 重载(不在聊天室内，就要加载)
+                    self._reloadMessage()
+                    
+                    isChatRecordLoad = false
                 }
-            }else {
-                _handleMessage(message: message)
+                messages.forEach { [weak self] (msg) in
+                    _handleMessage(message: msg)
+                    let msgJsonString = msg.toJsonString()
+                    let msgid = msg.serverMessageId
+                    SCCacheChatRecord.shareInstance()?.insertData(withRoomId: self?.currentChatRoomID, msgid: msgid, record: msgJsonString)
+                }
             }
-
-            let msgJsonString = message.toJsonString()
-            let msgid = message.serverMessageId
-
-            SCCacheChatRecord.shareInstance()?.insertData(withRoomId: self.currentChatRoomID, msgid: msgid, record: msgJsonString)
+        }else {
+            messages.forEach { [weak self] (msg) in
+                _handleMessage(message: msg)
+                let msgJsonString = msg.toJsonString()
+                let msgid = msg.serverMessageId
+                SCCacheChatRecord.shareInstance()?.insertData(withRoomId: self?.currentChatRoomID, msgid: msgid, record: msgJsonString)
+            }
         }
+//        for message in messages{
+//
+//            if let tmp1 = self.charRecordsLastServerMessageId {
+//                if serverMessageId != tmp1 {
+//                    if isChatRecordLoad {
+//                        //第一次 清空聊天消息 重载(不在聊天室内，就要加载)
+//                        self._reloadMessage()
+//
+//                        isChatRecordLoad = false
+//                    }
+//                    self.chatImageMessages = []
+//                    _handleMessage(message: message)
+//                    // print(serverMessageId,">>>>>>>",tmp1)
+//                }else {
+//                    // 相等 只能是 第一次
+//                }
+//            }else {
+//                _handleMessage(message: message)
+//            }
+//
+//            let msgJsonString = message.toJsonString()
+//            let msgid = message.serverMessageId
+//
+//            SCCacheChatRecord.shareInstance()?.insertData(withRoomId: self.currentChatRoomID, msgid: msgid, record: msgJsonString)
+//        }
         if isChatRecordLoad {
             isChatRecordLoad = false
         }
+
 //        for message in messages{
 //            _handleMessage(message: message)
 //        }
-        
         print("当前房间ID",self.currentChatRoomID!,chatRecords.count,"0-0-0-0-0-0")
         
 
@@ -989,13 +1010,12 @@ extension HHChatRoomViewController: JMessageDelegate {
 //                }
 //            }
 //        }
-        
+        if message.contentType == .image {
+            self.chatImageMessages.append(message)
+        }
         //修改聊天室历史消息排序问题,之前用了异步导致排序问题 -R
         let msg =  self._parseMessage(message)
 
-//        let msgData = NSKeyedArchiver.archivedData(withRootObject: msg)
-//
-//        print(msgData)
         
         //添加 消息历史 时间线
         if isNeedInsertTimeLine(message.timestamp.intValue) {// 是否显示时间
@@ -1306,10 +1326,20 @@ extension HHChatRoomViewController: JCMessageDelegate {
     }
     
     func message(message: JCMessageType, image: UIImage?) {
+        
         let browserImageVC = JCImageBrowserViewController()
         browserImageVC.messages = messages
         browserImageVC.conversation = conversation
         browserImageVC.currentMessage = message
+        browserImageVC.chatImageMessages = self.chatImageMessages
+        if let index = self.chatImageMessages.index(where: { (m) -> Bool in
+            m.msgId == message.msgId
+        }) {
+            browserImageVC.imgCurrentIndex = index
+        } else {
+            browserImageVC.imgCurrentIndex = 0
+        }
+        print(self.chatImageMessages.first?.msgId ?? "self.chatImageMessages.first?.msgId nil",message.msgId)
         present(browserImageVC, animated: true) {
             self.toolbar.isHidden = true
         }

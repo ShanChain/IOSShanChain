@@ -32,7 +32,7 @@ class TaskListContainerViewController: SCBaseVC {
     }
     
     
-    public var _oc_statusCode = 0{
+    @objc public var _oc_statusCode = 0{
         willSet{
             statusCode = StatusCode(rawValue: newValue)!
         }

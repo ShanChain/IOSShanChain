@@ -158,7 +158,8 @@ static char TAG_ACTIVITY_SHOW;
 #if SD_UIKIT
     dispatch_main_async_safe(^{
         if (!self.activityIndicator) {
-            self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:[self sd_getIndicatorStyle]];
+            
+            self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             self.activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
         
             [self addSubview:self.activityIndicator];

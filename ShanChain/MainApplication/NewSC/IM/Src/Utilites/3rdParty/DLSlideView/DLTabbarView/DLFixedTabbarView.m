@@ -137,7 +137,8 @@
     UILabel *fromLabel = (UILabel *)[scrollView_ viewWithTag:kLabelTagBase+fromIndex];
     UIImageView *fromIamge = (UIImageView *)[scrollView_ viewWithTag:kImageTagBase+fromIndex];
     UIImageView *fromSelectedIamge = (UIImageView *)[scrollView_ viewWithTag:kSelectedImageTagBase+fromIndex];
-    fromLabel.textColor = [DLUtility getColorOfPercent:percent between:fromItem.titleColor and:fromItem.selectedTitleColor];
+    
+    fromLabel.textColor = [DLUtility getColorOfPercent:percent between:fromItem.titleColor and1:fromItem.selectedTitleColor];
     fromIamge.alpha = percent;
     fromSelectedIamge.alpha = (1-percent);
 
@@ -146,7 +147,7 @@
         UILabel *toLabel = (UILabel *)[scrollView_ viewWithTag:kLabelTagBase+toIndex];
         UIImageView *toIamge = (UIImageView *)[scrollView_ viewWithTag:kImageTagBase+toIndex];
         UIImageView *toSelectedIamge = (UIImageView *)[scrollView_ viewWithTag:kSelectedImageTagBase+toIndex];
-        toLabel.textColor = [DLUtility getColorOfPercent:percent between:toItem.selectedTitleColor and:toItem.titleColor];
+        toLabel.textColor = [DLUtility getColorOfPercent:percent between:toItem.selectedTitleColor and1:toItem.titleColor];
         toIamge.alpha = (1-percent);
         toSelectedIamge.alpha = percent;
     }

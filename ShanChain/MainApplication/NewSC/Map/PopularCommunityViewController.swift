@@ -1,7 +1,7 @@
 //
 //  PopularCommunityViewController.swift
 //  ShanChain
-//
+//  
 //  Created by 千千世界 on 2018/12/18.
 //  Copyright © 2018年 ShanChain. All rights reserved.
 //
@@ -133,6 +133,7 @@ class PopularCommunityViewController: SCBaseVC {
         let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
         SCNetwork.shareInstance().hh_Get(withUrl: HotChatRoom_URL, parameters: ["page":page,"size":size,"version":currentVersion], showLoading: true) { (baseModel, error) in
             if error != nil{
+                complete()
                 return
             }
             if let tmpModel = baseModel {

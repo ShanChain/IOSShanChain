@@ -158,13 +158,13 @@
 - (void)switchingFrom:(NSInteger)fromIndex to:(NSInteger)toIndex percent:(float)percent{
     //DLScrollTabbarItem *fromItem = [self.tabbarItems objectAtIndex:fromIndex];
     UILabel *fromLabel = (UILabel *)[scrollView_ viewWithTag:kLabelTagBase+fromIndex];
-    fromLabel.textColor = [DLUtility getColorOfPercent:percent between:self.tabItemNormalColor and:self.tabItemSelectedColor];
+    fromLabel.textColor = [DLUtility getColorOfPercent:percent between:self.tabItemNormalColor and1:self.tabItemSelectedColor];
     
     UILabel *toLabel = nil;
     if (toIndex >= 0 && toIndex < [self tabbarCount]) {
         //DLScrollTabbarItem *toItem = [self.tabbarItems objectAtIndex:toIndex];
         toLabel = (UILabel *)[scrollView_ viewWithTag:kLabelTagBase+toIndex];
-        toLabel.textColor = [DLUtility getColorOfPercent:percent between:self.tabItemSelectedColor and:self.tabItemNormalColor];
+        toLabel.textColor = [DLUtility getColorOfPercent:percent between:self.tabItemSelectedColor and1:self.tabItemNormalColor];
     }
     
     // 计算track view位置和宽度

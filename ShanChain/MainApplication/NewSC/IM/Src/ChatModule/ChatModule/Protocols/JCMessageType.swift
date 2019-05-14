@@ -20,6 +20,7 @@ import JMessage
     var name: String { get }
     var identifier: UUID { get }
     var msgId: String { get }
+//    var serverMessageId: String { get }
     var date: Date { get }
     var sender: JMSGUser? { get }
     var senderAvator: UIImage? { get }

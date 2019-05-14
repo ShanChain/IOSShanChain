@@ -20,7 +20,7 @@ class UploadPhotePasswordView: UIView {
     
     @objc var vc:UIViewController?
     @objc var transferDic: Dictionary<String, Any>?
-    
+    @objc var isTransfer:Bool = false
     
     
     
@@ -64,7 +64,7 @@ class UploadPhotePasswordView: UIView {
         SCNetwork.shareInstance().hh_uploadFile(withArr: [self.imageURL ?? ""], url: CreateAuthCode_URL, parameters: ["deviceToken":registrationID], showLoading: true, call: { (baseModel, error) in
             
             if let authCode  = baseModel?.data , ((baseModel?.data as? String) != nil){
-                if self.imageViewTag == 214 {
+                if self.imageViewTag == 214 && self.isTransfer {
                     // 将原本H5做得请求放在原生做
                     self.removeFromSuperview()
                     self.transferHandle()

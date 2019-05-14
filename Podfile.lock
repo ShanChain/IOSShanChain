@@ -3,15 +3,15 @@ PODS:
   - ASExtendedCircularMenu (0.1.1)
   - BaiduMapKit (4.0.0)
   - Bugly (2.5.0)
-  - HandyJSON (5.0.0-beta.1)
-  - IQKeyboardManager (6.2.1)
-  - JCore (1.2.6)
-  - JMessage (3.7.0):
-    - JCore (~> 1.0)
-  - JPush (3.1.2):
-    - JCore (~> 1.2.6)
+  - HandyJSON (5.0.0)
+  - IQKeyboardManager (6.3.0)
+  - JCore (2.0.0)
+  - JMessage (3.8.1):
+    - JCore (< 3.0.0, >= 1.0.0)
+  - JPush (3.2.0):
+    - JCore (< 3.0.0, >= 2.0.0)
   - JShare (1.6.0):
-    - JCore (~> 1.2)
+    - JCore (< 3.0.0, >= 1.2.0)
   - LBXScan/LBXNative (2.3):
     - LBXScan/Types (~> 2.2)
   - LBXScan/LBXZBar (2.3):
@@ -24,21 +24,21 @@ PODS:
     - LBXScan/Types (~> 2.2)
   - LTScrollView (0.2.1)
   - MBProgressHUD (1.0.0)
-  - mob_sharesdk (4.2.4):
-    - mob_sharesdk/ShareSDK (= 4.2.4)
+  - mob_sharesdk (4.2.5):
+    - mob_sharesdk/ShareSDK (= 4.2.5)
     - MOBFoundation
-  - mob_sharesdk/ShareSDK (4.2.4):
+  - mob_sharesdk/ShareSDK (4.2.5):
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/QQ (4.2.4):
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.2.5):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.2.4):
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.2.5):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.2.4):
+  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.2.5):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKUI (4.2.4):
+  - mob_sharesdk/ShareSDKUI (4.2.5):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
   - MOBFoundation (3.2.2)
@@ -63,7 +63,7 @@ DEPENDENCIES:
   - Bugly
   - HandyJSON (~> 5.0.0-beta.1)
   - IQKeyboardManager
-  - JMessage (~> 3.7.0)
+  - JMessage (~> 3.8.1)
   - JPush
   - JShare
   - LBXScan/LBXNative (~> 2.3)
@@ -129,16 +129,16 @@ SPEC CHECKSUMS:
   ASExtendedCircularMenu: c6012cee87d7686981c2f0d184a461ae41c5dac0
   BaiduMapKit: 8fa2eb2ca81b92b740b19d9ff3b59d751d3e92e1
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
-  HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
-  IQKeyboardManager: 964638372b4a61892cc74fdfa6fd26de8c9464a2
-  JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7
-  JMessage: 90c194ca878a1724694da320aad4867b489276e9
-  JPush: d0cead70ba223a6a3b52749899ebda830dfbc49a
-  JShare: 47cf1b3389ff09c333f0599d57be9f7fe1b43073
+  HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
+  IQKeyboardManager: 2ca9d64893247556f53523dcd8d78641f0ba7c23
+  JCore: b962a2a1a61dc911ce5e79ba3ff21a95edaf5d23
+  JMessage: 2f1612060a3dfe362cf642898553ad8e49b5919f
+  JPush: 8459e7a709ad86f95884fcb49cbd57a6da24744e
+  JShare: a25b46aa9fd327ba86fe2ebaf02e5441441d5212
   LBXScan: e51449f0832d1fe17da632af0d22adeb3cfa3543
   LTScrollView: 93fff4aed9f9545f541a99b320b27808f5307c12
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  mob_sharesdk: 9797e05209dce16507be7797141f523daa033f76
+  mob_sharesdk: 260b7d0d1c4cc5f95711e709012f9eafa57c9965
   MOBFoundation: b5ff4038ddb9a0f06b685b86408f905a10aa147c
   ReactiveObjC: 7b6782ae39f9ac0f57205c3b0c0b69b9dd7048c0
   RedpacketAliAuthLib: 6173b52c25ab728db907da89fbcda3200d1cf98a
@@ -152,6 +152,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: 4d82288aca137df2477916d675cc3dfc3a85690e
+PODFILE CHECKSUM: 04a414515fa46d0b3b30cacb22527f85b66e0eef
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

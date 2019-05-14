@@ -4,8 +4,8 @@ target 'ShanChain' do
     use_frameworks!
     
     pod 'Bugly'
-    pod 'BaiduMapKit', '~> 4.0.0'
-    pod 'JMessage', '~> 3.7.0’
+    pod 'BaiduMapKit', '~> 4.0.0’
+    pod 'JMessage', '~> 3.8.1’
     pod 'JPush'
     pod 'JShare'
     pod 'RxSwift', '~> 4.0'

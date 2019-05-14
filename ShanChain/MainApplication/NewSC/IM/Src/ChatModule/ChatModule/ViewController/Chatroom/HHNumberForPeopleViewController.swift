@@ -24,12 +24,19 @@ class HHNumberForPeopleViewController: SCBaseVC {
     fileprivate var users:[JMSGUser] = []
     fileprivate var newUsers:[JMSGUser] = []
     
+    lazy var item1 = UIBarButtonItem.init(title: "管理", style: .plain, target: self, action: #selector(self.clickRightBarDelete))
+    lazy var item2 = UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(self.clickRightBarCancel))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        
         self.title = "广场成员"
         tableView.register(UINib.init(nibName: H_Peoplecell, bundle: nil), forCellReuseIdentifier: H_Peoplecell)
         tableView.rowHeight = 65
         tableView.tableFooterView = UIView()
+        //表格在编辑状态下允许多选
+        tableView.allowsMultipleSelectionDuringEditing = true
         reftreshData()
         self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)//这一句，修复偏移问题！
         if #available(iOS 11.0, *) {
@@ -40,6 +47,8 @@ class HHNumberForPeopleViewController: SCBaseVC {
             
         }
         _requstData(false) {}
+        
+        owner()
     }
     
     public required init(count:Int, roomId:String) {
@@ -52,7 +61,62 @@ class HHNumberForPeopleViewController: SCBaseVC {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    private lazy var moreButton = UIButton(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
     
+    func owner() {
+        
+        SCNetwork.shareInstance()?.hh_Get(withUrl: "/jm/room/ownerVerify", parameters: ["roomId":self.roomId,"token":SCCacheTool.shareInstance().getUserToken()], showLoading: false, call: { [unowned self] (result, err) in
+            
+            if let code = result?.code, let data = result?.data as? Int {
+                if code == "000000" && data == 1 {
+                    // 是创建者
+                    
+                    self.item1.tintColor = UIColor.init(r: 172, g: 129, b: 233)
+                    self.item2.tintColor = UIColor.init(r: 172, g: 129, b: 233)
+                    self.navigationItem.rightBarButtonItems = [self.item1]
+                    
+                }
+            }
+            
+        })
+    }
+    
+    @objc func clickRightBarDelete() {
+        if tableView.isEditing {
+            //删除
+            if let selectCount = tableView.indexPathsForSelectedRows {
+                print(selectCount,self.dataList[(selectCount.first?.row)!].username)
+                
+//                SCNetwork.shareInstance()?.v1_post(withUrl: "/jm/room/rmMembers", params: ["roomId":roomId,"jArray":], showLoading: true, call: { (model, err) in
+//
+//                })
+            }
+        }else {
+            //管理
+            let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+            let action1 = UIAlertAction.init(title: "删除广场成员", style: .destructive) { (action) in
+                self.tableView.setEditing(true, animated: true)
+                self.item1.title = "删除"
+                self.navigationItem.setRightBarButtonItems([self.item1,self.item2], animated: true)
+            }
+            let action2 = UIAlertAction.init(title: "取消", style: .cancel) { (action) in
+                self.tableView.setEditing(false, animated: true)
+                self.navigationItem.setRightBarButtonItems([self.item1], animated: true)
+            }
+            alert.addAction(action1)
+            alert.addAction(action2)
+            self.present(alert, animated: true, completion: {})
+            
+        }
+        
+        
+    }
+    @objc func clickRightBarCancel() {
+        //取消
+        self.tableView.setEditing(false, animated: true)
+        self.navigationItem.setRightBarButtonItems([self.item1], animated: true)
+        self.item1.title = "管理"
+    }
 }
 
 extension  HHNumberForPeopleViewController{
@@ -189,7 +253,36 @@ extension HHNumberForPeopleViewController:UITableViewDelegate,UITableViewDataSou
         cell.nikeNameLb.text = people.nickname
         cell.icon.image = people.iconImage
         cell.dialogueBtn.tag = indexPath.row
-        cell.selectionStyle = .none
+//        cell.selectionStyle = .none
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.isEditing {
+            if let selectCount = tableView.indexPathsForSelectedRows {
+                self.item1.title = "删除\(selectCount.count)"
+                
+            }
+        }else {
+            do {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        
+        
+        
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        if tableView.isEditing {
+            if let selectCount = tableView.indexPathsForSelectedRows {
+                self.item1.title = "删除\(selectCount.count)"
+                
+            }else {
+                
+                self.item1.title = "删除"
+            }
+        }
+        
     }
 }
 

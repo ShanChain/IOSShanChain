@@ -155,14 +155,15 @@
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:userInfo.mj_JSONString message:NSStringFromSelector(sel) delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
 //    [alert show];
     
-    // receiveTaskList 我的任务列表
-    // publishTaskList 我发布的
     // webView
     if (![[SCAppManager shareInstance] isLogin]) {
         [[SCAppManager shareInstance]logout];
     }else{
         JPushUserInfo *j_userInfo = [JPushUserInfo yy_modelWithDictionary:userInfo];
         
+        UINavigationController *nav  = (UINavigationController*)self.window.rootViewController;
+        
+
         if (NULLString(j_userInfo.sysPage)) {
                 NSDictionary  *custom = userInfo[@"custom"];
             if (!NULLString(custom[JM_COMVERSATION_TYPE])) {
@@ -171,13 +172,18 @@
                 NSString  *appkey = custom[JM_APPKET];
                 if ([conversationType isEqualToString:@"single"]) {
                     // 单聊
+                    
+                    if ([nav.visibleViewController isKindOfClass:[JCChatViewController class]]) {
+                        [nav popViewControllerAnimated:NO];
+                    }
                     [JMSGConversation createSingleConversationWithUsername:userName appKey:appkey completionHandler:^(JMSGConversation * conversation, NSError *error) {
                         if (!error) {
                             [ChatPublicService jg_addFriendFeFocusWithFunsJmUserName:userName];
                             JCChatViewController *chatVC = [[JCChatViewController alloc]initWithConversation:conversation];
+                            [conversation clearUnreadCount];
                             [[NSNotificationCenter defaultCenter]postNotificationName:kUpdateConversation object:nil];
-                            JCNavigationController *nav = [self mainNav];
-                            [nav.topViewController.navigationController pushViewController:chatVC animated:YES];
+                            JCNavigationController *nav1 = [self mainNav];
+                            [nav1.topViewController.navigationController pushViewController:chatVC animated:YES];
                         }
                     }];
                 }else if ([conversationType isEqualToString:@"group"]){
@@ -187,28 +193,73 @@
             return;
         }
         
-        UINavigationController *nav  = (UINavigationController*)self.window.rootViewController;
         if (nav.visibleViewController.navigationController.navigationBarHidden) {
             nav.visibleViewController.navigationController.navigationBarHidden = NO;
         }
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if ([j_userInfo.sysPage isEqualToString:@"webView"]) {
                 if (!NULLString(j_userInfo.url)) {
+                    
+                    if ([nav.visibleViewController isKindOfClass:[MyWalletViewController class]]) {
+                        MyWalletViewController *vc = (MyWalletViewController *)nav.visibleViewController;
+                        [vc dismissViewControllerAnimated:NO completion:nil];
+                        
+                    }
+                    NSString *tmp = [j_userInfo.url stringByAppendingString:[NSString stringWithFormat:@"&token=%@&JPush=JPush",[[SCCacheTool shareInstance] getUserToken]]];
                     MyWalletViewController *urlVC = [[MyWalletViewController alloc]init];
-                    urlVC.urlStr = j_userInfo.url;
-                    [nav.visibleViewController.navigationController pushViewController:urlVC animated:YES];
+                    urlVC.urlStr = tmp;
+                    JCNavigationController *walletNav = [[JCNavigationController alloc]initWithRootViewController:urlVC];
+                    JCNavigationController *nav1 = [self mainNav];
+                    [nav1.topViewController.navigationController presentViewController:walletNav animated:YES completion:nil];
+
+
+                    
                 }
-            }
-            else if ([j_userInfo.sysPage isEqualToString:@"messageList"]) {
+            }else if ([j_userInfo.sysPage isEqualToString:@"messageList"]) {
 //                return;                
-            } else {
-                TaskListContainerViewController *taskVC = [[TaskListContainerViewController alloc]init];
-                taskVC._oc_scrollToIndex = 1;
-//                if ([j_userInfo.sysPage isEqualToString:@"publishTaskList"]) {
-//                    taskVC._oc_statusCode = 3;
-//                }
-             
-                [nav.visibleViewController.navigationController pushViewController:taskVC animated:YES];
+            }else if ([j_userInfo.sysPage isEqualToString:@"couponsVendorList"]) {
+                // 我的马甲劵 MyCardCouponContainerViewController
+                if (![nav.visibleViewController isKindOfClass:[MyCardCouponContainerViewController class]]) {
+                    MyCardCouponContainerViewController *vc = [[MyCardCouponContainerViewController alloc] init];
+                    [nav.visibleViewController.navigationController pushViewController:vc animated:YES];
+                }
+                
+            }else if ([j_userInfo.sysPage isEqualToString:@"couponsClientGet"]) {
+                // 卡券详情 couponsClientGet
+                //别人创建的
+                if (![nav.visibleViewController isKindOfClass:[MyCardReceiveDetailsViewController class]]) {
+                    MyCardReceiveDetailsViewController *vc = (MyCardReceiveDetailsViewController *)[HHTool storyBoardWithName:@"MyCardReceiveDetailsViewController" Identifier:@"ReceiveCardID"];
+                    vc.orderId = j_userInfo.extra;
+                    vc.isJPush = YES;
+                    [nav.visibleViewController.navigationController pushViewController:vc animated:YES];
+                }
+                
+                
+            }else {
+                if (![nav.visibleViewController isKindOfClass:[MyHelpContainerViewController class]]) {
+                    MyHelpContainerViewController *vc = [[MyHelpContainerViewController alloc] init];
+                    
+                    if ([j_userInfo.sysPage isEqualToString:@"publishTaskList"]) {
+                        // publishTaskList 帮过我的
+                        vc._oc_scrollToIndex = 0;
+                    }else if ([j_userInfo.sysPage isEqualToString:@"receiveTaskList"]) {
+                        // receiveTaskList 我帮过的
+                        vc._oc_scrollToIndex = 1;
+                    }
+                    
+                    [nav.visibleViewController.navigationController pushViewController:vc animated:YES];
+                }else {
+                    MyHelpContainerViewController *vc = (MyHelpContainerViewController *)nav.visibleViewController;
+                    if ([j_userInfo.sysPage isEqualToString:@"publishTaskList"]) {
+                        // publishTaskList 帮过我的
+                        vc._oc_scrollToIndex = 0;
+                    }else if ([j_userInfo.sysPage isEqualToString:@"receiveTaskList"]) {
+                        // receiveTaskList 我帮过的
+                        vc._oc_scrollToIndex = 1;
+                    }
+                }
+                
             }
            
         });
@@ -232,48 +283,47 @@
 
 - (void)systemInformationActionWithUserInfo:(NSDictionary *)info {
     
+    JPushUserInfo *j_userInfo = [JPushUserInfo yy_modelWithDictionary:info];
+
     if (![[SCAppManager shareInstance] isLogin]) {
         [[SCAppManager shareInstance]logout];
     }else{
-        JPushUserInfo *j_userInfo = [JPushUserInfo yy_modelWithDictionary:info];
-        
-        UINavigationController *nav  = (UINavigationController*)self.window.rootViewController;
-        if (nav.visibleViewController.navigationController.navigationBarHidden) {
-            nav.visibleViewController.navigationController.navigationBarHidden = NO;
-        }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if ([j_userInfo.sysPage isEqualToString:@"messageList"]) {
-                // 系统消息
-                SCLog(@"系统消息--%@",j_userInfo);
-                
-                [[SCCacheChatRecord shareInstance] insertDataWithType:j_userInfo.type TITLE:j_userInfo.title EXTRA:j_userInfo.extra block:^(BOOL success) {
-                    if (success) {
-                        
-                        if (![nav.visibleViewController isKindOfClass:[SystemInformationViewController class]]) {
-                            SystemInformationViewController *vc = [[SystemInformationViewController alloc]init];
-                            [nav.visibleViewController.navigationController pushViewController:vc animated:YES];
-                        }else {
-                            SystemInformationViewController *vc = (SystemInformationViewController *)nav.visibleViewController;
-                            NSDate *date = [NSDate date];
-                            NSString *time = [date yyyyMMddByLineWithDate];
-                            NSDictionary *dic = @{
-                                                  @"type":j_userInfo.type,
-                                                  @"title":j_userInfo.title,
-                                                  @"extra":j_userInfo.extra,
-                                                  @"time":time,
-                                                  };
-                            [vc reloadViewWithNewObj:dic];
-                        }
-                        
-                    }
-                }];
-                
-                
-            }
+
+        if ([j_userInfo.sysPage isEqualToString:@"messageList"]) {
             
-        });
-        
-        
+            UINavigationController *nav  = (UINavigationController*)self.window.rootViewController;
+            if (nav.visibleViewController.navigationController.navigationBarHidden) {
+                nav.visibleViewController.navigationController.navigationBarHidden = NO;
+            }
+
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+                    [[SCCacheChatRecord shareInstance] insertDataWithType:j_userInfo.type TITLE:j_userInfo.title EXTRA:j_userInfo.extra block:^(BOOL success) {
+                        if (success) {
+
+                            if (![nav.visibleViewController isKindOfClass:[SystemInformationViewController class]]) {
+                                SystemInformationViewController *vc = [[SystemInformationViewController alloc]init];
+                                [nav.visibleViewController.navigationController pushViewController:vc animated:YES];
+                            }else {
+                                SystemInformationViewController *vc = (SystemInformationViewController *)nav.visibleViewController;
+                                NSDate *date = [NSDate date];
+                                NSString *time = [date yyyyMMddByLineWithDate];
+                                NSDictionary *dic = @{
+                                                      @"type":j_userInfo.type,
+                                                      @"title":j_userInfo.title,
+                                                      @"extra":j_userInfo.extra,
+                                                      @"time":time,
+                                                      };
+                                [vc reloadViewWithNewObj:dic];
+                            }
+
+                        }
+                    }];
+
+            });
+
+        }
+
     }
 }
 

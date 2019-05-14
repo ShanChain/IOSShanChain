@@ -9,7 +9,7 @@
 #import "DLUtility.h"
 
 @implementation DLUtility
-+ (UIColor *)getColorOfPercent:(CGFloat)percent between:(UIColor *)color1 and:(UIColor *)color2{
++ (UIColor *)getColorOfPercent:(CGFloat)percent between:(UIColor *)color1 and1:(UIColor *)color2{
     CGFloat red1, green1, blue1, alpha1;
     [color1 getRed:&red1 green:&green1 blue:&blue1 alpha:&alpha1];
     

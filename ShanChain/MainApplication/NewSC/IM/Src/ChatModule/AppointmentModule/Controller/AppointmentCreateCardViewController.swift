@@ -75,6 +75,8 @@ class AppointmentCreateCardViewController: UITableViewController {
             if error == nil{
                 HHTool.showSucess("创建成功")
                 self.navigationController?.popViewController(animated: true)
+            }else {
+                print(error.debugDescription)
             }
         }
     }

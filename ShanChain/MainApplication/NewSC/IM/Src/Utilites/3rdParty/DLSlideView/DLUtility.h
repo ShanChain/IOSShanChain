@@ -10,5 +10,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DLUtility : NSObject
-+ (UIColor *)getColorOfPercent:(CGFloat)percent between:(UIColor *)color1 and:(UIColor *)color2;
++ (UIColor *)getColorOfPercent:(CGFloat)percent between:(UIColor *)color1 and1:(UIColor *)color2;
 @end

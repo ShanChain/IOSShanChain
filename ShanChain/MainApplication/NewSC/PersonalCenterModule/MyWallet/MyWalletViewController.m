@@ -40,7 +40,7 @@
         uploadView.imageViewTag = 214;
         uploadView.vc = self;
         uploadView.transferDic = dic;
-        
+        uploadView.isTransfer = YES;
 //        weakify(uploadView);
 
         
@@ -68,6 +68,7 @@
     if (NULLString(self.urlStr)) {
         self.urlStr = WalletURL;
     }
+    SCLog(@"urlStr --> %@",self.urlStr);
     NSURL *url = [NSURL URLWithString:self.urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
@@ -217,9 +218,7 @@
             [self.webView loadRequest:request];
         }
         
-//        if ([key isEqualToString:@"toUpload"] && [obj isEqualToString:@"true"]) {
-//            SCLog(@"我是大连人");
-//        }
+
         
     }];
     

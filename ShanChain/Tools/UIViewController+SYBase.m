@@ -28,7 +28,7 @@
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     backButton.frame = CGRectMake(0, 0, 60, 44);
-    backButton.titleLabel.textAlignment = UITextAlignmentRight;
+    backButton.titleLabel.textAlignment = NSTextAlignmentRight;
     backButton.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -10);
     [backButton setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
     [backButton setTitle:name forState:UIControlStateNormal];
@@ -143,9 +143,9 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(0, 0, 80,30);
+    button.frame = CGRectMake(0, 0,50,30);
     [button.titleLabel setTextAlignment:NSTextAlignmentRight];
-    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    button.titleLabel.font = [UIFont systemFontOfSize:16];
     [button setTitle:title forState:(UIControlStateNormal)];
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];

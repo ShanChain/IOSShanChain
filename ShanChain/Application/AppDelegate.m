@@ -109,6 +109,14 @@
                           channel:@"App Store"
                  apsForProduction:isProduction
             advertisingIdentifier:nil];
+    // 如果​remoteNotification不为空，代表有推送发过来
+    NSDictionary *remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    if (remoteNotification) {
+        [self showAlerWithUserInfo:remoteNotification andSEL:_cmd];
+        [self systemInformationActionWithUserInfo:remoteNotification];
+    }
+
     
     return YES;
 }
@@ -197,26 +205,33 @@
     [UMessage setAutoAlert:NO];
     [UMessage didReceiveRemoteNotification:userInfo];
 
-    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
-
     NSDictionary *custom = userInfo[@"custom"];
     [NotificationHandler handlerNotificationWithCustom:custom];
-    
+
     // Required, iOS 7 Support
     [JPUSHService handleRemoteNotification:userInfo];
+
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^ _Nonnull)(UIBackgroundFetchResult))completionHandler{
+
     [UMessage setAutoAlert:NO];
     [UMessage didReceiveRemoteNotification:userInfo];
     NSDictionary *custom = userInfo[@"custom"];
     [NotificationHandler handlerNotificationWithCustom:custom];
-    
+
     // Required, For systems with less than or equal to iOS 6
     [JPUSHService handleRemoteNotification:userInfo];
-    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+    
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+        // 在前台 不做操作
+        [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+    }
+
     [self systemInformationActionWithUserInfo:userInfo];
+
     completionHandler(UIBackgroundFetchResultNewData);
+
 }
 
 //iOS10新增：处理前台收到通知的代理方法
@@ -229,7 +244,7 @@
         [UMessage setAutoAlert:NO];
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
-        
+
     }else{
         //应用处于前台时的本地推送接受
     }
@@ -244,7 +259,7 @@
         //应用处于后台时的远程推送接受
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
-        
+
     }else{
         //应用处于后台时的本地推送接受
     }
@@ -315,10 +330,6 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
-//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
-//    return YES;
-//}
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [application registerForRemoteNotifications];
 }
@@ -333,32 +344,30 @@
     }else{
         //从通知设置界面进入应用
     }
-    
-    NSDictionary * userInfo = notification.request.content.userInfo;
-    [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+
+//    NSDictionary * userInfo = notification.request.content.userInfo;
 }
 
 // iOS 10 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
-    // Required
+    // Required 在应用内收到推送会先执行这里
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
-    
-    // [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
 }
 
 // iOS 10 Support  前台点击通知调用方法
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-    // Required
+    // Required 点击通知栏就会执行这里
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
-    
     [self showAlerWithUserInfo:userInfo andSEL:_cmd];
+    [self systemInformationActionWithUserInfo:userInfo];
     completionHandler();  // 系统要求执行这个方法
 }
 

@@ -43,9 +43,11 @@ class MyHelpListViewController: SCBaseVC,LTTableViewProtocal {
         table.register(UINib.init(nibName: H_TaskListCellID, bundle: nil), forCellReuseIdentifier: H_TaskListCellID)
         table.register(UINib.init(nibName: H_TaskListPersonalCellID, bundle: nil), forCellReuseIdentifier: H_TaskListPersonalCellID)
         table.estimatedRowHeight = 200
+        table.estimatedSectionHeaderHeight = 10
         table.rowHeight = UITableView.automaticDimension
         table.separatorStyle = .none
         table.tableFooterView = UIView()
+        table.showsVerticalScrollIndicator = false
         return table
     }()
 
@@ -256,10 +258,11 @@ extension MyHelpListViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.0
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let head = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width - 20, height: 10))
+        head.backgroundColor = .clear
+        return head
     }
-    
 }
 
 extension MyHelpListViewController:TaskListCellProtocol{

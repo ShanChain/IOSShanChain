@@ -13,6 +13,7 @@
 @property  (nonatomic,copy)   NSString   *_j_business;
 @property  (nonatomic,copy)   NSString   *_j_msgid;
 @property  (nonatomic,copy)   NSString   *_j_uid;
+@property  (nonatomic,copy)   NSString   *_j_type;
 @property  (nonatomic,copy)   NSString   *msgContent;
 @property  (nonatomic,copy)   NSString   *sysPage;
 @property  (nonatomic,copy)   NSString   *title;

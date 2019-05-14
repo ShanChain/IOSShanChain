@@ -15,6 +15,7 @@ class JCImageBrowserViewController: UIViewController {
     var currentMessage: JCMessageType!
     var imageArr: [UIImage]!
     var imgCurrentIndex:Int = 0
+    var chatImageMessages:[JMSGMessage]?
     
     fileprivate lazy var CellIdentifier = "JCMessageImageCollectionViewCell"
     fileprivate var imageBrowser: UICollectionView!
@@ -26,16 +27,18 @@ class JCImageBrowserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black        
-        
+        print(currentMessage.identifier,currentMessage.name)
         if let messages = messages {
             imageMessages = getImageMessages(messages)
             if imageMessages.count > 0 {
-                if let index = imageMessages.index(where: { (m) -> Bool in
-                    m.mark == currentMessage.msgId
-                }) {
-                    imgCurrentIndex = index
-                } else {
-                    imgCurrentIndex = 0
+                if chatImageMessages == nil {
+                    if let index = imageMessages.index(where: { (m) -> Bool in
+                        m.mark == currentMessage.msgId
+                    }) {
+                        imgCurrentIndex = index
+                    } else {
+                        imgCurrentIndex = 0
+                    }
                 }
                 isMessageType = true
             }
@@ -60,17 +63,23 @@ class JCImageBrowserViewController: UIViewController {
                     imageMessages.append(msg)
                 }
             }else{
-                let chatRoom = conversation.target as? JMSGChatRoom
-                guard let jcMessageContent =  message.content as? JCMessageImageContent else{
-                    continue
-                }
-                let data = jcMessageContent.image?.jpegData(compressionQuality: 1.0)
                 
-                let jmsgMessageContent:JMSGImageContent = JMSGImageContent.init(imageData:data!)!
-                let msg = JMSGMessage.createChatRoomMessage(with:jmsgMessageContent as JMSGAbstractContent, chatRoomId: (chatRoom?.roomID)!)
-                msg.mark = message.msgId
-                if msg.contentType == .image {
-                    imageMessages.append(msg)
+                if let tmp = chatImageMessages {
+                    imageMessages = tmp
+                }else {
+                    let chatRoom = conversation.target as? JMSGChatRoom
+                    guard let jcMessageContent =  message.content as? JCMessageImageContent else{
+                        continue
+                    }
+                    let data = jcMessageContent.image?.jpegData(compressionQuality: 1.0)
+                    
+                    let jmsgMessageContent:JMSGImageContent = JMSGImageContent.init(imageData:data!)!
+                    print("jmsgMessageContent mefiaID",jmsgMessageContent.mediaID ?? "defiaID nil")
+                    let msg = JMSGMessage.createChatRoomMessage(with:jmsgMessageContent as JMSGAbstractContent, chatRoomId: (chatRoom?.roomID)!)
+                    msg.mark = message.msgId
+                    if msg.contentType == .image {
+                        imageMessages.append(msg)
+                    }
                 }
             }
         }
