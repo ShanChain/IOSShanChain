@@ -342,7 +342,7 @@
 }
 
 #pragma mark -- DUX_UploadUserIconDelegate
-- (void)uploadImageToServerWithImage:(UIImage *)image FileUrl:(NSString *)fileUrl {
+- (void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag imageData:(NSData *)data {
     
     [[CWMaskView shareInstance]singleTap];
     if (!image) {
@@ -379,8 +379,46 @@
     } withErrorCallBack:^(NSError *error) {
         [HHTool showError:error.localizedDescription];
     }];
-    
 }
+//- (void)uploadImageToServerWithImage:(UIImage *)image FileUrl:(NSString *)fileUrl {
+//    
+//    [[CWMaskView shareInstance]singleTap];
+//    if (!image) {
+//        return;
+//    }
+//    [HHTool show:@"正在上传"];
+//    [EditInfoService sc_uploadImage:image withCompressionQuality:1.0 callBlock:^(BOOL isSuccess) {
+//        [HHTool immediatelyDismiss];
+//        if (isSuccess) {
+//            [HHTool showSucess:@"上传成功"];
+//            [NotificationCenter postNotificationName:@"kUpdateUserInfo" object:nil];
+//            NSData *imgdata = UIImageJPEGRepresentation(image, 0.8);
+//            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:imgdata];
+//            NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+//            [defaults setObject:data forKey:@"kLastUserAvator"];
+//            [defaults synchronize];
+//        }else {
+//            [HHTool showError:@"上传失败"];
+//        }
+//    }];
+//    
+//    image = [image mc_resetToSize:CGSizeMake(64, 64)];
+//    image = [image cutCircleImage];
+//    weakify(self);
+//    [SCAliyunUploadMananger uploadImage:image withCompressionQuality:0.5 withCallBack:^(NSString *url) {
+//        
+//        if (!NULLString(url)) {
+//            [EditInfoService sc_editPersonalInfo:@{@"headImg":url} callBlock:^(BOOL isSuccess) {
+//                if (isSuccess) {
+//                    [weak_self setIconImage];
+//                }
+//            }];
+//        }
+//    } withErrorCallBack:^(NSError *error) {
+//        [HHTool showError:error.localizedDescription];
+//    }];
+//    
+//}
 //-(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag Info:(NSDictionary *)info{
 //
 //    [[CWMaskView shareInstance]singleTap];

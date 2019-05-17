@@ -56,6 +56,7 @@
                 NSLog(@"tablename%@",name);
                 
                 if ([name isEqualToString:tableName]) {
+                    [result close];
                     return;
                 }
                 
@@ -198,6 +199,7 @@
                 NSLog(@"tablename%@",name);
                 
                 if ([name isEqualToString:tableName]) {
+                    [result close];
                     return;
                 }
                 
@@ -211,6 +213,8 @@
             else{
                 SCLog(@"创建表失败");
             }
+            
+            
         }
         
         [db close];

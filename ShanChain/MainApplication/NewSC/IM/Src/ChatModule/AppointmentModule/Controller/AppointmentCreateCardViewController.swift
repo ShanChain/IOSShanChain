@@ -196,7 +196,8 @@ class AppointmentCreateCardViewController: UITableViewController {
 
 extension AppointmentCreateCardViewController:DUX_UploadUserIconDelegate{
     
-    func uploadImageToServer(with image: UIImage!, tag: Int) {
+    func uploadImageToServer(with image: UIImage!, tag: Int, imageData data: Data!) {
+        
         if let image = image{
             image.mc_reset(to: CGSize(width: 80, height: 80))
             image.cutCircle()
@@ -207,8 +208,20 @@ extension AppointmentCreateCardViewController:DUX_UploadUserIconDelegate{
                 HHTool.showError(error?.localizedDescription)
             })
         }
-        
     }
+//    func uploadImageToServer(with image: UIImage!, tag: Int) {
+//        if let image = image{
+//            image.mc_reset(to: CGSize(width: 80, height: 80))
+//            image.cutCircle()
+//            SCAliyunUploadMananger.uploadImage(image, withCompressionQuality: 0.5, withCallBack: { url in
+//                self.photoUrl = url
+//                self.icon.image = image
+//            }, withErrorCallBack: { error in
+//                HHTool.showError(error?.localizedDescription)
+//            })
+//        }
+//
+//    }
     
 }
 

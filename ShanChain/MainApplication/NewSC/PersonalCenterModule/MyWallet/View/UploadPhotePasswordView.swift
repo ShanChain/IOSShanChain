@@ -165,14 +165,20 @@ class UploadPhotePasswordView: UIView {
 
 extension UploadPhotePasswordView:DUX_UploadUserIconDelegate{
     
-    func uploadImageToServer(with image: UIImage!, tag: Int) {
-//        self.imageData = UIImagePNGRepresentation(image.mc_reset(to: CGSize(width: 100, height: 100)))
-        self.imageData = image.jpegData(compressionQuality: 1.0)
+    func uploadImageToServer(with image: UIImage!, tag: Int, imageData data: Data!) {
+        self.imageData = image.pngData()
         confirmBtn.backgroundColor = SC_ThemeMainColor
         confirmBtn.isUserInteractionEnabled = true
         selectImageBtn.setImage(image, for: .normal)
-        
     }
+//    func uploadImageToServer(with image: UIImage!, tag: Int) {
+////        self.imageData = UIImagePNGRepresentation(image.mc_reset(to: CGSize(width: 100, height: 100)))
+//        self.imageData = image.jpegData(compressionQuality: 1.0)
+//        confirmBtn.backgroundColor = SC_ThemeMainColor
+//        confirmBtn.isUserInteractionEnabled = true
+//        selectImageBtn.setImage(image, for: .normal)
+//        
+//    }
     
     func uploadImageToServer(with image: UIImage!, fileUrl: String!) {
         self.imageURL = fileUrl;

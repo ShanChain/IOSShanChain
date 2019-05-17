@@ -7,6 +7,7 @@
 //
 
 #import "DUX_UploadUserIcon.h"
+#import <Photos/Photos.h>
 
 static DUX_UploadUserIcon *uploadUserIcon = nil;
 
@@ -122,11 +123,71 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    //获取到这个图片的原始像素数据
+//    CFDataRef rawData = CGDataProviderCopyData(CGImageGetDataProvider(image.CGImage));
+//    SCLog(@"%@",rawData);
+//    __block NSString *referenceUrlString;
+//    __block NSData *imagePickedData;
+//    NSURL *imageExtenstion = info[UIImagePickerControllerReferenceURL];
+//    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageExtenstion] options:nil];
+//    PHAsset *asset = result.firstObject;
+//    [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+//        //获取实际路径
+//        imagePickedData = imageData;
+//        NSURL *tmp = info[@"PHImageFileURLKey"];
+//        referenceUrlString = [tmp absoluteString];
+//        SCLog(@"路径：%@--文件名：%@",tmp,tmp.lastPathComponent);
+//    }];
+    
+//    if (UIImagePNGRepresentation(image) != nil) {
+//        imagePickedData = UIImagePNGRepresentation(image);
+//
+//    }else{
+//        imagePickedData = UIImageJPEGRepresentation(image, 1.0);
+//
+//    }
+    
+    //获取选择的原图
+//    UIImage *originaliImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    
+//    NSURL *imageExtenstion = info[UIImagePickerControllerReferenceURL];
+//    NSData *imagePickedData;
+//    if ([[imageExtenstion absoluteString] containsString:@"PNG"]) {
+//        imagePickedData = UIImagePNGRepresentation(originaliImage);
+//    }else {
+//        imagePickedData = UIImageJPEGRepresentation(originaliImage, 1);
+//    }
+//    //将选择的图片保存到Document目录下
+//    NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+//    [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:imagePickedData attributes:nil];
+//    NSString *filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
+//    NSURL *tmp = [NSURL fileURLWithPath:filePath];
+    NSURL *imageExtenstion = info[UIImagePickerControllerReferenceURL];
+    NSData *imagePickedData;
+    if ([[imageExtenstion absoluteString] containsString:@"PNG"]) {
+        imagePickedData = UIImagePNGRepresentation(info[UIImagePickerControllerOriginalImage]);
+    }else {
+        imagePickedData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 1);
+    }
+    //图片保存的路径
+    //这里将图片放在沙盒的documents文件夹中
+    NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    //文件管理器
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
+    [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+    [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:imagePickedData attributes:nil];
+    //得到选择后沙盒中图片的完整路径
+    NSString *filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
+    NSURL *tmp = [NSURL fileURLWithPath:filePath];
     // ** 上传用户头像
-    if (self.uploadImageDelegate && [self.uploadImageDelegate respondsToSelector:@selector(uploadImageToServerWithImage:Tag:)]) {
-        [self.uploadImageDelegate uploadImageToServerWithImage:image Tag:self.tag];
+    if (self.uploadImageDelegate && [self.uploadImageDelegate respondsToSelector:@selector(uploadImageToServerWithImage:Tag:imageData:)]) {
+        [self.uploadImageDelegate uploadImageToServerWithImage:image Tag:self.tag imageData:nil];
     }
     
     if (self.uploadImageDelegate && [self.uploadImageDelegate respondsToSelector:@selector(uploadImageToServerWithImage:FileUrl:)]) {
@@ -134,9 +195,10 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
             NSString  *url = [info objectForKey:UIImagePickerControllerImageURL];
             [self.uploadImageDelegate uploadImageToServerWithImage:image FileUrl:[NSString stringWithFormat:@"%@",url]];
         } else {
-            [self.uploadImageDelegate uploadImageToServerWithImage:image FileUrl:[NSString stringWithFormat:@"%@",info[UIImagePickerControllerReferenceURL]]];
+            [self.uploadImageDelegate uploadImageToServerWithImage:image FileUrl:[NSString stringWithFormat:@"%@",[tmp absoluteString]]];
             
         }
+        
     }
 }
 

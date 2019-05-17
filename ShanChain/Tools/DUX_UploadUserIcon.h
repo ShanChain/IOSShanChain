@@ -17,7 +17,7 @@
 
 @optional
 // ** 处理图片的方法
-- (void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag;
+- (void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag imageData:(NSData *)data;
 - (void)uploadImageToServerWithImage:(UIImage *)image FileUrl:(NSString*)fileUrl;
 
 @end

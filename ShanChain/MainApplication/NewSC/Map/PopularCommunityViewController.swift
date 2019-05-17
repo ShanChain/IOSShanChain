@@ -292,31 +292,40 @@ extension PopularCommunityViewController:UITableViewDelegate,UITableViewDataSour
 }
 
 extension PopularCommunityViewController:HotCommunityCellProtocol{
+    //加入聊天室
     func joinChatRoomFor(index: Int) {
         
 //        NotificationCenter.default.post(name: NSNotification.Name("sysMsg"), object: self, userInfo: ["id":"123456"])
         
         let hotModel = self.dataList[index]
-
-        SCCacheChatRecord.shareInstance().createTable(withRoomId: hotModel.roomId!)
-
-        let chatRecords = SCCacheChatRecord.shareInstance().selectData(withRoomId: hotModel.roomId!) as! [String]
-
-        JGUserLoginService.jg_enterchatRoom(roomId: hotModel.roomId!) { (conversation , error) in
-            if error == nil && conversation != nil{
-
-                let chatRoomVC:HHChatRoomViewController = HHChatRoomViewController.init(conversation: conversation!, isJoinChat: false, navTitle: hotModel.roomName!)
-                chatRoomVC.takeImage = UIImage.init(fromURLString: hotModel.thumbnails)
-                chatRoomVC.shareTakeUrl = hotModel.thumbnails
+        
+        authenticateAction(hotModel.roomId!) { (isSuccess) in
+            if isSuccess {
+                HHTool.showTip("已被移除该聊天室，不可加入", duration: 1)
+            }else {
+                SCCacheChatRecord.shareInstance().createTable(withRoomId: hotModel.roomId!)
                 
-                chatRoomVC.chatRecords = chatRecords
-                self.pushPage(chatRoomVC, animated: true)
-                if let roomid = hotModel.roomId {
-                    self.updateList(roomid)
+                let chatRecords = SCCacheChatRecord.shareInstance().selectData(withRoomId: hotModel.roomId!) as! [String]
+                
+                JGUserLoginService.jg_enterchatRoom(roomId: hotModel.roomId!) { (conversation , error) in
+                    if error == nil && conversation != nil{
+                        
+                        let chatRoomVC:HHChatRoomViewController = HHChatRoomViewController.init(conversation: conversation!, isJoinChat: false, navTitle: hotModel.roomName!)
+                        chatRoomVC.takeImage = UIImage.init(fromURLString: hotModel.thumbnails)
+                        chatRoomVC.shareTakeUrl = hotModel.thumbnails
+                        
+                        chatRoomVC.chatRecords = chatRecords
+                        self.pushPage(chatRoomVC, animated: true)
+                        if let roomid = hotModel.roomId {
+                            self.updateList(roomid)
+                        }
+                        
+                    }
                 }
-                
             }
         }
+
+        
     }
     // 首页更新缓存列表（点击进入社区时调用）
     func updateList(_ roomID: String) {
@@ -327,6 +336,22 @@ extension PopularCommunityViewController:HotCommunityCellProtocol{
         SCNetwork.shareInstance()?.hh_post(withUrl: tmp, params: [:], showLoading: false, call: { (baseModel, error) in
             
         })
+    }
+    //验证用户是否为该聊天室的删除成员
+    func authenticateAction(_ roomId: String, finished:@escaping (_ isSuccess: Bool)->Void) {
+        
+        SCNetwork.shareInstance().hh_Get(withUrl: "/jm/room/blackMember/authenticate", parameters: ["roomId":roomId,"token":SCCacheTool.shareInstance()?.getUserToken()], showLoading: false) { (baseModel, error) in
+            
+            if let code = baseModel?.code, let data = baseModel?.data as? Int {
+                if code == "000000" && data == 1{
+                    finished(true)
+                }else {
+                    finished(false)
+                }
+            }else {
+                finished(false)
+            }
+        }
     }
 }
 extension PopularCommunityViewController: UISearchBarDelegate {

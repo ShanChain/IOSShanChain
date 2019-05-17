@@ -21,12 +21,19 @@ class HHNumberForPeopleViewController: SCBaseVC {
     fileprivate var size:Int = 10
     
     fileprivate var dataList:[PeopleListModel] = []
+    fileprivate var manageDataList:[PeopleListModel] = []
+    fileprivate var deleteDataList:[PeopleListModel] = []
     fileprivate var users:[JMSGUser] = []
     fileprivate var newUsers:[JMSGUser] = []
+    fileprivate var deleteUsers:[String] = []
+    
     
     lazy var item1 = UIBarButtonItem.init(title: "管理", style: .plain, target: self, action: #selector(self.clickRightBarDelete))
     lazy var item2 = UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(self.clickRightBarCancel))
     
+    deinit {
+        print(self,"析构函数deinit")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -46,7 +53,12 @@ class HHNumberForPeopleViewController: SCBaseVC {
 
             
         }
-        _requstData(false) {}
+        _requstData(false, { [weak self] in
+            if (self?.dataList) != nil {
+                self?.resetData()
+            }
+            
+        })
         
         owner()
     }
@@ -85,21 +97,46 @@ class HHNumberForPeopleViewController: SCBaseVC {
         if tableView.isEditing {
             //删除
             if let selectCount = tableView.indexPathsForSelectedRows {
-                print(selectCount,self.dataList[(selectCount.first?.row)!].username)
+                deleteUsers.removeAll()
+                for indexPath in selectCount {
+                    let obj: PeopleListModel = self.dataList[indexPath.row]
+                    deleteUsers.append(obj.username ?? "11111")
+                }
                 
-//                SCNetwork.shareInstance()?.v1_post(withUrl: "/jm/room/rmMembers", params: ["roomId":roomId,"jArray":], showLoading: true, call: { (model, err) in
-//
-//                })
+                let json = try! JSONSerialization.data(withJSONObject: deleteUsers, options: .prettyPrinted)
+                let jArrayJson = String(data: json, encoding: .utf8)
+                
+                SCNetwork.shareInstance()?.v1_post(withUrl: "/jm/room/rmMembers", params: ["roomId":roomId!,"jArray":jArrayJson,"token":SCCacheTool.shareInstance()?.getUserToken()], showLoading: true, call: { [weak self] (model, err) in
+                    if let code = model?.code, code == "000000" {
+                        HHTool.showSucess("删除成功")
+                        self?.tableView.setEditing(false, animated: true)
+                        self?.navigationItem.setRightBarButtonItems([self!.item1], animated: true)
+                        self?.item1.title = "管理"
+                        self?.page = 0
+                        self?._requstData(false, { [weak self] in
+                            if (self?.dataList) != nil {
+                                self?.resetData()
+                                
+                            }
+                            
+                        })
+                    }
+                    
+                })
             }
         }else {
             //管理
             let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
             let action1 = UIAlertAction.init(title: "删除广场成员", style: .destructive) { (action) in
+                self.dataList = self.deleteDataList
+                self.tableView.reloadData()
                 self.tableView.setEditing(true, animated: true)
                 self.item1.title = "删除"
                 self.navigationItem.setRightBarButtonItems([self.item1,self.item2], animated: true)
             }
             let action2 = UIAlertAction.init(title: "取消", style: .cancel) { (action) in
+                self.dataList = self.manageDataList
+                self.tableView.reloadData()
                 self.tableView.setEditing(false, animated: true)
                 self.navigationItem.setRightBarButtonItems([self.item1], animated: true)
             }
@@ -113,9 +150,26 @@ class HHNumberForPeopleViewController: SCBaseVC {
     }
     @objc func clickRightBarCancel() {
         //取消
+        self.dataList = self.manageDataList
+        self.tableView.reloadData()
         self.tableView.setEditing(false, animated: true)
         self.navigationItem.setRightBarButtonItems([self.item1], animated: true)
         self.item1.title = "管理"
+    }
+    
+    func resetData() {
+        self.manageDataList = self.dataList
+        self.deleteDataList = self.dataList
+        var deleteIdx: [Int] = []
+        for (idx, peopel) in self.dataList.enumerated() {
+            if peopel.username == "11111" || peopel.username == SCCacheTool.shareInstance()?.getHxUserName() {
+                deleteIdx.append(idx)
+            }
+        }
+        deleteIdx.reversed().forEach({ (i) in
+            self.deleteDataList.remove(at: i)
+        })
+        print(self.manageDataList.count,self.deleteDataList.count)
     }
 }
 
@@ -134,6 +188,9 @@ extension  HHNumberForPeopleViewController{
                 self?.page += 1
                 self?._requstData(true, { [weak self] in
                     self?.tableView.mj_footer.endRefreshing()
+                    if (self?.dataList) != nil {
+                        self?.resetData()
+                    }
                 })
                 
             })
@@ -144,6 +201,9 @@ extension  HHNumberForPeopleViewController{
                 self?.page = 0
                 self?._requstData(false, { [weak self] in
                     self?.tableView.mj_header.endRefreshing()
+                    if (self?.dataList) != nil {
+                        self?.resetData()
+                    }
                 });
             })
         }
@@ -152,7 +212,7 @@ extension  HHNumberForPeopleViewController{
 
     
     fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()){
-        print(self._requstPrameter(isLoad))
+        
         SCNetwork.shareInstance().v1_post(withUrl: JM_RoomMembers_URL, params: self._requstPrameter(isLoad), showLoading: true) { (baseModel, error) in
             if ((error) != nil){
                 return
@@ -260,7 +320,6 @@ extension HHNumberForPeopleViewController:UITableViewDelegate,UITableViewDataSou
         if tableView.isEditing {
             if let selectCount = tableView.indexPathsForSelectedRows {
                 self.item1.title = "删除\(selectCount.count)"
-                
             }
         }else {
             do {
@@ -268,17 +327,13 @@ extension HHNumberForPeopleViewController:UITableViewDelegate,UITableViewDataSou
             }
         }
         
-        
-        
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         if tableView.isEditing {
             if let selectCount = tableView.indexPathsForSelectedRows {
                 self.item1.title = "删除\(selectCount.count)"
-                
             }else {
-                
                 self.item1.title = "删除"
             }
         }

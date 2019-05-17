@@ -60,13 +60,18 @@ class MyWalletPasswordViewController: SCBaseVC {
 
 
 extension MyWalletPasswordViewController:DUX_UploadUserIconDelegate{
-    
-    func uploadImageToServer(with image: UIImage!, tag: Int) {
+    func uploadImageToServer(with image: UIImage!, tag: Int, imageData data: Data!) {
         self.imageData = image.mc_reset(to: CGSize(width: 100, height: 100)).pngData()
         generateBtn.backgroundColor = SC_ThemeMainColor
         generateBtn.isUserInteractionEnabled = true
         selectImageBtn.setImage(image, for: .normal)
     }
+//    func uploadImageToServer(with image: UIImage!, tag: Int) {
+//        self.imageData = image.mc_reset(to: CGSize(width: 100, height: 100)).pngData()
+//        generateBtn.backgroundColor = SC_ThemeMainColor
+//        generateBtn.isUserInteractionEnabled = true
+//        selectImageBtn.setImage(image, for: .normal)
+//    }
     func uploadImageToServer(with image: UIImage!, fileUrl: String!) {
         self.imageURL = fileUrl;
     }

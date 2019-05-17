@@ -72,9 +72,11 @@ class PublishTaskView: UIView {
         addSubview(makeView)
         addSubview(contentView)
         show()
-       
-        let tap = UITapGestureRecognizer(target: self, action: #selector(_tapSelectTime))
-        selectTimeTextFid.addGestureRecognizer(tap)
+        
+        selectTimeTextFid.delegate = self
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(_tapSelectTime))
+//        selectTimeTextFid.addGestureRecognizer(tap)
+        
         taskDesTextFid.delegate = self
         rewardTextFid.delegate = self;
         exchangeRateLabel.text = "1 SEAT = \(SCCacheTool.shareInstance().currencyModel.rate!)￥"
@@ -82,15 +84,15 @@ class PublishTaskView: UIView {
         publishBtn.addRoundedCorners(.bottomRight, withRadii:CGSize(width: 10, height: 10))
     }
     
-    @objc func _tapSelectTime(){
-        
-        let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddHours(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMDHm) { [weak self] (date) in
-            self?.selectTimeTextFid.text = date.getString(format: "YYYY-MM-dd HH:mm")
-            self?.endEditing(true)
-            self?.timestamp = String(Int(date.timeIntervalSince1970*1000))
-        }
-        datePicker.show()
-    }
+//    @objc func _tapSelectTime(){
+//
+//        let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddHours(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMDHm) { [weak self] (date) in
+//            self?.selectTimeTextFid.text = date.getString(format: "YYYY-MM-dd HH:mm")
+//            self?.endEditing(true)
+//            self?.timestamp = String(Int(date.timeIntervalSince1970*1000))
+//        }
+//        datePicker.show()
+//    }
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -176,6 +178,19 @@ class PublishTaskView: UIView {
 
 extension PublishTaskView:UITextFieldDelegate{
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == selectTimeTextFid {
+            // 修复无法弹出时间选择器（iOS低版本）
+            let datePicker = YLDatePicker(currentDate: Date(), minLimitDate:MCDate.init(date: Date()).byAddHours(1).date, maxLimitDate: MCDate.init(date: Date()).byAddYears(20).date, datePickerType: .YMDHm) { [weak self] (date) in
+                self?.selectTimeTextFid.text = date.getString(format: "YYYY-MM-dd HH:mm")
+                self?.endEditing(true)
+                self?.timestamp = String(Int(date.timeIntervalSince1970*1000))
+            }
+            datePicker.show()
+            return false
+        }
+        return true
+    }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var text:String = "\(textField.text ?? "")\(string)"
         let lmrRange = text.range(of: "￥")

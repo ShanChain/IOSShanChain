@@ -385,7 +385,6 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
         chatView.addGestureRecognizer(tap)
         view.addSubview(chatView)
         
-        
 
         // 本地缓存
         if self.chatRecords.count > 0 {
@@ -488,6 +487,7 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
     private func _setupNavigation() {
         
         _updateAvatar()
+        
         self.addNavigationRight(withImageName: "sc_com_icon_close", withTarget: self, withAction: #selector(_closePage))
         navigationController?.navigationBar.barTintColor = .white
 
@@ -983,7 +983,9 @@ extension HHChatRoomViewController: JMessageDelegate {
 //            _handleMessage(message: message)
 //        }
         print("当前房间ID",self.currentChatRoomID!,chatRecords.count,"0-0-0-0-0-0")
-        
+        if !self.chatView.isRoll {
+            self.chatView.scrollToLast(animated: true)
+        }
 
     }
     // 接收消息(服务器端下发的)回调
@@ -1029,9 +1031,7 @@ extension HHChatRoomViewController: JMessageDelegate {
         self.chatView.append(msg)
         self.updateUnread([msg])
         self.conversation.clearUnreadCount()
-        if !self.chatView.isRoll {
-            self.chatView.scrollToLast(animated: false)
-        }
+        
         
         // TODO: 这个判断是sdk bug导致的，暂时只能这么改
         //        if self.messages.contains(where: { (m) -> Bool in

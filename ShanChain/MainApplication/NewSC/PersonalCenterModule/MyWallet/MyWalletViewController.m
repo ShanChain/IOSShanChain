@@ -232,26 +232,28 @@
 
 
 #pragma mark  -DUX_UploadUserIconDelegate
--(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag {
-    
-    
-    
-    self.imageData = UIImagePNGRepresentation(image);
-    
-//    NSString *autoCode = [[SCCacheTool shareInstance] getAuthCode];
-//    [_webView JSAndOCSInteractionWithRegisterHandlerName:@"JSEcho" data:autoCode];
-//    SCLog(@"%@--%ld--%@",image,tag,self.imageData);
-//    NSString *tmp = [[NSString alloc] initWithData:self.imageData
-//                                         encoding:NSUTF8StringEncoding];
-//    if (!tmp) { // 解决NSData转化为NSString时，可能返回nil的情况
-//        NSData *data = ALUTF8NSData(self.imageData);
-//        tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    }
-//    NSDictionary *tmp = @{@"imageData":self.imageData};
+//-(void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag {
 //    
-//    [_webView JSAndOCSInteractionWithRegisterHandlerName:@"JSEcho" data:info];
+//    
+//    
+//    self.imageData = UIImagePNGRepresentation(image);
+//    
+////    NSString *autoCode = [[SCCacheTool shareInstance] getAuthCode];
+////    [_webView JSAndOCSInteractionWithRegisterHandlerName:@"JSEcho" data:autoCode];
+////    SCLog(@"%@--%ld--%@",image,tag,self.imageData);
+////    NSString *tmp = [[NSString alloc] initWithData:self.imageData
+////                                         encoding:NSUTF8StringEncoding];
+////    if (!tmp) { // 解决NSData转化为NSString时，可能返回nil的情况
+////        NSData *data = ALUTF8NSData(self.imageData);
+////        tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+////    }
+////    NSDictionary *tmp = @{@"imageData":self.imageData};
+////    
+////    [_webView JSAndOCSInteractionWithRegisterHandlerName:@"JSEcho" data:info];
+//}
+
+- (void)uploadImageToServerWithImage:(UIImage *)image Tag:(NSInteger)tag imageData:(NSData *)data {
+    self.imageData = data;
 }
-
-
 
 @end

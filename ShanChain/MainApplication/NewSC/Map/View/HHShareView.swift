@@ -81,10 +81,11 @@ class HHShareView: UIView {
                 contentView.addSubview(imageV)
                 imageV.snp.makeConstraints { (make) in
                     make.centerY.centerX.equalTo(showView)
-                    make.width.equalTo(image.size.width).priority(250)
-                    make.height.equalTo(image.size.height)
-                    make.width.lessThanOrEqualTo(SCREEN_WIDTH - 40)
-                    make.height.lessThanOrEqualTo(imageV.snp.width)
+//                    make.width.equalTo(image.size.width).priority(250)
+//                    make.height.equalTo(image.size.height)
+//                    make.width.lessThanOrEqualTo(SCREEN_WIDTH - 40)
+//                    make.height.lessThanOrEqualTo(imageV.snp.width)
+                    make.size.equalTo(CGSize(width: 300, height: 300))
                 }
             }
         }
