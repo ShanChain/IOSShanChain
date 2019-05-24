@@ -388,5 +388,33 @@ static NSDateFormatter* DateFormat(){
     return _currencyModel;
 }
 
+- (void)reViewVersion {
+    
+    self.isReviewState = NO;
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager POST:@"http://itunes.apple.com/lookup?id=1296793048" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSArray *resultArr = responseObject[@"results"];
+        NSDictionary *resultDic = resultArr.firstObject;
+        NSString *appStoreVersion = resultDic[@"version"];
+        NSString *shortVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+        if ([shortVersion compare:appStoreVersion options:NSNumericSearch] == NSOrderedDescending) {
+            /*
+             比较(指定字符串,条件)
+             NSNumericSearch 按照字符串里的数字为依据，算出顺序
+             NSOrderedAscending 升序 (左小右大), NSOrderedDescending 降序 (左大右小)
+             - (NSComparisonResult)compare:(NSString *)string options:(NSStringCompareOptions)mask
+             **/
+            
+            // 审核状态
+            self.isReviewState = YES;
+        }
+        SCLog(@"111%@%@",appStoreVersion,shortVersion);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
 @end
     

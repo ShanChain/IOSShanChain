@@ -187,6 +187,9 @@
 
 - (void)checkVersion {
     [PersonalCenterService _checkingUpdate:NO];
+    // 初始版本状态
+    [[SCCacheTool shareInstance] reViewVersion];
+    
 }
 
 

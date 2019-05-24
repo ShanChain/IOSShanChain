@@ -31,11 +31,11 @@ class AppointmentListViewController: SCBaseVC {
         super.viewDidLoad()
         title = NSLocalizedString("sc_Voucher_MarJar", comment: "字符串")
         createBtn.setTitle(NSLocalizedString("sc_Voucher_Creat", comment: "字符串"), for: .normal)
-//        tableView.tableHeaderView = headView
-//        tableView.tableHeaderView?.backgroundColor = SC_ThemeBackgroundViewColor
-        view.addSubview(headView)
         
-       // tableBottomConstraint.constant = CGFloat(UIDevice().bottomConstraint)
+        view.addSubview(headView)
+        headView.subviews.forEach { (view) in
+            view.isHidden = SCCacheTool.shareInstance()!.isReviewState
+        }
         headView.snp.makeConstraints { (mk) in
             mk.left.right.equalTo(0)
             mk.top.equalTo(self.topLayoutGuide.snp.bottom)

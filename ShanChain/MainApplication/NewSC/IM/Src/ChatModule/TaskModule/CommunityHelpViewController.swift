@@ -54,6 +54,7 @@ class CommunityHelpViewController: SCBaseVC {
         super.viewDidLoad()
         title = NSLocalizedString("sc_RewardTask", comment: "字符串")
         _snpLayout()
+        headerView.isHidden = SCCacheTool.shareInstance()!.isReviewState
         tableView.estimatedRowHeight = 120
         tableView.tableFooterView = UIView()
         tableView.showsVerticalScrollIndicator = false

@@ -318,13 +318,14 @@
 }
 
 - (NSArray *)titleArray{
-    //  NSLocalizedString(@"sc_Real_name_authentication", nil),
+    
     if (_titleArray == nil) {
-        if ([SCCacheTool shareInstance].status.integerValue == 0) {
+        if ([SCCacheTool shareInstance].isReviewState) {
             _titleArray = @[
                             NSLocalizedString(@"sc_Voucher_MyVoucher", nil),
+                            NSLocalizedString(@"sc_MyTask", nil),
                             NSLocalizedString(@"sc_MyMessage", nil),
-                            NSLocalizedString(@"sc_Feedback", nil),
+//                            NSLocalizedString(@"sc_Feedback", nil),
                             NSLocalizedString(@"sc_Setting", nil)];
         }else{
             _titleArray = @[

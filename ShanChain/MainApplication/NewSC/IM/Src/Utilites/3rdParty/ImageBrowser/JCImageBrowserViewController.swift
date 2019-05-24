@@ -27,7 +27,6 @@ class JCImageBrowserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black        
-        print(currentMessage.identifier,currentMessage.name)
         if let messages = messages {
             imageMessages = getImageMessages(messages)
             if imageMessages.count > 0 {

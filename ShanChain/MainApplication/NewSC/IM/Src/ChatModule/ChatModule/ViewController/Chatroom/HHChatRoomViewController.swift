@@ -595,10 +595,12 @@ class HHChatRoomViewController: UIViewController,ASCircularButtonDelegate{
                         JCAudioPlayerHelper.sharedInstance.stopAudio()
                     }
                 }
-                JMSGChatRoom.leaveChatRoom(withRoomId: (self?.currentChatRoomID)!, completionHandler: { (_, _) in
-//                    self.navigationController?.popViewController(animated: true)
-                    self?.navigationController?.popToRootViewController(animated: true)
-                })
+                self?.navigationController?.popToRootViewController(animated: true)
+//                这里暂时不做退出聊天室
+//                JMSGChatRoom.leaveChatRoom(withRoomId: (self?.currentChatRoomID)!, completionHandler: { (_, _) in
+////                    self.navigationController?.popViewController(animated: true)
+//                    self?.navigationController?.popToRootViewController(animated: true)
+//                })
                 
             }
         }

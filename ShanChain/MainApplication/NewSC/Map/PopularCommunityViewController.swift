@@ -35,6 +35,7 @@ class PopularCommunityViewController: SCBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         title = "与一半地球人共创社区"
 //        tableView.rowHeight = 250
         tableView.estimatedRowHeight = 250
@@ -48,8 +49,7 @@ class PopularCommunityViewController: SCBaseVC {
         _requstData(false) {}
         self.addRightBarButtonItem(withTarget: self, sel: #selector(_earthAction), image: UIImage.loadDefaultImage("sc_EarthNew"), selectedImage: UIImage.loadDefaultImage("sc_EarthNew"))
         _updateAvatar()
-//        let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
-//        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
+
         NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
         // 抽屉
         self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
@@ -78,12 +78,11 @@ class PopularCommunityViewController: SCBaseVC {
                 });
             })
         }
+
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(test(notif:)), name: NSNotification.Name(rawValue:"sysMsg"), object: nil)
+        
     }
-//    func test(notif: Notification) {
-//        print(notif.userInfo!)
-//    }
+
     @objc func _earthAction(){
         let vc = BMKTestLocationViewController()
         vc.isAddChatRoom = false
@@ -167,31 +166,8 @@ class PopularCommunityViewController: SCBaseVC {
                 complete()
 //                let numberOfElements = data!["numberOfElements"] as! Int
                 
-                
-//                if content?.count  == 0{
-//                    self.noDataTipShow(self.tableView, content:NSLocalizedString("sc_Nodata", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
-//                    self.dataList = []
-//                    self.tableView.reloadData()
-//                    return;
-//                }
-//                if let datas:[HotCommunityModel] = [HotCommunityModel].deserialize(from: content) as? [HotCommunityModel]{
-//                    self.noDataTipDismiss()
-//                    self.dataList = datas
-//                    self.tableView.reloadData()
-//                    self.tableView.scrollsToTop = true
-//                }
             }
-//            let data = baseModel?.data as! [Any]
-//            if data.count  == 0{
-//                 self.noDataTipShow(self.tableView, content:NSLocalizedString("sc_Nodata", comment: "字符串"), image: UIImage.loadImage("sc_com_icon_blankPage"), backgroundColor: SC_ThemeBackgroundViewColor)
-//                self.dataList = []
-//                self.tableView.reloadData()
-//                return;
-//            }
-//            if let datas:[HotCommunityModel] = [HotCommunityModel].deserialize(from: data) as? [HotCommunityModel]{
-//                self.dataList = datas
-//                self.tableView.reloadData()
-//            }
+
             
         }
         
