@@ -52,7 +52,8 @@
         if ([[NSUserDefaults standardUserDefaults]objectForKey:kJCCurrentUserName]) {
           
         }
-            PopularCommunityViewController *locationVC = [[PopularCommunityViewController alloc]init];
+//            PopularCommunityViewController *locationVC = [[PopularCommunityViewController alloc]init];
+        PopularContainViewController *locationVC = [[PopularContainViewController alloc]init];
 #ifdef DEBUG
    // AppointmentListViewController *locationVC = [[AppointmentListViewController alloc]init];
    // MyWalletViewController * locationVC = [[MyWalletViewController alloc]init];
@@ -126,6 +127,7 @@
 - (void)setJMessageSDK:(NSDictionary *)launchOptions{
     [JMessage setupJMessage:launchOptions appKey:JMSSAGE_APPKEY channel:nil apsForProduction:NO category:nil messageRoaming:YES];
     [JMessage setDebugMode];
+    [JMessage setLogOFF];
     [JMessage addDelegate:self withConversation:nil];
     // Required - 注册 APNs 通知
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
@@ -189,7 +191,9 @@
     [PersonalCenterService _checkingUpdate:NO];
     // 初始版本状态
     [[SCCacheTool shareInstance] reViewVersion];
-    
+    // 监听网络状态
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
 }
 
 
@@ -313,6 +317,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [self resetBadge:application];
+    [[SCWebSocket share] closeWebSocket];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -321,6 +326,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     [self resetBadge:application];
+    [[SCWebSocket share] openWebSocket];
 }
 
 

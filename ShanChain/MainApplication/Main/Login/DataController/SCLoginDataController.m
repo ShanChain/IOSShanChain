@@ -53,10 +53,13 @@
                         // 登录成功
                         UIViewController *rootVc = nil;
 //                        BMKTestLocationViewController  *locationVC = [[BMKTestLocationViewController alloc]init];
-                        PopularCommunityViewController *locationVC = [[PopularCommunityViewController alloc]init];
+//                        PopularCommunityViewController *locationVC = [[PopularCommunityViewController alloc]init];
+//                        PopularContainViewController *locationVC = [[PopularContainViewController alloc]init];
+                        PopularContainViewController *locationVC = [[PopularContainViewController alloc]init];
                         rootVc = [[JCNavigationController alloc]initWithRootViewController:locationVC];
                         //                    SCTabbarController *tabbarC=[[SCTabbarController alloc]init];
                         [HHTool mainWindow].rootViewController=rootVc;
+                        
                     }
                 }];
                 

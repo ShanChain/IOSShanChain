@@ -36,6 +36,7 @@ target 'ShanChain' do
     pod 'LBXScan/LBXZBar','~> 2.3'
     pod 'LBXScan/UI','~> 2.3'
     
+    pod 'Starscream'
     
     pod ‘ASExtendedCircularMenu’, :git => 'https://github.com/anshul18895/ASExtendedCircularMenu'    
     #react-native

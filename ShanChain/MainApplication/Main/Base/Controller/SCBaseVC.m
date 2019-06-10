@@ -7,6 +7,7 @@
 //
 
 #import "SCBaseVC.h"
+#import "ShanChain-Swift.h"
 
 @interface SCBaseVC ()<UIGestureRecognizerDelegate>
 
@@ -49,6 +50,7 @@
     [self layoutUI];
     [self showNavigationBarWhiteColor];
    // [self showNavigationBarWithNormalColor];
+
 }
 
 - (void)layoutUI {
@@ -73,6 +75,8 @@
     [notificationCenter addObserverForName:UIKeyboardWillHideNotification object:nil queue:mainQueue usingBlock:^(NSNotification *note) {
         [self.view removeGestureRecognizer:singleTapGesture];
     }];
+    
+    
 }
 
 #pragma mark ------------------- add left edge swipe back -------------------------------------
@@ -172,6 +176,5 @@
         
     }
 }
-
 
 @end

@@ -306,11 +306,19 @@ extension JCChatView: UICollectionViewDataSource, JCChatViewLayoutDelegate {
     }
     
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _chatViewData.count
+        if _chatViewData.count > 0 {
+            return _chatViewData.count
+        }else {
+            return 0
+        }
+//        return _chatViewData.count
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        if _chatViewData.count < 1 {
+            _chatContainerView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "none")
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "none", for: indexPath)
+        }
         let message = _chatViewData[indexPath.item]
 //        let options = (message.options.showsCard.hashValue << 0) | (message.options.showsAvatar.hashValue << 1)
         let alignment = message.options.alignment.rawValue
@@ -326,6 +334,7 @@ extension JCChatView: UICollectionViewDataSource, JCChatViewLayoutDelegate {
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, itemAt indexPath: IndexPath) -> JCMessageType {
+        // 这里 数组越界 未做修改
         return _chatViewData[indexPath.item]
     }
     

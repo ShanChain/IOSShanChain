@@ -16,6 +16,10 @@
 		22070692219AC0A400404459 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22070691219AC0A300404459 /* TaskListModel.swift */; };
 		2207069C219AEBE700404459 /* ShowSelectTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22070699219AEBE700404459 /* ShowSelectTableView.m */; };
 		2207069D219AEBE700404459 /* ShowSelectTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2207069A219AEBE700404459 /* ShowSelectTableView.xib */; };
+		2208F7632297C5A200B309A1 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2208F7622297C5A200B309A1 /* Starscream.framework */; };
+		2208F7662297CDA200B309A1 /* SCWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2208F7652297CDA200B309A1 /* SCWebSocket.swift */; };
+		220F9D74229CCAB800C37B54 /* PopularContainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F9D73229CCAB800C37B54 /* PopularContainViewController.swift */; };
+		220F9D76229CCCE300C37B54 /* PopularARSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F9D75229CCCE300C37B54 /* PopularARSViewController.swift */; };
 		22104B4F224A202200EB26A2 /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B47224A202100EB26A2 /* WebViewJavascriptBridgeBase.m */; };
 		22104B50224A202200EB26A2 /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B48224A202100EB26A2 /* WKWebViewJavascriptBridge.m */; };
 		22104B51224A202200EB26A2 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 22104B49224A202100EB26A2 /* WebViewJavascriptBridge.m */; };
@@ -705,6 +709,10 @@
 		22070699219AEBE700404459 /* ShowSelectTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowSelectTableView.m; sourceTree = "<group>"; };
 		2207069A219AEBE700404459 /* ShowSelectTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowSelectTableView.xib; sourceTree = "<group>"; };
 		2207069B219AEBE700404459 /* ShowSelectTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSelectTableView.h; sourceTree = "<group>"; };
+		2208F7622297C5A200B309A1 /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2208F7652297CDA200B309A1 /* SCWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCWebSocket.swift; sourceTree = "<group>"; };
+		220F9D73229CCAB800C37B54 /* PopularContainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularContainViewController.swift; sourceTree = "<group>"; };
+		220F9D75229CCCE300C37B54 /* PopularARSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularARSViewController.swift; sourceTree = "<group>"; };
 		22104B47224A202100EB26A2 /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
 		22104B48224A202100EB26A2 /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		22104B49224A202100EB26A2 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
@@ -1651,6 +1659,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2208F7632297C5A200B309A1 /* Starscream.framework in Frameworks */,
 				221D7006228A565D00B8FA97 /* AliyunVideoCore.framework in Frameworks */,
 				221D7005228A53E100B8FA97 /* AliyunVodPlayerSDK.framework in Frameworks */,
 				221D7004228A52A800B8FA97 /* VODUpload.framework in Frameworks */,
@@ -1719,6 +1728,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2208F7642297C74900B309A1 /* websocket */ = {
+			isa = PBXGroup;
+			children = (
+				2208F7652297CDA200B309A1 /* SCWebSocket.swift */,
+			);
+			path = websocket;
+			sourceTree = "<group>";
+		};
 		22104B46224A202100EB26A2 /* WebViewJavascriptBridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -2147,6 +2164,8 @@
 				2227012421C8F8B500FCD269 /* PopularCommunityViewController.xib */,
 				22C917742191BDE5002E5240 /* MapFootprintViewController.swift */,
 				22C917752191BDE5002E5240 /* MapFootprintViewController.xib */,
+				220F9D73229CCAB800C37B54 /* PopularContainViewController.swift */,
+				220F9D75229CCCE300C37B54 /* PopularARSViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -3158,6 +3177,7 @@
 		33055FE81F0503AC005740E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2208F7622297C5A200B309A1 /* Starscream.framework */,
 				221D7003228A52A800B8FA97 /* VODUpload.framework */,
 				22538AAB21D5F6D300B873F7 /* AVFoundation.framework */,
 				2271057B21B62CCA009FC34D /* AdSupport.framework */,
@@ -3544,6 +3564,7 @@
 		4852A14C1FCE9F7200CDD7BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2208F7642297C74900B309A1 /* websocket */,
 				89A259A61FF222BC0077E41C /* BaseConstants.h */,
 				892B39FC1FE9079100292A75 /* AliyunPlayer */,
 				4861DBED1FE3A88800D790BC /* login */,
@@ -4295,6 +4316,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/YHPhotoKit/YHPhotoKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YHPopupView/YHPopupView.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
@@ -4313,6 +4335,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YHPhotoKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YHPopupView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
@@ -4349,6 +4372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223F9A02217F12040031DB95 /* JCRecordingView.swift in Sources */,
+				220F9D76229CCCE300C37B54 /* PopularARSViewController.swift in Sources */,
 				22D247852189CA4B009C1E6A /* YLDatePicker.swift in Sources */,
 				4852A16B1FCE9F7200CDD7BE /* CacheModel.m in Sources */,
 				48718D2E1F42277400010AA0 /* AFURLRequestSerialization.m in Sources */,
@@ -4609,6 +4633,7 @@
 				223F99AF217F12040031DB95 /* JCMessageContentViewType.swift in Sources */,
 				332AB64F1F4ED8C900888313 /* NSString+Emoji.m in Sources */,
 				22070692219AC0A400404459 /* TaskListModel.swift in Sources */,
+				2208F7662297CDA200B309A1 /* SCWebSocket.swift in Sources */,
 				22581B4821DF5F4200F1D1B1 /* EditPersonalInfoViewController.m in Sources */,
 				2233C413227596A7007DAAE6 /* TYImageStorage.m in Sources */,
 				332D3E471F500331001ADDB3 /* NSObject+MJProperty.m in Sources */,
@@ -4731,6 +4756,7 @@
 				221B3BD921C74DE60061BB3E /* UIAlertView+LBXAlertAction.m in Sources */,
 				223F9992217F12040031DB95 /* JCMessageCardView.swift in Sources */,
 				221BEF0821D4A8A9007C76BF /* HelpCenterCell.swift in Sources */,
+				220F9D74229CCAB800C37B54 /* PopularContainViewController.swift in Sources */,
 				223F999D217F12040031DB95 /* JCConversationListViewController.swift in Sources */,
 				22C917B22194402D002E5240 /* TaskContentDetailsCell.swift in Sources */,
 				221BEF0421D4A522007C76BF /* CommunityHelpViewController.swift in Sources */,
@@ -5111,6 +5137,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cong He (7U6RL62DJ7)";
 				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
 				ENABLE_BITCODE = NO;
@@ -5166,6 +5193,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Cong He (4QTQHLBMWR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cong He (4QTQHLBMWR)";
 				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4QTQHLBMWR;
 				ENABLE_BITCODE = NO;

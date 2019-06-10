@@ -935,7 +935,7 @@ extension HHChatRoomViewController: JMessageDelegate {
                     //第一次 清空聊天消息 重载(不在聊天室内，就要加载)
                     self._reloadMessage()
                     
-                    isChatRecordLoad = false
+//                    isChatRecordLoad = false
                 }
                 messages.forEach { [weak self] (msg) in
                     _handleMessage(message: msg)

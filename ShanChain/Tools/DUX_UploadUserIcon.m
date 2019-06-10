@@ -36,7 +36,7 @@ static DUX_UploadUserIcon *uploadUserIcon = nil;
 
     
     
-    if (tag == 214) {
+    if (tag == 214 || tag == 215) {
         UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"sc_cancel", nil)

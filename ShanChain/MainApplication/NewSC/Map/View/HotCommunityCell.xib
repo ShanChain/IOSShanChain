@@ -77,11 +77,19 @@
                             <constraint firstAttribute="height" constant="72.5" id="soe-Jw-gaJ"/>
                         </constraints>
                     </view>
+                    <view hidden="YES" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGl-le-xEs" userLabel="maskView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="245.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="iGl-le-xEs" secondAttribute="bottom" id="02y-dx-N3W"/>
+                    <constraint firstAttribute="trailing" secondItem="iGl-le-xEs" secondAttribute="trailing" id="DDc-hA-Rxc"/>
+                    <constraint firstItem="iGl-le-xEs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IuT-42-FIy"/>
                     <constraint firstItem="ALd-fv-ua2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QjT-QX-wz6"/>
                     <constraint firstItem="MHS-Xs-pv1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Vpc-hT-Hxa"/>
                     <constraint firstItem="MHS-Xs-pv1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Zor-c8-EUp"/>
+                    <constraint firstItem="iGl-le-xEs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="akG-hw-oKC"/>
                     <constraint firstAttribute="trailing" secondItem="ALd-fv-ua2" secondAttribute="trailing" id="dxc-jh-Mcc"/>
                     <constraint firstAttribute="trailing" secondItem="MHS-Xs-pv1" secondAttribute="trailing" id="kFe-Tm-fe4"/>
                     <constraint firstAttribute="bottom" secondItem="ALd-fv-ua2" secondAttribute="bottom" id="o1Z-l5-Ky3"/>
@@ -106,6 +114,7 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="accessLb" destination="SoO-xc-zGj" id="IYT-TF-Egm"/>
+                <outlet property="cellMaskView" destination="iGl-le-xEs" id="keI-c0-AVl"/>
                 <outlet property="coverIcon" destination="MHS-Xs-pv1" id="H68-2Q-L27"/>
                 <outlet property="joinBtn" destination="1oI-Uz-g4C" id="jxs-Kq-Wd9"/>
                 <outlet property="mapIcon" destination="kz8-Cz-1dg" id="PPC-Lh-PMU"/>

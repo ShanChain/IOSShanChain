@@ -82,7 +82,7 @@
     config.FacebookAppID = FACEBOOK_ID;
     config.FacebookDisplayName = @"MarJar";
     [JSHAREService setupWithConfig:config];
-    [JSHAREService setDebug:YES];
+    [JSHAREService setDebug:NO];
     
 }
 

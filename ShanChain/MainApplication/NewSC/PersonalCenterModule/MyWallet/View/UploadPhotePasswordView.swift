@@ -59,7 +59,7 @@ class UploadPhotePasswordView: UIView {
         
         
         // 验证密码是否正确        
-
+        HHTool.checkCameraPermission()
         let registrationID:String = JPUSHService.registrationID() ?? ""
         SCNetwork.shareInstance().hh_uploadFile(withArr: [self.imageURL ?? ""], url: CreateAuthCode_URL, parameters: ["deviceToken":registrationID], showLoading: true, call: { (baseModel, error) in
             
@@ -70,6 +70,33 @@ class UploadPhotePasswordView: UIView {
                     self.transferHandle()
                     
                     
+                }else if self.imageViewTag == 215{
+                    // 支付 SEAT
+                    guard let userid = SCCacheTool.shareInstance()?.getCurrentUser(),let subuserid = SCCacheTool.shareInstance()?.getCurrentCharacterId(),let token = SCCacheTool.shareInstance().getUserToken() else {
+                        
+                        return
+                    }
+                    let url = String(format: "/wallet/api/wallet/2.0/payARS?token=%@", token)
+                    
+                    let payDic: Dictionary<String, Any> = ["file":self.imageURL ?? "","userId":userid,"subuserId":subuserid,"value":"0.001"]
+                    
+                    SCNetwork.shareInstance()?.transfer(withUrl: url, data: payDic, block: { (result, b) in
+                        guard let tmp = result as? Dictionary<String, Any> else {
+                            return
+                        }
+                        if let code = tmp["code"] as? Int, let msg = tmp["msg"] as? String {
+                            if code == 200 {
+                                
+                                HHTool.showTip("支付成功", duration: 1)
+                                self.closure?(true,msg)
+                                self.removeFromSuperview()
+                            }else {
+                                HHTool.showTip(msg, duration: 1)
+                            }
+                        }
+                        
+                    })
+                    
                 }else {
                     if SCCacheTool.shareInstance().characterModel.characterInfo.isBindPwd != true{
                         self.vc?.sc_hrShowAlert(withTitle: "验证成功！", message: "您也可以选择开启免密功能，在下次使用马甲券时便无需再次上传安全码，让使用更加方便快捷，是否开通免密功能？", buttonsTitles: ["暂不需要","立即开通"], andHandler: { (_, index) in
@@ -78,15 +105,15 @@ class UploadPhotePasswordView: UIView {
                                 EditInfoService.sc_editPersonalInfo(["bind":true], call: { (isSuccess) in
                                     if isSuccess == true{
                                         HHTool.showSucess("开通成功!")
-                                        SCCacheTool.shareInstance().setCacheValue(authCode as! String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
+                                        SCCacheTool.shareInstance().setCacheValue(authCode as? String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
                                     }
                                 })
                             }
-                            self.closure!(true,authCode as! String)
+                            self.closure?(true,authCode as! String)
                         })
                     }else{
-                        SCCacheTool.shareInstance().setCacheValue(authCode as! String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
-                        self.closure!(true,authCode as! String)
+                        SCCacheTool.shareInstance().setCacheValue(authCode as? String, withUserID:  SCCacheTool.shareInstance().getCurrentUser(), andKey: SC_AUTHCODE)
+                        self.closure?(true,authCode as! String)
                     }
                 }
                 
@@ -154,7 +181,7 @@ class UploadPhotePasswordView: UIView {
                 let formatter = NumberFormatter()
                 formatter.minimumIntegerDigits = 2
                 let tmp = formatter.string(from: code as! NSNumber)
-                self.closure!(true,tmp!)
+                self.closure?(true,tmp!)
                 return
                 
             }

@@ -42,10 +42,12 @@ class MyWalletGenerateSuccessViewController: SCBaseVC {
     
     
     func savePhoto(){
+        
         DispatchQueue.main.async(execute: {
             SCNetwork.shareInstance().hh_Get(withUrl: "/wallet/api/wallet/2.0/savePwd", parameters: ["token":""], showLoading: true, call: { (baseModel, error) in
                 if error == nil{
                     HHTool.showSucess("保存成功")
+                    
                     self.nextBtn.isEnabled = true
                     self.nextBtn.backgroundColor = SC_ThemeMainColor
                 }
@@ -53,6 +55,7 @@ class MyWalletGenerateSuccessViewController: SCBaseVC {
             })
           
         })
+        saveBtn.isEnabled = true
     }
     
     
@@ -73,6 +76,7 @@ class MyWalletGenerateSuccessViewController: SCBaseVC {
         addRightBarButtonItem(withTarget: self, sel: #selector(_clickTip), title: "提示", tintColor: SC_ThemeMainColor)
         codeIcon.image = UIImage(data: codeData)
         saveBtn.rx.tap.subscribe(onNext: { [weak self] in
+            self?.saveBtn.isEnabled = false
             if HHTool.checkDetectionPhotoPermission({}) == false{
                 self?.sc_hrShowAlert(withTitle: "温馨提示", message: "您已关闭读取照片权限，请前往系统【设置】-【隐私】-【照片】中开启 允许读取和写入", buttonsTitles: ["确定"], andHandler: nil)
                 return

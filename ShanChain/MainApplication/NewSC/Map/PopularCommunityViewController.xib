@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XsE-ul-JwS">
-                    <rect key="frame" x="15" y="76" width="345" height="542"/>
+                    <rect key="frame" x="15" y="76" width="345" height="502"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="kps-oc-1h4"/>
@@ -30,7 +30,7 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hee-o7-uyw">
-                    <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                    <rect key="frame" x="0.0" y="578" width="375" height="49"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjd-nl-3ia">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
@@ -96,9 +96,9 @@
             </subviews>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XsE-ul-JwS" secondAttribute="trailing" constant="15" id="LQh-BZ-UV1"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="XsE-ul-JwS" secondAttribute="bottom" constant="49" id="SzG-nr-GYC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="XsE-ul-JwS" secondAttribute="bottom" constant="89" id="SzG-nr-GYC"/>
                 <constraint firstItem="Hee-o7-uyw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WO9-wa-Wvr"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Hee-o7-uyw" secondAttribute="bottom" id="bCp-91-6X5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Hee-o7-uyw" secondAttribute="bottom" constant="40" id="bCp-91-6X5"/>
                 <constraint firstItem="XsE-ul-JwS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="56" id="cKh-fl-bhj"/>
                 <constraint firstItem="Hee-o7-uyw" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="oXb-J8-b5n"/>
                 <constraint firstItem="XsE-ul-JwS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="ox3-sI-36V"/>

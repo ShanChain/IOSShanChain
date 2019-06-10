@@ -19,7 +19,7 @@
 #import "SCLoginDataController.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
-
+#import "ShanChain-Swift.h"
 #define K_USERNAME @"K_USERNAME"
 
 @interface SCLoginController ()<UITextFieldDelegate>{
@@ -195,6 +195,9 @@
     self.title = NSLocalizedString(@"sc_login_LogInMJ", nil);
     [self makeSubViews];
     [self setKeyBoardAutoHidden];
+    
+    SCWebSocket *s = [SCWebSocket share];
+    [s closeWebSocket];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import LTScrollView
 
 fileprivate  let  k_cellID  = "HotCommunityCell"
 
@@ -36,6 +36,7 @@ class PopularCommunityViewController: SCBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         title = "与一半地球人共创社区"
 //        tableView.rowHeight = 250
         tableView.estimatedRowHeight = 250
@@ -45,18 +46,17 @@ class PopularCommunityViewController: SCBaseVC {
         let footview = UIView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 15))
         footview.backgroundColor = SC_ThemeBackgroundViewColor
         tableView.tableFooterView = footview
-        reftreshData()
         _requstData(false) {}
-        self.addRightBarButtonItem(withTarget: self, sel: #selector(_earthAction), image: UIImage.loadDefaultImage("sc_EarthNew"), selectedImage: UIImage.loadDefaultImage("sc_EarthNew"))
-        _updateAvatar()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
-        // 抽屉
-        self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
-            if direction == CWDrawerTransitionDirection.fromLeft{
-                self._maskAnimationFromLeft()
-            }
-        }
+//        self.addRightBarButtonItem(withTarget: self, sel: #selector(_earthAction), image: UIImage.loadDefaultImage("sc_EarthNew"), selectedImage: UIImage.loadDefaultImage("sc_EarthNew"))
+//        _updateAvatar()
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(_updateAvatar), name:  NSNotification.Name(rawValue: kUpdateAvatarSuccess), object: nil)
+//        // 抽屉
+//        self.cw_registerShowIntractive(withEdgeGesture: false) { (direction) in
+//            if direction == CWDrawerTransitionDirection.fromLeft{
+//                self._maskAnimationFromLeft()
+//            }
+//        }
         
         view.addSubview(self.searchBar)
         var seacrTop = 64
@@ -66,38 +66,33 @@ class PopularCommunityViewController: SCBaseVC {
         self.searchBar.snp.makeConstraints { (make) in
             make.trailing.equalTo(view)
             make.leading.equalTo(view)
-            make.top.equalTo(seacrTop)
+            make.top.equalTo(view)
+//            make.top.equalTo(seacrTop)
         }
         
-        tableView.mj_header = MJRefreshNormalHeader {[weak self] in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                print("下拉刷新 --- 1")
-                self?.page = 0
-                self?._requstData(false, { [weak self] in
-                    self?.tableView.mj_header.endRefreshing()
-                });
-            })
-        }
+        glt_scrollView = tableView
 
         
         
     }
 
-    @objc func _earthAction(){
-        let vc = BMKTestLocationViewController()
-        vc.isAddChatRoom = false
-        navigationController?.pushViewController(vc, animated: true)
-    }
     
-    @objc func _maskAnimationFromLeft(){
-        let vc = LeftViewController()
-        self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
-    }
     
-    @objc func _updateAvatar(){
-        let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
-        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
-    }
+//    @objc func _earthAction(){
+//        let vc = BMKTestLocationViewController()
+//        vc.isAddChatRoom = false
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
+//
+//    @objc func _maskAnimationFromLeft(){
+//        let vc = LeftViewController()
+//        self.cw_showDrawerViewController(vc, animationType: CWDrawerAnimationType.mask, configuration: nil)
+//    }
+//
+//    @objc func _updateAvatar(){
+//        let leftImageName = SCCacheTool.shareInstance().characterModel.characterInfo.headImg
+//        self.addLeftBarButtonItem(withTarget: self, sel: #selector(_maskAnimationFromLeft), imageName: leftImageName, selectedImageName: leftImageName)
+//    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -111,6 +106,17 @@ class PopularCommunityViewController: SCBaseVC {
     }
     
     fileprivate func reftreshData()  {
+        
+        tableView.mj_header = MJRefreshNormalHeader {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("下拉刷新 --- 1")
+                self?.page = 0
+                self?._requstData(false, { [weak self] in
+                    self?.tableView.mj_header.endRefreshing()
+                });
+            })
+        }
+        
         tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 print("上拉加载更多数据")
@@ -126,7 +132,7 @@ class PopularCommunityViewController: SCBaseVC {
     }
     
     @objc fileprivate func _requstData(_ isLoad:Bool  , _ complete: @escaping () -> ()) {
-        if (tableView.mj_footer == nil) {
+        if (tableView.mj_footer == nil||tableView.mj_header == nil) {
             reftreshData()
         }
         let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
@@ -188,6 +194,7 @@ class PopularCommunityViewController: SCBaseVC {
         case 23:
             let vc = CommunityHelpViewController()
             self.navigationController?.pushViewController(vc, animated: true)
+
         default:
             return
         }
@@ -279,30 +286,33 @@ extension PopularCommunityViewController:HotCommunityCellProtocol{
             if isSuccess {
                 HHTool.showTip("已被移除该聊天室，不可加入", duration: 1)
             }else {
-                SCCacheChatRecord.shareInstance().createTable(withRoomId: hotModel.roomId!)
-                
-                let chatRecords = SCCacheChatRecord.shareInstance().selectData(withRoomId: hotModel.roomId!) as! [String]
-                
-                JGUserLoginService.jg_enterchatRoom(roomId: hotModel.roomId!) { (conversation , error) in
-                    if error == nil && conversation != nil{
-                        
-                        let chatRoomVC:HHChatRoomViewController = HHChatRoomViewController.init(conversation: conversation!, isJoinChat: false, navTitle: hotModel.roomName!)
-                        chatRoomVC.takeImage = UIImage.init(fromURLString: hotModel.thumbnails)
-                        chatRoomVC.shareTakeUrl = hotModel.thumbnails
-                        
-                        chatRoomVC.chatRecords = chatRecords
-                        self.pushPage(chatRoomVC, animated: true)
-                        if let roomid = hotModel.roomId {
-                            self.updateList(roomid)
-                        }
-                        
-                    }
-                }
+//                SCCacheChatRecord.shareInstance().createTable(withRoomId: hotModel.roomId!)
+//
+//                let chatRecords = SCCacheChatRecord.shareInstance().selectData(withRoomId: hotModel.roomId!) as! [String]
+//
+//                JGUserLoginService.jg_enterchatRoom(roomId: hotModel.roomId!) { (conversation , error) in
+//                    if error == nil && conversation != nil{
+//
+//                        let chatRoomVC:HHChatRoomViewController = HHChatRoomViewController.init(conversation: conversation!, isJoinChat: false, navTitle: hotModel.roomName!)
+//                        chatRoomVC.takeImage = UIImage.init(fromURLString: hotModel.thumbnails)
+//                        chatRoomVC.shareTakeUrl = hotModel.thumbnails
+//
+//                        chatRoomVC.chatRecords = chatRecords
+//                        self.pushPage(chatRoomVC, animated: true)
+//                        if let roomid = hotModel.roomId {
+//                            self.updateList(roomid)
+//                        }
+//
+//                    }
+//                }
+                self.join(hotModel)
             }
         }
 
         
     }
+    
+    
     // 首页更新缓存列表（点击进入社区时调用）
     func updateList(_ roomID: String) {
         
@@ -326,6 +336,28 @@ extension PopularCommunityViewController:HotCommunityCellProtocol{
                 }
             }else {
                 finished(false)
+            }
+        }
+    }
+    // 进入聊天室
+    func join(_ model: HotCommunityModel) {
+        SCCacheChatRecord.shareInstance().createTable(withRoomId: model.roomId!)
+        
+        let chatRecords = SCCacheChatRecord.shareInstance().selectData(withRoomId: model.roomId!) as! [String]
+        
+        JGUserLoginService.jg_enterchatRoom(roomId: model.roomId!) { (conversation , error) in
+            if error == nil && conversation != nil{
+                
+                let chatRoomVC:HHChatRoomViewController = HHChatRoomViewController.init(conversation: conversation!, isJoinChat: false, navTitle: model.roomName!)
+                chatRoomVC.takeImage = UIImage.init(fromURLString: model.thumbnails)
+                chatRoomVC.shareTakeUrl = model.thumbnails
+                
+                chatRoomVC.chatRecords = chatRecords
+                self.pushPage(chatRoomVC, animated: true)
+                if let roomid = model.roomId {
+                    self.updateList(roomid)
+                }
+                
             }
         }
     }
